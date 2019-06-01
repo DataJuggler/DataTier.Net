@@ -1,0 +1,25 @@
+Update 6.1.2019: I now have DataTier.Net as its own repo.
+
+I may a decision to make the download smaller, I now only include the SQL Scripts to create the database.
+I was providing the option to attach the database, but this adds 5 megs to the download and makes
+it a little harder on my to produce updates.
+
+Sorry if this is a problem, but smaller downloads should make it easier to use.
+
+Also now all of the referenced files are referenced via NuGet packages.
+
+If you need the source code to any of the NuGet packages, the Data Juggler Shared Repo still contains
+all the source files. I do plan on eventually moving each project to thier own repo, but this takes time.
+
+--
+
+In the DataTier.Net.StoredProcedures.sql file, the last procedure 'UpdateProcPermissions' is an optional stored procedure.
+
+It is useful to grant permission to a SQL Server Login to execute all the stored procedures in a table. 
+
+I am not the author and I wish I knew who the original creator is to give them credit. Use it if you find it useful.
+
+Corby
+
+
+
