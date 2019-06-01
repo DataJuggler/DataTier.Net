@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{19158508-F27F-4340-AAD4-10B4FBB54404}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ObjectLibrary</RootNamespace>
+    <AssemblyName>ObjectLibrary</AssemblyName>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DataJuggler.Core.UltimateHelper, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\DataJuggler.Core.UltimateHelper.1.3.0\lib\net461\DataJuggler.Core.UltimateHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="DataJuggler.Net, Version=5.4.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\DataJuggler.Net.5.4.2\lib\net461\DataJuggler.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="envdte, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\PublicAssemblies\envdte.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BusinessObjects\CustomReader.business.cs" />
+    <Compile Include="BusinessObjects\CustomReader.data.cs" />
+    <Compile Include="BusinessObjects\DTNDatabase.business.cs" />
+    <Compile Include="BusinessObjects\DTNDatabase.data.cs" />
+    <Compile Include="BusinessObjects\DTNField.business.cs" />
+    <Compile Include="BusinessObjects\DTNField.data.cs" />
+    <Compile Include="BusinessObjects\DTNTable.business.cs" />
+    <Compile Include="BusinessObjects\DTNTable.data.cs" />
+    <Compile Include="BusinessObjects\Enumeration.business.cs" />
+    <Compile Include="BusinessObjects\Enumeration.data.cs" />
+    <Compile Include="BusinessObjects\FieldSet.business.cs" />
+    <Compile Include="BusinessObjects\FieldSet.data.cs" />
+    <Compile Include="BusinessObjects\FieldSetField.business.cs" />
+    <Compile Include="BusinessObjects\FieldSetField.data.cs" />
+    <Compile Include="BusinessObjects\FieldSetFieldView.business.cs" />
+    <Compile Include="BusinessObjects\FieldSetFieldView.data.cs" />
+    <Compile Include="BusinessObjects\Method.business.cs" />
+    <Compile Include="BusinessObjects\Method.data.cs" />
+    <Compile Include="BusinessObjects\Project.business.cs" />
+    <Compile Include="BusinessObjects\Project.data.cs" />
+    <Compile Include="BusinessObjects\ProjectReference.business.cs" />
+    <Compile Include="BusinessObjects\ProjectReference.data.cs" />
+    <Compile Include="BusinessObjects\ReferencesSet.business.cs" />
+    <Compile Include="BusinessObjects\ReferencesSet.data.cs" />
+    <Compile Include="BusinessObjects\VisualStudioSolution.cs" />
+    <Compile Include="Enumerations\ObjectLibrary.Enumerations.cs" />
+    <Compile Include="Parsers\DataTier.Net.Parser.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="RAD Studio Icon.ico" />
+    <Content Include="Tools.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

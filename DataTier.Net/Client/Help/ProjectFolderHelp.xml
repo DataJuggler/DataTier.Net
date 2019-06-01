@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Help>
+  <BackColor>Linen</BackColor>
+  <HelpText>
+    Before creating your project in DataTier.Net you should create your Visual Studio project using the DataTier.Net project templates.
+    Read the DataTier.Net User's Guide for information about how to install the project templates.
+    Once you have created your project, the project folder will contain 4 sub folders: ApplicationLogicComponent, DataGateway, DataAccessComponent, ObjectLibrary.
+  </HelpText>
+  <ImageName>ProjectFolderHelp.png</ImageName>
+  <ImageHeight>138</ImageHeight>
+  <ImageWidth>358</ImageWidth>
+  <Title></Title>
+</Help>

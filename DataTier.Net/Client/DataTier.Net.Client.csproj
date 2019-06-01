@@ -1,0 +1,805 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CE05821E-9A82-4F59-A8F2-A399FDEE9B24}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataTierClient</RootNamespace>
+    <AssemblyName>DataTier.Net</AssemblyName>
+    <ApplicationIcon>DataTier.Net.ico</ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DataJuggler.Core.UltimateHelper, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\DataJuggler.Core.UltimateHelper.1.3.0\lib\net461\DataJuggler.Core.UltimateHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="DataJuggler.Net, Version=5.4.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\DataJuggler.Net.5.4.2\lib\net461\DataJuggler.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="DataJuggler.Win.Controls, Version=5.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\DataJuggler.Win.Controls.5.4.1\lib\net461\DataJuggler.Win.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files\Microsoft Visual Studio 9.0\Common7\IDE\PublicAssemblies\EnvDTE.dll</HintPath>
+    </Reference>
+    <Reference Include="EnvDTE80, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files\Microsoft Visual Studio 9.0\Common7\IDE\PublicAssemblies\EnvDTE80.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=13.100.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files (x86)\Microsoft SQL Server\130\SDK\Assemblies\Microsoft.SqlServer.ConnectionInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Management.Sdk.Sfc, Version=13.100.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files (x86)\Microsoft SQL Server\130\SDK\Assemblies\Microsoft.SqlServer.Management.Sdk.Sfc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Smo, Version=13.100.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files (x86)\Microsoft SQL Server\130\SDK\Assemblies\Microsoft.SqlServer.Smo.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.SqlEnum, Version=13.100.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files (x86)\Microsoft SQL Server\130\SDK\Assemblies\Microsoft.SqlServer.SqlEnum.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="XmlMirror.Runtime, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\XmlMirror.Runtime.2.2.0\lib\net461\XmlMirror.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Builders\ClassBuilder.cs" />
+    <Compile Include="Builders\ControllerCreator.cs" />
+    <Compile Include="Builders\ControllerManagerCreator.cs" />
+    <Compile Include="Builders\DataManagerCreator.cs" />
+    <Compile Include="Builders\GatewayCreator.cs" />
+    <Compile Include="Builders\ObjectManagerCreator.cs" />
+    <Compile Include="Builders\DataObjectReaderCreator.cs" />
+    <Compile Include="Builders\DataWriterCreator.cs" />
+    <Compile Include="Builders\DataOperationMethodCreator.cs" />
+    <Compile Include="Builders\DataOperationsManagerCreator.cs" />
+    <Compile Include="Builders\StoredProcedureObjectCreator.cs" />
+    <Compile Include="ClientUtil\ChangeManager.cs" />
+    <Compile Include="ClientUtil\CodeLineHelper.cs" />
+    <Compile Include="ClientUtil\ConflictHelper.cs" />
+    <Compile Include="ClientUtil\CryptographyHelper.cs" />
+    <Compile Include="ClientUtil\DataConverter.cs" />
+    <Compile Include="ClientUtil\EnumerationHelper.cs" />
+    <Compile Include="ClientUtil\FieldSetHelper.cs" />
+    <Compile Include="ClientUtil\GatewayHelper.cs" />
+    <Compile Include="ClientUtil\MessageFilter.cs" />
+    <Compile Include="ClientUtil\ReferencesSetManager.cs" />
+    <Compile Include="ClientUtil\DialogHelper.cs" />
+    <Compile Include="ClientUtil\SerializationManager.cs" />
+    <Compile Include="ClientUtil\SQLSMOHelper.cs" />
+    <Compile Include="ClientUtil\VisualStudioHelper.cs" />
+    <Compile Include="Controls\ConfirmChangesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ConfirmChangesControl.Designer.cs">
+      <DependentUpon>ConfirmChangesControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ControllerEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ControllerEditor.Designer.cs">
+      <DependentUpon>ControllerEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CustomMethodEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CustomMethodEditor.Designer.cs">
+      <DependentUpon>CustomMethodEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CustomMethodsEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CustomMethodsEditor.Designer.cs">
+      <DependentUpon>CustomMethodsEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CustomReadersEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CustomReadersEditor.Designer.cs">
+      <DependentUpon>CustomReadersEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DatabasesEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DatabasesEditor.Designer.cs">
+      <DependentUpon>DatabasesEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DatabaseSelectorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DatabaseSelectorControl.Designer.cs">
+      <DependentUpon>DatabaseSelectorControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DataManagerEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DataManagerEditor.Designer.cs">
+      <DependentUpon>DataManagerEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DataObjectsEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DataObjectsEditor.Designer.cs">
+      <DependentUpon>DataObjectsEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DataOperationsEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DataOperationsEditor.Designer.cs">
+      <DependentUpon>DataOperationsEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DialogControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DialogControl.Designer.cs">
+      <DependentUpon>DialogControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EnumerationEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\EnumerationEditor.Designer.cs">
+      <DependentUpon>EnumerationEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FieldSetEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\FieldSetEditor.Designer.cs">
+      <DependentUpon>FieldSetEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\HelpControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\HelpControl.Designer.cs">
+      <DependentUpon>HelpControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ConfirmRemovalControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ConfirmRemovalControl.Designer.cs">
+      <DependentUpon>ConfirmRemovalControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Interfaces\ISaveCancel.cs" />
+    <Compile Include="Controls\Interfaces\ITabButtonParent.cs" />
+    <Compile Include="Controls\Interfaces\IWizardControl.cs" />
+    <Compile Include="Controls\NewStoredProcedureEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\NewStoredProcedureEditor.Designer.cs">
+      <DependentUpon>NewStoredProcedureEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OrderByControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\OrderByControl.Designer.cs">
+      <DependentUpon>OrderByControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OrderByFieldControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\OrderByFieldControl.Designer.cs">
+      <DependentUpon>OrderByFieldControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ProjectEditorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ProjectEditorControl.Designer.cs">
+      <DependentUpon>ProjectEditorControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ReaderEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReaderEditor.Designer.cs">
+      <DependentUpon>ReaderEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ReferenceEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReferenceEditor.Designer.cs">
+      <DependentUpon>ReferenceEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ReferencesSetEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ReferencesSetEditor.Designer.cs">
+      <DependentUpon>ReferencesSetEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SaveCancelControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SaveCancelControl.Designer.cs">
+      <DependentUpon>SaveCancelControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SelectSQLServerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SelectSQLServerControl.Designer.cs">
+      <DependentUpon>SelectSQLServerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SetupDataTier.Net.Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SetupDataTier.Net.Control.Designer.cs">
+      <DependentUpon>SetupDataTier.Net.Control.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SQLDatabaseEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SQLDatabaseEditor.Designer.cs">
+      <DependentUpon>SQLDatabaseEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StoredProcedureEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\StoredProcedureEditor.Designer.cs">
+      <DependentUpon>StoredProcedureEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DataEditorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DataEditorControl.Designer.cs">
+      <DependentUpon>DataEditorControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ValidationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ValidationControl.designer.cs">
+      <DependentUpon>ValidationControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\VisualStudioProjectUpdateControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\VisualStudioProjectUpdateControl.Designer.cs">
+      <DependentUpon>VisualStudioProjectUpdateControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WizardControlPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\WizardControlPanel.designer.cs">
+      <DependentUpon>WizardControlPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WriterEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\WriterEditor.Designer.cs">
+      <DependentUpon>WriterEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ConfirmChangesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ConfirmChangesForm.Designer.cs">
+      <DependentUpon>ConfirmChangesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CustomMethodEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CustomMethodEditorForm.Designer.cs">
+      <DependentUpon>CustomMethodEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Images\Images.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Images.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Images\ImageHelper.cs" />
+    <Compile Include="Controls\ProjectWizardControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ProjectWizardControl.Designer.cs">
+      <DependentUpon>ProjectWizardControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TabButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TabButton.Designer.cs">
+      <DependentUpon>TabButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WizardStatusControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\WizardStatusControl.Designer.cs">
+      <DependentUpon>WizardStatusControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ConfirmRemovalForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ConfirmRemovalForm.Designer.cs">
+      <DependentUpon>ConfirmRemovalForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CustomMethodsEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CustomMethodsEditorForm.Designer.cs">
+      <DependentUpon>CustomMethodsEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CustomReadersEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CustomReadersEditorForm.Designer.cs">
+      <DependentUpon>CustomReadersEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DatabaseSelectorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DatabaseSelectorForm.Designer.cs">
+      <DependentUpon>DatabaseSelectorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DialogControlForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DialogControlForm.Designer.cs">
+      <DependentUpon>DialogControlForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FieldSetEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FieldSetEditorForm.Designer.cs">
+      <DependentUpon>FieldSetEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\NewStoredProcedureEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\NewStoredProcedureEditorForm.Designer.cs">
+      <DependentUpon>NewStoredProcedureEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DataEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DataEditorForm.Designer.cs">
+      <DependentUpon>DataEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\EnumerationEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EnumerationEditorForm.Designer.cs">
+      <DependentUpon>EnumerationEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\HelpForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HelpForm.Designer.cs">
+      <DependentUpon>HelpForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ReferencesSetEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ReferencesSetEditorForm.Designer.cs">
+      <DependentUpon>ReferencesSetEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ProjectChooserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProjectChooserForm.Designer.cs">
+      <DependentUpon>ProjectChooserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ProjectWizardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProjectWizardForm.Designer.cs">
+      <DependentUpon>ProjectWizardForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ReferenceEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ReferenceEditorForm.Designer.cs">
+      <DependentUpon>ReferenceEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SelectSQLServerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SelectSQLServerForm.Designer.cs">
+      <DependentUpon>SelectSQLServerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ValidationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ValidationForm.Designer.cs">
+      <DependentUpon>ValidationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\VisualStudioProjectUpdateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\VisualStudioProjectUpdateForm.Designer.cs">
+      <DependentUpon>VisualStudioProjectUpdateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Objects\AppSettingsObject.cs" />
+    <Compile Include="ClientUtil\ButtonManager.cs" />
+    <Compile Include="Objects\CodeFileInfo.cs" />
+    <Compile Include="Objects\CodeLine.cs" />
+    <Compile Include="Objects\ColumnInfo.cs" />
+    <Compile Include="Objects\ChangesSet.cs" />
+    <Compile Include="Objects\ExcludeInfo.cs" />
+    <Compile Include="Objects\GatewayInfo.cs" />
+    <Compile Include="Objects\GatewayMethodInfo.cs" />
+    <Compile Include="Objects\MethodInfo.cs" />
+    <Compile Include="Objects\PanelExtender.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Objects\RegionInfo.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Xml\Writers\CustomReadersWriter.cs" />
+    <Compile Include="Xml\Writers\FieldSetFieldsWriter.cs" />
+    <Compile Include="Xml\Writers\FieldSetsWriter.cs" />
+    <Compile Include="Xml\Writers\FieldsWriter.cs" />
+    <EmbeddedResource Include="Controls\ConfirmChangesControl.resx">
+      <DependentUpon>ConfirmChangesControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ControllerEditor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ControllerEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CustomMethodEditor.resx">
+      <DependentUpon>CustomMethodEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CustomMethodsEditor.resx">
+      <DependentUpon>CustomMethodsEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CustomReadersEditor.resx">
+      <DependentUpon>CustomReadersEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DatabasesEditor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DatabasesEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DatabaseSelectorControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DatabaseSelectorControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DataManagerEditor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DataManagerEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DataObjectsEditor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DataObjectsEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DataOperationsEditor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DataOperationsEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DialogControl.resx">
+      <DependentUpon>DialogControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\EnumerationEditor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>EnumerationEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\FieldSetEditor.resx">
+      <DependentUpon>FieldSetEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\HelpControl.resx">
+      <DependentUpon>HelpControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Images\Images.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Images.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ConfirmRemovalControl.resx">
+      <DependentUpon>ConfirmRemovalControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\NewStoredProcedureEditor.resx">
+      <DependentUpon>NewStoredProcedureEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\OrderByControl.resx">
+      <DependentUpon>OrderByControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\OrderByFieldControl.resx">
+      <DependentUpon>OrderByFieldControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ProjectEditorControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ProjectEditorControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ProjectWizardControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ProjectWizardControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ReaderEditor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ReaderEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ReferenceEditor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ReferenceEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ReferencesSetEditor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ReferencesSetEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SaveCancelControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SaveCancelControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SelectSQLServerControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SelectSQLServerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SetupDataTier.Net.Control.resx">
+      <DependentUpon>SetupDataTier.Net.Control.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SQLDatabaseEditor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SQLDatabaseEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\StoredProcedureEditor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>StoredProcedureEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TabButton.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TabButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DataEditorControl.resx">
+      <DependentUpon>DataEditorControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ValidationControl.resx">
+      <DependentUpon>ValidationControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\VisualStudioProjectUpdateControl.resx">
+      <DependentUpon>VisualStudioProjectUpdateControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\WizardControlPanel.resx">
+      <DependentUpon>WizardControlPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\WizardStatusControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>WizardStatusControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\WriterEditor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>WriterEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ConfirmChangesForm.resx">
+      <DependentUpon>ConfirmChangesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CustomMethodEditorForm.resx">
+      <DependentUpon>CustomMethodEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ConfirmRemovalForm.resx">
+      <DependentUpon>ConfirmRemovalForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CustomMethodsEditorForm.resx">
+      <DependentUpon>CustomMethodsEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CustomReadersEditorForm.resx">
+      <DependentUpon>CustomReadersEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DatabaseSelectorForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DatabaseSelectorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DialogControlForm.resx">
+      <DependentUpon>DialogControlForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FieldSetEditorForm.resx">
+      <DependentUpon>FieldSetEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NewStoredProcedureEditorForm.resx">
+      <DependentUpon>NewStoredProcedureEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DataEditorForm.resx">
+      <DependentUpon>DataEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EnumerationEditorForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>EnumerationEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HelpForm.resx">
+      <DependentUpon>HelpForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ReferencesSetEditorForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ReferencesSetEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProjectChooserForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ProjectChooserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProjectWizardForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ProjectWizardForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ReferenceEditorForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ReferenceEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SelectSQLServerForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SelectSQLServerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ValidationForm.resx">
+      <DependentUpon>ValidationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\VisualStudioProjectUpdateForm.resx">
+      <DependentUpon>VisualStudioProjectUpdateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Enumerations\DataTierClient.Enumerations.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataTier.Net.ico" />
+    <None Include="Images\IncludeProjectFilesPlane.png" />
+    <Content Include="Images\OrderBy.png" />
+    <Content Include="Images\Parameter Mode.png" />
+    <None Include="Images\V.png" />
+    <None Include="Images\ReaderMode.png" />
+    <None Include="packages.config" />
+    <None Include="Resources\GreenRoomZoom.png" />
+    <None Include="Resources\GrayAsAStray.png" />
+    <None Include="Resources\BlueWall.png" />
+    <None Include="Resources\MoveLeft.png" />
+    <None Include="Resources\MoveRight.png" />
+    <None Include="Resources\MoveLeft3.png" />
+    <None Include="Resources\MoveRight2.png" />
+    <None Include="Resources\JackIsADullBoyGray.png" />
+    <None Include="Resources\MellowYellow.png" />
+    <None Include="Resources\EditMode.png" />
+    <None Include="Resources\Free Blue.png" />
+    <Content Include="lib\DataJuggler.Win.Controls Read Me.txt" />
+    <Content Include="RAD Studio Icon.ico" />
+    <Content Include="Resources\Black Button.png" />
+    <Content Include="Tools.ico" />
+    <Content Include="Xml\Files\DeserializedFieldSet.xml" />
+    <Content Include="Xml\Files\SelectedFieldSet.xml" />
+    <None Include="Resources\Information2.png" />
+    <None Include="Resources\Information.png" />
+    <None Include="Resources\Setup2.png" />
+    <None Include="Resources\Black Button1.png" />
+    <None Include="Resources\DarkBlackButton.png" />
+    <None Include="Images\DeepBlue.png" />
+    <None Include="Images\DeepGray.png" />
+    <Content Include="Help\ProjectFolderHelp.xml" />
+    <None Include="Resources\PartnerBoat.png" />
+    <None Include="Resources\Background2.png" />
+    <None Include="Resources\DarkBlueButton.png" />
+    <None Include="Resources\DarkButton.png" />
+    <None Include="Resources\DarkButton2.png" />
+    <None Include="Resources\ProjectFolder.png" />
+    <None Include="Resources\ProjectFolder1.png" />
+    <None Include="Resources\Deep Black.jpg" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataTier.Net.DataLibrary\ApplicationLogicComponent\ApplicationLogicComponent.csproj">
+      <Project>{dbcfccf2-c6b3-402d-905f-0eba77f8e9b3}</Project>
+      <Name>ApplicationLogicComponent</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataTier.Net.DataLibrary\DataGateway\DataGateway.csproj">
+      <Project>{2a156c95-1b12-47fe-a2ea-cdf999d98817}</Project>
+      <Name>DataGateway</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataTier.Net.DataLibrary\ObjectLibrary\ObjectLibrary.csproj">
+      <Project>{19158508-f27f-4340-aad4-10b4fbb54404}</Project>
+      <Name>ObjectLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StoredProcedureGenerator\DataTier.Net.StoredProcedureGenerator.csproj">
+      <Project>{27171eda-23ec-4637-bab3-0fa3f272495b}</Project>
+      <Name>DataTier.Net.StoredProcedureGenerator</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Help\Images\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

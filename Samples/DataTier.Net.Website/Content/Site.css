@@ -1,0 +1,78 @@
+﻿.bluebutton 
+{
+    background-image: url('Images/Blue Button.jpg');
+}
+.bluebutton:hover
+{
+    color: yellow;
+}
+body 
+{
+    background-image: url('Images/DeepPurple.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content 
+{
+    color: black;
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+.colornavajowhite 
+{
+    color: navajowhite;
+}
+.center-div 
+{
+    margin-top: 16px;
+    margin-bottom: 16px;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+}
+
+.colornavy 
+{
+    color: navy;
+}
+.colornavy:hover
+{
+    color: yellow;
+}
+.displayinline
+{
+    display: inline !important;
+}
+.fontsize16
+{
+    font-size: 16px;
+    font-family: Arial;
+}
+.marginleft16
+{
+    margin-left: 16px;
+}
+.orangebutton 
+{
+    background-image: url('Images/Orange Button.jpg');
+}
+.orangebutton:hover
+{
+    color: yellow;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}

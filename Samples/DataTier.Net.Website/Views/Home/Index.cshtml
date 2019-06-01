@@ -1,0 +1,52 @@
+﻿@using ObjectLibrary.BusinessObjects
+@model Notification
+       
+
+<img height="200" width="200" src="~/Content/Images/Data Juggler 400 x 400 Transparenet.png" />
+<img src="~/Content/Images/DataTier.Net.Logo.png" />
+<p><a class="colornavajowhite fontsize16 text-center" href="https://github.com/DataJuggler">https://github.com/DataJuggler</a></p>
+<p class="lead">DataTier.Net is a stored procedure driven alternative to Entity Framework.</p>
+<p><a href="https://github.com/DataJuggler/SharedRepo" class="btn btn-primary btn-lg orangebutton colornavy">Available free on GitHub&raquo;</a></p>
+<div class="row">
+    <div class="col-md-4">
+        <h2>Getting Started With DataTier.Net</h2>
+        <p>
+            <a class="colornavy" href="https://www.youtube.com/watch?v=GwjDKP9wLGk">Click Here To Watch On YouTube</a>
+        </p>
+        <p>
+            <img height="240" width="240" src="~/Content/Images/DataTier.Net Ad.jpg" />
+        </p>
+        <p></p>
+    </div>
+    <div class="col-md-4">
+        <p class="text-nowrap">DataTier.Net is part of the Data Juggler Shared Repo. Where all the code is free you can keep your dough.</p>
+        <p>
+            <img height="405" width="720" src="~/Content/Images/Shared Repo Town.png" /><br />
+        </p>
+        <p class="text-nowrap">From the Data Juggler Shared Repo Animated Video(s). Coming Soon.<p>
+    </div>
+</div>
+<br />
+
+
+@using (Html.BeginForm("Signup", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+
+    @Html.AntiForgeryToken()
+
+    <div class="displayinline center-div">
+
+        @Html.TextBox("EmailAddressControl", null, new { placeholder = "Enter Email Address", @class = "form-control displayinline" })
+        @Html.TextBox("GitHubFollowNameControl", null, new { placeholder = "Enter GitHub Follower Name", @class = "form-control displayinline" })
+        <input class="btn btn-primary btn-lg bluebutton colornavajowhite displayinline marginleft16" type="button" value="Sign Up For Email Notifications" onclick="location.href='@Url.Action("SignUp", "Home")'" />
+        <br />
+        <br />
+        <p class="instructions text-center">
+            To receive email notifications when a new major or minor version of DataTier.Net is released, enter your email address<br />
+            and your GitHub user name that followed DataJuggler on GitHub: <a class="colornavajowhite" href="https://github.com/DataJuggler">https://github.com/DataJuggler</a>
+        </p>
+        <label class="statusmessagegreen" id="StatusLabel"></label>
+    </div>
+}
+
+

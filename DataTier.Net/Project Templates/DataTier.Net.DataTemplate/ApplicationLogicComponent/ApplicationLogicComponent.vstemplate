@@ -1,0 +1,60 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>ApplicationLogicComponent</Name>
+    <Description>This project contains classes that connect the Client Gateway to the DataAccessComponent.</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>ApplicationLogicComponent</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="ApplicationLogicComponent.csproj" File="ApplicationLogicComponent.csproj" ReplaceParameters="true">      
+      <Folder Name="Connection" TargetFolderName="Connection">
+        <ProjectItem ReplaceParameters="true" TargetFileName="ApplicationConfigurationManager.cs">ApplicationConfigurationManager.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="AuthenticationManager.cs">AuthenticationManager.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Controllers" TargetFolderName="Controllers">
+        <ProjectItem ReplaceParameters="true" TargetFileName="ApplicationController.cs">ApplicationController.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="ControllerManager.cs">ControllerManager.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="SystemController.cs">SystemController.cs</ProjectItem>
+      </Folder>
+      <Folder Name="DataBridge" TargetFolderName="DataBridge">
+        <ProjectItem ReplaceParameters="true" TargetFileName="DataBridgeEnumerations.cs">DataBridgeEnumerations.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="DataBridgeManager.cs">DataBridgeManager.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="NullableBoolean.cs">NullableBoolean.cs</ProjectItem>
+      </Folder>
+      <Folder Name="DataOperations" TargetFolderName="DataOperations">
+        <ProjectItem ReplaceParameters="true" TargetFileName="DataOperationsManager.cs">DataOperationsManager.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="PolymorphicObject.cs">PolymorphicObject.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="SystemMethods.cs">SystemMethods.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Exceptions" TargetFolderName="Exceptions">
+        <ProjectItem ReplaceParameters="true" TargetFileName="CustomException.cs">CustomException.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="DataConnectionFailedException.cs">DataConnectionFailedException.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="InvalidConfigurationException.cs">InvalidConfigurationException.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="UnknownErrorException.cs">UnknownErrorException.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Logging" TargetFolderName="Logging">
+        <ProjectItem ReplaceParameters="true" TargetFileName="ErrorHandler.cs">ErrorHandler.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Properties" TargetFolderName="Properties">
+        <ProjectItem ReplaceParameters="true" TargetFileName="AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+        <Folder Name="DataSources" TargetFolderName="DataSources" />
+      </Folder>      
+      <Folder Name="Security" TargetFolderName="Security">
+        <ProjectItem ReplaceParameters="true" TargetFileName="BooleanHelper.cs">BooleanHelper.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="ConfigurationHelper.cs">ConfigurationHelper.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="CryptographyManager.cs">CryptographyManager.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="TextHelper.cs">TextHelper.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="Read Me.txt">Read Me.txt</ProjectItem>
+      </Folder>
+      <ProjectItem ReplaceParameters="false" TargetFileName="Tools.ico">Tools.ico</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>

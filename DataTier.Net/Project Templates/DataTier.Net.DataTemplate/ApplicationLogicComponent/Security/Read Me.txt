@@ -1,0 +1,3 @@
+These classes are all part of DataJuggler.Core.UltimateHelper class library.
+
+They are included here to save having to add a 5th project to the solution.

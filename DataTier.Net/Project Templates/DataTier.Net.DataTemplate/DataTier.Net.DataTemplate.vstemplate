@@ -1,0 +1,26 @@
+<VSTemplate Version="3.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="ProjectGroup">
+  <TemplateData>
+	<Name>DataTier.Net.ClassLibrary</Name>
+	<Description>Creates a new DataTier.Net Class Library project.</Description>
+	<Icon>DataTier.Net.ico</Icon>
+	<ProjectType>CSharp</ProjectType>
+  </TemplateData>
+  <TemplateContent>
+      <ProjectCollection>         
+          <ProjectTemplateLink ProjectName="ApplicationLogicComponent">
+            ApplicationLogicComponent\ApplicationLogicComponent.vstemplate
+          </ProjectTemplateLink>
+          <ProjectTemplateLink ProjectName="DataGateway">
+	          DataGateway\DataGateway.vstemplate
+          </ProjectTemplateLink>
+          <ProjectTemplateLink ProjectName="DataAccessComponent">
+            DataAccessComponent\DataAccessComponent.vstemplate
+          </ProjectTemplateLink>
+          <ProjectTemplateLink ProjectName="ObjectLibrary">
+            ObjectLibrary\ObjectLibrary.vstemplate
+          </ProjectTemplateLink>
+      </ProjectCollection>
+  </TemplateContent> 
+</VSTemplate>
+
+
