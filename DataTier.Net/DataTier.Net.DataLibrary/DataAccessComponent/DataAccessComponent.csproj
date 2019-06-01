@@ -177,7 +177,6 @@
     <Compile Include="StoredProcedureManager\UpdateProcedures\UpdateReferencesSetStoredProcedure.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="RAD Studio Icon.ico" />
     <Content Include="StoredProcedureManager\StoredProcedureSQL\UpdateProcPermissions.sql" />
     <Content Include="Tools.ico" />
   </ItemGroup>

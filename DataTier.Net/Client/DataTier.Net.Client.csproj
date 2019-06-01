@@ -721,7 +721,6 @@
     <None Include="Resources\EditMode.png" />
     <None Include="Resources\Free Blue.png" />
     <Content Include="lib\DataJuggler.Win.Controls Read Me.txt" />
-    <Content Include="RAD Studio Icon.ico" />
     <Content Include="Resources\Black Button.png" />
     <Content Include="Tools.ico" />
     <Content Include="Xml\Files\DeserializedFieldSet.xml" />

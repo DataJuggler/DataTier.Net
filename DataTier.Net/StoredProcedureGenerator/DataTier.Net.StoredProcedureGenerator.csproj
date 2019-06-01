@@ -81,7 +81,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="lib\DataJuggler.Win.Controls Read Me.txt" />
-    <Content Include="RAD Studio Icon.ico" />
     <Content Include="Tools.ico" />
   </ItemGroup>
   <ItemGroup>
