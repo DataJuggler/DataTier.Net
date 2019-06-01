@@ -1,15 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.271
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectionBuilder", "ConnectionBuilder\ConnectionBuilder.csproj", "{C42DA620-5C59-449B-A273-45432A1B619B}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataJuggler", "DataJuggler", "{1C7073E7-85FB-4109-B9F8-588E4501644E}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Win", "Win", "{598B0407-5485-4458-8666-095213780065}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJuggler.Win.Controls", "..\..\..\..\Win\DataJuggler.Win.Controls\DataJuggler.Win.Controls.csproj", "{70E97B98-9BE2-4747-A3AF-1C274AE401CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,17 +15,9 @@ Global
 		{C42DA620-5C59-449B-A273-45432A1B619B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C42DA620-5C59-449B-A273-45432A1B619B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C42DA620-5C59-449B-A273-45432A1B619B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{70E97B98-9BE2-4747-A3AF-1C274AE401CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{70E97B98-9BE2-4747-A3AF-1C274AE401CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{70E97B98-9BE2-4747-A3AF-1C274AE401CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{70E97B98-9BE2-4747-A3AF-1C274AE401CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{598B0407-5485-4458-8666-095213780065} = {1C7073E7-85FB-4109-B9F8-588E4501644E}
-		{70E97B98-9BE2-4747-A3AF-1C274AE401CE} = {598B0407-5485-4458-8666-095213780065}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {95A1FF9F-DDBC-4E95-AA22-1AA4805E895D}
