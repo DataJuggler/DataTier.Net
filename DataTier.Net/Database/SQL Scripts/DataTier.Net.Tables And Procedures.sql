@@ -82,6 +82,30 @@ CREATE TABLE [dbo].[DTNField](
 ) ON [PRIMARY]
 GO
 
+
+/****** Object:  Table [dbo].[DTNProcedure]    Script Date: 6/1/2019 9:24:14 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[DTNProcedure](
+	[ProcedureId] [int] IDENTITY(1,1) NOT NULL,
+	[ProjectId] [int] NOT NULL,
+	[TableId] [int] NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+	[Active] [bit] NOT NULL,
+ CONSTRAINT [PK_DTNProcedure] PRIMARY KEY CLUSTERED 
+(
+	[ProcedureId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[DTNProcedure] ADD  CONSTRAINT [DF_DTNProcedure_Active]  DEFAULT ((1)) FOR [Active]
+GO
+
 /****** Object:  Table [dbo].[DTNTable]    Script Date: 3/25/2019 11:09:55 PM ******/
 SET ANSI_NULLS ON
 GO
@@ -1153,6 +1177,182 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
+
+
+Create PROCEDURE [dbo].[DTNProcedure_Delete]
+
+    -- Primary Key Paramater
+    @ProcedureId int
+
+AS
+BEGIN
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    -- Begin Delete Statement
+    Delete From [DTNProcedure]
+
+    -- Delete Matching Record
+    Where [ProcedureId] = @ProcedureId
+
+END
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+GO
+
+/****** Object:  StoredProcedure [dbo].[DTNProcedure_FetchAll]    Script Date: 6/1/2019 9:25:51 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+Create PROCEDURE [dbo].[DTNProcedure_FetchAll]
+
+AS
+BEGIN
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    -- Begin Select Statement
+    Select [Active],[Name],[ProcedureId],[ProjectId],[TableId]
+
+    -- From tableName
+    From [DTNProcedure]
+
+END
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+GO
+
+/****** Object:  StoredProcedure [dbo].[DTNProcedure_Find]    Script Date: 6/1/2019 9:25:51 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+Create PROCEDURE [dbo].[DTNProcedure_Find]
+
+    -- Primary Key Paramater
+    @ProcedureId int
+
+AS
+BEGIN
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    -- Begin Select Statement
+    Select [Active],[Name],[ProcedureId],[ProjectId],[TableId]
+
+    -- From tableName
+    From [DTNProcedure]
+
+    -- Find Matching Record
+    Where [ProcedureId] = @ProcedureId
+
+END
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+GO
+
+/****** Object:  StoredProcedure [dbo].[DTNProcedure_Insert]    Script Date: 6/1/2019 9:25:51 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+Create PROCEDURE [dbo].[DTNProcedure_Insert]
+
+    -- Add the parameters for the stored procedure here
+    @Active bit,
+    @Name nvarchar(50),
+    @ProjectId int,
+    @TableId int
+
+AS
+BEGIN
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    -- Begin Insert Statement
+    Insert Into [DTNProcedure]
+    ([Active],[Name],[ProjectId],[TableId])
+
+    -- Begin Values List
+    Values(@Active, @Name, @ProjectId, @TableId)
+
+    -- Return ID of new record
+    SELECT SCOPE_IDENTITY()
+
+END
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+GO
+
+/****** Object:  StoredProcedure [dbo].[DTNProcedure_Update]    Script Date: 6/1/2019 9:25:51 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+Create PROCEDURE [dbo].[DTNProcedure_Update]
+
+    -- Add the parameters for the stored procedure here
+    @Active bit,
+    @Name nvarchar(50),
+    @ProcedureId int,
+    @ProjectId int,
+    @TableId int
+
+AS
+BEGIN
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    -- Begin Update Statement
+    Update [DTNProcedure]
+
+    -- Update Each field
+    Set [Active] = @Active,
+    [Name] = @Name,
+    [ProjectId] = @ProjectId,
+    [TableId] = @TableId
+
+    -- Update Matching Record
+    Where [ProcedureId] = @ProcedureId
+
+END
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+GO
+
+
 
 /****** Object:  StoredProcedure [dbo].[DTNTable_Delete]    Script Date: 3/22/2019 6:28:01 PM ******/
 SET ANSI_NULLS ON
