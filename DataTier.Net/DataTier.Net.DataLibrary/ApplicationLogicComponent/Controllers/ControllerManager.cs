@@ -28,6 +28,7 @@ namespace ApplicationLogicComponent.Controllers
         private CustomReaderController customreaderController;
         private DTNDatabaseController dtndatabaseController;
         private DTNFieldController dtnfieldController;
+        private DTNProcedureController dtnprocedureController;
         private DTNTableController dtntableController;
         private EnumerationController enumerationController;
         private FieldSetController fieldsetController;
@@ -66,6 +67,7 @@ namespace ApplicationLogicComponent.Controllers
                 this.CustomReaderController = new CustomReaderController(this.ErrorProcessor, this.AppController);
                 this.DTNDatabaseController = new DTNDatabaseController(this.ErrorProcessor, this.AppController);
                 this.DTNFieldController = new DTNFieldController(this.ErrorProcessor, this.AppController);
+                this.DTNProcedureController = new DTNProcedureController(this.ErrorProcessor, this.AppController);
                 this.DTNTableController = new DTNTableController(this.ErrorProcessor, this.AppController);
                 this.EnumerationController = new EnumerationController(this.ErrorProcessor, this.AppController);
                 this.FieldSetController = new FieldSetController(this.ErrorProcessor, this.AppController);
@@ -119,6 +121,14 @@ namespace ApplicationLogicComponent.Controllers
             {
                 get { return dtnfieldController; }
                 set { dtnfieldController = value; }
+            }
+            #endregion
+
+            #region DTNProcedureController
+            public DTNProcedureController DTNProcedureController
+            {
+                get { return dtnprocedureController; }
+                set { dtnprocedureController = value; }
             }
             #endregion
 

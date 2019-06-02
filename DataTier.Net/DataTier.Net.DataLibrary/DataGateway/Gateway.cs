@@ -155,6 +155,43 @@ namespace DataGateway
             }
             #endregion
         
+            #region DeleteDTNProcedure(int procedureId, DTNProcedure tempDTNProcedure = null)
+            /// <summary>
+            /// This method is used to delete DTNProcedure objects.
+            /// </summary>
+            /// <param name="procedureId">Delete the DTNProcedure with this procedureId</param>
+            /// <param name="tempDTNProcedure">Pass in a tempDTNProcedure to perform a custom delete.</param>
+            public bool DeleteDTNProcedure(int procedureId, DTNProcedure tempDTNProcedure = null)
+            {
+                // initial value
+                bool deleted = false;
+        
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // if the tempDTNProcedure does not exist
+                    if (tempDTNProcedure == null)
+                    {
+                        // create a temp DTNProcedure
+                        tempDTNProcedure = new DTNProcedure();
+                    }
+        
+                    // if the procedureId is set
+                    if (procedureId > 0)
+                    {
+                        // set the primary key
+                        tempDTNProcedure.UpdateIdentity(procedureId);
+                    }
+        
+                    // perform the delete
+                    deleted = this.AppController.ControllerManager.DTNProcedureController.Delete(tempDTNProcedure);
+                }
+        
+                // return value
+                return deleted;
+            }
+            #endregion
+        
             #region DeleteDTNTable(int tableId, DTNTable tempDTNTable = null)
             /// <summary>
             /// This method is used to delete DTNTable objects.
@@ -660,6 +697,43 @@ namespace DataGateway
 
                 // return value
                 return dTNField;
+            }
+            #endregion
+
+            #region FindDTNProcedure(int procedureId, DTNProcedure tempDTNProcedure = null)
+            /// <summary>
+            /// This method is used to find 'DTNProcedure' objects.
+            /// </summary>
+            /// <param name="procedureId">Find the DTNProcedure with this procedureId</param>
+            /// <param name="tempDTNProcedure">Pass in a tempDTNProcedure to perform a custom find.</param>
+            public DTNProcedure FindDTNProcedure(int procedureId, DTNProcedure tempDTNProcedure = null)
+            {
+                // initial value
+                DTNProcedure dTNProcedure = null;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // if the tempDTNProcedure does not exist
+                    if (tempDTNProcedure == null)
+                    {
+                        // create a temp DTNProcedure
+                        tempDTNProcedure = new DTNProcedure();
+                    }
+
+                    // if the procedureId is set
+                    if (procedureId > 0)
+                    {
+                        // set the primary key
+                        tempDTNProcedure.UpdateIdentity(procedureId);
+                    }
+
+                    // perform the find
+                    dTNProcedure = this.AppController.ControllerManager.DTNProcedureController.Find(tempDTNProcedure);
+                }
+
+                // return value
+                return dTNProcedure;
             }
             #endregion
 
@@ -1193,6 +1267,27 @@ namespace DataGateway
 
                 // return value
                 return dTNFields;
+            }
+            #endregion
+
+            #region LoadDTNProcedures(DTNProcedure tempDTNProcedure = null)
+            /// <summary>
+            /// This method loads a collection of 'DTNProcedure' objects.
+            /// </summary>
+            public List<DTNProcedure> LoadDTNProcedures(DTNProcedure tempDTNProcedure = null)
+            {
+                // initial value
+                List<DTNProcedure> dTNProcedures = null;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // perform the load
+                    dTNProcedures = this.AppController.ControllerManager.DTNProcedureController.FetchAll(tempDTNProcedure);
+                }
+
+                // return value
+                return dTNProcedures;
             }
             #endregion
 
@@ -1749,6 +1844,28 @@ namespace DataGateway
                 {
                     // perform the save
                     saved = this.AppController.ControllerManager.DTNFieldController.Save(ref dTNField);
+                }
+
+                // return value
+                return saved;
+            }
+            #endregion
+
+            #region SaveDTNProcedure(ref DTNProcedure dTNProcedure)
+            /// <summary>
+            /// This method is used to save 'DTNProcedure' objects.
+            /// </summary>
+            /// <param name="dTNProcedure">The DTNProcedure to save.</param>
+            public bool SaveDTNProcedure(ref DTNProcedure dTNProcedure)
+            {
+                // initial value
+                bool saved = false;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // perform the save
+                    saved = this.AppController.ControllerManager.DTNProcedureController.Save(ref dTNProcedure);
                 }
 
                 // return value

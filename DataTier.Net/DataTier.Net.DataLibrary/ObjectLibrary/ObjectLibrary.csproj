@@ -63,6 +63,8 @@
     <Compile Include="BusinessObjects\DTNDatabase.data.cs" />
     <Compile Include="BusinessObjects\DTNField.business.cs" />
     <Compile Include="BusinessObjects\DTNField.data.cs" />
+    <Compile Include="BusinessObjects\DTNProcedure.business.cs" />
+    <Compile Include="BusinessObjects\DTNProcedure.data.cs" />
     <Compile Include="BusinessObjects\DTNTable.business.cs" />
     <Compile Include="BusinessObjects\DTNTable.data.cs" />
     <Compile Include="BusinessObjects\Enumeration.business.cs" />

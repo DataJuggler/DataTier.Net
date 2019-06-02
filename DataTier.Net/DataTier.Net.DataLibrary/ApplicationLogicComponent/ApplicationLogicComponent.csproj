@@ -69,6 +69,7 @@
     <Compile Include="Controllers\CustomReaderController.cs" />
     <Compile Include="Controllers\DTNDatabaseController.cs" />
     <Compile Include="Controllers\DTNFieldController.cs" />
+    <Compile Include="Controllers\DTNProcedureController.cs" />
     <Compile Include="Controllers\DTNTableController.cs" />
     <Compile Include="Controllers\EnumerationController.cs" />
     <Compile Include="Controllers\FieldSetController.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="DataOperations\CustomReaderMethods.cs" />
     <Compile Include="DataOperations\DTNDatabaseMethods.cs" />
     <Compile Include="DataOperations\DTNFieldMethods.cs" />
+    <Compile Include="DataOperations\DTNProcedureMethods.cs" />
     <Compile Include="DataOperations\DTNTableMethods.cs" />
     <Compile Include="DataOperations\EnumerationMethods.cs" />
     <Compile Include="DataOperations\FieldSetFieldMethods.cs" />

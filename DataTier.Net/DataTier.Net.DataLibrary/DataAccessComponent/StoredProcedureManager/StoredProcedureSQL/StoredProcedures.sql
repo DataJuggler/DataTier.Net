@@ -6,7 +6,7 @@ Go
 -- =========================================================
 -- Procure Name: CustomReader_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Insert a new CustomReader
 -- =========================================================
 
@@ -68,7 +68,7 @@ Go
 -- =========================================================
 -- Procure Name: CustomReader_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Update an existing CustomReader
 -- =========================================================
 
@@ -134,7 +134,7 @@ Go
 -- =========================================================
 -- Procure Name: CustomReader_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Find an existing CustomReader
 -- =========================================================
 
@@ -191,7 +191,7 @@ Go
 -- =========================================================
 -- Procure Name: CustomReader_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Delete an existing CustomReader
 -- =========================================================
 
@@ -245,7 +245,7 @@ Go
 -- =========================================================
 -- Procure Name: CustomReader_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Returns all CustomReader objects
 -- =========================================================
 
@@ -296,7 +296,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNDatabase_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Insert a new DTNDatabase
 -- =========================================================
 
@@ -364,7 +364,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNDatabase_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Update an existing DTNDatabase
 -- =========================================================
 
@@ -442,7 +442,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNDatabase_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Find an existing DTNDatabase
 -- =========================================================
 
@@ -499,7 +499,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNDatabase_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Delete an existing DTNDatabase
 -- =========================================================
 
@@ -553,7 +553,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNDatabase_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Returns all DTNDatabase objects
 -- =========================================================
 
@@ -604,7 +604,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNField_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Insert a new DTNField
 -- =========================================================
 
@@ -679,7 +679,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNField_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Update an existing DTNField
 -- =========================================================
 
@@ -771,7 +771,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNField_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Find an existing DTNField
 -- =========================================================
 
@@ -828,7 +828,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNField_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Delete an existing DTNField
 -- =========================================================
 
@@ -882,7 +882,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNField_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Returns all DTNField objects
 -- =========================================================
 
@@ -931,9 +931,296 @@ set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 Go
 -- =========================================================
+-- Procure Name: DTNProcedure_Insert
+-- Author:           Data Juggler - Data Tier.Net Procedure Generator
+-- Create Date:   6/1/2019
+-- Description:    Insert a new DTNProcedure
+-- =========================================================
+
+-- Check if the procedure already exists
+IF EXISTS (select * from syscomments where id = object_id ('DTNProcedure_Insert'))
+
+    -- Procedure Does Exist, Drop First
+    BEGIN
+
+        -- Execute Drop
+        Drop Procedure DTNProcedure_Insert
+
+        -- Test if procedure was dropped
+        IF OBJECT_ID('dbo.DTNProcedure_Insert') IS NOT NULL
+
+            -- Print Line Drop Failed
+            PRINT '<<< Drop Failed On Procedure DTNProcedure_Insert >>>'
+
+        Else
+
+            -- Print Line Procedure Dropped
+            PRINT '<<< Drop Suceeded On Procedure DTNProcedure_Insert >>>'
+
+    End
+
+GO
+
+Create PROCEDURE DTNProcedure_Insert
+
+    -- Add the parameters for the stored procedure here
+    @Active bit,
+    @Name nvarchar(50),
+    @ProjectId int,
+    @TableId int
+
+AS
+BEGIN
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    -- Begin Insert Statement
+    Insert Into [DTNProcedure]
+    ([Active],[Name],[ProjectId],[TableId])
+
+    -- Begin Values List
+    Values(@Active, @Name, @ProjectId, @TableId)
+
+    -- Return ID of new record
+    SELECT SCOPE_IDENTITY()
+
+END
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+Go
+-- =========================================================
+-- Procure Name: DTNProcedure_Update
+-- Author:           Data Juggler - Data Tier.Net Procedure Generator
+-- Create Date:   6/1/2019
+-- Description:    Update an existing DTNProcedure
+-- =========================================================
+
+-- Check if the procedure already exists
+IF EXISTS (select * from syscomments where id = object_id ('DTNProcedure_Update'))
+
+    -- Procedure Does Exist, Drop First
+    BEGIN
+
+        -- Execute Drop
+        Drop Procedure DTNProcedure_Update
+
+        -- Test if procedure was dropped
+        IF OBJECT_ID('dbo.DTNProcedure_Update') IS NOT NULL
+
+            -- Print Line Drop Failed
+            PRINT '<<< Drop Failed On Procedure DTNProcedure_Update >>>'
+
+        Else
+
+            -- Print Line Procedure Dropped
+            PRINT '<<< Drop Suceeded On Procedure DTNProcedure_Update >>>'
+
+    End
+
+GO
+
+Create PROCEDURE DTNProcedure_Update
+
+    -- Add the parameters for the stored procedure here
+    @Active bit,
+    @Name nvarchar(50),
+    @ProcedureId int,
+    @ProjectId int,
+    @TableId int
+
+AS
+BEGIN
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    -- Begin Update Statement
+    Update [DTNProcedure]
+
+    -- Update Each field
+    Set [Active] = @Active,
+    [Name] = @Name,
+    [ProjectId] = @ProjectId,
+    [TableId] = @TableId
+
+    -- Update Matching Record
+    Where [ProcedureId] = @ProcedureId
+
+END
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+Go
+-- =========================================================
+-- Procure Name: DTNProcedure_Find
+-- Author:           Data Juggler - Data Tier.Net Procedure Generator
+-- Create Date:   6/1/2019
+-- Description:    Find an existing DTNProcedure
+-- =========================================================
+
+-- Check if the procedure already exists
+IF EXISTS (select * from syscomments where id = object_id ('DTNProcedure_Find'))
+
+    -- Procedure Does Exist, Drop First
+    BEGIN
+
+        -- Execute Drop
+        Drop Procedure DTNProcedure_Find
+
+        -- Test if procedure was dropped
+        IF OBJECT_ID('dbo.DTNProcedure_Find') IS NOT NULL
+
+            -- Print Line Drop Failed
+            PRINT '<<< Drop Failed On Procedure DTNProcedure_Find >>>'
+
+        Else
+
+            -- Print Line Procedure Dropped
+            PRINT '<<< Drop Suceeded On Procedure DTNProcedure_Find >>>'
+
+    End
+
+GO
+
+Create PROCEDURE DTNProcedure_Find
+
+    -- Primary Key Paramater
+    @ProcedureId int
+
+AS
+BEGIN
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    -- Begin Select Statement
+    Select [Active],[Name],[ProcedureId],[ProjectId],[TableId]
+
+    -- From tableName
+    From [DTNProcedure]
+
+    -- Find Matching Record
+    Where [ProcedureId] = @ProcedureId
+
+END
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+Go
+-- =========================================================
+-- Procure Name: DTNProcedure_Delete
+-- Author:           Data Juggler - Data Tier.Net Procedure Generator
+-- Create Date:   6/1/2019
+-- Description:    Delete an existing DTNProcedure
+-- =========================================================
+
+-- Check if the procedure already exists
+IF EXISTS (select * from syscomments where id = object_id ('DTNProcedure_Delete'))
+
+    -- Procedure Does Exist, Drop First
+    BEGIN
+
+        -- Execute Drop
+        Drop Procedure DTNProcedure_Delete
+
+        -- Test if procedure was dropped
+        IF OBJECT_ID('dbo.DTNProcedure_Delete') IS NOT NULL
+
+            -- Print Line Drop Failed
+            PRINT '<<< Drop Failed On Procedure DTNProcedure_Delete >>>'
+
+        Else
+
+            -- Print Line Procedure Dropped
+            PRINT '<<< Drop Suceeded On Procedure DTNProcedure_Delete >>>'
+
+    End
+
+GO
+
+Create PROCEDURE DTNProcedure_Delete
+
+    -- Primary Key Paramater
+    @ProcedureId int
+
+AS
+BEGIN
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    -- Begin Delete Statement
+    Delete From [DTNProcedure]
+
+    -- Delete Matching Record
+    Where [ProcedureId] = @ProcedureId
+
+END
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+Go
+-- =========================================================
+-- Procure Name: DTNProcedure_FetchAll
+-- Author:           Data Juggler - Data Tier.Net Procedure Generator
+-- Create Date:   6/1/2019
+-- Description:    Returns all DTNProcedure objects
+-- =========================================================
+
+-- Check if the procedure already exists
+IF EXISTS (select * from syscomments where id = object_id ('DTNProcedure_FetchAll'))
+
+    -- Procedure Does Exist, Drop First
+    BEGIN
+
+        -- Execute Drop
+        Drop Procedure DTNProcedure_FetchAll
+
+        -- Test if procedure was dropped
+        IF OBJECT_ID('dbo.DTNProcedure_FetchAll') IS NOT NULL
+
+            -- Print Line Drop Failed
+            PRINT '<<< Drop Failed On Procedure DTNProcedure_FetchAll >>>'
+
+        Else
+
+            -- Print Line Procedure Dropped
+            PRINT '<<< Drop Suceeded On Procedure DTNProcedure_FetchAll >>>'
+
+    End
+
+GO
+
+Create PROCEDURE DTNProcedure_FetchAll
+
+AS
+BEGIN
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    -- Begin Select Statement
+    Select [Active],[Name],[ProcedureId],[ProjectId],[TableId]
+
+    -- From tableName
+    From [DTNProcedure]
+
+END
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+Go
+-- =========================================================
 -- Procure Name: DTNTable_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Insert a new DTNTable
 -- =========================================================
 
@@ -999,7 +1286,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNTable_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Update an existing DTNTable
 -- =========================================================
 
@@ -1073,7 +1360,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNTable_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Find an existing DTNTable
 -- =========================================================
 
@@ -1130,7 +1417,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNTable_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Delete an existing DTNTable
 -- =========================================================
 
@@ -1184,7 +1471,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNTable_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Returns all DTNTable objects
 -- =========================================================
 
@@ -1235,7 +1522,7 @@ Go
 -- =========================================================
 -- Procure Name: Enumeration_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Insert a new Enumeration
 -- =========================================================
 
@@ -1295,7 +1582,7 @@ Go
 -- =========================================================
 -- Procure Name: Enumeration_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Update an existing Enumeration
 -- =========================================================
 
@@ -1357,7 +1644,7 @@ Go
 -- =========================================================
 -- Procure Name: Enumeration_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Find an existing Enumeration
 -- =========================================================
 
@@ -1414,7 +1701,7 @@ Go
 -- =========================================================
 -- Procure Name: Enumeration_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Delete an existing Enumeration
 -- =========================================================
 
@@ -1468,7 +1755,7 @@ Go
 -- =========================================================
 -- Procure Name: Enumeration_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Returns all Enumeration objects
 -- =========================================================
 
@@ -1519,7 +1806,7 @@ Go
 -- =========================================================
 -- Procure Name: FieldSet_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Insert a new FieldSet
 -- =========================================================
 
@@ -1583,7 +1870,7 @@ Go
 -- =========================================================
 -- Procure Name: FieldSet_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Update an existing FieldSet
 -- =========================================================
 
@@ -1653,7 +1940,7 @@ Go
 -- =========================================================
 -- Procure Name: FieldSet_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Find an existing FieldSet
 -- =========================================================
 
@@ -1710,7 +1997,7 @@ Go
 -- =========================================================
 -- Procure Name: FieldSet_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Delete an existing FieldSet
 -- =========================================================
 
@@ -1764,7 +2051,7 @@ Go
 -- =========================================================
 -- Procure Name: FieldSet_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Returns all FieldSet objects
 -- =========================================================
 
@@ -1815,7 +2102,7 @@ Go
 -- =========================================================
 -- Procure Name: FieldSetField_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Insert a new FieldSetField
 -- =========================================================
 
@@ -1875,7 +2162,7 @@ Go
 -- =========================================================
 -- Procure Name: FieldSetField_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Update an existing FieldSetField
 -- =========================================================
 
@@ -1937,7 +2224,7 @@ Go
 -- =========================================================
 -- Procure Name: FieldSetField_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Find an existing FieldSetField
 -- =========================================================
 
@@ -1994,7 +2281,7 @@ Go
 -- =========================================================
 -- Procure Name: FieldSetField_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Delete an existing FieldSetField
 -- =========================================================
 
@@ -2048,7 +2335,7 @@ Go
 -- =========================================================
 -- Procure Name: FieldSetField_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Returns all FieldSetField objects
 -- =========================================================
 
@@ -2099,7 +2386,7 @@ Go
 -- =========================================================
 -- Procure Name: FieldSetFieldView_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Returns all FieldSetFieldView objects
 -- =========================================================
 
@@ -2150,7 +2437,7 @@ Go
 -- =========================================================
 -- Procure Name: Method_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Insert a new Method
 -- =========================================================
 
@@ -2225,7 +2512,7 @@ Go
 -- =========================================================
 -- Procure Name: Method_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Update an existing Method
 -- =========================================================
 
@@ -2317,7 +2604,7 @@ Go
 -- =========================================================
 -- Procure Name: Method_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Find an existing Method
 -- =========================================================
 
@@ -2374,7 +2661,7 @@ Go
 -- =========================================================
 -- Procure Name: Method_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Delete an existing Method
 -- =========================================================
 
@@ -2428,7 +2715,7 @@ Go
 -- =========================================================
 -- Procure Name: Method_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Returns all Method objects
 -- =========================================================
 
@@ -2479,7 +2766,7 @@ Go
 -- =========================================================
 -- Procure Name: Project_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Insert a new Project
 -- =========================================================
 
@@ -2562,7 +2849,7 @@ Go
 -- =========================================================
 -- Procure Name: Project_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Update an existing Project
 -- =========================================================
 
@@ -2670,7 +2957,7 @@ Go
 -- =========================================================
 -- Procure Name: Project_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Find an existing Project
 -- =========================================================
 
@@ -2727,7 +3014,7 @@ Go
 -- =========================================================
 -- Procure Name: Project_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Delete an existing Project
 -- =========================================================
 
@@ -2781,7 +3068,7 @@ Go
 -- =========================================================
 -- Procure Name: Project_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Returns all Project objects
 -- =========================================================
 
@@ -2832,7 +3119,7 @@ Go
 -- =========================================================
 -- Procure Name: ProjectReference_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Insert a new ProjectReference
 -- =========================================================
 
@@ -2891,7 +3178,7 @@ Go
 -- =========================================================
 -- Procure Name: ProjectReference_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Update an existing ProjectReference
 -- =========================================================
 
@@ -2951,7 +3238,7 @@ Go
 -- =========================================================
 -- Procure Name: ProjectReference_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Find an existing ProjectReference
 -- =========================================================
 
@@ -3008,7 +3295,7 @@ Go
 -- =========================================================
 -- Procure Name: ProjectReference_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Delete an existing ProjectReference
 -- =========================================================
 
@@ -3062,7 +3349,7 @@ Go
 -- =========================================================
 -- Procure Name: ProjectReference_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Returns all ProjectReference objects
 -- =========================================================
 
@@ -3113,7 +3400,7 @@ Go
 -- =========================================================
 -- Procure Name: ReferencesSet_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Insert a new ReferencesSet
 -- =========================================================
 
@@ -3172,7 +3459,7 @@ Go
 -- =========================================================
 -- Procure Name: ReferencesSet_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Update an existing ReferencesSet
 -- =========================================================
 
@@ -3232,7 +3519,7 @@ Go
 -- =========================================================
 -- Procure Name: ReferencesSet_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Find an existing ReferencesSet
 -- =========================================================
 
@@ -3289,7 +3576,7 @@ Go
 -- =========================================================
 -- Procure Name: ReferencesSet_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Delete an existing ReferencesSet
 -- =========================================================
 
@@ -3343,7 +3630,7 @@ Go
 -- =========================================================
 -- Procure Name: ReferencesSet_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   5/12/2019
+-- Create Date:   6/1/2019
 -- Description:    Returns all ReferencesSet objects
 -- =========================================================
 

@@ -56,6 +56,7 @@
     <Compile Include="DataManager\DataHelper.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DataManager\DTNProcedureManager.cs" />
     <Compile Include="DataManager\FieldSetFieldManager.cs" />
     <Compile Include="DataManager\FieldSetFieldViewManager.cs" />
     <Compile Include="DataManager\FieldSetManager.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="DataManager\Readers\CustomReaderReader.cs" />
     <Compile Include="DataManager\Readers\DTNDatabaseReader.cs" />
     <Compile Include="DataManager\Readers\DTNFieldReader.cs" />
+    <Compile Include="DataManager\Readers\DTNProcedureReader.cs" />
     <Compile Include="DataManager\Readers\DTNTableReader.cs" />
     <Compile Include="DataManager\Readers\EnumerationReader.cs" />
     <Compile Include="DataManager\Readers\FieldSetFieldReader.cs" />
@@ -78,6 +80,8 @@
     <Compile Include="DataManager\Writers\DTNDatabaseWriterBase.cs" />
     <Compile Include="DataManager\Writers\DTNFieldWriter.cs" />
     <Compile Include="DataManager\Writers\DTNFieldWriterBase.cs" />
+    <Compile Include="DataManager\Writers\DTNProcedureWriter.cs" />
+    <Compile Include="DataManager\Writers\DTNProcedureWriterBase.cs" />
     <Compile Include="DataManager\Writers\DTNTableWriter.cs" />
     <Compile Include="DataManager\Writers\DTNTableWriterBase.cs" />
     <Compile Include="DataManager\Writers\EnumerationWriter.cs" />
@@ -112,6 +116,7 @@
     <Compile Include="StoredProcedureManager\DeleteProcedures\DeleteCustomReaderStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\DeleteProcedures\DeleteDTNDatabaseStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\DeleteProcedures\DeleteDTNFieldStoredProcedure.cs" />
+    <Compile Include="StoredProcedureManager\DeleteProcedures\DeleteDTNProcedureStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\DeleteProcedures\DeleteDTNTableStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\DeleteProcedures\DeleteEnumerationStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\DeleteProcedures\DeleteFieldSetFieldStoredProcedure.cs" />
@@ -123,6 +128,7 @@
     <Compile Include="StoredProcedureManager\FetchProcedures\FetchAllCustomReadersStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FetchAllDTNDatabasesStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FetchAllDTNFieldsStoredProcedure.cs" />
+    <Compile Include="StoredProcedureManager\FetchProcedures\FetchAllDTNProceduresStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FetchAllDTNTablesStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FetchAllEnumerationsStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FetchAllFieldSetFieldsStoredProcedure.cs" />
@@ -135,6 +141,7 @@
     <Compile Include="StoredProcedureManager\FetchProcedures\FindCustomReaderStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FindDTNDatabaseStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FindDTNFieldStoredProcedure.cs" />
+    <Compile Include="StoredProcedureManager\FetchProcedures\FindDTNProcedureStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FindDTNTableStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FindEnumerationStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FindFieldSetFieldStoredProcedure.cs" />
@@ -147,6 +154,7 @@
     <Compile Include="StoredProcedureManager\InsertProcedures\InsertCustomReaderStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\InsertProcedures\InsertDTNDatabaseStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\InsertProcedures\InsertDTNFieldStoredProcedure.cs" />
+    <Compile Include="StoredProcedureManager\InsertProcedures\InsertDTNProcedureStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\InsertProcedures\InsertDTNTableStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\InsertProcedures\InsertEnumerationStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\InsertProcedures\InsertFieldSetFieldStoredProcedure.cs" />
@@ -167,6 +175,7 @@
     <Compile Include="StoredProcedureManager\UpdateProcedures\UpdateCustomReaderStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\UpdateProcedures\UpdateDTNDatabaseStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\UpdateProcedures\UpdateDTNFieldStoredProcedure.cs" />
+    <Compile Include="StoredProcedureManager\UpdateProcedures\UpdateDTNProcedureStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\UpdateProcedures\UpdateDTNTableStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\UpdateProcedures\UpdateEnumerationStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\UpdateProcedures\UpdateFieldSetFieldStoredProcedure.cs" />

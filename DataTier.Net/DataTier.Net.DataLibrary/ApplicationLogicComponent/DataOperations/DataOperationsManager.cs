@@ -32,6 +32,7 @@ namespace ApplicationLogicComponent.DataOperations
         private CustomReaderMethods customreaderMethods;
         private DTNDatabaseMethods dtndatabaseMethods;
         private DTNFieldMethods dtnfieldMethods;
+        private DTNProcedureMethods dtnprocedureMethods;
         private DTNTableMethods dtntableMethods;
         private EnumerationMethods enumerationMethods;
         private FieldSetMethods fieldsetMethods;
@@ -70,6 +71,7 @@ namespace ApplicationLogicComponent.DataOperations
                 this.CustomReaderMethods = new CustomReaderMethods(this.DataManager);
                 this.DTNDatabaseMethods = new DTNDatabaseMethods(this.DataManager);
                 this.DTNFieldMethods = new DTNFieldMethods(this.DataManager);
+                this.DTNProcedureMethods = new DTNProcedureMethods(this.DataManager);
                 this.DTNTableMethods = new DTNTableMethods(this.DataManager);
                 this.EnumerationMethods = new EnumerationMethods(this.DataManager);
                 this.FieldSetMethods = new FieldSetMethods(this.DataManager);
@@ -123,6 +125,14 @@ namespace ApplicationLogicComponent.DataOperations
             {
                 get { return dtnfieldMethods; }
                 set { dtnfieldMethods = value; }
+            }
+            #endregion
+
+            #region DTNProcedureMethods
+            public DTNProcedureMethods DTNProcedureMethods
+            {
+                get { return dtnprocedureMethods; }
+                set { dtnprocedureMethods = value; }
             }
             #endregion
 

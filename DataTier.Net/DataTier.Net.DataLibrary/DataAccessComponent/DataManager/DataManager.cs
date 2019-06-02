@@ -30,6 +30,7 @@ namespace DataAccessComponent.DataManager
         private CustomReaderManager customreaderManager;
         private DTNDatabaseManager dtndatabaseManager;
         private DTNFieldManager dtnfieldManager;
+        private DTNProcedureManager dtnprocedureManager;
         private DTNTableManager dtntableManager;
         private EnumerationManager enumerationManager;
         private FieldSetManager fieldsetManager;
@@ -68,6 +69,7 @@ namespace DataAccessComponent.DataManager
                 this.CustomReaderManager = new CustomReaderManager(this);
                 this.DTNDatabaseManager = new DTNDatabaseManager(this);
                 this.DTNFieldManager = new DTNFieldManager(this);
+                this.DTNProcedureManager = new DTNProcedureManager(this);
                 this.DTNTableManager = new DTNTableManager(this);
                 this.EnumerationManager = new EnumerationManager(this);
                 this.FieldSetManager = new FieldSetManager(this);
@@ -113,6 +115,14 @@ namespace DataAccessComponent.DataManager
             {
                 get { return dtnfieldManager; }
                 set { dtnfieldManager = value; }
+            }
+            #endregion
+
+            #region DTNProcedureManager
+            public DTNProcedureManager DTNProcedureManager
+            {
+                get { return dtnprocedureManager; }
+                set { dtnprocedureManager = value; }
             }
             #endregion
 
