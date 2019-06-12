@@ -703,7 +703,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DataTier.Net.ico" />
-    <None Include="Images\IncludeProjectFilesPlane.png" />
     <Content Include="Images\OrderBy.png" />
     <Content Include="Images\Parameter Mode.png" />
     <None Include="Images\V.png" />

@@ -63,16 +63,6 @@ namespace DataTierClient.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Black_Button {
-            get {
-                object obj = ResourceManager.GetObject("Black Button", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Black_Button1 {
             get {
                 object obj = ResourceManager.GetObject("Black Button1", resourceCulture);
@@ -166,16 +156,6 @@ namespace DataTierClient.Properties {
         internal static System.Drawing.Bitmap EditMode {
             get {
                 object obj = ResourceManager.GetObject("EditMode", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap IncludeProjectFilesPlane {
-            get {
-                object obj = ResourceManager.GetObject("IncludeProjectFilesPlane", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

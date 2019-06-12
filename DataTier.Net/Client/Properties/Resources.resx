@@ -127,9 +127,6 @@
   <data name="Parameter Mode" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\Parameter Mode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="IncludeProjectFilesPlane" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\IncludeProjectFilesPlane.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="EditMode" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\EditMode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -138,9 +135,6 @@
   </data>
   <data name="OrderBy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\OrderBy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Black Button" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Black Button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DarkBlackButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DarkBlackButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
