@@ -104,24 +104,27 @@ namespace ConnectionBuilder
             this.WindowsAuthenticationRadioButton.TabStop = true;
             this.WindowsAuthenticationRadioButton.Text = "Windows Authentication";
             this.WindowsAuthenticationRadioButton.UseVisualStyleBackColor = false;
+            this.WindowsAuthenticationRadioButton.CheckedChanged += new System.EventHandler(this.SQLServerAuthenticationRadioButton_CheckedChanged);
             // 
             // BuildConnectionStringButton
             // 
             this.BuildConnectionStringButton.BackColor = System.Drawing.Color.Transparent;
-            this.BuildConnectionStringButton.BackgroundImage = global::ConnectionBuilder.Properties.Resources.DarkBlueButton;
+            this.BuildConnectionStringButton.BackgroundImage = global::ConnectionBuilder.Properties.Resources.DarkButton;
             this.BuildConnectionStringButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BuildConnectionStringButton.Enabled = false;
             this.BuildConnectionStringButton.FlatAppearance.BorderSize = 0;
             this.BuildConnectionStringButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.BuildConnectionStringButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BuildConnectionStringButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BuildConnectionStringButton.Font = new System.Drawing.Font("Verdana", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BuildConnectionStringButton.ForeColor = System.Drawing.Color.White;
+            this.BuildConnectionStringButton.ForeColor = System.Drawing.Color.DimGray;
             this.BuildConnectionStringButton.Location = new System.Drawing.Point(539, 524);
             this.BuildConnectionStringButton.Name = "BuildConnectionStringButton";
             this.BuildConnectionStringButton.Size = new System.Drawing.Size(214, 40);
             this.BuildConnectionStringButton.TabIndex = 8;
             this.BuildConnectionStringButton.Text = "Build Conn String";
             this.BuildConnectionStringButton.UseVisualStyleBackColor = false;
+            this.BuildConnectionStringButton.EnabledChanged += new System.EventHandler(this.Button_EnabledChanged);
             this.BuildConnectionStringButton.Click += new System.EventHandler(this.BuildConnectionStringButton_Click);
             this.BuildConnectionStringButton.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.BuildConnectionStringButton.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
@@ -150,20 +153,22 @@ namespace ConnectionBuilder
             // CopyButton
             // 
             this.CopyButton.BackColor = System.Drawing.Color.Transparent;
-            this.CopyButton.BackgroundImage = global::ConnectionBuilder.Properties.Resources.DarkBlueButton;
+            this.CopyButton.BackgroundImage = global::ConnectionBuilder.Properties.Resources.DarkButton;
             this.CopyButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.CopyButton.Enabled = false;
             this.CopyButton.FlatAppearance.BorderSize = 0;
             this.CopyButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.CopyButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.CopyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CopyButton.Font = new System.Drawing.Font("Verdana", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CopyButton.ForeColor = System.Drawing.Color.White;
+            this.CopyButton.ForeColor = System.Drawing.Color.DimGray;
             this.CopyButton.Location = new System.Drawing.Point(539, 570);
             this.CopyButton.Name = "CopyButton";
             this.CopyButton.Size = new System.Drawing.Size(104, 40);
             this.CopyButton.TabIndex = 9;
             this.CopyButton.Text = "Copy";
             this.CopyButton.UseVisualStyleBackColor = false;
+            this.CopyButton.EnabledChanged += new System.EventHandler(this.Button_EnabledChanged);
             this.CopyButton.Click += new System.EventHandler(this.CopyButton_Click);
             this.CopyButton.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.CopyButton.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
@@ -171,20 +176,22 @@ namespace ConnectionBuilder
             // TestDatabaseConnectionButton
             // 
             this.TestDatabaseConnectionButton.BackColor = System.Drawing.Color.Transparent;
-            this.TestDatabaseConnectionButton.BackgroundImage = global::ConnectionBuilder.Properties.Resources.DarkBlueButton;
+            this.TestDatabaseConnectionButton.BackgroundImage = global::ConnectionBuilder.Properties.Resources.DarkButton;
             this.TestDatabaseConnectionButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.TestDatabaseConnectionButton.Enabled = false;
             this.TestDatabaseConnectionButton.FlatAppearance.BorderSize = 0;
             this.TestDatabaseConnectionButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.TestDatabaseConnectionButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.TestDatabaseConnectionButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.TestDatabaseConnectionButton.Font = new System.Drawing.Font("Verdana", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TestDatabaseConnectionButton.ForeColor = System.Drawing.Color.White;
+            this.TestDatabaseConnectionButton.ForeColor = System.Drawing.Color.DimGray;
             this.TestDatabaseConnectionButton.Location = new System.Drawing.Point(294, 524);
             this.TestDatabaseConnectionButton.Name = "TestDatabaseConnectionButton";
             this.TestDatabaseConnectionButton.Size = new System.Drawing.Size(239, 40);
             this.TestDatabaseConnectionButton.TabIndex = 7;
             this.TestDatabaseConnectionButton.Text = "Test and Copy";
             this.TestDatabaseConnectionButton.UseVisualStyleBackColor = false;
+            this.TestDatabaseConnectionButton.EnabledChanged += new System.EventHandler(this.Button_EnabledChanged);
             this.TestDatabaseConnectionButton.Click += new System.EventHandler(this.TestDatabaseConnectionButton_Click);
             this.TestDatabaseConnectionButton.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.TestDatabaseConnectionButton.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
@@ -352,6 +359,7 @@ namespace ConnectionBuilder
             this.EncryptAndCopyButton.TabIndex = 11;
             this.EncryptAndCopyButton.Text = "Encrypt && Copy";
             this.EncryptAndCopyButton.UseVisualStyleBackColor = false;
+            this.EncryptAndCopyButton.EnabledChanged += new System.EventHandler(this.Button_EnabledChanged);
             this.EncryptAndCopyButton.Click += new System.EventHandler(this.EncryptAndCopyButton_Click);
             this.EncryptAndCopyButton.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.EncryptAndCopyButton.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
@@ -439,7 +447,7 @@ namespace ConnectionBuilder
             // StatusImage
             // 
             this.StatusImage.BackColor = System.Drawing.Color.Transparent;
-            this.StatusImage.BackgroundImage = global::ConnectionBuilder.Properties.Resources.Success;
+            this.StatusImage.BackgroundImage = global::ConnectionBuilder.Properties.Resources.Failure;
             this.StatusImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.StatusImage.Location = new System.Drawing.Point(699, 464);
             this.StatusImage.Name = "StatusImage";

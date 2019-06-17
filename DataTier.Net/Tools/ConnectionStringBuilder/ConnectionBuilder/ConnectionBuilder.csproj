@@ -36,14 +36,14 @@
     <ApplicationIcon>Key.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DataJuggler.Core.UltimateHelper, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DataJuggler.Core.UltimateHelper.1.3.0\lib\net461\DataJuggler.Core.UltimateHelper.dll</HintPath>
+    <Reference Include="DataJuggler.Core.UltimateHelper, Version=1.3.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DataJuggler.Core.UltimateHelper.1.3.2\lib\net461\DataJuggler.Core.UltimateHelper.dll</HintPath>
     </Reference>
-    <Reference Include="DataJuggler.Net, Version=5.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DataJuggler.Net.5.4.1\lib\net461\DataJuggler.Net.dll</HintPath>
+    <Reference Include="DataJuggler.Net, Version=5.4.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DataJuggler.Net.5.4.2\lib\net461\DataJuggler.Net.dll</HintPath>
     </Reference>
-    <Reference Include="DataJuggler.Win.Controls, Version=5.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DataJuggler.Win.Controls.5.4.1\lib\net461\DataJuggler.Win.Controls.dll</HintPath>
+    <Reference Include="DataJuggler.Win.Controls, Version=5.4.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DataJuggler.Win.Controls.5.4.5\lib\net461\DataJuggler.Win.Controls.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -71,18 +71,17 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -93,21 +92,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\DarkBlueButton.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\OrangeBackground.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="lib\DataJuggler.Win.Controls Read Me.txt" />
-    <Content Include="RAD Studio Icon.ico" />
     <Content Include="Tools.ico" />
-    <None Include="Resources\DarkButton.png" />
+    <None Include="Images\OrangeBackground.jpg" />
+    <None Include="Images\Success.png" />
+    <None Include="Images\DarkBlueButton.png" />
+    <None Include="Images\DarkButton.png" />
+    <None Include="Images\Failure.png" />
     <None Include="Images\Copied.jpg" />
+    <Content Include="Data Juggler.ico" />
     <Content Include="Key.ico" />
-    <None Include="Resources\Success.png" />
-    <None Include="Resources\Failure.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -20,11 +20,11 @@ namespace ConnectionBuilder
     /// <summary>
     /// This class is used to build and test connection strings.
     /// </summary>
-    public partial class ConnectionStringBuilderForm : Form, ICheckChangedListener
+    public partial class ConnectionStringBuilderForm : Form, ICheckChangedListener, ITextChanged
     {
         
         #region Private Variables
-      
+        private ConnectionInfo connectionInfo;
         #endregion
         
         #region Constructor
@@ -69,6 +69,31 @@ namespace ConnectionBuilder
                 
                 // display the connectionString
                 this.ConnectionstringControl.Text = connectionString;
+            }
+            #endregion
+            
+            #region Button_EnabledChanged(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when Button _ Enabled Changed
+            /// </summary>
+            private void Button_EnabledChanged(object sender, EventArgs e)
+            {
+                // cast the sender as a button
+                Button button = sender as Button;
+
+                // if enabled
+                if (button.Enabled)
+                {
+                    // Setup Enabled button
+                    button.ForeColor = Color.White;
+                    button.BackgroundImage = Properties.Resources.DarkBlueButton;
+                }
+                else
+                {
+                    // Setup Disabled button
+                    button.ForeColor = Color.DimGray;
+                    button.BackgroundImage = Properties.Resources.DarkButton;
+                }
             }
             #endregion
             
@@ -244,9 +269,70 @@ namespace ConnectionBuilder
                         EncryptionKeyControl.LabelColor = Color.DarkGray;
                     }
                 }
+
+                // Enable or disable buttons
+                UIControl();
             }
             #endregion
 
+            #region OnTextChanged(Control control, string text)
+            /// <summary>
+            /// event is fired when On Text Changed
+            /// </summary>
+            public void OnTextChanged(Control control, string text)
+            {
+                // if the value for HasConnectionInfo is true
+                if (HasConnectionInfo)
+                {
+                    // cast the control as a LabelTextBox
+                    LabelTextBoxControl textBox = control as LabelTextBoxControl;
+
+                    // If the textBox object exists
+                    if (NullHelper.Exists(textBox))
+                    {
+                        // determine the action by the name
+                        switch (textBox.Name)
+                        {
+                            case "DatabaseServerControl":
+
+                                // Set the value for DatabaseServer
+                                ConnectionInfo.DatabaseServer = text;
+
+                                // required
+                                break;
+
+                            case "DatabaseNameControl":
+
+                                 // Set the value for DatabaseName
+                                ConnectionInfo.DatabaseName = text;
+
+                                // required
+                                break;
+
+                            case "DatabaseUserControl":
+
+                                 // Set the value for DatabaseUserName
+                                ConnectionInfo.DatabaseUserName = text;
+
+                                // required
+                                break;
+
+                            case "DatabasePasswordControl":
+
+                                 // Set the value for DatabasePassword
+                                ConnectionInfo.DatabasePassword = text;
+
+                                // required
+                                break;
+                        }
+                    }
+                }
+
+                // Enable or disable ncontrols
+                UIControl();
+            }
+            #endregion
+            
             #region SQLServerAuthenticationRadioButton_CheckedChanged(object sender, EventArgs e)
             /// <summary>
             /// This event is fired when the SQL Server radio button is checked.
@@ -259,6 +345,16 @@ namespace ConnectionBuilder
                 // Show or hide the controls based upon the value of isChecked
                 this.DatabaseUserControl.Visible = isChecked;
                 this.DatabasePasswordControl.Visible = isChecked;
+
+                // if the value for HasConnectionInfo is true
+                if (HasConnectionInfo)
+                {
+                    // set the value for IntegratedSecurity
+                    ConnectionInfo.IntegratedSecurity = WindowsAuthenticationRadioButton.Checked;
+
+                    // Enable or disable controls
+                    UIControl();
+                }
             }
             #endregion
             
@@ -376,33 +472,121 @@ namespace ConnectionBuilder
             /// </summary>
             public void Init()
             {
+                // Create a new instance of a 'ConnectionInfo' object.
+                this.ConnectionInfo = new ConnectionInfo();
+
                 // Default to SQL Server Authentication at First
                 this.SQLServerAuthenticationRadioButton.Checked = true;
 
                 // Setup the listeners
                 this.UseEncryptionCheckBox.CheckChangedListener = this;
                 this.UseCustomKeyCheckBox.CheckChangedListener = this;
+                this.DatabaseServerControl.OnTextChangedListener = this;
+                this.DatabaseNameControl.OnTextChangedListener = this;
+                this.DatabaseUserControl.OnTextChangedListener = this;
+                this.DatabasePasswordControl.OnTextChangedListener = this;
+                this.ConnectionstringControl.OnTextChangedListener = this;
+                
+                // Enable or disable controls
+                UIControl();
             }
-        #endregion
+            #endregion
 
             #region ShowCopiedImage()
             /// <summary>
             /// This method Show Copied Image
             /// </summary>
             public void ShowCopiedImage()
-            {
-                 // Show the CopiedImage
-                this.CopiedImage.Visible = true;
+                {
+                     // Show the CopiedImage
+                    this.CopiedImage.Visible = true;
 
-                // Start the timer to get rid of the Copied Image
-                this.CopiedTimer.Enabled = true;
+                    // Start the timer to get rid of the Copied Image
+                    this.CopiedTimer.Enabled = true;
+                }
+                #endregion
+            
+            #region UIControl()
+            /// <summary>
+            /// This method enables or disables controls
+            /// </summary>
+            public void UIControl()
+            {
+                // if we have a valid connection info
+                if ((HasConnectionInfo) && (ConnectionInfo.IsValid))
+                {
+                    // Enable the button for BuildConnectionString
+                    BuildConnectionStringButton.Enabled = true;
+                }
+                else
+                {
+                    // Disable the button for BuildConnectionString
+                    BuildConnectionStringButton.Enabled = false;
+                }
+
+                // if the ConnectionStringControl.Text exists
+                if (ConnectionstringControl.HasText)
+                {
+                    // Enable the Test and Copy buttons
+                    TestDatabaseConnectionButton.Enabled = true;
+                    CopyButton.Enabled = true;
+                    
+                    // if Use Encryption is checked
+                    if (UseEncryptionCheckBox.Checked)
+                    {
+                        // Enable the EncryptAndCopyButton
+                        EncryptAndCopyButton.Enabled = true;
+                    }
+                    else
+                    {
+                        // Enable the EncryptAndCopyButton
+                        EncryptAndCopyButton.Enabled = false;
+                    }
+                }
+                else
+                {
+                      // Disable the Test and Copy buttons
+                    TestDatabaseConnectionButton.Enabled = false;
+                    CopyButton.Enabled = false;
+                   
+                    // Enable the EncryptAndCopyButton
+                    EncryptAndCopyButton.Enabled = false;
+                }
             }
             #endregion
-            
+
         #endregion
 
         #region Properties
 
+            #region ConnectionInfo
+            /// <summary>
+            /// This property gets or sets the value for 'ConnectionInfo'.
+            /// </summary>
+            public ConnectionInfo ConnectionInfo
+            {
+                get { return connectionInfo; }
+                set { connectionInfo = value; }
+            }
+            #endregion
+            
+            #region HasConnectionInfo
+            /// <summary>
+            /// This property returns true if this object has a 'ConnectionInfo'.
+            /// </summary>
+            public bool HasConnectionInfo
+            {
+                get
+                {
+                    // initial value
+                    bool hasConnectionInfo = (this.ConnectionInfo != null);
+                    
+                    // return value
+                    return hasConnectionInfo;
+                }
+            }
+            #endregion
+            
         #endregion
 
     }
