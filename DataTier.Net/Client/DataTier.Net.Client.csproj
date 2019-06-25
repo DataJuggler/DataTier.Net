@@ -56,14 +56,14 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DataJuggler.Core.UltimateHelper, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DataJuggler.Core.UltimateHelper.1.3.0\lib\net461\DataJuggler.Core.UltimateHelper.dll</HintPath>
+    <Reference Include="DataJuggler.Core.UltimateHelper, Version=1.3.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\DataJuggler.Core.UltimateHelper.1.3.2\lib\net461\DataJuggler.Core.UltimateHelper.dll</HintPath>
     </Reference>
     <Reference Include="DataJuggler.Net, Version=5.4.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\DataJuggler.Net.5.4.2\lib\net461\DataJuggler.Net.dll</HintPath>
     </Reference>
-    <Reference Include="DataJuggler.Win.Controls, Version=5.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DataJuggler.Win.Controls.5.4.1\lib\net461\DataJuggler.Win.Controls.dll</HintPath>
+    <Reference Include="DataJuggler.Win.Controls, Version=5.4.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\DataJuggler.Win.Controls.5.4.5\lib\net461\DataJuggler.Win.Controls.dll</HintPath>
     </Reference>
     <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <SpecificVersion>False</SpecificVersion>
@@ -702,6 +702,7 @@
     <Compile Include="Enumerations\DataTierClient.Enumerations.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data Juggler.ico" />
     <Content Include="DataTier.Net.ico" />
     <Content Include="Images\OrderBy.png" />
     <Content Include="Images\Parameter Mode.png" />
