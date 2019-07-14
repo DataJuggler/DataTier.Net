@@ -11,3 +11,9 @@ This page will be updated as I just learned how to use Git Hub pages today.
 Update 7.13.2019: I learned how to install Project Templates using VSIX installers, so now using DataTier.Net
 is easier than ever before.
 
+I updated the Quick Start Guide in both Word and PDF format, which is located in the DataTier.Net Class Room here:
+
+https://github.com/DataJuggler/DataTier.Net/tree/master/DataTier.Net/Class%20Room/Documents
+
+
+
