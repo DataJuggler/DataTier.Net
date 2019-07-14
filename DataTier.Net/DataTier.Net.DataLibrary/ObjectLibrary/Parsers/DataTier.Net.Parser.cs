@@ -19,50 +19,6 @@ namespace ObjectLibrary.Parsers
 
         #region Static Methods
 
-            #region ParseClassFileOption(FileOptionsEnum fileOptions)
-            /// <summary>
-            /// This method returns a string for the class file options.
-            /// </summary>
-            /// <param name="fileOptions"></param>
-            /// <returns></returns>
-            public static string ParseFileOption(FileOptionsEnum fileOptions)
-            {
-                // initial value
-                string fileOption = "";
-                
-                // determine string for each case
-                switch(fileOptions)
-                {
-                    case FileOptionsEnum.SeperateFilesPerDatabase:
-                    
-                        // set file option
-                        fileOption = "Seperate File Per Database";
-                        
-                            // required
-                            break;
-                            
-                    case FileOptionsEnum.SeperateFilesPerTable:
-
-                        // set file option
-                        fileOption = "Seperate File Per Table";
-
-                        // required
-                        break;
-
-                    case FileOptionsEnum.SingleFile:
-
-                        // set file option
-                        fileOption = "Single File";
-
-                        // required
-                        break;
-                }
-                
-                // return value
-                return fileOption;
-            }
-            #endregion
-
             #region ParseMethodType(string methodTypeSource)
             /// <summary>
             /// This method returns a MethodTypeEnum for the string given.

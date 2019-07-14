@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+    <Metadata>
+        <Identity Id="DataTier.Net.3dbb77d7-0d21-4537-bdb3-ead8588087f7" Version="1.1.6" Language="en-US" Publisher="Data Juggler" />
+        <DisplayName>DataTier.Net</DisplayName>
+        <Description xml:space="preserve">This project installs the DataTier.Net project templates into Visual Studio 2017 or 2019.</Description>
+        <MoreInfo>https://github.com/DataJuggler/DataTier.Net</MoreInfo>
+        <License>License.txt</License>
+        <GettingStartedGuide>DataTier.Net Quick Start.docx</GettingStartedGuide>
+        <Icon>DataTier.Net.ico</Icon>
+        <PreviewImage>DataTier.Net.png</PreviewImage>
+        <Tags>DataTier.Net</Tags>
+    </Metadata>
+    <Installation>
+        <InstallationTarget Version="[15.0,17.0)" Id="Microsoft.VisualStudio.Community"  />
+        <InstallationTarget Version="[15.0,17.0)" Id="Microsoft.VisualStudio.Pro" />
+        <InstallationTarget Version="[15.0,17.0)" Id="Microsoft.VisualStudio.Enterprise" />
+    </Installation>
+    <Dependencies>
+        <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
+    </Dependencies>
+    <Prerequisites>
+        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[16.0,17.0)" DisplayName="Visual Studio core editor" />
+    </Prerequisites>
+    <Assets>
+        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="File" Path="ProjectTemplates" TargetVersion="[15.0,17.0)" d:TargetPath="ProjectTemplates\DataTier.Net.ClassLibrary.zip" />
+    </Assets>
+</PackageManifest>

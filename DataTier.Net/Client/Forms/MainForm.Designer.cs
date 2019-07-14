@@ -32,8 +32,6 @@ namespace DataTierClient.Forms
         private System.Windows.Forms.Button OpenProjectButton;
         private System.Windows.Forms.Button CloseProjectButton;
         private System.Windows.Forms.Button EditProjectButton;
-        private System.Windows.Forms.Button IncludeProjectFilesButton;
-        private System.Windows.Forms.Button ViewProjectSummaryButton;
         private System.Windows.Forms.Button BuildAllButton;
         private System.Windows.Forms.Button HiddenButton;
         private SetupDataTierNetControl SetupDataTierNetControl;
@@ -70,11 +68,12 @@ namespace DataTierClient.Forms
             this.Images = new System.Windows.Forms.ImageList(this.components);
             this.MainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.ToolTipManager = new System.Windows.Forms.ToolTip(this.components);
+            this.YouTubeButton = new System.Windows.Forms.Button();
             this.MainPanel = new DataTierClient.Objects.PanelExtender();
+            this.StoredProcedureSQLButton = new System.Windows.Forms.Label();
+            this.ManageDataButton = new System.Windows.Forms.Button();
             this.SetupDataTierNetControl = new DataTierClient.Controls.SetupDataTierNetControl();
             this.HiddenButton = new System.Windows.Forms.Button();
-            this.IncludeProjectFilesButton = new System.Windows.Forms.Button();
-            this.ViewProjectSummaryButton = new System.Windows.Forms.Button();
             this.BuildAllButton = new System.Windows.Forms.Button();
             this.CloseProjectButton = new System.Windows.Forms.Button();
             this.EditProjectButton = new System.Windows.Forms.Button();
@@ -84,10 +83,10 @@ namespace DataTierClient.Forms
             this.ProjectLabel = new System.Windows.Forms.Label();
             this.StatusListBox = new System.Windows.Forms.ListView();
             this.RightContainer = new DataTierClient.Objects.PanelExtender();
+            this.BottomPanel = new DataTierClient.Objects.PanelExtender();
+            this.BottomRightMarginpanel = new DataTierClient.Objects.PanelExtender();
+            this.TopPanel = new DataTierClient.Objects.PanelExtender();
             this.RightPanel = new DataTierClient.Objects.PanelExtender();
-            this.StoredProcedureSQLButton = new System.Windows.Forms.Label();
-            this.ToolsLabel = new System.Windows.Forms.Label();
-            this.ManageDataButton = new System.Windows.Forms.Button();
             this.ViewPDFButton = new System.Windows.Forms.Button();
             this.ViewWordButton = new System.Windows.Forms.Button();
             this.ViewPDFButton2 = new System.Windows.Forms.Button();
@@ -95,15 +94,11 @@ namespace DataTierClient.Forms
             this.DatabaseGuideLabel = new System.Windows.Forms.Label();
             this.UsersGuideLabel = new System.Windows.Forms.Label();
             this.ClassRoomImage = new System.Windows.Forms.PictureBox();
-            this.TopPanel = new DataTierClient.Objects.PanelExtender();
-            this.BottomPanel = new DataTierClient.Objects.PanelExtender();
-            this.YouTubeButton = new System.Windows.Forms.Button();
-            this.BottomRightMarginpanel = new DataTierClient.Objects.PanelExtender();
             this.MainPanel.SuspendLayout();
             this.RightContainer.SuspendLayout();
+            this.BottomPanel.SuspendLayout();
             this.RightPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ClassRoomImage)).BeginInit();
-            this.BottomPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // StatusLabel
@@ -131,21 +126,37 @@ namespace DataTierClient.Forms
             this.MainStatusStrip.BackColor = System.Drawing.Color.Transparent;
             this.MainStatusStrip.BackgroundImage = global::DataTierClient.Properties.Resources.Deep_Black;
             this.MainStatusStrip.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.MainStatusStrip.Location = new System.Drawing.Point(0, 739);
+            this.MainStatusStrip.Location = new System.Drawing.Point(0, 579);
             this.MainStatusStrip.Name = "MainStatusStrip";
-            this.MainStatusStrip.Size = new System.Drawing.Size(1064, 22);
+            this.MainStatusStrip.Size = new System.Drawing.Size(900, 22);
             this.MainStatusStrip.TabIndex = 2;
             this.MainStatusStrip.Text = "statusStrip1";
+            // 
+            // YouTubeButton
+            // 
+            this.YouTubeButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("YouTubeButton.BackgroundImage")));
+            this.YouTubeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.YouTubeButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.YouTubeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.YouTubeButton.Location = new System.Drawing.Point(244, 0);
+            this.YouTubeButton.Name = "YouTubeButton";
+            this.YouTubeButton.Size = new System.Drawing.Size(128, 64);
+            this.YouTubeButton.TabIndex = 66;
+            this.ToolTipManager.SetToolTip(this.YouTubeButton, "Click here to launch your browser to watch the DataTier.Net Intro Movie");
+            this.YouTubeButton.UseVisualStyleBackColor = true;
+            this.YouTubeButton.Click += new System.EventHandler(this.YouTubeButton_Click);
+            this.YouTubeButton.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.YouTubeButton.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
             // MainPanel
             // 
             this.MainPanel.BackColor = System.Drawing.Color.Transparent;
             this.MainPanel.BackgroundImage = global::DataTierClient.Properties.Resources.Deep_Black;
             this.MainPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.MainPanel.Controls.Add(this.StoredProcedureSQLButton);
+            this.MainPanel.Controls.Add(this.ManageDataButton);
             this.MainPanel.Controls.Add(this.SetupDataTierNetControl);
             this.MainPanel.Controls.Add(this.HiddenButton);
-            this.MainPanel.Controls.Add(this.IncludeProjectFilesButton);
-            this.MainPanel.Controls.Add(this.ViewProjectSummaryButton);
             this.MainPanel.Controls.Add(this.BuildAllButton);
             this.MainPanel.Controls.Add(this.CloseProjectButton);
             this.MainPanel.Controls.Add(this.EditProjectButton);
@@ -159,8 +170,43 @@ namespace DataTierClient.Forms
             this.MainPanel.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MainPanel.Location = new System.Drawing.Point(0, 0);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(1064, 739);
+            this.MainPanel.Size = new System.Drawing.Size(900, 579);
             this.MainPanel.TabIndex = 17;
+            // 
+            // StoredProcedureSQLButton
+            // 
+            this.StoredProcedureSQLButton.ForeColor = System.Drawing.Color.GhostWhite;
+            this.StoredProcedureSQLButton.Location = new System.Drawing.Point(18, 520);
+            this.StoredProcedureSQLButton.Name = "StoredProcedureSQLButton";
+            this.StoredProcedureSQLButton.Size = new System.Drawing.Size(220, 24);
+            this.StoredProcedureSQLButton.TabIndex = 109;
+            this.StoredProcedureSQLButton.Text = "StoredProcedures.sql";
+            this.StoredProcedureSQLButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.StoredProcedureSQLButton.Visible = false;
+            this.StoredProcedureSQLButton.Click += new System.EventHandler(this.StoredProcedureSQLButton_Click);
+            this.StoredProcedureSQLButton.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.StoredProcedureSQLButton.MouseLeave += new System.EventHandler(this.Button_Leave);
+            // 
+            // ManageDataButton
+            // 
+            this.ManageDataButton.BackgroundImage = global::DataTierClient.Properties.Resources.Black_Button1;
+            this.ManageDataButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ManageDataButton.Enabled = false;
+            this.ManageDataButton.FlatAppearance.BorderSize = 0;
+            this.ManageDataButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.ManageDataButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.ManageDataButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ManageDataButton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ManageDataButton.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.ManageDataButton.Location = new System.Drawing.Point(186, 114);
+            this.ManageDataButton.Name = "ManageDataButton";
+            this.ManageDataButton.Size = new System.Drawing.Size(150, 40);
+            this.ManageDataButton.TabIndex = 107;
+            this.ManageDataButton.Text = "Manage Data";
+            this.ManageDataButton.UseVisualStyleBackColor = true;
+            this.ManageDataButton.Click += new System.EventHandler(this.ManageDataButton_Click);
+            this.ManageDataButton.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.ManageDataButton.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
             // SetupDataTierNetControl
             // 
@@ -188,48 +234,6 @@ namespace DataTierClient.Forms
             this.HiddenButton.Text = "New Project";
             this.HiddenButton.UseVisualStyleBackColor = true;
             // 
-            // IncludeProjectFilesButton
-            // 
-            this.IncludeProjectFilesButton.BackgroundImage = global::DataTierClient.Properties.Resources.DarkBlackButton;
-            this.IncludeProjectFilesButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.IncludeProjectFilesButton.Enabled = false;
-            this.IncludeProjectFilesButton.FlatAppearance.BorderSize = 0;
-            this.IncludeProjectFilesButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.IncludeProjectFilesButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.IncludeProjectFilesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.IncludeProjectFilesButton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IncludeProjectFilesButton.ForeColor = System.Drawing.Color.DimGray;
-            this.IncludeProjectFilesButton.Location = new System.Drawing.Point(432, 114);
-            this.IncludeProjectFilesButton.Name = "IncludeProjectFilesButton";
-            this.IncludeProjectFilesButton.Size = new System.Drawing.Size(252, 40);
-            this.IncludeProjectFilesButton.TabIndex = 93;
-            this.IncludeProjectFilesButton.Text = "Include Project Files";
-            this.IncludeProjectFilesButton.UseVisualStyleBackColor = true;
-            this.IncludeProjectFilesButton.Click += new System.EventHandler(this.IncludeProjectFilesButton_Click);
-            this.IncludeProjectFilesButton.MouseEnter += new System.EventHandler(this.Button_Enter);
-            this.IncludeProjectFilesButton.MouseLeave += new System.EventHandler(this.Button_Leave);
-            // 
-            // ViewProjectSummaryButton
-            // 
-            this.ViewProjectSummaryButton.BackgroundImage = global::DataTierClient.Properties.Resources.DarkBlackButton;
-            this.ViewProjectSummaryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ViewProjectSummaryButton.Enabled = false;
-            this.ViewProjectSummaryButton.FlatAppearance.BorderSize = 0;
-            this.ViewProjectSummaryButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.ViewProjectSummaryButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.ViewProjectSummaryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ViewProjectSummaryButton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ViewProjectSummaryButton.ForeColor = System.Drawing.Color.DimGray;
-            this.ViewProjectSummaryButton.Location = new System.Drawing.Point(152, 114);
-            this.ViewProjectSummaryButton.Name = "ViewProjectSummaryButton";
-            this.ViewProjectSummaryButton.Size = new System.Drawing.Size(269, 40);
-            this.ViewProjectSummaryButton.TabIndex = 92;
-            this.ViewProjectSummaryButton.Text = "View Project Summary";
-            this.ViewProjectSummaryButton.UseVisualStyleBackColor = true;
-            this.ViewProjectSummaryButton.Click += new System.EventHandler(this.ViewProjectSummaryButton_Click);
-            this.ViewProjectSummaryButton.MouseEnter += new System.EventHandler(this.Button_Enter);
-            this.ViewProjectSummaryButton.MouseLeave += new System.EventHandler(this.Button_Leave);
-            // 
             // BuildAllButton
             // 
             this.BuildAllButton.BackgroundImage = global::DataTierClient.Properties.Resources.DarkBlackButton;
@@ -241,9 +245,9 @@ namespace DataTierClient.Forms
             this.BuildAllButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BuildAllButton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BuildAllButton.ForeColor = System.Drawing.Color.DimGray;
-            this.BuildAllButton.Location = new System.Drawing.Point(21, 114);
+            this.BuildAllButton.Location = new System.Drawing.Point(20, 114);
             this.BuildAllButton.Name = "BuildAllButton";
-            this.BuildAllButton.Size = new System.Drawing.Size(120, 40);
+            this.BuildAllButton.Size = new System.Drawing.Size(150, 40);
             this.BuildAllButton.TabIndex = 91;
             this.BuildAllButton.Text = "Build All";
             this.BuildAllButton.UseVisualStyleBackColor = true;
@@ -262,9 +266,9 @@ namespace DataTierClient.Forms
             this.CloseProjectButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CloseProjectButton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CloseProjectButton.ForeColor = System.Drawing.Color.DimGray;
-            this.CloseProjectButton.Location = new System.Drawing.Point(525, 57);
+            this.CloseProjectButton.Location = new System.Drawing.Point(352, 114);
             this.CloseProjectButton.Name = "CloseProjectButton";
-            this.CloseProjectButton.Size = new System.Drawing.Size(160, 40);
+            this.CloseProjectButton.Size = new System.Drawing.Size(150, 40);
             this.CloseProjectButton.TabIndex = 90;
             this.CloseProjectButton.Text = "Close Project";
             this.CloseProjectButton.UseVisualStyleBackColor = true;
@@ -283,9 +287,9 @@ namespace DataTierClient.Forms
             this.EditProjectButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.EditProjectButton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EditProjectButton.ForeColor = System.Drawing.Color.DimGray;
-            this.EditProjectButton.Location = new System.Drawing.Point(357, 57);
+            this.EditProjectButton.Location = new System.Drawing.Point(352, 57);
             this.EditProjectButton.Name = "EditProjectButton";
-            this.EditProjectButton.Size = new System.Drawing.Size(160, 40);
+            this.EditProjectButton.Size = new System.Drawing.Size(150, 40);
             this.EditProjectButton.TabIndex = 89;
             this.EditProjectButton.Text = "Edit Project";
             this.EditProjectButton.UseVisualStyleBackColor = true;
@@ -303,9 +307,9 @@ namespace DataTierClient.Forms
             this.OpenProjectButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.OpenProjectButton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OpenProjectButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.OpenProjectButton.Location = new System.Drawing.Point(189, 57);
+            this.OpenProjectButton.Location = new System.Drawing.Point(186, 57);
             this.OpenProjectButton.Name = "OpenProjectButton";
-            this.OpenProjectButton.Size = new System.Drawing.Size(160, 40);
+            this.OpenProjectButton.Size = new System.Drawing.Size(150, 40);
             this.OpenProjectButton.TabIndex = 88;
             this.OpenProjectButton.Text = "Open Project";
             this.OpenProjectButton.UseVisualStyleBackColor = true;
@@ -323,9 +327,9 @@ namespace DataTierClient.Forms
             this.NewProjectButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.NewProjectButton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NewProjectButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.NewProjectButton.Location = new System.Drawing.Point(21, 57);
+            this.NewProjectButton.Location = new System.Drawing.Point(20, 57);
             this.NewProjectButton.Name = "NewProjectButton";
-            this.NewProjectButton.Size = new System.Drawing.Size(160, 40);
+            this.NewProjectButton.Size = new System.Drawing.Size(150, 40);
             this.NewProjectButton.TabIndex = 87;
             this.NewProjectButton.Text = "New Project";
             this.NewProjectButton.UseVisualStyleBackColor = true;
@@ -364,9 +368,9 @@ namespace DataTierClient.Forms
             this.StatusListBox.AutoArrange = false;
             this.StatusListBox.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StatusListBox.FullRowSelect = true;
-            this.StatusListBox.Location = new System.Drawing.Point(21, 170);
+            this.StatusListBox.Location = new System.Drawing.Point(20, 170);
             this.StatusListBox.Name = "StatusListBox";
-            this.StatusListBox.Size = new System.Drawing.Size(664, 400);
+            this.StatusListBox.Size = new System.Drawing.Size(482, 332);
             this.StatusListBox.SmallImageList = this.Images;
             this.StatusListBox.TabIndex = 56;
             this.StatusListBox.UseCompatibleStateImageBehavior = false;
@@ -379,16 +383,39 @@ namespace DataTierClient.Forms
             this.RightContainer.Controls.Add(this.TopPanel);
             this.RightContainer.Controls.Add(this.RightPanel);
             this.RightContainer.Dock = System.Windows.Forms.DockStyle.Right;
-            this.RightContainer.Location = new System.Drawing.Point(691, 0);
+            this.RightContainer.Location = new System.Drawing.Point(520, 0);
             this.RightContainer.Name = "RightContainer";
-            this.RightContainer.Size = new System.Drawing.Size(373, 739);
+            this.RightContainer.Size = new System.Drawing.Size(380, 579);
             this.RightContainer.TabIndex = 102;
+            // 
+            // BottomPanel
+            // 
+            this.BottomPanel.Controls.Add(this.YouTubeButton);
+            this.BottomPanel.Controls.Add(this.BottomRightMarginpanel);
+            this.BottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.BottomPanel.Location = new System.Drawing.Point(0, 507);
+            this.BottomPanel.Name = "BottomPanel";
+            this.BottomPanel.Size = new System.Drawing.Size(380, 64);
+            this.BottomPanel.TabIndex = 104;
+            // 
+            // BottomRightMarginpanel
+            // 
+            this.BottomRightMarginpanel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.BottomRightMarginpanel.Location = new System.Drawing.Point(372, 0);
+            this.BottomRightMarginpanel.Name = "BottomRightMarginpanel";
+            this.BottomRightMarginpanel.Size = new System.Drawing.Size(8, 64);
+            this.BottomRightMarginpanel.TabIndex = 1;
+            // 
+            // TopPanel
+            // 
+            this.TopPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.TopPanel.Location = new System.Drawing.Point(0, 571);
+            this.TopPanel.Name = "TopPanel";
+            this.TopPanel.Size = new System.Drawing.Size(380, 8);
+            this.TopPanel.TabIndex = 103;
             // 
             // RightPanel
             // 
-            this.RightPanel.Controls.Add(this.StoredProcedureSQLButton);
-            this.RightPanel.Controls.Add(this.ToolsLabel);
-            this.RightPanel.Controls.Add(this.ManageDataButton);
             this.RightPanel.Controls.Add(this.ViewPDFButton);
             this.RightPanel.Controls.Add(this.ViewWordButton);
             this.RightPanel.Controls.Add(this.ViewPDFButton2);
@@ -398,55 +425,8 @@ namespace DataTierClient.Forms
             this.RightPanel.Controls.Add(this.ClassRoomImage);
             this.RightPanel.Location = new System.Drawing.Point(18, 20);
             this.RightPanel.Name = "RightPanel";
-            this.RightPanel.Size = new System.Drawing.Size(319, 554);
+            this.RightPanel.Size = new System.Drawing.Size(319, 382);
             this.RightPanel.TabIndex = 101;
-            // 
-            // StoredProcedureSQLButton
-            // 
-            this.StoredProcedureSQLButton.ForeColor = System.Drawing.Color.GhostWhite;
-            this.StoredProcedureSQLButton.Location = new System.Drawing.Point(49, 512);
-            this.StoredProcedureSQLButton.Name = "StoredProcedureSQLButton";
-            this.StoredProcedureSQLButton.Size = new System.Drawing.Size(220, 24);
-            this.StoredProcedureSQLButton.TabIndex = 108;
-            this.StoredProcedureSQLButton.Text = "StoredProcedures.sql";
-            this.StoredProcedureSQLButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.StoredProcedureSQLButton.Visible = false;
-            this.StoredProcedureSQLButton.Click += new System.EventHandler(this.StoredProcedureSQLButton_Click);
-            this.StoredProcedureSQLButton.MouseEnter += new System.EventHandler(this.Button_Enter);
-            this.StoredProcedureSQLButton.MouseLeave += new System.EventHandler(this.Button_Leave);
-            // 
-            // ToolsLabel
-            // 
-            this.ToolsLabel.AutoSize = true;
-            this.ToolsLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ToolsLabel.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.ToolsLabel.Location = new System.Drawing.Point(130, 396);
-            this.ToolsLabel.Name = "ToolsLabel";
-            this.ToolsLabel.Size = new System.Drawing.Size(59, 22);
-            this.ToolsLabel.TabIndex = 107;
-            this.ToolsLabel.Text = "Tools";
-            this.ToolsLabel.Visible = false;
-            // 
-            // ManageDataButton
-            // 
-            this.ManageDataButton.BackgroundImage = global::DataTierClient.Properties.Resources.Black_Button1;
-            this.ManageDataButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ManageDataButton.FlatAppearance.BorderSize = 0;
-            this.ManageDataButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.ManageDataButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.ManageDataButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ManageDataButton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ManageDataButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.ManageDataButton.Location = new System.Drawing.Point(67, 445);
-            this.ManageDataButton.Name = "ManageDataButton";
-            this.ManageDataButton.Size = new System.Drawing.Size(184, 40);
-            this.ManageDataButton.TabIndex = 106;
-            this.ManageDataButton.Text = "Manage Data";
-            this.ManageDataButton.UseVisualStyleBackColor = true;
-            this.ManageDataButton.Visible = false;
-            this.ManageDataButton.Click += new System.EventHandler(this.ManageDataButton_Click);
-            this.ManageDataButton.MouseEnter += new System.EventHandler(this.Button_Enter);
-            this.ManageDataButton.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
             // ViewPDFButton
             // 
@@ -547,54 +527,12 @@ namespace DataTierClient.Forms
             this.ClassRoomImage.TabIndex = 99;
             this.ClassRoomImage.TabStop = false;
             // 
-            // TopPanel
-            // 
-            this.TopPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.TopPanel.Location = new System.Drawing.Point(0, 723);
-            this.TopPanel.Name = "TopPanel";
-            this.TopPanel.Size = new System.Drawing.Size(373, 16);
-            this.TopPanel.TabIndex = 103;
-            // 
-            // BottomPanel
-            // 
-            this.BottomPanel.Controls.Add(this.YouTubeButton);
-            this.BottomPanel.Controls.Add(this.BottomRightMarginpanel);
-            this.BottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.BottomPanel.Location = new System.Drawing.Point(0, 659);
-            this.BottomPanel.Name = "BottomPanel";
-            this.BottomPanel.Size = new System.Drawing.Size(373, 64);
-            this.BottomPanel.TabIndex = 104;
-            // 
-            // YouTubeButton
-            // 
-            this.YouTubeButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("YouTubeButton.BackgroundImage")));
-            this.YouTubeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.YouTubeButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.YouTubeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.YouTubeButton.Location = new System.Drawing.Point(229, 0);
-            this.YouTubeButton.Name = "YouTubeButton";
-            this.YouTubeButton.Size = new System.Drawing.Size(128, 64);
-            this.YouTubeButton.TabIndex = 66;
-            this.ToolTipManager.SetToolTip(this.YouTubeButton, "Click here to launch your browser to watch the DataTier.Net Intro Movie");
-            this.YouTubeButton.UseVisualStyleBackColor = true;
-            this.YouTubeButton.Click += new System.EventHandler(this.YouTubeButton_Click);
-            this.YouTubeButton.MouseEnter += new System.EventHandler(this.Button_Enter);
-            this.YouTubeButton.MouseLeave += new System.EventHandler(this.Button_Leave);
-            // 
-            // BottomRightMarginpanel
-            // 
-            this.BottomRightMarginpanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.BottomRightMarginpanel.Location = new System.Drawing.Point(357, 0);
-            this.BottomRightMarginpanel.Name = "BottomRightMarginpanel";
-            this.BottomRightMarginpanel.Size = new System.Drawing.Size(16, 64);
-            this.BottomRightMarginpanel.TabIndex = 1;
-            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1064, 761);
+            this.ClientSize = new System.Drawing.Size(900, 601);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.MainStatusStrip);
             this.Cursor = System.Windows.Forms.Cursors.Default;
@@ -606,10 +544,10 @@ namespace DataTierClient.Forms
             this.MainPanel.ResumeLayout(false);
             this.MainPanel.PerformLayout();
             this.RightContainer.ResumeLayout(false);
+            this.BottomPanel.ResumeLayout(false);
             this.RightPanel.ResumeLayout(false);
             this.RightPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ClassRoomImage)).EndInit();
-            this.BottomPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -620,9 +558,6 @@ namespace DataTierClient.Forms
 
         private PanelExtender RightContainer;
         private PanelExtender RightPanel;
-        private System.Windows.Forms.Label StoredProcedureSQLButton;
-        private System.Windows.Forms.Label ToolsLabel;
-        private System.Windows.Forms.Button ManageDataButton;
         private System.Windows.Forms.Button ViewPDFButton;
         private System.Windows.Forms.Button ViewWordButton;
         private System.Windows.Forms.Button ViewPDFButton2;
@@ -634,6 +569,8 @@ namespace DataTierClient.Forms
         private System.Windows.Forms.Button YouTubeButton;
         private PanelExtender BottomRightMarginpanel;
         private PanelExtender TopPanel;
+        private System.Windows.Forms.Button ManageDataButton;
+        private System.Windows.Forms.Label StoredProcedureSQLButton;
     }
     #endregion
 

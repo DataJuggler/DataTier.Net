@@ -30,8 +30,6 @@ namespace DataTierClient.ClientUtil
         private bool enableEditProject;
         private bool enableCloseProject;
         private bool enableBuiildAll;
-        private bool enableViewProjectSummary;
-        private bool enableIncludeProjectFiles;
         #endregion
 
         #region Methods
@@ -124,22 +122,6 @@ namespace DataTierClient.ClientUtil
                             // required
                             break;
 
-                        case "View Project Summary":
-
-                            // Set the return value
-                            isButtonEnabled = EnableViewProjectSummary;
-
-                            // required
-                            break;
-
-                        case "Include Project Files":
-
-                            // Set the return value
-                            isButtonEnabled = EnableIncludeProjectFiles;
-
-                            // required
-                            break;
-
                         case "Manage Data":
 
                             // Set to true
@@ -204,17 +186,6 @@ namespace DataTierClient.ClientUtil
             }
             #endregion
             
-            #region EnableIncludeProjectFiles
-            /// <summary>
-            /// This property gets or sets the value for 'EnableIncludeProjectFiles'.
-            /// </summary>
-            public bool EnableIncludeProjectFiles
-            {
-                get { return enableIncludeProjectFiles; }
-                set { enableIncludeProjectFiles = value; }
-            }
-            #endregion
-            
             #region EnableNewProject
             /// <summary>
             /// This property gets or sets the value for 'EnableNewProject'.
@@ -234,17 +205,6 @@ namespace DataTierClient.ClientUtil
             {
                 get { return enableOpenProject; }
                 set { enableOpenProject = value; }
-            }
-            #endregion
-            
-            #region EnableViewProjectSummary
-            /// <summary>
-            /// This property gets or sets the value for 'EnableViewProjectSummary'.
-            /// </summary>
-            public bool EnableViewProjectSummary
-            {
-                get { return enableViewProjectSummary; }
-                set { enableViewProjectSummary = value; }
             }
             #endregion
             

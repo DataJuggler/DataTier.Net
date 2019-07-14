@@ -30,7 +30,6 @@
       <Folder Name="Properties" TargetFolderName="Properties">
         <ProjectItem ReplaceParameters="true" TargetFileName="AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
       </Folder>
-      <ProjectItem ReplaceParameters="false" TargetFileName="RAD Studio Icon.ico">RAD Studio Icon.ico</ProjectItem>
       <Folder Name="StoredProcedureManager" TargetFolderName="StoredProcedureManager">
         <Folder Name="DeleteProcedures" TargetFolderName="DeleteProcedures">
           <ProjectItem ReplaceParameters="true" TargetFileName="TemporaryDeleteProcedure.cs">TemporaryDeleteProcedure.cs</ProjectItem>
@@ -51,7 +50,6 @@
           <ProjectItem ReplaceParameters="true" TargetFileName="TemporaryUpdateProcedure.cs">TemporaryUpdateProcedure.cs</ProjectItem>
         </Folder>
       </Folder>
-      <ProjectItem ReplaceParameters="false" TargetFileName="Tools.ico">Tools.ico</ProjectItem>
     </Project>
   </TemplateContent>
 </VSTemplate>

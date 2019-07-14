@@ -313,9 +313,6 @@ namespace ObjectLibrary.BusinessObjects
             /// </summary>
             public void Init()
             {
-                // Set ClassFileOption
-                this.ClassFileOption = (int) FileOptionsEnum.SeperateFilesPerTable;
-            
                 // Create Databases Collection
                 this.Databases = new List<DTNDatabase>();
                 

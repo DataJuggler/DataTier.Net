@@ -8,3 +8,6 @@ Please visit my YouTube channel to see the latest videos on DataTier.Net.
 
 This page will be updated as I just learned how to use Git Hub pages today.
 
+Update 7.13.2019: I learned how to install Project Templates using VSIX installers, so now using DataTier.Net
+is easier than ever before.
+

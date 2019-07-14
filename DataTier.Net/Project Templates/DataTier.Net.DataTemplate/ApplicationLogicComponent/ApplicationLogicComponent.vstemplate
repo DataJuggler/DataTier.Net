@@ -54,7 +54,6 @@
         <ProjectItem ReplaceParameters="true" TargetFileName="TextHelper.cs">TextHelper.cs</ProjectItem>
         <ProjectItem ReplaceParameters="false" TargetFileName="Read Me.txt">Read Me.txt</ProjectItem>
       </Folder>
-      <ProjectItem ReplaceParameters="false" TargetFileName="Tools.ico">Tools.ico</ProjectItem>
     </Project>
   </TemplateContent>
 </VSTemplate>

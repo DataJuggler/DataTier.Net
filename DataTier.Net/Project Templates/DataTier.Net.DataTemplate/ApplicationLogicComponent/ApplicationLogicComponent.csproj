@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>$safeprojectname$</RootNamespace>
     <AssemblyName>$safeprojectname$</AssemblyName>
-    <ApplicationIcon>Tools.ico</ApplicationIcon>
+    <ApplicationIcon></ApplicationIcon>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>2.0</OldToolsVersion>
@@ -79,8 +79,7 @@
     <Compile Include="Security\TextHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Security\Read Me.txt" />
-    <Content Include="Tools.ico" />
+    <Content Include="Security\Read Me.txt" />    
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccessComponent\DataAccessComponent.csproj">

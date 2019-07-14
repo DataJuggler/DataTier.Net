@@ -192,30 +192,6 @@ namespace DataTierClient.Forms
             }
             #endregion
             
-            #region IncludeProjectFilesButton_Click(object sender, EventArgs e)
-            /// <summary>
-            /// event is fired when the 'IncludeProjectFilesButton' is clicked.
-            /// </summary>
-            private void IncludeProjectFilesButton_Click(object sender, EventArgs e)
-            {
-                // if IncludeProjectFilesButton is enabled
-                if (ButtonManager.EnableIncludeProjectFiles)
-                {
-                      // remove the focus 
-                    HiddenButton.Focus();
-
-                    // include the files generated in the project.
-                    IncludeProjectFiles();
-
-                    // Recreate the ProjectFileManager so that this button will no longer be enabled.
-                    this.FileManager = new ProjectFileManager();
-
-                    // Enable or disable controls
-                    UIEnable();
-                }
-            }
-            #endregion
-            
             #region ManageDataButton_Click(object sender, EventArgs e)
             /// <summary>
             /// event is fired when the 'ManageDataButton_Click' is clicked.
@@ -398,24 +374,6 @@ namespace DataTierClient.Forms
             }
             #endregion
             
-            #region ViewProjectSummaryButton_Click(object sender, EventArgs e)
-            /// <summary>
-            /// event is fired when the 'ViewProjectSummaryButton' is clicked.
-            /// </summary>
-            private void ViewProjectSummaryButton_Click(object sender, EventArgs e)
-            {
-                // if this button enabled
-                if (ButtonManager.IsButtonEnabled(ViewProjectSummaryButton))
-                {
-                    // remove the focus 
-                    HiddenButton.Focus();
-
-                    // Display Open Project
-                    DisplayProjectSummary();
-                }
-            }
-            #endregion
-            
             #region ViewWordButton_Click(object sender, EventArgs e)
             /// <summary>
             /// This event is fired when the 'ViewWordButton' is clicked.
@@ -582,8 +540,8 @@ namespace DataTierClient.Forms
                     // Only launch the plane if new files were created
                     if ((this.HasFileManager) && (FileManager.WereNewFilesCreated))
                     {
-                        // Click the Include Project Files button on the user's behalf
-                        IncludeProjectFilesButton_Click(this, new EventArgs());
+                        // include the files generated in the project.
+                        IncludeProjectFiles();
                     }
 				}
 				catch (Exception)
@@ -1552,254 +1510,6 @@ namespace DataTierClient.Forms
             }
             #endregion
             
-            #region DisplayProjectSummary()
-            /// <summary>
-            /// This method displays the open project.
-            /// </summary>
-            private void DisplayProjectSummary()
-            {
-                // if there is not an open project
-                if(this.OpenProject == null)
-                {
-                   NoProjectSelectedException noProjectException = new NoProjectSelectedException("DisplayProjectSummary", "MainForm", null); 
-                }
-                
-                // locals
-                string projectName = "Project Name: ";
-                string projectFolder = "Project Folder: ";
-                string classFileOptions = "Class Options: ";
-                string databaseName = "Database Name: ";
-                string objectNamespace = "Object Namespace: ";
-                string objectFolder = "Object Folder: ";
-                string objectReferencesSet = "Object ReferencesSet: ";
-                string dataManagerNamespace = "Data Mgr. Namespace: ";
-                string dataManagerFolder = "Data Mgr. Folder: ";
-                string dataManagerReferencesSet = "Data Mrg. ReferencesSet: ";
-                string dataOperationsNamespace = "Data Operations Namespace: ";
-                string dataOperationsFolder = "Data Operations Folder: ";
-                string dataOperationsReferencesSet = "Data Operations ReferencesSet: ";
-                string controllerNamespace = "Controller Namespace: ";
-                string controllerFolder = "Controller Folder: ";
-                string controllerReferencesSet = "Controller ReferencesSet: ";
-                string readerNamespace = "Reader Namespace: ";
-                string readerFolder = "Reader Folder: ";
-                string readerReferencesSet = "Reader ReferencesSet: ";
-                string writerNamespace = "Writer Namespace: ";
-                string writerFolder = "Writer Folder: ";
-                string writerReferencesSet = "Writer ReferencesSet: ";
-                string storedProcedureNamespace = "Stored Procedure Namespace: ";
-                string storedProcedureFolder = "Stored Procedure Folder: ";
-                string storedProcedureReferencesSet = "Stored Procedure ReferencesSet: ";
-                
-                // If the selected project exists
-                if(this.OpenProject != null)
-                {
-                    // set properties
-                    projectName = projectName + this.OpenProject.ProjectName;    
-                    projectFolder = projectFolder + this.OpenProject.ProjectFolder;
-                    classFileOptions = classFileOptions + Parser.ParseFileOption( (FileOptionsEnum)this.OpenProject.ClassFileOption);
-                    
-                    // if there is at least one database
-                    if ((this.OpenProject.Databases != null) && (this.OpenProject.Databases.Count > 0))
-                    {
-                        // Get a reference to the first database
-                        DTNDatabase db = this.OpenProject.Databases[0];
-                        
-                        // set databaseName
-                        databaseName = databaseName + db.DatabaseName;
-                    }
-                    
-                    // object properties
-                    objectNamespace = objectNamespace + this.OpenProject.ObjectNamespace;
-                    objectFolder = objectFolder + this.OpenProject.ObjectFolder;
-                    
-                    // if the ObjectReferencesSet exists
-                    if(this.OpenProject.ObjectReferencesSet != null)
-                    {
-                        // add the reference name
-                        objectReferencesSet = objectReferencesSet + this.OpenProject.ObjectReferencesSet.ReferencesSetName;
-                    }
-                    
-                    // dataManagerProperties
-                    dataManagerNamespace = dataManagerNamespace + this.OpenProject.DataManagerNamespace;
-                    dataManagerFolder = dataManagerFolder + this.OpenProject.DataManagerFolder;
-
-                    // if the dataManagerReferencesSet exists
-                    if(this.OpenProject.DataManagerReferencesSet != null)
-                    {
-                        // set dataManagerReferencesSet
-                        dataManagerReferencesSet = dataManagerReferencesSet + this.OpenProject.DataManagerReferencesSet.ReferencesSetName;
-                    }
-                    
-                    // DataOperation Properties
-                    dataOperationsFolder = dataOperationsFolder + this.OpenProject.DataOperationsFolder;
-                    dataOperationsNamespace = dataOperationsNamespace + this.OpenProject.DataOperationsNamespace;
-
-                    // if the DataOperationsReferencesSet exists
-                    if(this.OpenProject.DataOperationsReferencesSet != null)
-                    {
-                        // set dataOperationsReferencesSet
-                        dataOperationsReferencesSet = dataOperationsReferencesSet + this.OpenProject.DataOperationsReferencesSet.ReferencesSetName;
-                    }
-                    
-                    // Controller Properties
-                    controllerFolder = controllerFolder + this.OpenProject.ControllerFolder;
-                    controllerNamespace = controllerNamespace + this.OpenProject.ControllerNamespace;
-
-                    // if the DataOperationsReferencesSet exists
-                    if(this.OpenProject.ControllerReferencesSet != null)
-                    {
-                        // set controllerReferencesSet
-                        controllerReferencesSet = controllerReferencesSet + this.OpenProject.ControllerReferencesSet.ReferencesSetName;
-                    }
-
-                    // Reader Properties
-                    readerFolder = readerFolder + this.OpenProject.ReaderFolder;
-                    readerNamespace = readerNamespace + this.OpenProject.ReaderNamespace;
-
-                    // if the DataOperationsReferencesSet exists
-                    if (this.OpenProject.ReaderReferencesSet != null)
-                    {
-                        // set readerReferencesSet
-                        readerReferencesSet = readerReferencesSet + this.OpenProject.ReaderReferencesSet.ReferencesSetName;
-                    }
-
-                    // Writer Properties
-                    writerFolder = writerFolder + this.OpenProject.DataWriterFolder;
-                    writerNamespace = writerNamespace + this.OpenProject.DataWriterNamespace;
-
-                    // if the DataOperationsReferencesSet exists
-                    if (this.OpenProject.WriterReferencesSet != null)
-                    {
-                        // set writerReferencesSet
-                        writerReferencesSet = writerReferencesSet + this.OpenProject.WriterReferencesSet.ReferencesSetName;
-                    }
-
-                    // Stored Procedure Properties
-                    storedProcedureFolder = storedProcedureFolder + this.OpenProject.StoredProcedureObjectFolder;
-                    storedProcedureNamespace = storedProcedureNamespace + this.OpenProject.StoredProcedureObjectNamespace;
-
-                    // if the DataOperationsReferencesSet exists
-                    if (this.OpenProject.StoredProcedureReferencesSet != null)
-                    {
-                        // set storedProcedureReferencesSet
-                        storedProcedureReferencesSet = storedProcedureReferencesSet + this.OpenProject.StoredProcedureReferencesSet.ReferencesSetName;
-                    }
-                }
-                
-                // Display Project Properties
-                AddColumnHeader();
-                
-                this.StatusListBox.Items.Add("---- Project Properties ----");
-                this.StatusListBox.Items.Add(projectName);
-                this.StatusListBox.Items.Add(projectFolder);
-                this.StatusListBox.Items.Add(classFileOptions);
-                this.StatusListBox.Items.Add("");
-                
-                // Display Database
-                this.StatusListBox.Items.Add("---- Database(s) ----");
-                this.StatusListBox.Items.Add(databaseName);
-                this.StatusListBox.Items.Add("");
-
-                // Display  Data Object Details
-                this.StatusListBox.Items.Add("---- Data Object Properties ----");
-                this.StatusListBox.Items.Add(objectFolder);
-                this.StatusListBox.Items.Add(objectNamespace);
-                this.StatusListBox.Items.Add(objectReferencesSet);
-
-                // if the OpenProject.ObjectReferencesSet exists
-                if ((this.OpenProject.ObjectReferencesSet != null) && (this.OpenProject.ObjectReferencesSet.References != null))
-                {
-                    // Display Refernces
-                    DisplayReferences(this.OpenProject.ObjectReferencesSet.References);
-                }
-
-                // DataManager
-                this.StatusListBox.Items.Add("");
-                this.StatusListBox.Items.Add("---- Data Manager Properties ----");
-                this.StatusListBox.Items.Add(dataManagerFolder);
-                this.StatusListBox.Items.Add(dataManagerNamespace);
-                this.StatusListBox.Items.Add(dataManagerReferencesSet);
-
-                // if the OpenProject.ObjectReferencesSet exists
-                if ((this.OpenProject.DataManagerReferencesSet != null) && (this.OpenProject.DataManagerReferencesSet.References != null))
-                {
-                    // Display Refernces
-                    DisplayReferences(this.OpenProject.DataManagerReferencesSet.References);
-                }
-
-                // DataOperations
-                this.StatusListBox.Items.Add("");
-                this.StatusListBox.Items.Add("---- Data Operations Properties ----");
-                this.StatusListBox.Items.Add(dataOperationsFolder);
-                this.StatusListBox.Items.Add(dataOperationsNamespace);
-                this.StatusListBox.Items.Add(dataOperationsReferencesSet);
-
-                // if the OpenProject.DataOperationsReferencesSet exists
-                if ((this.OpenProject.DataOperationsReferencesSet != null) && (this.OpenProject.DataOperationsReferencesSet.References != null))
-                {
-                    // Display Refernces
-                    DisplayReferences(this.OpenProject.DataOperationsReferencesSet.References);
-                }
-                
-                // Controller
-                this.StatusListBox.Items.Add("");
-                this.StatusListBox.Items.Add("---- Controller Properties ----");
-                this.StatusListBox.Items.Add(controllerFolder);
-                this.StatusListBox.Items.Add(controllerNamespace);
-                this.StatusListBox.Items.Add(controllerReferencesSet);
-
-                // if the OpenProject.ControllerReferencesSet exists
-                if ((this.OpenProject.ControllerReferencesSet != null) && (this.OpenProject.ControllerReferencesSet.References != null))
-                {
-                    // Display Refernces
-                    DisplayReferences(this.OpenProject.ControllerReferencesSet.References);
-                }
-
-                // Reader
-                this.StatusListBox.Items.Add("");
-                this.StatusListBox.Items.Add("---- Reader Properties ----");
-                this.StatusListBox.Items.Add(readerFolder);
-                this.StatusListBox.Items.Add(readerNamespace);
-                this.StatusListBox.Items.Add(readerReferencesSet);
-
-                // if the OpenProject.ReaderReferencesSet exists
-                if ((this.OpenProject.ReaderReferencesSet != null) && (this.OpenProject.ReaderReferencesSet.References != null))
-                {
-                    // Display Refernces
-                    DisplayReferences(this.OpenProject.ReaderReferencesSet.References);
-                }
-
-                // Writer
-                this.StatusListBox.Items.Add("");
-                this.StatusListBox.Items.Add("---- Writer Properties ----");
-                this.StatusListBox.Items.Add(writerFolder);
-                this.StatusListBox.Items.Add(writerNamespace);
-                this.StatusListBox.Items.Add(writerReferencesSet);
-
-                // if the OpenProject.ReaderReferencesSet exists
-                if ((this.OpenProject.WriterReferencesSet != null) && (this.OpenProject.WriterReferencesSet.References != null))
-                {
-                    // Display Refernces
-                    DisplayReferences(this.OpenProject.WriterReferencesSet.References);
-                }
-
-                // StoredProcedure
-                this.StatusListBox.Items.Add("");
-                this.StatusListBox.Items.Add("---- Stored Procedure Properties ----");
-                this.StatusListBox.Items.Add(storedProcedureFolder);
-                this.StatusListBox.Items.Add(storedProcedureNamespace);
-                this.StatusListBox.Items.Add(storedProcedureReferencesSet);
-
-                // if the OpenProject.ReaderReferencesSet exists
-                if ((this.OpenProject.StoredProcedureReferencesSet != null) && (this.OpenProject.StoredProcedureReferencesSet.References != null))
-                {
-                    // Display Refernces
-                    DisplayReferences(this.OpenProject.StoredProcedureReferencesSet.References);
-                }
-            }
-            #endregion
-
             #region DisplaySelectedProject()
             /// <summary>
             /// This method displays the selected project.
@@ -1986,6 +1696,12 @@ namespace DataTierClient.Forms
                         // set build
                         this.BuildComplete = false;
                     }
+
+                    // Recreate the ProjectFileManager so that this button will no longer be enabled.
+                    this.FileManager = new ProjectFileManager();
+
+                    // Enable or disable controls
+                    UIEnable();
                 }
             } 
             #endregion
@@ -2047,8 +1763,6 @@ namespace DataTierClient.Forms
                     this.NewProjectButton.Enabled = true;
                     this.OpenProjectButton.Enabled = true;    
                     this.BuildAllButton.Enabled = false;
-                    this.ViewProjectSummaryButton.Enabled = false;
-                    this.IncludeProjectFilesButton.Enabled = false;
                     this.EditProjectButton.Enabled = false;
                     this.CloseProjectButton.Enabled = false;
                 
@@ -2568,8 +2282,6 @@ namespace DataTierClient.Forms
                 
                 // set the control's enable property
                 ButtonManager.EnableBuiildAll = enabled;
-                ButtonManager.EnableViewProjectSummary = enabled;
-                ButtonManager.EnableIncludeProjectFiles =((enabled) && (this.BuildComplete) && (HasFileManager) && (FileManager.WereNewFilesCreated));
                 ButtonManager.EnableNewProject = !enabled;
                 ButtonManager.EnableOpenProject = !enabled;
                 ButtonManager.EnableEditProject = enabled;
@@ -2581,8 +2293,6 @@ namespace DataTierClient.Forms
                 ButtonManager.HandleButtonImage(EditProjectButton, ButtonManager.EnableEditProject);
                 ButtonManager.HandleButtonImage(CloseProjectButton, ButtonManager.EnableCloseProject);
                 ButtonManager.HandleButtonImage(BuildAllButton, ButtonManager.EnableBuiildAll);
-                ButtonManager.HandleButtonImage(ViewProjectSummaryButton, ButtonManager.EnableViewProjectSummary);
-                ButtonManager.HandleButtonImage(IncludeProjectFilesButton, ButtonManager.EnableIncludeProjectFiles);
                 
                 // if the value for enabled is true
                 if (enabled)
@@ -2599,19 +2309,21 @@ namespace DataTierClient.Forms
                 {
                     // Update for DataTier.Net version 1
                     ManageDataButton.ForeColor = Color.LemonChiffon;
-                    ManageDataButton.Visible = true;
-                    StoredProcedureSQLButton.Visible = true;
-                    ToolsLabel.Visible = true;
+                    ManageDataButton.Enabled = true;
+                    ButtonManager.HandleButtonImage(ManageDataButton, true);
 
+                    // Set up the StoredProcedureSQLButton (white button)
+                    StoredProcedureSQLButton.Visible = true;
+                    
                     // Show the StoredProcedureSQLButton if the StoredProceduresSQLPath text exists and the file exists
                     this.StoredProcedureSQLButton.Visible = ((HasStoredProceduresSQLPath) && (File.Exists(StoredProceduresSQLPath)));
                 }
                 else
                 {
                     // Update for DataTier.Net v1
-                    ManageDataButton.Visible = false;
+                    ManageDataButton.Enabled = false;
+                    ButtonManager.HandleButtonImage(ManageDataButton, false);
                     StoredProcedureSQLButton.Visible = false;
-                    ToolsLabel.Visible = false;
                 }
                 
                 // refresh everything

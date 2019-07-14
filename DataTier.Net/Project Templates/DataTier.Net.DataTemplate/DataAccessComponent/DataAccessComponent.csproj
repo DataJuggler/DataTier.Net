@@ -10,8 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>$safeprojectname$</RootNamespace>
     <AssemblyName>$safeprojectname$</AssemblyName>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon></ApplicationIcon>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>2.0</OldToolsVersion>
@@ -72,9 +71,7 @@
     <Compile Include="StoredProcedureManager\UpdateProcedures\TemporaryUpdateProcedure.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="RAD Studio Icon.ico" />
     <Content Include="StoredProcedureManager\StoredProcedureSQL\UpdateProcPermissions.sql" />
-    <Content Include="Tools.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ObjectLibrary\ObjectLibrary.csproj">

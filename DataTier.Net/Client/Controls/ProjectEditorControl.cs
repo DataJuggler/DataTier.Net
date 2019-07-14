@@ -81,26 +81,6 @@ namespace DataTierClient.Controls
             }
             #endregion
             
-            #region ClassOptionsComboBox_SelectedIndexChanged(object sender, EventArgs e)
-            /// <summary>
-            /// The SelectedIndex has changed on this combo box.
-            /// </summary>
-            /// <param name="sender"></param>
-            /// <param name="e"></param>
-            private void ClassOptionsComboBox_SelectedIndexChanged(object sender, EventArgs e)
-            {
-                // if the SelectedProject exists
-                if(this.SelectedProject != null)
-                {
-                    // Set the SelectedIndex
-                    this.SelectedProject.ClassFileOption = this.ClassOptionsComboBox.SelectedIndex;
-                    
-                    // Enable Controls
-                    UIEnable();
-                }
-            }
-            #endregion
-
             #region EditEnumerationsButton_Click(object sender, EventArgs e)
             /// <summary>
             /// This method edits the enumerations for this project.
@@ -215,7 +195,6 @@ namespace DataTierClient.Controls
                 // dislay values now
                 this.ProjectNameTextBox.Text = projectName;
                 this.ProjectFolderTextBox.Text = projectFolder;
-                this.ClassOptionsComboBox.SelectedIndex = index;
                 
                 // Refresh
                 this.Refresh();
@@ -236,25 +215,6 @@ namespace DataTierClient.Controls
 
                 // Set the next control
                 this.NextControl = ActiveControlEnum.DatabasesTab;
-                
-                // Load Class Options
-                LoadClassOptions();
-            }
-            #endregion
-
-            #region LoadClassOptions()
-            /// <summary>
-            /// This method loads the class file options
-            /// </summary>
-            private void LoadClassOptions()
-            {
-                // Clear Items
-                this.ClassOptionsComboBox.Items.Clear();
-                
-                // Add Each Item
-                this.ClassOptionsComboBox.Items.Add("Seperate File Per table");
-                this.ClassOptionsComboBox.Items.Add("Single File");
-                this.ClassOptionsComboBox.Items.Add("Single File Per Database");
             }
             #endregion
 

@@ -70,15 +70,6 @@ namespace ObjectLibrary.Enumerations
     }
     #endregion
 
-    #region FileOptionsEnum
-    public enum FileOptionsEnum : int
-    {
-        SeperateFilesPerTable = 0,
-        SingleFile = 1,
-        SeperateFilesPerDatabase = 2
-    }
-    #endregion
-
     #region InstallProcedureMethodEnum : int
     /// <summary>
     /// This enum is used for the method of how a procedure will be installed
