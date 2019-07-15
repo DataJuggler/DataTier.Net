@@ -13,8 +13,8 @@
     <ProjectGuid>{D698C5E4-0A0A-49AF-A888-582F827EDADA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DataTierNetTemplateInstaller</RootNamespace>
-    <AssemblyName>DataTierNetTemplateInstaller</AssemblyName>
+    <RootNamespace>DataTierNet.ProjectTemplates.Installer</RootNamespace>
+    <AssemblyName>DataTierNet.ProjectTemplates.Installer</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <GeneratePkgDefFile>true</GeneratePkgDefFile>
     <UseCodebase>true</UseCodebase>
@@ -35,6 +35,10 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DeployExtension>False</DeployExtension>
+    <CopyVsixExtensionFiles>False</CopyVsixExtensionFiles>
+    <CopyVsixExtensionLocation>
+    </CopyVsixExtensionLocation>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>

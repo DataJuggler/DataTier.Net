@@ -2,7 +2,7 @@
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
         <Identity Id="DataTier.Net.3dbb77d7-0d21-4537-bdb3-ead8588087f7" Version="1.1.6" Language="en-US" Publisher="Data Juggler" />
-        <DisplayName>DataTier.Net</DisplayName>
+        <DisplayName>DataTier.Net Project Templates</DisplayName>
         <Description xml:space="preserve">This project installs the DataTier.Net project templates into Visual Studio 2017 or 2019.</Description>
         <MoreInfo>https://github.com/DataJuggler/DataTier.Net</MoreInfo>
         <License>License.txt</License>

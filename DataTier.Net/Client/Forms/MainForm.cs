@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Diagnostics;
 using System.Text;
 using System.Windows.Forms;
 
@@ -1712,6 +1713,9 @@ namespace DataTierClient.Forms
             /// </summary>
             private void Init()
             {
+                // Adding the version number (taking off the last .0. Probably will never be used).
+                this.Text = "DataTier.Net - Version " + Application.ProductVersion.Substring(0, Application.ProductVersion.Length - 2);
+
                 // Create the buttonManager
                 ButtonManager = new ButtonManager();
 
@@ -1765,6 +1769,8 @@ namespace DataTierClient.Forms
                     this.BuildAllButton.Enabled = false;
                     this.EditProjectButton.Enabled = false;
                     this.CloseProjectButton.Enabled = false;
+
+              
                 
                     // Enable Controls
                     UIEnable();

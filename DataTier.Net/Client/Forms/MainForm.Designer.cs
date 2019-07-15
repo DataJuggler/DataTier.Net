@@ -154,7 +154,6 @@ namespace DataTierClient.Forms
             this.MainPanel.BackgroundImage = global::DataTierClient.Properties.Resources.Deep_Black;
             this.MainPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.MainPanel.Controls.Add(this.StoredProcedureSQLButton);
-            this.MainPanel.Controls.Add(this.ManageDataButton);
             this.MainPanel.Controls.Add(this.SetupDataTierNetControl);
             this.MainPanel.Controls.Add(this.HiddenButton);
             this.MainPanel.Controls.Add(this.BuildAllButton);
@@ -166,6 +165,7 @@ namespace DataTierClient.Forms
             this.MainPanel.Controls.Add(this.ProjectLabel);
             this.MainPanel.Controls.Add(this.StatusListBox);
             this.MainPanel.Controls.Add(this.RightContainer);
+            this.MainPanel.Controls.Add(this.ManageDataButton);
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPanel.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MainPanel.Location = new System.Drawing.Point(0, 0);

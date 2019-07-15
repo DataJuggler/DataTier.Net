@@ -1,3 +1,7 @@
+Update 7.14.2019: I now have a VSIX installer that makes it easier to install the templates.
+
+DataTier.Net\VSIX\DataTier.Net.ProjectTemplates.Installer.vsix
+
 Update 5.27.2019: There was a problem with the NuGet paths if I include the reference in the templates, so after opening right click your solution > Manager NuGet Packages for Solution.
 
 Search DataJuggler.Net, and this will resolve the issue. I am too tired to keep working on this now as I have to work in the morning.

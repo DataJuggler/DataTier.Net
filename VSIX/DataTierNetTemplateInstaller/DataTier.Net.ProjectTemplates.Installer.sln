@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataTierNetTemplateInstaller", "DataTierNetTemplateInstaller.csproj", "{D698C5E4-0A0A-49AF-A888-582F827EDADA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataTier.Net.ProjectTemplates.Installer", "DataTier.Net.ProjectTemplates.Installer.csproj", "{D698C5E4-0A0A-49AF-A888-582F827EDADA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
