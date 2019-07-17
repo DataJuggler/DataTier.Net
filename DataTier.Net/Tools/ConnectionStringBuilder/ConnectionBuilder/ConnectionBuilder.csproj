@@ -37,13 +37,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DataJuggler.Core.UltimateHelper, Version=1.3.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DataJuggler.Core.UltimateHelper.1.3.2\lib\net461\DataJuggler.Core.UltimateHelper.dll</HintPath>
+      <HintPath>..\..\..\..\packages\DataJuggler.Core.UltimateHelper.1.3.2\lib\net461\DataJuggler.Core.UltimateHelper.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="DataJuggler.Net, Version=5.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DataJuggler.Net.5.5.0\lib\net461\DataJuggler.Net.dll</HintPath>
+      <HintPath>..\..\..\..\packages\DataJuggler.Net.5.5.0\lib\net461\DataJuggler.Net.dll</HintPath>
     </Reference>
     <Reference Include="DataJuggler.Win.Controls, Version=5.4.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DataJuggler.Win.Controls.5.4.5\lib\net461\DataJuggler.Win.Controls.dll</HintPath>
+      <HintPath>..\..\..\..\packages\DataJuggler.Win.Controls.5.4.5\lib\net461\DataJuggler.Win.Controls.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -92,6 +93,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data Juggler.ico" />
     <Content Include="lib\DataJuggler.Win.Controls Read Me.txt" />
     <Content Include="Tools.ico" />
     <None Include="Images\OrangeBackground.jpg" />
@@ -100,7 +102,6 @@
     <None Include="Images\DarkButton.png" />
     <None Include="Images\Failure.png" />
     <None Include="Images\Copied.jpg" />
-    <Content Include="Data Juggler.ico" />
     <Content Include="Key.ico" />
   </ItemGroup>
   <ItemGroup />
