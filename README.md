@@ -2,6 +2,9 @@
 
 DataTier.Net is an all stored procedure alternative to Entity Framework. 
 
+After cloning, Rebuild the entire solution. You may need to set DataTier.Net.Client project as the Startup Project:
+DataTier.Net\DataTier.Net\Client
+
 Please visit my YouTube channel to see the latest videos on DataTier.Net.
 
 <a href='https://www.youtube.com/channel/UCaw0joqvisKr3lYJ9Pd2vHA'>Data Juggler on YouTube<a/>
