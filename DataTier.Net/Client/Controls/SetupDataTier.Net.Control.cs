@@ -212,40 +212,6 @@ namespace DataTierClient.Controls
             }
             #endregion
             
-            #region GetPathToMSBuild()
-            /// <summary>
-            /// This method returns the Path To MS Build
-            /// </summary>
-            public string GetPathToMSBuild()
-            {
-                // initial value
-                string pathToMSBuild = "";
-
-                try
-                {
-                     // open the key for Regionizer
-                    RegistryKey registryKey = Registry.LocalMachine.OpenSubKey(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MSBuild\ToolsVersions\4.0");
-
-                    // attempt to get the value
-                    pathToMSBuild = registryKey.GetValue(@"C:\Windows\Microsoft.NET\Framework64\v4.0.30319\") as string;
-
-                    // if the directory exists
-                    if (Directory.Exists(pathToMSBuild))
-                    {
-                        // get the path to MSBuild
-                        pathToMSBuild = Path.Combine(pathToMSBuild, "msbuild.exe");
-                    }
-                }
-                catch
-                {
-                    
-                }
-                
-                // return value
-                return pathToMSBuild;
-            }
-            #endregion
-            
             #region Init()
             /// <summary>
             /// This method performs initializations for this object.
@@ -268,35 +234,6 @@ namespace DataTierClient.Controls
                 
                 // get the fullPath
                 string path = Path.GetFullPath(temp);
-
-                // if the file does not exist, the most likely cause is the program was just cloned from GitHub
-                // which does not include the .exe's when you clone or download a project.
-                if (!File.Exists(path))
-                {
-                    try
-                    {
-                        // path to project
-                        string pathToProject = Path.Combine("../../../Tools/ConnectionStringBuilder/ConnectionBuilder", "ConnectionBuilder.csproj");
-
-                        // Get the path to msBuild
-                        string msBuild = GetPathToMSBuild();
-
-                        // if the msbuild.exe file exists
-                        if ((TextHelper.Exists(msBuild)) && (File.Exists(msBuild)) && (File.Exists(pathToProject)))
-                        {
-                            // attempt to build with MSBuild
-                            System.Diagnostics.Process.Start(msBuild + " " + pathToProject + " -property:Configuration=Debug");
-                        }
-                        else
-                        {
-                            
-                        }
-                    }
-                    catch (Exception error)
-                    {
-                        
-                    }
-                }
 
                 // if the path exists
                 if (File.Exists(path))
