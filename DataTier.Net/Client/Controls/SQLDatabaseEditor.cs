@@ -198,6 +198,10 @@ namespace DataTierClient.Controls
             {
                 try
                 {
+                    // 7.17.2019: Clear the list before adding again else it adds twice I found out today
+                    // funny this control has been here for 12 years or more.
+                    this.DatabasesComboBox.Items.Clear();
+
                     // locals
                     string serverName = this.ServerTextBox.Text.ToString();
 
