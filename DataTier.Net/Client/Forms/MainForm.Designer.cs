@@ -71,7 +71,6 @@ namespace DataTierClient.Forms
             this.YouTubeButton = new System.Windows.Forms.Button();
             this.MainPanel = new DataTierClient.Objects.PanelExtender();
             this.StoredProcedureSQLButton = new System.Windows.Forms.Label();
-            this.ManageDataButton = new System.Windows.Forms.Button();
             this.SetupDataTierNetControl = new DataTierClient.Controls.SetupDataTierNetControl();
             this.HiddenButton = new System.Windows.Forms.Button();
             this.BuildAllButton = new System.Windows.Forms.Button();
@@ -94,6 +93,7 @@ namespace DataTierClient.Forms
             this.DatabaseGuideLabel = new System.Windows.Forms.Label();
             this.UsersGuideLabel = new System.Windows.Forms.Label();
             this.ClassRoomImage = new System.Windows.Forms.PictureBox();
+            this.ManageDataButton = new System.Windows.Forms.Button();
             this.MainPanel.SuspendLayout();
             this.RightContainer.SuspendLayout();
             this.BottomPanel.SuspendLayout();
@@ -126,7 +126,7 @@ namespace DataTierClient.Forms
             this.MainStatusStrip.BackColor = System.Drawing.Color.Transparent;
             this.MainStatusStrip.BackgroundImage = global::DataTierClient.Properties.Resources.Deep_Black;
             this.MainStatusStrip.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.MainStatusStrip.Location = new System.Drawing.Point(0, 579);
+            this.MainStatusStrip.Location = new System.Drawing.Point(0, 739);
             this.MainStatusStrip.Name = "MainStatusStrip";
             this.MainStatusStrip.Size = new System.Drawing.Size(900, 22);
             this.MainStatusStrip.TabIndex = 2;
@@ -170,7 +170,7 @@ namespace DataTierClient.Forms
             this.MainPanel.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MainPanel.Location = new System.Drawing.Point(0, 0);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(900, 579);
+            this.MainPanel.Size = new System.Drawing.Size(900, 739);
             this.MainPanel.TabIndex = 17;
             // 
             // StoredProcedureSQLButton
@@ -186,27 +186,6 @@ namespace DataTierClient.Forms
             this.StoredProcedureSQLButton.Click += new System.EventHandler(this.StoredProcedureSQLButton_Click);
             this.StoredProcedureSQLButton.MouseEnter += new System.EventHandler(this.Button_Enter);
             this.StoredProcedureSQLButton.MouseLeave += new System.EventHandler(this.Button_Leave);
-            // 
-            // ManageDataButton
-            // 
-            this.ManageDataButton.BackgroundImage = global::DataTierClient.Properties.Resources.Black_Button1;
-            this.ManageDataButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ManageDataButton.Enabled = false;
-            this.ManageDataButton.FlatAppearance.BorderSize = 0;
-            this.ManageDataButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.ManageDataButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.ManageDataButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ManageDataButton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ManageDataButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.ManageDataButton.Location = new System.Drawing.Point(186, 114);
-            this.ManageDataButton.Name = "ManageDataButton";
-            this.ManageDataButton.Size = new System.Drawing.Size(150, 40);
-            this.ManageDataButton.TabIndex = 107;
-            this.ManageDataButton.Text = "Manage Data";
-            this.ManageDataButton.UseVisualStyleBackColor = true;
-            this.ManageDataButton.Click += new System.EventHandler(this.ManageDataButton_Click);
-            this.ManageDataButton.MouseEnter += new System.EventHandler(this.Button_Enter);
-            this.ManageDataButton.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
             // SetupDataTierNetControl
             // 
@@ -385,7 +364,7 @@ namespace DataTierClient.Forms
             this.RightContainer.Dock = System.Windows.Forms.DockStyle.Right;
             this.RightContainer.Location = new System.Drawing.Point(520, 0);
             this.RightContainer.Name = "RightContainer";
-            this.RightContainer.Size = new System.Drawing.Size(380, 579);
+            this.RightContainer.Size = new System.Drawing.Size(380, 739);
             this.RightContainer.TabIndex = 102;
             // 
             // BottomPanel
@@ -393,7 +372,7 @@ namespace DataTierClient.Forms
             this.BottomPanel.Controls.Add(this.YouTubeButton);
             this.BottomPanel.Controls.Add(this.BottomRightMarginpanel);
             this.BottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.BottomPanel.Location = new System.Drawing.Point(0, 507);
+            this.BottomPanel.Location = new System.Drawing.Point(0, 667);
             this.BottomPanel.Name = "BottomPanel";
             this.BottomPanel.Size = new System.Drawing.Size(380, 64);
             this.BottomPanel.TabIndex = 104;
@@ -409,7 +388,7 @@ namespace DataTierClient.Forms
             // TopPanel
             // 
             this.TopPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.TopPanel.Location = new System.Drawing.Point(0, 571);
+            this.TopPanel.Location = new System.Drawing.Point(0, 731);
             this.TopPanel.Name = "TopPanel";
             this.TopPanel.Size = new System.Drawing.Size(380, 8);
             this.TopPanel.TabIndex = 103;
@@ -527,12 +506,33 @@ namespace DataTierClient.Forms
             this.ClassRoomImage.TabIndex = 99;
             this.ClassRoomImage.TabStop = false;
             // 
+            // ManageDataButton
+            // 
+            this.ManageDataButton.BackgroundImage = global::DataTierClient.Properties.Resources.Black_Button1;
+            this.ManageDataButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ManageDataButton.Enabled = false;
+            this.ManageDataButton.FlatAppearance.BorderSize = 0;
+            this.ManageDataButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.ManageDataButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.ManageDataButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ManageDataButton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ManageDataButton.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.ManageDataButton.Location = new System.Drawing.Point(186, 114);
+            this.ManageDataButton.Name = "ManageDataButton";
+            this.ManageDataButton.Size = new System.Drawing.Size(150, 40);
+            this.ManageDataButton.TabIndex = 107;
+            this.ManageDataButton.Text = "Manage Data";
+            this.ManageDataButton.UseVisualStyleBackColor = true;
+            this.ManageDataButton.Click += new System.EventHandler(this.ManageDataButton_Click);
+            this.ManageDataButton.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.ManageDataButton.MouseLeave += new System.EventHandler(this.Button_Leave);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(900, 601);
+            this.ClientSize = new System.Drawing.Size(900, 761);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.MainStatusStrip);
             this.Cursor = System.Windows.Forms.Cursors.Default;
