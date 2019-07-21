@@ -69,7 +69,7 @@
             this.InstallDatabaseSchemaButton.Text = "DataTier.Net.Database.Schema.sql";
             this.InstallDatabaseSchemaButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.InstallDatabaseSchemaButton.Click += new System.EventHandler(this.InstallDatabaseSchemaButton_Click);
-            this.InstallDatabaseSchemaButton.MouseEnter += new System.EventHandler(this.InstallProjectTemplatesButton_Click);
+            this.InstallDatabaseSchemaButton.MouseEnter += new System.EventHandler(this.Button_Enter);
             this.InstallDatabaseSchemaButton.MouseLeave += new System.EventHandler(this.Button_Leave);
             this.InstallDatabaseSchemaButton.MouseHover += new System.EventHandler(this.InstallDatabaseSchemaButton_MouseHover);
             // 
