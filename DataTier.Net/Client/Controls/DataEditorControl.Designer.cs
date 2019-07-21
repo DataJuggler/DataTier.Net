@@ -160,7 +160,7 @@ namespace DataTierClient.Controls
             // 
             // RemoveTableButton
             // 
-            this.RemoveTableButton.BackgroundImage = global::DataTierClient.Properties.Resources.Black_Button1;
+            this.RemoveTableButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
             this.RemoveTableButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.RemoveTableButton.FlatAppearance.BorderSize = 0;
             this.RemoveTableButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -181,7 +181,7 @@ namespace DataTierClient.Controls
             // 
             // CreateMethodButton
             // 
-            this.CreateMethodButton.BackgroundImage = global::DataTierClient.Properties.Resources.Black_Button1;
+            this.CreateMethodButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
             this.CreateMethodButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.CreateMethodButton.FlatAppearance.BorderSize = 0;
             this.CreateMethodButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -202,7 +202,6 @@ namespace DataTierClient.Controls
             // 
             // ManageMethodButton
             // 
-            this.ManageMethodButton.BackgroundImage = global::DataTierClient.Properties.Resources.Black_Button1;
             this.ManageMethodButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ManageMethodButton.FlatAppearance.BorderSize = 0;
             this.ManageMethodButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -223,7 +222,7 @@ namespace DataTierClient.Controls
             // 
             // ManageReadersButton
             // 
-            this.ManageReadersButton.BackgroundImage = global::DataTierClient.Properties.Resources.Black_Button1;
+            this.ManageReadersButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
             this.ManageReadersButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ManageReadersButton.FlatAppearance.BorderSize = 0;
             this.ManageReadersButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -244,7 +243,7 @@ namespace DataTierClient.Controls
             // 
             // ManageFieldSetsButton
             // 
-            this.ManageFieldSetsButton.BackgroundImage = global::DataTierClient.Properties.Resources.Black_Button1;
+            this.ManageFieldSetsButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
             this.ManageFieldSetsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ManageFieldSetsButton.FlatAppearance.BorderSize = 0;
             this.ManageFieldSetsButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;

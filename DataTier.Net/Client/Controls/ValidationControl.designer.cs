@@ -74,7 +74,7 @@ namespace DataTierClient.Controls
             // 
             // OKButton
             // 
-            this.OKButton.BackgroundImage = global::DataTierClient.Properties.Resources.Black_Button1;
+            this.OKButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
             this.OKButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.OKButton.FlatAppearance.BorderSize = 0;
             this.OKButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;

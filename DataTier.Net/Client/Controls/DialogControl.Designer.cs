@@ -72,7 +72,7 @@
             // 
             // YesButton
             // 
-            this.YesButton.BackgroundImage = global::DataTierClient.Properties.Resources.Black_Button1;
+            this.YesButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
             this.YesButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.YesButton.FlatAppearance.BorderSize = 0;
             this.YesButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -92,7 +92,7 @@
             // 
             // NoButton
             // 
-            this.NoButton.BackgroundImage = global::DataTierClient.Properties.Resources.Black_Button1;
+            this.NoButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
             this.NoButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.NoButton.FlatAppearance.BorderSize = 0;
             this.NoButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;

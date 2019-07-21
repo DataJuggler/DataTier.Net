@@ -133,7 +133,7 @@ namespace DataTierClient.Controls
             // 
             // ConfirmUpdateButton
             // 
-            this.ConfirmUpdateButton.BackgroundImage = global::DataTierClient.Properties.Resources.Black_Button1;
+            this.ConfirmUpdateButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
             this.ConfirmUpdateButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ConfirmUpdateButton.FlatAppearance.BorderSize = 0;
             this.ConfirmUpdateButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;

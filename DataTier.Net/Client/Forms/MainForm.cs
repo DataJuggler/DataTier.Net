@@ -1713,6 +1713,10 @@ namespace DataTierClient.Forms
             /// </summary>
             private void Init()
             {
+                // local
+                bool userCancelledSetup = false;
+                bool restartRequired = false;
+
                 // Adding the version number (taking off the last .0. Probably will never be used).
                 this.Text = "DataTier.Net - Version " + Application.ProductVersion.Substring(0, Application.ProductVersion.Length - 2);
 
@@ -1722,16 +1726,41 @@ namespace DataTierClient.Forms
                 // Set the value for SetupComplete
                 this.SetupComplete = BooleanHelper.ParseBoolean(ConfigurationHelper.ReadAppSetting("SetupComplete"), false, false);
 
+                // If the Setup is not complete, show the Setup Form
+                if (!SetupComplete)
+                {
+                    // Create a new instance of a 'SetupForm' object.
+                    SetupForm setupForm = new SetupForm();
+
+                    // Show the SetupForm
+                    setupForm.ShowDialog();
+
+                    // if the user did not cancel
+                    if (!setupForm.UserCancelled)
+                    {
+                        // a restart is required
+                        restartRequired = true;
+
+                        // DataTier.Net has to be restarted.
+                        MessageBox.Show("DataTier.Net has to be restarted to register your changes." + Environment.NewLine + "This program will now end.", "Restart Required");
+
+                        // close this form
+                        this.Close();
+                    }
+                    else
+                    {
+                        // user did cancel setup
+                        userCancelledSetup = true;
+                    }
+                }
+
                 // If the Setup Control is not visible
                 if (this.SetupComplete)
                 {
-                    // hide the SetupControl
-                    SetupDataTierNetControl.Visible = false;
-
                     // Connect To The Local Database
                     bool connected = TestDatabaseConnection();
                 
-                    // If connected 
+                    // If not connected 
                     if(!connected)
                     {  
                         // set message
@@ -1769,20 +1798,47 @@ namespace DataTierClient.Forms
                     this.BuildAllButton.Enabled = false;
                     this.EditProjectButton.Enabled = false;
                     this.CloseProjectButton.Enabled = false;
-
-              
                 
                     // Enable Controls
                     UIEnable();
                 }
                 else
-                {
-                    // Position the SetupControl
-                    this.SetupDataTierNetControl.Left = this.NewProjectButton.Left;
-                    this.SetupDataTierNetControl.Top = this.NewProjectButton.Top;
+                {  
+                    // if the user cancelled Setup
+                    if (userCancelledSetup)
+                    {
+                        // set message
+                        string message = "Setup was cancelled by the user. This program will now close.";
 
-                    // hide the SetupControl
-                    SetupDataTierNetControl.Visible = true;
+                        // set the title
+                        string title = "Setup Cancelled";
+                    
+                        // Inform user of connection
+                        MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Information);    
+                    
+                        // Close this form
+                        this.Close();
+                    
+                        // Exit this routine
+                        return;
+                    }
+                    else if (!restartRequired)
+                    {
+                         // set message
+                        string message = "DataTier.Net was not setup properly. Please restart this program and try again.";
+
+                        // set the title
+                        string title = "Setup Was Not Successful";
+                    
+                        // Inform user of connection
+                        MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Information);    
+                    
+                        // Close this form
+                        this.Close();
+                    
+                        // Exit this routine
+                        return;
+                    }
                 }
             }
             #endregion

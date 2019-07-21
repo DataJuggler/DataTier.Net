@@ -83,7 +83,7 @@ namespace DataTierClient.Controls
                 // 
                 // ProcedureButton
                 // 
-                this.ProcedureButton.BackgroundImage = global::DataTierClient.Properties.Resources.Black_Button1;
+                this.ProcedureButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
                 this.ProcedureButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
                 this.ProcedureButton.FlatAppearance.BorderSize = 0;
                 this.ProcedureButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;

@@ -58,17 +58,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConnectionStringBuilderForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ConnectionStringBuilderForm.Designer.cs">
-      <DependentUpon>ConnectionStringBuilderForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ConnectionStringBuilderForm.resx">
-      <DependentUpon>ConnectionStringBuilderForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

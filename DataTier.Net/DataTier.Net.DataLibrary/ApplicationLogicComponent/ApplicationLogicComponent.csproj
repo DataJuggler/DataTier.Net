@@ -44,9 +44,6 @@
     <Reference Include="DataJuggler.Net, Version=5.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\DataJuggler.Net.5.5.0\lib\net461\DataJuggler.Net.dll</HintPath>
     </Reference>
-    <Reference Include="DataJuggler.Win.Controls, Version=5.4.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\DataJuggler.Win.Controls.5.4.5\lib\net461\DataJuggler.Win.Controls.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
@@ -135,11 +132,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Data Juggler.ico" />
-    <Content Include="lib\DataJuggler.Win.Controls Read Me.txt" />
-    <Content Include="Tools.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

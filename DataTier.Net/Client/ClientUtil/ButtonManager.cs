@@ -47,14 +47,13 @@ namespace DataTierClient.ClientUtil
                     if (enabled)
                     {
                         // appear enabled
-                        button.BackgroundImage = Properties.Resources.Black_Button1;
+                        // button.BackgroundImage = Properties.Resources.BlackButton;
                         button.ForeColor = Color.LemonChiffon;
                         button.Enabled = true;
                     }
                     else
                     {
                         // appear disabled
-                        button.BackgroundImage = Properties.Resources.DarkBlackButton;
                         button.ForeColor = Color.DimGray;
                         button.Enabled = false;
                     }

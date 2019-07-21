@@ -62,8 +62,8 @@
     <Reference Include="DataJuggler.Net, Version=5.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\DataJuggler.Net.5.5.0\lib\net461\DataJuggler.Net.dll</HintPath>
     </Reference>
-    <Reference Include="DataJuggler.Win.Controls, Version=5.4.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DataJuggler.Win.Controls.5.4.5\lib\net461\DataJuggler.Win.Controls.dll</HintPath>
+    <Reference Include="DataJuggler.Win.Controls, Version=5.4.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\DataJuggler.Win.Controls.5.4.6\lib\net461\DataJuggler.Win.Controls.dll</HintPath>
     </Reference>
     <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <SpecificVersion>False</SpecificVersion>
@@ -278,11 +278,11 @@
     <Compile Include="Controls\SelectSQLServerControl.Designer.cs">
       <DependentUpon>SelectSQLServerControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SetupDataTier.Net.Control.cs">
+    <Compile Include="Controls\SetupControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\SetupDataTier.Net.Control.Designer.cs">
-      <DependentUpon>SetupDataTier.Net.Control.cs</DependentUpon>
+    <Compile Include="Controls\SetupControl.Designer.cs">
+      <DependentUpon>SetupControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\SQLDatabaseEditor.cs">
       <SubType>UserControl</SubType>
@@ -331,6 +331,12 @@
     </Compile>
     <Compile Include="Forms\ConfirmChangesForm.Designer.cs">
       <DependentUpon>ConfirmChangesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ConnectionStringBuilderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ConnectionStringBuilderForm.Designer.cs">
+      <DependentUpon>ConnectionStringBuilderForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\CustomMethodEditorForm.cs">
       <SubType>Form</SubType>
@@ -458,6 +464,12 @@
     <Compile Include="Forms\SelectSQLServerForm.Designer.cs">
       <DependentUpon>SelectSQLServerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ValidationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -486,6 +498,11 @@
     <Compile Include="Objects\RegionInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Xml\Writers\CustomReadersWriter.cs" />
     <Compile Include="Xml\Writers\FieldSetFieldsWriter.cs" />
     <Compile Include="Xml\Writers\FieldSetsWriter.cs" />
@@ -584,8 +601,8 @@
       <SubType>Designer</SubType>
       <DependentUpon>SelectSQLServerControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SetupDataTier.Net.Control.resx">
-      <DependentUpon>SetupDataTier.Net.Control.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\SetupControl.resx">
+      <DependentUpon>SetupControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\SQLDatabaseEditor.resx">
       <SubType>Designer</SubType>
@@ -623,6 +640,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ConfirmChangesForm.resx">
       <DependentUpon>ConfirmChangesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ConnectionStringBuilderForm.resx">
+      <DependentUpon>ConnectionStringBuilderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CustomMethodEditorForm.resx">
       <DependentUpon>CustomMethodEditorForm.cs</DependentUpon>
@@ -683,6 +703,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>SelectSQLServerForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ValidationForm.resx">
       <DependentUpon>ValidationForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -691,14 +714,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Enumerations\DataTierClient.Enumerations.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -719,27 +737,33 @@
     <None Include="Resources\JackIsADullBoyGray.png" />
     <None Include="Resources\MellowYellow.png" />
     <None Include="Resources\EditMode.png" />
-    <None Include="Resources\Free Blue.png" />
     <Content Include="lib\DataJuggler.Win.Controls Read Me.txt" />
-    <Content Include="Resources\Black Button.png" />
+    <Content Include="Resources\BlackButton.png" />
+    <None Include="Resources\OrangeBackground.jpg" />
+    <None Include="Resources\Success.png" />
+    <None Include="Resources\Failure.png" />
+    <None Include="Resources\Copied.jpg" />
+    <None Include="Resources\WoodButtonWidth640.png" />
+    <None Include="Resources\WoodButtonWidth1280.png" />
+    <None Include="Resources\LinenBackground.jpg" />
+    <None Include="Resources\WoodButtonWidth640Disabled.png" />
+    <None Include="Resources\WoodButtonWidth1280Disabled.png" />
+    <None Include="Resources\WoodButtonWidth2560.png" />
+    <None Include="Resources\WoodButtonWidth2560Disabled.png" />
+    <None Include="Resources\Installed.jpg" />
+    <None Include="Resources\Setup Background.jpg" />
     <Content Include="Tools.ico" />
     <Content Include="Xml\Files\DeserializedFieldSet.xml" />
     <Content Include="Xml\Files\SelectedFieldSet.xml" />
     <None Include="Resources\Information2.png" />
     <None Include="Resources\Information.png" />
     <None Include="Resources\Setup2.png" />
-    <None Include="Resources\Black Button1.png" />
     <None Include="Resources\DarkBlackButton.png" />
     <None Include="Images\DeepBlue.png" />
     <None Include="Images\DeepGray.png" />
     <Content Include="Help\ProjectFolderHelp.xml" />
     <None Include="Resources\PartnerBoat.png" />
     <None Include="Resources\Background2.png" />
-    <None Include="Resources\DarkBlueButton.png" />
-    <None Include="Resources\DarkButton.png" />
-    <None Include="Resources\DarkButton2.png" />
-    <None Include="Resources\ProjectFolder.png" />
-    <None Include="Resources\ProjectFolder1.png" />
     <None Include="Resources\Deep Black.jpg" />
     <None Include="App.config">
       <SubType>Designer</SubType>

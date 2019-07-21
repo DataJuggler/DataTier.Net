@@ -34,7 +34,6 @@ namespace DataTierClient.Forms
         private System.Windows.Forms.Button EditProjectButton;
         private System.Windows.Forms.Button BuildAllButton;
         private System.Windows.Forms.Button HiddenButton;
-        private SetupDataTierNetControl SetupDataTierNetControl;
         #endregion
         
         #region Methods
@@ -71,7 +70,6 @@ namespace DataTierClient.Forms
             this.YouTubeButton = new System.Windows.Forms.Button();
             this.MainPanel = new DataTierClient.Objects.PanelExtender();
             this.StoredProcedureSQLButton = new System.Windows.Forms.Label();
-            this.SetupDataTierNetControl = new DataTierClient.Controls.SetupDataTierNetControl();
             this.HiddenButton = new System.Windows.Forms.Button();
             this.BuildAllButton = new System.Windows.Forms.Button();
             this.CloseProjectButton = new System.Windows.Forms.Button();
@@ -154,7 +152,6 @@ namespace DataTierClient.Forms
             this.MainPanel.BackgroundImage = global::DataTierClient.Properties.Resources.Deep_Black;
             this.MainPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.MainPanel.Controls.Add(this.StoredProcedureSQLButton);
-            this.MainPanel.Controls.Add(this.SetupDataTierNetControl);
             this.MainPanel.Controls.Add(this.HiddenButton);
             this.MainPanel.Controls.Add(this.BuildAllButton);
             this.MainPanel.Controls.Add(this.CloseProjectButton);
@@ -187,18 +184,9 @@ namespace DataTierClient.Forms
             this.StoredProcedureSQLButton.MouseEnter += new System.EventHandler(this.Button_Enter);
             this.StoredProcedureSQLButton.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
-            // SetupDataTierNetControl
-            // 
-            this.SetupDataTierNetControl.BackColor = System.Drawing.Color.Linen;
-            this.SetupDataTierNetControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.SetupDataTierNetControl.Location = new System.Drawing.Point(3457, 164);
-            this.SetupDataTierNetControl.Name = "SetupDataTierNetControl";
-            this.SetupDataTierNetControl.Size = new System.Drawing.Size(720, 680);
-            this.SetupDataTierNetControl.TabIndex = 95;
-            // 
             // HiddenButton
             // 
-            this.HiddenButton.BackgroundImage = global::DataTierClient.Properties.Resources.DarkBlueButton;
+            this.HiddenButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
             this.HiddenButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.HiddenButton.FlatAppearance.BorderSize = 0;
             this.HiddenButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -215,7 +203,7 @@ namespace DataTierClient.Forms
             // 
             // BuildAllButton
             // 
-            this.BuildAllButton.BackgroundImage = global::DataTierClient.Properties.Resources.DarkBlackButton;
+            this.BuildAllButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BuildAllButton.BackgroundImage")));
             this.BuildAllButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BuildAllButton.Enabled = false;
             this.BuildAllButton.FlatAppearance.BorderSize = 0;
@@ -236,7 +224,7 @@ namespace DataTierClient.Forms
             // 
             // CloseProjectButton
             // 
-            this.CloseProjectButton.BackgroundImage = global::DataTierClient.Properties.Resources.DarkBlackButton;
+            this.CloseProjectButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("CloseProjectButton.BackgroundImage")));
             this.CloseProjectButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.CloseProjectButton.Enabled = false;
             this.CloseProjectButton.FlatAppearance.BorderSize = 0;
@@ -257,7 +245,7 @@ namespace DataTierClient.Forms
             // 
             // EditProjectButton
             // 
-            this.EditProjectButton.BackgroundImage = global::DataTierClient.Properties.Resources.DarkBlackButton;
+            this.EditProjectButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("EditProjectButton.BackgroundImage")));
             this.EditProjectButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.EditProjectButton.Enabled = false;
             this.EditProjectButton.FlatAppearance.BorderSize = 0;
@@ -298,7 +286,7 @@ namespace DataTierClient.Forms
             // 
             // NewProjectButton
             // 
-            this.NewProjectButton.BackgroundImage = global::DataTierClient.Properties.Resources.Black_Button1;
+            this.NewProjectButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
             this.NewProjectButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.NewProjectButton.FlatAppearance.BorderSize = 0;
             this.NewProjectButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -508,7 +496,7 @@ namespace DataTierClient.Forms
             // 
             // ManageDataButton
             // 
-            this.ManageDataButton.BackgroundImage = global::DataTierClient.Properties.Resources.Black_Button1;
+            this.ManageDataButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
             this.ManageDataButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ManageDataButton.Enabled = false;
             this.ManageDataButton.FlatAppearance.BorderSize = 0;
