@@ -37,6 +37,7 @@
             this.InfoLabel3 = new System.Windows.Forms.Label();
             this.InfoLabel2 = new System.Windows.Forms.Label();
             this.InfoLabel1 = new System.Windows.Forms.Label();
+            this.InfoLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // DatabaseCreatedCheckBox
@@ -69,7 +70,7 @@
             this.InstallDatabaseSchemaButton.Text = "DataTier.Net.Database.Schema.sql";
             this.InstallDatabaseSchemaButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.InstallDatabaseSchemaButton.Click += new System.EventHandler(this.InstallDatabaseSchemaButton_Click);
-            this.InstallDatabaseSchemaButton.MouseEnter += new System.EventHandler(this.InstallProjectTemplatesButton_Click);
+            this.InstallDatabaseSchemaButton.MouseEnter += new System.EventHandler(this.Button_Enter);
             this.InstallDatabaseSchemaButton.MouseLeave += new System.EventHandler(this.Button_Leave);
             this.InstallDatabaseSchemaButton.MouseHover += new System.EventHandler(this.InstallDatabaseSchemaButton_MouseHover);
             // 
@@ -162,12 +163,25 @@
             this.InfoLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.InfoLabel1.Visible = false;
             // 
+            // InfoLabel
+            // 
+            this.InfoLabel.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InfoLabel.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.InfoLabel.Location = new System.Drawing.Point(767, 27);
+            this.InfoLabel.Name = "InfoLabel";
+            this.InfoLabel.Size = new System.Drawing.Size(278, 126);
+            this.InfoLabel.TabIndex = 117;
+            this.InfoLabel.Text = "Create a new database in SQL Server Management Studio \r\nnamed DataTier.Net.Databa" +
+    "se, then check this box.";
+            this.InfoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // SetupControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Transparent;
             this.BackgroundImage = global::DataTierClient.Properties.Resources.Setup_Background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Controls.Add(this.InfoLabel);
             this.Controls.Add(this.InfoLabel1);
             this.Controls.Add(this.InfoLabel2);
             this.Controls.Add(this.InfoLabel3);
@@ -195,5 +209,6 @@
         private System.Windows.Forms.Label InfoLabel3;
         private System.Windows.Forms.Label InfoLabel2;
         private System.Windows.Forms.Label InfoLabel1;
+        private System.Windows.Forms.Label InfoLabel;
     }
 }

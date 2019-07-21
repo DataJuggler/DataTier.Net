@@ -218,6 +218,10 @@ namespace DataTierClient.Controls
             /// </summary>
             public void OnCheckChanged(LabelCheckBoxControl sender, bool isChecked)
             {
+                // Show or hide the InfoLabel and InfoLabel1 basedup isChecked value.
+                InfoLabel.Visible = !isChecked;
+                InfoLabel1.Visible = isChecked;
+
                 // there is only one label check box control so this has to be the DatabaseCreatedCheckBox
                 
                 // if isChecked is true
