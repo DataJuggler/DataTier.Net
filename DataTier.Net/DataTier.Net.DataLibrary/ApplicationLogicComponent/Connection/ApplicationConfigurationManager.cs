@@ -201,8 +201,11 @@ namespace ApplicationLogicComponent.Connection
                 // if UseEncryption is true
                 if (this.UseEncryption)
                 {
-                    // Set the EncryptionKey
-                    this.EncryptionKey = ConfigurationHelper.ReadAppSetting("UseEncryption");
+                    // Get the encryptedEncryptionkey
+                    string encryptedEncryptionKey = ConfigurationHelper.ReadAppSetting("Encryptionkey");
+
+                    // Set the EncryptionKey by decrypting the EncryptionKey with the default EncryptionKey
+                    this.EncryptionKey = CryptographyHelper.DecryptString(encryptedEncryptionKey);
                 }
                 else
                 {

@@ -35,9 +35,13 @@ namespace DataTierClient.Forms
         private string appConfigPath;
         private int connectionStringIndex;
         private int setupCompleteIndex;
+        private int useEncryptionIndex;
+        private int encryptionKeyIndex;
         private const string HTMLCommentStart = "<!--";
         private const string ConnectionStringStart = "<add key=\"ConnectionString\" value=";
         private const string SetupCompleteStart = "<add key=\"SetupComplete\" value=";
+        private const string UseEncryptionStart = "<add key=\"UseEncryption\" value=";
+        private const string EncryptionKeyStart = "<add key=\"EncryptionKey\" value=";
         #endregion
         
         #region Constructors
@@ -657,6 +661,63 @@ namespace DataTierClient.Forms
             }
             #endregion
             
+            #region GetUseEncryptionTextLine(bool setEncryptionKeyAlso = false)
+            /// <summary>
+            /// This method returns the Use Encryption Text Line
+            /// </summary>
+            public TextLine GetUseEncryptionTextLine(bool setEncryptionKeyAlso = false)
+            {
+                // local
+                int index = -1;
+
+                // initial value
+                TextLine useEncryptionTextLine = null;
+
+                // if the AppConfigTextLines exist
+                if (ListHelper.HasOneOrMoreItems(AppConfigTextLines))
+                {
+                    // Iterate the collection of TextLine objects
+                    foreach (TextLine textLine in AppConfigTextLines)
+                    {
+                        // Increment the value for tempIndex
+                        index++;
+
+                        // if this is not a comment line
+                        if (!textLine.Text.Trim().StartsWith(HTMLCommentStart))
+                        {
+                            // if this is the ConnectionStringLine
+                            if (textLine.Text.Trim().StartsWith(UseEncryptionStart))
+                            {
+                                // get the textLine
+                                useEncryptionTextLine = textLine;
+
+                                // Set the UseEncryptionIndex
+                                UseEncryptionIndex = index;
+
+                                // if the value for setEncryptionKeyAlso is false
+                                if (!setEncryptionKeyAlso)
+                                {
+                                    // break out of this loop
+                                    break;
+                                }
+                            }
+                            else if (textLine.Text.Trim().StartsWith(EncryptionKeyStart))
+                            {
+                                // Set the SetupCompleteIndex
+                                EncryptionKeyIndex = index;
+
+                                // now we can exit
+                                break;
+                            }
+                        }
+                    }
+                }
+                
+                // return value
+                return useEncryptionTextLine;
+            }
+            #endregion
+            
             #region Init()
             /// <summary>
             /// This method performs initializations for this object.
@@ -695,6 +756,11 @@ namespace DataTierClient.Forms
                 // initial value
                 bool installed = false;
 
+                // locals
+                string newText = "";
+                string encryptedConnectionString = "";
+                TextLine useEncryptionTextLine = null;
+                
                 // verify the AppConfigPath was found
                 if ((HasAppConfigPath) && (File.Exists(AppConfigPath)))
                 {
@@ -704,15 +770,58 @@ namespace DataTierClient.Forms
                         // If the connectionStringLine object exists
                         if ((NullHelper.Exists(connectionStringLine)) && (TextHelper.Exists(ConnectionString)))
                         {
-                            // Get the nextText
-                            string newText = "    <add key=\"ConnectionString\" value=\"" + ConnectionString + "\" />";
+                            // if UseEncryption is true
+                            if (UseEncryptionCheckBox.Checked)
+                            {
+                                // get the textLine for useEncryption (this also sets the useEncryptionIndex
+                                useEncryptionTextLine = GetUseEncryptionTextLine(UseCustomKeyCheckBox.Checked);
 
-                            // Change the text from false to true in SetupComplete Line
-                            AppConfigTextLines[SetupCompleteIndex].Text = AppConfigTextLines[SetupCompleteIndex].Text.Replace("false", "true");
-                            AppConfigTextLines[SetupCompleteIndex].Text = AppConfigTextLines[SetupCompleteIndex].Text.Replace("False", "true");
-                            AppConfigTextLines[SetupCompleteIndex].Text = AppConfigTextLines[SetupCompleteIndex].Text.Replace("FALSE", "true");
-                            AppConfigTextLines[SetupCompleteIndex].Text = AppConfigTextLines[SetupCompleteIndex].Text.Replace("\"\"", "\"true\"");
+                                // if use custom encryption key
+                                if ((UseCustomKeyCheckBox.Checked) && (EncryptionKeyControl.HasText))
+                                {
+                                    // get the encryptionKey value
+                                    string encryptionKey = EncryptionKeyControl.Text;
 
+                                    // Encrypt the ConnectrionString using the EncryptionKey provided by user
+                                    encryptedConnectionString = CryptographyHelper.EncryptString(ConnectionString, encryptionKey);
+                                }
+                                else
+                                {
+                                    // Encrypt the ConnectrionString using the default EncryptionKey 
+                                    encryptedConnectionString = CryptographyHelper.EncryptString(ConnectionString);
+                                }
+
+                                // Get the nextText
+                                newText = "    <add key=\"ConnectionString\" value=\"" + encryptedConnectionString + "\" />";
+                            }
+                            else
+                            {
+                                // Get the nextText
+                                newText = "    <add key=\"ConnectionString\" value=\"" + ConnectionString + "\" />";
+                            }
+
+                            // If the UseEncryptionIndex value is set
+                            if (UseEncryptionIndex > 0)
+                            {
+                                // Change the text from false to true in UseEncryptionIndex Line
+                                AppConfigTextLines[UseEncryptionIndex].Text = "    " + UseEncryptionStart + "\"" + "true" + "\"" + " />";
+                            }
+
+                            // If the EncryptionKeyIndex value is set
+                            if (EncryptionKeyIndex > 0)
+                            {
+                                // local
+                                string encryptedEncryptionKey = CryptographyHelper.EncryptString(EncryptionKeyControl.Text);
+
+                                // Change the text from false to true in UseEncryptionIndex Line
+                                AppConfigTextLines[EncryptionKeyIndex].Text = "    " + EncryptionKeyStart + "\"" + encryptedEncryptionKey + "\"" + " />";
+                            }
+
+                            // Replace out all false values for true
+
+                            // Change the text to true in SetupComplete Line
+                            AppConfigTextLines[SetupCompleteIndex].Text = "    " + SetupCompleteStart + "\"" + "true" + "\"" + " />";
+                            
                             // set the text for this line
                             AppConfigTextLines[ConnectionStringIndex].Text = newText;        
 
@@ -901,6 +1010,17 @@ namespace DataTierClient.Forms
             }
             #endregion
             
+            #region EncryptionKeyIndex
+            /// <summary>
+            /// This property gets or sets the value for 'EncryptionKeyIndex'.
+            /// </summary>
+            public int EncryptionKeyIndex
+            {
+                get { return encryptionKeyIndex; }
+                set { encryptionKeyIndex = value; }
+            }
+            #endregion
+            
             #region HasAppConfigPath
             /// <summary>
             /// This property returns true if the 'AppConfigPath' exists.
@@ -977,6 +1097,17 @@ namespace DataTierClient.Forms
             {
                 get { return setupCompleteIndex; }
                 set { setupCompleteIndex = value; }
+            }
+            #endregion
+            
+            #region UseEncryptionIndex
+            /// <summary>
+            /// This property gets or sets the value for 'UseEncryptionIndex'.
+            /// </summary>
+            public int UseEncryptionIndex
+            {
+                get { return useEncryptionIndex; }
+                set { useEncryptionIndex = value; }
             }
             #endregion
             
