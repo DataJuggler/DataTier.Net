@@ -38,6 +38,8 @@
             this.InfoLabel2 = new System.Windows.Forms.Label();
             this.InfoLabel1 = new System.Windows.Forms.Label();
             this.InfoLabel = new System.Windows.Forms.Label();
+            this.ClickHere = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.ClickHere)).BeginInit();
             this.SuspendLayout();
             // 
             // DatabaseCreatedCheckBox
@@ -175,12 +177,24 @@
     "se, then check this box.";
             this.InfoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // ClickHere
+            // 
+            this.ClickHere.BackgroundImage = global::DataTierClient.Properties.Resources.Click_Here_Orange_Transparent1;
+            this.ClickHere.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClickHere.Location = new System.Drawing.Point(188, 83);
+            this.ClickHere.Name = "ClickHere";
+            this.ClickHere.Size = new System.Drawing.Size(150, 64);
+            this.ClickHere.TabIndex = 118;
+            this.ClickHere.TabStop = false;
+            this.ClickHere.Visible = false;
+            // 
             // SetupControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Transparent;
             this.BackgroundImage = global::DataTierClient.Properties.Resources.Setup_Background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Controls.Add(this.ClickHere);
             this.Controls.Add(this.InfoLabel);
             this.Controls.Add(this.InfoLabel1);
             this.Controls.Add(this.InfoLabel2);
@@ -195,6 +209,7 @@
             this.ForeColor = System.Drawing.Color.GhostWhite;
             this.Name = "SetupControl";
             this.Size = new System.Drawing.Size(1080, 720);
+            ((System.ComponentModel.ISupportInitialize)(this.ClickHere)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -210,5 +225,6 @@
         private System.Windows.Forms.Label InfoLabel2;
         private System.Windows.Forms.Label InfoLabel1;
         private System.Windows.Forms.Label InfoLabel;
+        private System.Windows.Forms.PictureBox ClickHere;
     }
 }

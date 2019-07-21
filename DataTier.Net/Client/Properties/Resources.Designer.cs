@@ -83,6 +83,26 @@ namespace DataTierClient.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Click_Here_Orange_Transparent {
+            get {
+                object obj = ResourceManager.GetObject("Click Here Orange Transparent", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Click_Here_Orange_Transparent1 {
+            get {
+                object obj = ResourceManager.GetObject("Click Here Orange Transparent1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Copied {
             get {
                 object obj = ResourceManager.GetObject("Copied", resourceCulture);

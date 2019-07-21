@@ -752,6 +752,7 @@
     <None Include="Resources\WoodButtonWidth2560Disabled.png" />
     <None Include="Resources\Installed.jpg" />
     <None Include="Resources\Setup Background.jpg" />
+    <None Include="Resources\Click Here Orange Transparent.png" />
     <Content Include="Tools.ico" />
     <Content Include="Xml\Files\DeserializedFieldSet.xml" />
     <Content Include="Xml\Files\SelectedFieldSet.xml" />

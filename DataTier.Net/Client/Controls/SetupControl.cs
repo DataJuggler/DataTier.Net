@@ -32,6 +32,7 @@ namespace DataTierClient.Controls
         
         #region Private Variables
         private bool userCancelled;
+        private bool databaseSchemaClicked;
         private const string DatabaseName = "DataTier.Net.Database";
         #endregion
         
@@ -138,6 +139,10 @@ namespace DataTierClient.Controls
             /// </summary>
             private void InstallDatabaseSchemaButton_Click(object sender, EventArgs e)
             {
+                // Set to clicked
+                DatabaseSchemaClicked = true;
+                ClickHere.Visible = false;
+
                 // get the path to the sql
                 string path = "../../../Database/SQL Scripts/DataTier.Net.Database.Schema.sql";
 
@@ -221,6 +226,7 @@ namespace DataTierClient.Controls
                 // Show or hide the InfoLabel and InfoLabel1 basedup isChecked value.
                 InfoLabel.Visible = !isChecked;
                 InfoLabel1.Visible = isChecked;
+                ClickHere.Visible = ((isChecked) && (!DatabaseSchemaClicked));
 
                 // there is only one label check box control so this has to be the DatabaseCreatedCheckBox
                 
@@ -259,6 +265,17 @@ namespace DataTierClient.Controls
 
         #region Properties
 
+            #region DatabaseSchemaClicked
+            /// <summary>
+            /// This property gets or sets the value for 'DatabaseSchemaClicked'.
+            /// </summary>
+            public bool DatabaseSchemaClicked
+            {
+                get { return databaseSchemaClicked; }
+                set { databaseSchemaClicked = value; }
+            }
+            #endregion
+            
             #region UserCancelled
             /// <summary>
             /// This property gets or sets the value for 'UserCancelled'.
