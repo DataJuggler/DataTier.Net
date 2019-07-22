@@ -34,6 +34,19 @@ namespace DataTierClient.Forms
         private System.Windows.Forms.Button EditProjectButton;
         private System.Windows.Forms.Button BuildAllButton;
         private System.Windows.Forms.Button HiddenButton;
+        private PanelExtender RightContainer;
+        private PanelExtender RightPanel;
+        private System.Windows.Forms.Button ViewPDFButton;
+        private System.Windows.Forms.Button ViewWordButton;
+        private System.Windows.Forms.Label QuickStartLabel;
+        private System.Windows.Forms.PictureBox ClassRoomImage;
+        private PanelExtender BottomPanel;
+        private System.Windows.Forms.Button YouTubeButton;
+        private PanelExtender BottomRightMarginpanel;
+        private PanelExtender TopPanel;
+        private System.Windows.Forms.Button ManageDataButton;
+        private System.Windows.Forms.Label StoredProcedureSQLButton;
+        private System.Windows.Forms.Label RunSetupButton;
         #endregion
         
         #region Methods
@@ -85,9 +98,12 @@ namespace DataTierClient.Forms
             this.BottomRightMarginpanel = new DataTierClient.Objects.PanelExtender();
             this.TopPanel = new DataTierClient.Objects.PanelExtender();
             this.RightPanel = new DataTierClient.Objects.PanelExtender();
+            this.ViewPDFButton2 = new System.Windows.Forms.Button();
+            this.ViewWordButton2 = new System.Windows.Forms.Button();
+            this.UsersGuideLabel = new System.Windows.Forms.Label();
             this.ViewPDFButton = new System.Windows.Forms.Button();
             this.ViewWordButton = new System.Windows.Forms.Button();
-            this.UsersGuideLabel = new System.Windows.Forms.Label();
+            this.QuickStartLabel = new System.Windows.Forms.Label();
             this.ClassRoomImage = new System.Windows.Forms.PictureBox();
             this.ManageDataButton = new System.Windows.Forms.Button();
             this.MainPanel.SuspendLayout();
@@ -122,7 +138,7 @@ namespace DataTierClient.Forms
             this.MainStatusStrip.BackColor = System.Drawing.Color.Transparent;
             this.MainStatusStrip.BackgroundImage = global::DataTierClient.Properties.Resources.Deep_Black;
             this.MainStatusStrip.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.MainStatusStrip.Location = new System.Drawing.Point(0, 739);
+            this.MainStatusStrip.Location = new System.Drawing.Point(0, 659);
             this.MainStatusStrip.Name = "MainStatusStrip";
             this.MainStatusStrip.Size = new System.Drawing.Size(900, 22);
             this.MainStatusStrip.TabIndex = 2;
@@ -166,7 +182,7 @@ namespace DataTierClient.Forms
             this.MainPanel.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MainPanel.Location = new System.Drawing.Point(0, 0);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(900, 739);
+            this.MainPanel.Size = new System.Drawing.Size(900, 659);
             this.MainPanel.TabIndex = 17;
             // 
             // RunSetupButton
@@ -186,7 +202,7 @@ namespace DataTierClient.Forms
             // StoredProcedureSQLButton
             // 
             this.StoredProcedureSQLButton.ForeColor = System.Drawing.Color.GhostWhite;
-            this.StoredProcedureSQLButton.Location = new System.Drawing.Point(18, 512);
+            this.StoredProcedureSQLButton.Location = new System.Drawing.Point(18, 620);
             this.StoredProcedureSQLButton.Name = "StoredProcedureSQLButton";
             this.StoredProcedureSQLButton.Size = new System.Drawing.Size(220, 24);
             this.StoredProcedureSQLButton.TabIndex = 109;
@@ -350,7 +366,7 @@ namespace DataTierClient.Forms
             this.StatusListBox.FullRowSelect = true;
             this.StatusListBox.Location = new System.Drawing.Point(20, 170);
             this.StatusListBox.Name = "StatusListBox";
-            this.StatusListBox.Size = new System.Drawing.Size(482, 332);
+            this.StatusListBox.Size = new System.Drawing.Size(482, 440);
             this.StatusListBox.SmallImageList = this.Images;
             this.StatusListBox.TabIndex = 56;
             this.StatusListBox.UseCompatibleStateImageBehavior = false;
@@ -365,7 +381,7 @@ namespace DataTierClient.Forms
             this.RightContainer.Dock = System.Windows.Forms.DockStyle.Right;
             this.RightContainer.Location = new System.Drawing.Point(520, 0);
             this.RightContainer.Name = "RightContainer";
-            this.RightContainer.Size = new System.Drawing.Size(380, 739);
+            this.RightContainer.Size = new System.Drawing.Size(380, 659);
             this.RightContainer.TabIndex = 102;
             // 
             // BottomPanel
@@ -373,7 +389,7 @@ namespace DataTierClient.Forms
             this.BottomPanel.Controls.Add(this.YouTubeButton);
             this.BottomPanel.Controls.Add(this.BottomRightMarginpanel);
             this.BottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.BottomPanel.Location = new System.Drawing.Point(0, 667);
+            this.BottomPanel.Location = new System.Drawing.Point(0, 587);
             this.BottomPanel.Name = "BottomPanel";
             this.BottomPanel.Size = new System.Drawing.Size(380, 64);
             this.BottomPanel.TabIndex = 104;
@@ -389,21 +405,67 @@ namespace DataTierClient.Forms
             // TopPanel
             // 
             this.TopPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.TopPanel.Location = new System.Drawing.Point(0, 731);
+            this.TopPanel.Location = new System.Drawing.Point(0, 651);
             this.TopPanel.Name = "TopPanel";
             this.TopPanel.Size = new System.Drawing.Size(380, 8);
             this.TopPanel.TabIndex = 103;
             // 
             // RightPanel
             // 
+            this.RightPanel.Controls.Add(this.ViewPDFButton2);
+            this.RightPanel.Controls.Add(this.ViewWordButton2);
+            this.RightPanel.Controls.Add(this.UsersGuideLabel);
             this.RightPanel.Controls.Add(this.ViewPDFButton);
             this.RightPanel.Controls.Add(this.ViewWordButton);
-            this.RightPanel.Controls.Add(this.UsersGuideLabel);
+            this.RightPanel.Controls.Add(this.QuickStartLabel);
             this.RightPanel.Controls.Add(this.ClassRoomImage);
             this.RightPanel.Location = new System.Drawing.Point(18, 20);
             this.RightPanel.Name = "RightPanel";
-            this.RightPanel.Size = new System.Drawing.Size(319, 258);
+            this.RightPanel.Size = new System.Drawing.Size(319, 419);
             this.RightPanel.TabIndex = 101;
+            // 
+            // ViewPDFButton2
+            // 
+            this.ViewPDFButton2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ViewPDFButton2.BackgroundImage")));
+            this.ViewPDFButton2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ViewPDFButton2.FlatAppearance.BorderSize = 0;
+            this.ViewPDFButton2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.ViewPDFButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ViewPDFButton2.Location = new System.Drawing.Point(164, 263);
+            this.ViewPDFButton2.Name = "ViewPDFButton2";
+            this.ViewPDFButton2.Size = new System.Drawing.Size(64, 64);
+            this.ViewPDFButton2.TabIndex = 104;
+            this.ViewPDFButton2.UseVisualStyleBackColor = true;
+            this.ViewPDFButton2.Click += new System.EventHandler(this.ViewPDFButton2_Click);
+            this.ViewPDFButton2.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.ViewPDFButton2.MouseLeave += new System.EventHandler(this.Button_Leave);
+            // 
+            // ViewWordButton2
+            // 
+            this.ViewWordButton2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ViewWordButton2.BackgroundImage")));
+            this.ViewWordButton2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ViewWordButton2.FlatAppearance.BorderSize = 0;
+            this.ViewWordButton2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.ViewWordButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ViewWordButton2.Location = new System.Drawing.Point(76, 263);
+            this.ViewWordButton2.Name = "ViewWordButton2";
+            this.ViewWordButton2.Size = new System.Drawing.Size(64, 64);
+            this.ViewWordButton2.TabIndex = 103;
+            this.ViewWordButton2.UseVisualStyleBackColor = true;
+            this.ViewWordButton2.Click += new System.EventHandler(this.ViewWordButton2_Click);
+            this.ViewWordButton2.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.ViewWordButton2.MouseLeave += new System.EventHandler(this.Button_Leave);
+            // 
+            // UsersGuideLabel
+            // 
+            this.UsersGuideLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UsersGuideLabel.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.UsersGuideLabel.Location = new System.Drawing.Point(34, 335);
+            this.UsersGuideLabel.Name = "UsersGuideLabel";
+            this.UsersGuideLabel.Size = new System.Drawing.Size(236, 17);
+            this.UsersGuideLabel.TabIndex = 105;
+            this.UsersGuideLabel.Text = "DataTier.Net User\'s Guide";
+            this.UsersGuideLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ViewPDFButton
             // 
@@ -437,17 +499,18 @@ namespace DataTierClient.Forms
             this.ViewWordButton.MouseEnter += new System.EventHandler(this.Button_Enter);
             this.ViewWordButton.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
-            // UsersGuideLabel
+            // QuickStartLabel
             // 
-            this.UsersGuideLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UsersGuideLabel.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.UsersGuideLabel.Location = new System.Drawing.Point(62, 218);
-            this.UsersGuideLabel.Name = "UsersGuideLabel";
-            this.UsersGuideLabel.Size = new System.Drawing.Size(195, 17);
-            this.UsersGuideLabel.TabIndex = 102;
-            this.UsersGuideLabel.Text = "DataTier.Net Quick Start";
-            this.UsersGuideLabel.MouseEnter += new System.EventHandler(this.Button_Enter);
-            this.UsersGuideLabel.MouseLeave += new System.EventHandler(this.Button_Leave);
+            this.QuickStartLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.QuickStartLabel.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.QuickStartLabel.Location = new System.Drawing.Point(34, 218);
+            this.QuickStartLabel.Name = "QuickStartLabel";
+            this.QuickStartLabel.Size = new System.Drawing.Size(236, 17);
+            this.QuickStartLabel.TabIndex = 102;
+            this.QuickStartLabel.Text = "DataTier.Net Quick Start";
+            this.QuickStartLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.QuickStartLabel.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.QuickStartLabel.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
             // ClassRoomImage
             // 
@@ -485,7 +548,7 @@ namespace DataTierClient.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(900, 761);
+            this.ClientSize = new System.Drawing.Size(900, 681);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.MainStatusStrip);
             this.Cursor = System.Windows.Forms.Cursors.Default;
@@ -508,19 +571,9 @@ namespace DataTierClient.Forms
 
         #endregion
 
-        private PanelExtender RightContainer;
-        private PanelExtender RightPanel;
-        private System.Windows.Forms.Button ViewPDFButton;
-        private System.Windows.Forms.Button ViewWordButton;
+        private System.Windows.Forms.Button ViewPDFButton2;
+        private System.Windows.Forms.Button ViewWordButton2;
         private System.Windows.Forms.Label UsersGuideLabel;
-        private System.Windows.Forms.PictureBox ClassRoomImage;
-        private PanelExtender BottomPanel;
-        private System.Windows.Forms.Button YouTubeButton;
-        private PanelExtender BottomRightMarginpanel;
-        private PanelExtender TopPanel;
-        private System.Windows.Forms.Button ManageDataButton;
-        private System.Windows.Forms.Label StoredProcedureSQLButton;
-        private System.Windows.Forms.Label RunSetupButton;
     }
     #endregion
 

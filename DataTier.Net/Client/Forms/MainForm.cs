@@ -379,6 +379,29 @@ namespace DataTierClient.Forms
                 }
             }
             #endregion
+
+            #region ViewPDFButton2_Click(object sender, EventArgs e)
+            /// <summary>
+            /// This event is fired when the 'ViewPDFButton2' is clicked.
+            /// </summary>
+            private void ViewPDFButton2_Click(object sender, EventArgs e)
+            {
+                // get the path to the file 
+                string path = Path.GetFullPath(@"../../../Class Room/Documents/DataTier.Net Users Guide.pdf");
+
+                // if the path exists
+                if (File.Exists(path))
+                {
+                    // Open the file
+                    System.Diagnostics.Process.Start(path);
+                }
+                else
+                {
+                    // Show a message to the user
+                    MessageBox.Show("Sorry we could not find the installed documentation.", "File Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            #endregion
             
             #region ViewWordButton_Click(object sender, EventArgs e)
             /// <summary>
@@ -389,6 +412,29 @@ namespace DataTierClient.Forms
                 // get the path to the file 
                 string path = Path.GetFullPath(@"../../../Class Room/Documents/DataTier.Net Quick Start.docx");
 
+                // if the path exists
+                if (File.Exists(path))
+                {
+                    // Open the file
+                    System.Diagnostics.Process.Start(path);
+                }
+                else
+                {
+                    // Show a message to the user
+                    MessageBox.Show("Sorry we could not find the installed documentation.", "File Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            #endregion
+
+            #region ViewWordButton2_Click(object sender, EventArgs e)
+            /// <summary>
+            /// This event is fired when the 'ViewWordButton2' is clicked.
+            /// </summary>
+            private void ViewWordButton2_Click(object sender, EventArgs e)
+            {
+                // get the path to the file 
+                string path = Path.GetFullPath(@"../../../Class Room/Documents/DataTier.Net Users Guide.docx");
+                
                 // if the path exists
                 if (File.Exists(path))
                 {
