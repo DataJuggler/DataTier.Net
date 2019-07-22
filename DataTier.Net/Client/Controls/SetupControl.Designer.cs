@@ -39,6 +39,9 @@
             this.InfoLabel1 = new System.Windows.Forms.Label();
             this.InfoLabel = new System.Windows.Forms.Label();
             this.ClickHere = new System.Windows.Forms.PictureBox();
+            this.ViewPDFButton = new System.Windows.Forms.Button();
+            this.ViewWordButton = new System.Windows.Forms.Button();
+            this.UsersGuideLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ClickHere)).BeginInit();
             this.SuspendLayout();
             // 
@@ -99,7 +102,7 @@
             this.ConfigureButton.Name = "ConfigureButton";
             this.ConfigureButton.Size = new System.Drawing.Size(240, 53);
             this.ConfigureButton.TabIndex = 112;
-            this.ConfigureButton.Text = "Build Connectionstring && Setup app.config";
+            this.ConfigureButton.Text = "Build Connectionstring && Setup App.config";
             this.ConfigureButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.ConfigureButton.Click += new System.EventHandler(this.ConfigureButton_Click);
             this.ConfigureButton.MouseEnter += new System.EventHandler(this.Button_Enter);
@@ -188,12 +191,57 @@
             this.ClickHere.TabStop = false;
             this.ClickHere.Visible = false;
             // 
+            // ViewPDFButton
+            // 
+            this.ViewPDFButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ViewPDFButton.BackgroundImage")));
+            this.ViewPDFButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ViewPDFButton.FlatAppearance.BorderSize = 0;
+            this.ViewPDFButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.ViewPDFButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ViewPDFButton.Location = new System.Drawing.Point(144, 343);
+            this.ViewPDFButton.Name = "ViewPDFButton";
+            this.ViewPDFButton.Size = new System.Drawing.Size(64, 64);
+            this.ViewPDFButton.TabIndex = 120;
+            this.ViewPDFButton.UseVisualStyleBackColor = true;
+            this.ViewPDFButton.Click += new System.EventHandler(this.ViewPDFButton_Click);
+            this.ViewPDFButton.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.ViewPDFButton.MouseLeave += new System.EventHandler(this.Button_Leave);
+            // 
+            // ViewWordButton
+            // 
+            this.ViewWordButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ViewWordButton.BackgroundImage")));
+            this.ViewWordButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ViewWordButton.FlatAppearance.BorderSize = 0;
+            this.ViewWordButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.ViewWordButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ViewWordButton.Location = new System.Drawing.Point(56, 343);
+            this.ViewWordButton.Name = "ViewWordButton";
+            this.ViewWordButton.Size = new System.Drawing.Size(64, 64);
+            this.ViewWordButton.TabIndex = 119;
+            this.ViewWordButton.UseVisualStyleBackColor = true;
+            this.ViewWordButton.Click += new System.EventHandler(this.ViewWordButton_Click);
+            this.ViewWordButton.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.ViewWordButton.MouseLeave += new System.EventHandler(this.Button_Leave);
+            // 
+            // UsersGuideLabel
+            // 
+            this.UsersGuideLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UsersGuideLabel.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.UsersGuideLabel.Location = new System.Drawing.Point(42, 415);
+            this.UsersGuideLabel.Name = "UsersGuideLabel";
+            this.UsersGuideLabel.Size = new System.Drawing.Size(195, 17);
+            this.UsersGuideLabel.TabIndex = 121;
+            this.UsersGuideLabel.Text = "DataTier.Net Quick Start";
+            // 
             // SetupControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Transparent;
             this.BackgroundImage = global::DataTierClient.Properties.Resources.Setup_Background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Controls.Add(this.ViewPDFButton);
+            this.Controls.Add(this.ViewWordButton);
+            this.Controls.Add(this.UsersGuideLabel);
             this.Controls.Add(this.ClickHere);
             this.Controls.Add(this.InfoLabel);
             this.Controls.Add(this.InfoLabel1);
@@ -226,5 +274,8 @@
         private System.Windows.Forms.Label InfoLabel1;
         private System.Windows.Forms.Label InfoLabel;
         private System.Windows.Forms.PictureBox ClickHere;
+        private System.Windows.Forms.Button ViewPDFButton;
+        private System.Windows.Forms.Button ViewWordButton;
+        private System.Windows.Forms.Label UsersGuideLabel;
     }
 }

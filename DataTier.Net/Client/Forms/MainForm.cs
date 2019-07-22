@@ -263,6 +263,34 @@ namespace DataTierClient.Forms
             }
             #endregion
 
+            #region RunSetupButton_Click(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when the 'RunSetupButton' is clicked.
+            /// </summary>
+            private void RunSetupButton_Click(object sender, EventArgs e)
+            {
+                // run the setup
+                bool userCancelledSetup = RunSetup();
+
+                // local
+                bool restartRequired = false;
+
+                // if the user did not cancel
+                if (!userCancelledSetup)
+                {
+                    // A restart is required if the user did not cancel
+                    restartRequired = true;
+                }
+
+                // if the user cancelled the setup
+                if (userCancelledSetup)
+                {
+                    // user cancelled the setup
+                    UserCancelledSetup(userCancelledSetup, restartRequired);
+                }
+            }
+            #endregion
+            
             #region StatusListBox_DoubleClick(object sender, EventArgs e)
             /// <summary>
             /// The Status list box was double clicked. This method
@@ -352,29 +380,6 @@ namespace DataTierClient.Forms
             }
             #endregion
             
-            #region ViewPDFButton2_Click(object sender, EventArgs e)
-            /// <summary>
-            /// This event is fired when the 'ViewPDFButton2' is clicked.
-            /// </summary>
-            private void ViewPDFButton2_Click(object sender, EventArgs e)
-            {
-                // get the path to the file 
-                string path = Path.GetFullPath(@"../../../Class Room/Documents/DataTier.Net Users Guide.pdf");
-
-                // if the path exists
-                if (File.Exists(path))
-                {
-                    // Open the file
-                    System.Diagnostics.Process.Start(path);
-                }
-                else
-                {
-                    // Show a message to the user
-                    MessageBox.Show("Sorry we could not find the installed documentation.", "File Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-            #endregion
-            
             #region ViewWordButton_Click(object sender, EventArgs e)
             /// <summary>
             /// This event is fired when the 'ViewWordButton' is clicked.
@@ -384,29 +389,6 @@ namespace DataTierClient.Forms
                 // get the path to the file 
                 string path = Path.GetFullPath(@"../../../Class Room/Documents/DataTier.Net Quick Start.docx");
 
-                // if the path exists
-                if (File.Exists(path))
-                {
-                    // Open the file
-                    System.Diagnostics.Process.Start(path);
-                }
-                else
-                {
-                    // Show a message to the user
-                    MessageBox.Show("Sorry we could not find the installed documentation.", "File Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-            #endregion
-            
-            #region ViewWordButton2_Click(object sender, EventArgs e)
-            /// <summary>
-            /// This event is fired when the 'ViewWordButton2' is clicked.
-            /// </summary>
-            private void ViewWordButton2_Click(object sender, EventArgs e)
-            {
-                // get the path to the file 
-                string path = Path.GetFullPath(@"../../../Class Room/Documents/DataTier.Net Users Guide.docx");
-                
                 // if the path exists
                 if (File.Exists(path))
                 {
@@ -1729,28 +1711,14 @@ namespace DataTierClient.Forms
                 // If the Setup is not complete, show the Setup Form
                 if (!SetupComplete)
                 {
-                    // Create a new instance of a 'SetupForm' object.
-                    SetupForm setupForm = new SetupForm();
-
-                    // Show the SetupForm
-                    setupForm.ShowDialog();
+                    // run the setup
+                    userCancelledSetup = RunSetup();
 
                     // if the user did not cancel
-                    if (!setupForm.UserCancelled)
+                    if (!userCancelledSetup)
                     {
-                        // a restart is required
+                        // A restart is required if the user did not cancel
                         restartRequired = true;
-
-                        // DataTier.Net has to be restarted.
-                        MessageBox.Show("DataTier.Net has to be restarted to register your changes." + Environment.NewLine + "This program will now end.", "Restart Required");
-
-                        // close this form
-                        this.Close();
-                    }
-                    else
-                    {
-                        // user did cancel setup
-                        userCancelledSetup = true;
                     }
                 }
 
@@ -1804,41 +1772,8 @@ namespace DataTierClient.Forms
                 }
                 else
                 {  
-                    // if the user cancelled Setup
-                    if (userCancelledSetup)
-                    {
-                        // set message
-                        string message = "Setup was cancelled by the user. This program will now close.";
-
-                        // set the title
-                        string title = "Setup Cancelled";
-                    
-                        // Inform user of connection
-                        MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Information);    
-                    
-                        // Close this form
-                        this.Close();
-                    
-                        // Exit this routine
-                        return;
-                    }
-                    else if (!restartRequired)
-                    {
-                         // set message
-                        string message = "DataTier.Net was not setup properly. Please restart this program and try again.";
-
-                        // set the title
-                        string title = "Setup Was Not Successful";
-                    
-                        // Inform user of connection
-                        MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Information);    
-                    
-                        // Close this form
-                        this.Close();
-                    
-                        // Exit this routine
-                        return;
-                    }
+                    // run the final part of user cancelled setup
+                    UserCancelledSetup(userCancelledSetup, restartRequired);
                 }
             }
             #endregion
@@ -1981,6 +1916,39 @@ namespace DataTierClient.Forms
             } 
             #endregion
         
+            #region RunSetup()
+            /// <summary>
+            /// This method Run Setup
+            /// </summary>
+            public bool RunSetup()
+            {
+                // initial value
+                bool userCancelled = true;
+
+                // Create a new instance of a 'SetupForm' object.
+                SetupForm setupForm = new SetupForm();
+
+                // Show the SetupForm
+                setupForm.ShowDialog();
+
+                // if the user did not cancel
+                if (!setupForm.UserCancelled)
+                {
+                    // User did not cancel, therefore a restart is required
+                    userCancelled = false;
+
+                    // DataTier.Net has to be restarted.
+                    MessageBox.Show("DataTier.Net has to be restarted to register your changes." + Environment.NewLine + "This program will now end.", "Restart Required");
+
+                    // close this form
+                    this.Close();
+                }
+                
+                // return value
+                return userCancelled;
+            }
+            #endregion
+            
             #region SaveDatabaseSchema()
             /// <summary>
             /// This method returns the Database Schema
@@ -2484,6 +2452,50 @@ namespace DataTierClient.Forms
                 }
             }
             #endregion        
+            
+            #region UserCancelledSetup(bool userCancelledSetup, bool restartRequired)
+            /// <summary>
+            /// This method User Cancelled Setup
+            /// </summary>
+            public void UserCancelledSetup(bool userCancelledSetup, bool restartRequired)
+            {
+                // if the user cancelled Setup
+                if (userCancelledSetup)
+                {
+                    // set message
+                    string message = "Setup was cancelled by the user. This program will now close.";
+
+                    // set the title
+                    string title = "Setup Cancelled";
+                    
+                    // Inform user of connection
+                    MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Information);    
+                    
+                    // Close this form
+                    this.Close();
+                    
+                    // Exit this routine
+                    return;
+                }
+                else if (!restartRequired)
+                {
+                        // set message
+                    string message = "DataTier.Net was not setup properly. Please restart this program and try again.";
+
+                    // set the title
+                    string title = "Setup Was Not Successful";
+                    
+                    // Inform user of connection
+                    MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Information);    
+                    
+                    // Close this form
+                    this.Close();
+                    
+                    // Exit this routine
+                    return;
+                }
+            }
+            #endregion
             
         #endregion
         

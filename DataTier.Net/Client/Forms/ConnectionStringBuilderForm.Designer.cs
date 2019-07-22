@@ -199,7 +199,7 @@ namespace DataTierClient.Forms
             this.InstallConnectionStringButton.Name = "InstallConnectionStringButton";
             this.InstallConnectionStringButton.Size = new System.Drawing.Size(450, 40);
             this.InstallConnectionStringButton.TabIndex = 7;
-            this.InstallConnectionStringButton.Text = "Install Conn String && Update app.config";
+            this.InstallConnectionStringButton.Text = "Install Conn String && Update App.config";
             this.InstallConnectionStringButton.UseVisualStyleBackColor = false;
             this.InstallConnectionStringButton.EnabledChanged += new System.EventHandler(this.Button_EnabledChanged);
             this.InstallConnectionStringButton.Click += new System.EventHandler(this.InstallConnectionStringButton_Click);

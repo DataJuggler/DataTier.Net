@@ -741,6 +741,9 @@ namespace DataTierClient.Forms
                 this.DatabaseUserControl.OnTextChangedListener = this;
                 this.DatabasePasswordControl.OnTextChangedListener = this;
                 this.ConnectionstringControl.OnTextChangedListener = this;
+
+                // Change the Content Alignment
+                this.ConnectionstringControl.LabelTextAlign = ContentAlignment.TopRight;
                 
                 // Enable or disable controls
                 UIControl();

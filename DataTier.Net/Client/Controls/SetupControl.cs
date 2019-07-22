@@ -48,7 +48,6 @@ namespace DataTierClient.Controls
             // Perform initializations for this object
             Init();
         }
-
         #endregion
 
         #region Events
@@ -246,6 +245,52 @@ namespace DataTierClient.Controls
             }
         #endregion
 
+            #region ViewPDFButton_Click(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when the 'ViewPDFButton' is clicked.
+            /// </summary>
+            private void ViewPDFButton_Click(object sender, EventArgs e)
+            {
+                // get the path to the file 
+                string path = Path.GetFullPath(@"../../../Class Room/Documents/DataTier.Net Quick Start.pdf");
+
+                // if the path exists
+                if (File.Exists(path))
+                {
+                    // Open the file
+                    System.Diagnostics.Process.Start(path);
+                }
+                else
+                {
+                    // Show a message to the user
+                    MessageBox.Show("Sorry we could not find the installed documentation.", "File Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            #endregion
+            
+            #region ViewWordButton_Click(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when the 'ViewWordButton' is clicked.
+            /// </summary>
+            private void ViewWordButton_Click(object sender, EventArgs e)
+            {
+                // get the path to the file 
+                string path = Path.GetFullPath(@"../../../Class Room/Documents/DataTier.Net Quick Start.docx");
+
+                // if the path exists
+                if (File.Exists(path))
+                {
+                    // Open the file
+                    System.Diagnostics.Process.Start(path);
+                }
+                else
+                {
+                    // Show a message to the user
+                    MessageBox.Show("Sorry we could not find the installed documentation.", "File Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            #endregion
+            
         #endregion
 
         #region Methods
@@ -256,6 +301,9 @@ namespace DataTierClient.Controls
             /// </summary>
             public void Init()
             {
+                // Default to UserCancelled in case the form is closed.
+                UserCancelled = true;
+
                 // Setup the listener
                 DatabaseCreatedCheckBox.CheckChangedListener = this;
             }
@@ -280,12 +328,17 @@ namespace DataTierClient.Controls
             /// <summary>
             /// This property gets or sets the value for 'UserCancelled'.
             /// </summary>
+            [Browsable(false)]
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
             public bool UserCancelled
             {
                 get { return userCancelled; }
-                set { userCancelled = value; }
+                set 
+                { 
+                    userCancelled = value;
+                }
             }
-        #endregion
+            #endregion
 
         #endregion
 
