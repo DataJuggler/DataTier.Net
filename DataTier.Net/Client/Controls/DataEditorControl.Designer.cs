@@ -202,6 +202,7 @@ namespace DataTierClient.Controls
             // 
             // ManageMethodButton
             // 
+            this.ManageMethodButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
             this.ManageMethodButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ManageMethodButton.FlatAppearance.BorderSize = 0;
             this.ManageMethodButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
