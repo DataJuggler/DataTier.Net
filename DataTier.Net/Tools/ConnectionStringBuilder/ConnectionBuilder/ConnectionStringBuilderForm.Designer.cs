@@ -109,7 +109,7 @@ namespace ConnectionBuilder
             // BuildConnectionStringButton
             // 
             this.BuildConnectionStringButton.BackColor = System.Drawing.Color.Transparent;
-            this.BuildConnectionStringButton.BackgroundImage = global::ConnectionBuilder.Properties.Resources.DarkButton;
+            this.BuildConnectionStringButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BuildConnectionStringButton.BackgroundImage")));
             this.BuildConnectionStringButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BuildConnectionStringButton.Enabled = false;
             this.BuildConnectionStringButton.FlatAppearance.BorderSize = 0;
@@ -117,10 +117,10 @@ namespace ConnectionBuilder
             this.BuildConnectionStringButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BuildConnectionStringButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BuildConnectionStringButton.Font = new System.Drawing.Font("Verdana", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BuildConnectionStringButton.ForeColor = System.Drawing.Color.DimGray;
+            this.BuildConnectionStringButton.ForeColor = System.Drawing.Color.DarkGray;
             this.BuildConnectionStringButton.Location = new System.Drawing.Point(539, 524);
             this.BuildConnectionStringButton.Name = "BuildConnectionStringButton";
-            this.BuildConnectionStringButton.Size = new System.Drawing.Size(214, 40);
+            this.BuildConnectionStringButton.Size = new System.Drawing.Size(214, 36);
             this.BuildConnectionStringButton.TabIndex = 8;
             this.BuildConnectionStringButton.Text = "Build Conn String";
             this.BuildConnectionStringButton.UseVisualStyleBackColor = false;
@@ -132,17 +132,17 @@ namespace ConnectionBuilder
             // DoneButton
             // 
             this.DoneButton.BackColor = System.Drawing.Color.Transparent;
-            this.DoneButton.BackgroundImage = global::ConnectionBuilder.Properties.Resources.DarkBlueButton;
+            this.DoneButton.BackgroundImage = global::ConnectionBuilder.Properties.Resources.WoodButtonWidth640;
             this.DoneButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.DoneButton.FlatAppearance.BorderSize = 0;
             this.DoneButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.DoneButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.DoneButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DoneButton.Font = new System.Drawing.Font("Verdana", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DoneButton.ForeColor = System.Drawing.Color.White;
+            this.DoneButton.ForeColor = System.Drawing.Color.Black;
             this.DoneButton.Location = new System.Drawing.Point(649, 570);
             this.DoneButton.Name = "DoneButton";
-            this.DoneButton.Size = new System.Drawing.Size(104, 40);
+            this.DoneButton.Size = new System.Drawing.Size(104, 36);
             this.DoneButton.TabIndex = 10;
             this.DoneButton.Text = "Done";
             this.DoneButton.UseVisualStyleBackColor = false;
@@ -153,7 +153,7 @@ namespace ConnectionBuilder
             // CopyButton
             // 
             this.CopyButton.BackColor = System.Drawing.Color.Transparent;
-            this.CopyButton.BackgroundImage = global::ConnectionBuilder.Properties.Resources.DarkButton;
+            this.CopyButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("CopyButton.BackgroundImage")));
             this.CopyButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.CopyButton.Enabled = false;
             this.CopyButton.FlatAppearance.BorderSize = 0;
@@ -161,10 +161,10 @@ namespace ConnectionBuilder
             this.CopyButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.CopyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CopyButton.Font = new System.Drawing.Font("Verdana", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CopyButton.ForeColor = System.Drawing.Color.DimGray;
+            this.CopyButton.ForeColor = System.Drawing.Color.DarkGray;
             this.CopyButton.Location = new System.Drawing.Point(539, 570);
             this.CopyButton.Name = "CopyButton";
-            this.CopyButton.Size = new System.Drawing.Size(104, 40);
+            this.CopyButton.Size = new System.Drawing.Size(104, 36);
             this.CopyButton.TabIndex = 9;
             this.CopyButton.Text = "Copy";
             this.CopyButton.UseVisualStyleBackColor = false;
@@ -176,7 +176,7 @@ namespace ConnectionBuilder
             // TestDatabaseConnectionButton
             // 
             this.TestDatabaseConnectionButton.BackColor = System.Drawing.Color.Transparent;
-            this.TestDatabaseConnectionButton.BackgroundImage = global::ConnectionBuilder.Properties.Resources.DarkButton;
+            this.TestDatabaseConnectionButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("TestDatabaseConnectionButton.BackgroundImage")));
             this.TestDatabaseConnectionButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.TestDatabaseConnectionButton.Enabled = false;
             this.TestDatabaseConnectionButton.FlatAppearance.BorderSize = 0;
@@ -184,10 +184,10 @@ namespace ConnectionBuilder
             this.TestDatabaseConnectionButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.TestDatabaseConnectionButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.TestDatabaseConnectionButton.Font = new System.Drawing.Font("Verdana", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TestDatabaseConnectionButton.ForeColor = System.Drawing.Color.DimGray;
-            this.TestDatabaseConnectionButton.Location = new System.Drawing.Point(294, 524);
+            this.TestDatabaseConnectionButton.ForeColor = System.Drawing.Color.DarkGray;
+            this.TestDatabaseConnectionButton.Location = new System.Drawing.Point(333, 524);
             this.TestDatabaseConnectionButton.Name = "TestDatabaseConnectionButton";
-            this.TestDatabaseConnectionButton.Size = new System.Drawing.Size(239, 40);
+            this.TestDatabaseConnectionButton.Size = new System.Drawing.Size(200, 36);
             this.TestDatabaseConnectionButton.TabIndex = 7;
             this.TestDatabaseConnectionButton.Text = "Test and Copy";
             this.TestDatabaseConnectionButton.UseVisualStyleBackColor = false;
@@ -207,7 +207,6 @@ namespace ConnectionBuilder
             this.DatabaseNameControl.LabelColor = System.Drawing.SystemColors.ControlText;
             this.DatabaseNameControl.LabelFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DatabaseNameControl.LabelText = "Database Name:";
-            this.DatabaseNameControl.LabelTextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.DatabaseNameControl.LabelTopMargin = 0;
             this.DatabaseNameControl.LabelWidth = 240;
             this.DatabaseNameControl.Location = new System.Drawing.Point(32, 64);
@@ -218,7 +217,6 @@ namespace ConnectionBuilder
             this.DatabaseNameControl.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.DatabaseNameControl.Size = new System.Drawing.Size(720, 30);
             this.DatabaseNameControl.TabIndex = 1;
-            this.DatabaseNameControl.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.DatabaseNameControl.TextBoxBottomMargin = 0;
             this.DatabaseNameControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
             this.DatabaseNameControl.TextBoxEditableColor = System.Drawing.Color.White;
@@ -236,7 +234,6 @@ namespace ConnectionBuilder
             this.DatabaseServerControl.LabelColor = System.Drawing.SystemColors.ControlText;
             this.DatabaseServerControl.LabelFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DatabaseServerControl.LabelText = "Database Server:";
-            this.DatabaseServerControl.LabelTextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.DatabaseServerControl.LabelTopMargin = 0;
             this.DatabaseServerControl.LabelWidth = 240;
             this.DatabaseServerControl.Location = new System.Drawing.Point(32, 20);
@@ -247,7 +244,6 @@ namespace ConnectionBuilder
             this.DatabaseServerControl.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.DatabaseServerControl.Size = new System.Drawing.Size(720, 30);
             this.DatabaseServerControl.TabIndex = 0;
-            this.DatabaseServerControl.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.DatabaseServerControl.TextBoxBottomMargin = 0;
             this.DatabaseServerControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
             this.DatabaseServerControl.TextBoxEditableColor = System.Drawing.Color.White;
@@ -265,7 +261,6 @@ namespace ConnectionBuilder
             this.DatabaseUserControl.LabelColor = System.Drawing.SystemColors.ControlText;
             this.DatabaseUserControl.LabelFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DatabaseUserControl.LabelText = "Database User Name:";
-            this.DatabaseUserControl.LabelTextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.DatabaseUserControl.LabelTopMargin = 0;
             this.DatabaseUserControl.LabelWidth = 240;
             this.DatabaseUserControl.Location = new System.Drawing.Point(32, 148);
@@ -276,7 +271,6 @@ namespace ConnectionBuilder
             this.DatabaseUserControl.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.DatabaseUserControl.Size = new System.Drawing.Size(720, 30);
             this.DatabaseUserControl.TabIndex = 4;
-            this.DatabaseUserControl.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.DatabaseUserControl.TextBoxBottomMargin = 0;
             this.DatabaseUserControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
             this.DatabaseUserControl.TextBoxEditableColor = System.Drawing.Color.White;
@@ -294,7 +288,6 @@ namespace ConnectionBuilder
             this.DatabasePasswordControl.LabelColor = System.Drawing.SystemColors.ControlText;
             this.DatabasePasswordControl.LabelFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DatabasePasswordControl.LabelText = "Database Password:";
-            this.DatabasePasswordControl.LabelTextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.DatabasePasswordControl.LabelTopMargin = 0;
             this.DatabasePasswordControl.LabelWidth = 240;
             this.DatabasePasswordControl.Location = new System.Drawing.Point(32, 192);
@@ -305,7 +298,6 @@ namespace ConnectionBuilder
             this.DatabasePasswordControl.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.DatabasePasswordControl.Size = new System.Drawing.Size(720, 30);
             this.DatabasePasswordControl.TabIndex = 5;
-            this.DatabasePasswordControl.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.DatabasePasswordControl.TextBoxBottomMargin = 0;
             this.DatabasePasswordControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
             this.DatabasePasswordControl.TextBoxEditableColor = System.Drawing.Color.White;
@@ -323,7 +315,6 @@ namespace ConnectionBuilder
             this.ConnectionstringControl.LabelColor = System.Drawing.SystemColors.ControlText;
             this.ConnectionstringControl.LabelFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ConnectionstringControl.LabelText = "Connection String:";
-            this.ConnectionstringControl.LabelTextAlign = System.Drawing.ContentAlignment.TopRight;
             this.ConnectionstringControl.LabelTopMargin = 0;
             this.ConnectionstringControl.LabelWidth = 240;
             this.ConnectionstringControl.Location = new System.Drawing.Point(32, 320);
@@ -334,7 +325,6 @@ namespace ConnectionBuilder
             this.ConnectionstringControl.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.ConnectionstringControl.Size = new System.Drawing.Size(720, 137);
             this.ConnectionstringControl.TabIndex = 6;
-            this.ConnectionstringControl.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.ConnectionstringControl.TextBoxBottomMargin = 0;
             this.ConnectionstringControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
             this.ConnectionstringControl.TextBoxEditableColor = System.Drawing.Color.White;
@@ -344,7 +334,7 @@ namespace ConnectionBuilder
             // EncryptAndCopyButton
             // 
             this.EncryptAndCopyButton.BackColor = System.Drawing.Color.Transparent;
-            this.EncryptAndCopyButton.BackgroundImage = global::ConnectionBuilder.Properties.Resources.DarkButton;
+            this.EncryptAndCopyButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("EncryptAndCopyButton.BackgroundImage")));
             this.EncryptAndCopyButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.EncryptAndCopyButton.Enabled = false;
             this.EncryptAndCopyButton.FlatAppearance.BorderSize = 0;
@@ -352,10 +342,10 @@ namespace ConnectionBuilder
             this.EncryptAndCopyButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.EncryptAndCopyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.EncryptAndCopyButton.Font = new System.Drawing.Font("Verdana", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EncryptAndCopyButton.ForeColor = System.Drawing.Color.DimGray;
-            this.EncryptAndCopyButton.Location = new System.Drawing.Point(294, 570);
+            this.EncryptAndCopyButton.ForeColor = System.Drawing.Color.DarkGray;
+            this.EncryptAndCopyButton.Location = new System.Drawing.Point(333, 570);
             this.EncryptAndCopyButton.Name = "EncryptAndCopyButton";
-            this.EncryptAndCopyButton.Size = new System.Drawing.Size(239, 40);
+            this.EncryptAndCopyButton.Size = new System.Drawing.Size(200, 36);
             this.EncryptAndCopyButton.TabIndex = 11;
             this.EncryptAndCopyButton.Text = "Encrypt && Copy";
             this.EncryptAndCopyButton.UseVisualStyleBackColor = false;
@@ -376,7 +366,6 @@ namespace ConnectionBuilder
             this.UseEncryptionCheckBox.LabelColor = System.Drawing.SystemColors.ControlText;
             this.UseEncryptionCheckBox.LabelFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UseEncryptionCheckBox.LabelText = "Use Encryption:";
-            this.UseEncryptionCheckBox.LabelTextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.UseEncryptionCheckBox.LabelWidth = 240;
             this.UseEncryptionCheckBox.Location = new System.Drawing.Point(32, 236);
             this.UseEncryptionCheckBox.Name = "UseEncryptionCheckBox";
@@ -395,7 +384,6 @@ namespace ConnectionBuilder
             this.EncryptionKeyControl.LabelColor = System.Drawing.Color.DarkGray;
             this.EncryptionKeyControl.LabelFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EncryptionKeyControl.LabelText = "Encryption Key:";
-            this.EncryptionKeyControl.LabelTextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.EncryptionKeyControl.LabelTopMargin = 0;
             this.EncryptionKeyControl.LabelWidth = 240;
             this.EncryptionKeyControl.Location = new System.Drawing.Point(32, 276);
@@ -406,7 +394,6 @@ namespace ConnectionBuilder
             this.EncryptionKeyControl.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.EncryptionKeyControl.Size = new System.Drawing.Size(720, 30);
             this.EncryptionKeyControl.TabIndex = 13;
-            this.EncryptionKeyControl.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.EncryptionKeyControl.TextBoxBottomMargin = 0;
             this.EncryptionKeyControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
             this.EncryptionKeyControl.TextBoxEditableColor = System.Drawing.Color.White;
@@ -426,7 +413,6 @@ namespace ConnectionBuilder
             this.UseCustomKeyCheckBox.LabelColor = System.Drawing.SystemColors.ControlText;
             this.UseCustomKeyCheckBox.LabelFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UseCustomKeyCheckBox.LabelText = "Use Custom Key:";
-            this.UseCustomKeyCheckBox.LabelTextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.UseCustomKeyCheckBox.LabelWidth = 200;
             this.UseCustomKeyCheckBox.Location = new System.Drawing.Point(300, 236);
             this.UseCustomKeyCheckBox.Name = "UseCustomKeyCheckBox";
@@ -447,7 +433,7 @@ namespace ConnectionBuilder
             // StatusImage
             // 
             this.StatusImage.BackColor = System.Drawing.Color.Transparent;
-            this.StatusImage.BackgroundImage = global::ConnectionBuilder.Properties.Resources.Failure;
+            this.StatusImage.BackgroundImage = global::ConnectionBuilder.Properties.Resources.WoodButtonWidth640;
             this.StatusImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.StatusImage.Location = new System.Drawing.Point(699, 464);
             this.StatusImage.Name = "StatusImage";
@@ -459,7 +445,6 @@ namespace ConnectionBuilder
             // CopiedImage
             // 
             this.CopiedImage.BackColor = System.Drawing.Color.Transparent;
-            this.CopiedImage.BackgroundImage = global::ConnectionBuilder.Properties.Resources.Copied;
             this.CopiedImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.CopiedImage.Location = new System.Drawing.Point(12, 546);
             this.CopiedImage.Name = "CopiedImage";
@@ -477,7 +462,7 @@ namespace ConnectionBuilder
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.BackgroundImage = global::ConnectionBuilder.Properties.Resources.OrangeBackground;
+            this.BackgroundImage = global::ConnectionBuilder.Properties.Resources.LinenBackground;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(792, 625);
             this.Controls.Add(this.CopiedImage);

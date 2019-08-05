@@ -94,11 +94,11 @@
   <ItemGroup>
     <Content Include="Data Juggler.ico" />
     <Content Include="lib\DataJuggler.Win.Controls Read Me.txt" />
+    <None Include="Resources\LinenBackground.jpg" />
+    <None Include="Resources\WoodButtonWidth640.png" />
+    <None Include="Resources\WoodButtonWidth640Disabled.png" />
     <Content Include="Tools.ico" />
-    <None Include="Images\OrangeBackground.jpg" />
     <None Include="Images\Success.png" />
-    <None Include="Images\DarkBlueButton.png" />
-    <None Include="Images\DarkButton.png" />
     <None Include="Images\Failure.png" />
     <None Include="Images\Copied.jpg" />
     <Content Include="Key.ico" />

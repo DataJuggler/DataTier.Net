@@ -73,26 +73,6 @@ namespace ConnectionBuilder.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap DarkBlueButton {
-            get {
-                object obj = ResourceManager.GetObject("DarkBlueButton", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap DarkButton {
-            get {
-                object obj = ResourceManager.GetObject("DarkButton", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Failure {
             get {
                 object obj = ResourceManager.GetObject("Failure", resourceCulture);
@@ -103,9 +83,9 @@ namespace ConnectionBuilder.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap OrangeBackground {
+        internal static System.Drawing.Bitmap LinenBackground {
             get {
-                object obj = ResourceManager.GetObject("OrangeBackground", resourceCulture);
+                object obj = ResourceManager.GetObject("LinenBackground", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -116,6 +96,26 @@ namespace ConnectionBuilder.Properties {
         internal static System.Drawing.Bitmap Success {
             get {
                 object obj = ResourceManager.GetObject("Success", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WoodButtonWidth640 {
+            get {
+                object obj = ResourceManager.GetObject("WoodButtonWidth640", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WoodButtonWidth640Disabled {
+            get {
+                object obj = ResourceManager.GetObject("WoodButtonWidth640Disabled", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

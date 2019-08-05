@@ -86,13 +86,13 @@ namespace ConnectionBuilder
                 {
                     // Setup Enabled button
                     button.ForeColor = Color.White;
-                    button.BackgroundImage = Properties.Resources.DarkBlueButton;
+                    button.BackgroundImage = Properties.Resources.WoodButtonWidth640;
                 }
                 else
                 {
                     // Setup Disabled button
                     button.ForeColor = Color.DimGray;
-                    button.BackgroundImage = Properties.Resources.DarkButton;
+                    button.BackgroundImage = Properties.Resources.WoodButtonWidth640Disabled;
                 }
             }
             #endregion
@@ -237,7 +237,7 @@ namespace ConnectionBuilder
                         this.UseCustomKeyCheckBox.Enabled = true;
                         this.EncryptAndCopyButton.Enabled = true;
                         this.EncryptAndCopyButton.ForeColor = Color.White;
-                        this.EncryptAndCopyButton.BackgroundImage = Properties.Resources.DarkBlueButton;
+                        this.EncryptAndCopyButton.BackgroundImage = Properties.Resources.WoodButtonWidth640;
                     }
                     else
                     {
@@ -246,7 +246,7 @@ namespace ConnectionBuilder
                         this.UseCustomKeyCheckBox.Enabled = false;
                         this.EncryptAndCopyButton.Enabled = false;
                         this.EncryptAndCopyButton.ForeColor = Color.DarkGray;
-                        this.EncryptAndCopyButton.BackgroundImage = Properties.Resources.DarkButton;
+                        this.EncryptAndCopyButton.BackgroundImage = Properties.Resources.WoodButtonWidth640Disabled;
                     }
                 }
 
@@ -424,7 +424,7 @@ namespace ConnectionBuilder
                 catch (Exception error)
                 {
                     // for debugging only
-                    string err = error.ToString();
+                    DebugHelper.WriteDebugError("TestDatabaseConnection_Click", this.Name, error);
                     
                     // Show a success message
                     MessageBox.Show("A connection to the database count not be estalished.", "Connection Test Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
