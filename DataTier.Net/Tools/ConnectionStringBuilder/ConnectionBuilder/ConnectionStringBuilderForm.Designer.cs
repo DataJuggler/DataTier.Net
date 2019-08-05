@@ -433,7 +433,7 @@ namespace ConnectionBuilder
             // StatusImage
             // 
             this.StatusImage.BackColor = System.Drawing.Color.Transparent;
-            this.StatusImage.BackgroundImage = global::ConnectionBuilder.Properties.Resources.WoodButtonWidth640;
+            this.StatusImage.BackgroundImage = global::ConnectionBuilder.Properties.Resources.Success;
             this.StatusImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.StatusImage.Location = new System.Drawing.Point(699, 464);
             this.StatusImage.Name = "StatusImage";
@@ -445,6 +445,7 @@ namespace ConnectionBuilder
             // CopiedImage
             // 
             this.CopiedImage.BackColor = System.Drawing.Color.Transparent;
+            this.CopiedImage.BackgroundImage = global::ConnectionBuilder.Properties.Resources.Copied;
             this.CopiedImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.CopiedImage.Location = new System.Drawing.Point(12, 546);
             this.CopiedImage.Name = "CopiedImage";
@@ -455,7 +456,7 @@ namespace ConnectionBuilder
             // 
             // CopiedTimer
             // 
-            this.CopiedTimer.Interval = 5000;
+            this.CopiedTimer.Interval = 4000;
             this.CopiedTimer.Tick += new System.EventHandler(this.CopiedTimer_Tick);
             // 
             // ConnectionStringBuilderForm

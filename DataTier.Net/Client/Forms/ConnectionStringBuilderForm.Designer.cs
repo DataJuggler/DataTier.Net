@@ -443,7 +443,7 @@ namespace DataTierClient.Forms
             // 
             // CopiedTimer
             // 
-            this.CopiedTimer.Interval = 5000;
+            this.CopiedTimer.Interval = 4000;
             this.CopiedTimer.Tick += new System.EventHandler(this.CopiedTimer_Tick);
             // 
             // TestButton
@@ -484,7 +484,7 @@ namespace DataTierClient.Forms
             // 
             // InstalledTimer
             // 
-            this.InstalledTimer.Interval = 5000;
+            this.InstalledTimer.Interval = 4000;
             this.InstalledTimer.Tick += new System.EventHandler(this.InstalledTimer_Tick);
             // 
             // ConnectionStringBuilderForm

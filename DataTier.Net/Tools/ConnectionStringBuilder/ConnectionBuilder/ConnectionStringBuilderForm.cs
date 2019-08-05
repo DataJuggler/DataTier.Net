@@ -85,13 +85,13 @@ namespace ConnectionBuilder
                 if (button.Enabled)
                 {
                     // Setup Enabled button
-                    button.ForeColor = Color.White;
+                    button.ForeColor = Color.Black;
                     button.BackgroundImage = Properties.Resources.WoodButtonWidth640;
                 }
                 else
                 {
                     // Setup Disabled button
-                    button.ForeColor = Color.DimGray;
+                    button.ForeColor = Color.DarkGray;
                     button.BackgroundImage = Properties.Resources.WoodButtonWidth640Disabled;
                 }
             }
@@ -236,7 +236,7 @@ namespace ConnectionBuilder
                         this.UseCustomKeyCheckBox.Editable = true;
                         this.UseCustomKeyCheckBox.Enabled = true;
                         this.EncryptAndCopyButton.Enabled = true;
-                        this.EncryptAndCopyButton.ForeColor = Color.White;
+                        this.EncryptAndCopyButton.ForeColor = Color.Black;
                         this.EncryptAndCopyButton.BackgroundImage = Properties.Resources.WoodButtonWidth640;
                     }
                     else
