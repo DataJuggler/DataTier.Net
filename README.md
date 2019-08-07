@@ -1,5 +1,9 @@
 ## Welcome To DataTier.Net Home
 
+Update 8.7.2019: 
+I just create a new video 'Build A Complete C# / SQL Server Application In 15 Minutes With DataTier.Net' (thanks to NuGet magic).
+https://www.youtube.com/watch?v=nS7pKZvOaSM
+
 DataTier.Net is an all stored procedure alternative to Entity Framework. 
 
 After cloning, Rebuild the entire solution. You may need to set DataTier.Net.Client project as the Startup Project:
