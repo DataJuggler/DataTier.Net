@@ -339,7 +339,7 @@ namespace DataTierClient.Forms
             this.CurrentProjectLabel.BackColor = System.Drawing.Color.Transparent;
             this.CurrentProjectLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CurrentProjectLabel.ForeColor = System.Drawing.Color.DimGray;
-            this.CurrentProjectLabel.Location = new System.Drawing.Point(89, 20);
+            this.CurrentProjectLabel.Location = new System.Drawing.Point(94, 20);
             this.CurrentProjectLabel.Name = "CurrentProjectLabel";
             this.CurrentProjectLabel.Size = new System.Drawing.Size(169, 18);
             this.CurrentProjectLabel.TabIndex = 71;
@@ -350,11 +350,11 @@ namespace DataTierClient.Forms
             // 
             this.ProjectLabel.AutoSize = true;
             this.ProjectLabel.BackColor = System.Drawing.Color.Transparent;
-            this.ProjectLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProjectLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProjectLabel.ForeColor = System.Drawing.Color.LemonChiffon;
             this.ProjectLabel.Location = new System.Drawing.Point(21, 19);
             this.ProjectLabel.Name = "ProjectLabel";
-            this.ProjectLabel.Size = new System.Drawing.Size(72, 18);
+            this.ProjectLabel.Size = new System.Drawing.Size(78, 18);
             this.ProjectLabel.TabIndex = 70;
             this.ProjectLabel.Text = "Project:";
             this.ProjectLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
