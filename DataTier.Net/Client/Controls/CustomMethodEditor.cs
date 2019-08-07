@@ -1277,8 +1277,7 @@ namespace DataTierClient.Controls
                 // local (default to true)
                 bool enabled = true;
                 bool orderByVisible = false;
-                Control orderByControl = null;
-
+                
                 // If the MethodInfo object exists
                 if (this.HasMethodInfo)
                 {
@@ -1305,6 +1304,13 @@ namespace DataTierClient.Controls
                     this.ParameterFieldControl.Enabled = (MethodInfo.ParameterType == ParameterTypeEnum.Single_Field);
                     this.ParameterFieldControl.Editable = (MethodInfo.ParameterType == ParameterTypeEnum.Single_Field);
 
+                    // if this is a Load By method
+                    if (MethodInfo.MethodType == MethodTypeEnum.Load_By)
+                    {
+                        // set to true
+                        orderByVisible = true;
+                    }
+
                     // if Using a Custom Reader, the only order by available, is the ReaderFieldSet, and it has to also be
                     // an order by field set.
                     if ((MethodInfo.HasCustomReader) && (MethodInfo.CustomReader.HasFieldSet) && (MethodInfo.CustomReader.FieldSet.HasFields) && (MethodInfo.CustomReader.FieldSet.OrderByMode))
@@ -1320,14 +1326,7 @@ namespace DataTierClient.Controls
                         EditOrderByFieldSetsButton.Enabled = true;    
                     }
                     else
-                    {
-                        // if this is a Load By method
-                        if (MethodInfo.MethodType == MethodTypeEnum.Load_By)
-                        {
-                            // set to true
-                            orderByVisible = true;
-                        }
-                       
+                    { 
                         // if the value for orderByVisible is true
                         if (orderByVisible)
                         {
@@ -1339,6 +1338,7 @@ namespace DataTierClient.Controls
                                 EditOrderByFieldSetsButton.Visible = false;
 
                                 // Show OrderByFieldControl
+                                OrderByTypeControl.Visible = true;
                                 OrderByFieldControl.Visible = true;
                                 OrderByFieldControl.Editable = true;
                             }
@@ -1347,6 +1347,7 @@ namespace DataTierClient.Controls
                                 // Show the FieldSet and Button
                                 OrderByFieldSetControl.Editable = true;
                                 OrderByFieldSetControl.Enabled = true;
+                                OrderByTypeControl.Visible = false;
                                 EditOrderByFieldSetsButton.Visible = true;
                                 EditOrderByFieldSetsButton.Enabled = true;
                             }
@@ -1355,6 +1356,7 @@ namespace DataTierClient.Controls
                                 // Hide all controls
                                 OrderByFieldControl.Visible = false;
                                 OrderByFieldSetControl.Visible = false;
+                                OrderByTypeControl.Visible = false;
                                 EditOrderByFieldSetsButton.Visible = false;
                             }
                         }
@@ -1363,6 +1365,7 @@ namespace DataTierClient.Controls
                             // Hide all controls
                             OrderByFieldControl.Visible = false;
                             OrderByFieldSetControl.Visible = false;
+                            OrderByTypeControl.Visible = false;
                             EditOrderByFieldSetsButton.Visible = false;
                         }
                     }
@@ -1375,6 +1378,9 @@ namespace DataTierClient.Controls
                 this.UseCustomReaderCheckBox.Editable = enabled;
                 this.CustomReaderControl.Editable = enabled;
                 this.EditReadersButton.Enabled = enabled;
+
+                // refresh everything
+                Refresh();  
             }
             #endregion
             
