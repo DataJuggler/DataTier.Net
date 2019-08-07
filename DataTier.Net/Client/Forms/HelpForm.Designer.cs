@@ -18,7 +18,6 @@ namespace DataTierClient.Forms
         
         #region Private Variables
         private System.ComponentModel.IContainer components = null;
-        private Controls.HelpControl HelpControl;
         #endregion
         
         #region Methods
@@ -45,35 +44,37 @@ namespace DataTierClient.Forms
             /// </summary>
             private void InitializeComponent()
             {
-                System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HelpForm));
-                this.HelpControl = new HelpControl();
-                this.SuspendLayout();
-                // 
-                // HelpControl
-                // 
-                this.HelpControl.BackColor = System.Drawing.Color.Linen;
-                this.HelpControl.Dock = System.Windows.Forms.DockStyle.Fill;
-                this.HelpControl.Location = new System.Drawing.Point(0, 0);
-                this.HelpControl.Name = "HelpControl";
-                this.HelpControl.Size = new System.Drawing.Size(595, 502);
-                this.HelpControl.TabIndex = 0;
-                // 
-                // HelpForm
-                // 
-                this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-                this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-                this.ClientSize = new System.Drawing.Size(595, 502);
-                this.Controls.Add(this.HelpControl);
-                this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-                this.Name = "HelpForm";
-                this.Text = "DataTier.Net Code Generation Toolkit Help";
-                this.ResumeLayout(false);
-                
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HelpForm));
+            this.HelpControl = new DataTierClient.Controls.HelpControl();
+            this.SuspendLayout();
+            // 
+            // HelpControl
+            // 
+            this.HelpControl.BackColor = System.Drawing.Color.Linen;
+            this.HelpControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.HelpControl.Location = new System.Drawing.Point(0, 0);
+            this.HelpControl.Name = "HelpControl";
+            this.HelpControl.Size = new System.Drawing.Size(712, 488);
+            this.HelpControl.TabIndex = 0;
+            // 
+            // HelpForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(712, 488);
+            this.Controls.Add(this.HelpControl);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "HelpForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "DataTier.Net Code Generation Toolkit Help";
+            this.ResumeLayout(false);
+
             }
-            #endregion
-            
         #endregion
-        
+
+        #endregion
+
+        private HelpControl HelpControl;
     }
     #endregion
 
