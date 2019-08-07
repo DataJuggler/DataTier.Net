@@ -485,6 +485,10 @@ namespace DataTierClient.Forms
 				{
 				    // default value
 				    this.BuildComplete = false;
+
+                    // Update for version 1.2.3: Clearing the list box and hiding the StoredProcedures link button
+                    StatusListBox.Items.Clear();
+                    StoredProcedureSQLButton.Visible = false;
 				
 					// safeguard
 					if ((this.OpenProject == null) || (this.OpenProject.Databases == null) || (this.OpenProject.Databases.Count < 1))
