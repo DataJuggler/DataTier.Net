@@ -9,6 +9,8 @@ Update 8.9.2019: I just learned how to use Benchmark.Net, and my first test Data
 
 This test was very simple and just loads 1 record out of a 1 record table (setting).
 
+I will post the BenchMark.Net project to Git Hub soon.
+
 If I include the creation of the Gateway for DataTier.Net and the DBContext for Entity Framework, DataTier.Net jumps from 14 to 19 and EF jumps fromm 195 to over 700.
 
 I will publish some more results after I get some sleep. I suspect EF might win when multiple records are saved since Save is one at a time in DataTier.Net and multiple records can be saved in 1 call with EF.
