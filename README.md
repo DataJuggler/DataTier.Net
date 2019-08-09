@@ -7,7 +7,7 @@ Update 8.9.2019: I just learned how to use Benchmark.Net, and my first test Data
 | LoadDTNSetting |  14.24 us | 0.0181 us | 0.0169 us |
 |  LoadEFSetting | 195.93 us | 0.5839 us | 0.5462 us |
 
-This test was very simple and just loads 1 record out of a 1 record table (setting).
+This test was very simple and just loads 1 record out of a 1 record table (Setting).
 
 I will post the BenchMark.Net project to Git Hub soon.
 
