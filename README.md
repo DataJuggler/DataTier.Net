@@ -23,10 +23,12 @@ https://www.youtube.com/watch?v=nS7pKZvOaSM
 
 DataTier.Net is an all stored procedure alternative to Entity Framework. 
 
-After cloning, Rebuild the entire solution. You may need to set DataTier.Net.Client project as the Startup Project:
+After cloning, right click the solution and select 'Manage Nuget Packages for Solution'. Then click the 'Restore' button.
+
+Rebuild the solution. You may need to set DataTier.Net.Client project as the Startup Project:
 DataTier.Net\DataTier.Net\Client
 
-I may have Debug > Start building the Connection String Builder form. Haven't made sure yet.
+I also included a new Connection String Builder form.
 
 Please visit my YouTube channel to see the latest videos on DataTier.Net.
 
