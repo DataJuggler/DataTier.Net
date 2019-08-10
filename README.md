@@ -1,15 +1,34 @@
 ## Welcome To DataTier.Net Home
 
+Update 8.9.2019: I just learned how to use Benchmark.Net, and my first test DataTier.Net blew away Entity Framework.
+
+|         Method |      Mean |     Error |    StdDev |
+|--------------- |----------:|----------:|----------:|
+| LoadDTNSetting |  14.24 us | 0.0181 us | 0.0169 us |
+|  LoadEFSetting | 195.93 us | 0.5839 us | 0.5462 us |
+
+This test was very simple and just loads 1 record out of a 1 record table (Setting).
+
+I will post the BenchMark.Net project to Git Hub soon.
+
+If I include the creation of the Gateway for DataTier.Net and the DBContext for Entity Framework, DataTier.Net jumps from 14 to 19 and EF jumps fromm 195 to over 700.
+
+I will publish some more results after I get some sleep. I suspect EF might win when multiple records are saved since Save is one at a time in DataTier.Net and multiple records can be saved in 1 call with EF.
+
+I lost my day job yesterday, but this makes me feel better. 
+
 Update 8.7.2019: 
 I just create a new video 'Build A Complete C# / SQL Server Application In 15 Minutes With DataTier.Net' (thanks to NuGet magic).
 https://www.youtube.com/watch?v=nS7pKZvOaSM
 
 DataTier.Net is an all stored procedure alternative to Entity Framework. 
 
-After cloning, Rebuild the entire solution. You may need to set DataTier.Net.Client project as the Startup Project:
+After cloning, right click the solution and select 'Manage Nuget Packages for Solution'. Then click the 'Restore' button.
+
+Rebuild the solution. You may need to set DataTier.Net.Client project as the Startup Project:
 DataTier.Net\DataTier.Net\Client
 
-I may have Debug > Start building the Connection String Builder form. Haven't made sure yet.
+I also included a new Connection String Builder form.
 
 Please visit my YouTube channel to see the latest videos on DataTier.Net.
 
