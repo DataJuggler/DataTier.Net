@@ -2099,7 +2099,7 @@ namespace DataTierClient.Forms
                                             // before saving, we must see if we can find this field in the existingTable
 
                                             // If the existingTable object exists and it is not a new table
-                                            if ((NullHelper.Exists(existingTable)) && (!existingTable.IsNew))
+                                            if ((NullHelper.Exists(existingTable)) && (!existingTable.IsNew) && (ListHelper.HasOneOrMoreItems(existingTable.Fields)))
                                             {
                                                 // attempt to find the existingField
                                                 DTNField existingField = existingTable.Fields.FirstOrDefault(x => x.FieldName == field.FieldName);
@@ -2158,32 +2158,25 @@ namespace DataTierClient.Forms
 
                                 // Update 12.28.2018: We must load the fields from the database for this table, and
                                 //                              test if any fields have been dropped from the database.
-                                if ((NullHelper.Exists(existingTable)) && (!existingTable.IsNew))
-                                {
-                                    // load the fields for the existing table from the database
-                                    existingTable.Fields = Gateway.LoadDTNFieldsForTable(existingTable.TableId);
-
-                                    // if there are one or more fields
-                                    if (ListHelper.HasOneOrMoreItems(existingTable.Fields))
+                                if ((NullHelper.Exists(existingTable)) && (!existingTable.IsNew) && (ListHelper.HasOneOrMoreItems(existingTable.Fields)))
+                                {  
+                                    // iterate the fields for this table
+                                    foreach (DTNField existingField in existingTable.Fields)
                                     {
-                                        // iterate the fields for this table
-                                        foreach (DTNField existingField in existingTable.Fields)
+                                        // we must check that each of these fields exists in the dataTable now, else it was dropped
+                                        DataField field = dataTable.Fields.FirstOrDefault(x => x.FieldName == existingField.FieldName);
+
+                                        // if the field does not exist
+                                        if (NullHelper.IsNull(field))
                                         {
-                                            // we must check that each of these fields exists in the dataTable now, else it was dropped
-                                            DataField field = dataTable.Fields.FirstOrDefault(x => x.FieldName == existingField.FieldName);
+                                            // perform the delete
+                                            bool deleted = Gateway.DeleteDTNField(existingField.FieldId);
 
-                                            // if the field does not exist
-                                            if (NullHelper.IsNull(field))
+                                            // if the value for deleted is false
+                                            if (!deleted)
                                             {
-                                                // perform the delete
-                                                bool deleted = Gateway.DeleteDTNField(existingField.FieldId);
-
-                                                // if the value for deleted is false
-                                                if (!deleted)
-                                                {
-                                                    // not saved
-                                                    saved = false;
-                                                }
+                                                // not saved
+                                                saved = false;
                                             }
                                         }
                                     }

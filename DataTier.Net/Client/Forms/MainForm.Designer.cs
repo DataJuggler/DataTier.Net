@@ -41,7 +41,6 @@ namespace DataTierClient.Forms
         private System.Windows.Forms.Label QuickStartLabel;
         private System.Windows.Forms.PictureBox ClassRoomImage;
         private PanelExtender BottomPanel;
-        private System.Windows.Forms.Button YouTubeButton;
         private PanelExtender BottomRightMarginpanel;
         private PanelExtender TopPanel;
         private System.Windows.Forms.Button ManageDataButton;
@@ -80,7 +79,6 @@ namespace DataTierClient.Forms
             this.Images = new System.Windows.Forms.ImageList(this.components);
             this.MainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.ToolTipManager = new System.Windows.Forms.ToolTip(this.components);
-            this.YouTubeButton = new System.Windows.Forms.Button();
             this.MainPanel = new DataTierClient.Objects.PanelExtender();
             this.RunSetupButton = new System.Windows.Forms.Label();
             this.StoredProcedureSQLButton = new System.Windows.Forms.Label();
@@ -106,6 +104,8 @@ namespace DataTierClient.Forms
             this.QuickStartLabel = new System.Windows.Forms.Label();
             this.ClassRoomImage = new System.Windows.Forms.PictureBox();
             this.ManageDataButton = new System.Windows.Forms.Button();
+            this.YouTubeButtonRightMarginPanel = new DataTierClient.Objects.PanelExtender();
+            this.YouTubeButton = new System.Windows.Forms.Button();
             this.MainPanel.SuspendLayout();
             this.RightContainer.SuspendLayout();
             this.BottomPanel.SuspendLayout();
@@ -143,22 +143,6 @@ namespace DataTierClient.Forms
             this.MainStatusStrip.Size = new System.Drawing.Size(900, 22);
             this.MainStatusStrip.TabIndex = 2;
             this.MainStatusStrip.Text = "statusStrip1";
-            // 
-            // YouTubeButton
-            // 
-            this.YouTubeButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("YouTubeButton.BackgroundImage")));
-            this.YouTubeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.YouTubeButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.YouTubeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.YouTubeButton.Location = new System.Drawing.Point(244, 0);
-            this.YouTubeButton.Name = "YouTubeButton";
-            this.YouTubeButton.Size = new System.Drawing.Size(128, 64);
-            this.YouTubeButton.TabIndex = 66;
-            this.ToolTipManager.SetToolTip(this.YouTubeButton, "Click here to launch your browser to watch the DataTier.Net Intro Movie");
-            this.YouTubeButton.UseVisualStyleBackColor = true;
-            this.YouTubeButton.Click += new System.EventHandler(this.YouTubeButton_Click);
-            this.YouTubeButton.MouseEnter += new System.EventHandler(this.Button_Enter);
-            this.YouTubeButton.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
             // MainPanel
             // 
@@ -387,6 +371,7 @@ namespace DataTierClient.Forms
             // BottomPanel
             // 
             this.BottomPanel.Controls.Add(this.YouTubeButton);
+            this.BottomPanel.Controls.Add(this.YouTubeButtonRightMarginPanel);
             this.BottomPanel.Controls.Add(this.BottomRightMarginpanel);
             this.BottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.BottomPanel.Location = new System.Drawing.Point(0, 587);
@@ -543,6 +528,30 @@ namespace DataTierClient.Forms
             this.ManageDataButton.MouseEnter += new System.EventHandler(this.Button_Enter);
             this.ManageDataButton.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
+            // YouTubeButtonRightMarginPanel
+            // 
+            this.YouTubeButtonRightMarginPanel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.YouTubeButtonRightMarginPanel.Location = new System.Drawing.Point(356, 0);
+            this.YouTubeButtonRightMarginPanel.Name = "YouTubeButtonRightMarginPanel";
+            this.YouTubeButtonRightMarginPanel.Size = new System.Drawing.Size(16, 64);
+            this.YouTubeButtonRightMarginPanel.TabIndex = 67;
+            // 
+            // YouTubeButton
+            // 
+            this.YouTubeButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("YouTubeButton.BackgroundImage")));
+            this.YouTubeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.YouTubeButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.YouTubeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.YouTubeButton.Location = new System.Drawing.Point(228, 0);
+            this.YouTubeButton.Name = "YouTubeButton";
+            this.YouTubeButton.Size = new System.Drawing.Size(128, 64);
+            this.YouTubeButton.TabIndex = 68;
+            this.ToolTipManager.SetToolTip(this.YouTubeButton, "Click here to launch your browser to watch the DataTier.Net Intro Movie");
+            this.YouTubeButton.UseVisualStyleBackColor = true;
+            this.YouTubeButton.Click += new System.EventHandler(this.YouTubeButton_Click);
+            this.YouTubeButton.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.YouTubeButton.MouseLeave += new System.EventHandler(this.Button_Leave);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -574,6 +583,8 @@ namespace DataTierClient.Forms
         private System.Windows.Forms.Button ViewPDFButton2;
         private System.Windows.Forms.Button ViewWordButton2;
         private System.Windows.Forms.Label UsersGuideLabel;
+        private System.Windows.Forms.Button YouTubeButton;
+        private PanelExtender YouTubeButtonRightMarginPanel;
     }
     #endregion
 
