@@ -161,14 +161,21 @@ namespace DataTierClient.Controls
                 // Set this to true
                 this.Loading = true;
 
+                // If the projectFolder string exists
+                if ((TextHelper.Exists(projectFolder)) && (projectFolder.Length > 80))
+                {
+                    // abbreviate
+                    projectFolder = projectFolder.Substring(1, 80) + "...";
+                }
+
                 // store the args
                 this.ProjectFileManager = projectFileManager;
                 this.ProjectFolder = projectFolder;
                 this.DeleteFiles = deleteFiles;
-
+                
                 // Set the projectRootPath
-                this.ProjectFolderLabel.Text = "Project Folder: " + projectFolder;                    
-
+                this.ProjectFolderLabel.Text = "Project Folder: " + projectFolder;          
+                
                 // Remove everything
                 this.CodeItemsListBox.Items.Clear();
 

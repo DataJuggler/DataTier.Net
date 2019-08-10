@@ -2021,6 +2021,7 @@ namespace DataTierClient.Forms
                 // locals
                 Exception error = null;
                 DTNTable existingTable = null;
+                List<DTNTable> existingTables = null;
 
                 // if the DataManager exists and has one or more Databases
                 if ((this.HasDataManager) && (ListHelper.HasOneOrMoreItems(this.DataManager.Databases)) && (this.HasOpenProject))
@@ -2030,6 +2031,9 @@ namespace DataTierClient.Forms
 
                     // Now the tables are loaded when the project is opened
                     List<DTNTable> tables = this.OpenProject.Tables;
+
+                    // load the existingTables
+                    existingTables = gateway.LoadDTNTablesForProject(OpenProject.ProjectId);
 
                     // The tables above stay loaded in memory, so we still have the values for Exclude 
                     // which is going to be reset after the values are set
@@ -2051,16 +2055,19 @@ namespace DataTierClient.Forms
 
                                 // before saving we must see if we can find this table 
 
-                                // if the tables collection exists
-                                if (NullHelper.Exists(tables)) 
+                                // if the existingTables collection exists
+                                if (NullHelper.Exists(existingTables)) 
                                 {
                                     // now attempt to find this table in the existing tables
-                                    existingTable  = tables.FirstOrDefault(x => x.TableName == table.TableName);    
+                                    existingTable  = existingTables.FirstOrDefault(x => x.TableName == table.TableName);    
                                 }
 
                                 // If the existingTable object exists
                                 if (NullHelper.Exists(existingTable))
                                 {
+                                    // load the existing Fields
+                                    existingTable.Fields = gateway.LoadDTNFieldsForTable(existingTable.TableId);
+
                                     // preserve the Exclude value
                                     table.Exclude = existingTable.Exclude;
 
@@ -2184,7 +2191,7 @@ namespace DataTierClient.Forms
                             }
 
                             // Update 12.29.2018: We must check if any tables have been dropped. 
-                            List<DTNTable> deleteTables = tables.Where(x => x.FoundInLatestSchema == false).ToList();
+                            List<DTNTable> deleteTables = existingTables.Where(x => x.FoundInLatestSchema == false).ToList();
 
                             // If the deleteTables collection exists and has one or more items
                             if (ListHelper.HasOneOrMoreItems(deleteTables))
