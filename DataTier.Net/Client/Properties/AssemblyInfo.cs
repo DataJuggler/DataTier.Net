@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("C# Data Tier Creator, Code Generation Utility & Stored Procedure Creator.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Data Juggler")]
-[assembly: AssemblyProduct("DataTier.Net - Shared as part of the Data Juggler Shared Repo")]
+[assembly: AssemblyProduct("DataTier.Net - Shared free and open source with the 'Do Whatever You Want' license.")]
 [assembly: AssemblyCopyright("Copyright © Data Juggler 2018 - 2019 Shared open source at github.com/DataJuggler")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -29,5 +29,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("1.2.5.0")]
-[assembly: AssemblyFileVersion("1.2.5.0")]
+[assembly: AssemblyVersion("1.2.6.0")]
+[assembly: AssemblyFileVersion("1.2.6.0")]

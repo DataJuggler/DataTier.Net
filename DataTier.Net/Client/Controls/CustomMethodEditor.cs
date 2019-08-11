@@ -1304,6 +1304,18 @@ namespace DataTierClient.Controls
                     this.ParameterFieldControl.Enabled = (MethodInfo.ParameterType == ParameterTypeEnum.Single_Field);
                     this.ParameterFieldControl.Editable = (MethodInfo.ParameterType == ParameterTypeEnum.Single_Field);
 
+                    // Update 8.11.2019: The ParametersControl.LabelText needs to reflect the correct case, singular or plural
+                    if (MethodInfo.ParameterType == ParameterTypeEnum.Field_Set)
+                    {
+                        // change to plural
+                        ParametersControl.LabelText = "Parameters:";
+                    }
+                    else
+                    {
+                        // change to singular
+                        ParametersControl.LabelText = "Parameter:";
+                    }
+
                     // if this is a Load By method
                     if (MethodInfo.MethodType == MethodTypeEnum.Load_By)
                     {
