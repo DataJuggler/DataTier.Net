@@ -395,7 +395,7 @@ namespace DataTierClient.Controls
                         // required
                         break;
 
-                    case "Update Project":
+                    case "Update Projects":
 
                         // Call the UpdateProjectButton_Click event
                         UpdateProjectButton_Click(this, null);
