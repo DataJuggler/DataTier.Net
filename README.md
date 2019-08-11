@@ -1,5 +1,8 @@
 ## Welcome To DataTier.Net Home
 
+Update 8.11.2019: I just published a new video on YouTube: 'How To Create Custom Methods With DataTier.Net':
+https://www.youtube.com/watch?v=655uS4wU_aU 
+
 Update 8.9.2019: I just learned how to use Benchmark.Net, and my first test DataTier.Net blew away Entity Framework.
 
 |         Method |      Mean |     Error |    StdDev |
