@@ -1,24 +1,51 @@
 ## Welcome To DataTier.Net Home
 
-Update 8.9.2019: I just learned how to use Benchmark.Net, and my first test DataTier.Net blew away Entity Framework.
+<img src=https://github.com/DataJuggler/SharedRepo/blob/master/Shared/Images/DataTier.Net%20Ad.png>
 
-|         Method |      Mean |     Error |    StdDev |
-|--------------- |----------:|----------:|----------:|
-| LoadDTNSetting |  14.24 us | 0.0181 us | 0.0169 us |
-|  LoadEFSetting | 195.93 us | 0.5839 us | 0.5462 us |
+<b>Setup Instructions - 3 Easy Steps</b>
 
-This test was very simple and just loads 1 record out of a 1 record table (Setting).
+<img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/3%20Easy%20Steps.png>
+(screen shot of DataTier.Net setup screen).
 
-I will post the BenchMark.Net project to Git Hub soon.
+<br/>
+<b>Step 1: Create DataTier.Net Database</b><br/>
+1. Create a new database in SQL Server Management Studio named DataTier.Net.Database<br/>
+2. Check the box 'DataTier.Net Database Has Been Created:<br/>
 
-If I include the creation of the Gateway for DataTier.Net and the DBContext for Entity Framework, DataTier.Net jumps from 14 to 19 and EF jumps fromm 195 to over 700.
+<img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Step%201%20-%20Part%202.png />
 
-I will publish some more results after I get some sleep. I suspect EF might win when multiple records are saved since Save is one at a time in DataTier.Net and multiple records can be saved in 1 call with EF.
+As the instructions indicate, this will launch SQL Server Management Studio. You may be prompted to login.<br/>
 
-I lost my day job yesterday, but this makes me feel better. 
+Execute the SQL script to install DataTier.Net tables and stored procedures.<br/>
+
+<b>Geeky Note:</b> DataTier.Net was built using DataTier.Net.<br/>
+
+<b> Step 2: Install DataTier.Net Project Templates Installer VSIX<br/><br/>
+  
+You can install the project Template into Visual Studio 2017 and / or 2019 (recommended).<br/>
+
+<img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Install%20Data%20Tier.Net%20Templates.png><br/>
+
+<b>Step 3: Build Your Connection String and Setup App.config<br/>
+  
+<img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Build%20Connection%20String.png><br/>
+
+Build your connection string, and once enabled click the Install Conn String & Setup App.config button.<br/>
+
+You will be shown a message box you must restart Visual Studio to complete the setup.<br/>
+
+Open the project again in Visual Studio and run the project. You should see Test Database Connection Passed.
+
+<img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Setup%20Complete.png>
+
+Now you are ready to create your own DataTier.Net projects.
+
+
+Update 8.11.2019: I just published a new video on YouTube: 'How To Create Custom Methods With DataTier.Net':
+https://www.youtube.com/watch?v=655uS4wU_aU 
 
 Update 8.7.2019: 
-I just create a new video 'Build A Complete C# / SQL Server Application In 15 Minutes With DataTier.Net' (thanks to NuGet magic).
+I just created a new video 'Build A Complete C# / SQL Server Application In 15 Minutes With DataTier.Net' (thanks to NuGet magic).
 https://www.youtube.com/watch?v=nS7pKZvOaSM
 
 DataTier.Net is an all stored procedure alternative to Entity Framework. 
