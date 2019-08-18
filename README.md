@@ -36,7 +36,7 @@ You will be shown a message box you must restart Visual Studio to complete the s
 
 Open the project again in Visual Studio and run the project. You should see Test Database Connection Passed.
 
-
+<img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Setup%20Complete.png>
 
 Now you are ready to create your own DataTier.Net projects.
 
