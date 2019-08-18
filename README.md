@@ -18,9 +18,9 @@ As the instructions indicate, this will launch SQL Server Management Studio. You
 
 Execute the SQL script to install DataTier.Net tables and stored procedures.<br/>
 
-<b>Geeky Note:</b> DataTier.Net was built using DataTier.Net.<br/>
+<b>Geeky Note:</b> DataTier.Net was built using DataTier.Net.
 
-<b> Step 2: Install DataTier.Net Project Templates Installer VSIX<br/><br/>
+<b> Step 2: Install DataTier.Net Project Templates Installer VSIX
   
 You can install the project Template into Visual Studio 2017 and / or 2019 (recommended).<br/>
 
