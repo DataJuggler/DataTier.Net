@@ -28,8 +28,17 @@ You can install the project Template into Visual Studio 2017 and / or 2019 (reco
 
 <b>Step 3: Build Your Connection String and Setup App.config<br/>
   
+<img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Build%20Connection%20String.png><br/>
+
+Build your connection string, and once enabled click the Install Conn String & Setup App.config button.<br/>
+
+You will be shown a message box you must restart Visual Studio to complete the setup.<br/>
+
+Open the project again in Visual Studio and run the project. You should see Test Database Connection Passed.
 
 
+
+Now you are ready to create your own DataTier.Net projects.
 
 
 Update 8.11.2019: I just published a new video on YouTube: 'How To Create Custom Methods With DataTier.Net':
