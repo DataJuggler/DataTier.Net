@@ -1,5 +1,7 @@
 ## Welcome To DataTier.Net Home
 
+<img src=https://github.com/DataJuggler/SharedRepo/blob/master/Shared/Images/DataTier.Net%20Ad.png>
+
 Update 8.11.2019: I just published a new video on YouTube: 'How To Create Custom Methods With DataTier.Net':
 https://www.youtube.com/watch?v=655uS4wU_aU 
 
