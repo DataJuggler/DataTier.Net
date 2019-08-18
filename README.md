@@ -40,7 +40,7 @@ Open the project again in Visual Studio and run DataTier.Net. You should see Tes
 
 Now you are ready to create your own DataTier.Net projects.
 
-<b>Anatomy of a DataTier.Net Projecgt</b>
+<b>Anatomy of a DataTier.Net Project</b>
 
 <img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Data%20Model.jpg>
 
