@@ -22,10 +22,12 @@ Execute the SQL script to install DataTier.Net tables and stored procedures.<br/
 
 <b> Step 2: Install DataTier.Net Project Templates Installer VSIX<br/><br/>
   
-You can install the project Template to Visual Studio 2017 or 2019 (recommended).<br/>
+You can install the project Template into Visual Studio 2017 and / or 2019 (recommended).<br/>
 
+<img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Install%20Data%20Tier.Net%20Templates.png><br/>
 
-
+<b>Step 3: Build Your Connection String and Setup App.config<br/>
+  
 
 
 
