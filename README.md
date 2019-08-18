@@ -44,14 +44,14 @@ Now you are ready to create your own DataTier.Net projects.
 
 <img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Data%20Model.jpg>
 
-There are four projects that make up a DataTier.Net project:
+There are four projects that make up a DataTier.Net project:<br/>
 
 <img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Anatomy%20of%20a%20DataTier.Net%20Project.png>
 
-<b>1. Application Logic Component</b>Contains the Controller Manager and Managers for each table and Data Operations (stored procedure calls).
-<b>2. Data Access Component</b>Contains the Data Manager and Managers for each table which contain Data Readers and Data Writers.
-<b>3. Gateway</b>Contains methods for Find, Load, Save and Delete plus any Custom Methods you create.
-<b>4. Object Library</b>The object library uses partial classes and one is created for each table or view in your database.
+<b>1. Application Logic Component</b>Contains the Controller Manager and Managers for each table and Data Operations (stored procedure calls).<br/>
+<b>2. Data Access Component</b>Contains the Data Manager and Managers for each table which contain Data Readers and Data Writers.<br/>
+<b>3. Gateway</b>Contains methods for Find, Load, Save and Delete plus any Custom Methods you create.<br/>
+<b>4. Object Library</b>The object library uses partial classes and one is created for each table or view in your database.<br/>
 
 For more information read the DataTier.Net User's Guide located in the Class Room folder if you clone or online here:
 https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/DataTier.Net%20Users%20Guide.pdf
