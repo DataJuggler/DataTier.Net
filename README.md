@@ -7,6 +7,7 @@
 <img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/3%20Easy%20Steps.png>
 (screen shot of DataTier.Net setup screen).
 
+<br/>
 <b>Step 1: Create DataTier.Net Database</b>
 1. Create a new database in SQL Server Management Studio named DataTier.Net.Database
 2. Check the box 'DataTier.Net Database Has Been Created:
