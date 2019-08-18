@@ -8,21 +8,21 @@
 (screen shot of DataTier.Net setup screen).
 
 <br/>
-<b>Step 1: Create DataTier.Net Database</b>
-1. Create a new database in SQL Server Management Studio named DataTier.Net.Database
-2. Check the box 'DataTier.Net Database Has Been Created:
+<b>Step 1: Create DataTier.Net Database</b><br/>
+1. Create a new database in SQL Server Management Studio named DataTier.Net.Database<br/>
+2. Check the box 'DataTier.Net Database Has Been Created:<br/>
 
 <img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Step%201%20-%20Part%202.png />
 
-As the instructions indicate, this will launch SQL Server Management Studio. You may be prompted to login.
+As the instructions indicate, this will launch SQL Server Management Studio. You may be prompted to login.<br/>
 
-Execute the SQL script to install DataTier.Net tables and stored procedures.
+Execute the SQL script to install DataTier.Net tables and stored procedures.<br/>
 
-Geeky Note: DataTier.Net was built using DataTier.Net.
+<b>Geeky Note:</b> DataTier.Net was built using DataTier.Net.<br/>
 
-<b> Step 2: Install DataTier.Net Project Templates Installer VSIX
+<b> Step 2: Install DataTier.Net Project Templates Installer VSIX<br/><br/>
   
-You can install the project Template to Visual Studio 2017 or 2019 (recommended).
+You can install the project Template to Visual Studio 2017 or 2019 (recommended).<br/>
 
 
 
