@@ -51,7 +51,14 @@ There are four projects that make up a DataTier.Net project:<br/>
 <b>1. Application Logic Component</b>Contains the Controller Manager and Managers for each table and Data Operations (stored procedure calls).<br/>
 <b>2. Data Access Component</b> Contains the Data Manager and Managers for each table which contain Data Readers and Data Writers.<br/>
 <b>3. Gateway</b> Contains methods for Find, Load, Save and Delete plus any Custom Methods you create.<br/>
-<b>4. Object Library</b> The object library uses partial classes and one is created for each table or view in your database.<br/>
+<b>4. Object Library</b> The object library uses partial classes and one is created for each table or view in your database:<br/>
+
+<img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Partial%20Classes.png>
+
+<b>Do not add any code to the data class or it will be overwritten next time you build with DataTier.Net.</b>
+The file .data.cs is code generated every time you build with DataTier.Net. 
+
+The .business.cs is only created if it does not already exist, so you are free to add any custom methods or properties to the business class.
 
 For more information read the DataTier.Net User's Guide located in the Class Room folder if you clone or online here:
 https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/DataTier.Net%20Users%20Guide.pdf
