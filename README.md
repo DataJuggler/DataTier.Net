@@ -63,6 +63,22 @@ The .business.cs is only created if it does not already exist, so you are free t
 For more information read the DataTier.Net User's Guide located in the Class Room folder if you clone or online here:
 https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/DataTier.Net%20Users%20Guide.pdf
 
+--
+
+Update 8.19.2019: I am learning Blazor Preview 8 and Dot Net Core, and quickly found out all of my connection strings stopped working due to the lack of an app.config or web.config.
+
+My first thought was to add this Microsoft.Extensions.Configuration & Microsoft.Extensions.Configuration.JSon, but this added about a dozen depenency Nuget packages, so instead I am making a breaking change for the Version 2 of the project templates.
+
+The breaking change is going to be when you create a Gateway object, you must pass an enivonment variable name for the Connection String.
+
+I learned how to create Environment variables today, and I have to admit I felt kind of stupid all the years I commented out connection strings for Dev, Test & Production machines.
+
+It is 2019, and like or not Dot Net Core is the future (mostly not for me so far, but I still like 8 tracks).
+
+I am going to finish my project in Blazor for my website before I make the new change.
+
+So far Blazor is pretty cool, but Dot Net Core takes some getting used to.
+
 Update 8.11.2019: I just published a new video on YouTube: 'How To Create Custom Methods With DataTier.Net':
 https://www.youtube.com/watch?v=655uS4wU_aU 
 
