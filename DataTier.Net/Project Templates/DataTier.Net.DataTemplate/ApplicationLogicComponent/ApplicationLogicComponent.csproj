@@ -10,7 +10,8 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>$safeprojectname$</RootNamespace>
     <AssemblyName>$safeprojectname$</AssemblyName>
-    <ApplicationIcon></ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>2.0</OldToolsVersion>
@@ -73,13 +74,6 @@
     <Compile Include="Connection\AuthenticationManager.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Security\BooleanHelper.cs" />
-    <Compile Include="Security\ConfigurationHelper.cs" />
-    <Compile Include="Security\CryptographyManager.cs" />
-    <Compile Include="Security\TextHelper.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Security\Read Me.txt" />    
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccessComponent\DataAccessComponent.csproj">
@@ -94,6 +88,7 @@
   <ItemGroup>
     <Folder Include="Helpers\" />
     <Folder Include="Properties\DataSources\" />
+    <Content Include="Read Me.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

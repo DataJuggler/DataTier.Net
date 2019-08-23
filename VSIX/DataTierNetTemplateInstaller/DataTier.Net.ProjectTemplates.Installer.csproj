@@ -53,11 +53,15 @@
     <Compile Include="DataTierNetTemplateInstallerPackage.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DataTier.Net Quick Start.docx">
+    <Content Include="ProjectTemplates\DataTier.Net.ClassLibrary.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="ProjectTemplates\DataTier.Net.ClassLibrary.zip">
+    <Content Include="DataTier.Net Users Guide.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Release Notes.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>

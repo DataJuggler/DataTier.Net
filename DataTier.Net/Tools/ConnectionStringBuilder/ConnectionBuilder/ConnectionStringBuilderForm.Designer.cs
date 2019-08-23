@@ -447,6 +447,7 @@ namespace ConnectionBuilder
             this.CopiedImage.BackColor = System.Drawing.Color.Transparent;
             this.CopiedImage.BackgroundImage = global::ConnectionBuilder.Properties.Resources.Copied;
             this.CopiedImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.CopiedImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.CopiedImage.Location = new System.Drawing.Point(12, 546);
             this.CopiedImage.Name = "CopiedImage";
             this.CopiedImage.Size = new System.Drawing.Size(120, 68);
@@ -493,6 +494,7 @@ namespace ConnectionBuilder
             this.Name = "ConnectionStringBuilderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Connection String Builder";
+            this.Activated += new System.EventHandler(this.ConnectionStringBuilderForm_Activated);
             ((System.ComponentModel.ISupportInitialize)(this.StatusImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CopiedImage)).EndInit();
             this.ResumeLayout(false);

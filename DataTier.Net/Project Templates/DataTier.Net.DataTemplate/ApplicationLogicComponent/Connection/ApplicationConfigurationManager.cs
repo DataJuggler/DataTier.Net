@@ -1,8 +1,8 @@
 
 #region using statements
 
+using DataJuggler.Core.UltimateHelper;
 using $safeprojectname$.Logging;
-using $safeprojectname$.Security;
 using System;
 using System.Configuration;
 using System.IO;
@@ -329,9 +329,9 @@ namespace $safeprojectname$.Connection
                 }
 
                 // Encrypt Each Property
-                string encryptedPassword = CryptographyManager.EncryptString(applicationPassword);
-                string encryptedUserName = CryptographyManager.EncryptString(applicationUserName);
-                string encryptedSavePassword = CryptographyManager.EncryptString(savePassword.ToString());
+                string encryptedPassword = CryptographyHelper.EncryptString(applicationPassword);
+                string encryptedUserName = CryptographyHelper.EncryptString(applicationUserName);
+                string encryptedSavePassword = CryptographyHelper.EncryptString(savePassword.ToString());
 
                 // Save Login Information
                 this.UpdateKey("ApplicationPassword", encryptedPassword);

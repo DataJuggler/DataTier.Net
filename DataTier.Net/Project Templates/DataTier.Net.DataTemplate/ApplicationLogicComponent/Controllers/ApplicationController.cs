@@ -37,20 +37,24 @@ namespace $safeprojectname$.Controllers
         private SystemController systemController;
         private DataBridgeManager dataBridge;
         private Exception exception;
+        private string connectionName;
         #endregion
 
         #region Constructors
 
-        #region Default Constructor
-        /// <summary>
-        /// Creates a new ApplicationController object.
-        /// </summary>
-        public ApplicationController()
-        {
-            // Perform Initializations
-            Init();
-        }
-        #endregion
+            #region Default Constructor
+            /// <summary>
+            /// Creates a new ApplicationController object.
+            /// </summary>
+            public ApplicationController(string connectionName = "")
+            {
+                // store the arg
+                this.ConnectionName = connectionName;
+
+                // Perform Initializations
+                Init();
+            }
+            #endregion
 
         #endregion
 
@@ -128,7 +132,7 @@ namespace $safeprojectname$.Controllers
                 this.LoginManager.Configuration.Read();
 
                 // Create DataBridgeManager object (needed for child controllers).
-                this.DataBridge = new DataBridgeManager(this.LoginManager, this.ErrorProcessor);
+                this.DataBridge = new DataBridgeManager(this.LoginManager, this.ErrorProcessor, this.ConnectionName);
 
                 // Create ControllerManager
                 this.ControllerManager = new ControllerManager(this.ErrorProcessor, this);
@@ -152,6 +156,17 @@ namespace $safeprojectname$.Controllers
             {
                 get { return loginManager; }
                 set { loginManager = value; }
+            }
+            #endregion
+
+            #region ConnectionName
+            /// <summary>
+            /// This property gets or sets the value for 'ConnectionName'.
+            /// </summary>
+            public string ConnectionName
+            {
+                get { return connectionName; }
+                set { connectionName = value; }
             }
             #endregion
 
@@ -243,6 +258,23 @@ namespace $safeprojectname$.Controllers
                 set { errorProcessor = value; }
             }
             #endregion\
+
+            #region HasConnectionName
+            /// <summary>
+            /// This property returns true if the 'ConnectionName' exists.
+            /// </summary>
+            public bool HasConnectionName
+            {
+                get
+                {
+                    // initial value
+                    bool hasConnectionName = (!String.IsNullOrEmpty(this.ConnectionName));
+                    
+                    // return value
+                    return hasConnectionName;
+                }
+            }
+            #endregion
 
             #region HasDataBridge
             /// <summary>

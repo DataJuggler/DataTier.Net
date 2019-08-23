@@ -46,14 +46,8 @@
       <Folder Name="Properties" TargetFolderName="Properties">
         <ProjectItem ReplaceParameters="true" TargetFileName="AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
         <Folder Name="DataSources" TargetFolderName="DataSources" />
-      </Folder>      
-      <Folder Name="Security" TargetFolderName="Security">
-        <ProjectItem ReplaceParameters="true" TargetFileName="BooleanHelper.cs">BooleanHelper.cs</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="ConfigurationHelper.cs">ConfigurationHelper.cs</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="CryptographyManager.cs">CryptographyManager.cs</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="TextHelper.cs">TextHelper.cs</ProjectItem>
-        <ProjectItem ReplaceParameters="false" TargetFileName="Read Me.txt">Read Me.txt</ProjectItem>
-      </Folder>
+      </Folder>  
+      <ProjectItem ReplaceParameters="false" TargetFileName="Read Me.txt">Read Me.txt</ProjectItem>          
     </Project>
-  </TemplateContent>
+  </TemplateContent>  
 </VSTemplate>

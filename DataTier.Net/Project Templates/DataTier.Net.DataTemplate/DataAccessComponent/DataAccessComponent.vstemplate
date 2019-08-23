@@ -50,6 +50,7 @@
           <ProjectItem ReplaceParameters="true" TargetFileName="TemporaryUpdateProcedure.cs">TemporaryUpdateProcedure.cs</ProjectItem>
         </Folder>
       </Folder>
+      <ProjectItem ReplaceParameters="false" TargetFileName="Read Me.txt">Read Me.txt</ProjectItem>
     </Project>
   </TemplateContent>
 </VSTemplate>

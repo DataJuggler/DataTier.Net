@@ -1,0 +1,77 @@
+Starting this today. Probably should have started this 15 years ago.
+
+8.22.2019: Update for version 1.3.0 - DataTier.Net now works with Dot Net Core / Blazor.
+
+The new change is still experimental, so please be aware breaking changes may come as new releases
+of Blazor come out.
+
+To use DataTier.Net with Blazor, you must use the preview release of System.Data.SQLClient:
+
+DataJuggler.Core.UltimateHelper must be upgraded to at least version 1.3.5.
+This includes a new EnvironmentVariableHelper.cs class.
+
+This class is brand new, and I fully expect I am going to have to research security for cases where a
+website may be running under a different credentials or users. For now just ensure the Environment Variable
+is avaible to the web server (IIS is all I know. Cross Platform sounds like an elevated running shoe to me).
+
+This is my Blazor references for the Data Juggler website I am building in Blazor.
+
+ <ItemGroup>
+    <PackageReference Include="DataJuggler.Core.UltimateHelper" Version="1.3.5" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.7.0-preview8.19405.3" />
+  </ItemGroup>
+
+Blazor Rocks!
+To me Blazor is so awesome being able to use a For Each Loop with HTML. 
+Maybe MVC had this and I just didn't know, but compared to an Asp.Net repeater this is a dream come true.
+
+    // and you can write C# comments. 
+    // Never gain to you have to write like this ------>         <!-- No More HTML Comments! :) -->
+    @foreach (Product product in products)
+    {
+        <b>@product.Name</b><br/>
+        <div class="movedown8 moveleft240 maxwidth60Percent">
+            @product.Description
+            <a href=@product.ProjectUrl>@product.ProjectUrl</a>
+        </div><br />
+        <img class="productimage @product.CssClass" src=@product.ImageUrl />
+        <div class="clear margintopneg56"></div>
+    }
+
+Instructions for Dot Net Core / Blazor Environment Variables
+
+1. Build your connection string to the database for your Blazor project
+2. Create an Environment Variable for the connection string you created in step 1.
+3. When you create an instance of the Gateway, pass in the EnvironmentVariableName like this:
+
+This file is the ProductService.cs from the Data Juggler website I am building in Blazor:
+
+using DataGateway;
+using ObjectLibrary.BusinessObjects;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+/// <summary>
+/// This method returns a list of products
+/// </summary>
+/// <returns></returns>
+namespace DataJugglerWeb.Data.Services
+{
+    public class ProductService
+    {
+        public static Task<List<Product>> GetProducts()
+        {
+            // set the connectionName
+            string connectionName = "DataJugglerWebConnection";
+
+            // Create a new instance of a 'Gateway' object, and set the connectionName
+            Gateway gateway = new Gateway(connectionName);
+
+            // load the products
+            List<Product> products = gateway.LoadProducts();
+
+            // return products
+            return Task.FromResult(products);
+        }
+    }
+}

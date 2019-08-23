@@ -1,6 +1,7 @@
 
 #region using statements
 
+using DataJuggler.Core.UltimateHelper;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,7 +9,6 @@ using DataAccessComponent.DataManager;
 using $safeprojectname$.Logging;
 using $safeprojectname$.Exceptions;
 using $safeprojectname$.Controllers;
-using $safeprojectname$.Security;
 
 #endregion
 
@@ -67,42 +67,56 @@ namespace $safeprojectname$.Connection
                     // If connection is not set 
                     if(String.IsNullOrEmpty(dataManager.DataConnector.ConnectionString))
                     {
-                        // Read Configuration File
-                        this.Configuration.Read();
-
-                        // If the configuration is valid
-                        if (this.Configuration.IsValid)
+                        // if the connectionName is set
+                        if (TextHelper.Exists(dataManager.ConnectionName))
                         {
-                            // if the ConnectionString exists
-                            if (this.Configuration.HasConnectionString)
-                            {
-                                // Set the connection string using Integrated Secrity (Windows Authentication)
-                                dataManager.DataConnector.ConnectionString = this.Configuration.ConnectionString;
-                            }
-                            else
-                            {
-                                // set the server
-                                string serverName = this.Configuration.DatabaseServer;
+                            // Set the ConnectionString (requires DataJuggler.Core.UltimateHelper version 1.3.5 or greater)
+                            dataManager.DataConnector.ConnectionString = EnvironmentVariableHelper.GetEnvironmentVariableValue(dataManager.ConnectionName);
+                        }
+                        else
+                        {
+                            // this is for environments using a web.config or app.config.
 
-                                // set the databaseName
-                                string databaseName = this.Configuration.DatabaseName;
+                            // For Dot Net Core / Blazor or any new projects, Environment Variables are now the
+                            // recommended way to store connection strings.
 
-                                // If integrated security is set to true
-                                if (this.Configuration.IntegratedSecurity)
+                            // Read Configuration File
+                            this.Configuration.Read();
+
+                            // If the configuration is valid
+                            if (this.Configuration.IsValid)
+                            {
+                                // if the ConnectionString exists
+                                if (this.Configuration.HasConnectionString)
                                 {
                                     // Set the connection string using Integrated Secrity (Windows Authentication)
-                                    dataManager.DataConnector.ConnectionString = dataManager.DataConnector.BuildConnectionString(serverName, databaseName);
+                                    dataManager.DataConnector.ConnectionString = this.Configuration.ConnectionString;
                                 }
                                 else
                                 {
-                                    // set the userName
-                                    string userName = this.Configuration.DatabaseUserName;
+                                    // set the server
+                                    string serverName = this.Configuration.DatabaseServer;
 
-                                    // set the password
-                                    string password = this.Configuration.DatabasePassword;
+                                    // set the databaseName
+                                    string databaseName = this.Configuration.DatabaseName;
 
-                                    // build the connectionstring for Sql Server Authentication
-                                    dataManager.DataConnector.ConnectionString = dataManager.DataConnector.BuildConnectionString(serverName, databaseName, userName, password);
+                                    // If integrated security is set to true
+                                    if (this.Configuration.IntegratedSecurity)
+                                    {
+                                        // Set the connection string using Integrated Secrity (Windows Authentication)
+                                        dataManager.DataConnector.ConnectionString = dataManager.DataConnector.BuildConnectionString(serverName, databaseName);
+                                    }
+                                    else
+                                    {
+                                        // set the userName
+                                        string userName = this.Configuration.DatabaseUserName;
+
+                                        // set the password
+                                        string password = this.Configuration.DatabasePassword;
+
+                                        // build the connectionstring for Sql Server Authentication
+                                        dataManager.DataConnector.ConnectionString = dataManager.DataConnector.BuildConnectionString(serverName, databaseName, userName, password);
+                                    }
                                 }
                             }
                         }
@@ -111,7 +125,8 @@ namespace $safeprojectname$.Connection
                     // check if database is already connected
                     if (dataManager.DataConnector.State == System.Data.ConnectionState.Open)
                     {
-                        // close connection and reopen (there should not be any open connection here.
+                        // close connection and reopen (there should not be any open connections here)
+                        // I have been thinking of a bulk insert feature in the future, but that is not for this method
                         // To Do: Log Error 'Database Connection Was Already Open'
                         dataManager.DataConnector.Close();
                     }

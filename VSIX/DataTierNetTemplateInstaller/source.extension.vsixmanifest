@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="DataTier.Net.3dbb77d7-0d21-4537-bdb3-ead8588087f7" Version="1.1.6" Language="en-US" Publisher="Data Juggler" />
+        <Identity Id="DataTier.Net.3dbb77d7-0d21-4537-bdb3-ead8588087f7" Version="1.3.0" Language="en-US" Publisher="Data Juggler" />
         <DisplayName>DataTier.Net Project Templates</DisplayName>
-        <Description xml:space="preserve">This project installs the DataTier.Net project templates into Visual Studio 2017 or 2019.</Description>
+        <Description xml:space="preserve">This is the latest version of the templates and they are being modified to work with Dot Net Core. There are a few changes that need to be tested to make sure the new ConnectionName environment variable method works.
+
+This is all brand new code so I can make DataTier.Net work with Dot Net Core / Blazor. 
+
+To work with Blazor you must use the Preview version of System.Data.SQLClient for now:
+
+  &lt;PackageReference Include="System.Data.SqlClient" Version="4.7.0-preview8.19405.3" /&gt;
+  &lt;/ItemGroup&gt;</Description>
         <MoreInfo>https://github.com/DataJuggler/DataTier.Net</MoreInfo>
         <License>License.txt</License>
-        <GettingStartedGuide>DataTier.Net Quick Start.docx</GettingStartedGuide>
+        <GettingStartedGuide>DataTier.Net Users Guide.docx</GettingStartedGuide>
+        <ReleaseNotes>Release Notes.txt</ReleaseNotes>
         <Icon>DataTier.Net.ico</Icon>
         <PreviewImage>DataTier.Net.png</PreviewImage>
         <Tags>DataTier.Net</Tags>
+        <Preview>true</Preview>
     </Metadata>
     <Installation>
         <InstallationTarget Version="[15.0,17.0)" Id="Microsoft.VisualStudio.Community"  />

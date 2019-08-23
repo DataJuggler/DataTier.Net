@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="StoredProcedureManager\StoredProcedureSQL\UpdateProcPermissions.sql" />
+    <Content Include="Read Me.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ObjectLibrary\ObjectLibrary.csproj">

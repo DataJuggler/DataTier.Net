@@ -30,14 +30,23 @@ namespace $safeprojectname$
         
         #region Private Variables
         private ApplicationController appController;
+        private string connectionName;
         #endregion
         
         #region Constructor
         /// <summary>
-        /// The Gateway to the FlyingElephantWeb.
+        /// Create a new instance of a Gateway object.
         /// </summary>
-        public Gateway()
+        /// <param name="connectionName">Optional. If supplied DataTier.Net will read an environment variable
+        /// by the name to determine the ConnectionString to use.</param>
+        /// If not supplied, the ConnectionString must still be read from an app.config or web.config.
+        /// At some point in the future, the ConnectionString in an app.config or web.config will no longer be supported.
+        /// This will probably be when Dot Net 5 comes out, which I think is towards the end of the year in 2020.
+        public Gateway(string connectionName = "")
         {
+            // store the ConnectionName
+            this.ConnectionName = connectionName;
+
             // Perform Initializations for this object
             Init();
         }
@@ -147,7 +156,7 @@ namespace $safeprojectname$
             private void Init()
             {
                 // Create Application Controller
-                this.AppController = new ApplicationController();
+                this.AppController = new ApplicationController(ConnectionName);
             }
             #endregion
 
@@ -165,6 +174,17 @@ namespace $safeprojectname$
                 set { appController = value; }
             }
             #endregion
+
+            #region ConnectionName
+            /// <summary>
+            /// This property gets or sets the value for 'ConnectionName'.
+            /// </summary>
+            public string ConnectionName
+            {
+                get { return connectionName; }
+                set { connectionName = value; }
+            }
+            #endregion
             
             #region HasAppController
             /// <summary>
@@ -179,6 +199,23 @@ namespace $safeprojectname$
                     
                     // return value
                     return hasAppController;
+                }
+            }
+            #endregion
+
+            #region HasConnectionName
+            /// <summary>
+            /// This property returns true if the 'ConnectionName' exists.
+            /// </summary>
+            public bool HasConnectionName
+            {
+                get
+                {
+                    // initial value
+                    bool hasConnectionName = (!String.IsNullOrEmpty(this.ConnectionName));
+                    
+                    // return value
+                    return hasConnectionName;
                 }
             }
             #endregion

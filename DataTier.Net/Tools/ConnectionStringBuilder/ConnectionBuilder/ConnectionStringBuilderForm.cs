@@ -25,6 +25,7 @@ namespace ConnectionBuilder
         
         #region Private Variables
         private ConnectionInfo connectionInfo;
+        private bool formActivated;
         #endregion
         
         #region Constructor
@@ -119,6 +120,31 @@ namespace ConnectionBuilder
             }
             #endregion
                                   
+            #region ConnectionStringBuilderForm_Activated(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when Connection String Builder Form _ Activated
+            /// </summary>
+            private void ConnectionStringBuilderForm_Activated(object sender, EventArgs e)
+            {
+                // if the Form has not been activated yet
+                if (!FormActivated)
+                {
+                    // Set the Server Name if set
+                    DatabaseServerControl.Text = ConfigurationHelper.ReadAppSetting("ServerName");
+
+                    // if there is Text
+                    if (DatabaseServerControl.HasText)
+                    {
+                        // Change the focus to the DatabaseName
+                        DatabaseNameControl.SetFocusToTextBox();
+                    }
+                }
+
+                // Set to true
+                FormActivated = true;
+            }
+            #endregion
+            
             #region CopiedTimer_Tick(object sender, EventArgs e)
             /// <summary>
             /// event is fired when Copied Timer _ Tick
@@ -570,6 +596,17 @@ namespace ConnectionBuilder
             }
             #endregion
             
+            #region FormActivated
+            /// <summary>
+            /// This property gets or sets the value for 'FormActivated'.
+            /// </summary>
+            public bool FormActivated
+            {
+                get { return formActivated; }
+                set { formActivated = value; }
+            }
+            #endregion
+            
             #region HasConnectionInfo
             /// <summary>
             /// This property returns true if this object has a 'ConnectionInfo'.
@@ -585,8 +622,8 @@ namespace ConnectionBuilder
                     return hasConnectionInfo;
                 }
             }
-            #endregion
-            
+        #endregion
+
         #endregion
 
     }

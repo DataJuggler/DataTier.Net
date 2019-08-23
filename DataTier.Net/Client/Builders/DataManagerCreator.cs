@@ -295,13 +295,22 @@ namespace DataTierClient.Builders
                 WriteLine("/// </summary>");
                 
                 // Get Constructor Line
-                string constructorLine = "public DataManager()";
+                string constructorLine = "public DataManager(string connectionName = \"\")";
                 
                 // Write constructorLine Line
                 WriteLine(constructorLine);
 
                 // Write Open Bracket
                 WriteOpenBracket(true);
+
+                // Write comment
+                WriteComment("Store the ConnectionName arg");
+
+                // Write line to store the arg
+                WriteLine("this.ConnectionName = connectionName;");
+
+                // Write a blank line
+                WriteLine();
                 
                 // Write Comment Perform Initializations For This Object.
                 WriteComment("Perform Initializations For This Object.");
@@ -426,6 +435,9 @@ namespace DataTierClient.Builders
 
                 // Write ErrorProcessor and ParentController
                 WriteLine("private DataConnector dataConnector;");
+
+                // Update 8.22.2019 - Version 1.3.0: Dot Net Core / Blazor compatibility
+                WriteLine("private string connectionName;");
                 
                 // Write DataTable Private Variables
                 if(this.DataTables != null)
@@ -517,6 +529,10 @@ namespace DataTierClient.Builders
 
                 // Write Property For DataConnector
                 WriteProperty("DataConnector", "dataConnector", "DataConnector");
+
+                // Update 8.22.2019 - Version 1.3.0: Dot Net Core / Blazor compatibility
+                // Write Property For ConnectionName
+                WriteProperty("ConnectionName", "connectionName", "string");
                 
                 // Now Create A Property For Each Controller
                 if(this.DataTables != null)

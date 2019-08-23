@@ -1,6 +1,7 @@
 
 #region using statements
 
+using DataJuggler.Core.UltimateHelper;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +10,6 @@ using $safeprojectname$.Connection;
 using $safeprojectname$.Logging;
 using $safeprojectname$.Exceptions;
 using $safeprojectname$.DataOperations;
-using $safeprojectname$.Security;
 using $safeprojectname$.Controllers;
 using DataAccessComponent.DataManager;
 using ObjectLibrary.BusinessObjects;
@@ -36,17 +36,19 @@ namespace $safeprojectname$.DataBridge
         private ErrorHandler errorProcessor;
         private AuthenticationManager loginManager;
         private Exception exception;
+        private string connectionName;
         #endregion
 
         #region Constructor
         /// <summary>
         /// Creates a new instance of a DataBridgeManager object.
         /// </summary>
-        public DataBridgeManager(AuthenticationManager loginManagerArg, ErrorHandler errorProcessorArg)
+        public DataBridgeManager(AuthenticationManager loginManagerArg, ErrorHandler errorProcessorArg, string connectionName = "")
         {
             // Set Properties
             this.LoginManager = loginManagerArg;
             this.ErrorProcessor = errorProcessorArg;
+            this.ConnectionName = connectionName;
 
             // Perform Initializations
             Init();
@@ -84,7 +86,7 @@ namespace $safeprojectname$.DataBridge
             private void Init()
             {
                 // Create DataManager(s)
-                this.DataManager = new DataManager();
+                this.DataManager = new DataManager(ConnectionName);
 
                 // Create DataOperations
                 this.DataOperations = new DataOperationsManager(this.DataManager);
@@ -93,7 +95,7 @@ namespace $safeprojectname$.DataBridge
 
             #region PerformDataOperation()
             /// <summary>
-            /// Performs an operation that required a connection to the databsae.
+            /// Performs an operation that required a connection to the database.
             /// This method uses a delegate to execute the method so that this is the 
             /// only place in the application a connection to the database is opened.
             /// </summary>
@@ -187,6 +189,17 @@ namespace $safeprojectname$.DataBridge
             }
             #endregion
 
+            #region ConnectionName
+            /// <summary>
+            /// This property gets or sets the value for 'ConnectionName'.
+            /// </summary>
+            public string ConnectionName
+            {
+                get { return connectionName; }
+                set { connectionName = value; }
+            }
+            #endregion
+
             #region DataManager
             /// <summary>
             /// This object controls all data access
@@ -235,6 +248,23 @@ namespace $safeprojectname$.DataBridge
                 set { errorProcessor = value; }
             }
             #endregion\
+
+            #region HasConnectionName
+            /// <summary>
+            /// This property returns true if the 'ConnectionName' exists.
+            /// </summary>
+            public bool HasConnectionName
+            {
+                get
+                {
+                    // initial value
+                    bool hasConnectionName = (!String.IsNullOrEmpty(this.ConnectionName));
+                    
+                    // return value
+                    return hasConnectionName;
+                }
+            }
+            #endregion
 
             #region HasDataManager
             /// <summary>
