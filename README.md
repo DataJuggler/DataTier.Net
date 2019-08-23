@@ -64,6 +64,43 @@ For more information read the DataTier.Net User's Guide located in the Class Roo
 https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/DataTier.Net%20Users%20Guide.pdf
 
 --
+Update 8.23.2019: I am excited to announce the release of DataTier.Net version 1.3.0.
+
+This version works with either .Net Framework or .Net Core. I have only tested with Blazor Preview 8, and you must use tthe pre release preview of System.Data.SQLClient 4.7.0+ for it work with Blazor.
+
+For .Net Framework projects, 4.6.1 of System.Data.SqlClient is installed when you add the Nuget package DataJuggler.Net.
+
+If you have previously installed the project templates, you will need to uninstall and reinstall the templates as they have been updated.
+
+When you create a DataTier.Net.ClassLibrary project, you now must add two Nuget packages.
+
+1. DataJuggler.Core.UltimateHelper to Application Logic Component
+2. DataJuggler.Net to Data Access Component.
+
+I did try to make the project templates install the Nuget packages automatically and never could get it to work.
+
+Instructions for .Net Core / Blazor, or if you prefer to use Environment Variables over Connection Strings in an app.config or web.confg:
+
+Create an Environment Variable and give it a name for your project.
+
+Example: DataJugglerWebConnection
+
+In Windows 10 Search Box type: Edit Environment Variables For Your Account
+
+Create an Environment Variable and set the value to the connection string you want to use.
+
+Then when you create an instance of the Gateway, pass in the connection name:
+
+    // set the connectionName
+    string connectionName = "DataJugglerWebConnection";
+
+    // Create a new instance of a 'Gateway' object, and set the connectionName
+    Gateway gateway = new Gateway(connectionName);
+
+Note: you must use DataJuggler.Core.UltimateHelper version 1.3.5 or greater, as this includes a new class EnvironmentVariableHelper.cs.
+
+Blazor tutorials and videos are coming soon, I just wanted to publish a release with DataTier.Net working for .Net Framework and .Net Core.
+--
 
 Update 8.19.2019: I am learning Blazor Preview 8 and Dot Net Core, and quickly found out all of my connection strings stopped working due to the lack of an app.config or web.config.
 
