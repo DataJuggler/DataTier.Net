@@ -74,7 +74,7 @@ https://youtu.be/uJ30y6JHYKs
 
 Update 8.23.2019: I am excited to announce the release of DataTier.Net version 1.3.0.
 
-This version works with either .Net Framework or .Net Core. I have only tested with Blazor Preview 8, and you must use tthe pre release preview of System.Data.SQLClient 4.7.0+ for it work with Blazor.
+This version works with either .Net Framework or .Net Core. I have only tested with Blazor Preview 8, and you must use tthe pre release preview of System.Data.SQLClient 4.7.0+ for it to work with Blazor.
 
 For .Net Framework projects, 4.6.1 of System.Data.SqlClient is installed when you add the Nuget package DataJuggler.Net.
 
