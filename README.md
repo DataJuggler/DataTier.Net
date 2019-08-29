@@ -105,7 +105,7 @@ Then when you create an instance of the Gateway, pass in the connection name:
     // Create a new instance of a 'Gateway' object, and set the connectionName
     Gateway gateway = new Gateway(connectionName);
 
-Note: you must use DataJuggler.Core.UltimateHelper version 1.3.5 or greater, as this includes a new class EnvironmentVariableHelper.cs.
+Note: you must use Nuget Package DataJuggler.Core.UltimateHelper version 1.3.5 or greater, as this includes a new class EnvironmentVariableHelper.cs.
 
 Blazor tutorials and videos are coming soon, I just wanted to publish a release with DataTier.Net working for .Net Framework and .Net Core.
 --
