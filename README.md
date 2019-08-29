@@ -64,6 +64,14 @@ For more information read the DataTier.Net User's Guide located in the Class Roo
 https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/DataTier.Net%20Users%20Guide.pdf
 
 --
+Update 8.29.2019: I created two short videos today:
+
+DataTier.Net 101 - Class #2 - How To Create Enumerations
+https://youtu.be/vzVAiiulyUs
+
+DataTier.Net 101 - Class #3 - How To Delete A Table
+https://youtu.be/uJ30y6JHYKs
+
 Update 8.23.2019: I am excited to announce the release of DataTier.Net version 1.3.0.
 
 This version works with either .Net Framework or .Net Core. I have only tested with Blazor Preview 8, and you must use tthe pre release preview of System.Data.SQLClient 4.7.0+ for it work with Blazor.
