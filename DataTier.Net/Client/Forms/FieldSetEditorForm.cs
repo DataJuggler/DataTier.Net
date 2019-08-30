@@ -56,6 +56,17 @@ namespace DataTierClient.Forms
             }
         #endregion
 
+            #region SetupForOrderByMode(DTNTable table, FieldSet fieldSet = null)
+            /// <summary>
+            /// This method prepares the FieldSetEditor control to be shown in OrderByMode
+            /// </summary>
+            public void SetupForOrderByMode(DTNTable table, FieldSet fieldSet = null)
+            {
+                // Setup the control
+                this.FieldSetEditor.SetupForOrderByMode(table, fieldSet);
+            }
+            #endregion
+
         #endregion
     }
     #endregion

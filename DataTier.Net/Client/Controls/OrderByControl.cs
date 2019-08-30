@@ -74,6 +74,9 @@ namespace DataTierClient.Controls
                 // initial value
                 int index = -1;
 
+                // local
+                int largeWord = 12;
+
                 // Get the Hash
                 string tempHash = GetFieldsHash();
 
@@ -106,6 +109,13 @@ namespace DataTierClient.Controls
                                     // Setup this control
                                     FieldControl1.Text = field.FieldName;
                                     FieldControl1.Visible = true;
+
+                                    // if this is a wide field
+                                    if (field.FieldName.Length > largeWord)
+                                    {
+                                        // Increase the width of the control
+                                        FieldControl1.Width = 168 + (12 * (field.FieldName.Length - largeWord));
+                                    }
                                     
                                     // required
                                     break;
@@ -115,6 +125,13 @@ namespace DataTierClient.Controls
                                     // Setup this control
                                     FieldControl2.Text = field.FieldName;
                                     FieldControl2.Visible = true;
+
+                                     // if this is a wide field
+                                    if (field.FieldName.Length > largeWord)
+                                    {
+                                        // Increase the width of the control
+                                        FieldControl2.Width = 168 + (12 * (field.FieldName.Length - largeWord));
+                                    }
                                 
                                     // required
                                     break;
@@ -125,6 +142,13 @@ namespace DataTierClient.Controls
                                     FieldControl3.Text = field.FieldName;
                                     FieldControl3.Visible = true;
 
+                                    // if this is a wide field
+                                    if (field.FieldName.Length > largeWord)
+                                    {
+                                        // Increase the width of the control
+                                        FieldControl3.Width = 168 + (12 * (field.FieldName.Length - largeWord));
+                                    }
+
                                     // required
                                     break;
 
@@ -133,6 +157,13 @@ namespace DataTierClient.Controls
                                     // Setup this control
                                     FieldControl4.Text = field.FieldName;
                                     FieldControl4.Visible = true;
+
+                                    // if this is a wide field
+                                    if (field.FieldName.Length > largeWord)
+                                    {
+                                        // Increase the width of the control
+                                        FieldControl4.Width = 168 + (12 * (field.FieldName.Length - largeWord));
+                                    }
                                 
                                     // required
                                     break;

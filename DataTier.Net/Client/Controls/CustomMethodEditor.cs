@@ -631,7 +631,7 @@ namespace DataTierClient.Controls
                             FieldSetEditorForm fieldSetEditorForm = new FieldSetEditorForm();
 
                             // Setup the control
-                            fieldSetEditorForm.Setup(this.SelectedTable, false);
+                            fieldSetEditorForm.SetupForOrderByMode(this.SelectedTable);
 
                             // Show the form
                             fieldSetEditorForm.ShowDialog();
@@ -1342,15 +1342,17 @@ namespace DataTierClient.Controls
                         // if the value for orderByVisible is true
                         if (orderByVisible)
                         {
+                            // Show OrderByTypeControl
+                            OrderByTypeControl.Visible = true;
+
                             // Determine which Order By controls are visible
                             if (MethodInfo.OrderByType == OrderByTypeEnum.Single_Field)
                             {
                                 // Hide the FieldSet and Button
                                 OrderByFieldSetControl.Visible = false;
                                 EditOrderByFieldSetsButton.Visible = false;
-
-                                // Show OrderByFieldControl
-                                OrderByTypeControl.Visible = true;
+                                
+                                // Show the Order By Field Control
                                 OrderByFieldControl.Visible = true;
                                 OrderByFieldControl.Editable = true;
                             }
@@ -1359,7 +1361,7 @@ namespace DataTierClient.Controls
                                 // Show the FieldSet and Button
                                 OrderByFieldSetControl.Editable = true;
                                 OrderByFieldSetControl.Enabled = true;
-                                OrderByTypeControl.Visible = false;
+                                
                                 EditOrderByFieldSetsButton.Visible = true;
                                 EditOrderByFieldSetsButton.Enabled = true;
                             }
@@ -1368,7 +1370,6 @@ namespace DataTierClient.Controls
                                 // Hide all controls
                                 OrderByFieldControl.Visible = false;
                                 OrderByFieldSetControl.Visible = false;
-                                OrderByTypeControl.Visible = false;
                                 EditOrderByFieldSetsButton.Visible = false;
                             }
                         }

@@ -34,6 +34,8 @@ namespace DataTierClient.Controls
         #region Private Variables
         private bool parameterMode;
         private bool parameterModeReadOnly;
+        private bool orderByModeReadOnly;
+        private bool readerModeReadOnly;
         private DTNTable selectedTable;
         private FieldSet selectedFieldSet;
         private EditModeEnum editMode;
@@ -471,7 +473,7 @@ namespace DataTierClient.Controls
                 }
             }
             #endregion
-            
+                
             #region DisplaySelectedFieldSet()
             /// <summary>
             /// This method Display Selected Field Set
@@ -518,8 +520,22 @@ namespace DataTierClient.Controls
 
                     // display the values
                     this.FieldSetNameControl.Text = name;
-                    this.ParameterModeCheckBox.Checked = parameterMode;
-                    this.OrderByModeCheckBox.Checked = orderByMode;
+
+                    // if we are not in paremterModeReadOnly mode.
+                    if (!parameterModeReadOnly)
+                    {
+                        // Check the box if in ParameterMode
+                        this.ParameterModeCheckBox.Checked = parameterMode;
+                    }
+                    
+                    // if we are not in Order By Mode Read Only
+                    if (!OrderByModeReadOnly)
+                    {
+                        // Check the box if in orderByMode
+                        this.OrderByModeCheckBox.Checked = orderByMode;
+                    }
+
+                    // probably needs Read Only also, but not now
                     this.ReaderModeCheckBox.Checked = readerMode;
                 }
                 catch (Exception error)
@@ -561,6 +577,22 @@ namespace DataTierClient.Controls
                     showParameterMode = SelectedFieldSet.ParameterMode;
                     showOrderByMode = SelectedFieldSet.OrderByMode;
                     showReaderMode = SelectedFieldSet.ReaderMode;
+                }
+                else
+                {
+                    // if the value for ParameterModeReadOnly is true
+                    if (ParameterModeReadOnly)
+                    {
+                        // Show the ParameterMode Image
+                        showParameterMode = true;
+                    }
+
+                    // if the value for OrderByModeReadOnly is true
+                    if (OrderByModeReadOnly)
+                    {   
+                        // Show the OrderByMode Image
+                        showOrderByMode = true;
+                    }
                 }
 
                 // get the visible images
@@ -733,53 +765,41 @@ namespace DataTierClient.Controls
             public List<PictureBox> GetVisibleImages()
             {
                 // initial value
-                List<PictureBox> visibleImages = null;
-
-                // local
-                int count = 0;
+                List<PictureBox> visibleImages = new List<PictureBox>();
 
                 // if the value for HasSelectedFieldSet is true
                 if (HasSelectedFieldSet)
                 {
-                    // Create a new collection of 'PictureBox' objects.
-                    visibleImages = new List<PictureBox>();
-
-                    // if ParameterMode is true
-                    if (SelectedFieldSet.ParameterMode)
+                    // if ParameterMode is true or ParameterModeReadOnly is true
+                    if ((SelectedFieldSet.ParameterMode) || (ParameterModeReadOnly))
                     {
-                        // increment count
-                        count++;
-
                         // Add this image
                         visibleImages.Add(ParameterModeImage);
                     }
 
-                    // if OrderbyMode is true
-                    if (SelectedFieldSet.OrderByMode)
-                    {
-                        // increment count
-                        count++;
-
+                    // if OrderbyMode is true or OrderByModeReadOnly is true
+                    if ((SelectedFieldSet.OrderByMode) || (OrderByModeReadOnly))
+                    {  
                         // Add this image
                         visibleImages.Add(OrderByImage);
                     }
 
-                    // if OrderbyMode is true
-                    if (SelectedFieldSet.ReaderMode)
+                    // if OrderbyMode is true or ReaderModeReadOnly is true
+                    if ((SelectedFieldSet.ReaderMode) || (ReaderModeReadOnly))
                     {
-                        // increment count
-                        count++;
-
                         // Add this image
                         visibleImages.Add(ReaderModeImage);
                     }
-
-                    // if the value for count is zero
-                    if (count == 0)
-                    {
-                        // destroy
-                        visibleImages = null;
-                    }
+                }
+                else if (ParameterModeReadOnly)
+                {
+                    // Add this image
+                    visibleImages.Add(ParameterModeImage);
+                }
+                else if (OrderByModeReadOnly)
+                {
+                    // Add this image
+                    visibleImages.Add(OrderByImage);
                 }
 
                 // return value
@@ -1245,6 +1265,45 @@ namespace DataTierClient.Controls
                 this.ParameterModeReadOnly = parameterModeReadOnly;
                 this.SelectedFieldSet = fieldSet;
 
+                // Check or uncheck the checkbox
+                this.ParameterModeCheckBox.Checked = parameterMode;
+
+                // If the SelectedTable object exists
+                if (this.HasSelectedTable)
+                {
+                    // Display the Table
+                    this.TableControl.Text = this.SelectedTable.ClassName;
+
+                    // Display the fields
+                    DisplayFields();
+
+                    // if the FieldSets exist
+                    if (this.SelectedTable.HasFieldSets)
+                    {
+                        // Display the FieldSets
+                        DisplayFieldSets();    
+                    }
+                }
+
+                // Enable or disable controls
+                UIEnable();
+            }
+            #endregion
+
+            #region SetupForOrderByMode(DTNTable table, FieldSet fieldSet = null)
+            /// <summary>
+            /// This method prepares this control to be shown.
+            /// </summary>
+            public void SetupForOrderByMode(DTNTable table, FieldSet fieldSet = null)
+            {
+                // Store the args
+                this.SelectedTable = table;
+                this.OrderByModeCheckBox.Checked = true;
+                this.ParameterMode = false;
+                this.ParameterModeCheckBox.Checked = false;
+                this.OrderByModeReadOnly = true;
+                this.SelectedFieldSet = fieldSet;
+                
                 // If the SelectedTable object exists
                 if (this.HasSelectedTable)
                 {
@@ -1325,14 +1384,15 @@ namespace DataTierClient.Controls
             /// </summary>
             public void UIEnable()
             {
+                // Enable the images for ParameterMode, OrderByMode and / or ReaderMode
+                EnableModeImages();
+
                 // if we do not have a table, do not allow anything
                 if (this.HasSelectedTable)
-                {
-                    // Enable the images for ParameterMode, OrderByMode and / or ReaderMode
-                    EnableModeImages();
-
+                { 
                     // Show the image if in ParameterMode
                     this.ParameterModeCheckBox.Editable = !this.ParameterModeReadOnly;
+                    this.OrderByModeCheckBox.Editable = !this.OrderByModeReadOnly;
                     this.EditPanel.Enabled = this.IsInEditMode;
                     this.SaveCancelControl2.Visible = this.IsInEditMode;
                     this.EditModeImage.Visible = this.IsInEditMode;
@@ -1687,6 +1747,17 @@ namespace DataTierClient.Controls
             }
             #endregion
             
+            #region OrderByModeReadOnly
+            /// <summary>
+            /// This property gets or sets the value for 'OrderByModeReadOnly'.
+            /// </summary>
+            public bool OrderByModeReadOnly
+            {
+                get { return orderByModeReadOnly; }
+                set { orderByModeReadOnly = value; }
+            }
+            #endregion
+            
             #region ParameterMode
             /// <summary>
             /// This property gets or sets the value for 'ParameterMode'.
@@ -1730,6 +1801,17 @@ namespace DataTierClient.Controls
                     // return value
                     return fieldSetEditorForm;
                 }
+            }
+            #endregion
+            
+            #region ReaderModeReadOnly
+            /// <summary>
+            /// This property gets or sets the value for 'ReaderModeReadOnly'.
+            /// </summary>
+            public bool ReaderModeReadOnly
+            {
+                get { return readerModeReadOnly; }
+                set { readerModeReadOnly = value; }
             }
             #endregion
             
