@@ -199,6 +199,9 @@ namespace DataTierClient.Forms
             /// </summary>
             private void ManageDataButton_Click(object sender, EventArgs e)
             {
+                // Reload the table here because because New Tables are not saved if you don't
+                this.OpenProject.Tables = gateway.LoadDTNTablesForProject(this.OpenProject.ProjectId);
+
                 // Create a new instance of a 'DataEditorForm' object.
                 DataEditorForm dataEditor = new DataEditorForm();
 
