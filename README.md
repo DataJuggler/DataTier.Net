@@ -109,6 +109,7 @@ Note: you must use Nuget Package DataJuggler.Core.UltimateHelper version 1.3.5 o
 
 Blazor tutorials and videos are coming soon, I just wanted to publish a release with DataTier.Net working for .Net Framework and .Net Core.
 --
+Update 8.31.2019: I released version 1.3.2 today. I fixed a bug where new tables or views would not change the selected table in the Data Editor (Manage Data Button Click) unless the project had been saved and opened.
 
 Update 8.19.2019: I am learning Blazor Preview 8 and Dot Net Core, and quickly found out all of my connection strings stopped working due to the lack of an app.config or web.config.
 
