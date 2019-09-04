@@ -1294,6 +1294,12 @@ namespace DataTierClient.Forms
                                 // Field Set
                                 orderByFieldSet.Fields = FieldSetHelper.LoadFieldSetFields(method.OrderByFieldSetId);
                             }
+                            else
+                            {
+                                // Erase both values
+                                orderByField = null;
+                                orderByFieldSet = null;
+                            }
 
                             // if the table exists
                             if (NullHelper.Exists(table))
@@ -1354,6 +1360,14 @@ namespace DataTierClient.Forms
                                         // create a fetch all procedure
                                         textWriter.CreateFindProc(dataTable, true, method.ProcedureName, parameterList, method.CustomReader, orderByField, orderByFieldSet);
                                     }
+                                }
+                                else
+                                {
+                                    // erase everything
+                                    parameter = null;
+                                    parameterField = null;
+                                    parameters = null;
+                                    parameterList = null;
                                 }
                             }
                         }
