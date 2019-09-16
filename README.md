@@ -64,6 +64,45 @@ For more information read the DataTier.Net User's Guide located in the Class Roo
 https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/DataTier.Net%20Users%20Guide.pdf
 
 --
+Update 9.15.2019: 
+Major Milestone
+
+DataTier.Net 2.0.3 has been released.
+
+DataTier.Net now works with Dot Net Core!
+
+When you get started with DataTier.Net, if you are creating projects for both .Net Framework and Dot Net Core then you will need to still complete Step 2 of the setup screen. If you only want to create Dot Net Core projects, you may skip installing the .Net Framework project templates.
+
+Note: As of today you must use Visual Studio 16.3 Preview 3 to use DataTier.Net with DotNetCore.
+
+Install DataTier.Net.Core.ProjectTemplates
+
+Open a command prompect or PowerShell and execute:
+
+dotnet new -i DataJuggler.DataTier.Net.Core.ProjectTemplates
+
+You should see a message the project templates have been installed:
+
+DataJuggler.DataTier.Net.Core.ProjectTemplates      DataTier.Net.Core.ProjectTemplates      
+
+Then to create a new data library project, navigate to the folder in your command prompt:
+
+cd (full path to project directory)
+
+Example:
+
+cd c:\Projects\DotNetCoreTest
+
+c:\Projects\DotNetCoreTest>
+
+Create DataTier.Net Dot Net Core DataTier:
+
+dotnet new DataTier.Net.Core.ProjectTemplates
+
+This will create the four projects that make up a DataTier.Net data tier in the current folder.
+
+Updated documentation and videos are coming soon.
+
 Update 9.11.2019: I now have a new website: https://www.datajuggler.com 
 
 I built this site using C#, SQL Server, Blazor and DataTier.Net.
