@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <PackageId>DataJuggler.DataTier.Net.Core.ObjectLibrary</PackageId>
+    <Version>2.0.2</Version>
+    <Authors>DataJuggler</Authors>
+    <Company>DataJuggler</Company>
+    <Description>This is one of four projects that make up a DataTier.Net.Core.ProjectTemplate</Description>
+  </PropertyGroup>
+
+</Project>

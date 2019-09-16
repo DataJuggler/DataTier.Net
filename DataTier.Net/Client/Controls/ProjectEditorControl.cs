@@ -81,6 +81,21 @@ namespace DataTierClient.Controls
             }
             #endregion
             
+            #region DotNetCoreCheckBox_CheckedChanged(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when Dot Net Core Check Box _ Checked Changed
+            /// </summary>
+            private void DotNetCoreCheckBox_CheckedChanged(object sender, EventArgs e)
+            {
+                // if the value for HasSelectedProject is true
+                if (HasSelectedProject)
+                {
+                    // set the value
+                    SelectedProject.DotNetCore = DotNetCoreCheckBox.Checked;
+                }
+            }
+            #endregion
+            
             #region EditEnumerationsButton_Click(object sender, EventArgs e)
             /// <summary>
             /// This method edits the enumerations for this project.
@@ -182,6 +197,7 @@ namespace DataTierClient.Controls
                 string projectName = "";
                 string projectFolder = "";
                 int index = 0;
+                bool dotNetCore = false;
                 
                 // if the SelectedProject Exists
                 if(this.SelectedProject != null)
@@ -190,11 +206,13 @@ namespace DataTierClient.Controls
                     projectName = this.SelectedProject.ProjectName;
                     projectFolder = this.SelectedProject.ProjectFolder;
                     index = (int) this.SelectedProject.ClassFileOption;
+                    dotNetCore = SelectedProject.DotNetCore;
                 }
                 
                 // dislay values now
                 this.ProjectNameTextBox.Text = projectName;
                 this.ProjectFolderTextBox.Text = projectFolder;
+                this.DotNetCoreCheckBox.Checked = dotNetCore;
                 
                 // Refresh
                 this.Refresh();
@@ -457,7 +475,7 @@ namespace DataTierClient.Controls
         #endregion
 
         #endregion
-        
+
     }
     #endregion
     

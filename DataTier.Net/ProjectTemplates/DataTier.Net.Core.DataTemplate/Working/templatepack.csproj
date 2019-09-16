@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    
+    <PackageType>Template</PackageType>
+    <PackageVersion>2.0.3</PackageVersion>
+    <PackageId>DataJuggler.DataTier.Net.Core.ProjectTemplates</PackageId>
+    <Title>DataJuggler.DataTier.Net.Core.ProjectTemplates</Title>
+    <Authors>Data Juggler</Authors>
+    <Description>This is a new set of templates to use when creating a project for DataTier.Net targeting DotNetCore 3.0.</Description>
+    <PackageTags>DataTier.Net;DataTier.Net.Core;C#;SQL;SQLServer;EntityFrameworkAlternative;</PackageTags>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <Version>2.0.2</Version>
+    <Product>DataJuggler.DataTier.Net.Core.ProjectTemplate</Product>
+
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" />
+    <Compile Remove="**\*" />
+  </ItemGroup>
+  
+</Project>
+
+
+
+    
+    
+    
+
+
+  
+
+

@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D2F15FB0-ED7E-4B59-A64A-F623B7CDCB1B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>$safeprojectname$</RootNamespace>
+    <AssemblyName>$safeprojectname$</AssemblyName>
+    <ApplicationIcon></ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataManager\DataHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataManager\SqlParameterHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataManager\DataManager.cs" />
+    <Compile Include="DataManager\Readers\TemporaryReader.cs" />
+    <Compile Include="DataManager\Writers\TemporaryWriter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DataManager\DataConnector.cs" />
+    <Compile Include="StoredProcedureManager\DeleteProcedures\TemporaryDeleteProcedure.cs" />
+    <Compile Include="StoredProcedureManager\FetchProcedures\TemporaryFetchProcedure.cs" />
+    <Compile Include="StoredProcedureManager\InsertProcedures\TemporaryInsertProcedure.cs" />
+    <Compile Include="StoredProcedureManager\StoredProcedure.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StoredProcedureManager\StoredProcedureCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StoredProcedureManager\StoredProcedureTypeEnum.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StoredProcedureManager\UpdateProcedures\TemporaryUpdateProcedure.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="StoredProcedureManager\StoredProcedureSQL\UpdateProcPermissions.sql" />
+    <Content Include="Read Me.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ObjectLibrary\ObjectLibrary.csproj">
+      <Project>{7C4BE09B-0CCA-49BA-B716-6EAEEA22ADC9}</Project>
+      <Name>ObjectLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

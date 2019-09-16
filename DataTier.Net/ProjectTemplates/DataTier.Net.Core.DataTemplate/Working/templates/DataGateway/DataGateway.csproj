@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Version>2.0.2</Version>
+    <PackageId>DataJuggler.DataTier.Net.Core.DataGateway</PackageId>
+    <Authors>DataJuggler</Authors>
+    <Company>DataJuggler</Company>
+    <Description>This is one of the four projects that make up a DataTier.Net.Core.ProjectTemplate</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ApplicationLogicComponent\ApplicationLogicComponent.csproj" />
+    <ProjectReference Include="..\DataAccessComponent\DataAccessComponent.csproj" />
+    <ProjectReference Include="..\ObjectLibrary\ObjectLibrary.csproj" />
+  </ItemGroup>
+
+</Project>

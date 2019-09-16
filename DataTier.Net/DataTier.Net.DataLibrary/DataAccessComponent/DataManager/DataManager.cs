@@ -27,6 +27,7 @@ namespace DataAccessComponent.DataManager
 
         #region Private Variables
         private DataConnector dataConnector;
+        private string connectionName;
         private CustomReaderManager customreaderManager;
         private DTNDatabaseManager dtndatabaseManager;
         private DTNFieldManager dtnfieldManager;
@@ -46,8 +47,11 @@ namespace DataAccessComponent.DataManager
         /// <summary>
         /// Creates a new instance of a(n) 'DataManager' object.
         /// </summary>
-        public DataManager()
+        public DataManager(string connectionName = "")
         {
+            // Store the ConnectionName arg
+            this.ConnectionName = connectionName;
+
             // Perform Initializations For This Object.
             Init();
         }
@@ -91,6 +95,14 @@ namespace DataAccessComponent.DataManager
             {
                 get { return dataConnector; }
                 set { dataConnector = value; }
+            }
+            #endregion
+
+            #region ConnectionName
+            public string ConnectionName
+            {
+                get { return connectionName; }
+                set { connectionName = value; }
             }
             #endregion
 

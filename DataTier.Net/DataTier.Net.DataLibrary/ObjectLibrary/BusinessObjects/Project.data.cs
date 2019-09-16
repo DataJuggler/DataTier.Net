@@ -30,6 +30,7 @@ namespace ObjectLibrary.BusinessObjects
         private string dataWriterNamespace;
         private int dataWriterReferencesSetId;
         private DateTime dateModified;
+        private bool dotNetCore;
         private string objectFolder;
         private string objectNamespace;
         private int objectReferencesSetId;
@@ -256,6 +257,20 @@ namespace ObjectLibrary.BusinessObjects
                 set
                 {
                     dateModified = value;
+                }
+            }
+            #endregion
+
+            #region bool DotNetCore
+            public bool DotNetCore
+            {
+                get
+                {
+                    return dotNetCore;
+                }
+                set
+                {
+                    dotNetCore = value;
                 }
             }
             #endregion

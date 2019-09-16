@@ -62,6 +62,7 @@ namespace DataTierClient.Controls
             this.EnumerationsButton = new DataTierClient.Controls.TabButton();
             this.BrowseProjectFolderButton = new DataTierClient.Controls.TabButton();
             this.HelpButton = new System.Windows.Forms.Button();
+            this.DotNetCoreCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // ProjectFolderTextBox
@@ -108,7 +109,7 @@ namespace DataTierClient.Controls
             this.AutoFillChildFoldersCheckBox.Checked = true;
             this.AutoFillChildFoldersCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.AutoFillChildFoldersCheckBox.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AutoFillChildFoldersCheckBox.Location = new System.Drawing.Point(114, 125);
+            this.AutoFillChildFoldersCheckBox.Location = new System.Drawing.Point(114, 153);
             this.AutoFillChildFoldersCheckBox.Name = "AutoFillChildFoldersCheckBox";
             this.AutoFillChildFoldersCheckBox.Size = new System.Drawing.Size(199, 22);
             this.AutoFillChildFoldersCheckBox.TabIndex = 77;
@@ -119,7 +120,7 @@ namespace DataTierClient.Controls
             // 
             this.InfoLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.InfoLabel.ForeColor = System.Drawing.Color.DimGray;
-            this.InfoLabel.Location = new System.Drawing.Point(111, 150);
+            this.InfoLabel.Location = new System.Drawing.Point(111, 178);
             this.InfoLabel.Name = "InfoLabel";
             this.InfoLabel.Size = new System.Drawing.Size(459, 96);
             this.InfoLabel.TabIndex = 78;
@@ -174,10 +175,23 @@ namespace DataTierClient.Controls
             this.HelpButton.MouseEnter += new System.EventHandler(this.Button_Enter);
             this.HelpButton.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
+            // DotNetCoreCheckBox
+            // 
+            this.DotNetCoreCheckBox.AutoSize = true;
+            this.DotNetCoreCheckBox.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DotNetCoreCheckBox.Location = new System.Drawing.Point(114, 112);
+            this.DotNetCoreCheckBox.Name = "DotNetCoreCheckBox";
+            this.DotNetCoreCheckBox.Size = new System.Drawing.Size(192, 22);
+            this.DotNetCoreCheckBox.TabIndex = 82;
+            this.DotNetCoreCheckBox.Text = "Dot Net Core Project";
+            this.DotNetCoreCheckBox.UseVisualStyleBackColor = true;
+            this.DotNetCoreCheckBox.CheckedChanged += new System.EventHandler(this.DotNetCoreCheckBox_CheckedChanged);
+            // 
             // ProjectEditorControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.DotNetCoreCheckBox);
             this.Controls.Add(this.HelpButton);
             this.Controls.Add(this.BrowseProjectFolderButton);
             this.Controls.Add(this.EnumerationsButton);
@@ -194,10 +208,11 @@ namespace DataTierClient.Controls
             this.PerformLayout();
 
             }
-            #endregion
-            
         #endregion
-        
+
+        #endregion
+
+        private System.Windows.Forms.CheckBox DotNetCoreCheckBox;
     }
     #endregion
 

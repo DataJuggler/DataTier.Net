@@ -50,19 +50,20 @@ namespace DataAccessComponent.DataManager.Readers
                 int dataWriterNamespacefield = 11;
                 int dataWriterReferencesSetIdfield = 12;
                 int dateModifiedfield = 13;
-                int objectFolderfield = 14;
-                int objectNamespacefield = 15;
-                int objectReferencesSetIdfield = 16;
-                int projectFolderfield = 17;
-                int projectIdfield = 18;
-                int projectNamefield = 19;
-                int readerFolderfield = 20;
-                int readerNamespacefield = 21;
-                int readerReferencesSetIdfield = 22;
-                int storedProcedureObjectFolderfield = 23;
-                int storedProcedureObjectNamespacefield = 24;
-                int storedProcedureReferencesSetIdfield = 25;
-                int storedProcsFolderfield = 26;
+                int dotNetCorefield = 14;
+                int objectFolderfield = 15;
+                int objectNamespacefield = 16;
+                int objectReferencesSetIdfield = 17;
+                int projectFolderfield = 18;
+                int projectIdfield = 19;
+                int projectNamefield = 20;
+                int readerFolderfield = 21;
+                int readerNamespacefield = 22;
+                int readerReferencesSetIdfield = 23;
+                int storedProcedureObjectFolderfield = 24;
+                int storedProcedureObjectNamespacefield = 25;
+                int storedProcedureReferencesSetIdfield = 26;
+                int storedProcsFolderfield = 27;
 
                 try
                 {
@@ -81,6 +82,7 @@ namespace DataAccessComponent.DataManager.Readers
                     project.DataWriterNamespace = DataHelper.ParseString(dataRow.ItemArray[dataWriterNamespacefield]);
                     project.DataWriterReferencesSetId = DataHelper.ParseInteger(dataRow.ItemArray[dataWriterReferencesSetIdfield], 0);
                     project.DateModified = DataHelper.ParseDate(dataRow.ItemArray[dateModifiedfield]);
+                    project.DotNetCore = DataHelper.ParseBoolean(dataRow.ItemArray[dotNetCorefield], false);
                     project.ObjectFolder = DataHelper.ParseString(dataRow.ItemArray[objectFolderfield]);
                     project.ObjectNamespace = DataHelper.ParseString(dataRow.ItemArray[objectNamespacefield]);
                     project.ObjectReferencesSetId = DataHelper.ParseInteger(dataRow.ItemArray[objectReferencesSetIdfield], 0);

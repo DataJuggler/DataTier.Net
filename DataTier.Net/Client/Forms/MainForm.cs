@@ -573,8 +573,9 @@ namespace DataTierClient.Forms
 					// enable controls
 				    UIEnable();
 
-                    // Only launch the plane if new files were created
-                    if ((this.HasFileManager) && (FileManager.WereNewFilesCreated))
+                    // Only launch the VisualStudio Project Updater if this new files were added and this is not a DotNetCore project
+                    // This is only needed for DotNetFramework. DotNetCore adds all files by default (reason #5 DotNetCore is growing on me)
+                    if ((this.HasFileManager) && (FileManager.WereNewFilesCreated) && (!this.OpenProject.DotNetCore))
                     {
                         // include the files generated in the project.
                         IncludeProjectFiles();
