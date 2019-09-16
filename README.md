@@ -64,6 +64,14 @@ For more information read the DataTier.Net User's Guide located in the Class Roo
 https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/DataTier.Net%20Users%20Guide.pdf
 
 --
+Update 9.11.2019: I now have a new website: https://www.datajuggler.com 
+
+I built this site using C#, SQL Server, Blazor and DataTier.Net.
+
+Blazor is my new favorite web development platform.
+--
+Update 9.4.2019: Data Juggler joined Twitter today! Ask your DataTier.Net questions @Data_Juggler.
+
 Update 8.29.2019: I created two short videos today:
 
 DataTier.Net 101 - Class #2 - How To Create Enumerations
