@@ -79,7 +79,7 @@ Note: As of today you must use Visual Studio 16.3 Preview 4 is recommended to us
 
 Install DataTier.Net.Core.ProjectTemplates
 
-Open a command prompect or PowerShell and execute:
+Open a command promt or PowerShell window and execute:
 
 dotnet new -i DataJuggler.DataTier.Net.Core.ProjectTemplates
 
