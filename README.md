@@ -26,7 +26,11 @@ You can install the project Template into Visual Studio 2017 and / or 2019 (reco
 
 <img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Install%20Data%20Tier.Net%20Templates.png><br/>
 
-Dot Net Core instructions are below.
+Dot Net Core instructions
+
+Open a command promt or PowerShell window and execute:
+
+dotnet new -i DataJuggler.DataTier.Net.Core.ProjectTemplates
 
 <b>Step 3: Build Your Connection String and Setup App.config<br/>
   
