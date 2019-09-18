@@ -132,6 +132,20 @@ namespace DataTierClient.Controls
             }
             #endregion
             
+            #region DotNetCoreLabel_Click(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when the 'DotNetCoreLabel' is clicked.
+            /// </summary>
+            private void DotNetCoreLabel_Click(object sender, EventArgs e)
+            {
+                // Copy the text to the clipboard
+                Clipboard.SetText("dotnet new -i DataJuggler.DataTier.Net.Core.ProjectTemplates");
+
+                // Show the user a message
+                MessageBoxHelper.ShowMessage("The dot net core cli installation instructions have been copied to your clipboard." + Environment.NewLine + "Open a command prompt and paste, then hit Enter to install", "Copied");
+            }
+            #endregion
+            
             #region InstallDatabaseSchemaButton_Click(object sender, EventArgs e)
             /// <summary>
             /// event is fired when the 'InstallDatabaseSchemaButton' is clicked.
@@ -338,7 +352,7 @@ namespace DataTierClient.Controls
                     userCancelled = value;
                 }
             }
-            #endregion
+        #endregion
 
         #endregion
 

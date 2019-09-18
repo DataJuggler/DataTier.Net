@@ -1,4 +1,19 @@
-Starting this today. Probably should have started this 15 years ago.
+9.17.2019: Updated DataTier.Net to work with .Net Framework and Dot Net Core.
+
+Dot Net Core project templates are installed via a command line and Nuget:
+
+(Visual Studio 16.3 Preview 4 must be installed)
+
+dotnet new -i DataJuggler.DataTier.Net.Core.ProjectTemplates
+
+Then to create a new data tier project navigate in a command window to the folder you want to deploy to:
+
+dotnet new DataTier.Net.Core.ProjectTemplates
+
+This will create the four projects that make up a DataTier.Net template.
+
+A new Blazor video is coming soon.
+
 
 8.22.2019: Update for version 1.3.0 - DataTier.Net now works with Dot Net Core / Blazor.
 

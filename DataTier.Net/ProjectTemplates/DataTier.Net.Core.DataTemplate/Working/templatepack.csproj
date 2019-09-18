@@ -3,7 +3,7 @@
   <PropertyGroup>
     
     <PackageType>Template</PackageType>
-    <PackageVersion>2.0.3</PackageVersion>
+    <PackageVersion>2.0.7</PackageVersion>
     <PackageId>DataJuggler.DataTier.Net.Core.ProjectTemplates</PackageId>
     <Title>DataJuggler.DataTier.Net.Core.ProjectTemplates</Title>
     <Authors>Data Juggler</Authors>
@@ -13,7 +13,7 @@
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <ContentTargetFolders>content</ContentTargetFolders>
-    <Version>2.0.2</Version>
+    <Version>2.0.7</Version>
     <Product>DataJuggler.DataTier.Net.Core.ProjectTemplate</Product>
 
   </PropertyGroup>
