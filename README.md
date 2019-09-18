@@ -26,6 +26,12 @@ You can install the project Template into Visual Studio 2017 and / or 2019 (reco
 
 <img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Install%20Data%20Tier.Net%20Templates.png><br/>
 
+Dot Net Core instructions
+
+Open a command promt or PowerShell window and execute:
+
+dotnet new -i DataJuggler.DataTier.Net.Core.ProjectTemplates
+
 <b>Step 3: Build Your Connection String and Setup App.config<br/>
   
 <img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Build%20Connection%20String.png><br/>
@@ -73,11 +79,11 @@ DataTier.Net now works with Dot Net Core!
 
 When you get started with DataTier.Net, if you are creating projects for both .Net Framework and Dot Net Core then you will need to still complete Step 2 of the setup screen. If you only want to create Dot Net Core projects, you may skip installing the .Net Framework project templates.
 
-Note: As of today you must use Visual Studio 16.3 Preview 3 to use DataTier.Net with DotNetCore.
+Note: As of today you must use Visual Studio 16.3 Preview 4 is recommended to use DataTier.Net with DotNetCore.
 
 Install DataTier.Net.Core.ProjectTemplates
 
-Open a command prompect or PowerShell and execute:
+Open a command promt or PowerShell window and execute:
 
 dotnet new -i DataJuggler.DataTier.Net.Core.ProjectTemplates
 
