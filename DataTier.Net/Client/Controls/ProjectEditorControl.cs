@@ -1,6 +1,8 @@
 
 #region using statements
 
+using DataJuggler.Win.Controls;
+using DataJuggler.Win.Controls.Interfaces;
 using DataTierClient.Controls.Interfaces;
 using DataTierClient.Enumerations;
 using System;
@@ -22,7 +24,7 @@ namespace DataTierClient.Controls
     /// <summary>
     /// This class edits the basic information for a project.
     /// </summary>
-    public partial class ProjectEditorControl : UserControl, IWizardControl, ITabButtonParent
+    public partial class ProjectEditorControl : UserControl, IWizardControl, ITabButtonParent, ISelectedIndexListener
     {
         
         #region Private Variables
@@ -45,6 +47,24 @@ namespace DataTierClient.Controls
         #endregion
         
         #region Events
+            
+            #region BlazorServicesCheckBox_CheckedChanged(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when Blazor Services Check Box _ Checked Changed
+            /// </summary>
+            private void BlazorServicesCheckBox_CheckedChanged(object sender, EventArgs e)
+            {
+                 // if the value for HasSelectedProject is true
+                if (HasSelectedProject)
+                {
+                    // set the value
+                    SelectedProject.EnableBlazorFeatures = BlazorServicesCheckBox.Checked;
+                }
+
+                // Enable or disable controls
+                UIEnable();
+            }
+            #endregion
             
             #region BrowseProjectFolderButton_Click(object sender, EventArgs e)
             /// <summary>
@@ -93,6 +113,9 @@ namespace DataTierClient.Controls
                     // set the value
                     SelectedProject.DotNetCore = DotNetCoreCheckBox.Checked;
                 }
+
+                // Enable or disable controls
+                UIEnable();
             }
             #endregion
             
@@ -129,6 +152,24 @@ namespace DataTierClient.Controls
 
                 // Show the helpForm
                 helpForm.ShowDialog();
+            }
+            #endregion
+            
+            #region OnSelectedIndexChanged(LabelComboBoxControl control, int selectedIndex, object selectedItem)
+            /// <summary>
+            /// event is fired when a selection is made in the 'On'.
+            /// </summary>
+            public void OnSelectedIndexChanged(LabelComboBoxControl control, int selectedIndex, object selectedItem)
+            {
+                // if the value for HasSelectedProject is true
+                if (HasSelectedProject)
+                {
+                    // Set the value
+                    SelectedProject.BindingCallbackOption = (BindingCallbackOptionEnum) selectedIndex;
+                }
+
+                // Enable or disable controls
+                UIEnable();
             }
             #endregion
             
@@ -196,8 +237,9 @@ namespace DataTierClient.Controls
                 // locals
                 string projectName = "";
                 string projectFolder = "";
-                int index = 0;
                 bool dotNetCore = false;
+                bool enableBlazorFeatures = false;
+                int bindingIndex = -1;
                 
                 // if the SelectedProject Exists
                 if(this.SelectedProject != null)
@@ -205,26 +247,74 @@ namespace DataTierClient.Controls
                     // set values
                     projectName = this.SelectedProject.ProjectName;
                     projectFolder = this.SelectedProject.ProjectFolder;
-                    index = (int) this.SelectedProject.ClassFileOption;
                     dotNetCore = SelectedProject.DotNetCore;
+                    enableBlazorFeatures = SelectedProject.EnableBlazorFeatures;
+                    bindingIndex = FindBindingIndex(SelectedProject.BindingCallbackOption);
                 }
                 
                 // dislay values now
                 this.ProjectNameTextBox.Text = projectName;
                 this.ProjectFolderTextBox.Text = projectFolder;
                 this.DotNetCoreCheckBox.Checked = dotNetCore;
-                
-                // Refresh
-                this.Refresh();
+                this.BlazorServicesCheckBox.Checked = enableBlazorFeatures;
+                this.BindingCallbackOptionControl.SelectedIndex = bindingIndex;
+                                
+                // Enable controls
+                UIEnable();
             }
             #endregion
         
+            #region FindBindingIndex(BindingCallbackOptionEnum bindingCallbackOption)
+            /// <summary>
+            /// This method returns the Binding Index
+            /// </summary>
+            public int FindBindingIndex(BindingCallbackOptionEnum bindingCallbackOption)
+            {
+                // initial value
+                int index = -1;
+
+                // Determine the action by the bindingCallbackOption
+                switch (bindingCallbackOption)
+                {
+                    case BindingCallbackOptionEnum.Allow_Binding:
+                    
+                        // set the return value
+                        index = 1;
+
+                        // required
+                        break;
+
+                    case BindingCallbackOptionEnum.No_Binding:
+
+                        // set the return value
+                        index = 0;
+
+                        // required
+                        break;
+
+                    case BindingCallbackOptionEnum.Create_Binding:
+
+                        // set the return value
+                        index = 2;
+
+                        // required
+                        break;
+                }
+                
+                // return value
+                return index;
+            }
+            #endregion
+            
             #region Init()
             /// <summary>
             /// Perform Initializations For This Object.
             /// </summary>
             public void Init()
             {
+                // Setup the listener
+                this.BindingCallbackOptionControl.SelectedIndexListener = this;
+
                 // Set Dock To Fill
                 this.Dock = DockStyle.Fill;
 
@@ -233,6 +323,9 @@ namespace DataTierClient.Controls
 
                 // Set the next control
                 this.NextControl = ActiveControlEnum.DatabasesTab;
+
+                // Load the binding choices
+                this.BindingCallbackOptionControl.LoadItems(typeof(BindingCallbackOptionEnum));
             }
             #endregion
 
@@ -291,6 +384,24 @@ namespace DataTierClient.Controls
                     // Enable Controls on the project wizard
                     this.ParentProjectWizard.UIEnable();
                 }    
+
+                // if the value for HasSelectedProject is true
+                if (HasSelectedProject)
+                {
+                    // Show Enable BlazorServices for DotNetCore projects only
+                    this.BlazorServicesCheckBox.Visible = SelectedProject.DotNetCore;
+
+                    // Enable Blazor Features to true
+                    this.BindingCallbackOptionControl.Visible = SelectedProject.EnableBlazorFeatures;
+                }
+                else
+                {
+                    // Do not show for .Net Framework projects
+                    this.BlazorServicesCheckBox.Visible = false;
+                }
+
+                // refresh controls
+                this.Refresh();
             }
             #endregion
 
@@ -306,17 +417,18 @@ namespace DataTierClient.Controls
                 // return value
                 return valid;
             }
-            #endregion
 
         #endregion
-               
+
+        #endregion
+
         #region Properties
 
-            #region EditMode
-            /// <summary>
-            /// Is this an existing project or a new project.
-            /// </summary>
-            public bool EditMode
+        #region EditMode
+        /// <summary>
+        /// Is this an existing project or a new project.
+        /// </summary>
+        public bool EditMode
             {
                 get
                 {

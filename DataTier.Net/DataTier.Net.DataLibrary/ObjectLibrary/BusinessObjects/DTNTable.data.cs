@@ -18,6 +18,7 @@ namespace ObjectLibrary.BusinessObjects
         #region Private Variables
         private string classFileName;
         private string className;
+        private bool createBindingCallback;
         private int databaseId;
         private bool exclude;
         private bool isView;
@@ -71,6 +72,20 @@ namespace ObjectLibrary.BusinessObjects
                 set
                 {
                     className = value;
+                }
+            }
+            #endregion
+
+            #region bool CreateBindingCallback
+            public bool CreateBindingCallback
+            {
+                get
+                {
+                    return createBindingCallback;
+                }
+                set
+                {
+                    createBindingCallback = value;
                 }
             }
             #endregion

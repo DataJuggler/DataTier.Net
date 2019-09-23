@@ -63,12 +63,14 @@ namespace DataTierClient.Controls
             this.BrowseProjectFolderButton = new DataTierClient.Controls.TabButton();
             this.HelpButton = new System.Windows.Forms.Button();
             this.DotNetCoreCheckBox = new System.Windows.Forms.CheckBox();
+            this.BlazorServicesCheckBox = new System.Windows.Forms.CheckBox();
+            this.BindingCallbackOptionControl = new DataJuggler.Win.Controls.LabelComboBoxControl();
             this.SuspendLayout();
             // 
             // ProjectFolderTextBox
             // 
             this.ProjectFolderTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ProjectFolderTextBox.Location = new System.Drawing.Point(218, 60);
+            this.ProjectFolderTextBox.Location = new System.Drawing.Point(210, 58);
             this.ProjectFolderTextBox.Name = "ProjectFolderTextBox";
             this.ProjectFolderTextBox.Size = new System.Drawing.Size(373, 27);
             this.ProjectFolderTextBox.TabIndex = 74;
@@ -77,18 +79,18 @@ namespace DataTierClient.Controls
             // ProjectNameTextBox
             // 
             this.ProjectNameTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ProjectNameTextBox.Location = new System.Drawing.Point(218, 20);
+            this.ProjectNameTextBox.Location = new System.Drawing.Point(210, 20);
             this.ProjectNameTextBox.Name = "ProjectNameTextBox";
-            this.ProjectNameTextBox.Size = new System.Drawing.Size(304, 27);
+            this.ProjectNameTextBox.Size = new System.Drawing.Size(218, 27);
             this.ProjectNameTextBox.TabIndex = 73;
             this.ProjectNameTextBox.TextChanged += new System.EventHandler(this.ProjectNameTextBox_TextChanged);
             // 
             // ProjectFolderLabel
             // 
             this.ProjectFolderLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ProjectFolderLabel.Location = new System.Drawing.Point(20, 64);
+            this.ProjectFolderLabel.Location = new System.Drawing.Point(32, 62);
             this.ProjectFolderLabel.Name = "ProjectFolderLabel";
-            this.ProjectFolderLabel.Size = new System.Drawing.Size(200, 20);
+            this.ProjectFolderLabel.Size = new System.Drawing.Size(180, 20);
             this.ProjectFolderLabel.TabIndex = 71;
             this.ProjectFolderLabel.Text = "Project Folder:";
             this.ProjectFolderLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -96,9 +98,9 @@ namespace DataTierClient.Controls
             // ProjectNameLabel
             // 
             this.ProjectNameLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ProjectNameLabel.Location = new System.Drawing.Point(20, 24);
+            this.ProjectNameLabel.Location = new System.Drawing.Point(32, 24);
             this.ProjectNameLabel.Name = "ProjectNameLabel";
-            this.ProjectNameLabel.Size = new System.Drawing.Size(200, 20);
+            this.ProjectNameLabel.Size = new System.Drawing.Size(180, 20);
             this.ProjectNameLabel.TabIndex = 70;
             this.ProjectNameLabel.Text = "Project Name:";
             this.ProjectNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -109,7 +111,7 @@ namespace DataTierClient.Controls
             this.AutoFillChildFoldersCheckBox.Checked = true;
             this.AutoFillChildFoldersCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.AutoFillChildFoldersCheckBox.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AutoFillChildFoldersCheckBox.Location = new System.Drawing.Point(114, 153);
+            this.AutoFillChildFoldersCheckBox.Location = new System.Drawing.Point(82, 176);
             this.AutoFillChildFoldersCheckBox.Name = "AutoFillChildFoldersCheckBox";
             this.AutoFillChildFoldersCheckBox.Size = new System.Drawing.Size(199, 22);
             this.AutoFillChildFoldersCheckBox.TabIndex = 77;
@@ -120,7 +122,7 @@ namespace DataTierClient.Controls
             // 
             this.InfoLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.InfoLabel.ForeColor = System.Drawing.Color.DimGray;
-            this.InfoLabel.Location = new System.Drawing.Point(111, 178);
+            this.InfoLabel.Location = new System.Drawing.Point(89, 200);
             this.InfoLabel.Name = "InfoLabel";
             this.InfoLabel.Size = new System.Drawing.Size(459, 96);
             this.InfoLabel.TabIndex = 78;
@@ -133,7 +135,7 @@ namespace DataTierClient.Controls
             this.EnumerationsButton.ButtonNumber = 0;
             this.EnumerationsButton.ButtonText = "Enumerations";
             this.EnumerationsButton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EnumerationsButton.Location = new System.Drawing.Point(529, 19);
+            this.EnumerationsButton.Location = new System.Drawing.Point(430, 19);
             this.EnumerationsButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.EnumerationsButton.Name = "EnumerationsButton";
             this.EnumerationsButton.NotSelectedImage = null;
@@ -166,7 +168,7 @@ namespace DataTierClient.Controls
             this.HelpButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.HelpButton.FlatAppearance.BorderSize = 0;
             this.HelpButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.HelpButton.Location = new System.Drawing.Point(629, 57);
+            this.HelpButton.Location = new System.Drawing.Point(629, 55);
             this.HelpButton.Name = "HelpButton";
             this.HelpButton.Size = new System.Drawing.Size(32, 32);
             this.HelpButton.TabIndex = 81;
@@ -179,7 +181,7 @@ namespace DataTierClient.Controls
             // 
             this.DotNetCoreCheckBox.AutoSize = true;
             this.DotNetCoreCheckBox.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DotNetCoreCheckBox.Location = new System.Drawing.Point(114, 112);
+            this.DotNetCoreCheckBox.Location = new System.Drawing.Point(82, 110);
             this.DotNetCoreCheckBox.Name = "DotNetCoreCheckBox";
             this.DotNetCoreCheckBox.Size = new System.Drawing.Size(192, 22);
             this.DotNetCoreCheckBox.TabIndex = 82;
@@ -187,15 +189,56 @@ namespace DataTierClient.Controls
             this.DotNetCoreCheckBox.UseVisualStyleBackColor = true;
             this.DotNetCoreCheckBox.CheckedChanged += new System.EventHandler(this.DotNetCoreCheckBox_CheckedChanged);
             // 
+            // BlazorServicesCheckBox
+            // 
+            this.BlazorServicesCheckBox.AutoSize = true;
+            this.BlazorServicesCheckBox.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BlazorServicesCheckBox.Location = new System.Drawing.Point(82, 138);
+            this.BlazorServicesCheckBox.Name = "BlazorServicesCheckBox";
+            this.BlazorServicesCheckBox.Size = new System.Drawing.Size(213, 22);
+            this.BlazorServicesCheckBox.TabIndex = 83;
+            this.BlazorServicesCheckBox.Text = "Enable Blazor Features";
+            this.BlazorServicesCheckBox.UseVisualStyleBackColor = true;
+            this.BlazorServicesCheckBox.Visible = false;
+            this.BlazorServicesCheckBox.CheckedChanged += new System.EventHandler(this.BlazorServicesCheckBox_CheckedChanged);
+            // 
+            // BindingCallbackOptionControl
+            // 
+            this.BindingCallbackOptionControl.BackColor = System.Drawing.Color.Transparent;
+            this.BindingCallbackOptionControl.ComboBoxLeftMargin = 1;
+            this.BindingCallbackOptionControl.ComboBoxText = "";
+            this.BindingCallbackOptionControl.ComoboBoxFont = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BindingCallbackOptionControl.Editable = true;
+            this.BindingCallbackOptionControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BindingCallbackOptionControl.HideLabel = false;
+            this.BindingCallbackOptionControl.LabelBottomMargin = 0;
+            this.BindingCallbackOptionControl.LabelColor = System.Drawing.SystemColors.ControlText;
+            this.BindingCallbackOptionControl.LabelFont = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BindingCallbackOptionControl.LabelText = "Bindings:";
+            this.BindingCallbackOptionControl.LabelTopMargin = 0;
+            this.BindingCallbackOptionControl.LabelWidth = 96;
+            this.BindingCallbackOptionControl.List = null;
+            this.BindingCallbackOptionControl.Location = new System.Drawing.Point(293, 106);
+            this.BindingCallbackOptionControl.Name = "BindingCallbackOptionControl";
+            this.BindingCallbackOptionControl.SelectedIndex = -1;
+            this.BindingCallbackOptionControl.SelectedIndexListener = null;
+            this.BindingCallbackOptionControl.Size = new System.Drawing.Size(329, 28);
+            this.BindingCallbackOptionControl.Sorted = false;
+            this.BindingCallbackOptionControl.Source = null;
+            this.BindingCallbackOptionControl.TabIndex = 84;
+            this.BindingCallbackOptionControl.Visible = false;
+            // 
             // ProjectEditorControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.BindingCallbackOptionControl);
+            this.Controls.Add(this.InfoLabel);
+            this.Controls.Add(this.BlazorServicesCheckBox);
             this.Controls.Add(this.DotNetCoreCheckBox);
             this.Controls.Add(this.HelpButton);
             this.Controls.Add(this.BrowseProjectFolderButton);
             this.Controls.Add(this.EnumerationsButton);
-            this.Controls.Add(this.InfoLabel);
             this.Controls.Add(this.AutoFillChildFoldersCheckBox);
             this.Controls.Add(this.ProjectFolderTextBox);
             this.Controls.Add(this.ProjectNameTextBox);
@@ -213,6 +256,8 @@ namespace DataTierClient.Controls
         #endregion
 
         private System.Windows.Forms.CheckBox DotNetCoreCheckBox;
+        private System.Windows.Forms.CheckBox BlazorServicesCheckBox;
+        private DataJuggler.Win.Controls.LabelComboBoxControl BindingCallbackOptionControl;
     }
     #endregion
 

@@ -248,7 +248,7 @@ namespace DataTierClient.Controls
                     // if the value for HasOpenProject is true
                     if (HasOpenProject)
                     {
-                        // Set the FileName
+                        // Set the DataWatcherFileName
                         SelectedReader.FileName = Path.Combine(OpenProject.ReaderFolder, text + ".cs");
                     }
 

@@ -141,10 +141,10 @@ namespace DataTierClient.Xml.Writers
                     sb.Append(indentString2);
                     sb.Append("<FieldSetId>" + customReader.FieldSetId + "</FieldSetId>" + Environment.NewLine);
 
-                    // Write out the value for FileName
+                    // Write out the value for DataWatcherFileName
 
                     sb.Append(indentString2);
-                    sb.Append("<FileName>" + customReader.FileName + "</FileName>" + Environment.NewLine);
+                    sb.Append("<DataWatcherFileName>" + customReader.FileName + "</DataWatcherFileName>" + Environment.NewLine);
 
                     // Write out the value for ReaderName
 

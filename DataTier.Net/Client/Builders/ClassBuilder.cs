@@ -2,6 +2,7 @@
 
 #region using statements
 
+using DataGateway;
 using DataJuggler.Core.UltimateHelper;
 using System;
 using System.Collections.Generic;
@@ -132,6 +133,7 @@ namespace DataTierClient.Builders
 
                                         // Set the value for Exclude in the dataTable
                                         dataTable.Exclude = table.Exclude;
+                                        dataTable.CreateBindingCallback = table.CreateBindingCallback;
 
                                         // if this table has one or more fields
                                         if (ListHelper.HasOneOrMoreItems(table.Fields))
@@ -195,6 +197,7 @@ namespace DataTierClient.Builders
                                         {
                                             // Update the value for exclude
                                             dtnTable.Exclude = existingTable.Exclude;
+                                            dtnTable.CreateBindingCallback = existingTable.CreateBindingCallback;
                                         }
                                             
                                         // Add this table
@@ -264,6 +267,16 @@ namespace DataTierClient.Builders
             {
                 // Create sqlConnector
                 SQLDatabaseConnector sqlConnector = new SQLDatabaseConnector();
+
+                // if the tables are not loaded for the db
+                if ((NullHelper.Exists(db)) && (!ListHelper.HasOneOrMoreItems(db.Tables)))
+                {
+                    // Create a new instance of a 'Gateway' object.
+                    Gateway gateway = new Gateway();
+
+                    // load the tables
+                    db.Tables = gateway.LoadDTNTablesByProjectId(this.CurrentProject.ProjectId);
+                }
 
                 // if the DataManager does not exist
                 if (NullHelper.IsNull(DataManager))
@@ -415,9 +428,6 @@ namespace DataTierClient.Builders
                 {
                     // Create DataManager
                     this.DataManager = new DataManager(this.CurrentProject.ObjectFolder, this.CurrentProject.ProjectName, DataManager.ClassOutputLanguage.CSharp);
-                    
-                    // Select ClassFileOptoins
-                    this.DataManager.ClassFileOptions = (DataManager.FileOptions) this.CurrentProject.ClassFileOption;
                     
                     // Set NameSpaceName
                     this.DataManager.NamespaceName = this.CurrentProject.ObjectNamespace;

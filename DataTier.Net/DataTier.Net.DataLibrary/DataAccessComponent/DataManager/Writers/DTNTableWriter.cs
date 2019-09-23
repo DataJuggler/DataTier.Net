@@ -1,5 +1,4 @@
 
-
 #region using statements
 
 using DataAccessComponent.StoredProcedureManager.DeleteProcedures;
@@ -13,7 +12,6 @@ using System.Data.SqlClient;
 
 #endregion
 
-
 namespace DataAccessComponent.DataManager.Writers
 {
 
@@ -26,38 +24,6 @@ namespace DataAccessComponent.DataManager.Writers
     {
 
         #region Static Methods
-
-            #region CreateFetchAllDTNTablesStoredProcedure(DTNTable dTNTable)
-            /// <summary>
-            /// This method creates an instance of a
-            /// 'FetchAllDTNTablesStoredProcedure' object and
-            /// creates the sql parameter[] array needed
-            /// to execute the procedure 'DTNTable_FetchAll'.
-            /// </summary>
-            /// <returns>An instance of a(n) 'FetchAllDTNTablesStoredProcedure' object.</returns>
-            public static new FetchAllDTNTablesStoredProcedure CreateFetchAllDTNTablesStoredProcedure(DTNTable dTNTable)
-            {
-                // Initial value
-                FetchAllDTNTablesStoredProcedure fetchAllDTNTablesStoredProcedure = new FetchAllDTNTablesStoredProcedure();
-
-                // If the dTNTable object exists
-                if (dTNTable != null)
-                {
-                    // if FetchAllForProjectId is true and the ProjectId is set
-                    if ((dTNTable.FetchAllForProjectId) && (dTNTable.HasProjectId))
-                    {
-                        // Set the ProcedureName
-                        fetchAllDTNTablesStoredProcedure.ProcedureName = "DTNTable_FetchAllForProjectId";
-
-                        // Set the Parameter for @ProjectID
-                        fetchAllDTNTablesStoredProcedure.Parameters = SqlParameterHelper.CreateSqlParameters("@ProjectId", dTNTable.ProjectId);
-                    }
-                }
-
-                // return value
-                return fetchAllDTNTablesStoredProcedure;
-            }
-            #endregion
 
             #region CreateDeleteDTNTableStoredProcedure(DTNTable dTNTable)
             /// <summary>
@@ -97,6 +63,38 @@ namespace DataAccessComponent.DataManager.Writers
             }
             #endregion
 
+            #region CreateFetchAllDTNTablesStoredProcedure(DTNTable dTNTable)
+            /// <summary>
+            /// This method creates an instance of a
+            /// 'FetchAllDTNTablesStoredProcedure' object and
+            /// creates the sql parameter[] array needed
+            /// to execute the procedure 'DTNTable_FetchAll'.
+            /// </summary>
+            /// <returns>An instance of a(n) 'FetchAllDTNTablesStoredProcedure' object.</returns>
+            public static new FetchAllDTNTablesStoredProcedure CreateFetchAllDTNTablesStoredProcedure(DTNTable dTNTable)
+            {
+                // Initial value
+                FetchAllDTNTablesStoredProcedure fetchAllDTNTablesStoredProcedure = new FetchAllDTNTablesStoredProcedure();
+
+                // if the dTNTable object exists
+                if (dTNTable != null)
+                {
+                    // if LoadByProjectId is true
+                    if (dTNTable.LoadByProjectId)
+                    {
+                        // Change the procedure name
+                        fetchAllDTNTablesStoredProcedure.ProcedureName = "DTNTable_FetchAllByProjectId";
+                        
+                        // Create the @ProjectId parameter
+                        fetchAllDTNTablesStoredProcedure.Parameters = SqlParameterHelper.CreateSqlParameters("@ProjectId", dTNTable.ProjectId);
+                    }
+                }
+                
+                // return value
+                return fetchAllDTNTablesStoredProcedure;
+            }
+            #endregion
+            
         #endregion
 
     }

@@ -200,7 +200,7 @@ namespace DataTierClient.Forms
             private void ManageDataButton_Click(object sender, EventArgs e)
             {
                 // Reload the table here because because New Tables are not saved if you don't
-                this.OpenProject.Tables = gateway.LoadDTNTablesForProject(this.OpenProject.ProjectId);
+                this.OpenProject.Tables = gateway.LoadDTNTablesByProjectId(this.OpenProject.ProjectId);
 
                 // Create a new instance of a 'DataEditorForm' object.
                 DataEditorForm dataEditor = new DataEditorForm();
@@ -214,6 +214,9 @@ namespace DataTierClient.Forms
                 // if the user did not cancel
                 if (!dataEditor.UserCancelled)
                 {
+                    // reload the project in case the ServicesFolder changed in the BlazorDataEditorControl
+                    this.OpenProject = gateway.FindProject(OpenProject.ProjectId);
+
                     // Get the tables from the dataEditor control
                     this.OpenProject.Tables = dataEditor.Tables;
 
@@ -1309,7 +1312,7 @@ namespace DataTierClient.Forms
                                 table.Fields = gateway.LoadDTNFieldsForTable(method.TableId);
 
                                 // Convert the table
-                                dataTable = DataConverter.ConvertDataTable(table);
+                                dataTable = DataConverter.ConvertDataTable(table, this.OpenProject);
 
                                 // if this is a Single Field
                                 if (method.ParameterType == ParameterTypeEnum.Single_Field)
@@ -1937,7 +1940,7 @@ namespace DataTierClient.Forms
                 if (this.HasOpenProject)
                 {
                     // load the tables for this project
-                    OpenProject.Tables = Gateway.LoadDTNTablesForProject(this.OpenProject.ProjectId);
+                    OpenProject.Tables = Gateway.LoadDTNTablesByProjectId(this.OpenProject.ProjectId);
 
                     // If the tables collection exists and has one or more items
                     if (ListHelper.HasOneOrMoreItems(OpenProject.Tables))
@@ -2051,7 +2054,7 @@ namespace DataTierClient.Forms
                     List<DTNTable> tables = this.OpenProject.Tables;
 
                     // load the existingTables
-                    existingTables = gateway.LoadDTNTablesForProject(OpenProject.ProjectId);
+                    existingTables = gateway.LoadDTNTablesByProjectId(OpenProject.ProjectId);
 
                     // The tables above stay loaded in memory, so we still have the values for Exclude 
                     // which is going to be reset after the values are set
@@ -2459,6 +2462,9 @@ namespace DataTierClient.Forms
                                 {
                                     // Update the value for Exclude to the current value from the project
                                     dataTable.Exclude = table.Exclude;
+
+                                    // Update the value for CreateBindingCallback
+                                    dataTable.CreateBindingCallback = table.CreateBindingCallback;
 
                                     // if this table should not be excluded
                                     if ((!dataTable.Exclude) && (dataTable.Fields != null) && (table.HasFields))

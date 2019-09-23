@@ -2,12 +2,14 @@
 
 #region using statements
 
+using DataJuggler.Win.Controls;
+using DataJuggler.Win.Controls.Interfaces;
 using DataJuggler.Net;
+using DataTierClient.Forms;
 using DataJuggler.Core.UltimateHelper;
 using DataGateway;
 using DataTierClient.ClientUtil;
 using DataTierClient.Controls.Interfaces;
-using DataTierClient.Forms;
 using DataTierClient.Objects;
 using ObjectLibrary.BusinessObjects;
 using ObjectLibrary.Enumerations;
@@ -26,7 +28,7 @@ namespace DataTierClient.Controls
     /// This control is used to manage tables, fields and code files, including 
     /// Methods, Custom Readers and Field Sets for the selected table.
     /// </summary>
-    public partial class DataEditorControl : UserControl, ISaveCancelControl
+    public partial class DataEditorControl : UserControl, ISaveCancelControl, ICheckChangedListener
     {
         
         #region Private Variables
@@ -58,6 +60,29 @@ namespace DataTierClient.Controls
         #endregion
         
         #region Events
+            
+            #region BlazorFeaturesButton_Click(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when the 'BlazorFeaturesButton' is clicked.
+            /// </summary>
+            private void BlazorFeaturesButton_Click(object sender, EventArgs e)
+            {
+                // Create a new instance of a 'BlazorServicesForm' object.
+                BlazorServicesForm form = new BlazorServicesForm();
+
+                // Setup the form
+                form.Setup(this.Project, this.SelectedTable);
+
+                // Show the form
+                form.ShowDialog();
+
+                // Create a new instance of a 'Gateway' object.
+                Gateway gateway = new Gateway();
+
+                // reload the project in case it changed
+                this.Project = gateway.FindProject(Project.ProjectId);
+            }
+            #endregion
             
             #region Button_Enter(object sender, EventArgs e)
             /// <summary>
@@ -204,6 +229,34 @@ namespace DataTierClient.Controls
 
                 // Reload the table and display the buttons
                 TablesListBox_SelectedIndexChanged(this, null);
+            }
+            #endregion
+            
+            #region OnCheckChanged(LabelCheckBoxControl sender, bool isChecked)
+            /// <summary>
+            /// event is fired when On Check Changed
+            /// </summary>
+            public void OnCheckChanged(LabelCheckBoxControl sender, bool isChecked)
+            {
+                // if the value for HasSelectedTable is true
+                if ((HasSelectedTable) && (HasProject) && (Project.EnableBlazorFeatures) && (Project.BindingCallbackOption == BindingCallbackOptionEnum.Allow_Binding))
+                {  
+                    // set the value
+                    if (SelectedTable.CreateBindingCallback != isChecked)
+                    {
+                        // Set the value
+                        SelectedTable.CreateBindingCallback = isChecked;
+
+                        // Create a new instance of a 'Gateway' object.
+                        Gateway gateway = new Gateway();
+
+                        // save the selection
+                        bool saved = gateway.SaveDTNTable(ref selectedTable);
+                    }
+
+                    // Enable or disable controls
+                    UIEnable();
+                }
             }
             #endregion
             
@@ -407,6 +460,9 @@ namespace DataTierClient.Controls
                 {
                     // set the table
                     DTNTable table = this.Tables[this.TablesListBox.SelectedIndex];
+
+                    // check the box if checked
+                    CreateBindingCallbackControl.Checked = table.CreateBindingCallback;
 
                     // if the tableId is set
                     if (table.TableId > 0)
@@ -627,6 +683,9 @@ namespace DataTierClient.Controls
             /// </summary>
             public void Init()
             {
+                // Setup the listener
+                this.CreateBindingCallbackControl.CheckChangedListener = this;
+
                 // default to true
                 this.UserCancelled = true;
                 
@@ -706,6 +765,10 @@ namespace DataTierClient.Controls
             /// </summary>
             public void UIEnable()
             {
+                // local
+                bool showBlazorFeatures = ((HasProject) && (Project.BindingCallbackOption != BindingCallbackOptionEnum.No_Binding));
+                bool showCreateBindingCallbackControl = ((HasProject) && (Project.BindingCallbackOption == BindingCallbackOptionEnum.Allow_Binding));
+
                 // if there is a SelectedTable
                 if ((this.HasSelectedTable) && (!this.SelectedTable.Exclude))
                 {
@@ -718,6 +781,8 @@ namespace DataTierClient.Controls
                     this.ManageReadersButton.Visible = true;
                     this.ManageFieldSetsButton.Visible = true;
                     this.ManageMethodButton.Visible = true;
+                    this.BlazorFeaturesButton.Visible = showBlazorFeatures;
+                    this.CreateBindingCallbackControl.Visible = showCreateBindingCallbackControl;
                 }
                 else
                 {
@@ -730,6 +795,8 @@ namespace DataTierClient.Controls
                     this.ManageReadersButton.Visible = false;
                     this.ManageFieldSetsButton.Visible = false;
                     this.ManageMethodButton.Visible = false;
+                    this.BlazorFeaturesButton.Visible = false;
+                    this.CreateBindingCallbackControl.Visible = false;
                 }
                 
                 // Not If Loading
@@ -749,12 +816,13 @@ namespace DataTierClient.Controls
                     }
                 }
             }
-            #endregion
-            
+
         #endregion
-        
+
+        #endregion
+
         #region Properties
-            
+
             #region Gateway
             /// <summary>
             /// This property gets or sets the value for 'Gateway'.

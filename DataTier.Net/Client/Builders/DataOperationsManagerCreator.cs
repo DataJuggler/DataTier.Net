@@ -63,7 +63,7 @@ namespace DataTierClient.Builders
                 // verify DataTable exist
                 if (dataTables != null)
                 {
-                    // Get FileName
+                    // Get DataWatcherFileName
                     fileName = CreateFileName();
                     
                     // Create Writer

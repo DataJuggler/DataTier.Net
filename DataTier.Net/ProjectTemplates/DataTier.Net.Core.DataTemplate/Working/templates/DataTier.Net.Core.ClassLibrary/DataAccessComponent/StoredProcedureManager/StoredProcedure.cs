@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data.SqlClient;
 using ObjectLibrary.Enumerations;
+using DataJuggler.Net.Core.Enumerations;
 
 #endregion
 

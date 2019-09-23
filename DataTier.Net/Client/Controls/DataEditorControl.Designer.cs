@@ -71,6 +71,8 @@ namespace DataTierClient.Controls
             this.ManageMethodButton = new System.Windows.Forms.Button();
             this.ManageReadersButton = new System.Windows.Forms.Button();
             this.ManageFieldSetsButton = new System.Windows.Forms.Button();
+            this.BlazorFeaturesButton = new System.Windows.Forms.Button();
+            this.CreateBindingCallbackControl = new DataJuggler.Win.Controls.LabelCheckBoxControl();
             this.SuspendLayout();
             // 
             // TablesListBox
@@ -168,7 +170,7 @@ namespace DataTierClient.Controls
             this.RemoveTableButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.RemoveTableButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RemoveTableButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.RemoveTableButton.Location = new System.Drawing.Point(360, 284);
+            this.RemoveTableButton.Location = new System.Drawing.Point(360, 269);
             this.RemoveTableButton.Name = "RemoveTableButton";
             this.RemoveTableButton.Size = new System.Drawing.Size(232, 40);
             this.RemoveTableButton.TabIndex = 97;
@@ -189,7 +191,7 @@ namespace DataTierClient.Controls
             this.CreateMethodButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CreateMethodButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CreateMethodButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.CreateMethodButton.Location = new System.Drawing.Point(360, 92);
+            this.CreateMethodButton.Location = new System.Drawing.Point(360, 77);
             this.CreateMethodButton.Name = "CreateMethodButton";
             this.CreateMethodButton.Size = new System.Drawing.Size(232, 40);
             this.CreateMethodButton.TabIndex = 100;
@@ -210,7 +212,7 @@ namespace DataTierClient.Controls
             this.ManageMethodButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ManageMethodButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ManageMethodButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.ManageMethodButton.Location = new System.Drawing.Point(360, 140);
+            this.ManageMethodButton.Location = new System.Drawing.Point(360, 125);
             this.ManageMethodButton.Name = "ManageMethodButton";
             this.ManageMethodButton.Size = new System.Drawing.Size(232, 40);
             this.ManageMethodButton.TabIndex = 101;
@@ -231,7 +233,7 @@ namespace DataTierClient.Controls
             this.ManageReadersButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ManageReadersButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ManageReadersButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.ManageReadersButton.Location = new System.Drawing.Point(360, 236);
+            this.ManageReadersButton.Location = new System.Drawing.Point(360, 221);
             this.ManageReadersButton.Name = "ManageReadersButton";
             this.ManageReadersButton.Size = new System.Drawing.Size(232, 40);
             this.ManageReadersButton.TabIndex = 102;
@@ -252,7 +254,7 @@ namespace DataTierClient.Controls
             this.ManageFieldSetsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ManageFieldSetsButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ManageFieldSetsButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.ManageFieldSetsButton.Location = new System.Drawing.Point(360, 188);
+            this.ManageFieldSetsButton.Location = new System.Drawing.Point(360, 173);
             this.ManageFieldSetsButton.Name = "ManageFieldSetsButton";
             this.ManageFieldSetsButton.Size = new System.Drawing.Size(232, 40);
             this.ManageFieldSetsButton.TabIndex = 103;
@@ -263,10 +265,51 @@ namespace DataTierClient.Controls
             this.ManageFieldSetsButton.MouseEnter += new System.EventHandler(this.Button_Enter);
             this.ManageFieldSetsButton.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
+            // BlazorFeaturesButton
+            // 
+            this.BlazorFeaturesButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
+            this.BlazorFeaturesButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BlazorFeaturesButton.FlatAppearance.BorderSize = 0;
+            this.BlazorFeaturesButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.BlazorFeaturesButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.BlazorFeaturesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BlazorFeaturesButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BlazorFeaturesButton.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.BlazorFeaturesButton.Location = new System.Drawing.Point(363, 315);
+            this.BlazorFeaturesButton.Name = "BlazorFeaturesButton";
+            this.BlazorFeaturesButton.Size = new System.Drawing.Size(232, 40);
+            this.BlazorFeaturesButton.TabIndex = 104;
+            this.BlazorFeaturesButton.Text = "Blazor Data Services";
+            this.BlazorFeaturesButton.UseVisualStyleBackColor = true;
+            this.BlazorFeaturesButton.Visible = false;
+            this.BlazorFeaturesButton.Click += new System.EventHandler(this.BlazorFeaturesButton_Click);
+            this.BlazorFeaturesButton.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.BlazorFeaturesButton.MouseLeave += new System.EventHandler(this.Button_Leave);
+            // 
+            // CreateBindingCallbackControl
+            // 
+            this.CreateBindingCallbackControl.BackColor = System.Drawing.Color.Transparent;
+            this.CreateBindingCallbackControl.CheckBoxHorizontalOffSet = 0;
+            this.CreateBindingCallbackControl.CheckBoxVerticalOffSet = 3;
+            this.CreateBindingCallbackControl.CheckChangedListener = null;
+            this.CreateBindingCallbackControl.Checked = false;
+            this.CreateBindingCallbackControl.Editable = true;
+            this.CreateBindingCallbackControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CreateBindingCallbackControl.LabelColor = System.Drawing.SystemColors.ControlText;
+            this.CreateBindingCallbackControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CreateBindingCallbackControl.LabelText = "Create Callback:";
+            this.CreateBindingCallbackControl.LabelWidth = 160;
+            this.CreateBindingCallbackControl.Location = new System.Drawing.Point(383, 363);
+            this.CreateBindingCallbackControl.Name = "CreateBindingCallbackControl";
+            this.CreateBindingCallbackControl.Size = new System.Drawing.Size(176, 28);
+            this.CreateBindingCallbackControl.TabIndex = 105;
+            // 
             // DataEditorControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Linen;
+            this.Controls.Add(this.CreateBindingCallbackControl);
+            this.Controls.Add(this.BlazorFeaturesButton);
             this.Controls.Add(this.ManageFieldSetsButton);
             this.Controls.Add(this.ManageReadersButton);
             this.Controls.Add(this.ManageMethodButton);
@@ -288,10 +331,12 @@ namespace DataTierClient.Controls
             this.PerformLayout();
 
             }
-            #endregion
-            
         #endregion
-        
+
+        #endregion
+
+        private System.Windows.Forms.Button BlazorFeaturesButton;
+        private DataJuggler.Win.Controls.LabelCheckBoxControl CreateBindingCallbackControl;
     }
     #endregion
 

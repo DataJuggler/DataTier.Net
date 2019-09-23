@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    
+    <PackageType>Template</PackageType>
+    <PackageVersion>2.0.10</PackageVersion>
+    <PackageId>DataJuggler.DataTier.Net.Core.ItemTemplates.BlazorDataServices</PackageId>
+    <Title>DataJuggler.DataTier.Net.Core.ItemTemplates.BlazorDataServices</Title>
+    <Authors>Data Juggler</Authors>
+    <Description>This item template creates two files, a DataWatcher and a Service. This package is meant to be installed via DataTier.Net, as there are few variables that have to replaced and I haven't figured out Dot Net Core replacement paremeters yet, so I am rolling my own replacement parameters after install. </Description>
+    <PackageTags>DataTier.Net;DataTier.Net.Core;C#;SQL;SQLServer;EntityFrameworkAlternative;</PackageTags>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <Version>2.0.10</Version>
+    <Product>DataJuggler.DataTier.Net.Core.ItemTemplates.BlazorDataServices</Product>
+
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" />
+    <Compile Remove="**\*" />
+  </ItemGroup>
+  
+</Project>
+
+
+
+    
+    
+    
+
+
+  
+
+

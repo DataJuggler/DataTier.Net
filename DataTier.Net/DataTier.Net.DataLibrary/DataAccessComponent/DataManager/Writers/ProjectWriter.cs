@@ -1,5 +1,4 @@
 
-
 #region using statements
 
 using DataAccessComponent.StoredProcedureManager.DeleteProcedures;
@@ -12,7 +11,6 @@ using System.Data;
 using System.Data.SqlClient;
 
 #endregion
-
 
 namespace DataAccessComponent.DataManager.Writers
 {
@@ -27,10 +25,8 @@ namespace DataAccessComponent.DataManager.Writers
 
         #region Static Methods
 
-            // *******************************************
-            // Write any overrides or custom methods here.
-            // *******************************************
-
+            
+            
         #endregion
 
     }

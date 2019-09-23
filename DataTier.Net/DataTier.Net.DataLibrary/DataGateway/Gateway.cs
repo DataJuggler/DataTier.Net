@@ -1312,32 +1312,32 @@ namespace DataGateway
             }
             #endregion
 
-            #region LoadDTNTablesForProject(int projectId)
+            #region LoadDTNTablesByProjectId(int projectId)
             /// <summary>
-            /// method returns the DTN Tables For Project
+            /// This method is used to load 'DTNTable' objects for the ProjectId given.
             /// </summary>
-            public List<DTNTable> LoadDTNTablesForProject(int projectId)
+            public List<DTNTable> LoadDTNTablesByProjectId(int projectId)
             {
                 // initial value
-                List<DTNTable> tables = null;
+                List<DTNTable> dTNTables = null;
                 
-                // Create a new instance of a 'DTNTable' object.
-                DTNTable tempTable = new DTNTable();
-
-                // Set the value for the property 'FetchAllForProjectId' to true
-                tempTable.FetchAllForProjectId = true;
-
-                // set hte projectId
-                tempTable.ProjectId = projectId;
-
-                // load the tables
-                tables = LoadDTNTables(tempTable);
+                // Create a temp DTNTable object
+                DTNTable tempDTNTable = new DTNTable();
+                
+                // Set the value for LoadByProjectId to true
+                tempDTNTable.LoadByProjectId = true;
+                
+                // Set the value for ProjectId
+                tempDTNTable.ProjectId = projectId;
+                
+                // Perform the load
+                dTNTables = LoadDTNTables(tempDTNTable);
                 
                 // return value
-                return tables;
+                return dTNTables;
             }
             #endregion
-
+            
             #region LoadEnumerations(Enumeration tempEnumeration = null)
             /// <summary>
             /// This method loads a collection of 'Enumeration' objects.

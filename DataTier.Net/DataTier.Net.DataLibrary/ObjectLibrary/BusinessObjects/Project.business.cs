@@ -1,5 +1,4 @@
 
-
 #region using statements
 
 using System;
@@ -31,7 +30,7 @@ namespace ObjectLibrary.BusinessObjects
         public ReferencesSet writerReferencesSet;
         public ReferencesSet storedProcedureReferencesSet;
 		private List<Enumeration> enumerations;
-        private List<DTNTable> tables;
+        private List<DTNTable> tables;        
         #endregion
 
         #region Constructor

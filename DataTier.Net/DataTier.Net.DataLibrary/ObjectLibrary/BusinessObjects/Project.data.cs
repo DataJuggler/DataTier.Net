@@ -16,7 +16,7 @@ namespace ObjectLibrary.BusinessObjects
     {
 
         #region Private Variables
-        private int classFileOption;
+        private BindingCallbackOptionEnum bindingCallbackOption;
         private string controllerFolder;
         private string controllerNamespace;
         private int controllerReferencesSetId;
@@ -31,6 +31,7 @@ namespace ObjectLibrary.BusinessObjects
         private int dataWriterReferencesSetId;
         private DateTime dateModified;
         private bool dotNetCore;
+        private bool enableBlazorFeatures;
         private string objectFolder;
         private string objectNamespace;
         private int objectReferencesSetId;
@@ -40,6 +41,7 @@ namespace ObjectLibrary.BusinessObjects
         private string readerFolder;
         private string readerNamespace;
         private int readerReferencesSetId;
+        private string servicesFolder;
         private string storedProcedureObjectFolder;
         private string storedProcedureObjectNamespace;
         private int storedProcedureReferencesSetId;
@@ -65,16 +67,16 @@ namespace ObjectLibrary.BusinessObjects
 
         #region Properties
 
-            #region int ClassFileOption
-            public int ClassFileOption
+            #region BindingCallbackOptionEnum BindingCallbackOption
+            public BindingCallbackOptionEnum BindingCallbackOption
             {
                 get
                 {
-                    return classFileOption;
+                    return bindingCallbackOption;
                 }
                 set
                 {
-                    classFileOption = value;
+                    bindingCallbackOption = value;
                 }
             }
             #endregion
@@ -275,6 +277,20 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
 
+            #region bool EnableBlazorFeatures
+            public bool EnableBlazorFeatures
+            {
+                get
+                {
+                    return enableBlazorFeatures;
+                }
+                set
+                {
+                    enableBlazorFeatures = value;
+                }
+            }
+            #endregion
+
             #region string ObjectFolder
             public string ObjectFolder
             {
@@ -393,6 +409,20 @@ namespace ObjectLibrary.BusinessObjects
                 set
                 {
                     readerReferencesSetId = value;
+                }
+            }
+            #endregion
+
+            #region string ServicesFolder
+            public string ServicesFolder
+            {
+                get
+                {
+                    return servicesFolder;
+                }
+                set
+                {
+                    servicesFolder = value;
                 }
             }
             #endregion

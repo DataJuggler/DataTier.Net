@@ -385,7 +385,7 @@ namespace DataTierClient.Controls
                         DataJuggler.Net.ReferencesSet convertedReferences = classBuilder.ConvertReferences(references, "ObjectReaders");
 
                         // convert the DTNTable to DataJuggler.Net.DataTable
-                        DataTable dataTable = DataConverter.ConvertDataTable(methodInfo.SelectedTable);
+                        DataTable dataTable = DataConverter.ConvertDataTable(methodInfo.SelectedTable, this.Project);
 
                         // If the dataTable object exists
                         if (NullHelper.Exists(dataTable))

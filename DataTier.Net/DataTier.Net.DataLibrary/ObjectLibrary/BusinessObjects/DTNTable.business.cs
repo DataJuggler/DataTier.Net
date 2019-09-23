@@ -20,9 +20,9 @@ namespace ObjectLibrary.BusinessObjects
         private List<Method> methods;
         private List<CustomReader> customReaders;
         private List<FieldSet> fieldSets;
-        private bool fetchAllForProjectId;
         private bool deleteAllForProjectId;
         private bool foundInLatestSchema;
+        private bool loadByProjectId;
         #endregion
 
         #region Constructor
@@ -113,17 +113,6 @@ namespace ObjectLibrary.BusinessObjects
             {
                 get { return deleteAllForProjectId; }
                 set { deleteAllForProjectId = value; }
-            }
-            #endregion
-            
-            #region FetchAllForProjectId
-            /// <summary>
-            /// This property gets or sets the value for 'FetchAllForProjectId'.
-            /// </summary>
-            public bool FetchAllForProjectId
-            {
-                get { return fetchAllForProjectId; }
-                set { fetchAllForProjectId = value; }
             }
             #endregion
             
@@ -296,6 +285,17 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
             
+            #region LoadByProjectId
+            /// <summary>
+            /// This property gets or sets the value for 'LoadByProjectId'.
+            /// </summary>
+            public bool LoadByProjectId
+            {
+                get { return loadByProjectId; }
+                set { loadByProjectId = value; }
+            }
+            #endregion
+
             #region Methods
             /// <summary>
             /// This property gets or sets the value for 'Methods'.

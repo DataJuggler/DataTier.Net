@@ -289,7 +289,7 @@ namespace DataTierClient.Controls
                     this.ManualUpdateRadioButton.Checked = true;
 
                     // convert the table
-                    DataJuggler.Net.DataTable table = DataConverter.ConvertDataTable(MethodInfo.SelectedTable);
+                    DataJuggler.Net.DataTable table = DataConverter.ConvertDataTable(MethodInfo.SelectedTable, this.OpenProject);
 
                     // if this is a Single Field Parameter and the Parameter Field exists
                     if ((MethodInfo.ParameterType == ParameterTypeEnum.Single_Field) && (MethodInfo.HasParameterField))

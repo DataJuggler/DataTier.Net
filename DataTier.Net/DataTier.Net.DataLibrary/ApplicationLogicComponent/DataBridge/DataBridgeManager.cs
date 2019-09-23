@@ -24,7 +24,7 @@ namespace ApplicationLogicComponent.DataBridge
     /// This class is the only object that will open & close data connections.
     /// In fact, the only place in the application where the data connection
     /// is opened is in the PerformDataOperation() method in this object.
-    /// This object requires that a delagate (method pointer) be passed
+    /// This object requires that a delegate (method pointer) be passed
     /// in that will perform the data operation using the open connection.
     /// </summary>
     public class DataBridgeManager

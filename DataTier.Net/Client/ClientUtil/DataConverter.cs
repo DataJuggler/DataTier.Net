@@ -272,6 +272,7 @@ namespace DataTierClient.ClientUtil
                     table.ClassFileName = sourceTable.ClassFileName;
                     table.ClassName = sourceTable.ClassName;
                     table.Exclude = sourceTable.Exclude;
+                    table.CreateBindingCallback = sourceTable.CreateBindingCallback;
                     
                     // Only 1 Database is officially supported now
                     table.DatabaseId = project.Databases[0].DatabaseId;
@@ -294,11 +295,11 @@ namespace DataTierClient.ClientUtil
             }
             #endregion
 
-            #region ConvertDataTable(DTNTable sourceTable)
+            #region ConvertDataTable(DTNTable sourceTable, Project project)
             /// <summary>
             /// This method converts a Data Table to a DTNTable for storing some of the scheme info in SQL.
             /// </summary>
-            public static DataJuggler.Net.DataTable ConvertDataTable(DTNTable sourceTable)
+            public static DataJuggler.Net.DataTable ConvertDataTable(DTNTable sourceTable, Project project)
             {
                 // initial value
                 DataJuggler.Net.DataTable table = null;
@@ -318,6 +319,17 @@ namespace DataTierClient.ClientUtil
                     table.Fields = ConvertDataFields(sourceTable.Fields);
                     table.Serializable = sourceTable.Serializable;
                     table.Name = sourceTable.TableName;
+
+                    // New field used with Blazor
+                    if ((NullHelper.Exists(project)) && (project.EnableBlazorFeatures) && (project.BindingCallbackOption != BindingCallbackOptionEnum.No_Binding))
+                    {
+                        // if the Project has Create Binding, this implies all tables or if the sourceTable has CreatingBindingCallback set to true
+                        if ((project.BindingCallbackOption == BindingCallbackOptionEnum.Create_Binding) || (sourceTable.CreateBindingCallback))
+                        {
+                            // set the value for CreateBindingCallback to true
+                            table.CreateBindingCallback = true;    
+                        }
+                    }
                 }
                 
                 // return value

@@ -35,6 +35,20 @@ namespace ObjectLibrary.Enumerations
     }
     #endregion
 
+    #region BindingCallbackOptionEnum
+    /// <summary>
+    /// This option is used to designate if binding is allowed, and if allowed
+    /// is it set at the Project Level which means all tables have binding or
+    /// not or whether or not it is set per table. 
+    /// </summary>
+    public enum BindingCallbackOptionEnum : int
+    {
+        No_Binding = 0,
+        Allow_Binding = 1,
+        Create_Binding = 2
+    }
+    #endregion
+
     #region DataTypeEnum
     public enum DataTypeEnum : int
     {
