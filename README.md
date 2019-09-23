@@ -21,14 +21,15 @@ Execute the SQL script to install DataTier.Net tables and stored procedures.<br/
 <b>Geeky Note:</b> DataTier.Net was built using DataTier.Net.
 
 <b> Step 2: Install DataTier.Net Project Templates Installer VSIX
-  
+
+<b>.Net Framework Only. the Dot Net Core templates are installed via a link on the Setup Scren</b>
 You can install the project Template into Visual Studio 2017 and / or 2019 (recommended).<br/>
 
 <img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Install%20Data%20Tier.Net%20Templates.png><br/>
 
 Dot Net Core instructions
 
-Open a command promt or PowerShell window and execute:
+Open a command prompt or PowerShell window and execute:
 
 dotnet new -i DataJuggler.DataTier.Net.Core.ProjectTemplates
 
@@ -69,6 +70,10 @@ The .business.cs is only created if it does not already exist, so you are free t
 For more information read the DataTier.Net User's Guide located in the Class Room folder if you clone or online here:
 https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/DataTier.Net%20Users%20Guide.pdf
 
+--
+Update 9.23.2019: Version 2.1.0 has been released.
+
+Many of the Blazor features have only been tested in a couple of projects so far. I am sure this code will evolve as Blazor matures.
 --
 Update 9.15.2019: 
 Major Milestone
@@ -160,7 +165,11 @@ Then when you create an instance of the Gateway, pass in the connection name:
 
 Note: you must use Nuget Package DataJuggler.Core.UltimateHelper version 1.3.5 or greater, as this includes a new class EnvironmentVariableHelper.cs.
 
-Blazor tutorials and videos are coming soon, I just wanted to publish a release with DataTier.Net working for .Net Framework and .Net Core.
+9.23.2019:
+I created a new sample project using Blazor & DataTier.Net: 
+https://github.com/DataJuggler/BlazorToDoList 
+
+More Blazor tutorials and videos are coming soon, I just wanted to publish a release with DataTier.Net working for .Net Framework and .Net Core.
 --
 Update 8.31.2019: I released version 1.3.2 today. I fixed a bug where new tables or views would not change the selected table in the Data Editor (Manage Data Button Click) unless the project had been saved and opened.
 
