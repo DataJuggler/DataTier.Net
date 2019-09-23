@@ -4,8 +4,8 @@
 
 using DataTierClient.Forms;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Data;
 using System.IO;
@@ -34,6 +34,8 @@ namespace DataTierClient.Controls
         private bool userCancelled;
         private bool databaseSchemaClicked;
         private const string DatabaseName = "DataTier.Net.Database";
+        private const string DotNetCoreProjectTemplates = "dotnet new -i DataJuggler.DataTier.Net.Core.ProjectTemplates";
+        private const string UninstallDotNetCoreProjectTemplates = "dotnet new -u DataJuggler.DataTier.Net.Core.ProjectTemplates";
         #endregion
         
         #region Constructor
@@ -138,11 +140,28 @@ namespace DataTierClient.Controls
             /// </summary>
             private void DotNetCoreLabel_Click(object sender, EventArgs e)
             {
-                // Copy the text to the clipboard
-                Clipboard.SetText("dotnet new -i DataJuggler.DataTier.Net.Core.ProjectTemplates");
+                 try               
+                 {
+                     // Create a Process to launch a command window (hidden) to create the item templates
+                    Process process = new Process();
+                    ProcessStartInfo startInfo = new ProcessStartInfo();
+                    startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    startInfo.FileName = "cmd.exe";
+                    startInfo.Arguments = "/C " + DotNetCoreProjectTemplates;
+                    process.StartInfo = startInfo;
+                    process.Start();
 
-                // Show the user a message
-                MessageBoxHelper.ShowMessage("The dot net core cli installation instructions have been copied to your clipboard." + Environment.NewLine + "Open a command prompt and paste, then hit Enter to install", "Copied");
+                    // Show the user a message
+                    MessageBoxHelper.ShowMessage("DataJuggler.DataTier.Net.Core.ProjectTemplates were installed onto your computer.", "Install Complete");
+                 }
+                 catch (Exception error)
+                 {
+                     // Set the error
+                    DebugHelper.WriteDebugError("DotNetCoreLabel_Click", this.Name, error);
+
+                    // show the user a message
+                    MessageBoxHelper.ShowMessage("The DataTier.Net.Core.Project Templates could not be installed. Ensure you are connected to the internet and try again.", "Insteall Templates Failed");
+                 }
             }
             #endregion
             
@@ -259,6 +278,37 @@ namespace DataTierClient.Controls
             }
         #endregion
 
+            #region UninstallDotNetCoreLabel_Click(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when the 'UninstallDotNetCoreLabel' is clicked.
+            /// </summary>
+            private void UninstallDotNetCoreLabel_Click(object sender, EventArgs e)
+            {
+                try               
+                 {
+                     // Create a Process to launch a command window (hidden) to create the item templates
+                    Process process = new Process();
+                    ProcessStartInfo startInfo = new ProcessStartInfo();
+                    startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    startInfo.FileName = "cmd.exe";
+                    startInfo.Arguments = "/C " + UninstallDotNetCoreProjectTemplates;
+                    process.StartInfo = startInfo;
+                    process.Start();
+
+                    // Show the user a message
+                    MessageBoxHelper.ShowMessage("DataJuggler.DataTier.Net.Core.ProjectTemplates were uninstalled from your computer.", "Uninstall Complete");
+                 }
+                 catch (Exception error)
+                 {
+                     // Set the error
+                    DebugHelper.WriteDebugError("UninstallDotNetCoreLabel_Click", this.Name, error);
+
+                    // show the user a message
+                    MessageBoxHelper.ShowMessage("The DataTier.Net.Core.Project Templates could not be uninstalled.", "Uninsteall Templates Failed");
+                 }
+            }
+            #endregion
+            
             #region ViewPDFButton_Click(object sender, EventArgs e)
             /// <summary>
             /// event is fired when the 'ViewPDFButton' is clicked.

@@ -65,6 +65,7 @@ namespace DataTierClient.Controls
             this.DotNetCoreCheckBox = new System.Windows.Forms.CheckBox();
             this.BlazorServicesCheckBox = new System.Windows.Forms.CheckBox();
             this.BindingCallbackOptionControl = new DataJuggler.Win.Controls.LabelComboBoxControl();
+            this.CreateDotNetCoreProject = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ProjectFolderTextBox
@@ -181,7 +182,7 @@ namespace DataTierClient.Controls
             // 
             this.DotNetCoreCheckBox.AutoSize = true;
             this.DotNetCoreCheckBox.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DotNetCoreCheckBox.Location = new System.Drawing.Point(82, 110);
+            this.DotNetCoreCheckBox.Location = new System.Drawing.Point(82, 106);
             this.DotNetCoreCheckBox.Name = "DotNetCoreCheckBox";
             this.DotNetCoreCheckBox.Size = new System.Drawing.Size(192, 22);
             this.DotNetCoreCheckBox.TabIndex = 82;
@@ -218,7 +219,7 @@ namespace DataTierClient.Controls
             this.BindingCallbackOptionControl.LabelTopMargin = 0;
             this.BindingCallbackOptionControl.LabelWidth = 96;
             this.BindingCallbackOptionControl.List = null;
-            this.BindingCallbackOptionControl.Location = new System.Drawing.Point(293, 106);
+            this.BindingCallbackOptionControl.Location = new System.Drawing.Point(293, 134);
             this.BindingCallbackOptionControl.Name = "BindingCallbackOptionControl";
             this.BindingCallbackOptionControl.SelectedIndex = -1;
             this.BindingCallbackOptionControl.SelectedIndexListener = null;
@@ -228,10 +229,25 @@ namespace DataTierClient.Controls
             this.BindingCallbackOptionControl.TabIndex = 84;
             this.BindingCallbackOptionControl.Visible = false;
             // 
+            // CreateDotNetCoreProject
+            // 
+            this.CreateDotNetCoreProject.AutoSize = true;
+            this.CreateDotNetCoreProject.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CreateDotNetCoreProject.Location = new System.Drawing.Point(347, 108);
+            this.CreateDotNetCoreProject.Name = "CreateDotNetCoreProject";
+            this.CreateDotNetCoreProject.Size = new System.Drawing.Size(271, 18);
+            this.CreateDotNetCoreProject.TabIndex = 85;
+            this.CreateDotNetCoreProject.Text = "Create DataTier in Project Folder";
+            this.CreateDotNetCoreProject.Visible = false;
+            this.CreateDotNetCoreProject.Click += new System.EventHandler(this.CreateDotNetCoreProject_Click);
+            this.CreateDotNetCoreProject.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.CreateDotNetCoreProject.MouseLeave += new System.EventHandler(this.Button_Leave);
+            // 
             // ProjectEditorControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.CreateDotNetCoreProject);
             this.Controls.Add(this.BindingCallbackOptionControl);
             this.Controls.Add(this.InfoLabel);
             this.Controls.Add(this.BlazorServicesCheckBox);
@@ -258,6 +274,7 @@ namespace DataTierClient.Controls
         private System.Windows.Forms.CheckBox DotNetCoreCheckBox;
         private System.Windows.Forms.CheckBox BlazorServicesCheckBox;
         private DataJuggler.Win.Controls.LabelComboBoxControl BindingCallbackOptionControl;
+        private System.Windows.Forms.Label CreateDotNetCoreProject;
     }
     #endregion
 

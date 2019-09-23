@@ -1,14 +1,14 @@
 
 #region using statements
 
+using DataJuggler.Core.UltimateHelper;
 using DataJuggler.Win.Controls;
 using DataJuggler.Win.Controls.Interfaces;
 using DataTierClient.Controls.Interfaces;
 using DataTierClient.Enumerations;
 using System;
-using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows.Forms;
-using DataJuggler.Net;
 using DataTierClient.ClientUtil;
 using ObjectLibrary.Enumerations;
 using ObjectLibrary.BusinessObjects;
@@ -30,6 +30,7 @@ namespace DataTierClient.Controls
         #region Private Variables
         private ActiveControlEnum nextControl;
         private ActiveControlEnum prevControl;
+        private const string CreateDataTier = "dotnet new DataTier.Net.Core.ProjectTemplates";
         #endregion 
         
         #region Constructor
@@ -75,7 +76,7 @@ namespace DataTierClient.Controls
             private void BrowseProjectFolderButton_Click(object sender, EventArgs e)
             {
                 // Choose the folder
-                DialogHelper.ChooseFolder(this.ProjectFolderTextBox, this.ProjectFolder);
+                DataJuggler.Core.UltimateHelper.DialogHelper.ChooseFolder(this.ProjectFolderTextBox, this.ProjectFolder);
             }
             #endregion
 
@@ -98,6 +99,47 @@ namespace DataTierClient.Controls
             {
                 // Change the cursor back to the default pointer
                 Cursor = Cursors.Default;
+            }
+            #endregion
+            
+            #region CreateDotNetCoreProject_Click(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when the 'CreateDotNetCoreProject' is clicked.
+            /// </summary>
+            private void CreateDotNetCoreProject_Click(object sender, EventArgs e)
+            {
+                try
+                {
+                    // if the SelectedProject exists
+                    if ((HasSelectedProject) && (TextHelper.Exists(SelectedProject.ProjectFolder)))
+                    {
+                        // Create a Process to launch a command window (hidden) to create the item templates
+                        Process process = new Process();
+                        ProcessStartInfo startInfo = new ProcessStartInfo();
+                        startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                        startInfo.FileName = "cmd.exe";
+                        startInfo.WorkingDirectory = SelectedProject.ProjectFolder;
+                        startInfo.Arguments = "/C " + CreateDataTier;
+                        process.StartInfo = startInfo;
+                        process.Start();
+
+                        // show the user a message
+                        MessageBoxHelper.ShowMessage("Your DataTier has been created.", "DataTier Created");
+                    }
+                    else
+                    {
+                        // show the user a message
+                        MessageBoxHelper.ShowMessage("The Project Folder is required.", "DataTier Creation Failed");
+                    }
+                }
+                catch (Exception error)
+                {
+                    // Set the error
+                    DebugHelper.WriteDebugError("CreateBlazorServicesButton_LinkClicked", this.Name, error);
+
+                    // show the user a message
+                    MessageBoxHelper.ShowMessage("The datatier could not be created in the Project Folder. Ensure you are connected to the internet and that you have permission to write to the Project Folder.", "Create DataTier Failed");
+                }
             }
             #endregion
             
@@ -393,11 +435,16 @@ namespace DataTierClient.Controls
 
                     // Enable Blazor Features to true
                     this.BindingCallbackOptionControl.Visible = SelectedProject.EnableBlazorFeatures;
+
+                    // Show the CreateDotNetCoreProject control if DotNetCore
+                    this.CreateDotNetCoreProject.Visible = SelectedProject.DotNetCore;
                 }
                 else
                 {
                     // Do not show for .Net Framework projects
                     this.BlazorServicesCheckBox.Visible = false;
+                    this.CreateDotNetCoreProject.Visible = false;
+                     this.BindingCallbackOptionControl.Visible = false;
                 }
 
                 // refresh controls

@@ -42,8 +42,9 @@
             this.ViewPDFButton = new System.Windows.Forms.Button();
             this.ViewWordButton = new System.Windows.Forms.Button();
             this.UsersGuideLabel = new System.Windows.Forms.Label();
-            this.DotNetCoreLabel = new System.Windows.Forms.Label();
+            this.InsteallDotNetCoreLabel = new System.Windows.Forms.Label();
             this.FrameworkLabel = new System.Windows.Forms.Label();
+            this.UninstallDotNetCoreLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ClickHere)).BeginInit();
             this.SuspendLayout();
             // 
@@ -85,7 +86,7 @@
             // 
             this.InstallProjectTemplatesButton.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.InstallProjectTemplatesButton.ForeColor = System.Drawing.Color.GhostWhite;
-            this.InstallProjectTemplatesButton.Location = new System.Drawing.Point(480, 174);
+            this.InstallProjectTemplatesButton.Location = new System.Drawing.Point(480, 166);
             this.InstallProjectTemplatesButton.Name = "InstallProjectTemplatesButton";
             this.InstallProjectTemplatesButton.Size = new System.Drawing.Size(248, 53);
             this.InstallProjectTemplatesButton.TabIndex = 111;
@@ -235,30 +236,44 @@
             this.UsersGuideLabel.TabIndex = 121;
             this.UsersGuideLabel.Text = "DataTier.Net Quick Start";
             // 
-            // DotNetCoreLabel
+            // InsteallDotNetCoreLabel
             // 
-            this.DotNetCoreLabel.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DotNetCoreLabel.ForeColor = System.Drawing.Color.GhostWhite;
-            this.DotNetCoreLabel.Location = new System.Drawing.Point(324, 245);
-            this.DotNetCoreLabel.Name = "DotNetCoreLabel";
-            this.DotNetCoreLabel.Size = new System.Drawing.Size(380, 35);
-            this.DotNetCoreLabel.TabIndex = 122;
-            this.DotNetCoreLabel.Text = "Click To Copy Dot Net Core CLI";
-            this.DotNetCoreLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.DotNetCoreLabel.Click += new System.EventHandler(this.DotNetCoreLabel_Click);
-            this.DotNetCoreLabel.MouseEnter += new System.EventHandler(this.Button_Enter);
-            this.DotNetCoreLabel.MouseLeave += new System.EventHandler(this.Button_Leave);
+            this.InsteallDotNetCoreLabel.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InsteallDotNetCoreLabel.ForeColor = System.Drawing.Color.GhostWhite;
+            this.InsteallDotNetCoreLabel.Location = new System.Drawing.Point(318, 233);
+            this.InsteallDotNetCoreLabel.Name = "InsteallDotNetCoreLabel";
+            this.InsteallDotNetCoreLabel.Size = new System.Drawing.Size(436, 26);
+            this.InsteallDotNetCoreLabel.TabIndex = 122;
+            this.InsteallDotNetCoreLabel.Text = "Install DotNetCore Project Templates\r\n\r\n\r\n\r\n";
+            this.InsteallDotNetCoreLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.InsteallDotNetCoreLabel.Click += new System.EventHandler(this.DotNetCoreLabel_Click);
+            this.InsteallDotNetCoreLabel.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.InsteallDotNetCoreLabel.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
             // FrameworkLabel
             // 
             this.FrameworkLabel.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FrameworkLabel.ForeColor = System.Drawing.Color.GhostWhite;
-            this.FrameworkLabel.Location = new System.Drawing.Point(345, 174);
+            this.FrameworkLabel.Location = new System.Drawing.Point(345, 166);
             this.FrameworkLabel.Name = "FrameworkLabel";
             this.FrameworkLabel.Size = new System.Drawing.Size(125, 53);
             this.FrameworkLabel.TabIndex = 123;
             this.FrameworkLabel.Text = ".Net Framework:";
             this.FrameworkLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // UninstallDotNetCoreLabel
+            // 
+            this.UninstallDotNetCoreLabel.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UninstallDotNetCoreLabel.ForeColor = System.Drawing.Color.GhostWhite;
+            this.UninstallDotNetCoreLabel.Location = new System.Drawing.Point(318, 259);
+            this.UninstallDotNetCoreLabel.Name = "UninstallDotNetCoreLabel";
+            this.UninstallDotNetCoreLabel.Size = new System.Drawing.Size(436, 35);
+            this.UninstallDotNetCoreLabel.TabIndex = 124;
+            this.UninstallDotNetCoreLabel.Text = "Uninstall DotNetCore Project Templates\r\n\r\n\r\n\r\n\r\n";
+            this.UninstallDotNetCoreLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.UninstallDotNetCoreLabel.Click += new System.EventHandler(this.UninstallDotNetCoreLabel_Click);
+            this.UninstallDotNetCoreLabel.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.UninstallDotNetCoreLabel.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
             // SetupControl
             // 
@@ -266,8 +281,9 @@
             this.BackColor = System.Drawing.Color.Transparent;
             this.BackgroundImage = global::DataTierClient.Properties.Resources.Setup_Background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Controls.Add(this.UninstallDotNetCoreLabel);
             this.Controls.Add(this.FrameworkLabel);
-            this.Controls.Add(this.DotNetCoreLabel);
+            this.Controls.Add(this.InsteallDotNetCoreLabel);
             this.Controls.Add(this.ViewPDFButton);
             this.Controls.Add(this.ViewWordButton);
             this.Controls.Add(this.UsersGuideLabel);
@@ -306,7 +322,8 @@
         private System.Windows.Forms.Button ViewPDFButton;
         private System.Windows.Forms.Button ViewWordButton;
         private System.Windows.Forms.Label UsersGuideLabel;
-        private System.Windows.Forms.Label DotNetCoreLabel;
+        private System.Windows.Forms.Label InsteallDotNetCoreLabel;
         private System.Windows.Forms.Label FrameworkLabel;
+        private System.Windows.Forms.Label UninstallDotNetCoreLabel;
     }
 }

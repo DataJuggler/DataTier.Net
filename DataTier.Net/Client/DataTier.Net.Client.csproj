@@ -125,12 +125,12 @@
     <Compile Include="ClientUtil\ConflictHelper.cs" />
     <Compile Include="ClientUtil\CryptographyHelper.cs" />
     <Compile Include="ClientUtil\DataConverter.cs" />
+    <Compile Include="ClientUtil\DialogHelper.cs" />
     <Compile Include="ClientUtil\EnumerationHelper.cs" />
     <Compile Include="ClientUtil\FieldSetHelper.cs" />
     <Compile Include="ClientUtil\GatewayHelper.cs" />
     <Compile Include="ClientUtil\MessageFilter.cs" />
     <Compile Include="ClientUtil\ReferencesSetManager.cs" />
-    <Compile Include="ClientUtil\DialogHelper.cs" />
     <Compile Include="ClientUtil\SerializationManager.cs" />
     <Compile Include="ClientUtil\SQLSMOHelper.cs" />
     <Compile Include="ClientUtil\VisualStudioHelper.cs" />

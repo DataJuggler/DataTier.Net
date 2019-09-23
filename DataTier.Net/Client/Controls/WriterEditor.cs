@@ -1,6 +1,7 @@
 
 #region using statements
 
+using DataJuggler.Core.UltimateHelper;
 using DataTierClient.Controls.Interfaces;
 using DataTierClient.Enumerations;
 using System;
@@ -52,7 +53,7 @@ namespace DataTierClient.Controls
             private void BrowseWriterFolderButton_Click(object sender, EventArgs e)
             {
                 // Browse for the folder
-                DialogHelper.ChooseFolder(this.WriterFolderTextBox, this.ProjectFolder);  
+                DataJuggler.Core.UltimateHelper.DialogHelper.ChooseFolder(this.WriterFolderTextBox, this.ProjectFolder);  
             }
             #endregion
 
