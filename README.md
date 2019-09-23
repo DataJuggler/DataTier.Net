@@ -21,7 +21,8 @@ Execute the SQL script to install DataTier.Net tables and stored procedures.<br/
 <b>Geeky Note:</b> DataTier.Net was built using DataTier.Net.
 
 <b> Step 2: Install DataTier.Net Project Templates Installer VSIX
-  
+
+<b>.Net Framework Only. the Dot Net Core templates are installed via a link on the Setup Scren</b>
 You can install the project Template into Visual Studio 2017 and / or 2019 (recommended).<br/>
 
 <img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Install%20Data%20Tier.Net%20Templates.png><br/>
@@ -160,7 +161,11 @@ Then when you create an instance of the Gateway, pass in the connection name:
 
 Note: you must use Nuget Package DataJuggler.Core.UltimateHelper version 1.3.5 or greater, as this includes a new class EnvironmentVariableHelper.cs.
 
-Blazor tutorials and videos are coming soon, I just wanted to publish a release with DataTier.Net working for .Net Framework and .Net Core.
+9.23.2019:
+I created a new sample project using Blazor & DataTier.Net: 
+https://github.com/DataJuggler/BlazorToDoList 
+
+More Blazor tutorials and videos are coming soon, I just wanted to publish a release with DataTier.Net working for .Net Framework and .Net Core.
 --
 Update 8.31.2019: I released version 1.3.2 today. I fixed a bug where new tables or views would not change the selected table in the Data Editor (Manage Data Button Click) unless the project had been saved and opened.
 
