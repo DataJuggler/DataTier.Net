@@ -29,7 +29,7 @@ You can install the project Template into Visual Studio 2017 and / or 2019 (reco
 
 Dot Net Core instructions
 
-Open a command promt or PowerShell window and execute:
+Open a command prompt or PowerShell window and execute:
 
 dotnet new -i DataJuggler.DataTier.Net.Core.ProjectTemplates
 
