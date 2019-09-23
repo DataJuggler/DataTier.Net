@@ -71,6 +71,10 @@ For more information read the DataTier.Net User's Guide located in the Class Roo
 https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/DataTier.Net%20Users%20Guide.pdf
 
 --
+Update 9.23.2019: Version 2.1.0 has been released.
+
+Many of the Blazor features have only been tested in a couple of projects so far. I am sure this code will evolve as Blazor matures.
+--
 Update 9.15.2019: 
 Major Milestone
 
