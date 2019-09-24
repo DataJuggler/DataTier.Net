@@ -748,8 +748,18 @@ namespace DataTierClient.Controls
                 this.Project = project;
                 
                 // Store original values
-                if (HasProject)
-                {
+                if ((HasProject) && (ListHelper.HasOneOrMoreItems(Project.Tables)))
+                {  
+                    // create a new gateway object
+                    Gateway gateway = new Gateway();
+
+                    // the fields for any projects
+                    foreach (DTNTable table in project.Tables)
+                    {
+                        // Load the fields for this table
+                        table.Fields = gateway.LoadDTNFieldsForTable(table.TableId);
+                    }
+
                     // Get the original values
                     this.OriginalValues = ChangeManager.GetObjectValues(project.Tables);
                 }
