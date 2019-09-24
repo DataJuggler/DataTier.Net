@@ -9,4 +9,8 @@
     <Description>This is one of four projects that make up a DataTier.Net.Core.ProjectTemplate</Description>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="DataJuggler.Net.Core" Version="2.1.0" />
+  </ItemGroup>
+
 </Project>
