@@ -210,6 +210,9 @@ namespace DataTierClient.Controls
                         // Show a message
                         string message = "The following classes were created:" + Environment.NewLine + path + Environment.NewLine + path2;
 
+                        // Hide the graph
+                        Graph.Visible = false;
+
                         // Show the user a message
                         MessageBoxHelper.ShowMessage(message, "Files Created");
                     }
