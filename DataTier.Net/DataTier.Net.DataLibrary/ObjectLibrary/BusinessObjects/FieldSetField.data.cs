@@ -20,7 +20,6 @@ namespace ObjectLibrary.BusinessObjects
         private int fieldOrdinal;
         private int fieldSetFieldId;
         private int fieldSetId;
-        private bool delete;
         #endregion
 
         #region Methods
@@ -89,20 +88,6 @@ namespace ObjectLibrary.BusinessObjects
                 set
                 {
                     fieldSetId = value;
-                }
-            }
-            #endregion
-
-            #region bool Delete
-            public bool Delete
-            {
-                get
-                {
-                    return delete;
-                }
-                set
-                {
-                    delete = value;
                 }
             }
             #endregion

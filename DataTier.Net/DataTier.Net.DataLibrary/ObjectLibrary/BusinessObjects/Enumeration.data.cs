@@ -20,7 +20,6 @@ namespace ObjectLibrary.BusinessObjects
         private string enumerationName;
         private string fieldName;
         private int projectId;
-        private bool delete;
         #endregion
 
         #region Methods
@@ -89,20 +88,6 @@ namespace ObjectLibrary.BusinessObjects
                 set
                 {
                     projectId = value;
-                }
-            }
-            #endregion
-
-            #region bool Delete
-            public bool Delete
-            {
-                get
-                {
-                    return delete;
-                }
-                set
-                {
-                    delete = value;
                 }
             }
             #endregion

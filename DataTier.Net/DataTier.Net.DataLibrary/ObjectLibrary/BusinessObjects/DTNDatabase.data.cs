@@ -28,7 +28,6 @@ namespace ObjectLibrary.BusinessObjects
         private bool serializable;
         private string serverName;
         private string userId;
-        private bool delete;
         #endregion
 
         #region Methods
@@ -209,20 +208,6 @@ namespace ObjectLibrary.BusinessObjects
                 set
                 {
                     userId = value;
-                }
-            }
-            #endregion
-
-            #region bool Delete
-            public bool Delete
-            {
-                get
-                {
-                    return delete;
-                }
-                set
-                {
-                    delete = value;
                 }
             }
             #endregion

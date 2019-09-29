@@ -24,7 +24,6 @@ namespace ObjectLibrary.BusinessObjects
         private int projectId;
         private bool readerMode;
         private int tableId;
-        private bool delete;
         #endregion
 
         #region Methods
@@ -149,20 +148,6 @@ namespace ObjectLibrary.BusinessObjects
                 set
                 {
                     tableId = value;
-                }
-            }
-            #endregion
-
-            #region bool Delete
-            public bool Delete
-            {
-                get
-                {
-                    return delete;
-                }
-                set
-                {
-                    delete = value;
                 }
             }
             #endregion

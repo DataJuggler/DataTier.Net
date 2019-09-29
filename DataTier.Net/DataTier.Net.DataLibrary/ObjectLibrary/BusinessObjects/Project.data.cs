@@ -46,7 +46,6 @@ namespace ObjectLibrary.BusinessObjects
         private string storedProcedureObjectNamespace;
         private int storedProcedureReferencesSetId;
         private string storedProcsFolder;
-        private bool delete;
         #endregion
 
         #region Methods
@@ -479,20 +478,6 @@ namespace ObjectLibrary.BusinessObjects
                 set
                 {
                     storedProcsFolder = value;
-                }
-            }
-            #endregion
-
-            #region bool Delete
-            public bool Delete
-            {
-                get
-                {
-                    return delete;
-                }
-                set
-                {
-                    delete = value;
                 }
             }
             #endregion

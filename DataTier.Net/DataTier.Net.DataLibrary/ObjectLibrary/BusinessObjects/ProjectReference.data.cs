@@ -19,7 +19,6 @@ namespace ObjectLibrary.BusinessObjects
         private string referenceName;
         private int referencesId;
         private int referencesSetId;
-        private bool delete;
         #endregion
 
         #region Methods
@@ -74,20 +73,6 @@ namespace ObjectLibrary.BusinessObjects
                 set
                 {
                     referencesSetId = value;
-                }
-            }
-            #endregion
-
-            #region bool Delete
-            public bool Delete
-            {
-                get
-                {
-                    return delete;
-                }
-                set
-                {
-                    delete = value;
                 }
             }
             #endregion

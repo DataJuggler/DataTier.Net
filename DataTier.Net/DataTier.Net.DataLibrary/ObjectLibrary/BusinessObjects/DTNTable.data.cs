@@ -27,7 +27,6 @@ namespace ObjectLibrary.BusinessObjects
         private bool serializable;
         private int tableId;
         private string tableName;
-        private bool delete;
         #endregion
 
         #region Methods
@@ -194,20 +193,6 @@ namespace ObjectLibrary.BusinessObjects
                 set
                 {
                     tableName = value;
-                }
-            }
-            #endregion
-
-            #region bool Delete
-            public bool Delete
-            {
-                get
-                {
-                    return delete;
-                }
-                set
-                {
-                    delete = value;
                 }
             }
             #endregion
