@@ -169,11 +169,30 @@ namespace DataTier.Net.StoredProcedureGenerator
             /// <param name="parameterField">The field to use as a parameter</param>
             public void CreateDeleteProc(DataTable dataTable, string procedureName, DataField parameterField)
             {
+                // get the parameterName
+                string parameterName = "";
+
                 // Perform the Procedure Innitialization
                 InitProcedure(dataTable, ProcedureTypeEnum.Delete, procedureName, parameterField);
 
                 // Write the Field Parameter
-                WriteFieldParameter(parameterField);
+                parameterName = WriteFieldParameter(parameterField);
+
+                // problem with this is, parameterName above contains the dataType also
+                // Example: @personId int
+
+                // create a delimiter to parse on spaces only
+                char[] delimiter = { ' ' };
+
+                // get the words
+                List<Word> words = WordParser.GetWords(parameterName, delimiter);
+
+                // if there  are one or more words
+                if (ListHelper.HasOneOrMoreItems(words))
+                {
+                    // now set the parameterName to the firstWord
+                    parameterName = words[0].Text;
+                }
 
                 // Write BeginProcedure
                 WriteBeginProcedure();
@@ -183,7 +202,19 @@ namespace DataTier.Net.StoredProcedureGenerator
 
                 // Write Procedure 
                 WriteLine("Delete From [" + dataTable.Name + "]");
-                
+
+                // Write Blank Line
+                WriteLine();
+
+                 // Write Comment Begin Delete Statement
+                WriteComment("Write Where Clause");
+
+                // set the WhereClause
+                string whereClause = "Where [" + parameterField.FieldName + "] = " + parameterName;
+
+                // Write the Where Clause
+                WriteLine(whereClause);
+
                 // Write Blank Line
                 WriteLine();
 
@@ -1774,8 +1805,11 @@ namespace DataTier.Net.StoredProcedureGenerator
             /// used in custom methods for DataTier.Net
             /// </summary>
             /// <param name="dataList"></param>
-            private void WriteFieldParameter(DataField dataField, bool appendComma = false)
+            private string WriteFieldParameter(DataField dataField, bool appendComma = false)
             {  
+                // initial value 
+                string parameter = "";
+
                 // check if dataField exists
                 if(dataField != null)
                 {
@@ -1789,7 +1823,7 @@ namespace DataTier.Net.StoredProcedureGenerator
                     WriteComment("Create @" + dataField.FieldName + " Paramater");
 
                     // Get FieldParam
-                    string parameter = CreateFieldParam(dataField, true);
+                    parameter = CreateFieldParam(dataField, true);
 
                     // if a comma should be added to the end
                     if (appendComma)
@@ -1807,6 +1841,9 @@ namespace DataTier.Net.StoredProcedureGenerator
                     // Write Blank Line
                     WriteLine();
                 }
+
+                // return value
+                return parameter;
             }  
             #endregion
 

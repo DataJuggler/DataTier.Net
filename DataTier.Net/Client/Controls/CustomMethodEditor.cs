@@ -1299,6 +1299,7 @@ namespace DataTierClient.Controls
                 // local (default to true)
                 bool enabled = true;
                 bool orderByVisible = false;
+                bool topRowsVisible = true;
                 
                 // If the MethodInfo object exists
                 if (this.HasMethodInfo)
@@ -1311,6 +1312,10 @@ namespace DataTierClient.Controls
 
                         // not enabled for Delete
                         enabled = false;
+
+                         // set to true
+                        orderByVisible = false;
+                        topRowsVisible = false;
                     }
                     else
                     {
@@ -1336,13 +1341,6 @@ namespace DataTierClient.Controls
                     {
                         // change to singular
                         ParametersControl.LabelText = "Parameter:";
-                    }
-
-                    // if this is a Load By method
-                    if (MethodInfo.MethodType != MethodTypeEnum.Delete_By)
-                    {
-                        // set to true
-                        orderByVisible = true;
                     }
 
                     // if Using a Custom Reader, the only order by available, is the ReaderFieldSet, and it has to also be
@@ -1422,6 +1420,7 @@ namespace DataTierClient.Controls
                 this.UseCustomReaderCheckBox.Editable = enabled;
                 this.CustomReaderControl.Editable = enabled;
                 this.EditReadersButton.Enabled = enabled;
+                this.TopRowsControl.Visible = topRowsVisible;
 
                 // refresh everything
                 Refresh();  
