@@ -70,7 +70,12 @@ The .business.cs is only created if it does not already exist, so you are free t
 For more information read the DataTier.Net User's Guide located in the Class Room folder if you clone or online here:
 https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/DataTier.Net%20Users%20Guide.pdf
 
+-- 
+
+Update 10.4.2019: I added a few new features regarding Order By in descending order, and I fixed a couple of bugs regarding Delete by procedures and what can be enabled (changed) on a Delete By procedure.
+
 --
+
 Update 9.26.2017: I just published a new video demonstrating DataTier.Net 2.1 For Dot Net Core 3.0 and Blazor Projects.
 
 https://youtu.be/sowTLLeAfm8
