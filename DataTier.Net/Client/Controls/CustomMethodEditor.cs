@@ -206,6 +206,10 @@ namespace DataTierClient.Controls
                         
                             // Set the ProcedureName Text root
                             this.ProcedureNameControl.Text = this.SelectedTable.TableName + "_" + "DeleteBy";
+
+                            // You cannot update a Delete procedure, no need to is another way to put it.
+                            this.UpdateOnBuildCheckbox.Checked = false;
+                            this.UpdateOnBuildCheckbox.Editable = false;
                         
                             // required
                             break;
@@ -226,6 +230,10 @@ namespace DataTierClient.Controls
                         
                             // Set the ProcedureName Text root
                             this.ProcedureNameControl.Text = this.SelectedTable.TableName + "_" + "FindBy";
+
+                             // Set to editable in case Delete was previously selected
+                            this.UpdateOnBuildCheckbox.Checked = true;
+                            this.UpdateOnBuildCheckbox.Editable = true;
                         
                             // required
                             break;
@@ -245,6 +253,10 @@ namespace DataTierClient.Controls
                         
                             // Set the ProcedureName Text root
                             this.ProcedureNameControl.Text = this.SelectedTable.TableName + "_" + "FetchAllFor";
+
+                            // Set to editable in case Delete was previously selected
+                            this.UpdateOnBuildCheckbox.Checked = true;
+                            this.UpdateOnBuildCheckbox.Editable = true;
                         
                             // required
                             break;
