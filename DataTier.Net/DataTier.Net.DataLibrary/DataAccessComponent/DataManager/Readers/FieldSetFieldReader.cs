@@ -40,6 +40,7 @@ namespace DataAccessComponent.DataManager.Readers
                 int fieldOrdinalfield = 1;
                 int fieldSetFieldIdfield = 2;
                 int fieldSetIdfield = 3;
+                int orderByDescendingfield = 4;
 
                 try
                 {
@@ -48,6 +49,7 @@ namespace DataAccessComponent.DataManager.Readers
                     fieldSetField.FieldOrdinal = DataHelper.ParseInteger(dataRow.ItemArray[fieldOrdinalfield], 0);
                     fieldSetField.UpdateIdentity(DataHelper.ParseInteger(dataRow.ItemArray[fieldSetFieldIdfield], 0));
                     fieldSetField.FieldSetId = DataHelper.ParseInteger(dataRow.ItemArray[fieldSetIdfield], 0);
+                    fieldSetField.OrderByDescending = DataHelper.ParseBoolean(dataRow.ItemArray[orderByDescendingfield], false);
                 }
                 catch
                 {

@@ -86,6 +86,8 @@ namespace DataTierClient.Controls
             this.EditOrderByFieldSetsButton = new DataTierClient.Controls.TabButton();
             this.OrderByTypeControl = new DataJuggler.Win.Controls.LabelComboBoxControl();
             this.OrderByFieldControl = new DataJuggler.Win.Controls.LabelComboBoxControl();
+            this.DescendingCheckBox = new DataJuggler.Win.Controls.LabelCheckBoxControl();
+            this.TopRowsControl = new DataJuggler.Win.Controls.LabelTextBoxControl();
             ((System.ComponentModel.ISupportInitialize)(this.IsViewIcon)).BeginInit();
             this.SuspendLayout();
             // 
@@ -103,7 +105,6 @@ namespace DataTierClient.Controls
             this.CustomReaderControl.LabelColor = System.Drawing.SystemColors.ControlText;
             this.CustomReaderControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomReaderControl.LabelText = "Custom Reader:";
-            this.CustomReaderControl.LabelTextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.CustomReaderControl.LabelTopMargin = 0;
             this.CustomReaderControl.LabelWidth = 188;
             this.CustomReaderControl.List = null;
@@ -129,7 +130,6 @@ namespace DataTierClient.Controls
             this.UseCustomReaderCheckBox.LabelColor = System.Drawing.SystemColors.ControlText;
             this.UseCustomReaderCheckBox.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UseCustomReaderCheckBox.LabelText = "Use Custom Reader:";
-            this.UseCustomReaderCheckBox.LabelTextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.UseCustomReaderCheckBox.LabelWidth = 200;
             this.UseCustomReaderCheckBox.Location = new System.Drawing.Point(8, 380);
             this.UseCustomReaderCheckBox.Name = "UseCustomReaderCheckBox";
@@ -149,7 +149,6 @@ namespace DataTierClient.Controls
             this.ParameterFieldControl.LabelColor = System.Drawing.SystemColors.ControlText;
             this.ParameterFieldControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ParameterFieldControl.LabelText = "Parameter Field:";
-            this.ParameterFieldControl.LabelTextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.ParameterFieldControl.LabelTopMargin = 0;
             this.ParameterFieldControl.LabelWidth = 188;
             this.ParameterFieldControl.List = null;
@@ -176,7 +175,6 @@ namespace DataTierClient.Controls
             this.ParameterTypeControl.LabelColor = System.Drawing.SystemColors.ControlText;
             this.ParameterTypeControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ParameterTypeControl.LabelText = "Parameter Type:";
-            this.ParameterTypeControl.LabelTextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.ParameterTypeControl.LabelTopMargin = 0;
             this.ParameterTypeControl.LabelWidth = 188;
             this.ParameterTypeControl.List = null;
@@ -200,7 +198,6 @@ namespace DataTierClient.Controls
             this.ProcedureNameControl.LabelColor = System.Drawing.SystemColors.ControlText;
             this.ProcedureNameControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProcedureNameControl.LabelText = "Procedure Name:";
-            this.ProcedureNameControl.LabelTextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.ProcedureNameControl.LabelTopMargin = 2;
             this.ProcedureNameControl.LabelWidth = 188;
             this.ProcedureNameControl.Location = new System.Drawing.Point(20, 220);
@@ -211,7 +208,6 @@ namespace DataTierClient.Controls
             this.ProcedureNameControl.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.ProcedureNameControl.Size = new System.Drawing.Size(620, 28);
             this.ProcedureNameControl.TabIndex = 6;
-            this.ProcedureNameControl.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.ProcedureNameControl.TextBoxBottomMargin = 0;
             this.ProcedureNameControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
             this.ProcedureNameControl.TextBoxEditableColor = System.Drawing.Color.White;
@@ -229,7 +225,6 @@ namespace DataTierClient.Controls
             this.ParametersControl.LabelColor = System.Drawing.SystemColors.ControlText;
             this.ParametersControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ParametersControl.LabelText = "Parameter:";
-            this.ParametersControl.LabelTextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.ParametersControl.LabelTopMargin = 2;
             this.ParametersControl.LabelWidth = 188;
             this.ParametersControl.Location = new System.Drawing.Point(20, 260);
@@ -240,7 +235,6 @@ namespace DataTierClient.Controls
             this.ParametersControl.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.ParametersControl.Size = new System.Drawing.Size(620, 28);
             this.ParametersControl.TabIndex = 7;
-            this.ParametersControl.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.ParametersControl.TextBoxBottomMargin = 0;
             this.ParametersControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
             this.ParametersControl.TextBoxEditableColor = System.Drawing.Color.White;
@@ -258,7 +252,6 @@ namespace DataTierClient.Controls
             this.MethodNameControl.LabelColor = System.Drawing.SystemColors.ControlText;
             this.MethodNameControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MethodNameControl.LabelText = "Method Name:";
-            this.MethodNameControl.LabelTextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.MethodNameControl.LabelTopMargin = 2;
             this.MethodNameControl.LabelWidth = 188;
             this.MethodNameControl.Location = new System.Drawing.Point(20, 180);
@@ -269,7 +262,6 @@ namespace DataTierClient.Controls
             this.MethodNameControl.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.MethodNameControl.Size = new System.Drawing.Size(620, 28);
             this.MethodNameControl.TabIndex = 5;
-            this.MethodNameControl.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.MethodNameControl.TextBoxBottomMargin = 0;
             this.MethodNameControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
             this.MethodNameControl.TextBoxEditableColor = System.Drawing.Color.White;
@@ -289,7 +281,6 @@ namespace DataTierClient.Controls
             this.MethodTypeControl.LabelColor = System.Drawing.SystemColors.ControlText;
             this.MethodTypeControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MethodTypeControl.LabelText = "Method Type:";
-            this.MethodTypeControl.LabelTextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.MethodTypeControl.LabelTopMargin = 0;
             this.MethodTypeControl.LabelWidth = 188;
             this.MethodTypeControl.List = null;
@@ -313,7 +304,6 @@ namespace DataTierClient.Controls
             this.SelectedTableControl.LabelColor = System.Drawing.SystemColors.ControlText;
             this.SelectedTableControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SelectedTableControl.LabelText = "Selected Table:";
-            this.SelectedTableControl.LabelTextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.SelectedTableControl.LabelTopMargin = 4;
             this.SelectedTableControl.LabelWidth = 188;
             this.SelectedTableControl.Location = new System.Drawing.Point(20, 20);
@@ -324,7 +314,6 @@ namespace DataTierClient.Controls
             this.SelectedTableControl.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.SelectedTableControl.Size = new System.Drawing.Size(620, 28);
             this.SelectedTableControl.TabIndex = 0;
-            this.SelectedTableControl.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.SelectedTableControl.TextBoxBottomMargin = 0;
             this.SelectedTableControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
             this.SelectedTableControl.TextBoxEditableColor = System.Drawing.Color.White;
@@ -345,7 +334,6 @@ namespace DataTierClient.Controls
             this.ParameterFieldSetControl.LabelColor = System.Drawing.SystemColors.ControlText;
             this.ParameterFieldSetControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ParameterFieldSetControl.LabelText = "Parameter Set:";
-            this.ParameterFieldSetControl.LabelTextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.ParameterFieldSetControl.LabelTopMargin = 0;
             this.ParameterFieldSetControl.LabelWidth = 188;
             this.ParameterFieldSetControl.List = null;
@@ -380,7 +368,6 @@ namespace DataTierClient.Controls
             this.PropertyNameControl.LabelColor = System.Drawing.SystemColors.ControlText;
             this.PropertyNameControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PropertyNameControl.LabelText = "Property Name:";
-            this.PropertyNameControl.LabelTextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.PropertyNameControl.LabelTopMargin = 2;
             this.PropertyNameControl.LabelWidth = 188;
             this.PropertyNameControl.Location = new System.Drawing.Point(20, 300);
@@ -391,7 +378,6 @@ namespace DataTierClient.Controls
             this.PropertyNameControl.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.PropertyNameControl.Size = new System.Drawing.Size(620, 28);
             this.PropertyNameControl.TabIndex = 8;
-            this.PropertyNameControl.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.PropertyNameControl.TextBoxBottomMargin = 0;
             this.PropertyNameControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
             this.PropertyNameControl.TextBoxEditableColor = System.Drawing.Color.White;
@@ -410,7 +396,6 @@ namespace DataTierClient.Controls
             this.UpdateOnBuildCheckbox.LabelColor = System.Drawing.SystemColors.ControlText;
             this.UpdateOnBuildCheckbox.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UpdateOnBuildCheckbox.LabelText = "Update On Build:";
-            this.UpdateOnBuildCheckbox.LabelTextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.UpdateOnBuildCheckbox.LabelWidth = 200;
             this.UpdateOnBuildCheckbox.Location = new System.Drawing.Point(8, 340);
             this.UpdateOnBuildCheckbox.Name = "UpdateOnBuildCheckbox";
@@ -483,7 +468,6 @@ namespace DataTierClient.Controls
             this.OrderByFieldSetControl.LabelColor = System.Drawing.SystemColors.ControlText;
             this.OrderByFieldSetControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OrderByFieldSetControl.LabelText = "Order By Field Set:";
-            this.OrderByFieldSetControl.LabelTextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.OrderByFieldSetControl.LabelTopMargin = 0;
             this.OrderByFieldSetControl.LabelWidth = 188;
             this.OrderByFieldSetControl.List = null;
@@ -530,7 +514,6 @@ namespace DataTierClient.Controls
             this.OrderByTypeControl.LabelColor = System.Drawing.SystemColors.ControlText;
             this.OrderByTypeControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OrderByTypeControl.LabelText = "Order By Type:";
-            this.OrderByTypeControl.LabelTextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.OrderByTypeControl.LabelTopMargin = 0;
             this.OrderByTypeControl.LabelWidth = 188;
             this.OrderByTypeControl.List = null;
@@ -556,7 +539,6 @@ namespace DataTierClient.Controls
             this.OrderByFieldControl.LabelColor = System.Drawing.SystemColors.ControlText;
             this.OrderByFieldControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OrderByFieldControl.LabelText = "Order By Field:";
-            this.OrderByFieldControl.LabelTextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.OrderByFieldControl.LabelTopMargin = 0;
             this.OrderByFieldControl.LabelWidth = 188;
             this.OrderByFieldControl.List = null;
@@ -570,10 +552,57 @@ namespace DataTierClient.Controls
             this.OrderByFieldControl.TabIndex = 14;
             this.OrderByFieldControl.Visible = false;
             // 
+            // DescendingCheckBox
+            // 
+            this.DescendingCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.DescendingCheckBox.CheckBoxHorizontalOffSet = 0;
+            this.DescendingCheckBox.CheckBoxVerticalOffSet = 4;
+            this.DescendingCheckBox.CheckChangedListener = null;
+            this.DescendingCheckBox.Checked = false;
+            this.DescendingCheckBox.Editable = true;
+            this.DescendingCheckBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DescendingCheckBox.LabelColor = System.Drawing.SystemColors.ControlText;
+            this.DescendingCheckBox.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DescendingCheckBox.LabelText = "Descending:";
+            this.DescendingCheckBox.LabelWidth = 188;
+            this.DescendingCheckBox.Location = new System.Drawing.Point(20, 534);
+            this.DescendingCheckBox.Name = "DescendingCheckBox";
+            this.DescendingCheckBox.Size = new System.Drawing.Size(226, 28);
+            this.DescendingCheckBox.TabIndex = 1004;
+            // 
+            // TopRowsControl
+            // 
+            this.TopRowsControl.BackColor = System.Drawing.Color.Transparent;
+            this.TopRowsControl.BottomMargin = 0;
+            this.TopRowsControl.Editable = true;
+            this.TopRowsControl.Encrypted = false;
+            this.TopRowsControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TopRowsControl.LabelBottomMargin = 0;
+            this.TopRowsControl.LabelColor = System.Drawing.SystemColors.ControlText;
+            this.TopRowsControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TopRowsControl.LabelText = "Select Top Rows:";
+            this.TopRowsControl.LabelTopMargin = 2;
+            this.TopRowsControl.LabelWidth = 188;
+            this.TopRowsControl.Location = new System.Drawing.Point(316, 340);
+            this.TopRowsControl.MultiLine = false;
+            this.TopRowsControl.Name = "TopRowsControl";
+            this.TopRowsControl.OnTextChangedListener = null;
+            this.TopRowsControl.PasswordMode = false;
+            this.TopRowsControl.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.TopRowsControl.Size = new System.Drawing.Size(324, 28);
+            this.TopRowsControl.TabIndex = 1005;
+            this.TopRowsControl.TextBoxBottomMargin = 0;
+            this.TopRowsControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
+            this.TopRowsControl.TextBoxEditableColor = System.Drawing.Color.White;
+            this.TopRowsControl.TextBoxFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TopRowsControl.TextBoxTopMargin = 0;
+            // 
             // CustomMethodEditor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Linen;
+            this.Controls.Add(this.TopRowsControl);
+            this.Controls.Add(this.DescendingCheckBox);
             this.Controls.Add(this.EditOrderByFieldSetsButton);
             this.Controls.Add(this.OrderByTypeControl);
             this.Controls.Add(this.IsViewIcon);
@@ -601,10 +630,12 @@ namespace DataTierClient.Controls
             this.ResumeLayout(false);
 
             }
-            #endregion
-            
         #endregion
-        
+
+        #endregion
+
+        private DataJuggler.Win.Controls.LabelCheckBoxControl DescendingCheckBox;
+        private DataJuggler.Win.Controls.LabelTextBoxControl TopRowsControl;
     }
     #endregion
 

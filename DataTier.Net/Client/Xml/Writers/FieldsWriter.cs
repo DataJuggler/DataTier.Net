@@ -136,15 +136,15 @@ namespace DataTierClient.Xml.Writers
                     sb.Append(indentString2);
                     sb.Append("<DefaultValue>" + dTNField.DefaultValue + "</DefaultValue>" + Environment.NewLine);
 
-                    // Write out the value for Delete
-
-                    sb.Append(indentString2);
-                    sb.Append("<Delete>" + dTNField.Delete + "</Delete>" + Environment.NewLine);
-
                     // Write out the value for DeleteAllForProject
 
                     sb.Append(indentString2);
                     sb.Append("<DeleteAllForProject>" + dTNField.DeleteAllForProject + "</DeleteAllForProject>" + Environment.NewLine);
+
+                    // Write out the value for Descending
+
+                    sb.Append(indentString2);
+                    sb.Append("<Descending>" + dTNField.Descending.ToString() + "</Descending>" + Environment.NewLine);
 
                     // Write out the value for Exclude
 

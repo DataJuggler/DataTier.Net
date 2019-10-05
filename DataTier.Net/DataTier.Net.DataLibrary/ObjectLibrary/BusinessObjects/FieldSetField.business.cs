@@ -16,6 +16,8 @@ namespace ObjectLibrary.BusinessObjects
 
         #region Private Variables
         private bool deleteAllForFieldSet;
+        private bool findByFieldSetId;
+        private bool loadByFieldSetId;
         #endregion
 
         #region Constructor
@@ -53,6 +55,17 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
             
+            #region FindByFieldSetId
+            /// <summary>
+            /// This property gets or sets the value for 'FindByFieldSetId'.
+            /// </summary>
+            public bool FindByFieldSetId
+            {
+                get { return findByFieldSetId; }
+                set { findByFieldSetId = value; }
+            }
+            #endregion
+
             #region HasFieldSetId
             /// <summary>
             /// This property returns true if the 'FieldSetId' is set.
@@ -70,6 +83,17 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
             
+            #region LoadByFieldSetId
+            /// <summary>
+            /// This property gets or sets the value for 'LoadByFieldSetId'.
+            /// </summary>
+            public bool LoadByFieldSetId
+            {
+                get { return loadByFieldSetId; }
+                set { loadByFieldSetId = value; }
+            }
+            #endregion
+
         #endregion
 
     }

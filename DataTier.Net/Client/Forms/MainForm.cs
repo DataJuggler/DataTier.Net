@@ -1222,7 +1222,6 @@ namespace DataTierClient.Forms
                 ProcedureWriter textWriter = null;
 
                 // locals
-                
                 DTNTable table = null;
                 DataTable dataTable = null;
                 
@@ -1235,6 +1234,10 @@ namespace DataTierClient.Forms
                 // locals for OrderBy
                 DTNField orderByField = null;
                 FieldSet orderByFieldSet = null;
+                bool descending = false;
+
+                // new feature TopRows
+                int topRows = 0;
                 
                 // If the methods collection exists and has one or more items
                 if (ListHelper.HasOneOrMoreItems(methods))
@@ -1245,6 +1248,10 @@ namespace DataTierClient.Forms
                     // Iterate the collection of Method objects
                     foreach (Method method in methods)
                     { 
+                        // reset the values
+                        descending = false;
+                        topRows = method.TopRows;
+
                         // only update if UpdateProcedureOnBuild is true
                         if (method.UpdateProcedureOnBuild)
                         {
@@ -1288,6 +1295,9 @@ namespace DataTierClient.Forms
                             {
                                 // Single Field
                                 orderByField = gateway.FindDTNField(method.OrderByFieldId);
+
+                                // set the value for descending
+                                descending = method.OrderByDescending;
                             }
                             // if OrderByType equals FieldSet
                             else if (method.OrderByType == OrderByTypeEnum.Field_Set)
@@ -1332,12 +1342,12 @@ namespace DataTierClient.Forms
                                     else if (method.MethodType == MethodTypeEnum.Find_By)
                                     {
                                         // create a find procedure
-                                        textWriter.CreateFindProc(dataTable, false, method.ProcedureName, parameter, method.CustomReader, orderByField);
+                                        textWriter.CreateFindProc(dataTable, false, method.ProcedureName, parameter, method.CustomReader, orderByField, orderByFieldSet, descending, topRows);
                                     }
                                     else if (method.MethodType == MethodTypeEnum.Load_By)
                                     {
                                         // create a fetch all procedure
-                                        textWriter.CreateFindProc(dataTable, true, method.ProcedureName, parameter, method.CustomReader);
+                                        textWriter.CreateFindProc(dataTable, true, method.ProcedureName, parameter, method.CustomReader, orderByField, orderByFieldSet, descending, topRows);
                                     }
                                 }
                                 else if (method.ParameterType == ParameterTypeEnum.Field_Set)
@@ -1357,12 +1367,12 @@ namespace DataTierClient.Forms
                                     else if (method.MethodType == MethodTypeEnum.Find_By)
                                     {
                                         // create a find procedure
-                                        textWriter.CreateFindProc(dataTable, false, method.ProcedureName, parameterList, method.CustomReader, orderByField, orderByFieldSet);
+                                        textWriter.CreateFindProc(dataTable, false, method.ProcedureName, parameterList, method.CustomReader, orderByField, orderByFieldSet, descending, topRows);
                                     }
                                     else if (method.MethodType == MethodTypeEnum.Load_By)
                                     {
                                         // create a fetch all procedure
-                                        textWriter.CreateFindProc(dataTable, true, method.ProcedureName, parameterList, method.CustomReader, orderByField, orderByFieldSet);
+                                        textWriter.CreateFindProc(dataTable, true, method.ProcedureName, parameterList, method.CustomReader, orderByField, orderByFieldSet, descending, topRows);
                                     }
                                 }
                                 else

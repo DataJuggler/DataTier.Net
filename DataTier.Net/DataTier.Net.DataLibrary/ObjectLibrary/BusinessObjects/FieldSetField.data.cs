@@ -20,6 +20,7 @@ namespace ObjectLibrary.BusinessObjects
         private int fieldOrdinal;
         private int fieldSetFieldId;
         private int fieldSetId;
+        private bool orderByDescending;
         #endregion
 
         #region Methods
@@ -88,6 +89,20 @@ namespace ObjectLibrary.BusinessObjects
                 set
                 {
                     fieldSetId = value;
+                }
+            }
+            #endregion
+
+            #region bool OrderByDescending
+            public bool OrderByDescending
+            {
+                get
+                {
+                    return orderByDescending;
+                }
+                set
+                {
+                    orderByDescending = value;
                 }
             }
             #endregion

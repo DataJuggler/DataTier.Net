@@ -117,7 +117,7 @@ namespace DataAccessComponent.DataManager.Writers
             internal static SqlParameter[] CreateInsertParameters(Method method)
             {
                 // Initial Values
-                SqlParameter[] parameters = new SqlParameter[18];
+                SqlParameter[] parameters = new SqlParameter[20];
                 SqlParameter param = null;
 
                 // verify methodexists
@@ -147,89 +147,101 @@ namespace DataAccessComponent.DataManager.Writers
                     // set parameters[3]
                     parameters[3] = param;
 
-                    // Create [OrderByFieldId] parameter
-                    param = new SqlParameter("@OrderByFieldId", method.OrderByFieldId);
+                    // Create [OrderByDescending] parameter
+                    param = new SqlParameter("@OrderByDescending", method.OrderByDescending);
 
                     // set parameters[4]
                     parameters[4] = param;
 
-                    // Create [OrderByFieldSetId] parameter
-                    param = new SqlParameter("@OrderByFieldSetId", method.OrderByFieldSetId);
+                    // Create [OrderByFieldId] parameter
+                    param = new SqlParameter("@OrderByFieldId", method.OrderByFieldId);
 
                     // set parameters[5]
                     parameters[5] = param;
 
-                    // Create [OrderByType] parameter
-                    param = new SqlParameter("@OrderByType", method.OrderByType);
+                    // Create [OrderByFieldSetId] parameter
+                    param = new SqlParameter("@OrderByFieldSetId", method.OrderByFieldSetId);
 
                     // set parameters[6]
                     parameters[6] = param;
 
-                    // Create [ParameterFieldId] parameter
-                    param = new SqlParameter("@ParameterFieldId", method.ParameterFieldId);
+                    // Create [OrderByType] parameter
+                    param = new SqlParameter("@OrderByType", method.OrderByType);
 
                     // set parameters[7]
                     parameters[7] = param;
 
-                    // Create [Parameters] parameter
-                    param = new SqlParameter("@Parameters", method.Parameters);
+                    // Create [ParameterFieldId] parameter
+                    param = new SqlParameter("@ParameterFieldId", method.ParameterFieldId);
 
                     // set parameters[8]
                     parameters[8] = param;
 
-                    // Create [ParametersFieldSetId] parameter
-                    param = new SqlParameter("@ParametersFieldSetId", method.ParametersFieldSetId);
+                    // Create [Parameters] parameter
+                    param = new SqlParameter("@Parameters", method.Parameters);
 
                     // set parameters[9]
                     parameters[9] = param;
 
-                    // Create [ParameterType] parameter
-                    param = new SqlParameter("@ParameterType", method.ParameterType);
+                    // Create [ParametersFieldSetId] parameter
+                    param = new SqlParameter("@ParametersFieldSetId", method.ParametersFieldSetId);
 
                     // set parameters[10]
                     parameters[10] = param;
 
-                    // Create [ProcedureName] parameter
-                    param = new SqlParameter("@ProcedureName", method.ProcedureName);
+                    // Create [ParameterType] parameter
+                    param = new SqlParameter("@ParameterType", method.ParameterType);
 
                     // set parameters[11]
                     parameters[11] = param;
 
-                    // Create [ProcedureText] parameter
-                    param = new SqlParameter("@ProcedureText", method.ProcedureText);
+                    // Create [ProcedureName] parameter
+                    param = new SqlParameter("@ProcedureName", method.ProcedureName);
 
                     // set parameters[12]
                     parameters[12] = param;
 
-                    // Create [ProjectId] parameter
-                    param = new SqlParameter("@ProjectId", method.ProjectId);
+                    // Create [ProcedureText] parameter
+                    param = new SqlParameter("@ProcedureText", method.ProcedureText);
 
                     // set parameters[13]
                     parameters[13] = param;
 
-                    // Create [PropertyName] parameter
-                    param = new SqlParameter("@PropertyName", method.PropertyName);
+                    // Create [ProjectId] parameter
+                    param = new SqlParameter("@ProjectId", method.ProjectId);
 
                     // set parameters[14]
                     parameters[14] = param;
 
-                    // Create [TableId] parameter
-                    param = new SqlParameter("@TableId", method.TableId);
+                    // Create [PropertyName] parameter
+                    param = new SqlParameter("@PropertyName", method.PropertyName);
 
                     // set parameters[15]
                     parameters[15] = param;
 
-                    // Create [UpdateProcedureOnBuild] parameter
-                    param = new SqlParameter("@UpdateProcedureOnBuild", method.UpdateProcedureOnBuild);
+                    // Create [TableId] parameter
+                    param = new SqlParameter("@TableId", method.TableId);
 
                     // set parameters[16]
                     parameters[16] = param;
 
-                    // Create [UseCustomReader] parameter
-                    param = new SqlParameter("@UseCustomReader", method.UseCustomReader);
+                    // Create [TopRows] parameter
+                    param = new SqlParameter("@TopRows", method.TopRows);
 
                     // set parameters[17]
                     parameters[17] = param;
+
+                    // Create [UpdateProcedureOnBuild] parameter
+                    param = new SqlParameter("@UpdateProcedureOnBuild", method.UpdateProcedureOnBuild);
+
+                    // set parameters[18]
+                    parameters[18] = param;
+
+                    // Create [UseCustomReader] parameter
+                    param = new SqlParameter("@UseCustomReader", method.UseCustomReader);
+
+                    // set parameters[19]
+                    parameters[19] = param;
                 }
 
                 // return value
@@ -276,7 +288,7 @@ namespace DataAccessComponent.DataManager.Writers
             internal static SqlParameter[] CreateUpdateParameters(Method method)
             {
                 // Initial Values
-                SqlParameter[] parameters = new SqlParameter[19];
+                SqlParameter[] parameters = new SqlParameter[21];
                 SqlParameter param = null;
 
                 // verify methodexists
@@ -306,93 +318,105 @@ namespace DataAccessComponent.DataManager.Writers
                     // set parameters[3]
                     parameters[3] = param;
 
-                    // Create parameter for [OrderByFieldId]
-                    param = new SqlParameter("@OrderByFieldId", method.OrderByFieldId);
+                    // Create parameter for [OrderByDescending]
+                    param = new SqlParameter("@OrderByDescending", method.OrderByDescending);
 
                     // set parameters[4]
                     parameters[4] = param;
 
-                    // Create parameter for [OrderByFieldSetId]
-                    param = new SqlParameter("@OrderByFieldSetId", method.OrderByFieldSetId);
+                    // Create parameter for [OrderByFieldId]
+                    param = new SqlParameter("@OrderByFieldId", method.OrderByFieldId);
 
                     // set parameters[5]
                     parameters[5] = param;
 
-                    // Create parameter for [OrderByType]
-                    param = new SqlParameter("@OrderByType", method.OrderByType);
+                    // Create parameter for [OrderByFieldSetId]
+                    param = new SqlParameter("@OrderByFieldSetId", method.OrderByFieldSetId);
 
                     // set parameters[6]
                     parameters[6] = param;
 
-                    // Create parameter for [ParameterFieldId]
-                    param = new SqlParameter("@ParameterFieldId", method.ParameterFieldId);
+                    // Create parameter for [OrderByType]
+                    param = new SqlParameter("@OrderByType", method.OrderByType);
 
                     // set parameters[7]
                     parameters[7] = param;
 
-                    // Create parameter for [Parameters]
-                    param = new SqlParameter("@Parameters", method.Parameters);
+                    // Create parameter for [ParameterFieldId]
+                    param = new SqlParameter("@ParameterFieldId", method.ParameterFieldId);
 
                     // set parameters[8]
                     parameters[8] = param;
 
-                    // Create parameter for [ParametersFieldSetId]
-                    param = new SqlParameter("@ParametersFieldSetId", method.ParametersFieldSetId);
+                    // Create parameter for [Parameters]
+                    param = new SqlParameter("@Parameters", method.Parameters);
 
                     // set parameters[9]
                     parameters[9] = param;
 
-                    // Create parameter for [ParameterType]
-                    param = new SqlParameter("@ParameterType", method.ParameterType);
+                    // Create parameter for [ParametersFieldSetId]
+                    param = new SqlParameter("@ParametersFieldSetId", method.ParametersFieldSetId);
 
                     // set parameters[10]
                     parameters[10] = param;
 
-                    // Create parameter for [ProcedureName]
-                    param = new SqlParameter("@ProcedureName", method.ProcedureName);
+                    // Create parameter for [ParameterType]
+                    param = new SqlParameter("@ParameterType", method.ParameterType);
 
                     // set parameters[11]
                     parameters[11] = param;
 
-                    // Create parameter for [ProcedureText]
-                    param = new SqlParameter("@ProcedureText", method.ProcedureText);
+                    // Create parameter for [ProcedureName]
+                    param = new SqlParameter("@ProcedureName", method.ProcedureName);
 
                     // set parameters[12]
                     parameters[12] = param;
 
-                    // Create parameter for [ProjectId]
-                    param = new SqlParameter("@ProjectId", method.ProjectId);
+                    // Create parameter for [ProcedureText]
+                    param = new SqlParameter("@ProcedureText", method.ProcedureText);
 
                     // set parameters[13]
                     parameters[13] = param;
 
-                    // Create parameter for [PropertyName]
-                    param = new SqlParameter("@PropertyName", method.PropertyName);
+                    // Create parameter for [ProjectId]
+                    param = new SqlParameter("@ProjectId", method.ProjectId);
 
                     // set parameters[14]
                     parameters[14] = param;
 
-                    // Create parameter for [TableId]
-                    param = new SqlParameter("@TableId", method.TableId);
+                    // Create parameter for [PropertyName]
+                    param = new SqlParameter("@PropertyName", method.PropertyName);
 
                     // set parameters[15]
                     parameters[15] = param;
 
-                    // Create parameter for [UpdateProcedureOnBuild]
-                    param = new SqlParameter("@UpdateProcedureOnBuild", method.UpdateProcedureOnBuild);
+                    // Create parameter for [TableId]
+                    param = new SqlParameter("@TableId", method.TableId);
 
                     // set parameters[16]
                     parameters[16] = param;
 
-                    // Create parameter for [UseCustomReader]
-                    param = new SqlParameter("@UseCustomReader", method.UseCustomReader);
+                    // Create parameter for [TopRows]
+                    param = new SqlParameter("@TopRows", method.TopRows);
 
                     // set parameters[17]
                     parameters[17] = param;
 
+                    // Create parameter for [UpdateProcedureOnBuild]
+                    param = new SqlParameter("@UpdateProcedureOnBuild", method.UpdateProcedureOnBuild);
+
+                    // set parameters[18]
+                    parameters[18] = param;
+
+                    // Create parameter for [UseCustomReader]
+                    param = new SqlParameter("@UseCustomReader", method.UseCustomReader);
+
+                    // set parameters[19]
+                    parameters[19] = param;
+
                     // Create parameter for [MethodId]
                     param = new SqlParameter("@MethodId", method.MethodId);
-                    parameters[18] = param;
+                    parameters[20] = param;
                 }
 
                 // return value

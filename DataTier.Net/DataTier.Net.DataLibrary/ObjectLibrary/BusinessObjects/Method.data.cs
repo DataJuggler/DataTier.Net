@@ -21,6 +21,7 @@ namespace ObjectLibrary.BusinessObjects
         private int methodId;
         private MethodTypeEnum methodType;
         private string name;
+        private bool orderByDescending;
         private int orderByFieldId;
         private int orderByFieldSetId;
         private OrderByTypeEnum orderByType;
@@ -33,6 +34,7 @@ namespace ObjectLibrary.BusinessObjects
         private int projectId;
         private string propertyName;
         private int tableId;
+        private int topRows;
         private bool updateProcedureOnBuild;
         private bool useCustomReader;
         #endregion
@@ -117,6 +119,20 @@ namespace ObjectLibrary.BusinessObjects
                 set
                 {
                     name = value;
+                }
+            }
+            #endregion
+
+            #region bool OrderByDescending
+            public bool OrderByDescending
+            {
+                get
+                {
+                    return orderByDescending;
+                }
+                set
+                {
+                    orderByDescending = value;
                 }
             }
             #endregion
@@ -285,6 +301,20 @@ namespace ObjectLibrary.BusinessObjects
                 set
                 {
                     tableId = value;
+                }
+            }
+            #endregion
+
+            #region int TopRows
+            public int TopRows
+            {
+                get
+                {
+                    return topRows;
+                }
+                set
+                {
+                    topRows = value;
                 }
             }
             #endregion

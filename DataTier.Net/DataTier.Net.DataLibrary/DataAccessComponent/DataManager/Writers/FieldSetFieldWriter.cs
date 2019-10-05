@@ -1,5 +1,4 @@
 
-
 #region using statements
 
 using DataAccessComponent.StoredProcedureManager.DeleteProcedures;
@@ -12,7 +11,6 @@ using System.Data;
 using System.Data.SqlClient;
 
 #endregion
-
 
 namespace DataAccessComponent.DataManager.Writers
 {
@@ -61,6 +59,38 @@ namespace DataAccessComponent.DataManager.Writers
             }
             #endregion
 
+            #region CreateFetchAllFieldSetFieldsStoredProcedure(FieldSetField fieldSetField)
+            /// <summary>
+            /// This method creates an instance of a
+            /// 'FetchAllFieldSetFieldsStoredProcedure' object and
+            /// creates the sql parameter[] array needed
+            /// to execute the procedure 'FieldSetField_FetchAll'.
+            /// </summary>
+            /// <returns>An instance of a(n) 'FetchAllFieldSetFieldsStoredProcedure' object.</returns>
+            public static new FetchAllFieldSetFieldsStoredProcedure CreateFetchAllFieldSetFieldsStoredProcedure(FieldSetField fieldSetField)
+            {
+                // Initial value
+                FetchAllFieldSetFieldsStoredProcedure fetchAllFieldSetFieldsStoredProcedure = new FetchAllFieldSetFieldsStoredProcedure();
+
+                // if the fieldSetField object exists
+                if (fieldSetField != null)
+                {
+                    // if LoadByFieldSetId is true
+                    if (fieldSetField.LoadByFieldSetId)
+                    {
+                        // Change the procedure name
+                        fetchAllFieldSetFieldsStoredProcedure.ProcedureName = "FieldSetField_FetchAllForFieldSetId";
+                        
+                        // Create the @FieldSetId parameter
+                        fetchAllFieldSetFieldsStoredProcedure.Parameters = SqlParameterHelper.CreateSqlParameters("@FieldSetId", fieldSetField.FieldSetId);
+                    }
+                }
+                
+                // return value
+                return fetchAllFieldSetFieldsStoredProcedure;
+            }
+            #endregion
+            
         #endregion
 
     }

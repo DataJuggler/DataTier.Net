@@ -101,9 +101,17 @@ namespace DataTierClient.Controls
             /// <param name="selectedIndex"></param>
             public void OnCheckChanged(LabelCheckBoxControl sender, bool isChecked)
             {
-                // Enable the CustomReader control if isChecked is true
-                this.CustomReaderControl.Enabled = isChecked;
-                this.CustomReaderControl.Editable = isChecked;
+                // If the sender object exists
+                if (NullHelper.Exists(sender))
+                {
+                    // if the senderName is CustomReaderControl
+                    if (sender.Name == CustomReaderControl.Name)
+                    {
+                        // Enable the CustomReader control if isChecked is true
+                        this.CustomReaderControl.Enabled = isChecked;
+                        this.CustomReaderControl.Editable = isChecked;
+                    }
+                }
             }
             #endregion
             
@@ -174,10 +182,10 @@ namespace DataTierClient.Controls
                             this.ParameterFieldSetControl.Editable = false;
 
                             // Set the Text
-                            this.MethodNameControl.Text = "Load" + PluralWordHelper.GetPluralName(this.SelectedTable.TableName, false) + "By";
+                            this.MethodNameControl.Text = "Load" + PluralWordHelper.GetPluralName(this.SelectedTable.TableName, false) + "For";
                         
                             // Set the ProcedureName Text root
-                            this.ProcedureNameControl.Text = this.SelectedTable.TableName + "_" + "FetchAllBy";
+                            this.ProcedureNameControl.Text = this.SelectedTable.TableName + "_" + "FetchAllFor";
                         
                             // required
                             break;
@@ -233,10 +241,10 @@ namespace DataTierClient.Controls
                             this.ParameterFieldSetControl.Editable = false;
 
                             // Set the Text
-                            this.MethodNameControl.Text = "Load" + PluralWordHelper.GetPluralName(this.SelectedTable.TableName, false) + "By";
+                            this.MethodNameControl.Text = "Load" + PluralWordHelper.GetPluralName(this.SelectedTable.TableName, false) + "For";
                         
                             // Set the ProcedureName Text root
-                            this.ProcedureNameControl.Text = this.SelectedTable.TableName + "_" + "FetchAllBy";
+                            this.ProcedureNameControl.Text = this.SelectedTable.TableName + "_" + "FetchAllFor";
                         
                             // required
                             break;
@@ -712,6 +720,7 @@ namespace DataTierClient.Controls
                     MethodInfo.UpdateOnBuild = this.UpdateOnBuildCheckbox.Checked;
                     MethodInfo.UseCustomReader = this.UseCustomReaderCheckBox.Checked;
                     MethodInfo.MethodId = this.SelectedMethod.MethodId;
+                    MethodInfo.TopRows = this.TopRowsControl.IntValue;
 
                     // if UseCustomReader is true and the SelectedMethod.CustomReader exists
                     if ((MethodInfo.UseCustomReader) && (SelectedMethod.HasCustomReader))
@@ -814,11 +823,13 @@ namespace DataTierClient.Controls
                         {
                             // Set the OrderByField
                             MethodInfo.OrderByField = this.SelectedTable.Fields[this.OrderByFieldControl.SelectedIndex];
+                            MethodInfo.OrderByDescending = DescendingCheckBox.Checked;
                         }
                         else
                         {
-                            // Set the OrderByField to nothing
+                            // Set the OrderByField to nothing & set OrderByDescending to false
                             MethodInfo.OrderByField = null;
+                            MethodInfo.OrderByDescending = false;
                         }
                     }
                     else if (MethodInfo.OrderByType == OrderByTypeEnum.Field_Set)
@@ -869,6 +880,8 @@ namespace DataTierClient.Controls
                 DTNField orderByField = null;
                 int orderByFieldIndex = -1;
                 int orderByFieldSetIndex = -1;
+                bool descending = false;
+                int topRows = 0;
 
                 // If the SelectedMethod object exists
                 if (this.HasSelectedMethod)
@@ -919,6 +932,9 @@ namespace DataTierClient.Controls
                         // verify the OrderByFieldId is set before going to the server
                         if (this.SelectedMethod.OrderByFieldId > 0)
                         {
+                            // set the value for descending
+                            descending = SelectedMethod.OrderByDescending;
+
                             // load the parameterField
                             orderByField = gateway.FindDTNField(this.SelectedMethod.OrderByFieldId);
 
@@ -971,6 +987,9 @@ namespace DataTierClient.Controls
                     // set the propertyName
                     propertyName = this.SelectedMethod.PropertyName;
 
+                    // set the value for topRows
+                    topRows = SelectedMethod.TopRows;
+
                     // set the value for updateOnBuild
                     updateOnBuild = this.SelectedMethod.UpdateProcedureOnBuild;
 
@@ -1004,7 +1023,9 @@ namespace DataTierClient.Controls
                 this.UseCustomReaderCheckBox.Checked = useCustomReader;
                 this.OrderByTypeControl.SelectedIndex = orderByTypeIndex;
                 this.OrderByFieldControl.SelectedIndex = orderByFieldIndex;
+                this.DescendingCheckBox.Checked = descending;
                 this.OrderByFieldSetControl.SelectedIndex = orderByFieldSetIndex;
+                this.TopRowsControl.Text = topRows.ToString();
                 
                 // if the value for useCustomReader is true
                 if (useCustomReader)
@@ -1095,6 +1116,7 @@ namespace DataTierClient.Controls
                 this.CustomReaderControl.SelectedIndexListener = this;
                 this.OrderByTypeControl.SelectedIndexListener = this;
                 this.OrderByFieldControl.SelectedIndexListener = this;
+                this.DescendingCheckBox.CheckChangedListener = this;
                 this.OrderByFieldSetControl.SelectedIndexListener = this;
 
                 // Set both buttons
@@ -1317,7 +1339,7 @@ namespace DataTierClient.Controls
                     }
 
                     // if this is a Load By method
-                    if (MethodInfo.MethodType == MethodTypeEnum.Load_By)
+                    if (MethodInfo.MethodType != MethodTypeEnum.Delete_By)
                     {
                         // set to true
                         orderByVisible = true;
@@ -1329,6 +1351,7 @@ namespace DataTierClient.Controls
                     {
                         // Hide OrderByFieldControl
                         OrderByFieldControl.Visible = false;
+                        DescendingCheckBox.Visible = false;
 
                         // Show the FieldSet and Button
                         OrderByFieldSetControl.Visible = true;
@@ -1354,21 +1377,28 @@ namespace DataTierClient.Controls
                                 
                                 // Show the Order By Field Control
                                 OrderByFieldControl.Visible = true;
+                                DescendingCheckBox.Visible = true;
                                 OrderByFieldControl.Editable = true;
                             }
                             else if (MethodInfo.OrderByType == OrderByTypeEnum.Field_Set)
                             {
+                                // Hide the OrderByField & DescendingCheckBox controls
+                                OrderByFieldControl.Visible = false;
+                                DescendingCheckBox.Visible = false;
+
                                 // Show the FieldSet and Button
                                 OrderByFieldSetControl.Editable = true;
                                 OrderByFieldSetControl.Enabled = true;
-                                
                                 EditOrderByFieldSetsButton.Visible = true;
                                 EditOrderByFieldSetsButton.Enabled = true;
                             }
                             else
                             {
+                                // this should never happen
+
                                 // Hide all controls
                                 OrderByFieldControl.Visible = false;
+                                DescendingCheckBox.Visible = false;
                                 OrderByFieldSetControl.Visible = false;
                                 EditOrderByFieldSetsButton.Visible = false;
                             }
@@ -1377,6 +1407,7 @@ namespace DataTierClient.Controls
                         {
                             // Hide all controls
                             OrderByFieldControl.Visible = false;
+                            DescendingCheckBox.Visible = false;
                             OrderByFieldSetControl.Visible = false;
                             OrderByTypeControl.Visible = false;
                             EditOrderByFieldSetsButton.Visible = false;

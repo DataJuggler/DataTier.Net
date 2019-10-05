@@ -469,7 +469,7 @@ namespace DataTier.Net.StoredProcedureGenerator
             /// </summary>
             /// <param name="dataTable">The table to create the Find procedure for.</param>
             /// <param name="fetchAll">Pass in true for a FetchAll (Load) or false for a Find.</param>
-            public void CreateFindProc(DataTable dataTable, bool fetchAll, CustomReader customReader = null)
+            public void CreateFindProc(DataTable dataTable, bool fetchAll, DataField parameterField = null, CustomReader customReader = null, DTNField orderByField = null, FieldSet orderByFieldSet = null, bool orderByFieldDescending = false, int topRows = 0)
             {
                 // if this is a fetch all
                 if(fetchAll)
@@ -497,6 +497,14 @@ namespace DataTier.Net.StoredProcedureGenerator
 
                 // Write Select Fields
                 string selectFields = CreateFieldList(dataTable, true, true, customReader);
+
+                // If the value for topRows is greater than zero
+                if (topRows > 0)
+                {
+                    // append Top (x) to the Select List so the top rows is returned (fixing bug where there wasn't a
+                    // space between the number and the first field.
+                    selectFields = selectFields.Replace("Select ", "Select Top " + topRows.ToString() + " "); 
+                }
                 
                 // Write select fiels
                 WriteLine(selectFields);
@@ -525,7 +533,7 @@ namespace DataTier.Net.StoredProcedureGenerator
             }
             #endregion
 
-            #region CreateFindProc(DataTable dataTable, bool fetchAll, string procedureName, DataField parameterField, CustomReader customReader = null, DataField orderByField = null, FieldSet orderByFieldSet = null)
+            #region CreateFindProc(DataTable dataTable, bool fetchAll, string procedureName, DataField parameterField, CustomReader customReader = null, DataField orderByField = null, FieldSet orderByFieldSet = null, bool orderByFieldDescending = false, int topRows = 0)
             /// <summary>
             /// This method creates the Find procedure for the table, procedureName and parameterField given. 
             /// </summary>
@@ -533,7 +541,12 @@ namespace DataTier.Net.StoredProcedureGenerator
             /// <param name="fetchAll">Is this a Find or a FetchAll procedure</param>
             /// <param name="procedureName">The name of the stored procedure to create</param>
             /// <param name="parameterField">If set, this overrides the PrimaryKey parameter</param>
-            public void CreateFindProc(DataTable dataTable, bool fetchAll, string procedureName, DataField parameterField, CustomReader customReader = null, DTNField orderByField = null, FieldSet orderByFieldSet = null)
+            /// <param name="customReader">Optional parameter if creating a custom reader</param>
+            /// <param name="orderByField">Optional parameter used to add an order by witih a single field</param>
+            /// <param name="orderByFieldSet">Optional Parameter if an Order By field set is used</param>
+            /// <param name="orderByFieldDescending">Optional parameter if a single field order by is in descending order.</param>
+            /// <param name="topRows">Optional parameter to Select top (x) number of rows</param>
+            public void CreateFindProc(DataTable dataTable, bool fetchAll, string procedureName, DataField parameterField, CustomReader customReader = null, DTNField orderByField = null, FieldSet orderByFieldSet = null, bool orderByFieldDescending = false, int topRows = 0)
             {
                 // If both objects exist
                 if ((NullHelper.Exists(dataTable, parameterField)) && (TextHelper.Exists(procedureName)))
@@ -556,6 +569,13 @@ namespace DataTier.Net.StoredProcedureGenerator
                     }
                     else
                     {
+                        // if topRows exceeds the max of 1
+                        if (topRows > 1)
+                        {
+                            //  A find method cannot return more than 1 record
+                            topRows = 1;
+                        }
+
                         // Perform the Procedure Innitialization
                         InitProcedure(dataTable, ProcedureTypeEnum.Find, procedureName, parameterField);
                     
@@ -575,6 +595,14 @@ namespace DataTier.Net.StoredProcedureGenerator
 
                     // Write Select Fields
                     string selectFields = CreateFieldList(dataTable, true, true, customReader);
+
+                    // If the value for topRows is greater than zero
+                    if (topRows > 0)
+                    {
+                        // append Top (x) to the Select List so the top rows is returned (fixing bug where there wasn't a
+                        // space between the number and the first field.
+                        selectFields = selectFields.Replace("Select ", "Select Top " + topRows.ToString() + " "); 
+                    }
                 
                     // Write select fiels
                     WriteLine(selectFields);
@@ -607,7 +635,7 @@ namespace DataTier.Net.StoredProcedureGenerator
                     if (NullHelper.Exists(orderByField))
                     {
                         // Write the OrderByField
-                        WriteOrderByField(orderByField);
+                        WriteOrderByField(orderByField, orderByFieldDescending);
                     }
                     // If the orderByFieldSet object exists
                     else if ((NullHelper.Exists(orderByFieldSet)) && (ListHelper.HasOneOrMoreItems(orderByFieldSet.Fields)))
@@ -630,7 +658,7 @@ namespace DataTier.Net.StoredProcedureGenerator
             /// <param name="fetchAll">Is this a Find or a FetchAll procedure</param>
             /// <param name="procedureName">The name of the stored procedure to create</param>
             /// <param name="orderByFieldSet">If set, this overrides the PrimaryKey parameter</param>
-            public void CreateFindProc(DataTable dataTable, bool fetchAll, string procedureName, List<DataField> parameters, CustomReader customReader = null, DTNField orderByField = null, FieldSet orderByFieldSet = null)
+            public void CreateFindProc(DataTable dataTable, bool fetchAll, string procedureName, List<DataField> parameters, CustomReader customReader = null, DTNField orderByField = null, FieldSet orderByFieldSet = null, bool orderByDescending = false, int topRows = 0)
             {
                 // If all objects exist and the parameters collection has one or more items
                 if ((NullHelper.Exists(dataTable)) && (TextHelper.Exists(procedureName)) && (ListHelper.HasOneOrMoreItems(parameters)))
@@ -662,6 +690,14 @@ namespace DataTier.Net.StoredProcedureGenerator
                     // Write Select Fields
                     string selectFields = CreateFieldList(dataTable, true, true, customReader);
                 
+                    // If the value for topRows is greater than zero
+                    if (topRows > 0)
+                    {
+                        // append Top (x) to the Select List so the top rows is returned (fixing bug where there wasn't a
+                        // space between the number and the first field.
+                        selectFields = selectFields.Replace("Select ", "Select Top " + topRows.ToString() + " "); 
+                    }
+
                     // Write select fiels
                     WriteLine(selectFields);
                 
@@ -1141,6 +1177,38 @@ namespace DataTier.Net.StoredProcedureGenerator
             {
                 // Close the open file stream
                 Writer.Close();
+            }
+            #endregion
+
+            #region FindFieldSetField(List<FieldSetField> fields, int fieldId)
+            /// <summary>
+            /// This method returns the Field
+            /// </summary>
+            public static FieldSetField FindFieldSetField(List<FieldSetField> fields, int fieldId)
+            {
+                // initial value
+                FieldSetField field = null;
+
+                // If the fields collection exists and has one or more items
+                if ((ListHelper.HasOneOrMoreItems(fields)) && (fieldId > 0))
+                {
+                    // Iterate the collection of DTNField objects
+                    foreach (FieldSetField tempField in fields)
+                    {
+                        // if this is the field being sought                        
+                        if (tempField.FieldId == fieldId)
+                        {
+                            // set the return value                            
+                            field = tempField;
+
+                            // break;
+                            break;
+                        }
+                    }
+                }
+                
+                // return value
+                return field;
             }
             #endregion
 
@@ -1998,11 +2066,11 @@ namespace DataTier.Net.StoredProcedureGenerator
             } 
             #endregion
 
-            #region WriteOrderByField(DTNField orderByField)
+            #region WriteOrderByField(DTNField orderByField, bool descending = false)
             /// <summary>
             /// This method Write Order By Field
             /// </summary>
-            public void WriteOrderByField(DTNField orderByField)
+            public void WriteOrderByField(DTNField orderByField, bool descending = false)
             {   
                 // If the orderByField object exists
                 if (NullHelper.Exists(orderByField))
@@ -2010,11 +2078,23 @@ namespace DataTier.Net.StoredProcedureGenerator
                     // Write Blank Line
                     WriteLine();
 
-                    // Write Comment
-                    WriteComment("Order by " + orderByField);
+                    // if descending
+                    if (descending)
+                    {
+                        // Write Comment
+                        WriteComment("Order by " + orderByField + " in descending order");
 
-                    // Write the FieldName
-                    WriteLine("Order By [" + orderByField.FieldName + "]");
+                        // Write the FieldName and desc
+                        WriteLine("Order By [" + orderByField.FieldName + "] desc" );
+                    }
+                    else
+                    {
+                        // Write Comment
+                        WriteComment("Order by " + orderByField);
+
+                        // Write the FieldName
+                        WriteLine("Order By [" + orderByField.FieldName + "]" );
+                    }
                 }
             }
             #endregion
@@ -2025,8 +2105,8 @@ namespace DataTier.Net.StoredProcedureGenerator
             /// </summary>
             public void WriteOrderByFieldSet(FieldSet orderByFieldSet)
             {
-                // If the orderByFieldSet object exists
-                if (NullHelper.Exists(orderByFieldSet))
+                // If the orderByFieldSet object exists and has one or more fields
+                if ((NullHelper.Exists(orderByFieldSet)) && (ListHelper.HasOneOrMoreItems(orderByFieldSet.Fields) && (orderByFieldSet.HasFieldSetFields)))
                 {
                     // Write Blank Line
                     WriteLine();
@@ -2040,6 +2120,16 @@ namespace DataTier.Net.StoredProcedureGenerator
                         // Add this field
                         sb.Append("[" + field.FieldName + "]");
 
+                        // attempt to find this field
+                        FieldSetField tempFieldSetField = FindFieldSetField(orderByFieldSet.FieldSetFields, field.FieldId);
+
+                        // if this field was found and is descending
+                        if ((NullHelper.Exists(tempFieldSetField)) && (tempFieldSetField.OrderByDescending))
+                        {
+                            // append the word descending
+                            sb.Append(" desc");
+                        }
+
                         // Add a comma
                         sb.Append(",");
                     }
@@ -2047,7 +2137,7 @@ namespace DataTier.Net.StoredProcedureGenerator
                     // set the temp
                     string temp = sb.ToString();
 
-                    // set the orderBy
+                    // set the orderBy string (trim off the last comma)
                     string orderBy = temp.Substring(0, temp.Length - 1);
 
                     // Set the Order By

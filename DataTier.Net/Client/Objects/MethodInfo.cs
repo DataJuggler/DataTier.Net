@@ -32,6 +32,7 @@ namespace DataTierClient.Objects
         private FieldSet orderByFieldSet;
         private FieldSet parameterFieldSet;
         private OrderByTypeEnum orderByType;
+        private bool orderByDescending;
         private string methodName;
         private string baseMethodName;
         private string procedureName;
@@ -43,6 +44,7 @@ namespace DataTierClient.Objects
         private bool updateOnBuild;
         private int methodId;
         private string storedProcedureVariableName;
+        private int topRows;
         #endregion
 
         #region Properties
@@ -221,6 +223,17 @@ namespace DataTierClient.Objects
             }
             #endregion
             
+            #region OrderByDescending
+            /// <summary>
+            /// This property gets or sets the value for 'OrderByDescending'.
+            /// </summary>
+            public bool OrderByDescending
+            {
+                get { return orderByDescending; }
+                set { orderByDescending = value; }
+            }
+            #endregion
+            
             #region OrderByField
             /// <summary>
             /// This property gets or sets the value for 'OrderByField'.
@@ -350,6 +363,17 @@ namespace DataTierClient.Objects
             {
                 get { return storedProcedureVariableName; }
                 set { storedProcedureVariableName = value; }
+            }
+            #endregion
+            
+            #region TopRows
+            /// <summary>
+            /// This property gets or sets the value for 'TopRows'.
+            /// </summary>
+            public int TopRows
+            {
+                get { return topRows; }
+                set { topRows = value; }
             }
             #endregion
             

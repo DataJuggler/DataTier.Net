@@ -111,11 +111,6 @@ namespace DataTierClient.Xml.Writers
                     sb.Append(indentString2);
                     sb.Append("<ClassName>" + customReader.ClassName + "</ClassName>" + Environment.NewLine);
 
-                    // Write out the value for Delete
-
-                    sb.Append(indentString2);
-                    sb.Append("<Delete>" + customReader.Delete + "</Delete>" + Environment.NewLine);
-
                     // Write out the value for FetchAllForTable
 
                     sb.Append(indentString2);

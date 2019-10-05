@@ -58,6 +58,38 @@ namespace DataTierClient.ClientUtil
                 return field;
             }
             #endregion
+
+            #region FindFieldSetField(List<FieldSetField> fields, int fieldId)
+            /// <summary>
+            /// This method returns the Field
+            /// </summary>
+            public static FieldSetField FindFieldSetField(List<FieldSetField> fields, int fieldId)
+            {
+                // initial value
+                FieldSetField field = null;
+
+                // If the fields collection exists and has one or more items
+                if ((ListHelper.HasOneOrMoreItems(fields)) && (fieldId > 0))
+                {
+                    // Iterate the collection of DTNField objects
+                    foreach (FieldSetField tempField in fields)
+                    {
+                        // if this is the field being sought                        
+                        if (tempField.FieldId == fieldId)
+                        {
+                            // set the return value                            
+                            field = tempField;
+
+                            // break;
+                            break;
+                        }
+                    }
+                }
+                
+                // return value
+                return field;
+            }
+            #endregion
             
             #region GetParametersText(ref FieldSet fieldSet)
             /// <summary>

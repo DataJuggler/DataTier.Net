@@ -146,7 +146,7 @@
             this.MinimumSize = new System.Drawing.Size(960, 640);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "RAD Studio Procedure Finder";
+            this.Text = "DataTier.Net Procedure Finder";
             this.TopPanel.ResumeLayout(false);
             this.BottomPanel.ResumeLayout(false);
             this.ResumeLayout(false);

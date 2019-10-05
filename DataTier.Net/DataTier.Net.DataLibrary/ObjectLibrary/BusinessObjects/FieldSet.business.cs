@@ -44,6 +44,44 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
 
+            #region FindFieldSetFieldIndex(int fieldId)
+            /// <summary>
+            /// This method returns the Field Set Field Index
+            /// </summary>
+            public int FindFieldSetFieldIndex(int fieldId)
+            {
+                // initial value
+                int index = -1;
+
+                // local
+                int tempIndex = -1;
+
+                // if the value for HasFieldSetFields is true
+                if (HasFieldSetFields)
+                {
+                    // iterate the FieldSetFields
+                    foreach (FieldSetField field in FieldSetFields)
+                    {
+                        // Increment the value for tempIndex
+                        tempIndex++;
+
+                        // this is the fieldId being sought
+                        if (field.FieldId == fieldId)
+                        {
+                            // set the return value
+                            index = tempIndex;
+
+                            // break out of the loop
+                            break;
+                        }
+                    }
+                }
+                
+                // return value
+                return index;
+            }
+            #endregion
+            
             #region Init()
             /// <summary>
             /// This method performs initializations for this object.
@@ -127,7 +165,10 @@ namespace ObjectLibrary.BusinessObjects
             public List<FieldSetField> FieldSetFields
             {
                 get { return fieldSetFields; }
-                set { fieldSetFields = value; }
+                set 
+                { 
+                    fieldSetFields = value;
+                }
             }
             #endregion
             

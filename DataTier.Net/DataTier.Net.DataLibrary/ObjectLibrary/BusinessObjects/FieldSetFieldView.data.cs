@@ -30,6 +30,7 @@ namespace ObjectLibrary.BusinessObjects
         private int fieldSize;
         private bool isEnumeration;
         private int isNullable;
+        private bool orderByDescending;
         private bool parameterMode;
         private bool primaryKey;
         private int projectId;
@@ -237,6 +238,20 @@ namespace ObjectLibrary.BusinessObjects
                 set
                 {
                     isNullable = value;
+                }
+            }
+            #endregion
+
+            #region bool OrderByDescending
+            public bool OrderByDescending
+            {
+                get
+                {
+                    return orderByDescending;
+                }
+                set
+                {
+                    orderByDescending = value;
                 }
             }
             #endregion

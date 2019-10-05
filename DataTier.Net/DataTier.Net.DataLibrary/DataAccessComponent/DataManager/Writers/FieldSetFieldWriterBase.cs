@@ -117,7 +117,7 @@ namespace DataAccessComponent.DataManager.Writers
             internal static SqlParameter[] CreateInsertParameters(FieldSetField fieldSetField)
             {
                 // Initial Values
-                SqlParameter[] parameters = new SqlParameter[3];
+                SqlParameter[] parameters = new SqlParameter[4];
                 SqlParameter param = null;
 
                 // verify fieldSetFieldexists
@@ -140,6 +140,12 @@ namespace DataAccessComponent.DataManager.Writers
 
                     // set parameters[2]
                     parameters[2] = param;
+
+                    // Create [OrderByDescending] parameter
+                    param = new SqlParameter("@OrderByDescending", fieldSetField.OrderByDescending);
+
+                    // set parameters[3]
+                    parameters[3] = param;
                 }
 
                 // return value
@@ -186,7 +192,7 @@ namespace DataAccessComponent.DataManager.Writers
             internal static SqlParameter[] CreateUpdateParameters(FieldSetField fieldSetField)
             {
                 // Initial Values
-                SqlParameter[] parameters = new SqlParameter[4];
+                SqlParameter[] parameters = new SqlParameter[5];
                 SqlParameter param = null;
 
                 // verify fieldSetFieldexists
@@ -210,9 +216,15 @@ namespace DataAccessComponent.DataManager.Writers
                     // set parameters[2]
                     parameters[2] = param;
 
+                    // Create parameter for [OrderByDescending]
+                    param = new SqlParameter("@OrderByDescending", fieldSetField.OrderByDescending);
+
+                    // set parameters[3]
+                    parameters[3] = param;
+
                     // Create parameter for [FieldSetFieldId]
                     param = new SqlParameter("@FieldSetFieldId", fieldSetField.FieldSetFieldId);
-                    parameters[3] = param;
+                    parameters[4] = param;
                 }
 
                 // return value

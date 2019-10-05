@@ -87,6 +87,9 @@ namespace DataTierClient.Controls
 
                             // Load the FieldSetFields for this table
                             this.SelectedFieldSet.Fields = FieldSetHelper.LoadFieldSetFields(this.SelectedFieldSet.FieldSetId);
+
+                            // Load the FieldSetFields
+                            this.SelectedFieldSet.FieldSetFields = gateway.LoadFieldSetFieldsForFieldSetId(SelectedFieldSet.FieldSetId);
                         }
 
                         // Display the selectedFieldSet
@@ -269,7 +272,9 @@ namespace DataTierClient.Controls
 
                     // Create a new collection of 'DTNField' objects.
                     this.SelectedFieldSet.Fields = new List<DTNField>();
-                    this.SelectedFieldSet.FieldSetFields = new List<FieldSetField>();
+                    
+                    // create a tempList
+                    List<FieldSetField> tempFieldSetFields = new List<FieldSetField>();
                     
                     // iterate the fields
                     for (int x = 0; x < this.FieldsListBox.Items.Count; x++)
@@ -306,21 +311,30 @@ namespace DataTierClient.Controls
                             // if we are in OrderByMode
                             if (SelectedFieldSet.OrderByMode)
                             {
+                                // local
+                                bool descending = false;
+
                                 // Set the FieldOrdinal
-                                fieldSetField.FieldOrdinal = OrderByControl.FindFieldOrdinal(field.FieldName);
+                                fieldSetField.FieldOrdinal = OrderByControl.FindFieldOrdinal(field.FieldName, ref descending);
+
+                                // attempt to fiind tghis field
+                                FieldSetField tempFieldSetField = FieldSetHelper.FindFieldSetField(SelectedFieldSet.FieldSetFields, field.FieldId);
+
+                                // if the tempFieldSetField exists
+                                if (NullHelper.Exists(tempFieldSetField))
+                                {
+                                    // set the value for OrderByDescending
+                                    fieldSetField.OrderByDescending = descending;
+                                }
                             }
 
-                            // Get the FieldSetIndex
-                            int index = GetFieldIndex(field.FieldId, true);
-                            
-                            // if the index was not found
-                            if (index < 0)
-                            {
-                                // Add this field
-                                this.SelectedFieldSet.FieldSetFields.Add(fieldSetField);
-                            }
+                            // add this item
+                            tempFieldSetFields.Add(fieldSetField);
                         }
                     }
+
+                    // set the FieldSetFields
+                    SelectedFieldSet.FieldSetFields = tempFieldSetFields;
 
                     // update the count
                     int count = this.SelectedFieldSet.FieldSetFields.Count;
@@ -1178,10 +1192,7 @@ namespace DataTierClient.Controls
                         }
 
                         // Change the EditMode
-                        this.EditMode = EditModeEnum.Edit;
-
-                        // Enable the controls now that we are in EditMode.
-                        UIEnable();
+                        this.EditMode = EditModeEnum.Edit;                      
 
                         // required
                         break;
@@ -1271,6 +1282,25 @@ namespace DataTierClient.Controls
                 // If the SelectedTable object exists
                 if (this.HasSelectedTable)
                 {
+                    // Create a new instance of a 'Gateway' object.
+                    Gateway gateway = new Gateway();
+
+                    // If the value for the property SelectedTable.HasFields is false
+                    if (!SelectedTable.HasFields)
+                    {
+                        // load the fields
+                        SelectedTable.Fields = gateway.LoadDTNFieldsForTable(SelectedTable.TableId);
+                    }
+
+                    // if the fieldSets have not been loaded
+                    if (!SelectedTable.HasFieldSets)
+                    {
+                        // Load the FieldSets
+                        SelectedTable.FieldSets = gateway.LoadFieldSetsForTable(SelectedTable.TableId);
+
+                        
+                    }
+
                     // Display the Table
                     this.TableControl.Text = this.SelectedTable.ClassName;
 

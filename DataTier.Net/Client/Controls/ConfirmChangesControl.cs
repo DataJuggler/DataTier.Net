@@ -283,6 +283,7 @@ namespace DataTierClient.Controls
                             method.TableId = MethodInfo.SelectedTable.TableId;
                             method.UpdateProcedureOnBuild = MethodInfo.UpdateOnBuild;
                             method.Parameters = MethodInfo.Parameters;
+                            method.TopRows = MethodInfo.TopRows;
 
                             // if UseCustomReader is true and the CustomReader exists and the CustomReader.Id is set
                             if ((MethodInfo.UseCustomReader) && (MethodInfo.HasCustomReader) && (!MethodInfo.CustomReader.IsNew))
@@ -303,11 +304,28 @@ namespace DataTierClient.Controls
                             {
                                 // set the OrderByFieldId
                                 method.OrderByFieldId = MethodInfo.OrderByField.FieldId;
+                                method.OrderByDescending = MethodInfo.OrderByDescending;
+
+                                // Erase FieldSetId
+                                method.OrderByFieldSetId = 0;
                             }
                             else if (MethodInfo.HasOrderByFieldSet)
                             {
+                                // erase OrderByFieldId & Descending
+                                method.OrderByFieldId = 0;
+                                method.OrderByDescending = false;
+
                                 // set the OrderByFieldSetId
                                 method.OrderByFieldSetId = MethodInfo.OrderByFieldSet.FieldSetId;
+                            }
+                            else
+                            {
+                                // erase OrderByFieldId & Descending
+                                method.OrderByFieldId = 0;
+                                method.OrderByDescending = false;
+
+                                 // Erase FieldSetId
+                                method.OrderByFieldSetId = 0;
                             }
 
                             // save the method
@@ -2665,13 +2683,20 @@ namespace DataTierClient.Controls
                     methodName = MethodInfo.MethodName;
                     
                     // get the index of the wordBy
-                    int byIndex = methodInfo.MethodName.IndexOf("By");
+                    int index = methodInfo.MethodName.IndexOf("By");
+
+                    // if the index was not found
+                    if (index < 0)
+                    {
+                        // set the index
+                        index = methodInfo.MethodName.IndexOf("For");
+                    }
                     
                     // if the word By was present
-                    if (byIndex > 0)
+                    if (index > 0)
                     {
                         // set the baseMethodName
-                        baseMethodName = methodName.Substring(0, byIndex);
+                        baseMethodName = methodName.Substring(0, index);
 
                         // set the BaseMethodName (needed in the Gateway)
                         MethodInfo.BaseMethodName = baseMethodName;

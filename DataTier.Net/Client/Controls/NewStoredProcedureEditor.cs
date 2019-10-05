@@ -279,6 +279,16 @@ namespace DataTierClient.Controls
                 // If the MethodInfo object exists
                 if (this.HasMethodInfo)
                 {  
+                    // if the OrderByFieldSet object exists
+                    if (NullHelper.Exists(orderByFieldSet))
+                    {
+                        // set the gateway
+                        Gateway gateway = new Gateway();
+
+                        // load the orderByFields
+                        orderByFieldSet.FieldSetFields = gateway.LoadFieldSetFieldsForFieldSetId(orderByFieldSet.FieldSetId);
+                    }
+
                     // Set the Name of the Table
                     this.SelectedTableControl.Text = this.MethodInfo.SelectedTable.TableName;
                   
@@ -313,7 +323,7 @@ namespace DataTierClient.Controls
                             if (MethodInfo.MethodType == MethodTypeEnum.Find_By) 
                             {  
                                 // create a find procedure
-                                writer.CreateFindProc(table, false, MethodInfo.ProcedureName, parameter, customReader, orderByField, orderByFieldSet);
+                                writer.CreateFindProc(table, false, MethodInfo.ProcedureName, parameter, customReader, orderByField, orderByFieldSet, methodInfo.OrderByDescending, methodInfo.TopRows);
                             }
                             // if Load By is the Method Type
                             else if (MethodInfo.MethodType == MethodTypeEnum.Load_By) 
@@ -330,7 +340,7 @@ namespace DataTierClient.Controls
                                 }
 
                                 // create a find procedure
-                                writer.CreateFindProc(table, true, MethodInfo.ProcedureName, parameter, customReader, orderByField, orderByFieldSet);
+                                writer.CreateFindProc(table, true, MethodInfo.ProcedureName, parameter, customReader, orderByField, orderByFieldSet, methodInfo.OrderByDescending, methodInfo.TopRows);
                             }
                         }
                     }

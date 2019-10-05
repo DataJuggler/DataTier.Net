@@ -106,15 +106,14 @@ namespace DataTierClient.Xml.Writers
 
                     // Write out each property
 
-                    // Write out the value for Delete
-
-                    sb.Append(indentString2);
-                    sb.Append("<Delete>" + fieldSetField.Delete + "</Delete>" + Environment.NewLine);
-
                     // Write out the value for DeleteAllForFieldSet
 
                     sb.Append(indentString2);
                     sb.Append("<DeleteAllForFieldSet>" + fieldSetField.DeleteAllForFieldSet + "</DeleteAllForFieldSet>" + Environment.NewLine);
+
+                    // Write out the value for Descending
+                    sb.Append(indentString2);
+                    sb.Append("<Descending>" + fieldSetField.OrderByDescending + "</Descending>" + Environment.NewLine);
 
                     // Write out the value for FieldId
 

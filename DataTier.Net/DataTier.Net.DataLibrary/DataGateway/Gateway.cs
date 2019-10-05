@@ -885,6 +885,32 @@ namespace DataGateway
             }
             #endregion
 
+            #region FindFieldSetFieldByFieldSetId(int fieldSetId)
+            /// <summary>
+            /// This method is used to find 'FieldSetField' objects for the FieldSetId given.
+            /// </summary>
+            public FieldSetField FindFieldSetFieldByFieldSetId(int fieldSetId)
+            {
+                // initial value
+                FieldSetField fieldSetField = null;
+                
+                // Create a temp FieldSetField object
+                FieldSetField tempFieldSetField = new FieldSetField();
+                
+                // Set the value for FindByFieldSetId to true
+                tempFieldSetField.FindByFieldSetId = true;
+                
+                // Set the value for FieldSetId
+                tempFieldSetField.FieldSetId = fieldSetId;
+                
+                // Perform the find
+                fieldSetField = FindFieldSetField(0, tempFieldSetField);
+                
+                // return value
+                return fieldSetField;
+            }
+            #endregion
+            
             #region FindMethod(int methodId, Method tempMethod = null)
             /// <summary>
             /// This method is used to find 'Method' objects.
@@ -1406,6 +1432,32 @@ namespace DataGateway
             }
             #endregion
 
+            #region LoadFieldSetFieldsForFieldSetId(int fieldSetId)
+            /// <summary>
+            /// This method is used to load 'FieldSetField' objects for the FieldSetId given.
+            /// </summary>
+            public List<FieldSetField> LoadFieldSetFieldsForFieldSetId(int fieldSetId)
+            {
+                // initial value
+                List<FieldSetField> fieldSetFields = null;
+                
+                // Create a temp FieldSetField object
+                FieldSetField tempFieldSetField = new FieldSetField();
+                
+                // Set the value for LoadByFieldSetId to true
+                tempFieldSetField.LoadByFieldSetId = true;
+                
+                // Set the value for FieldSetId
+                tempFieldSetField.FieldSetId = fieldSetId;
+                
+                // Perform the load
+                fieldSetFields = LoadFieldSetFields(tempFieldSetField);
+                
+                // return value
+                return fieldSetFields;
+            }
+            #endregion
+            
             #region LoadFieldSetFieldViews(FieldSetFieldView tempFieldSetFieldView = null)
             /// <summary>
             /// This method loads a collection of 'FieldSetFieldView' objects.
@@ -2191,4 +2243,3 @@ namespace DataGateway
     #endregion
 
 }
-

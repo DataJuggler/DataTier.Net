@@ -2,6 +2,8 @@
 
 #region using statements
 
+using DataTierClient.ClientUtil;
+using DataGateway;
 using DataJuggler.Core.UltimateHelper;
 using ObjectLibrary.BusinessObjects;
 using System;
@@ -101,6 +103,20 @@ namespace DataTierClient.Controls
                             // Set the FieldOrdinal
                             field.FieldOrdinal = index;
 
+                            // if the SelectedFieldSet exists
+                            if (HasFieldSet)
+                            {
+                                // attempt to find the tempFieldSetField
+                                FieldSetField tempFieldSetField = FieldSetHelper.FindFieldSetField(this.FieldSet.FieldSetFields, field.FieldId);
+
+                                // If the tempFieldSetField object exists
+                                if (NullHelper.Exists(tempFieldSetField))
+                                {
+                                    // set the value for descending
+                                    field.Descending = tempFieldSetField.OrderByDescending;
+                                }
+                            }
+
                             // Determine the action by the index
                             switch (index)
                             {
@@ -109,6 +125,13 @@ namespace DataTierClient.Controls
                                     // Setup this control
                                     FieldControl1.Text = field.FieldName;
                                     FieldControl1.Visible = true;
+
+                                    // if descending
+                                    if (field.Descending)
+                                    {
+                                        // // toggle to descending
+                                        FieldControl1.OrderByDescendingMenuItem_Click(this, new EventArgs());
+                                    }
 
                                     // if this is a wide field
                                     if (field.FieldName.Length > largeWord)
@@ -126,6 +149,13 @@ namespace DataTierClient.Controls
                                     FieldControl2.Text = field.FieldName;
                                     FieldControl2.Visible = true;
 
+                                    // if descending
+                                    if (field.Descending)
+                                    {
+                                        // // toggle to descending
+                                        FieldControl2.OrderByDescendingMenuItem_Click(this, new EventArgs());
+                                    }
+
                                      // if this is a wide field
                                     if (field.FieldName.Length > largeWord)
                                     {
@@ -142,6 +172,13 @@ namespace DataTierClient.Controls
                                     FieldControl3.Text = field.FieldName;
                                     FieldControl3.Visible = true;
 
+                                    // if descending
+                                    if (field.Descending)
+                                    {
+                                        // // toggle to descending
+                                        FieldControl3.OrderByDescendingMenuItem_Click(this, new EventArgs());
+                                    }
+
                                     // if this is a wide field
                                     if (field.FieldName.Length > largeWord)
                                     {
@@ -157,6 +194,13 @@ namespace DataTierClient.Controls
                                     // Setup this control
                                     FieldControl4.Text = field.FieldName;
                                     FieldControl4.Visible = true;
+
+                                    // if descending
+                                    if (field.Descending)
+                                    {
+                                        // // toggle to descending
+                                        FieldControl4.OrderByDescendingMenuItem_Click(this, new EventArgs());
+                                    }
 
                                     // if this is a wide field
                                     if (field.FieldName.Length > largeWord)
@@ -265,11 +309,11 @@ namespace DataTierClient.Controls
             }
             #endregion
 
-            #region FindFieldOrdinal(string fieldName)
+            #region FindFieldOrdinal(string fieldName, ref bool descending)
             /// <summary>
             /// This method returns the Field Ordinal
             /// </summary>
-            public int FindFieldOrdinal(string fieldName)
+            public int FindFieldOrdinal(string fieldName, ref bool descending)
             {
                 // initial value
                 int fieldOrdinal = -1;
@@ -300,6 +344,13 @@ namespace DataTierClient.Controls
                 {
                     // set the return value
                     fieldOrdinal = 3;
+                }
+
+                // if the fieldOrdinal was set and the FieldSet.FieldSetFields[index] exists
+                if ((fieldOrdinal > -1) && (HasFieldSet) && (FieldSet.HasFieldSetFields) && (fieldOrdinal < FieldSet.FieldSetFields.Count))
+                {
+                    // set the value for descending
+                    descending = FieldSet.FieldSetFields[fieldOrdinal].OrderByDescending;
                 }
                 
                 // return value
@@ -402,7 +453,7 @@ namespace DataTierClient.Controls
                     // Swap the value for FieldOrdinal
                     Fields[index + 1].FieldOrdinal--;
 
-                    // Display the Fields (which resorts)
+                    // Display the Fields (which re-sorts)
                     DisplayFields();
 
                     // Reselect the field
@@ -421,6 +472,52 @@ namespace DataTierClient.Controls
                 
                 // return value
                 return swapped;
+            }
+            #endregion
+            
+            #region ToggleDescending(int index, bool descending)
+            /// <summary>
+            /// This method Toggle Descending
+            /// </summary>
+            public void ToggleDescending(int index, bool descending)
+            {
+                // if the index is in range
+                if ((HasFields) && ((index >= 0) && (index < Fields.Count)))
+                {
+                    // if the SelectedFieldSetEditor exists and the SelectedFieldSet is set
+                    if ((HasParentFieldSetEditor) && (ParentFieldSetEditor.HasSelectedFieldSet))
+                    {
+                        // if the FieldSetFields do not exist in the SelectedFieldSet
+                        if (!ListHelper.HasOneOrMoreItems(ParentFieldSetEditor.SelectedFieldSet.FieldSetFields))
+                        {
+                            // Create a new instance of a 'Gateway' object.
+                            Gateway gateway = new Gateway();
+
+                            // Load the FieldSetFields for the SelectedFieldSet
+                            ParentFieldSetEditor.SelectedFieldSet.FieldSetFields = gateway.LoadFieldSetFieldsForFieldSetId(ParentFieldSetEditor.SelectedFieldSet.FieldSetId);
+                        }
+
+                        // verify the ParentFieldSetEditor.SelectedFieldSet has FieldSetFields
+                        if (ParentFieldSetEditor.SelectedFieldSet.HasFieldSetFields)
+                        {
+                            // local
+                            int fieldSetFieldIndex = ParentFieldSetEditor.SelectedFieldSet.FindFieldSetFieldIndex(Fields[index].FieldId);
+
+                            // if the fieldSetFieldIndex was found
+                            if (fieldSetFieldIndex >= 0)
+                            {
+                                // set the value for descending
+                                ParentFieldSetEditor.SelectedFieldSet.FieldSetFields[fieldSetFieldIndex].OrderByDescending = descending;
+                            }
+                        }
+                    }
+
+                    // set the value
+                    Fields[index].Descending = descending;
+
+                    // Enable the Save button if there are changes, or disable it if no changes
+                    ParentFieldSetEditor.UIEnable();
+                }
             }
             #endregion
             

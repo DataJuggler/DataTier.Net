@@ -41,20 +41,22 @@ namespace DataAccessComponent.DataManager.Readers
                 int methodIdfield = 2;
                 int methodTypefield = 3;
                 int namefield = 4;
-                int orderByFieldIdfield = 5;
-                int orderByFieldSetIdfield = 6;
-                int orderByTypefield = 7;
-                int parameterFieldIdfield = 8;
-                int parametersfield = 9;
-                int parametersFieldSetIdfield = 10;
-                int parameterTypefield = 11;
-                int procedureNamefield = 12;
-                int procedureTextfield = 13;
-                int projectIdfield = 14;
-                int propertyNamefield = 15;
-                int tableIdfield = 16;
-                int updateProcedureOnBuildfield = 17;
-                int useCustomReaderfield = 18;
+                int orderByDescendingfield = 5;
+                int orderByFieldIdfield = 6;
+                int orderByFieldSetIdfield = 7;
+                int orderByTypefield = 8;
+                int parameterFieldIdfield = 9;
+                int parametersfield = 10;
+                int parametersFieldSetIdfield = 11;
+                int parameterTypefield = 12;
+                int procedureNamefield = 13;
+                int procedureTextfield = 14;
+                int projectIdfield = 15;
+                int propertyNamefield = 16;
+                int tableIdfield = 17;
+                int topRowsfield = 18;
+                int updateProcedureOnBuildfield = 19;
+                int useCustomReaderfield = 20;
 
                 try
                 {
@@ -64,6 +66,7 @@ namespace DataAccessComponent.DataManager.Readers
                     method.UpdateIdentity(DataHelper.ParseInteger(dataRow.ItemArray[methodIdfield], 0));
                     method.MethodType = (MethodTypeEnum) DataHelper.ParseInteger(dataRow.ItemArray[methodTypefield], 0);
                     method.Name = DataHelper.ParseString(dataRow.ItemArray[namefield]);
+                    method.OrderByDescending = DataHelper.ParseBoolean(dataRow.ItemArray[orderByDescendingfield], false);
                     method.OrderByFieldId = DataHelper.ParseInteger(dataRow.ItemArray[orderByFieldIdfield], 0);
                     method.OrderByFieldSetId = DataHelper.ParseInteger(dataRow.ItemArray[orderByFieldSetIdfield], 0);
                     method.OrderByType = (OrderByTypeEnum) DataHelper.ParseInteger(dataRow.ItemArray[orderByTypefield], 0);
@@ -76,6 +79,7 @@ namespace DataAccessComponent.DataManager.Readers
                     method.ProjectId = DataHelper.ParseInteger(dataRow.ItemArray[projectIdfield], 0);
                     method.PropertyName = DataHelper.ParseString(dataRow.ItemArray[propertyNamefield]);
                     method.TableId = DataHelper.ParseInteger(dataRow.ItemArray[tableIdfield], 0);
+                    method.TopRows = DataHelper.ParseInteger(dataRow.ItemArray[topRowsfield], 0);
                     method.UpdateProcedureOnBuild = DataHelper.ParseBoolean(dataRow.ItemArray[updateProcedureOnBuildfield], false);
                     method.UseCustomReader = DataHelper.ParseBoolean(dataRow.ItemArray[useCustomReaderfield], false);
                 }

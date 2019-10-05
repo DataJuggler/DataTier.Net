@@ -29,6 +29,7 @@ namespace DataTierClient.Controls
         private bool selected;
         private string text;
         private int index;
+        private bool descending;
         #endregion
         
         #region Constructor
@@ -129,6 +130,36 @@ namespace DataTierClient.Controls
             }
             #endregion
             
+            #region OrderByDescendingMenuItem_Click(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when the 'OrderByDescendingMenuItem' is clicked.
+            /// </summary>
+            internal void OrderByDescendingMenuItem_Click(object sender, EventArgs e)
+            {
+                // toggle
+                this.Descending = !this.Descending;
+
+                // if currently descending
+                if (this.Descending)
+                {
+                    // Change the text
+                    this.OrderByDescendingMenuItem.Text = "Switch To Ascending.";
+                }
+                else
+                {
+                    // Change the text
+                    this.OrderByDescendingMenuItem.Text = "Switch To Descending.";
+                }
+
+                // if the value for HasParentOrderByControl is true
+                if (HasParentOrderByControl)
+                {
+                    // Notify the parent so this can be saved
+                    ParentOrderByControl.ToggleDescending(Index, Descending);
+                }
+            }
+            #endregion
+            
         #endregion
         
         #region Methods
@@ -149,6 +180,18 @@ namespace DataTierClient.Controls
                 {
                     // Set to gray
                     this.MainPanel.BackgroundImage = Properties.Resources.JackIsADullBoyGray;
+
+                    // if descending
+                    if (descending)  
+                    {
+                        // Set to Coral (close to red)
+                        this.FieldNameLabel.BackColor = Color.Coral;
+                    }
+                    else
+                    {
+                        // Set to transparent
+                        this.FieldNameLabel.BackColor = Color.Transparent;
+                    }
                 }
             }
             #endregion
@@ -165,6 +208,10 @@ namespace DataTierClient.Controls
                 // if the value for Selected is true
                 if ((Selected) && (EditMode))
                 {
+                    // Enable the ContextMenu
+                    ContextMenu.Enabled = true;
+                    OrderByDescendingMenuItem.Enabled = true;
+
                     switch (index)
                     {
                         case 0:
@@ -217,6 +264,10 @@ namespace DataTierClient.Controls
                     // Hide both
                     MoveLeftButton.Visible = false;
                     MoveRightButton.Visible = false;
+
+                    // Disable
+                    ContextMenu.Enabled = false;
+                    OrderByDescendingMenuItem.Enabled = false;
                 }
             }
             #endregion
@@ -249,6 +300,32 @@ namespace DataTierClient.Controls
             }
             #endregion
 
+            #region Descending
+            /// <summary>
+            /// This property gets or sets the value for 'Descending'.
+            /// </summary>
+            public bool Descending
+            {
+                get { return descending; }
+                set 
+                { 
+                    // set the value
+                    descending = value;
+
+                    // if descending
+                    if (descending)
+                    {
+                        // use another color
+                        FieldNameLabel.BackColor = Color.Coral;
+                    }
+                    else
+                    {
+                        FieldNameLabel.BackColor = Color.Transparent;
+                    }
+                }
+            }
+            #endregion
+            
             #region EditMode
             /// <summary>
             /// This read only property returns the value for 'EditMode'.

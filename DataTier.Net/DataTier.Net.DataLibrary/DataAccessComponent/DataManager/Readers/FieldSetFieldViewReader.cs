@@ -50,12 +50,13 @@ namespace DataAccessComponent.DataManager.Readers
                 int fieldSizefield = 11;
                 int isEnumerationfield = 12;
                 int isNullablefield = 13;
-                int parameterModefield = 14;
-                int primaryKeyfield = 15;
-                int projectIdfield = 16;
-                int requiredfield = 17;
-                int scopefield = 18;
-                int tableIdfield = 19;
+                int orderByDescendingfield = 14;
+                int parameterModefield = 15;
+                int primaryKeyfield = 16;
+                int projectIdfield = 17;
+                int requiredfield = 18;
+                int scopefield = 19;
+                int tableIdfield = 20;
 
                 try
                 {
@@ -74,6 +75,7 @@ namespace DataAccessComponent.DataManager.Readers
                     fieldSetFieldView.FieldSize = DataHelper.ParseInteger(dataRow.ItemArray[fieldSizefield], 0);
                     fieldSetFieldView.IsEnumeration = DataHelper.ParseBoolean(dataRow.ItemArray[isEnumerationfield], false);
                     fieldSetFieldView.IsNullable = DataHelper.ParseInteger(dataRow.ItemArray[isNullablefield], 0);
+                    fieldSetFieldView.OrderByDescending = DataHelper.ParseBoolean(dataRow.ItemArray[orderByDescendingfield], false);
                     fieldSetFieldView.ParameterMode = DataHelper.ParseBoolean(dataRow.ItemArray[parameterModefield], false);
                     fieldSetFieldView.PrimaryKey = DataHelper.ParseBoolean(dataRow.ItemArray[primaryKeyfield], false);
                     fieldSetFieldView.ProjectId = DataHelper.ParseInteger(dataRow.ItemArray[projectIdfield], 0);

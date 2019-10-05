@@ -43,6 +43,7 @@ namespace DataTierClient.Controls
             /// </summary>
             private void InitializeComponent()
             {
+            this.components = new System.ComponentModel.Container();
             this.LeftMarginPanel = new System.Windows.Forms.Panel();
             this.MoveLeftButton = new System.Windows.Forms.PictureBox();
             this.BottomMarginPanel2 = new System.Windows.Forms.Panel();
@@ -55,11 +56,14 @@ namespace DataTierClient.Controls
             this.BottomMarginPanel = new System.Windows.Forms.Panel();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.FieldNameLabel = new System.Windows.Forms.Label();
+            this.ContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.OrderByDescendingMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LeftMarginPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MoveLeftButton)).BeginInit();
             this.RightMarginPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MoveRightButton)).BeginInit();
             this.MainPanel.SuspendLayout();
+            this.ContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // LeftMarginPanel
@@ -183,6 +187,7 @@ namespace DataTierClient.Controls
             // FieldNameLabel
             // 
             this.FieldNameLabel.BackColor = System.Drawing.Color.Transparent;
+            this.FieldNameLabel.ContextMenuStrip = this.ContextMenu;
             this.FieldNameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FieldNameLabel.ForeColor = System.Drawing.Color.Black;
             this.FieldNameLabel.Location = new System.Drawing.Point(0, 0);
@@ -194,6 +199,23 @@ namespace DataTierClient.Controls
             this.FieldNameLabel.Click += new System.EventHandler(this.FieldNameLabel_Click);
             this.FieldNameLabel.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.FieldNameLabel.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
+            // 
+            // ContextMenu
+            // 
+            this.ContextMenu.Enabled = false;
+            this.ContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.OrderByDescendingMenuItem});
+            this.ContextMenu.Name = "ContextMenu";
+            this.ContextMenu.Size = new System.Drawing.Size(247, 26);
+            // 
+            // OrderByDescendingMenuItem
+            // 
+            this.OrderByDescendingMenuItem.Enabled = false;
+            this.OrderByDescendingMenuItem.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OrderByDescendingMenuItem.Name = "OrderByDescendingMenuItem";
+            this.OrderByDescendingMenuItem.Size = new System.Drawing.Size(246, 22);
+            this.OrderByDescendingMenuItem.Text = "Order By Descending";
+            this.OrderByDescendingMenuItem.Click += new System.EventHandler(this.OrderByDescendingMenuItem_Click);
             // 
             // OrderByFieldControl
             // 
@@ -214,6 +236,7 @@ namespace DataTierClient.Controls
             this.RightMarginPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MoveRightButton)).EndInit();
             this.MainPanel.ResumeLayout(false);
+            this.ContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
             }
@@ -233,6 +256,8 @@ namespace DataTierClient.Controls
         private System.Windows.Forms.Panel BottomMarginPanel;
         private System.Windows.Forms.Panel MainPanel;
         private System.Windows.Forms.Label FieldNameLabel;
+        private System.Windows.Forms.ContextMenuStrip ContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem OrderByDescendingMenuItem;
     }
     #endregion
 

@@ -104,13 +104,6 @@ namespace DataTierClient.Xml.Writers
                     // Write the open fieldSet node
                     sb.Append("<FieldSet>" + Environment.NewLine);
 
-                    // Write out each property
-
-                    // Write out the value for Delete
-
-                    sb.Append(indentString2);
-                    sb.Append("<Delete>" + fieldSet.Delete + "</Delete>" + Environment.NewLine);
-
                     // Write out the value for FetchAllForTable
 
                     sb.Append(indentString2);

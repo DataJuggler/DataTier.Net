@@ -16,6 +16,7 @@ namespace ObjectLibrary.BusinessObjects
     {
 
         #region Private Variables
+        private bool descending;
         private bool fetchAllForFieldSet;
         private bool deleteAllForProject;
         private bool fetchAllForTable;
@@ -65,6 +66,17 @@ namespace ObjectLibrary.BusinessObjects
             {
                 get { return deleteAllForProject; }
                 set { deleteAllForProject = value; }
+            }
+            #endregion
+            
+            #region Descending
+            /// <summary>
+            /// This property gets or sets the value for 'Descending'.
+            /// </summary>
+            public bool Descending
+            {
+                get { return descending; }
+                set { descending = value; }
             }
             #endregion
             
