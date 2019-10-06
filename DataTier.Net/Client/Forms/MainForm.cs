@@ -8,6 +8,8 @@ using DataGateway;
 using DataJuggler.Core.UltimateHelper;
 using DataJuggler.Core.UltimateHelper.Objects;
 using DataJuggler.Net;
+using DataJuggler.Win.Controls;
+using DataJuggler.Win.Controls.Interfaces;
 using DataTier.Net.StoredProcedureGenerator;
 using DataTierClient.Builders;
 using DataTierClient.ClientUtil;
@@ -25,18 +27,20 @@ using System.IO;
 using System.Linq;
 using System.Diagnostics;
 using System.Text;
+using System.Net;
 using System.Windows.Forms;
+using DataTierClient.Xml.Parsers;
 
 #endregion
 
 namespace DataTierClient.Forms
 {
 
-    #region class MainForm : Form, IWindowsForm
+    #region class MainForm : Form, ICheckChangedListener
     /// <summary>
     /// The main UI for this application.
     /// </summary>
-    public partial class MainForm : Form
+    public partial class MainForm : Form, ICheckChangedListener
     {
     
         #region Private Variables
@@ -53,6 +57,8 @@ namespace DataTierClient.Forms
         private bool setupComplete;
         private ButtonManager buttonManager;
         private string storedProceduresSQLPath;
+        private Admin admin;
+        private const string UpdateCheckXml = @"https://datajuggler.com/Updates/DataTier.Net.Update.xml";
         #endregion
         
         #region Constructor
@@ -251,6 +257,37 @@ namespace DataTierClient.Forms
             }
             #endregion
            
+            #region OnCheckChanged(LabelCheckBoxControl sender, bool isChecked)
+            /// <summary>
+            /// event is fired when On Check Changed
+            /// </summary>
+            public void OnCheckChanged(LabelCheckBoxControl sender, bool isChecked)
+            {
+                // if the Admin object exists
+                if (HasAdmin)
+                {
+                    // set the value
+                    Admin.CheckForUpdates = isChecked;
+
+                    // Create a new instance of a 'Gateway' object.
+                    Gateway gateway = new Gateway();
+
+                    // save the admin
+                    bool saved = gateway.SaveAdmin(ref admin);
+
+                    // if saved
+                    if (saved)
+                    {
+                        // show the text
+                        MainStatus.Text = "   Your changes have been saved.";
+
+                        // Enable the timer
+                        StatusTimer.Enabled = true;
+                    }
+                }
+            }
+            #endregion
+            
             #region OpenProjectButton_Click(object sender, EventArgs e)
             /// <summary>
             /// event is fired when the 'OpenProjectButton' is clicked.
@@ -340,6 +377,20 @@ namespace DataTierClient.Forms
             } 
             #endregion
         
+            #region StatusTimer_Tick(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when Status Timer _ Tick
+            /// </summary>
+            private void StatusTimer_Tick(object sender, EventArgs e)
+            {
+                // erase the text
+                MainStatus.Text = "";
+
+                // disable the timer now
+                StatusTimer.Enabled = false;
+            }
+            #endregion
+            
             #region StoredProcedureSQLButton_Click(object sender, EventArgs e)
             /// <summary>
             /// event is fired when the 'StoredProcedureSQLButton' is clicked.
@@ -1152,6 +1203,137 @@ namespace DataTierClient.Forms
             } 
             #endregion
 
+            #region CheckForUpdate()
+            /// <summary>
+            /// This method returns the For Update
+            /// </summary>
+            public Admin CheckForUpdate()
+            {
+                // initial value
+                Admin update = null;
+
+                // what has changed? Code? SQL? Both?
+                bool codeHasChanged = false;
+                bool sqlHasChanged = false;
+                bool codeVersionUpdated = false;
+                bool sqlHashUpdated = false;
+                string sqlHash = "";
+
+                // Create a new instance of a 'Gateway' object.
+                Gateway gateway = new Gateway();
+
+                try
+                {
+                    // get the client
+                    using (var client = new WebClient())
+                    {
+                        // get the result
+                        string updateXmlText = client.DownloadString(UpdateCheckXml);
+
+                        // if the string was found
+                        if (TextHelper.Exists(updateXmlText))
+                        {
+                            // create an adminParser
+                            AdminParser parser = new AdminParser();
+
+                            // load the admin from the web
+                            update = parser.ParseAdmin(updateXmlText);
+
+                            // If the update object exists
+                            if (NullHelper.Exists(update))
+                            {
+                                // find the first admin
+                                Admin admin = gateway.FindFirstAdmin();
+
+                                // if the current admin object exists
+                                if (NullHelper.Exists(admin))
+                                {
+                                    // determine what has changed
+                                    codeHasChanged = (admin.CodeVersion != update.CodeVersion);
+                                    sqlHasChanged = (admin.SchemaHash != update.SchemaHash);
+                                }
+                            }
+                        }
+                    }
+
+                    // if the code or SQL has changed
+                    if ((codeHasChanged) || (sqlHasChanged))
+                    {
+                        // get the installedVersion
+                        string installedCodeVersion = Application.ProductVersion.Substring(0, Application.ProductVersion.Length - 2);
+
+                        // test if the user has updated
+                        if ((codeHasChanged) && (update.CodeVersion == installedCodeVersion)) 
+                        {
+                            // the code has been updated
+                            codeHasChanged = false;
+
+                            // the Admin object must be updated
+                            codeVersionUpdated = true;
+                        }
+
+                        // if the sqlHasChanged from the Admin to the Update Version, check if the
+                        // Sql Has Been Fixed
+                        if (sqlHasChanged)
+                        {
+                            // Get the hash
+                            sqlHash = GetSqlHash();
+
+                            // if the SQL now matches
+                            if (TextHelper.IsEqual(sqlHash, update.SchemaHash))
+                            {
+                                // the sql is updated now
+                                sqlHasChanged = false;
+
+                                 // the Admin object must be updated with the new SqlHash
+                                sqlHashUpdated = true;
+                            }
+                        }
+
+                        // if the adminUpdateRequired is true
+                        if ((codeVersionUpdated) || (sqlHashUpdated))
+                        {
+                            // codeVersionUpdated is true
+                            if (codeVersionUpdated)
+                            {
+                                // update the CodeVersion
+                                admin.CodeVersion = installedCodeVersion;
+                            }
+
+                            // if updated
+                            if (sqlHashUpdated)
+                            {
+                                // set the new hash
+                                admin.SchemaHash = sqlHash;
+                            }
+
+                            // Save the admin
+                            bool saved = gateway.SaveAdmin(ref admin);
+                        }
+                        else
+                        {
+                            // Create a new instance of an 'UpdateForm' object.
+                            UpdateForm form = new UpdateForm();
+
+                            // setup the form
+                            form.Setup(sqlHasChanged);
+
+                            // Show the Form
+                            form.ShowDialog();
+                        }
+                    }
+                }
+                catch (Exception error)
+                {   
+                    // for debugging for now
+                    DebugHelper.WriteDebugError("CheckForUpdate", this.Name, error);
+                }
+
+                // return value
+                return update;
+            }
+            #endregion
+            
             #region ConfirmDelete(string itemType)
             /// <summary>
             /// If the user confirms deleting
@@ -1710,6 +1892,58 @@ namespace DataTierClient.Forms
             }
             #endregion
             
+            #region GetSqlHash()
+            /// <summary>
+            /// This method returns the Sql Hash
+            /// </summary>
+            public string GetSqlHash()
+            {
+                // initial value
+                string sqlHash = "";
+
+                // create a database
+                Database database = new Database();
+
+                // paste in your connectionstring
+                database.ConnectionString = ConfigurationHelper.ReadAppSetting("Connectionstring");
+
+                try
+                {
+                    // if the connecionstring exists
+                    if (TextHelper.Exists(database.ConnectionString))
+                    {
+                        // Create a new instance of a 'SQLDatabaseConnector' object.
+                        SQLDatabaseConnector connector = new SQLDatabaseConnector();
+
+                        // set the connectionstring on the connector
+                        connector.ConnectionString = database.ConnectionString;
+
+                        // open the connection
+                        connector.Open();
+
+                        // get the sqlHash
+                        sqlHash = connector.GetDatabaseSchemaHash(database);
+
+                        // close the connection
+                        connector.Close();
+                    }
+                    else
+                    {
+                        // Show the user a message
+                        MessageBoxHelper.ShowMessage("You must paste in a connection string to continue.", "Connectionstring Required");
+                    }
+                }
+                catch (Exception error)
+                {
+                    // Show the user a message
+                    DebugHelper.WriteDebugError("GetSqlHash", this.Name, error);
+                }
+                
+                // return value
+                return sqlHash;
+            }
+            #endregion
+            
             #region GetStoredProceduresSQLPath()
             /// <summary>
             /// This method returns the Stored Procedures SQL Path
@@ -1830,6 +2064,30 @@ namespace DataTierClient.Forms
 
                     // Create the gateway
                     this.Gateway = new Gateway();
+
+                    // Load the Admin object
+                    List<Admin> admins = Gateway.LoadAdmins();
+
+                    // If the admins collection exists and has one or more items
+                    if (ListHelper.HasOneOrMoreItems(admins))
+                    {
+                        // setf the Admin object
+                        this.Admin = admins[0];
+                    }
+
+                    // if the value for HasAdmin is true
+                    if (HasAdmin)
+                    {
+                        // set the value of checked
+                        CheckForUpdatesCheckBox.Checked = Admin.CheckForUpdates;
+
+                        // if Check For Updates is true
+                        if (Admin.CheckForUpdates)
+                        {
+                            // first test, create a writer for the Xml to place on my webserver
+                            Admin update = CheckForUpdate();
+                        }
+                    }
                 
                     // Load Projects
                     this.AllProjects = this.Gateway.LoadProjects();
@@ -1847,6 +2105,9 @@ namespace DataTierClient.Forms
                     this.BuildAllButton.Enabled = false;
                     this.EditProjectButton.Enabled = false;
                     this.CloseProjectButton.Enabled = false;
+
+                    // Setup the Listener
+                    this.CheckForUpdatesCheckBox.CheckChangedListener = this;
                 
                     // Enable Controls
                     UIEnable();
@@ -2579,11 +2840,22 @@ namespace DataTierClient.Forms
                     return;
                 }
             }
-            #endregion
-            
         #endregion
-        
+
+        #endregion
+
         #region Properties
+
+            #region Admin
+            /// <summary>
+            /// This property gets or sets the value for 'Admin'.
+            /// </summary>
+            public Admin Admin
+            {
+                get { return admin; }
+                set { admin = value; }
+            }
+            #endregion
             
             #region AllProjects
             /// <summary>
@@ -2739,6 +3011,23 @@ namespace DataTierClient.Forms
             {
                 get { return gateway; }
                 set { gateway = value; }
+            }
+            #endregion
+            
+            #region HasAdmin
+            /// <summary>
+            /// This property returns true if this object has an 'Admin'.
+            /// </summary>
+            public bool HasAdmin
+            {
+                get
+                {
+                    // initial value
+                    bool hasAdmin = (this.Admin != null);
+                    
+                    // return value
+                    return hasAdmin;
+                }
             }
             #endregion
             

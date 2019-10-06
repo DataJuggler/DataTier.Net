@@ -56,14 +56,14 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DataJuggler.Core.UltimateHelper, Version=1.3.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DataJuggler.Core.UltimateHelper.1.3.6\lib\net461\DataJuggler.Core.UltimateHelper.dll</HintPath>
+    <Reference Include="DataJuggler.Core.UltimateHelper, Version=1.3.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\DataJuggler.Core.UltimateHelper.1.3.9\lib\net461\DataJuggler.Core.UltimateHelper.dll</HintPath>
     </Reference>
-    <Reference Include="DataJuggler.Net, Version=5.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DataJuggler.Net.5.7.0\lib\net461\DataJuggler.Net.dll</HintPath>
+    <Reference Include="DataJuggler.Net, Version=5.7.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\DataJuggler.Net.5.7.1\lib\net461\DataJuggler.Net.dll</HintPath>
     </Reference>
-    <Reference Include="DataJuggler.Win.Controls, Version=5.6.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DataJuggler.Win.Controls.5.6.8\lib\net461\DataJuggler.Win.Controls.dll</HintPath>
+    <Reference Include="DataJuggler.Win.Controls, Version=5.6.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\DataJuggler.Win.Controls.5.6.9\lib\net461\DataJuggler.Win.Controls.dll</HintPath>
     </Reference>
     <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <SpecificVersion>False</SpecificVersion>
@@ -310,6 +310,12 @@
     <Compile Include="Controls\DataEditorControl.Designer.cs">
       <DependentUpon>DataEditorControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UpdateControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UpdateControl.Designer.cs">
+      <DependentUpon>UpdateControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ValidationControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -484,6 +490,12 @@
     <Compile Include="Forms\SetupForm.Designer.cs">
       <DependentUpon>SetupForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\UpdateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UpdateForm.Designer.cs">
+      <DependentUpon>UpdateForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ValidationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -517,6 +529,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Xml\Parsers\AdminParser.base.cs" />
+    <Compile Include="Xml\Parsers\AdminParser.custom.cs" />
+    <Compile Include="Xml\Writers\AdminWriter.cs" />
     <Compile Include="Xml\Writers\CustomReadersWriter.cs" />
     <Compile Include="Xml\Writers\FieldSetFieldsWriter.cs" />
     <Compile Include="Xml\Writers\FieldSetsWriter.cs" />
@@ -636,6 +651,9 @@
     <EmbeddedResource Include="Controls\DataEditorControl.resx">
       <DependentUpon>DataEditorControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\UpdateControl.resx">
+      <DependentUpon>UpdateControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ValidationControl.resx">
       <DependentUpon>ValidationControl.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -726,6 +744,9 @@
     <EmbeddedResource Include="Forms\SetupForm.resx">
       <DependentUpon>SetupForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UpdateForm.resx">
+      <DependentUpon>UpdateForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ValidationForm.resx">
       <DependentUpon>ValidationForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -776,6 +797,7 @@
     <None Include="Resources\DataTier.Net.Blazor.png" />
     <None Include="Resources\DataTier.Net.Blazor1.png" />
     <Content Include="Tools.ico" />
+    <Content Include="Xml\Files\DataTier.Net.Update.xml" />
     <Content Include="Xml\Files\DeserializedFieldSet.xml" />
     <Content Include="Xml\Files\SelectedFieldSet.xml" />
     <None Include="Resources\Information2.png" />

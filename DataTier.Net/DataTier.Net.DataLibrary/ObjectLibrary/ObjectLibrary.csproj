@@ -38,11 +38,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DataJuggler.Core.UltimateHelper, Version=1.3.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\DataJuggler.Core.UltimateHelper.1.3.6\lib\net461\DataJuggler.Core.UltimateHelper.dll</HintPath>
+    <Reference Include="DataJuggler.Core.UltimateHelper, Version=1.3.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\DataJuggler.Core.UltimateHelper.1.3.9\lib\net461\DataJuggler.Core.UltimateHelper.dll</HintPath>
     </Reference>
-    <Reference Include="DataJuggler.Net, Version=5.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\DataJuggler.Net.5.7.0\lib\net461\DataJuggler.Net.dll</HintPath>
+    <Reference Include="DataJuggler.Net, Version=5.7.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\DataJuggler.Net.5.7.1\lib\net461\DataJuggler.Net.dll</HintPath>
     </Reference>
     <Reference Include="envdte, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <SpecificVersion>False</SpecificVersion>
@@ -60,6 +60,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessObjects\Admin.business.cs" />
+    <Compile Include="BusinessObjects\Admin.data.cs" />
     <Compile Include="BusinessObjects\CustomReader.business.cs" />
     <Compile Include="BusinessObjects\CustomReader.data.cs" />
     <Compile Include="BusinessObjects\DTNDatabase.business.cs" />

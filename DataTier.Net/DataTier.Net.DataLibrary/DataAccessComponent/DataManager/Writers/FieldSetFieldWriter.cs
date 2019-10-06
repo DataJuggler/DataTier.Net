@@ -91,6 +91,48 @@ namespace DataAccessComponent.DataManager.Writers
             }
             #endregion
             
+            #region CreateFindFieldSetFieldStoredProcedure(FieldSetField fieldSetField)
+            /// <summary>
+            /// This method creates an instance of a
+            /// 'FindFieldSetFieldStoredProcedure' object and
+            /// creates the sql parameter[] array needed
+            /// to execute the procedure 'FieldSetField_Find'.
+            /// </summary>
+            /// <param name="fieldSetField">The 'FieldSetField' to use to
+            /// get the primary key parameter.</param>
+            /// <returns>An instance of an FetchUserStoredProcedure</returns>
+            public static new FindFieldSetFieldStoredProcedure CreateFindFieldSetFieldStoredProcedure(FieldSetField fieldSetField)
+            {
+                // Initial Value
+                FindFieldSetFieldStoredProcedure findFieldSetFieldStoredProcedure = null;
+
+                // verify fieldSetField exists
+                if(fieldSetField != null)
+                {
+                    // Instanciate findFieldSetFieldStoredProcedure
+                    findFieldSetFieldStoredProcedure = new FindFieldSetFieldStoredProcedure();
+
+                    // if fieldSetField.FindByFieldSetId is true
+                    if (fieldSetField.FindByFieldSetId)
+                    {
+                        // Change the procedure name
+                        findFieldSetFieldStoredProcedure.ProcedureName = "FieldSetField_FindByFieldSetId";
+                        
+                        // Create the @FieldSetId parameter
+                        findFieldSetFieldStoredProcedure.Parameters = SqlParameterHelper.CreateSqlParameters("@FieldSetId", fieldSetField.FieldSetId);
+                    }
+                    else
+                    {
+                        // Now create parameters for this procedure
+                        findFieldSetFieldStoredProcedure.Parameters = CreatePrimaryKeyParameter(fieldSetField);
+                    }
+                }
+
+                // return value
+                return findFieldSetFieldStoredProcedure;
+            }
+            #endregion
+            
         #endregion
 
     }

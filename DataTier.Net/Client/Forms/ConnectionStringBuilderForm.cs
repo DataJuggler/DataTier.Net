@@ -507,7 +507,7 @@ namespace DataTierClient.Forms
                         if (connectionTest)
                         {
                             // Change the text to passed
-                            this.StatusLabel.Text = "Database Connection Passed.";
+                            this.StatusLabel.Text = "Database Connection Test Passed.";
 
                             // Show Success
                             this.StatusImage.BackgroundImage = Properties.Resources.Success;

@@ -25,6 +25,7 @@ namespace ApplicationLogicComponent.Controllers
         #region Private Variables
         private ErrorHandler errorProcessor;
         private ApplicationController appController;
+        private AdminController adminController;
         private CustomReaderController customreaderController;
         private DTNDatabaseController dtndatabaseController;
         private DTNFieldController dtnfieldController;
@@ -64,6 +65,7 @@ namespace ApplicationLogicComponent.Controllers
             private void Init()
             {
                 // Create Child Controllers
+                this.AdminController = new AdminController(this.ErrorProcessor, this.AppController);
                 this.CustomReaderController = new CustomReaderController(this.ErrorProcessor, this.AppController);
                 this.DTNDatabaseController = new DTNDatabaseController(this.ErrorProcessor, this.AppController);
                 this.DTNFieldController = new DTNFieldController(this.ErrorProcessor, this.AppController);
@@ -97,6 +99,14 @@ namespace ApplicationLogicComponent.Controllers
             {
                 get { return errorProcessor; }
                 set { errorProcessor = value; }
+            }
+            #endregion
+
+            #region AdminController
+            public AdminController AdminController
+            {
+                get { return adminController; }
+                set { adminController = value; }
             }
             #endregion
 

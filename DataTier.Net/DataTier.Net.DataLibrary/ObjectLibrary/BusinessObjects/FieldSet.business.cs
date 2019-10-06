@@ -44,32 +44,26 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
 
-            #region FindFieldSetFieldIndex(int fieldId)
+            #region FindFieldSetFieldIndex()
             /// <summary>
             /// This method returns the Field Set Field Index
             /// </summary>
             public int FindFieldSetFieldIndex(int fieldId)
             {
                 // initial value
-                int index = -1;
+                int fieldSetFieldIndex = -1;
 
-                // local
-                int tempIndex = -1;
-
-                // if the value for HasFieldSetFields is true
+                // if the Fields collection exists
                 if (HasFieldSetFields)
                 {
-                    // iterate the FieldSetFields
-                    foreach (FieldSetField field in FieldSetFields)
+                    // iterate the fields
+                    for (int x = 0; x < FieldSetFields.Count; x++)
                     {
-                        // Increment the value for tempIndex
-                        tempIndex++;
-
-                        // this is the fieldId being sought
-                        if (field.FieldId == fieldId)
+                        // if this is the field being sought
+                        if (FieldSetFields[x].FieldId == fieldId)
                         {
                             // set the return value
-                            index = tempIndex;
+                            fieldSetFieldIndex = x;
 
                             // break out of the loop
                             break;
@@ -78,7 +72,7 @@ namespace ObjectLibrary.BusinessObjects
                 }
                 
                 // return value
-                return index;
+                return fieldSetFieldIndex;
             }
             #endregion
             
@@ -165,10 +159,7 @@ namespace ObjectLibrary.BusinessObjects
             public List<FieldSetField> FieldSetFields
             {
                 get { return fieldSetFields; }
-                set 
-                { 
-                    fieldSetFields = value;
-                }
+                set { fieldSetFields = value; }
             }
             #endregion
             

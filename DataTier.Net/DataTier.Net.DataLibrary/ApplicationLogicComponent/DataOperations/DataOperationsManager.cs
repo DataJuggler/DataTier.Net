@@ -29,6 +29,7 @@ namespace ApplicationLogicComponent.DataOperations
         #region Private Variables
         private DataManager dataManager;
         private SystemMethods systemMethods;
+        private AdminMethods adminMethods;
         private CustomReaderMethods customreaderMethods;
         private DTNDatabaseMethods dtndatabaseMethods;
         private DTNFieldMethods dtnfieldMethods;
@@ -68,6 +69,7 @@ namespace ApplicationLogicComponent.DataOperations
             {
                 // Create Child DataOperatonMethods
                 this.SystemMethods = new SystemMethods();
+                this.AdminMethods = new AdminMethods(this.DataManager);
                 this.CustomReaderMethods = new CustomReaderMethods(this.DataManager);
                 this.DTNDatabaseMethods = new DTNDatabaseMethods(this.DataManager);
                 this.DTNFieldMethods = new DTNFieldMethods(this.DataManager);
@@ -101,6 +103,14 @@ namespace ApplicationLogicComponent.DataOperations
             {
                 get { return systemMethods; }
                 set { systemMethods = value; }
+            }
+            #endregion
+
+            #region AdminMethods
+            public AdminMethods AdminMethods
+            {
+                get { return adminMethods; }
+                set { adminMethods = value; }
             }
             #endregion
 

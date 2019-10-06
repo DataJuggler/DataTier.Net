@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Admin>
+  <AdminId>1</AdminId>
+  <CodeVersion>2.2.0</CodeVersion>
+  <GitCommit>e29e09c</GitCommit>
+  <IsNew>False</IsNew>
+  <LastUpdated>10/6/2019 5:28:07 AM</LastUpdated>
+  <SchemaHash>fkFGtMQS89Y=</SchemaHash>
+</Admin>
