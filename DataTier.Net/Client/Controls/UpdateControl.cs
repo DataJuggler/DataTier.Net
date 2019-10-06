@@ -64,6 +64,21 @@ namespace DataTierClient.Controls
             }
             #endregion
             
+            #region UIEnable()
+            /// <summary>
+            /// This method UI Enable
+            /// </summary>
+            public void UIEnable()
+            {
+                // Only show the SQL Update & Instructions if SQL Changes have occurred.
+                this.SQLUpdateLabel.Visible = ShowSQLUpdate;
+                this.SQLUpdateInstructions.Visible = ShowSQLUpdate;
+
+                // Refresh Everything
+                this.Refresh();
+            }
+            #endregion
+            
         #endregion
         
         #region Events
@@ -105,6 +120,30 @@ namespace DataTierClient.Controls
 
         #region Properties
 
+            #region CreateParams
+            /// <summary>
+            /// This property here is what did the trick to reduce the flickering.
+            /// I also needed to make all of the controls Double Buffered, but
+            /// this was the final touch. It is a little slow when you switch tabs
+            /// but that is because the repainting is finishing before control is
+            /// returned.
+            /// </summary>
+            protected override CreateParams CreateParams
+            {
+                get
+                {
+                    // initial value
+                    CreateParams cp = base.CreateParams;
+
+                    // Apparently this interrupts Paint to finish before showing
+                    cp.ExStyle |= 0x02000000;
+
+                    // return value
+                    return cp;
+                }
+            }
+            #endregion
+
             #region ShowSQLUpdate
             /// <summary>
             /// This property gets or sets the value for 'ShowSQLUpdate'.
@@ -112,7 +151,13 @@ namespace DataTierClient.Controls
             public bool ShowSQLUpdate
             {
                 get { return showSQLUpdate; }
-                set { showSQLUpdate = value; }
+                set 
+                { 
+                    showSQLUpdate = value;
+
+                    // Enable controls
+                    UIEnable();
+                }
             }
             #endregion
             

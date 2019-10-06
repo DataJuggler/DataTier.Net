@@ -113,6 +113,7 @@
             this.Controls.Add(this.CodeUpdateLabel);
             this.Controls.Add(this.UpdateLabel);
             this.Controls.Add(this.NoChangesLabel);
+            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Name = "UpdateControl";
