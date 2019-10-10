@@ -286,7 +286,7 @@ namespace DataTierClient.Controls
                         Gateway gateway = new Gateway();
 
                         // load the orderByFields
-                        orderByFieldSet.FieldSetFields = gateway.LoadFieldSetFieldsForFieldSetId(orderByFieldSet.FieldSetId);
+                        orderByFieldSet.FieldSetFields = gateway.LoadFieldSetFieldViewsByFieldSetId(orderByFieldSet.FieldSetId);
                     }
 
                     // Set the Name of the Table

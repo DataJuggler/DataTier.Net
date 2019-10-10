@@ -20,7 +20,7 @@ namespace ObjectLibrary.BusinessObjects
         private bool fetchAllForTable;
         private List<DTNField> fields;
         private List<DataField> dataFields;
-        private List<FieldSetField> fieldSetFields;
+        private List<FieldSetFieldView> fieldSetFields;
         #endregion
 
         #region Constructor
@@ -76,6 +76,38 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
             
+            #region FindFieldSetFieldView(int fieldId)
+            /// <summary>
+            /// This method returns the Field Set Field View
+            /// </summary>
+            public FieldSetFieldView FindFieldSetFieldView(int fieldId)
+            {
+                // initial value
+                FieldSetFieldView fieldSetFieldView = null;
+
+                // If the value for fieldId is greater than zero
+                if ((fieldId > 0) && (HasFieldSetFields))
+                {
+                    // Iterate the collection of FieldSetFieldView objects
+                    foreach (FieldSetFieldView field in FieldSetFields)
+                    {
+                        // if this is the field being sought
+                        if (field.FieldId == fieldId)
+                        {
+                            // set the return value
+                            fieldSetFieldView = field;
+
+                            // break out of the loop
+                            break;
+                        }
+                    }
+                }
+                
+                // return value
+                return fieldSetFieldView;
+            }
+            #endregion
+            
             #region Init()
             /// <summary>
             /// This method performs initializations for this object.
@@ -84,7 +116,7 @@ namespace ObjectLibrary.BusinessObjects
             {
                 // Create the sub objects
                 this.Fields = new List<DTNField>();
-                this.FieldSetFields = new List<FieldSetField>();
+                this.FieldSetFields = new List<FieldSetFieldView>();
             }
         #endregion
 
@@ -156,7 +188,7 @@ namespace ObjectLibrary.BusinessObjects
             /// <summary>
             /// This property gets or sets the value for 'FieldSetFields'.
             /// </summary>
-            public List<FieldSetField> FieldSetFields
+            public List<FieldSetFieldView> FieldSetFields
             {
                 get { return fieldSetFields; }
                 set { fieldSetFields = value; }

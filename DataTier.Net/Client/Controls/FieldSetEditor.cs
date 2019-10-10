@@ -16,6 +16,7 @@ using ObjectLibrary.Enumerations;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 #endregion
@@ -38,6 +39,7 @@ namespace DataTierClient.Controls
         private bool readerModeReadOnly;
         private DTNTable selectedTable;
         private FieldSet selectedFieldSet;
+        private FieldSetFieldView selectedFieldSetFieldView;
         private EditModeEnum editMode;
         private string failedReason;
         private string storedXml;
@@ -61,6 +63,28 @@ namespace DataTierClient.Controls
 
         #region Events
 
+            #region Button_Enter(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when Button _ Enter
+            /// </summary>
+            private void Button_Enter(object sender, EventArgs e)
+            {
+                // Change the cursor to a hand
+                Cursor = Cursors.Hand;
+            }
+            #endregion
+            
+            #region Button_Leave(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when Button _ Leave
+            /// </summary>
+            private void Button_Leave(object sender, EventArgs e)
+            {
+                // Change the cursor back to the default pointer
+                Cursor = Cursors.Default;
+            }
+            #endregion
+            
             #region FieldSetsListBox_SelectedIndexChanged(object sender, EventArgs e)
             /// <summary>
             /// event is fired when a selection is made in the 'FieldSetsListBox_'.
@@ -89,11 +113,14 @@ namespace DataTierClient.Controls
                             this.SelectedFieldSet.Fields = FieldSetHelper.LoadFieldSetFields(this.SelectedFieldSet.FieldSetId);
 
                             // Load the FieldSetFields
-                            this.SelectedFieldSet.FieldSetFields = gateway.LoadFieldSetFieldsForFieldSetId(SelectedFieldSet.FieldSetId);
+                            this.SelectedFieldSet.FieldSetFields = gateway.LoadFieldSetFieldViewsByFieldSetId(SelectedFieldSet.FieldSetId);
                         }
 
                         // Display the selectedFieldSet
                         DisplaySelectedFieldSet();
+
+                        // Display the Order By Fields
+                        DisplayOrderByFields();
                     }
 
                     // Enable or disable controls
@@ -108,42 +135,81 @@ namespace DataTierClient.Controls
             /// </summary>
             private void FieldsListBox_ItemCheck(object sender, ItemCheckEventArgs e)
             {
-                // locals
-                bool isChecked = false;
-                ColumnInfo columnInfo = null;
-
-                // do not Capture when Loading
-                if (!this.Loading)
+                try
                 {
-                    // If the SelectedFieldSet object exists
-                    if (this.HasSelectedFieldSet)
+                    // locals
+                    bool isChecked = false;
+                    ColumnInfo columnInfo = null;
+
+                    // do not Capture when Loading
+                    if (!this.Loading)
                     {
-                        // if it is now checked
-                        if (e.NewValue == CheckState.Checked)
+                        // If the SelectedFieldSet object exists
+                        if (this.HasSelectedFieldSet)
                         {
-                            // toggle to true
-                            isChecked = true;
+                            // if it is now checked
+                            if (e.NewValue == CheckState.Checked)
+                            {
+                                // toggle to true
+                                isChecked = true;
+                            }
+
+                            // Create a new instance of a 'ColumnInfo' object.
+                            columnInfo = new ColumnInfo(e.Index, isChecked);    
                         }
 
-                        // Create a new instance of a 'ColumnInfo' object.
-                        columnInfo = new ColumnInfo(e.Index, isChecked);    
-                    }
+                        // set the fieldId
+                        int fieldId = SelectedTable.Fields[e.Index].FieldId;
 
-                    // Capture the SelectedFieldSet
-                    CaptureSelectedFieldSet(columnInfo);
+                        // set the fieldName
+                        string fieldName = SelectedTable.Fields[e.Index].FieldName;
 
-                    // Enable controls
-                    UIEnable();
+                        /// find the index
+                        int index = SelectedFieldSet.FindFieldSetFieldIndex(fieldId);
 
-                    // If the selectedFieldSet exists and OrderByMode is true
-                    if ((HasSelectedFieldSet) && (SelectedFieldSet.OrderByMode))
-                    {
-                        // Load the fields
-                        this.SelectedFieldSet.Fields = FieldSetHelper.LoadFieldSetFields(SelectedFieldSet.FieldSetFields, SelectedFieldSet.Fields);
+                        // if ischecked
+                        if (isChecked)
+                        {
+                            // add item
+                            
+                            // create a new FieldSetFieldView object
+                            FieldSetFieldView fieldSetField = new FieldSetFieldView();
+
+                            // set the properties
+                            fieldSetField.FieldId = fieldId;
+                            fieldSetField.FieldOrdinal = OrderByFields.Count;
+                            fieldSetField.FieldSetId = SelectedFieldSet.FieldSetId;
+                            fieldSetField.FieldName = fieldName;
+
+                            // add this item
+                            SelectedFieldSet.FieldSetFields.Add(fieldSetField);
+                        }
+                        else
+                        {
+                            // remove item
+
+                            // if the index was found
+                            if (index >= 0)
+                            {
+                                // remove this field
+                                SelectedFieldSet.FieldSetFields.RemoveAt(index);
+
+                                // Reset the FieldOrdinals
+                                ReOrderBy();
+                            }
+                        }
+
+                        // Enable controls
+                        UIEnable();
 
                         // Redisplay the Fields
-                        OrderByControl.DisplayFields();
+                        DisplayOrderByFields();
                     }
+                }
+                catch (Exception error)
+                {
+                    // for debugging only for now
+                    DebugHelper.WriteDebugError("FieldsListBox_ItemChecK", this.Name, error);
                 }
             }
             #endregion
@@ -152,7 +218,7 @@ namespace DataTierClient.Controls
             /// <summary>
             /// event is fired when Fields List Box _ Key Down
             /// </summary>
-            internal void FieldsListBox_KeyDown(object sender, KeyEventArgs e)
+            private void FieldsListBox_KeyDown(object sender, KeyEventArgs e)
             {
                 // if the SelectedTable exists
                 if (this.HasSelectedTable)
@@ -169,6 +235,152 @@ namespace DataTierClient.Controls
                         HandleSelectNone();
                     }
                 }
+            }
+            #endregion
+            
+            #region MoveDownButton_Click(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when the 'MoveDownButton' is clicked.
+            /// </summary>
+            private void MoveDownButton_Click(object sender, EventArgs e)
+            {
+                // locals
+                int thisFieldId = 0;
+                int nextFieldId = 0;
+                int thisFieldIndex = -1;
+                int nextFieldIndex = -1;
+                int index = OrderByFieldsListBox.SelectedIndex;
+
+                // verify the index is in range
+                if ((index >= 0) && (index < OrderByFields.Count))
+                {
+                    // now update this item
+                    thisFieldId = OrderByFields[index].FieldId;
+                    
+                    // set the fieldId for the tiem above this item
+                    nextFieldId = OrderByFields[index + 1].FieldId;
+
+                    // find the index
+                    thisFieldIndex = SelectedFieldSet.FindFieldSetFieldIndex(thisFieldId);
+
+                    // find the nextIndex
+                    nextFieldIndex = SelectedFieldSet.FindFieldSetFieldIndex(nextFieldId);
+
+                    // if the indexes were both found
+                    if ((thisFieldIndex >= 0) && (nextFieldId >= 0))
+                    {
+                        // increase this fieldOrdinal
+                        SelectedFieldSet.FieldSetFields[thisFieldIndex].FieldOrdinal++;
+
+                        // decrease the nextField
+                        SelectedFieldSet.FieldSetFields[nextFieldIndex].FieldOrdinal--;
+                    }
+
+                    // display the fields again with the new sort
+                    DisplayOrderByFields();
+
+                    // Change the selected index
+                    OrderByFieldsListBox.SelectedIndex = index + 1;
+
+                    // Set Focus to highlight the item
+                    OrderByFieldsListBox.Focus();
+                }
+            }
+            #endregion
+            
+            #region MoveDownButton_EnabledChanged(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when Move Down Button _ Enabled Changed
+            /// </summary>
+            private void MoveDownButton_EnabledChanged(object sender, EventArgs e)
+            {
+                // if enabled
+                if (MoveDownButton.Enabled)
+                {
+                    // Use enabled image
+                    MoveDownButton.BackgroundImage = Properties.Resources.Arrow_Down;
+                }
+                else
+                {
+                    // Use disabled image
+                    MoveDownButton.BackgroundImage = Properties.Resources.Arrow_Down_Gray;
+                }
+
+                // update everything
+                this.Refresh();
+            }
+            #endregion
+            
+            #region MoveUpButton_Click(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when the 'MoveUpButton' is clicked.
+            /// </summary>
+            private void MoveUpButton_Click(object sender, EventArgs e)
+            {
+                // locals
+                int thisFieldId = 0;
+                int nextFieldId = 0;
+                int thisFieldIndex = -1;
+                int nextFieldIndex = -1;
+                int index = OrderByFieldsListBox.SelectedIndex;
+
+                // verify the index is in range
+                if ((index > 0) && (index < (OrderByFields.Count)))
+                {
+                    // now update this item
+                    thisFieldId = OrderByFields[index].FieldId;
+                    
+                    // set the fieldId for the tiem above this item
+                    nextFieldId = OrderByFields[index - 1].FieldId;
+
+                    // find the index
+                    thisFieldIndex = SelectedFieldSet.FindFieldSetFieldIndex(thisFieldId);
+
+                    // find the nextIndex
+                    nextFieldIndex = SelectedFieldSet.FindFieldSetFieldIndex(nextFieldId);
+
+                    // if the indexes were both found
+                    if ((thisFieldIndex >= 0) && (nextFieldIndex >= 0))
+                    {
+                        //  decrease this fieldOrdinal
+                        SelectedFieldSet.FieldSetFields[thisFieldIndex].FieldOrdinal--;
+
+                        // increase the nextField
+                        SelectedFieldSet.FieldSetFields[nextFieldIndex].FieldOrdinal++;
+                    }
+
+                    // display the fields again with the new sort
+                    DisplayOrderByFields();
+
+                    // Change the selected index
+                    OrderByFieldsListBox.SelectedIndex = index - 1;
+
+                    // Set Focus to highlight the item
+                    OrderByFieldsListBox.Focus();
+                }
+            }
+            #endregion
+            
+            #region MoveUpButton_EnabledChanged(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when Move Up Button _ Enabled Changed
+            /// </summary>
+            private void MoveUpButton_EnabledChanged(object sender, EventArgs e)
+            {
+                 // if enabled
+                if (MoveUpButton.Enabled)
+                {
+                    // Use enabled image
+                    MoveUpButton.BackgroundImage = Properties.Resources.Arrow_Up;
+                }
+                else
+                {
+                    // Use disabled image
+                    MoveUpButton.BackgroundImage = Properties.Resources.Arrow_Up_Gray;
+                }
+
+                // update everything
+                this.Refresh();
             }
             #endregion
             
@@ -211,6 +423,30 @@ namespace DataTierClient.Controls
                             
                             // required
                             break;
+
+                        case "DescendingCheckBox":
+                            
+                            // if the value for HasSelectedFieldSetFieldView is true
+                            if ((HasSelectedFieldSetFieldView) && (!this.Loading))
+                            {
+                                // set the value on the field
+                                SelectedFieldSetFieldView.OrderByDescending = isChecked;
+
+                                // store the index
+                                int index = OrderByFieldsListBox.SelectedIndex;
+
+                                // redisplay the fields
+                                DisplayOrderByFields();
+
+                                // restore the index
+                                OrderByFieldsListBox.SelectedIndex = index;
+
+                                // Set Focus so the selected item highlights
+                                OrderByFieldsListBox.Focus();
+                            }
+
+                            // required
+                            break;
                     }
                 }
 
@@ -242,6 +478,58 @@ namespace DataTierClient.Controls
             }
             #endregion
 
+            #region OrderByFields_SelectedIndexChanged(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when a selection is made in the 'OrderByFields_'.
+            /// </summary>
+            private void OrderByFields_SelectedIndexChanged(object sender, EventArgs e)
+            {
+                // if not loading
+                if (!this.Loading)
+                {
+                    // cast the selected item as a field
+                    this.SelectedFieldSetFieldView = OrderByFieldsListBox.SelectedItem as FieldSetFieldView;
+
+                    // if there is a selected item
+                    if (HasSelectedFieldSetFieldView)
+                    {
+                        // Check or uncheck the checkbox based on the value of OrderByDescending
+                        DescendingCheckBox.Checked = SelectedFieldSetFieldView.OrderByDescending;
+                    }
+                    else
+                    {
+                        // uncheck the checkbox
+                        DescendingCheckBox.Checked = false;
+                    }
+
+                    // Enable controls
+                    UIEnable();
+                }
+            }
+            #endregion
+            
+            #region OrderByFieldsLabel_EnabledChanged(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when Order By Fields Label _ Enabled Changed
+            /// </summary>
+            private void OrderByFieldsLabel_EnabledChanged(object sender, EventArgs e)
+            {
+                // if Enabled
+                if (OrderByFieldsLabel.Enabled)
+                {
+                    // Use black
+                    OrderByFieldsLabel.ForeColor = Color.Black;
+                    DescendingCheckBox.LabelColor = Color.Black;
+                }
+                else
+                {
+                    // use Gray
+                    OrderByFieldsLabel.ForeColor = Color.Gray;
+                    DescendingCheckBox.LabelColor = Color.Gray;
+                }
+            }
+            #endregion
+            
         #endregion
 
         #region Methods
@@ -274,7 +562,7 @@ namespace DataTierClient.Controls
                     this.SelectedFieldSet.Fields = new List<DTNField>();
                     
                     // create a tempList
-                    List<FieldSetField> tempFieldSetFields = new List<FieldSetField>();
+                    List<FieldSetFieldView> tempFieldSetFields = new List<FieldSetFieldView>();
                     
                     // iterate the fields
                     for (int x = 0; x < this.FieldsListBox.Items.Count; x++)
@@ -301,11 +589,11 @@ namespace DataTierClient.Controls
                             DTNField field = this.SelectedTable.Fields[x];
 
                             // Create the FieldSetField
-                            FieldSetField fieldSetField = new FieldSetField();
+                            FieldSetFieldView fieldSetField = new FieldSetFieldView();
 
                             // Set the properties
                             fieldSetField.FieldId = field.FieldId;
-                            fieldSetField.FieldOrdinal = fieldOrdinal;
+                            fieldSetField.FieldOrdinal = field.FieldOrdinal;
                             fieldSetField.FieldSetId = this.SelectedFieldSet.FieldSetId;
 
                             // if we are in OrderByMode
@@ -314,17 +602,14 @@ namespace DataTierClient.Controls
                                 // local
                                 bool descending = false;
 
-                                // Set the FieldOrdinal
-                                fieldSetField.FieldOrdinal = OrderByControl.FindFieldOrdinal(field.FieldName, ref descending);
-
                                 // attempt to fiind tghis field
-                                FieldSetField tempFieldSetField = FieldSetHelper.FindFieldSetField(SelectedFieldSet.FieldSetFields, field.FieldId);
+                                FieldSetFieldView tempFieldSetField = SelectedFieldSet.FindFieldSetFieldView(field.FieldId);
 
                                 // if the tempFieldSetField exists
                                 if (NullHelper.Exists(tempFieldSetField))
                                 {
                                     // set the value for OrderByDescending
-                                    fieldSetField.OrderByDescending = descending;
+                                    fieldSetField.OrderByDescending = tempFieldSetField.OrderByDescending;
                                 }
                             }
 
@@ -488,6 +773,37 @@ namespace DataTierClient.Controls
             }
             #endregion
                 
+            #region DisplayOrderByFields()
+            /// <summary>
+            /// This method Display Order By Fields
+            /// </summary>
+            public void DisplayOrderByFields()
+            {
+                // set to true
+                this.Loading = true;
+
+                // clear the list
+                this.OrderByFieldsListBox.Items.Clear();
+
+                // If the SelectedFieledSet.FieldSetFields exists
+                if (ListHelper.HasOneOrMoreItems(OrderByFields))
+                {
+                    // iterate the fields
+                    foreach (FieldSetFieldView field in OrderByFields)
+                    {
+                        // add this item
+                        OrderByFieldsListBox.Items.Add(field);
+                    }
+
+                    // refresh everything
+                    this.Refresh();
+                }
+
+                // set to false
+                this.Loading = false;
+            }
+            #endregion
+            
             #region DisplaySelectedFieldSet()
             /// <summary>
             /// This method Display Selected Field Set
@@ -518,7 +834,7 @@ namespace DataTierClient.Controls
                         if (orderByMode)
                         {
                             // Set the FieldSet
-                            this.OrderByControl.DisplayFields();
+                            DisplayFieldSetFields();
                         }
                     }
 
@@ -653,22 +969,63 @@ namespace DataTierClient.Controls
                     if (showReaderMode)
                     {
                         // Display the fields
-                        this.OrderByControl.DisplayFields();
+                        DisplayFieldSetFields();
                     }
 
                     // Show or hide the controls
-                    this.OrderByControl.Visible = showReaderMode;
-                    this.OrderByLabel.Visible = showReaderMode;
+                    // this.OrderByControl.Visible = showReaderMode;
+                    // this.lab.Visible = showReaderMode;
                 }
                 else
                 {
                     // Show the OrderByControl
-                    this.OrderByControl.Visible = false;
-                    this.OrderByLabel.Visible = false;
+                    // this.OrderByControl.Visible = false;
+                    // this.OrderByLabel.Visible = false;
                 }
 
                 // Refresh everything
                 this.Refresh();
+            }
+            #endregion
+            
+            #region FindFieldOrdinal(int fieldId, ref bool descending)
+            /// <summary>
+            /// This method returns the Field Ordinal
+            /// </summary>
+            public int FindFieldOrdinal(int fieldId, ref bool descending)
+            {
+                // initial value
+                int fieldOrdinal = -1;
+
+                // local
+                int tempIndex = -1;
+
+                // if the value for HasSelectedFieldSet is true
+                if ((HasSelectedFieldSet) && (SelectedFieldSet.HasFieldSetFields))
+                {
+                    // iterate the fieldSetFields
+                    foreach (FieldSetFieldView fieldSetField in SelectedFieldSet.FieldSetFields)
+                    {
+                        // Increment the value for tempIndex
+                        tempIndex++;
+
+                        // if this is the field being sought
+                        if (fieldSetField.FieldId == fieldId)
+                        {
+                            // set the return value
+                            fieldOrdinal = fieldSetField.FieldOrdinal;
+
+                            // set the value for the byref object
+                            descending = fieldSetField.OrderByDescending;
+
+                            // break out of the loop
+                            break;
+                        }
+                    }
+                }
+                
+                // return value
+                return fieldOrdinal;
             }
             #endregion
             
@@ -691,7 +1048,7 @@ namespace DataTierClient.Controls
                     if ((lookInFieldSetFields) && (this.SelectedFieldSet.HasFieldSetFields))
                     {  
                         // iterate the fields for this table
-                        foreach (FieldSetField field in this.SelectedFieldSet.FieldSetFields)
+                        foreach (FieldSetFieldView field in this.SelectedFieldSet.FieldSetFields)
                         {
                             // Increment the value for tempIndex
                             tempIndex++;
@@ -852,7 +1209,7 @@ namespace DataTierClient.Controls
                         if ((isNew) && (this.SelectedFieldSet.HasFieldSetFields))
                         {  
                             // iterate the FieldSetFields
-                            foreach (FieldSetField field in this.SelectedFieldSet.FieldSetFields)
+                            foreach (FieldSetFieldView field in this.SelectedFieldSet.FieldSetFields)
                             {
                                 // Update the FieldSetId
                                 field.FieldSetId = this.SelectedFieldSet.FieldSetId;      
@@ -865,11 +1222,14 @@ namespace DataTierClient.Controls
                         // make sure the delete was successful
                         if (deleted)
                         {
+                            // make sure the order by FieldOrdinal is correct in sequence
+                            ReOrderBy();
+
                             // iterate the FieldSetFields
-                            foreach (FieldSetField field in this.SelectedFieldSet.FieldSetFields)
+                            foreach (FieldSetFieldView field in OrderByFields)
                             {
-                                // clone this field
-                                FieldSetField tempField = field.Clone();
+                                // Derive this field from the view
+                                FieldSetField tempField = FieldSetHelper.ConvertFieldSetFieldView(field);
 
                                 // make sure a new record is inserted since a delete was just executed
                                 tempField.UpdateIdentity(0);
@@ -1015,6 +1375,7 @@ namespace DataTierClient.Controls
                 this.ParameterModeCheckBox.CheckChangedListener = this;
                 this.OrderByModeCheckBox.CheckChangedListener = this;
                 this.ReaderModeCheckBox.CheckChangedListener = this;
+                this.DescendingCheckBox.CheckChangedListener = this;
 
                 // Setup this listener
                 this.FieldSetNameControl.OnTextChangedListener = this;
@@ -1264,6 +1625,44 @@ namespace DataTierClient.Controls
             }
             #endregion
             
+            #region ReOrderBy()
+            /// <summary>
+            /// This method Re Order By
+            /// </summary>
+            public void ReOrderBy()
+            {
+                // locals
+                int fieldOrdinal = -1;
+
+                if ((HasSelectedFieldSet) && (SelectedFieldSet.HasFieldSetFields))
+                {
+                    // iterate the items
+                    foreach (object item in OrderByFieldsListBox.Items)
+                    {
+                        // Increment the value for fieldOrdinal
+                        fieldOrdinal++;
+
+                        // cast the item as a field
+                        FieldSetFieldView field = item as FieldSetFieldView;
+
+                        // if the field exists
+                        if (NullHelper.Exists(field))
+                        {
+                            // find the index of this item
+                            int index = SelectedFieldSet.FindFieldSetFieldIndex(field.FieldId);
+
+                            // if the index was found
+                            if (index >= 0)
+                            {
+                                // set the value
+                                SelectedFieldSet.FieldSetFields[index].FieldOrdinal = fieldOrdinal;
+                            }
+                        }
+                    }
+                }
+            }
+            #endregion
+            
             #region Setup(DTNTable table, bool parameterMode, bool parameterModeReadOnly = false, FieldSet fieldSet = null)
             /// <summary>
             /// This method prepares this control to be shown.
@@ -1417,6 +1816,18 @@ namespace DataTierClient.Controls
                 // Enable the images for ParameterMode, OrderByMode and / or ReaderMode
                 EnableModeImages();
 
+                // Enable the label in EditMode
+                this.OrderByFieldsListBox.Enabled = false;
+                this.OrderByFieldsLabel.Enabled = false;
+                this.DescendingCheckBox.Enabled = false;
+
+                // if nothing is selected in the list box
+                if (OrderByFieldsListBox.SelectedItem == null)
+                {
+                    // erase the SelectedFieldSetFieldView if there is nothing selected in the list box
+                    SelectedFieldSetFieldView = null;
+                }
+                
                 // if we do not have a table, do not allow anything
                 if (this.HasSelectedTable)
                 { 
@@ -1432,6 +1843,8 @@ namespace DataTierClient.Controls
                     {
                         // Do not allow FieldSets to be clicked on 
                         this.FieldSetsListBox.Enabled = false;
+                        
+                        // Enable fields list box
                         this.FieldsListBox.Enabled = true;
 
                         // Disable all the buttons while in EditMode
@@ -1451,9 +1864,32 @@ namespace DataTierClient.Controls
                         {
                             // Enable the Save button
                             this.SaveCancelControl2.EnableSaveButton(true);
+
+                            // Disable the buttons 
+                            this.MoveDownButton.Enabled = false;
+                            this.MoveUpButton.Enabled = false;
                         }
                         else if (this.EditMode == EditModeEnum.Edit)
                         {
+                            // Enable 
+                            this.OrderByFieldsListBox.Enabled = true;
+                            this.OrderByFieldsLabel.Enabled = true;
+                            this.DescendingCheckBox.Enabled = true;
+
+                            // if the value for HasSelectedFieldSetFieldView is true
+                            if (HasSelectedFieldSetFieldView)
+                            {
+                                // Enable the buttons based on where the selected item fits in the list
+                                this.MoveDownButton.Enabled = (OrderByFieldsListBox.SelectedIndex != (OrderByFieldsListBox.Items.Count - 1));
+                                this.MoveUpButton.Enabled = (OrderByFieldsListBox.SelectedIndex != 0);
+                            }
+                            else
+                            {
+                                // Disable the buttons 
+                                this.MoveDownButton.Enabled = false;
+                                this.MoveUpButton.Enabled = false;
+                            }
+                            
                             // If the 'SelectedFieldSet' object and the 'SerializedFieldSet' objects both exist.
                             if ((this.HasSelectedFieldSet) && (this.HasStoredXml))
                             {
@@ -1495,6 +1931,10 @@ namespace DataTierClient.Controls
 
                         // Enabled when not in edit mode
                         this.SaveCancelControl.SetupCancelButton("Done", 80, true, true);
+
+                        // Disable the buttons 
+                        this.MoveDownButton.Enabled = false;
+                        this.MoveUpButton.Enabled = false;
                     }
 
                     // local
@@ -1514,9 +1954,6 @@ namespace DataTierClient.Controls
 
                     // Display the value
                     this.SelectedFieldsCountLabel.Text = selectedFieldsCount.ToString();
-
-                    // Show or hide the control
-                    OrderByControl.Visible = ((HasSelectedFieldSet) && (SelectedFieldSet.OrderByMode));
                 }
                 else
                 {
@@ -1525,6 +1962,11 @@ namespace DataTierClient.Controls
                     this.EditButton.Enabled = false;
                     this.DeleteButton.Enabled = false;
                     this.FieldSetsListBox.Enabled = false;
+                    this.MoveUpButton.Enabled = false;
+                    this.MoveDownButton.Enabled = false;
+                    OrderByFieldsListBox.Enabled = false;
+                    this.OrderByFieldsLabel.Enabled = false;
+                    this.DescendingCheckBox.Enabled = false;
                 }
             }
             #endregion
@@ -1627,9 +2069,6 @@ namespace DataTierClient.Controls
                     // set EditMode
                     editMode = value;
 
-                    // Erase the SelectedField
-                    this.OrderByControl.SelectedField = null;
-
                     // Enable or disable controls
                     UIEnable();
                 }
@@ -1660,6 +2099,40 @@ namespace DataTierClient.Controls
                     
                     // return value
                     return hasFailedReason;
+                }
+            }
+            #endregion
+            
+            #region HasOrderByFields
+            /// <summary>
+            /// This property returns true if this object has an 'OrderByFields'.
+            /// </summary>
+            public bool HasOrderByFields
+            {
+                get
+                {
+                    // initial value
+                    bool hasOrderByFields = (this.OrderByFields != null);
+                    
+                    // return value
+                    return hasOrderByFields;
+                }
+            }
+            #endregion
+            
+            #region HasSelectedFieldSetFieldView
+            /// <summary>
+            /// This property returns true if this object has a 'SelectedFieldSetFieldView'.
+            /// </summary>
+            public bool HasSelectedFieldSetFieldView
+            {
+                get
+                {
+                    // initial value
+                    bool hasSelectedFieldSetFieldView = (this.SelectedFieldSetFieldView != null);
+
+                    // return value
+                    return hasSelectedFieldSetFieldView;
                 }
             }
             #endregion
@@ -1776,6 +2249,31 @@ namespace DataTierClient.Controls
                 set { loading = value; }
             }
             #endregion
+
+            #region OrderByFields
+            /// <summary>
+            /// This read only property returns the SelectedFieldSet.FieldSetFields
+            /// ordered by FieldOrdinal
+            /// </summary>
+            public List<FieldSetFieldView> OrderByFields
+            {
+                get
+                {
+                    // initial value
+                    List<FieldSetFieldView> orderByFields = null;
+
+                    // if the value for HasSelectedFieldSet is true
+                    if ((HasSelectedFieldSet) && (SelectedFieldSet.HasFieldSetFields))
+                    {
+                        // set the return value
+                        orderByFields = SelectedFieldSet.FieldSetFields.OrderBy(x => x.FieldOrdinal).ToList();
+                    }
+
+                    // return value
+                    return orderByFields;
+                }
+            }
+            #endregion
             
             #region OrderByModeReadOnly
             /// <summary>
@@ -1867,6 +2365,17 @@ namespace DataTierClient.Controls
             }
             #endregion
             
+            #region SelectedFieldSetFieldView
+            /// <summary>
+            /// This property gets or sets the value for 'SelectedFieldSetFieldView'.
+            /// </summary>
+            public FieldSetFieldView SelectedFieldSetFieldView
+            {
+                get { return selectedFieldSetFieldView; }
+                set { selectedFieldSetFieldView = value; }
+            }
+            #endregion
+            
             #region SelectedTable
             /// <summary>
             /// This property gets or sets the value for 'SelectedTable'.
@@ -1887,8 +2396,8 @@ namespace DataTierClient.Controls
                 get { return storedXml; }
                 set { storedXml = value; }
             }
-            #endregion
-            
+        #endregion
+
         #endregion
 
     }

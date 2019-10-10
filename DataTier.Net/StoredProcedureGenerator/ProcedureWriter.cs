@@ -1211,20 +1211,20 @@ namespace DataTier.Net.StoredProcedureGenerator
             }
             #endregion
 
-            #region FindFieldSetField(List<FieldSetField> fields, int fieldId)
+            #region FindFieldSetFieldView(List<FieldSetField> fields, int fieldId)
             /// <summary>
             /// This method returns the Field
             /// </summary>
-            public static FieldSetField FindFieldSetField(List<FieldSetField> fields, int fieldId)
+            public static FieldSetFieldView FindFieldSetFieldView(List<FieldSetFieldView> fields, int fieldId)
             {
                 // initial value
-                FieldSetField field = null;
+                FieldSetFieldView field = null;
 
                 // If the fields collection exists and has one or more items
                 if ((ListHelper.HasOneOrMoreItems(fields)) && (fieldId > 0))
                 {
                     // Iterate the collection of DTNField objects
-                    foreach (FieldSetField tempField in fields)
+                    foreach (FieldSetFieldView tempField in fields)
                     {
                         // if this is the field being sought                        
                         if (tempField.FieldId == fieldId)
@@ -2158,7 +2158,7 @@ namespace DataTier.Net.StoredProcedureGenerator
                         sb.Append("[" + field.FieldName + "]");
 
                         // attempt to find this field
-                        FieldSetField tempFieldSetField = FindFieldSetField(orderByFieldSet.FieldSetFields, field.FieldId);
+                        FieldSetFieldView tempFieldSetField = FindFieldSetFieldView(orderByFieldSet.FieldSetFields, field.FieldId);
 
                         // if this field was found and is descending
                         if ((NullHelper.Exists(tempFieldSetField)) && (tempFieldSetField.OrderByDescending))

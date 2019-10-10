@@ -27,6 +27,33 @@ namespace DataTierClient.ClientUtil
         
         #region Methods
     
+            #region ConvertFieldSetFieldView(FieldSetFieldView fieldSetFieldView)
+            /// <summary>
+            /// This method returns the Field Set Field View
+            /// </summary>
+            public static FieldSetField ConvertFieldSetFieldView(FieldSetFieldView fieldSetFieldView)
+            {
+                // initial value
+                FieldSetField field = null;
+
+                // If the fieldSetFieldView object exists
+                if (NullHelper.Exists(fieldSetFieldView))
+                {
+                    // Create a new instance of a 'FieldSetField' object.
+                    field = new FieldSetField();
+
+                    // set each property
+                    field.FieldId = fieldSetFieldView.FieldId;
+                    field.FieldOrdinal = fieldSetFieldView.FieldOrdinal;
+                    field.FieldSetId = fieldSetFieldView.FieldSetId;
+                    field.OrderByDescending = fieldSetFieldView.OrderByDescending;
+                }
+                
+                // return value
+                return field;
+            }
+            #endregion
+            
             #region FindField(List<DTNField> fields, int fieldId)
             /// <summary>
             /// This method returns the Field
@@ -90,7 +117,7 @@ namespace DataTierClient.ClientUtil
                 return field;
             }
             #endregion
-            
+
             #region GetParametersText(ref FieldSet fieldSet)
             /// <summary>
             /// This method returns the Parameters Text
@@ -203,54 +230,6 @@ namespace DataTierClient.ClientUtil
             }
             #endregion            
 
-            #region LoadFieldSetFields(List<FieldSetField> fieldSetFields, List<DTNField> fields)
-            /// <summary>
-            /// This method returns a list of Field Set Fields View
-            /// </summary>
-            public static List<DTNField> LoadFieldSetFields(List<FieldSetField> fieldSetFields, List<DTNField> fields)
-            {
-                // local
-                DTNField field = null;
-
-                // if there are one or more FieldSetFields
-                if (ListHelper.HasOneOrMoreItems(fieldSetFields))
-                {
-                    // Create a new instance of a 'Gateway' object.
-                    Gateway gateway = new Gateway();
-
-                    // Iterate the collection of FieldSetField objects
-                    foreach (FieldSetField fieldSetField in fieldSetFields)
-                    {
-                        // Attempt to find this field
-                        field = FindField(fields, fieldSetField.FieldId);
-
-                        // If the field object exists
-                        if (NullHelper.IsNull(field))
-                        {
-                            // load the field
-                            field = gateway.FindDTNField(fieldSetField.FieldId);                            
-                        }
-
-                        // If the field object exists
-                        if (NullHelper.Exists(field, fields))
-                        {
-                            // set the fieldOrdinal
-                            field.FieldOrdinal = fields.Count;
-
-                            // add this field
-                            fields.Add(field);
-                        }
-
-                        // sort by FieldOrdinal
-                        fields = fields.OrderBy(x => x.FieldOrdinal).ToList();
-                    }                    
-                }
-                
-                // return value
-                return fields;
-            }
-            #endregion            
-            
         #endregion
         
     }

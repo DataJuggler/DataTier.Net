@@ -24,11 +24,11 @@ namespace DataTierClient.Xml.Writers
 
         #region Methods
 
-            #region ExportList(List<FieldSetField> fieldSetFields, int indent = 0)
+            #region ExportList(List<FieldSetFieldView> fieldSetFields, int indent = 0)
             // <Summary>
             // This method is used to export a list of 'FieldSetField' objects to xml
             // </Summary>
-            public string ExportList(List<FieldSetField> fieldSetFields, int indent = 0)
+            public string ExportList(List<FieldSetFieldView> fieldSetFields, int indent = 0)
             {
                 // initial value
                 string xml = "";
@@ -53,7 +53,7 @@ namespace DataTierClient.Xml.Writers
                 if ((fieldSetFields != null) && (fieldSetFields.Count > 0))
                 {
                     // Iterate the fieldSetFields collection
-                    foreach (FieldSetField fieldSetField  in fieldSetFields)
+                    foreach (FieldSetFieldView fieldSetField  in fieldSetFields)
                     {
                         // Get the xml for this fieldSetFields
                         fieldSetFieldsXml = ExportFieldSetField(fieldSetField, indent + 2);
@@ -79,11 +79,11 @@ namespace DataTierClient.Xml.Writers
             }
             #endregion
 
-            #region ExportFieldSetField(FieldSetField fieldSetField, int indent = 0)
+            #region ExportFieldSetField(FieldSetFieldView fieldSetField, int indent = 0)
             // <Summary>
             // This method is used to export a FieldSetField object to xml.
             // </Summary>
-            public string ExportFieldSetField(FieldSetField fieldSetField, int indent = 0)
+            public string ExportFieldSetField(FieldSetFieldView fieldSetField, int indent = 0)
             {
                 // initial value
                 string fieldSetFieldXml = "";
@@ -105,11 +105,6 @@ namespace DataTierClient.Xml.Writers
                     sb.Append("<FieldSetField>" + Environment.NewLine);
 
                     // Write out each property
-
-                    // Write out the value for DeleteAllForFieldSet
-
-                    sb.Append(indentString2);
-                    sb.Append("<DeleteAllForFieldSet>" + fieldSetField.DeleteAllForFieldSet + "</DeleteAllForFieldSet>" + Environment.NewLine);
 
                     // Write out the value for Descending
                     sb.Append(indentString2);

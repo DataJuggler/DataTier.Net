@@ -31,6 +31,20 @@ namespace DataTierClient.Controls
         private DataJuggler.Win.Controls.LabelCheckBoxControl ParameterModeCheckBox;
         private DataJuggler.Win.Controls.LabelTextBoxControl FieldSetNameControl;
         private SaveCancelControl SaveCancelControl2;
+        private DataJuggler.Win.Controls.LabelCheckBoxControl OrderByModeCheckBox;
+        private System.Windows.Forms.Panel TagsPanel;
+        private System.Windows.Forms.PictureBox ParameterModeImage;
+        private System.Windows.Forms.PictureBox ReaderModeImage;
+        private System.Windows.Forms.PictureBox OrderByImage;
+        private DataJuggler.Win.Controls.LabelCheckBoxControl ReaderModeCheckBox;
+        private System.Windows.Forms.PictureBox EditModeImage;
+        private DataJuggler.Win.Controls.Objects.PanelExtender BottomFillerPanel;
+        private DataJuggler.Win.Controls.LabelLabelControl ValidationLabel;
+        private System.Windows.Forms.Panel Filler1;
+        private System.Windows.Forms.ListBox OrderByFieldsListBox;
+        private System.Windows.Forms.Label OrderByFieldsLabel;
+        private System.Windows.Forms.Button MoveDownButton;
+        private System.Windows.Forms.Button MoveUpButton;
         #endregion
         
         #region Methods
@@ -58,7 +72,6 @@ namespace DataTierClient.Controls
             private void InitializeComponent()
             {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FieldSetEditor));
             this.FieldSetsListBox = new System.Windows.Forms.ListBox();
             this.FieldSetsLabel = new System.Windows.Forms.Label();
             this.FieldsLabel = new System.Windows.Forms.Label();
@@ -75,17 +88,20 @@ namespace DataTierClient.Controls
             this.SaveCancelControl2 = new DataTierClient.Controls.SaveCancelControl();
             this.ParameterModeCheckBox = new DataJuggler.Win.Controls.LabelCheckBoxControl();
             this.FieldSetNameControl = new DataJuggler.Win.Controls.LabelTextBoxControl();
-            this.SaveCancelControl = new DataTierClient.Controls.SaveCancelControl();
-            this.SelectedFieldsCountLabel = new DataJuggler.Win.Controls.LabelLabelControl();
             this.TagsPanel = new System.Windows.Forms.Panel();
+            this.BottomFillerPanel = new DataJuggler.Win.Controls.Objects.PanelExtender();
+            this.ValidationLabel = new DataJuggler.Win.Controls.LabelLabelControl();
+            this.Filler1 = new System.Windows.Forms.Panel();
+            this.SaveCancelControl = new DataTierClient.Controls.SaveCancelControl();
+            this.OrderByFieldsListBox = new System.Windows.Forms.ListBox();
+            this.OrderByFieldsLabel = new System.Windows.Forms.Label();
+            this.MoveDownButton = new System.Windows.Forms.Button();
+            this.MoveUpButton = new System.Windows.Forms.Button();
             this.DeleteButton = new DataTierClient.Controls.TabButton();
             this.AddButton = new DataTierClient.Controls.TabButton();
             this.EditButton = new DataTierClient.Controls.TabButton();
-            this.BottomFillerPanel = new DataJuggler.Win.Controls.Objects.PanelExtender();
-            this.ValidationLabel = new DataJuggler.Win.Controls.LabelLabelControl();
-            this.OrderByControl = new DataTierClient.Controls.OrderByControl();
-            this.Filler1 = new System.Windows.Forms.Panel();
-            this.OrderByLabel = new System.Windows.Forms.Label();
+            this.DescendingCheckBox = new DataJuggler.Win.Controls.LabelCheckBoxControl();
+            this.SelectedFieldsCountLabel = new DataJuggler.Win.Controls.LabelLabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.EditModeImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ReaderModeImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OrderByImage)).BeginInit();
@@ -128,10 +144,11 @@ namespace DataTierClient.Controls
             // FieldsListBox
             // 
             this.FieldsListBox.CheckOnClick = true;
+            this.FieldsListBox.Enabled = false;
             this.FieldsListBox.FormattingEnabled = true;
             this.FieldsListBox.Location = new System.Drawing.Point(482, 85);
             this.FieldsListBox.Name = "FieldsListBox";
-            this.FieldsListBox.Size = new System.Drawing.Size(316, 334);
+            this.FieldsListBox.Size = new System.Drawing.Size(316, 312);
             this.FieldsListBox.TabIndex = 105;
             this.ToolTip.SetToolTip(this.FieldsListBox, "Press Ctrl + A to Check All.\r\nPress Ctrl + N to Check None.");
             this.FieldsListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.FieldsListBox_ItemCheck);
@@ -143,7 +160,7 @@ namespace DataTierClient.Controls
             this.EditModeImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.EditModeImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.EditModeImage.Dock = System.Windows.Forms.DockStyle.Right;
-            this.EditModeImage.Location = new System.Drawing.Point(712, 0);
+            this.EditModeImage.Location = new System.Drawing.Point(1077, 0);
             this.EditModeImage.Name = "EditModeImage";
             this.EditModeImage.Size = new System.Drawing.Size(128, 40);
             this.EditModeImage.TabIndex = 127;
@@ -319,30 +336,6 @@ namespace DataTierClient.Controls
             this.FieldSetNameControl.TextBoxFont = new System.Drawing.Font("Verdana", 12F);
             this.FieldSetNameControl.TextBoxTopMargin = 2;
             // 
-            // SaveCancelControl
-            // 
-            this.SaveCancelControl.BackColor = System.Drawing.Color.Transparent;
-            this.SaveCancelControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.SaveCancelControl.Location = new System.Drawing.Point(0, 580);
-            this.SaveCancelControl.Name = "SaveCancelControl";
-            this.SaveCancelControl.Size = new System.Drawing.Size(840, 40);
-            this.SaveCancelControl.TabIndex = 110;
-            // 
-            // SelectedFieldsCountLabel
-            // 
-            this.SelectedFieldsCountLabel.Font = new System.Drawing.Font("Verdana", 12F);
-            this.SelectedFieldsCountLabel.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.SelectedFieldsCountLabel.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SelectedFieldsCountLabel.LabelText = "Fields Selected:";
-            this.SelectedFieldsCountLabel.LabelWidth = 152;
-            this.SelectedFieldsCountLabel.Location = new System.Drawing.Point(472, 421);
-            this.SelectedFieldsCountLabel.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.SelectedFieldsCountLabel.Name = "SelectedFieldsCountLabel";
-            this.SelectedFieldsCountLabel.Size = new System.Drawing.Size(260, 24);
-            this.SelectedFieldsCountLabel.TabIndex = 117;
-            this.SelectedFieldsCountLabel.ValueLabelColor = System.Drawing.SystemColors.ControlText;
-            this.SelectedFieldsCountLabel.ValueLabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            // 
             // TagsPanel
             // 
             this.TagsPanel.Controls.Add(this.EditModeImage);
@@ -352,8 +345,104 @@ namespace DataTierClient.Controls
             this.TagsPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.TagsPanel.Location = new System.Drawing.Point(0, 0);
             this.TagsPanel.Name = "TagsPanel";
-            this.TagsPanel.Size = new System.Drawing.Size(840, 40);
+            this.TagsPanel.Size = new System.Drawing.Size(1205, 40);
             this.TagsPanel.TabIndex = 119;
+            // 
+            // BottomFillerPanel
+            // 
+            this.BottomFillerPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.BottomFillerPanel.Location = new System.Drawing.Point(0, 492);
+            this.BottomFillerPanel.Name = "BottomFillerPanel";
+            this.BottomFillerPanel.Size = new System.Drawing.Size(1205, 20);
+            this.BottomFillerPanel.TabIndex = 130;
+            // 
+            // ValidationLabel
+            // 
+            this.ValidationLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.ValidationLabel.Font = new System.Drawing.Font("Verdana", 12F);
+            this.ValidationLabel.LabelColor = System.Drawing.Color.Firebrick;
+            this.ValidationLabel.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ValidationLabel.LabelText = "Error:";
+            this.ValidationLabel.LabelWidth = 80;
+            this.ValidationLabel.Location = new System.Drawing.Point(0, 468);
+            this.ValidationLabel.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.ValidationLabel.Name = "ValidationLabel";
+            this.ValidationLabel.Size = new System.Drawing.Size(1205, 24);
+            this.ValidationLabel.TabIndex = 131;
+            this.ValidationLabel.ValueLabelColor = System.Drawing.Color.Firebrick;
+            this.ValidationLabel.ValueLabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ValidationLabel.Visible = false;
+            // 
+            // Filler1
+            // 
+            this.Filler1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.Filler1.Location = new System.Drawing.Point(0, 464);
+            this.Filler1.Name = "Filler1";
+            this.Filler1.Size = new System.Drawing.Size(1205, 4);
+            this.Filler1.TabIndex = 133;
+            // 
+            // SaveCancelControl
+            // 
+            this.SaveCancelControl.BackColor = System.Drawing.Color.Transparent;
+            this.SaveCancelControl.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.SaveCancelControl.Location = new System.Drawing.Point(0, 512);
+            this.SaveCancelControl.Name = "SaveCancelControl";
+            this.SaveCancelControl.Size = new System.Drawing.Size(1205, 40);
+            this.SaveCancelControl.TabIndex = 110;
+            // 
+            // OrderByFieldsListBox
+            // 
+            this.OrderByFieldsListBox.Enabled = false;
+            this.OrderByFieldsListBox.FormattingEnabled = true;
+            this.OrderByFieldsListBox.ItemHeight = 18;
+            this.OrderByFieldsListBox.Location = new System.Drawing.Point(817, 85);
+            this.OrderByFieldsListBox.Name = "OrderByFieldsListBox";
+            this.OrderByFieldsListBox.Size = new System.Drawing.Size(316, 310);
+            this.OrderByFieldsListBox.TabIndex = 136;
+            this.OrderByFieldsListBox.SelectedIndexChanged += new System.EventHandler(this.OrderByFields_SelectedIndexChanged);
+            // 
+            // OrderByFieldsLabel
+            // 
+            this.OrderByFieldsLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OrderByFieldsLabel.Location = new System.Drawing.Point(815, 62);
+            this.OrderByFieldsLabel.Name = "OrderByFieldsLabel";
+            this.OrderByFieldsLabel.Size = new System.Drawing.Size(154, 20);
+            this.OrderByFieldsLabel.TabIndex = 135;
+            this.OrderByFieldsLabel.Text = "Order By Fields:";
+            this.OrderByFieldsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.OrderByFieldsLabel.EnabledChanged += new System.EventHandler(this.OrderByFieldsLabel_EnabledChanged);
+            // 
+            // MoveDownButton
+            // 
+            this.MoveDownButton.BackgroundImage = global::DataTierClient.Properties.Resources.Arrow_Down_Gray;
+            this.MoveDownButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.MoveDownButton.Enabled = false;
+            this.MoveDownButton.FlatAppearance.BorderSize = 0;
+            this.MoveDownButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.MoveDownButton.Location = new System.Drawing.Point(1137, 127);
+            this.MoveDownButton.Name = "MoveDownButton";
+            this.MoveDownButton.Size = new System.Drawing.Size(32, 32);
+            this.MoveDownButton.TabIndex = 138;
+            this.MoveDownButton.UseVisualStyleBackColor = true;
+            this.MoveDownButton.EnabledChanged += new System.EventHandler(this.MoveDownButton_EnabledChanged);
+            this.MoveDownButton.Click += new System.EventHandler(this.MoveDownButton_Click);
+            // 
+            // MoveUpButton
+            // 
+            this.MoveUpButton.BackgroundImage = global::DataTierClient.Properties.Resources.Arrow_Up_Gray;
+            this.MoveUpButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.MoveUpButton.Enabled = false;
+            this.MoveUpButton.FlatAppearance.BorderSize = 0;
+            this.MoveUpButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.MoveUpButton.Location = new System.Drawing.Point(1137, 89);
+            this.MoveUpButton.Name = "MoveUpButton";
+            this.MoveUpButton.Size = new System.Drawing.Size(32, 32);
+            this.MoveUpButton.TabIndex = 137;
+            this.MoveUpButton.UseVisualStyleBackColor = true;
+            this.MoveUpButton.EnabledChanged += new System.EventHandler(this.MoveUpButton_EnabledChanged);
+            this.MoveUpButton.Click += new System.EventHandler(this.MoveUpButton_Click);
+            this.MoveUpButton.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.MoveUpButton.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
             // DeleteButton
             // 
@@ -406,73 +495,55 @@ namespace DataTierClient.Controls
             this.EditButton.Size = new System.Drawing.Size(64, 26);
             this.EditButton.TabIndex = 103;
             // 
-            // BottomFillerPanel
+            // DescendingCheckBox
             // 
-            this.BottomFillerPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.BottomFillerPanel.Location = new System.Drawing.Point(0, 560);
-            this.BottomFillerPanel.Name = "BottomFillerPanel";
-            this.BottomFillerPanel.Size = new System.Drawing.Size(840, 20);
-            this.BottomFillerPanel.TabIndex = 130;
+            this.DescendingCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.DescendingCheckBox.CheckBoxHorizontalOffSet = 2;
+            this.DescendingCheckBox.CheckBoxVerticalOffSet = 3;
+            this.DescendingCheckBox.CheckChangedListener = null;
+            this.DescendingCheckBox.Checked = false;
+            this.DescendingCheckBox.Editable = true;
+            this.DescendingCheckBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DescendingCheckBox.LabelColor = System.Drawing.SystemColors.ControlText;
+            this.DescendingCheckBox.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DescendingCheckBox.LabelText = "Descending:";
+            this.DescendingCheckBox.LabelWidth = 120;
+            this.DescendingCheckBox.Location = new System.Drawing.Point(996, 60);
+            this.DescendingCheckBox.Name = "DescendingCheckBox";
+            this.DescendingCheckBox.Size = new System.Drawing.Size(155, 24);
+            this.DescendingCheckBox.TabIndex = 139;
             // 
-            // ValidationLabel
+            // SelectedFieldsCountLabel
             // 
-            this.ValidationLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ValidationLabel.Font = new System.Drawing.Font("Verdana", 12F);
-            this.ValidationLabel.LabelColor = System.Drawing.Color.Firebrick;
-            this.ValidationLabel.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ValidationLabel.LabelText = "Error:";
-            this.ValidationLabel.LabelWidth = 80;
-            this.ValidationLabel.Location = new System.Drawing.Point(0, 536);
-            this.ValidationLabel.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.ValidationLabel.Name = "ValidationLabel";
-            this.ValidationLabel.Size = new System.Drawing.Size(840, 24);
-            this.ValidationLabel.TabIndex = 131;
-            this.ValidationLabel.ValueLabelColor = System.Drawing.Color.Firebrick;
-            this.ValidationLabel.ValueLabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ValidationLabel.Visible = false;
-            // 
-            // OrderByControl
-            // 
-            this.OrderByControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("OrderByControl.BackgroundImage")));
-            this.OrderByControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.OrderByControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.OrderByControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.OrderByControl.Location = new System.Drawing.Point(0, 488);
-            this.OrderByControl.Name = "OrderByControl";
-            this.OrderByControl.Size = new System.Drawing.Size(840, 48);
-            this.OrderByControl.TabIndex = 132;
-            this.OrderByControl.Visible = false;
-            // 
-            // Filler1
-            // 
-            this.Filler1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.Filler1.Location = new System.Drawing.Point(0, 484);
-            this.Filler1.Name = "Filler1";
-            this.Filler1.Size = new System.Drawing.Size(840, 4);
-            this.Filler1.TabIndex = 133;
-            // 
-            // OrderByLabel
-            // 
-            this.OrderByLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.OrderByLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.OrderByLabel.Location = new System.Drawing.Point(0, 466);
-            this.OrderByLabel.Name = "OrderByLabel";
-            this.OrderByLabel.Size = new System.Drawing.Size(840, 18);
-            this.OrderByLabel.TabIndex = 134;
-            this.OrderByLabel.Text = "Order By Field Order:";
-            this.OrderByLabel.Visible = false;
+            this.SelectedFieldsCountLabel.Font = new System.Drawing.Font("Verdana", 12F);
+            this.SelectedFieldsCountLabel.ForeColor = System.Drawing.Color.Black;
+            this.SelectedFieldsCountLabel.LabelColor = System.Drawing.Color.Black;
+            this.SelectedFieldsCountLabel.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SelectedFieldsCountLabel.LabelText = "Count:";
+            this.SelectedFieldsCountLabel.LabelWidth = 80;
+            this.SelectedFieldsCountLabel.Location = new System.Drawing.Point(482, 417);
+            this.SelectedFieldsCountLabel.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.SelectedFieldsCountLabel.Name = "SelectedFieldsCountLabel";
+            this.SelectedFieldsCountLabel.Size = new System.Drawing.Size(305, 24);
+            this.SelectedFieldsCountLabel.TabIndex = 140;
+            this.SelectedFieldsCountLabel.ValueLabelColor = System.Drawing.Color.Black;
+            this.SelectedFieldsCountLabel.ValueLabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SelectedFieldsCountLabel.Visible = false;
             // 
             // FieldSetEditor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Linen;
-            this.Controls.Add(this.OrderByLabel);
+            this.Controls.Add(this.SelectedFieldsCountLabel);
+            this.Controls.Add(this.DescendingCheckBox);
+            this.Controls.Add(this.MoveDownButton);
+            this.Controls.Add(this.MoveUpButton);
+            this.Controls.Add(this.OrderByFieldsListBox);
+            this.Controls.Add(this.OrderByFieldsLabel);
             this.Controls.Add(this.Filler1);
-            this.Controls.Add(this.OrderByControl);
             this.Controls.Add(this.ValidationLabel);
             this.Controls.Add(this.BottomFillerPanel);
             this.Controls.Add(this.TagsPanel);
-            this.Controls.Add(this.SelectedFieldsCountLabel);
             this.Controls.Add(this.EditPanel);
             this.Controls.Add(this.TableControl);
             this.Controls.Add(this.SaveCancelControl);
@@ -486,8 +557,7 @@ namespace DataTierClient.Controls
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "FieldSetEditor";
-            this.Size = new System.Drawing.Size(840, 620);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FieldsListBox_KeyDown);
+            this.Size = new System.Drawing.Size(1205, 552);
             ((System.ComponentModel.ISupportInitialize)(this.EditModeImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ReaderModeImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OrderByImage)).EndInit();
@@ -501,19 +571,8 @@ namespace DataTierClient.Controls
 
         #endregion
 
+        private DataJuggler.Win.Controls.LabelCheckBoxControl DescendingCheckBox;
         private DataJuggler.Win.Controls.LabelLabelControl SelectedFieldsCountLabel;
-        private DataJuggler.Win.Controls.LabelCheckBoxControl OrderByModeCheckBox;
-        private System.Windows.Forms.Panel TagsPanel;
-        private System.Windows.Forms.PictureBox ParameterModeImage;
-        private System.Windows.Forms.PictureBox ReaderModeImage;
-        private System.Windows.Forms.PictureBox OrderByImage;
-        private DataJuggler.Win.Controls.LabelCheckBoxControl ReaderModeCheckBox;
-        private System.Windows.Forms.PictureBox EditModeImage;
-        private DataJuggler.Win.Controls.Objects.PanelExtender BottomFillerPanel;
-        private DataJuggler.Win.Controls.LabelLabelControl ValidationLabel;
-        private OrderByControl OrderByControl;
-        private System.Windows.Forms.Panel Filler1;
-        private System.Windows.Forms.Label OrderByLabel;
     }
     #endregion
 

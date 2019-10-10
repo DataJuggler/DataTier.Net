@@ -30,17 +30,7 @@ namespace DataTierClient.Forms
 
         #region Events
 
-            #region FieldSetEditorForm_KeyDown(object sender, KeyEventArgs e)
-            /// <summary>
-            /// event is fired when Field Set Editor Form _ Key Down
-            /// </summary>
-            private void FieldSetEditorForm_KeyDown(object sender, KeyEventArgs e)
-            {
-                // Handle the Keydown on the control
-                this.FieldSetEditor.FieldsListBox_KeyDown(sender, e);
-            }
-            #endregion
-            
+           
         #endregion
 
         #region Methods

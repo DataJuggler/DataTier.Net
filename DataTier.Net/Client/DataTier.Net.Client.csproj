@@ -238,18 +238,6 @@
     <Compile Include="Controls\NewStoredProcedureEditor.Designer.cs">
       <DependentUpon>NewStoredProcedureEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\OrderByControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\OrderByControl.Designer.cs">
-      <DependentUpon>OrderByControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OrderByFieldControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\OrderByFieldControl.Designer.cs">
-      <DependentUpon>OrderByFieldControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\ProjectEditorControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -599,12 +587,6 @@
     <EmbeddedResource Include="Controls\NewStoredProcedureEditor.resx">
       <DependentUpon>NewStoredProcedureEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\OrderByControl.resx">
-      <DependentUpon>OrderByControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\OrderByFieldControl.resx">
-      <DependentUpon>OrderByFieldControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ProjectEditorControl.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ProjectEditorControl.cs</DependentUpon>
@@ -743,6 +725,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SetupForm.resx">
       <DependentUpon>SetupForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UpdateForm.resx">
       <DependentUpon>UpdateForm.cs</DependentUpon>
@@ -779,6 +762,11 @@
     <None Include="Resources\MellowYellow.png" />
     <None Include="Resources\EditMode.png" />
     <Content Include="lib\DataJuggler.Win.Controls Read Me.txt" />
+    <None Include="Resources\Back.png" />
+    <None Include="Resources\arrow-up.png" />
+    <None Include="Resources\arrow-down.png" />
+    <None Include="Resources\arrow-up-gray.png" />
+    <None Include="Resources\arrow-down-gray.png" />
     <Content Include="Resources\BlackButton.png" />
     <None Include="Resources\OrangeBackground.jpg" />
     <None Include="Resources\Success.png" />
@@ -796,6 +784,7 @@
     <None Include="Resources\Click Here Orange Transparent.png" />
     <None Include="Resources\DataTier.Net.Blazor.png" />
     <None Include="Resources\DataTier.Net.Blazor1.png" />
+    <None Include="Resources\Next.png" />
     <Content Include="Tools.ico" />
     <Content Include="Xml\Files\DataTier.Net.Update.xml" />
     <Content Include="Xml\Files\DeserializedFieldSet.xml" />
