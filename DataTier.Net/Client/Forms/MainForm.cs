@@ -3,7 +3,6 @@
 #region using statements
 
 using ApplicationLogicComponent.Controllers;
-using ApplicationLogicComponent.Exceptions;
 using DataGateway;
 using DataJuggler.Core.UltimateHelper;
 using DataJuggler.Core.UltimateHelper.Objects;
@@ -13,23 +12,20 @@ using DataJuggler.Win.Controls.Interfaces;
 using DataTier.Net.StoredProcedureGenerator;
 using DataTierClient.Builders;
 using DataTierClient.ClientUtil;
-using DataTierClient.Controls;
 using DataTierClient.Controls.Images;
 using DataTierClient.Enumerations;
 using DataTierClient.Objects;
+using DataTierClient.Xml.Parsers;
 using ObjectLibrary.BusinessObjects;
 using ObjectLibrary.Enumerations;
-using ObjectLibrary.Parsers;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Diagnostics;
-using System.Text;
 using System.Net;
+using System.Text;
 using System.Windows.Forms;
-using DataTierClient.Xml.Parsers;
 
 #endregion
 
@@ -1245,6 +1241,22 @@ namespace DataTierClient.Forms
                                 // find the first admin
                                 Admin admin = gateway.FindFirstAdmin();
 
+                                // if the admin object does not exist
+                                if (NullHelper.IsNull(admin))
+                                {
+                                    // create an admin object
+                                    admin = new Admin();
+
+                                    // default to true unless turned off
+                                    admin.CheckForUpdates = true;
+                                    admin.CodeVersion = Application.ProductVersion.Substring(0, Application.ProductVersion.Length - 2);
+                                    admin.GitCommit = update.GitCommit;
+                                    admin.LastUpdated = DateTime.Now;
+                                    
+                                    // now save
+                                    bool saved = gateway.SaveAdmin(ref admin);
+                                }
+
                                 // if the current admin object exists
                                 if (NullHelper.Exists(admin))
                                 {
@@ -2066,14 +2078,7 @@ namespace DataTierClient.Forms
                     this.Gateway = new Gateway();
 
                     // Load the Admin object
-                    List<Admin> admins = Gateway.LoadAdmins();
-
-                    // If the admins collection exists and has one or more items
-                    if (ListHelper.HasOneOrMoreItems(admins))
-                    {
-                        // setf the Admin object
-                        this.Admin = admins[0];
-                    }
+                    this.Admin = Gateway.FindFirstAdmin();
 
                     // if the value for HasAdmin is true
                     if (HasAdmin)
@@ -2084,9 +2089,17 @@ namespace DataTierClient.Forms
                         // if Check For Updates is true
                         if (Admin.CheckForUpdates)
                         {
-                            // first test, create a writer for the Xml to place on my webserver
-                            Admin update = CheckForUpdate();
+                            // Check the web for the latest version
+                            CheckForUpdate();
                         }
+                    }
+                    else
+                    {
+                        // here we are checking for an update, and if it doesn't exist the Admin object is created with CheckForUpdate
+                        // Set to true until turned off
+
+                        // Check the web for the latest version
+                        CheckForUpdate();
                     }
                 
                     // Load Projects
