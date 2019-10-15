@@ -664,12 +664,12 @@ namespace DataTier.Net.StoredProcedureGenerator
                     if (fetchAll)
                     {
                         // Add the WhereClause
-                        WriteWhereClause(parameterField, ProcedureTypeEnum.FetchAll);
+                        WriteWhereClause(parameterField, ProcedureTypeEnum.FetchAll, useCustomWhere, whereText);
                     }
                     else
                     {
                         // Add the WhereClause
-                        WriteWhereClause(parameterField, ProcedureTypeEnum.Find);
+                        WriteWhereClause(parameterField, ProcedureTypeEnum.Find, useCustomWhere, whereText);
                     }
 
                     // If the orderByField object exists
@@ -691,7 +691,7 @@ namespace DataTier.Net.StoredProcedureGenerator
             }
             #endregion
 
-            #region CreateFindProc(DataTable dataTable, bool fetchAll, string procedureName, List<DataField> parameters, CustomReader customReader = null, FieldSet orderByFieldSet = null, FieldSet orderByFieldSet = null)
+            #region CreateFindProc(DataTable dataTable, bool fetchAll, string procedureName, List<DataField> parameters, CustomReader customReader = null, DTNField orderByField = null, FieldSet orderByFieldSet = null, bool orderByDescending = false, int topRows = 0, bool useCustomWhere = false, string whereText = "")
             /// <summary>
             /// This method creates the Find procedure for the table, procedureName and parameterField given. 
             /// </summary>
@@ -699,7 +699,14 @@ namespace DataTier.Net.StoredProcedureGenerator
             /// <param name="fetchAll">Is this a Find or a FetchAll procedure</param>
             /// <param name="procedureName">The name of the stored procedure to create</param>
             /// <param name="orderByFieldSet">If set, this overrides the PrimaryKey parameter</param>
-            public void CreateFindProc(DataTable dataTable, bool fetchAll, string procedureName, List<DataField> parameters, CustomReader customReader = null, DTNField orderByField = null, FieldSet orderByFieldSet = null, bool orderByDescending = false, int topRows = 0)
+            /// <param name="customReader"></param>
+            /// <param name="orderByDescending"></param>
+            /// <param name="orderByField"></param>
+            /// <param name="parameters"></param>
+            /// <param name="topRows"></param>
+            /// <param name="useCustomWhere"></param>
+            /// <param name="whereText"></param>
+            public void CreateFindProc(DataTable dataTable, bool fetchAll, string procedureName, List<DataField> parameters, CustomReader customReader = null, DTNField orderByField = null, FieldSet orderByFieldSet = null, bool orderByDescending = false, int topRows = 0, bool useCustomWhere = false, string whereText = "")
             {
                 // If all objects exist and the parameters collection has one or more items
                 if ((NullHelper.Exists(dataTable)) && (TextHelper.Exists(procedureName)) && (ListHelper.HasOneOrMoreItems(parameters)))
@@ -758,12 +765,12 @@ namespace DataTier.Net.StoredProcedureGenerator
                     if (fetchAll)
                     {
                         // Add the WhereClause
-                        WriteWhereClause(parameters, ProcedureTypeEnum.FetchAll);
+                        WriteWhereClause(parameters, ProcedureTypeEnum.FetchAll, useCustomWhere, whereText);
                     }
                     else
                     {
                         // Add the WhereClause
-                        WriteWhereClause(parameters, ProcedureTypeEnum.Find);
+                        WriteWhereClause(parameters, ProcedureTypeEnum.Find, useCustomWhere, whereText);
                     }
 
                     // If the orderByField object exists
@@ -2247,12 +2254,12 @@ namespace DataTier.Net.StoredProcedureGenerator
             } 
             #endregion
         
-            #region WriteWhereClause(List<DataField> parameters, ProcedureTypeEnum proceduteType)
+            #region WriteWhereClause(List<DataField> parameters, ProcedureTypeEnum proceduteType, bool useCustomWhere = false, string whereText = "")
             /// <summary>
             /// This method writes the where clause for the primary key
             /// </summary>
             /// <param name="dataField"></param>
-            private void WriteWhereClause(List<DataField> parameters, ProcedureTypeEnum proceduteType)
+            private void WriteWhereClause(List<DataField> parameters, ProcedureTypeEnum proceduteType, bool useCustomWhere = false, string whereText = "")
             {
                 // locals
                 string procedureTypeName = proceduteType.ToString();
@@ -2275,43 +2282,53 @@ namespace DataTier.Net.StoredProcedureGenerator
                         WriteComment(procedureTypeName + " Matching Record");
                     }
              
-                    // Create StringBuilder
-                    StringBuilder sb = new StringBuilder("Where ");
 
-                    // Iterate the collection of DataField objects
-                    foreach (DataField parameter in parameters)
+                    // if useCustomWhere is true and the whereText exists and where text starts with the word where
+                    if ((useCustomWhere) && (TextHelper.Exists(whereText)) && (whereText.ToLower().StartsWith("where")))
                     {
-                        // parameter
-                        count++;
-
-                        // set the value for lastField if this is last field
-                        lastField = (count == parameters.Count);
-
-                        // Append an open brack
-                        sb.Append("[");
-
-                        // append field name
-                        sb.Append(parameter.FieldName);
-                
-                        // Append closing ], equals sign and the @ symbol for this parameter
-                        sb.Append("] = @");
-
-                        // append field name
-                        sb.Append(parameter.FieldName);
-
-                        // if this is not the last field
-                        if (!lastField)
-                        {
-                            // append the word And with spaces surrounding it
-                            sb.Append(and);
-                        }
+                        // write whereClause
+                        WriteLine(whereText);
                     }
+                    else
+                    { 
+                        // Create StringBuilder
+                        StringBuilder sb = new StringBuilder("Where ");
 
-                    // get where clause
-                    string whereClause = sb.ToString();
+                        // Iterate the collection of DataField objects
+                        foreach (DataField parameter in parameters)
+                        {
+                            // parameter
+                            count++;
+
+                            // set the value for lastField if this is last field
+                            lastField = (count == parameters.Count);
+
+                            // Append an open brack
+                            sb.Append("[");
+
+                            // append field name
+                            sb.Append(parameter.FieldName);
                 
-                    // write whereClause
-                    WriteLine(whereClause);
+                            // Append closing ], equals sign and the @ symbol for this parameter
+                            sb.Append("] = @");
+
+                            // append field name
+                            sb.Append(parameter.FieldName);
+
+                            // if this is not the last field
+                            if (!lastField)
+                            {
+                                // append the word And with spaces surrounding it
+                                sb.Append(and);
+                            }
+                        }
+
+                        // get where clause
+                        string whereClause = sb.ToString();
+                
+                        // write whereClause
+                        WriteLine(whereClause);
+                    }
                 }
             } 
             #endregion

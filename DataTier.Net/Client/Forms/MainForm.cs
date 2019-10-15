@@ -1430,6 +1430,10 @@ namespace DataTierClient.Forms
                 FieldSet orderByFieldSet = null;
                 bool descending = false;
 
+                // locals for CustomWhere
+                bool useCustomWhere = false;
+                string whereText = "";
+
                 // new feature TopRows
                 int topRows = 0;
                 
@@ -1445,6 +1449,21 @@ namespace DataTierClient.Forms
                         // reset the values
                         descending = false;
                         topRows = method.TopRows;
+
+                        // set the value for useCustomWhere
+                        useCustomWhere = method.UseCustomWhere;
+                            
+                        // if useCustomWhere is true
+                        if (useCustomWhere)
+                        {
+                            // set the value for whereText
+                            whereText = method.WhereText;
+                        }
+                        else
+                        {
+                            // erase
+                            whereText = "";
+                        }
 
                         // only update if UpdateProcedureOnBuild is true
                         if (method.UpdateProcedureOnBuild)
@@ -1536,12 +1555,12 @@ namespace DataTierClient.Forms
                                     else if (method.MethodType == MethodTypeEnum.Find_By)
                                     {
                                         // create a find procedure
-                                        textWriter.CreateFindProc(dataTable, false, method.ProcedureName, parameter, method.CustomReader, orderByField, orderByFieldSet, descending, topRows);
+                                        textWriter.CreateFindProc(dataTable, false, method.ProcedureName, parameter, method.CustomReader, orderByField, orderByFieldSet, descending, topRows, useCustomWhere, whereText);
                                     }
                                     else if (method.MethodType == MethodTypeEnum.Load_By)
                                     {
                                         // create a fetch all procedure
-                                        textWriter.CreateFindProc(dataTable, true, method.ProcedureName, parameter, method.CustomReader, orderByField, orderByFieldSet, descending, topRows);
+                                        textWriter.CreateFindProc(dataTable, true, method.ProcedureName, parameter, method.CustomReader, orderByField, orderByFieldSet, descending, topRows, useCustomWhere, whereText);
                                     }
                                 }
                                 else if (method.ParameterType == ParameterTypeEnum.Field_Set)
@@ -1561,12 +1580,12 @@ namespace DataTierClient.Forms
                                     else if (method.MethodType == MethodTypeEnum.Find_By)
                                     {
                                         // create a find procedure
-                                        textWriter.CreateFindProc(dataTable, false, method.ProcedureName, parameterList, method.CustomReader, orderByField, orderByFieldSet, descending, topRows);
+                                        textWriter.CreateFindProc(dataTable, false, method.ProcedureName, parameterList, method.CustomReader, orderByField, orderByFieldSet, descending, topRows, useCustomWhere, whereText);
                                     }
                                     else if (method.MethodType == MethodTypeEnum.Load_By)
                                     {
                                         // create a fetch all procedure
-                                        textWriter.CreateFindProc(dataTable, true, method.ProcedureName, parameterList, method.CustomReader, orderByField, orderByFieldSet, descending, topRows);
+                                        textWriter.CreateFindProc(dataTable, true, method.ProcedureName, parameterList, method.CustomReader, orderByField, orderByFieldSet, descending, topRows, useCustomWhere, whereText);
                                     }
                                 }
                                 else

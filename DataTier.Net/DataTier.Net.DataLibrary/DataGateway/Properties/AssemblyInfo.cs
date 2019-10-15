@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("DataGateway")]
 [assembly: AssemblyDescription("This class serves as the bridge between client applications and the DataAccessComponent.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("[Your Company Name]")]
+[assembly: AssemblyCompany("Data Juggler")]
 [assembly: AssemblyProduct("DataGateway")]
-[assembly: AssemblyCopyright("Copyright © [Date] [Your Company Name]")]
+[assembly: AssemblyCopyright("Copyright © [Date] Data Juggler - Licensed Free of Charge")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("2.2.5.0")]
+[assembly: AssemblyFileVersion("2.2.5.0")]

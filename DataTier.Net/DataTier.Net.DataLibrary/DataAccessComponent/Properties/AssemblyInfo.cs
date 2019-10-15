@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("DataAccessComponent")]
 [assembly: AssemblyDescription("This object serves as the data tier for this application.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("[Your Company Name]")]
+[assembly: AssemblyCompany("Data Juggler")]
 [assembly: AssemblyProduct("DataAccessComponent")]
-[assembly: AssemblyCopyright("Copyright © [Date] [Your Company Name]")]
+[assembly: AssemblyCopyright("Copyright © [Date] Data Juggler")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -31,5 +31,5 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("2.2.5.0")]
+[assembly: AssemblyFileVersion("2.2.5.0")]
