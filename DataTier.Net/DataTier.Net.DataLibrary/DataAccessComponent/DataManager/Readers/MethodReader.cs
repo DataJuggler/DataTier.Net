@@ -57,6 +57,8 @@ namespace DataAccessComponent.DataManager.Readers
                 int topRowsfield = 18;
                 int updateProcedureOnBuildfield = 19;
                 int useCustomReaderfield = 20;
+                int useCustomWherefield = 21;
+                int whereTextfield = 22;
 
                 try
                 {
@@ -82,6 +84,8 @@ namespace DataAccessComponent.DataManager.Readers
                     method.TopRows = DataHelper.ParseInteger(dataRow.ItemArray[topRowsfield], 0);
                     method.UpdateProcedureOnBuild = DataHelper.ParseBoolean(dataRow.ItemArray[updateProcedureOnBuildfield], false);
                     method.UseCustomReader = DataHelper.ParseBoolean(dataRow.ItemArray[useCustomReaderfield], false);
+                    method.UseCustomWhere = DataHelper.ParseBoolean(dataRow.ItemArray[useCustomWherefield], false);
+                    method.WhereText = DataHelper.ParseString(dataRow.ItemArray[whereTextfield]);
                 }
                 catch
                 {

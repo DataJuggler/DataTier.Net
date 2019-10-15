@@ -661,14 +661,14 @@ namespace DataTierClient.Controls
                             updateForm.ShowDialog();
                         }
 
-                        // Create the form3
-                        NewStoredProcedureEditorForm form3 = new NewStoredProcedureEditorForm();
+                        // Create the procedureEditorForm
+                        NewStoredProcedureEditorForm procedureEditorForm = new NewStoredProcedureEditorForm();
 
                         // setup the form
-                        form3.Setup(methodInfo, this.Project, methodInfo.CustomReader, methodInfo.OrderByField, methodInfo.OrderByFieldSet);
+                        procedureEditorForm.Setup(methodInfo, this.Project, methodInfo.CustomReader, methodInfo.OrderByField, methodInfo.OrderByFieldSet);
 
                         // Show this form
-                        form3.ShowDialog();
+                        procedureEditorForm.ShowDialog();
                     }
                 }
 

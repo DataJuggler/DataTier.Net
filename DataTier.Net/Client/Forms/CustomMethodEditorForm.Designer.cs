@@ -55,11 +55,6 @@ namespace DataTierClient.Forms
             this.CustomMethodEditor.Location = new System.Drawing.Point(0, 0);
             this.CustomMethodEditor.MethodInfo = null;
             this.CustomMethodEditor.Name = "CustomMethodEditor";
-            this.CustomMethodEditor.SelectedField = null;
-            this.CustomMethodEditor.SelectedFieldSet = null;
-            this.CustomMethodEditor.SelectedMethod = null;
-            this.CustomMethodEditor.SelectedProject = null;
-            this.CustomMethodEditor.SelectedTable = null;
             this.CustomMethodEditor.Size = new System.Drawing.Size(720, 610);
             this.CustomMethodEditor.TabIndex = 0;
             this.CustomMethodEditor.UserCancelled = true;

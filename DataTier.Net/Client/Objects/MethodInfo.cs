@@ -45,6 +45,9 @@ namespace DataTierClient.Objects
         private int methodId;
         private string storedProcedureVariableName;
         private int topRows;
+        private bool useCustomWhere;
+        private string whereText;
+        private string procedureText;
         #endregion
 
         #region Properties
@@ -71,6 +74,23 @@ namespace DataTierClient.Objects
             }
             #endregion
             
+            #region HasWhereText
+            /// <summary>
+            /// This property returns true if the 'WhereText' exists.
+            /// </summary>
+            public bool HasWhereText
+            {
+                get
+                {
+                    // initial value
+                    bool hasWhereText = (!String.IsNullOrEmpty(this.WhereText));
+                    
+                    // return value
+                    return hasWhereText;
+                }
+            }
+            #endregion
+            
             #region HasCustomReader
             /// <summary>
             /// This property returns true if this object has a 'CustomReader'.
@@ -84,6 +104,23 @@ namespace DataTierClient.Objects
                     
                     // return value
                     return hasCustomReader;
+                }
+            }
+            #endregion
+            
+            #region HasProcedureText
+            /// <summary>
+            /// This property returns true if the 'ProcedureText' exists.
+            /// </summary>
+            public bool HasProcedureText
+            {
+                get
+                {
+                    // initial value
+                    bool hasProcedureText = (!String.IsNullOrEmpty(this.ProcedureText));
+                    
+                    // return value
+                    return hasProcedureText;
                 }
             }
             #endregion
@@ -321,6 +358,17 @@ namespace DataTierClient.Objects
                 set { procedureName = value; }
             }
             #endregion
+
+            #region ProcedureText
+            /// <summary>
+            /// This property gets or sets the value for 'ProcedureText'.
+            /// </summary>
+            public string ProcedureText
+            {
+                get { return procedureText; }
+                set { procedureText = value; }
+            }
+            #endregion
             
             #region PropertyDataType
             /// <summary>
@@ -398,7 +446,29 @@ namespace DataTierClient.Objects
                 set { useCustomReader = value; }
             }
             #endregion
+
+            #region UseCustomWhere
+            /// <summary>
+            /// This property gets or sets the value for 'UseCustomWhere'.
+            /// </summary>
+            public bool UseCustomWhere
+            {
+                get { return useCustomWhere; }
+                set { useCustomWhere = value; }
+            }
+            #endregion
          
+            #region WhereText
+            /// <summary>
+            /// This property gets or sets the value for 'WhereText'.
+            /// </summary>
+            public string WhereText
+            {
+                get { return whereText; }
+                set { whereText = value; }
+            }
+            #endregion
+            
         #endregion
 
     }

@@ -117,7 +117,7 @@ namespace DataAccessComponent.DataManager.Writers
             internal static SqlParameter[] CreateInsertParameters(Method method)
             {
                 // Initial Values
-                SqlParameter[] parameters = new SqlParameter[20];
+                SqlParameter[] parameters = new SqlParameter[22];
                 SqlParameter param = null;
 
                 // verify methodexists
@@ -242,6 +242,18 @@ namespace DataAccessComponent.DataManager.Writers
 
                     // set parameters[19]
                     parameters[19] = param;
+
+                    // Create [UseCustomWhere] parameter
+                    param = new SqlParameter("@UseCustomWhere", method.UseCustomWhere);
+
+                    // set parameters[20]
+                    parameters[20] = param;
+
+                    // Create [WhereText] parameter
+                    param = new SqlParameter("@WhereText", method.WhereText);
+
+                    // set parameters[21]
+                    parameters[21] = param;
                 }
 
                 // return value
@@ -288,7 +300,7 @@ namespace DataAccessComponent.DataManager.Writers
             internal static SqlParameter[] CreateUpdateParameters(Method method)
             {
                 // Initial Values
-                SqlParameter[] parameters = new SqlParameter[21];
+                SqlParameter[] parameters = new SqlParameter[23];
                 SqlParameter param = null;
 
                 // verify methodexists
@@ -414,9 +426,21 @@ namespace DataAccessComponent.DataManager.Writers
                     // set parameters[19]
                     parameters[19] = param;
 
+                    // Create parameter for [UseCustomWhere]
+                    param = new SqlParameter("@UseCustomWhere", method.UseCustomWhere);
+
+                    // set parameters[20]
+                    parameters[20] = param;
+
+                    // Create parameter for [WhereText]
+                    param = new SqlParameter("@WhereText", method.WhereText);
+
+                    // set parameters[21]
+                    parameters[21] = param;
+
                     // Create parameter for [MethodId]
                     param = new SqlParameter("@MethodId", method.MethodId);
-                    parameters[20] = param;
+                    parameters[22] = param;
                 }
 
                 // return value

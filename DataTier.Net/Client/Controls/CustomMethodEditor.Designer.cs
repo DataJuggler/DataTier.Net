@@ -88,6 +88,7 @@ namespace DataTierClient.Controls
             this.OrderByFieldControl = new DataJuggler.Win.Controls.LabelComboBoxControl();
             this.DescendingCheckBox = new DataJuggler.Win.Controls.LabelCheckBoxControl();
             this.TopRowsControl = new DataJuggler.Win.Controls.LabelTextBoxControl();
+            this.CustomWhereCheckBox = new DataJuggler.Win.Controls.LabelCheckBoxControl();
             ((System.ComponentModel.ISupportInitialize)(this.IsViewIcon)).BeginInit();
             this.SuspendLayout();
             // 
@@ -597,10 +598,29 @@ namespace DataTierClient.Controls
             this.TopRowsControl.TextBoxFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TopRowsControl.TextBoxTopMargin = 0;
             // 
+            // CustomWhereCheckBox
+            // 
+            this.CustomWhereCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.CustomWhereCheckBox.CheckBoxHorizontalOffSet = 0;
+            this.CustomWhereCheckBox.CheckBoxVerticalOffSet = 4;
+            this.CustomWhereCheckBox.CheckChangedListener = null;
+            this.CustomWhereCheckBox.Checked = false;
+            this.CustomWhereCheckBox.Editable = true;
+            this.CustomWhereCheckBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CustomWhereCheckBox.LabelColor = System.Drawing.SystemColors.ControlText;
+            this.CustomWhereCheckBox.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CustomWhereCheckBox.LabelText = "Custom Where:";
+            this.CustomWhereCheckBox.LabelWidth = 188;
+            this.CustomWhereCheckBox.Location = new System.Drawing.Point(316, 380);
+            this.CustomWhereCheckBox.Name = "CustomWhereCheckBox";
+            this.CustomWhereCheckBox.Size = new System.Drawing.Size(226, 28);
+            this.CustomWhereCheckBox.TabIndex = 1006;
+            // 
             // CustomMethodEditor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Linen;
+            this.Controls.Add(this.CustomWhereCheckBox);
             this.Controls.Add(this.TopRowsControl);
             this.Controls.Add(this.DescendingCheckBox);
             this.Controls.Add(this.EditOrderByFieldSetsButton);
@@ -636,6 +656,7 @@ namespace DataTierClient.Controls
 
         private DataJuggler.Win.Controls.LabelCheckBoxControl DescendingCheckBox;
         private DataJuggler.Win.Controls.LabelTextBoxControl TopRowsControl;
+        private DataJuggler.Win.Controls.LabelCheckBoxControl CustomWhereCheckBox;
     }
     #endregion
 

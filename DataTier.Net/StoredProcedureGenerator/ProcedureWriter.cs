@@ -494,13 +494,21 @@ namespace DataTier.Net.StoredProcedureGenerator
             }
             #endregion
 
-            #region CreateFindProc(DataTable dataTable, bool fetchAll, CustomReader customReader = null)
+            #region CreateFindProc(DataTable dataTable, bool fetchAll, DataField parameterField = null, CustomReader customReader = null, DTNField orderByField = null, FieldSet orderByFieldSet = null, bool orderByFieldDescending = false, int topRows = 0, bool useCustomWhere = false, string whereText = "")
             /// <summary>
             /// This method creates the find procedure.
             /// </summary>
             /// <param name="dataTable">The table to create the Find procedure for.</param>
             /// <param name="fetchAll">Pass in true for a FetchAll (Load) or false for a Find.</param>
-            public void CreateFindProc(DataTable dataTable, bool fetchAll, DataField parameterField = null, CustomReader customReader = null, DTNField orderByField = null, FieldSet orderByFieldSet = null, bool orderByFieldDescending = false, int topRows = 0)
+            /// <param name="customReader">Should a custom reader be used for this method. If yes, the fields list comes from the Reader.</param>
+            /// <param name="orderByField">The field to order by for a single field order by.</param>
+            /// <param name="orderByFieldDescending">If using a seingle field orderby, you can optionally set the value to descending (desc) order.</param>
+            /// <param name="orderByFieldSet">A field set to use for the Order By section.</param>
+            /// <param name="parameterField">A field to use as the parameter for the procedure.</param>
+            /// <param name="topRows">Optional, the number of rows to select.</param>
+            /// <param name="useCustomWhere">If true, a Custom Where clause is created using the whereText that must be passed in with it.</param>
+            /// <param name="whereText">The custom where clause to use if UseCustomWhere is true. Must start with the word Where.</param>
+            public void CreateFindProc(DataTable dataTable, bool fetchAll, DataField parameterField = null, CustomReader customReader = null, DTNField orderByField = null, FieldSet orderByFieldSet = null, bool orderByFieldDescending = false, int topRows = 0, bool useCustomWhere = false, string whereText = "")
             {
                 // if this is a fetch all
                 if(fetchAll)
@@ -550,13 +558,13 @@ namespace DataTier.Net.StoredProcedureGenerator
                 WriteLine("From [" + dataTable.Name + "]");
                 
                 // if this is a find
-                if(!fetchAll)
+                if ((!fetchAll) || (useCustomWhere))
                 {
                     // Write Blank Line
                     WriteLine();
                 
                     // Add the WhereClause
-                    WriteWhereClause(dataTable.PrimaryKey, ProcedureTypeEnum.Find);
+                    WriteWhereClause(dataTable.PrimaryKey, ProcedureTypeEnum.Find, useCustomWhere, whereText);
                 }
                     
                 // Write End Procedure
@@ -564,7 +572,7 @@ namespace DataTier.Net.StoredProcedureGenerator
             }
             #endregion
 
-            #region CreateFindProc(DataTable dataTable, bool fetchAll, string procedureName, DataField parameterField, CustomReader customReader = null, DataField orderByField = null, FieldSet orderByFieldSet = null, bool orderByFieldDescending = false, int topRows = 0)
+            #region CreateFindProc(DataTable dataTable, bool fetchAll, string procedureName, DataField parameterField, CustomReader customReader = null, DataField orderByField = null, FieldSet orderByFieldSet = null, bool orderByFieldDescending = false, int topRows = 0, bool useCustomWhere = false, string whereText = "")
             /// <summary>
             /// This method creates the Find procedure for the table, procedureName and parameterField given. 
             /// </summary>
@@ -577,7 +585,9 @@ namespace DataTier.Net.StoredProcedureGenerator
             /// <param name="orderByFieldSet">Optional Parameter if an Order By field set is used</param>
             /// <param name="orderByFieldDescending">Optional parameter if a single field order by is in descending order.</param>
             /// <param name="topRows">Optional parameter to Select top (x) number of rows</param>
-            public void CreateFindProc(DataTable dataTable, bool fetchAll, string procedureName, DataField parameterField, CustomReader customReader = null, DTNField orderByField = null, FieldSet orderByFieldSet = null, bool orderByFieldDescending = false, int topRows = 0)
+            /// <param name="useCustomWhere">Set to true to use a Custom Where clause instead of the default where text</param>
+            /// <param name="whereText">The text to use for a Where clause, if UseCustomWhere is true</param>
+            public void CreateFindProc(DataTable dataTable, bool fetchAll, string procedureName, DataField parameterField, CustomReader customReader = null, DTNField orderByField = null, FieldSet orderByFieldSet = null, bool orderByFieldDescending = false, int topRows = 0, bool useCustomWhere = false, string whereText = "")
             {
                 // If both objects exist
                 if ((NullHelper.Exists(dataTable, parameterField)) && (TextHelper.Exists(procedureName)))
@@ -2186,12 +2196,12 @@ namespace DataTier.Net.StoredProcedureGenerator
             }
             #endregion
 
-            #region WriteWhereClause(DataField fieldName, ProcedureTypeEnum proceduteType)
+            #region WriteWhereClause(DataField fieldName, ProcedureTypeEnum proceduteType, bool useCustomWhere = false, string whereText = "")
             /// <summary>
             /// This method writes the where clause for the primary key
             /// </summary>
             /// <param name="dataField"></param>
-            private void WriteWhereClause(DataField fieldName, ProcedureTypeEnum proceduteType)
+            private void WriteWhereClause(DataField fieldName, ProcedureTypeEnum proceduteType, bool useCustomWhere = false, string whereText = "")
             {
                 // get procedure type name
                 string procedureTypeName = proceduteType.ToString();
@@ -2208,23 +2218,32 @@ namespace DataTier.Net.StoredProcedureGenerator
                     WriteComment(procedureTypeName + " Matching Record");
                 }
              
-                // Create StringBuilder
-                StringBuilder sb = new StringBuilder("Where [");
+                // if useCustomWhere is true and the whereText exists and where text starts with the word where
+                if ((useCustomWhere) && (TextHelper.Exists(whereText)) && (whereText.ToLower().StartsWith("where")))
+                {
+                    // write the custom whereText
+                    WriteLine(whereText);
+                }
+                else
+                {
+                    // Create StringBuilder
+                    StringBuilder sb = new StringBuilder("Where [");
                 
-                // append field name
-                sb.Append(fieldName.FieldName);
+                    // append field name
+                    sb.Append(fieldName.FieldName);
                 
-                // Append closing ]
-                sb.Append("] = @");
+                    // Append closing ]
+                    sb.Append("] = @");
 
-                // append field name
-                sb.Append(fieldName.FieldName);
+                    // append field name
+                    sb.Append(fieldName.FieldName);
+
+                     // get where clause
+                    string whereClause = sb.ToString();
                 
-                // get where clause
-                string whereClause = sb.ToString();
-                
-                // write whereClause
-                WriteLine(whereClause);
+                    // write whereClause
+                    WriteLine(whereClause);
+                }
             } 
             #endregion
         

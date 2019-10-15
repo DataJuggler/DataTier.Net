@@ -248,8 +248,20 @@ namespace DataTierClient.Controls
                             Gateway gateway = new Gateway();
 
                             // local
-                            Method method = gateway.FindMethodByName(MethodInfo.MethodName);
+                            Method method = null;
 
+                            // if the MethodId is set, use that
+                            if (MethodInfo.MethodId > 0)
+                            {
+                                // use the MethodId
+                                method = gateway.FindMethod(MethodInfo.MethodId);
+                            }
+                            else
+                            {
+                                // Find By Name
+                                method = gateway.FindMethodByName(MethodInfo.MethodName);
+                            }
+                            
                             // if the method object does not exist
                             if (NullHelper.IsNull(method))
                             {
@@ -261,7 +273,7 @@ namespace DataTierClient.Controls
                             method.Active = true;
                             method.MethodType = MethodInfo.MethodType;
                             method.Name = MethodInfo.MethodName;
-
+                            
                             // if the ParameterField exists
                             if (MethodInfo.HasParameterField)
                             {
@@ -284,6 +296,19 @@ namespace DataTierClient.Controls
                             method.UpdateProcedureOnBuild = MethodInfo.UpdateOnBuild;
                             method.Parameters = MethodInfo.Parameters;
                             method.TopRows = MethodInfo.TopRows;
+                            method.UseCustomWhere = MethodInfo.UseCustomWhere;
+                            
+                            // if UseCustomWhere is true
+                            if (method.UseCustomWhere)
+                            {
+                                // Use the Same WhereText
+                                method.WhereText = MethodInfo.WhereText;
+                            }
+                            else
+                            {
+                                // Use Empty String
+                                method.WhereText = "";
+                            }
 
                             // if UseCustomReader is true and the CustomReader exists and the CustomReader.Id is set
                             if ((MethodInfo.UseCustomReader) && (MethodInfo.HasCustomReader) && (!MethodInfo.CustomReader.IsNew))

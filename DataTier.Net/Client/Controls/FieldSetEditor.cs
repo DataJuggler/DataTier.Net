@@ -447,6 +447,17 @@ namespace DataTierClient.Controls
 
                             // required
                             break;
+
+                        case "CustomWhereCheckBox":
+
+                            // if the value for HasSelectedFieldSetFieldView is true
+                            if ((HasSelectedFieldSetFieldView) && (!this.Loading))
+                            {
+                               
+                            }
+
+                            // required
+                            break;
                     }
                 }
 
@@ -1376,7 +1387,7 @@ namespace DataTierClient.Controls
                 this.OrderByModeCheckBox.CheckChangedListener = this;
                 this.ReaderModeCheckBox.CheckChangedListener = this;
                 this.DescendingCheckBox.CheckChangedListener = this;
-
+                
                 // Setup this listener
                 this.FieldSetNameControl.OnTextChangedListener = this;
 

@@ -397,7 +397,7 @@ namespace DataTierClient.Controls
             this.OrderByFieldsListBox.ItemHeight = 18;
             this.OrderByFieldsListBox.Location = new System.Drawing.Point(817, 85);
             this.OrderByFieldsListBox.Name = "OrderByFieldsListBox";
-            this.OrderByFieldsListBox.Size = new System.Drawing.Size(316, 310);
+            this.OrderByFieldsListBox.Size = new System.Drawing.Size(316, 148);
             this.OrderByFieldsListBox.TabIndex = 136;
             this.OrderByFieldsListBox.SelectedIndexChanged += new System.EventHandler(this.OrderByFields_SelectedIndexChanged);
             // 

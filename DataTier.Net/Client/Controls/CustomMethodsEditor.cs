@@ -396,7 +396,10 @@ namespace DataTierClient.Controls
             public Method SelectedMethod
             {
                 get { return selectedMethod; }
-                set { selectedMethod = value; }
+                set 
+                { 
+                    selectedMethod = value;
+                }
             }
             #endregion
 

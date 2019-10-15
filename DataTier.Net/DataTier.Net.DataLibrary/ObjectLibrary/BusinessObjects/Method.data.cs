@@ -37,6 +37,8 @@ namespace ObjectLibrary.BusinessObjects
         private int topRows;
         private bool updateProcedureOnBuild;
         private bool useCustomReader;
+        private bool useCustomWhere;
+        private string whereText;
         #endregion
 
         #region Methods
@@ -343,6 +345,34 @@ namespace ObjectLibrary.BusinessObjects
                 set
                 {
                     useCustomReader = value;
+                }
+            }
+            #endregion
+
+            #region bool UseCustomWhere
+            public bool UseCustomWhere
+            {
+                get
+                {
+                    return useCustomWhere;
+                }
+                set
+                {
+                    useCustomWhere = value;
+                }
+            }
+            #endregion
+
+            #region string WhereText
+            public string WhereText
+            {
+                get
+                {
+                    return whereText;
+                }
+                set
+                {
+                    whereText = value;
                 }
             }
             #endregion

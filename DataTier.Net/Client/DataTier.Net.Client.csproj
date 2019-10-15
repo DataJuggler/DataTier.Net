@@ -524,6 +524,7 @@
     <Compile Include="Xml\Writers\FieldSetFieldsWriter.cs" />
     <Compile Include="Xml\Writers\FieldSetsWriter.cs" />
     <Compile Include="Xml\Writers\FieldsWriter.cs" />
+    <Compile Include="Xml\Writers\MethodsWriter.cs" />
     <EmbeddedResource Include="Controls\BlazorDataServicesControl.resx">
       <DependentUpon>BlazorDataServicesControl.cs</DependentUpon>
     </EmbeddedResource>

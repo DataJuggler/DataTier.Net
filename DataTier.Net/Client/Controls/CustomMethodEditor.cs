@@ -1,6 +1,7 @@
 ﻿
 #region using statements
 
+using System.ComponentModel;
 using DataGateway;
 using DataJuggler.Core.UltimateHelper;
 using DataJuggler.Net;
@@ -110,6 +111,23 @@ namespace DataTierClient.Controls
                         // Enable the CustomReader control if isChecked is true
                         this.CustomReaderControl.Enabled = isChecked;
                         this.CustomReaderControl.Editable = isChecked;
+                    }
+                    // if DescendingCheckBox
+                    else if (sender.Name == this.DescendingCheckBox.Name)
+                    {
+                        // set the value
+                        this.SelectedMethod.OrderByDescending = isChecked;
+                    }
+                    // if CustomWhereCheckBox
+                    else if (sender.Name == this.CustomWhereCheckBox.Name)
+                    {
+                        // Set UseCustomWhere
+                        this.SelectedMethod.UseCustomWhere = isChecked;
+                    }
+                    else if (sender.Name == this.CustomWhereCheckBox.Name)
+                    {
+                        // Set the value
+                        this.SelectedMethod.UseCustomWhere = isChecked;
                     }
                 }
             }
@@ -733,6 +751,8 @@ namespace DataTierClient.Controls
                     MethodInfo.UseCustomReader = this.UseCustomReaderCheckBox.Checked;
                     MethodInfo.MethodId = this.SelectedMethod.MethodId;
                     MethodInfo.TopRows = this.TopRowsControl.IntValue;
+                    MethodInfo.UseCustomWhere = CustomWhereCheckBox.Checked;
+                    MethodInfo.WhereText = SelectedMethod.WhereText;
 
                     // if UseCustomReader is true and the SelectedMethod.CustomReader exists
                     if ((MethodInfo.UseCustomReader) && (SelectedMethod.HasCustomReader))
@@ -894,6 +914,7 @@ namespace DataTierClient.Controls
                 int orderByFieldSetIndex = -1;
                 bool descending = false;
                 int topRows = 0;
+                bool customWhere = false;
 
                 // If the SelectedMethod object exists
                 if (this.HasSelectedMethod)
@@ -1021,6 +1042,9 @@ namespace DataTierClient.Controls
                             customReaderIndex = this.CustomReaderControl.FindItemIndexByValue(customReader.ClassName);
                         }
                     }
+
+                    // Is the customWhere checked
+                    customWhere = this.SelectedMethod.UseCustomWhere;
                 }
 
                 // Display the values
@@ -1038,6 +1062,7 @@ namespace DataTierClient.Controls
                 this.DescendingCheckBox.Checked = descending;
                 this.OrderByFieldSetControl.SelectedIndex = orderByFieldSetIndex;
                 this.TopRowsControl.Text = topRows.ToString();
+                this.CustomWhereCheckBox.Checked = customWhere;
                 
                 // if the value for useCustomReader is true
                 if (useCustomReader)
@@ -1130,6 +1155,7 @@ namespace DataTierClient.Controls
                 this.OrderByFieldControl.SelectedIndexListener = this;
                 this.DescendingCheckBox.CheckChangedListener = this;
                 this.OrderByFieldSetControl.SelectedIndexListener = this;
+                this.CustomWhereCheckBox.CheckChangedListener = this;
 
                 // Set both buttons
                 this.EditParametersSetButton.ShowNotSelectedImageWhenDisabled = true;
@@ -1594,6 +1620,8 @@ namespace DataTierClient.Controls
             /// <summary>
             /// This property gets or sets the value for 'SelectedField'.
             /// </summary>
+            [Browsable(false)]
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
             public DTNField SelectedField
             {
                 get { return selectedField; }
@@ -1605,6 +1633,8 @@ namespace DataTierClient.Controls
             /// <summary>
             /// This property gets or sets the value for 'SelectedFieldSet'.
             /// </summary>
+            [Browsable(false)]
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
             public FieldSet SelectedFieldSet
             {
                 get { return selectedFieldSet; }
@@ -1616,10 +1646,15 @@ namespace DataTierClient.Controls
             /// <summary>
             /// This property gets or sets the value for 'SelectedMethod'.
             /// </summary>
+            [Browsable(false)]
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
             public Method SelectedMethod
             {
                 get { return selectedMethod; }
-                set { selectedMethod = value; }
+                set
+                { 
+                    selectedMethod = value; 
+                }
             }
             #endregion
             
@@ -1627,6 +1662,8 @@ namespace DataTierClient.Controls
             /// <summary>
             /// This property gets or sets the value for 'SelectedProject'.
             /// </summary>
+            [Browsable(false)]
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
             public Project SelectedProject
             {
                 get { return selectedProject; }
@@ -1638,6 +1675,8 @@ namespace DataTierClient.Controls
             /// <summary>
             /// This property gets or sets the value for 'SelectedTable'.
             /// </summary>
+            [Browsable(false)]
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
             public DTNTable SelectedTable
             {
                 get { return selectedTable; }

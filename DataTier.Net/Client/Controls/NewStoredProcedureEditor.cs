@@ -1,18 +1,23 @@
 ﻿
 #region using statements
 
+using DataJuggler.Core.UltimateHelper;
+using DataJuggler.Core.UltimateHelper.Objects;
 using DataTierClient.Forms;
 using DataTierClient.Controls.Interfaces;
 using DataJuggler.Net.Sql;
-using DataJuggler.Core.UltimateHelper;
+using DataJuggler.Win.Controls;
+using DataJuggler.Win.Controls.Interfaces;
 using DataTierClient.ClientUtil;
 using DataTier.Net.StoredProcedureGenerator;
 using DataTierClient.Objects;
+using DataTierClient.Xml.Writers;
 using ObjectLibrary.BusinessObjects;
 using ObjectLibrary.Enumerations;
 using DataGateway;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows.Forms;
 
 #endregion
@@ -24,13 +29,17 @@ namespace DataTierClient.Controls
     /// <summary>
     /// This control is used to create a stored procedure
     /// </summary>
-    public partial class NewStoredProcedureEditor : UserControl, ISaveCancelControl
+    public partial class NewStoredProcedureEditor : UserControl, ISaveCancelControl, ICheckChangedListener
     {
         
         #region Private Variables
         private MethodInfo methodInfo;
         private InstallProcedureMethodEnum installProcedureMethod;
         private Project openProject;
+        private bool customWhere;
+        private string fullProcedureText;
+        private string storedXml;
+        private List<TextLine> linesAfterOrderBy;
         #endregion
         
         #region Constructor
@@ -82,6 +91,27 @@ namespace DataTierClient.Controls
 
                 // Change the text
                 this.ProcedureButton.Text = "Copy Procedure";
+            }
+            #endregion
+            
+            #region OnCheckChanged(LabelCheckBoxControl sender, bool isChecked)
+            /// <summary>
+            /// event is fired when On Check Changed
+            /// </summary>
+            public void OnCheckChanged(LabelCheckBoxControl sender, bool isChecked)
+            {
+                // if the value for HasMethodInfo is true
+                if (HasMethodInfo)
+                {
+                    // set the value which toggles the panel
+                    MethodInfo.UseCustomWhere = isChecked;
+
+                    // Enable the Save button if there are changes
+                    UIEnable();
+
+                    // set this value because the WherePanel shjows or hides based upon it
+                    this.CustomWhere = isChecked;
+                }
             }
             #endregion
             
@@ -186,6 +216,24 @@ namespace DataTierClient.Controls
             }
             #endregion
             
+            #region ProcedureTextBox_TextChanged(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when Procedure Text Box _ Text Changed
+            /// </summary>
+            private void ProcedureTextBox_TextChanged(object sender, EventArgs e)
+            {
+                // if the value for HasMethodInfo is true
+                if (HasMethodInfo)
+                {
+                    // Set the full text
+                    MethodInfo.ProcedureText = ProcedureTextBox.Text;
+
+                    // Enable or disable controls
+                    UIEnable();
+                }
+            }
+            #endregion
+            
             #region UpdateMyDatabaseRadioButton_CheckedChanged(object sender, System.EventArgs e)
             /// <summary>
             /// event is fired when Update My Database Radio Button _ Checked Changed
@@ -200,6 +248,130 @@ namespace DataTierClient.Controls
             }
             #endregion
             
+            #region WhereTextBox_TextChanged(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when Where Text Box _ Text Changed
+            /// </summary>
+            private void WhereTextBox_TextChanged(object sender, EventArgs e)
+            {
+                // locals
+                bool whereStarted = false;
+                bool whereFinished = false;
+
+                // if the MethodInfo object exists
+                if (HasMethodInfo)
+                {
+                    // Get the new text
+                    string whereText = WhereTextBox.Text;
+
+                    // set the value in the MethodInfo object
+                    MethodInfo.WhereText = whereText + Environment.NewLine;
+
+                    // get the procedureText
+                    string procedureText = ProcedureTextBox.Text;
+
+                     // now the existing where text must be replaced
+                    int whereIndex = procedureText.ToLower().IndexOf("where [");
+    
+                    // if the whereIndex was found
+                    if (whereIndex >= 0)
+                    {
+                        // get all the lines after the where
+                        string temp = procedureText.Substring(whereIndex);
+
+                        // get the textLines after this whereIndex
+                        List<TextLine> endProcedureTextLines = WordParser.GetTextLines(temp);
+                        List<TextLine> linesAfterOrderBy = new List<TextLine>();
+                        string postWhereText = "";
+                        
+                        // if there are one or more items
+                        if (ListHelper.HasOneOrMoreItems(endProcedureTextLines))
+                        {   
+                            // Iterate the collection of TextLine objects
+                            foreach (TextLine textLine in endProcedureTextLines)
+                            {
+                                // if where has not been encountered yet
+                                if (!whereStarted)
+                                {
+                                    // if this is not the where line
+                                    if (textLine.Text.TrimStart().ToLower().StartsWith("where ["))
+                                    {
+                                        // where has Started
+                                        whereStarted = true;
+                                    }
+                                }
+                                else if (!whereFinished)
+                                {
+                                    // if the Text exists
+                                    if (!TextHelper.Exists(textLine.Text))
+                                    {
+                                        // where has finished
+                                        whereFinished = true;
+
+                                         // Add this line
+                                        linesAfterOrderBy.Add(textLine);
+                                    }
+                                    else if (textLine.Text.TrimStart().ToLower().StartsWith("order by"))
+                                    {
+                                        // Add this line
+                                        linesAfterOrderBy.Add(textLine);
+                                    }
+                                    else if (textLine.Text.TrimStart().ToLower().StartsWith("end"))
+                                    {
+                                        // Add this line
+                                        linesAfterOrderBy.Add(textLine);
+                                    }
+                                }
+                                else
+                                {
+                                    // Add this line
+                                    linesAfterOrderBy.Add(textLine);
+                                }
+                            }
+                        }
+
+                        // if there are NOT any lines after order by
+                        if ((ListHelper.HasOneOrMoreItems(linesAfterOrderBy)) && (HasLinesAfterOrderBy))
+                        {
+                            // use the linesAftterOrderBy previously stored
+                            linesAfterOrderBy = this.LinesAfterOrderBy;
+                        }
+
+                        // if there are any lines after order by
+                        if (ListHelper.HasOneOrMoreItems(linesAfterOrderBy))
+                        {
+                            // store the linesAfterOrderBy, because sometimes typing goes too fast 
+                            // for the parsing to keep up (I think)
+                            this.LinesAfterOrderBy = linesAfterOrderBy;
+
+                            // Create a new instance of a 'StringBuilder' object.
+                            StringBuilder sb = new StringBuilder();
+
+                            // Iterate the collection of TextLine objects
+                            foreach (TextLine textLine in linesAfterOrderBy)
+                            {
+                                // Add this item
+                                sb.Append(textLine.Text);
+                                sb.Append(Environment.NewLine);
+                            }
+
+                            // set the postWhereText
+                            postWhereText = sb.ToString();
+                        }
+
+                        // set the new ProcedureText
+                        procedureText = procedureText.Substring(0, whereIndex) + MethodInfo.WhereText + postWhereText;
+
+                        // set the updated text
+                        this.ProcedureTextBox.Text = procedureText;
+                    }
+
+                    // Show the save button if there are any changes
+                    UIEnable();
+                }
+            }
+            #endregion
+            
         #endregion
 
         #region Methods
@@ -211,10 +383,13 @@ namespace DataTierClient.Controls
             public void Init()
             {
                 // Hide the Save button
-                this.SaveCancelControl.SetupSaveButton("", 0, false, false);
+                this.SaveCancelControl.SetupSaveButton("Save", 80, true, false);
 
                 // Setup the Done button
-                this.SaveCancelControl.SetupCancelButton("Done", 80);                
+                this.SaveCancelControl.SetupCancelButton("Done", 80);         
+                
+                // Setup the listener
+                this.CustomWhereCheckBox.CheckChangedListener = this;
             }
             #endregion
             
@@ -254,8 +429,27 @@ namespace DataTierClient.Controls
                         // Set the text
                         method.ProcedureText = this.ProcedureTextBox.Text;
 
+                        // Make sure the value is still the same
+                        method.UseCustomWhere = CustomWhereCheckBox.Checked;
+
+                        // Save the current Text
+                        method.WhereText = WhereTextBox.Text;
+
                         // Save this method
                         bool saved = gateway.SaveMethod(ref method);
+
+                        // if saved
+                        if (saved)
+                        {
+                            // create a new 
+                            MethodsWriter methodsWriter = new MethodsWriter();
+
+                            // get the StoredXml
+                            StoredXml = methodsWriter.ExportMethodInfo(this.MethodInfo);
+
+                            // Enable controls
+                            UIEnable();
+                        }
                     }
                 }
             }
@@ -279,6 +473,12 @@ namespace DataTierClient.Controls
                 // If the MethodInfo object exists
                 if (this.HasMethodInfo)
                 {  
+                    // create a new 
+                    MethodsWriter methodsWriter = new MethodsWriter();
+
+                    // get the StoredXml
+                    StoredXml = methodsWriter.ExportMethodInfo(this.MethodInfo);
+
                     // if the OrderByFieldSet object exists
                     if (NullHelper.Exists(orderByFieldSet))
                     {
@@ -297,6 +497,12 @@ namespace DataTierClient.Controls
 
                     // Check the button for Manual Update (user clicks Copy and goes to their SQL instance and executes).
                     this.ManualUpdateRadioButton.Checked = true;
+
+                    // Check the box if UseCustomReader is true
+                    this.CustomWhereCheckBox.Checked = MethodInfo.UseCustomWhere;
+
+                    // Set the CustomWhereText (if any)
+                    this.WhereTextBox.Text = MethodInfo.WhereText;
 
                     // convert the table
                     DataJuggler.Net.DataTable table = DataConverter.ConvertDataTable(MethodInfo.SelectedTable, this.OpenProject);
@@ -386,6 +592,68 @@ namespace DataTierClient.Controls
                     // get the procedureText
                     string procedureText = writer.TextWriter.ToString();
 
+                    // Show the Where Panel if CustomWhere is true
+                    WherePanel.Visible = MethodInfo.UseCustomWhere;
+
+                    // if CustomWhere
+                    if (MethodInfo.UseCustomWhere)
+                    {
+                        // now the existing where text must be replaced
+                        int whereIndex = procedureText.ToLower().IndexOf("where [");
+
+                        // if the WhereText does not exist yet
+                        if ((!MethodInfo.HasWhereText) && (whereIndex > 0))
+                        {
+                            // Set the text as it is now
+                            string whereText = procedureText.Substring(whereIndex);
+
+                            // If the whereText string exists
+                            if (TextHelper.Exists(whereText))
+                            {
+                                // get the textLines
+                                List<TextLine> textLines = WordParser.GetTextLines(whereText);
+
+                                // If the textLines collection exists and has one or more items
+                                if (ListHelper.HasOneOrMoreItems(textLines))
+                                {
+                                    // Create a new instance of a 'StringBuilder' object.
+                                    StringBuilder sb = new StringBuilder();
+
+                                    // add each textLine of the Where Clause except the last one
+                                    foreach (TextLine textLine in textLines)
+                                    {
+                                        // if this is the End line
+                                        if (!textLine.Text.ToLower().StartsWith("end"))
+                                        {
+                                            // Add this line
+                                            sb.Append(textLine.Text);
+                                        }
+                                    }
+
+                                    // Get the Where Clause
+                                    MethodInfo.WhereText = sb.ToString().Trim();
+                                }
+                            }
+                        }
+
+                        // Set the WhereText
+                        WhereTextBox.Text = MethodInfo.WhereText;
+                        
+                        // if the whereIndex was found
+                        if (whereIndex >= 0)
+                        {
+                            // if the WhereText does not already exist
+                            if (!TextHelper.Exists(MethodInfo.WhereText))
+                            {
+                                // Set the default WhereText
+                                MethodInfo.WhereText = procedureText.Substring(whereIndex);
+                            }
+
+                            // set the new ProcedureText
+                            procedureText = procedureText.Substring(0, whereIndex) + MethodInfo.WhereText + Environment.NewLine + Environment.NewLine + "END";                        
+                        }
+                    }
+
                     // Remove any double blank lines
                     procedureText = CodeLineHelper.RemoveDoubleBlankLines(procedureText);
 
@@ -394,11 +662,95 @@ namespace DataTierClient.Controls
                 }
             }
             #endregion
+
+            #region UIEnable()
+            /// <summary>
+            /// This method UI Enable
+            /// </summary>
+            public void UIEnable()
+            {
+                // local
+                bool hasChanges = false;
+
+                // if the MethodInfo exists
+                if ((HasMethodInfo) && (HasStoredXml))
+                {
+                    // Create a new instance of a 'MethodsWriter' object.
+                    MethodsWriter writer = new MethodsWriter();
+
+                    // get the currentXml
+                    string currentXml = writer.ExportMethodInfo(this.MethodInfo);
+
+                    // set the value
+                    hasChanges = !TextHelper.IsEqual(currentXml, StoredXml);
+
+                    // for debugging only is why this is broken out
+
+                    // if there are changes
+                    if (hasChanges)
+                    {
+                        // Enable the save button if there are changes
+                        this.SaveCancelControl.EnableSaveButton(hasChanges);
+                    }
+                    else
+                    {
+                        // Enable the save button if there are changes
+                        this.SaveCancelControl.EnableSaveButton(hasChanges);
+                    }
+                }
+            }
+            #endregion
             
         #endregion
 
         #region Properties
 
+            #region CustomWhere
+            /// <summary>
+            /// This property gets or sets the value for 'CustomWhere'.
+            /// </summary>
+            public bool CustomWhere
+            {
+                get { return customWhere; }
+                set 
+                { 
+                    // set the value
+                    customWhere = value;
+
+                    // Show or hide the panel
+                    this.WherePanel.Visible = customWhere;
+                }
+            }
+            #endregion
+            
+            #region FullProcedureText
+            /// <summary>
+            /// This property gets or sets the value for 'FullProcedureText'.
+            /// </summary>
+            public string FullProcedureText
+            {
+                get { return fullProcedureText; }
+                set { fullProcedureText = value; }
+            }
+            #endregion
+            
+            #region HasLinesAfterOrderBy
+            /// <summary>
+            /// This property returns true if this object has a 'LinesAfterOrderBy'.
+            /// </summary>
+            public bool HasLinesAfterOrderBy
+            {
+                get
+                {
+                    // initial value
+                    bool hasLinesAfterOrderBy = (this.LinesAfterOrderBy != null);
+                    
+                    // return value
+                    return hasLinesAfterOrderBy;
+                }
+            }
+            #endregion
+            
             #region HasMethodInfo
             /// <summary>
             /// This property returns true if this object has a 'MethodInfo'.
@@ -450,6 +802,23 @@ namespace DataTierClient.Controls
             }
             #endregion
             
+            #region HasStoredXml
+            /// <summary>
+            /// This property returns true if the 'StoredXml' exists.
+            /// </summary>
+            public bool HasStoredXml
+            {
+                get
+                {
+                    // initial value
+                    bool hasStoredXml = (!String.IsNullOrEmpty(this.StoredXml));
+                    
+                    // return value
+                    return hasStoredXml;
+                }
+            }
+            #endregion
+            
             #region InstallProcedureMethod
             /// <summary>
             /// This property gets or sets the value for 'InstallProcedureMethod'.
@@ -458,6 +827,17 @@ namespace DataTierClient.Controls
             {
                 get { return installProcedureMethod; }
                 set { installProcedureMethod = value; }
+            }
+            #endregion
+            
+            #region LinesAfterOrderBy
+            /// <summary>
+            /// This property gets or sets the value for 'LinesAfterOrderBy'.
+            /// </summary>
+            public List<TextLine> LinesAfterOrderBy
+            {
+                get { return linesAfterOrderBy; }
+                set { linesAfterOrderBy = value; }
             }
             #endregion
             
@@ -497,6 +877,17 @@ namespace DataTierClient.Controls
                     // return value
                     return parent;
                 }
+            }
+        #endregion
+
+            #region StoredXml
+            /// <summary>
+            /// This property gets or sets the value for 'StoredXml'.
+            /// </summary>
+            public string StoredXml
+            {
+                get { return storedXml; }
+                set { storedXml = value; }
             }
             #endregion
             
