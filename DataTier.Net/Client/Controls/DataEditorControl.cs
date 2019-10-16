@@ -61,6 +61,21 @@ namespace DataTierClient.Controls
         
         #region Events
             
+            #region AllButton_Click(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when the 'AllButton' is clicked.
+            /// </summary>
+            private void AllButton_Click(object sender, EventArgs e)
+            {
+                // iterate the list box
+                for (int i = 0; i < TablesListBox.Items.Count; i++)
+                {
+                    // unselect this item
+                    TablesListBox.SetItemChecked(i, true);
+                }
+            }
+            #endregion
+            
             #region BlazorFeaturesButton_Click(object sender, EventArgs e)
             /// <summary>
             /// event is fired when the 'BlazorFeaturesButton' is clicked.
@@ -229,6 +244,21 @@ namespace DataTierClient.Controls
 
                 // Reload the table and display the buttons
                 TablesListBox_SelectedIndexChanged(this, null);
+            }
+            #endregion
+            
+            #region NoneButton_Click(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when the 'NoneButton' is clicked.
+            /// </summary>
+            private void NoneButton_Click(object sender, EventArgs e)
+            {
+                // iterate the list box
+                for (int i = 0; i < TablesListBox.Items.Count; i++)
+                {
+                    // unselect this item
+                    TablesListBox.SetItemChecked(i, false);
+                }
             }
             #endregion
             

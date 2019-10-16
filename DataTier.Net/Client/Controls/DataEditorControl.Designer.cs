@@ -73,6 +73,8 @@ namespace DataTierClient.Controls
             this.ManageFieldSetsButton = new System.Windows.Forms.Button();
             this.BlazorFeaturesButton = new System.Windows.Forms.Button();
             this.CreateBindingCallbackControl = new DataJuggler.Win.Controls.LabelCheckBoxControl();
+            this.AllButton = new System.Windows.Forms.Label();
+            this.NoneButton = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // TablesListBox
@@ -125,9 +127,9 @@ namespace DataTierClient.Controls
             // TablesLabel
             // 
             this.TablesLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TablesLabel.Location = new System.Drawing.Point(24, 4);
+            this.TablesLabel.Location = new System.Drawing.Point(24, 14);
             this.TablesLabel.Name = "TablesLabel";
-            this.TablesLabel.Size = new System.Drawing.Size(94, 29);
+            this.TablesLabel.Size = new System.Drawing.Size(94, 18);
             this.TablesLabel.TabIndex = 5;
             this.TablesLabel.Text = "Tables:";
             this.TablesLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -304,10 +306,38 @@ namespace DataTierClient.Controls
             this.CreateBindingCallbackControl.Size = new System.Drawing.Size(176, 28);
             this.CreateBindingCallbackControl.TabIndex = 105;
             // 
+            // AllButton
+            // 
+            this.AllButton.AutoSize = true;
+            this.AllButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AllButton.Location = new System.Drawing.Point(177, 14);
+            this.AllButton.Name = "AllButton";
+            this.AllButton.Size = new System.Drawing.Size(28, 18);
+            this.AllButton.TabIndex = 106;
+            this.AllButton.Text = "All";
+            this.AllButton.Click += new System.EventHandler(this.AllButton_Click);
+            this.AllButton.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.AllButton.MouseLeave += new System.EventHandler(this.Button_Leave);
+            // 
+            // NoneButton
+            // 
+            this.NoneButton.AutoSize = true;
+            this.NoneButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NoneButton.Location = new System.Drawing.Point(232, 14);
+            this.NoneButton.Name = "NoneButton";
+            this.NoneButton.Size = new System.Drawing.Size(54, 18);
+            this.NoneButton.TabIndex = 107;
+            this.NoneButton.Text = "None";
+            this.NoneButton.Click += new System.EventHandler(this.NoneButton_Click);
+            this.NoneButton.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.NoneButton.MouseLeave += new System.EventHandler(this.Button_Leave);
+            // 
             // DataEditorControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Linen;
+            this.Controls.Add(this.NoneButton);
+            this.Controls.Add(this.AllButton);
             this.Controls.Add(this.CreateBindingCallbackControl);
             this.Controls.Add(this.BlazorFeaturesButton);
             this.Controls.Add(this.ManageFieldSetsButton);
@@ -337,6 +367,8 @@ namespace DataTierClient.Controls
 
         private System.Windows.Forms.Button BlazorFeaturesButton;
         private DataJuggler.Win.Controls.LabelCheckBoxControl CreateBindingCallbackControl;
+        private System.Windows.Forms.Label AllButton;
+        private System.Windows.Forms.Label NoneButton;
     }
     #endregion
 

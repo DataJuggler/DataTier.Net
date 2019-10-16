@@ -118,8 +118,7 @@ namespace DataTierClient.Builders
                             // if there are one or more tables in the current Project
                             if (ListHelper.HasOneOrMoreItems(CurrentProject.Tables))
                             {
-                                // Update for DataTier.Net - The value for Exclude for any tables or fields must be set
-                                // The tables are actually for the entire project, not per database
+                                // iterate the tables
                                 foreach (DTNTable table in CurrentProject.Tables)
                                 {
                                     // attempt to find this table in this database
