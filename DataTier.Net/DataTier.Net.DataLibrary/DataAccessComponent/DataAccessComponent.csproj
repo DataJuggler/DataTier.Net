@@ -41,8 +41,8 @@
     <Reference Include="DataJuggler.Core.UltimateHelper, Version=1.3.9.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\DataJuggler.Core.UltimateHelper.1.3.9\lib\net461\DataJuggler.Core.UltimateHelper.dll</HintPath>
     </Reference>
-    <Reference Include="DataJuggler.Net, Version=5.7.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\DataJuggler.Net.5.7.1\lib\net461\DataJuggler.Net.dll</HintPath>
+    <Reference Include="DataJuggler.Net, Version=5.7.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\DataJuggler.Net.5.7.2\lib\net461\DataJuggler.Net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -198,9 +198,7 @@
     <Compile Include="StoredProcedureManager\UpdateProcedures\UpdateReferencesSetStoredProcedure.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data Juggler.ico" />
     <Content Include="StoredProcedureManager\StoredProcedureSQL\UpdateProcPermissions.sql" />
-    <Content Include="Tools.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ObjectLibrary\ObjectLibrary.csproj">
