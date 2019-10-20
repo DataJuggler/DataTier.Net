@@ -2495,8 +2495,17 @@ namespace DataTierClient.Controls
                             // write out a blank line
                             insertIndex = CodeLineHelper.InsertCodeLine(ref codeLines, setParameterFieldValueComment, insertIndex);
 
-                            // set the comment
-                            setParameterFieldValue = indent2 + tempVariableName + "." + MethodInfo.ParameterField.FieldName + " = " + parameter + ";";
+                            // if this is a Primary Key field
+                            if ((MethodInfo.ParameterField.PrimaryKey) && (MethodInfo.ParameterField.DataType == DataTypeEnum.Autonumber))
+                            {
+                                // set the value
+                                setParameterFieldValue = indent2 + tempVariableName + ".UpdateIdentity(" + parameter + ");";
+                            }
+                            else
+                            {
+                                // set the value
+                                setParameterFieldValue = indent2 + tempVariableName + "." + MethodInfo.ParameterField.FieldName + " = " + parameter + ";";
+                            }
 
                             // write out a blank line
                             insertIndex = CodeLineHelper.InsertCodeLine(ref codeLines, setParameterFieldValue, insertIndex);
@@ -2702,44 +2711,44 @@ namespace DataTierClient.Controls
                 string writerMethodName = "";
                 
                 // If the MethodInfo object exists
-                if (this.HasMethodInfo)
+                if ((this.HasMethodInfo) && (MethodInfo.HasSelectedTable))
                 {
                     // locals
                     methodName = MethodInfo.MethodName;
                     
-                    // get the index of the wordBy
-                    int index = methodInfo.MethodName.IndexOf("By");
-
-                    // if the index was not found
-                    if (index < 0)
-                    {
-                        // set the index
-                        index = methodInfo.MethodName.IndexOf("For");
-                    }
-                    
-                    // if the word By was present
-                    if (index > 0)
+                    // Update 10.20: Chaning the way the baseMethodName is set
+                    if (MethodInfo.MethodType == MethodTypeEnum.Find_By)
                     {
                         // set the baseMethodName
-                        baseMethodName = methodName.Substring(0, index);
-
-                        // set the BaseMethodName (needed in the Gateway)
-                        MethodInfo.BaseMethodName = baseMethodName;
-
-                        // set the baseMethodName to look for
-                        writerMethodName = "Create" + baseMethodName + "StoredProcedure";
-
-                        // if this is a Load procedure
-                        if (baseMethodName.StartsWith("Load"))
-                        {
-                            // set the baseMethodName to look for
-                            writerMethodName = writerMethodName.Replace("Load", "FetchAll");
-                        }
-
-                        // set the variable name used in the method
-                        MethodInfo.StoredProcedureVariableName = CSharpClassWriter.LowerCaseFirstCharEx(baseMethodName.Replace("Load", "FetchAll")) + "StoredProcedure";
+                        baseMethodName = "Find" + MethodInfo.SelectedTable.TableName;
+                    }
+                    else if (MethodInfo.MethodType == MethodTypeEnum.Load_By)
+                    {
+                        // set the baseMethodName
+                        baseMethodName = "Load" + PluralWordHelper.GetPluralName(MethodInfo.SelectedTable.TableName, false);
+                    }
+                    else if (MethodInfo.MethodType == MethodTypeEnum.Delete_By)
+                    {
+                        // set the baseMethodName
+                        baseMethodName = "Delete" + MethodInfo.SelectedTable.TableName;
                     }
 
+                    // set the BaseMethodName (needed in the Gateway)
+                    MethodInfo.BaseMethodName = baseMethodName;
+
+                    // set the baseMethodName to look for
+                    writerMethodName = "Create" + baseMethodName + "StoredProcedure";
+
+                    // if this is a Load procedure
+                    if (baseMethodName.StartsWith("Load"))
+                    {
+                        // set the baseMethodName to look for
+                        writerMethodName = writerMethodName.Replace("Load", "FetchAll");
+                    }
+
+                    // set the variable name used in the method
+                    MethodInfo.StoredProcedureVariableName = CSharpClassWriter.LowerCaseFirstCharEx(baseMethodName.Replace("Load", "FetchAll")) + "StoredProcedure";
+                    
                     // set the writerFile path
                     string writerFile = Path.Combine(ProjectFolder,  @"DataAccessComponent\DataManager\Writers\", MethodInfo.SelectedTable.ClassName + "Writer.cs");
 
