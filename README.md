@@ -70,6 +70,9 @@ The .business.cs is only created if it does not already exist, so you are free t
 For more information read the DataTier.Net User's Guide located in the Class Room folder if you clone or online here:
 https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/DataTier.Net%20Users%20Guide.pdf
 
+--
+Update 10.20.2019: I add a new feature that allows you to create a Custom Where Clause https://youtu.be/59CyqxS9JVI 
+
 -- 
 
 Update 10.4.2019: I added a few new features regarding Order By in descending order, and I fixed a couple of bugs regarding Delete by procedures and what can be enabled (changed) on a Delete By procedure.
