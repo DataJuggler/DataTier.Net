@@ -359,6 +359,13 @@ namespace DataTierClient.Controls
                             // if the value for saved is true
                             if (saved)
                             {
+                                // if the MethodInfo exists
+                                if (HasMethodInfo)
+                                {
+                                    // This was causing a bug on the NewStoredProcedureEditorControl.
+                                    MethodInfo.MethodId = method.MethodId;
+                                }
+
                                 // Enable the Next button
                                 this.SaveCancelControl.EnableSaveButton(true);
                             }
