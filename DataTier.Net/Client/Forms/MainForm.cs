@@ -1262,7 +1262,7 @@ namespace DataTierClient.Forms
                                 {
                                     // determine what has changed
                                     codeHasChanged = (admin.CodeVersion != update.CodeVersion);
-                                    sqlHasChanged = (admin.SchemaHash != update.SchemaHash);
+                                    sqlHasChanged = CryptographyHelper.VerifyHash(admin.SchemaHash, update.SchemaHash);
                                 }
                             }
                         }

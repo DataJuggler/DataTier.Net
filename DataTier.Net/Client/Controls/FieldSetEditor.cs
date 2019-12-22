@@ -610,9 +610,6 @@ namespace DataTierClient.Controls
                             // if we are in OrderByMode
                             if (SelectedFieldSet.OrderByMode)
                             {
-                                // local
-                                bool descending = false;
-
                                 // attempt to fiind tghis field
                                 FieldSetFieldView tempFieldSetField = SelectedFieldSet.FindFieldSetFieldView(field.FieldId);
 
