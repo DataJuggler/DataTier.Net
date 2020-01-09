@@ -4,6 +4,7 @@
 
 using DataJuggler.Core.UltimateHelper;
 using System;
+using DataJuggler.Net.Cryptography;
 using ApplicationLogicComponent.Logging;
 using ApplicationLogicComponent.Security;
 using System.Configuration;
@@ -38,8 +39,6 @@ namespace ApplicationLogicComponent.Connection
         private bool logToFile;
         private bool savePassword;
         private bool integratedSecurity;
-        private bool useEncryption;
-        private string encryptionKey;
         XmlDocument xmlDoc;
         #endregion
 
@@ -192,29 +191,8 @@ namespace ApplicationLogicComponent.Connection
                 //
                 //     SQL Server Authentication: there are 2 extra values for a UserName and Password.
 
-                // get the value for useEncryption
-                string useEncryption = ConfigurationHelper.ReadAppSetting("UseEncryption");
-                
-                // Parse the value
-                this.UseEncryption = BooleanHelper.ParseBoolean(useEncryption, false, false);
-
-                // if UseEncryption is true
-                if (this.UseEncryption)
-                {
-                    // Get the encryptedEncryptionkey
-                    string encryptedEncryptionKey = ConfigurationHelper.ReadAppSetting("Encryptionkey");
-
-                    // Set the EncryptionKey by decrypting the EncryptionKey with the default EncryptionKey
-                    this.EncryptionKey = CryptographyHelper.DecryptString(encryptedEncryptionKey);
-                }
-                else
-                {
-                    // erase
-                    this.EncryptionKey = String.Empty;
-                }
-
                 // Set the ConnectionString
-                this.ConnectionString = ConfigurationHelper.ReadAppSetting("ConnectionString", UseEncryption, EncryptionKey);
+                this.ConnectionString = ConfigurationHelper.ReadAppSetting("ConnectionString");
 
                 // if the connection string does not exist
                 if (!this.HasConnectionString)
@@ -223,22 +201,22 @@ namespace ApplicationLogicComponent.Connection
                     // is a connectionstring
 
                     // Set the DatabaseServer
-                    this.DatabaseServer = ConfigurationHelper.ReadAppSetting("DatabaseServer", UseEncryption, EncryptionKey); 
+                    this.DatabaseServer = ConfigurationHelper.ReadAppSetting("DatabaseServer"); 
 
                     // Read the app setting for the database name
-                    this.DatabaseName = ConfigurationHelper.ReadAppSetting("DatabaseName", UseEncryption, EncryptionKey); 
+                    this.DatabaseName = ConfigurationHelper.ReadAppSetting("DatabaseName"); 
 
                     // Set the value for integrated security
-                    this.IntegratedSecurity = BooleanHelper.ParseBoolean(ConfigurationHelper.ReadAppSetting("IntegratedSecurity", UseEncryption, EncryptionKey), false, false);
+                    this.IntegratedSecurity = BooleanHelper.ParseBoolean(ConfigurationHelper.ReadAppSetting("IntegratedSecurity"), false, false);
 
                     // if integrated security is true
                     if (!this.IntegratedSecurity)
                     {
                         // Set the DatabaseUserName
-                        this.DatabaseUserName = ConfigurationHelper.ReadAppSetting("DatabaseUserName", UseEncryption, EncryptionKey);
+                        this.DatabaseUserName = ConfigurationHelper.ReadAppSetting("DatabaseUserName");
 
                         // Set the DatabasePassword 
-                        this.DatabasePassword = ConfigurationHelper.ReadAppSetting("DatabasePassword", UseEncryption, EncryptionKey);
+                        this.DatabasePassword = ConfigurationHelper.ReadAppSetting("DatabasePassword");
                     }
                 }
 
@@ -256,7 +234,7 @@ namespace ApplicationLogicComponent.Connection
                 {
                     // locals
                     string methodName = "Read";
-                    string objectName = "ApplicationLogicComponent.StartUp.RADApplicationConfiguration";
+                    string objectName = "ApplicationLogicComponent.Connection.Read";
 
                     // Log the current error
                     this.ErrorProcessor.LogError(methodName, objectName, error);
@@ -577,17 +555,6 @@ namespace ApplicationLogicComponent.Connection
             }
             #endregion
 
-            #region EncryptionKey
-            /// <summary>
-            /// This property gets or sets the value for 'EncryptionKey'.
-            /// </summary>
-            public string EncryptionKey
-            {
-                get { return encryptionKey; }
-                set { encryptionKey = value; }
-            }
-            #endregion
-            
             #region ErrorProcessor
             /// <summary>
             /// This property handles how errors will be "logged"
@@ -693,28 +660,17 @@ namespace ApplicationLogicComponent.Connection
                 set { savePassword = value; }
             }
             #endregion
-
-            #region UseEncryption
+            
+            #region XmlDoc
             /// <summary>
-            /// This property gets or sets the value for 'UseEncryption'.
+            /// The Xml document that opens the App.Config file.
             /// </summary>
-            public bool UseEncryption
+            public XmlDocument XmlDoc
             {
-                get { return useEncryption; }
-                set { useEncryption = value; }
+                get { return xmlDoc; }
+                set { xmlDoc = value; }
             }
             #endregion
-            
-        #region XmlDoc
-        /// <summary>
-        /// The Xml document that opens the App.Config file.
-        /// </summary>
-        public XmlDocument XmlDoc
-        {
-            get { return xmlDoc; }
-            set { xmlDoc = value; }
-        }
-        #endregion
 
         #endregion
 

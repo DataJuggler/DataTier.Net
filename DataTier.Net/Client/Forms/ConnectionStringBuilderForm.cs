@@ -5,6 +5,7 @@
 using DataJuggler.Core.UltimateHelper;
 using DataJuggler.Core.UltimateHelper.Objects;
 using DataJuggler.Net;
+using DataJuggler.Net.Cryptography;
 using DataJuggler.Net.Connection;
 using DataJuggler.Win.Controls;
 using DataJuggler.Win.Controls.Interfaces;

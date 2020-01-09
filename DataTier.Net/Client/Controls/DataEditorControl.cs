@@ -268,8 +268,8 @@ namespace DataTierClient.Controls
             /// </summary>
             public void OnCheckChanged(LabelCheckBoxControl sender, bool isChecked)
             {
-                // if the value for HasSelectedTable is true
-                if ((HasSelectedTable) && (HasProject) && (Project.EnableBlazorFeatures) && (Project.BindingCallbackOption == BindingCallbackOptionEnum.Allow_Binding))
+                // 1.9.2020: Added check for Loading if the value for HasSelectedTable is true
+                if ((!Loading) && (HasSelectedTable) && (HasProject) && (Project.EnableBlazorFeatures) && (Project.BindingCallbackOption == BindingCallbackOptionEnum.Allow_Binding))
                 {  
                     // set the value
                     if (SelectedTable.CreateBindingCallback != isChecked)
@@ -282,6 +282,21 @@ namespace DataTierClient.Controls
 
                         // save the selection
                         bool saved = gateway.SaveDTNTable(ref selectedTable);
+
+                        // if the save was good
+                        if (saved)
+                        {
+                            // Find the index of the selected table
+                            int index = FindTableIndex(SelectedTable.TableId);
+
+                            // if the index was found
+                            if (index >= 0)
+                            {
+                                // Set the value at this index - fixes a bug where changing indexes doesn't
+                                // display the correct value as the database.
+                                Tables[index].CreateBindingCallback = SelectedTable.CreateBindingCallback;
+                            }
+                        }
                     }
 
                     // Enable or disable controls
@@ -486,10 +501,14 @@ namespace DataTierClient.Controls
             /// </summary>
             private void TablesListBox_SelectedIndexChanged(object sender, EventArgs e)
             {
+                // if the Tables collection existrs and the SelectedIndex is in range
                 if ((this.HasTables) && (this.TablesListBox.SelectedIndex >= 0) && (this.TablesListBox.SelectedIndex < this.Tables.Count))
                 {
                     // set the table
                     DTNTable table = this.Tables[this.TablesListBox.SelectedIndex];
+
+                    // Set Loading to true
+                    Loading = true;
 
                     // check the box if checked
                     CreateBindingCallbackControl.Checked = table.CreateBindingCallback;
@@ -515,6 +534,9 @@ namespace DataTierClient.Controls
                             // Load the FieldSets
                             this.SelectedTable.FieldSets = this.Gateway.LoadFieldSetsForTable(this.SelectedTable.TableId);
                         }
+
+                        // Set Loading to false
+                        Loading = false;
                     }
                 }
                 else
@@ -619,6 +641,44 @@ namespace DataTierClient.Controls
                 
                 // Enable or disable controls
                 UIEnable();
+            }
+            #endregion
+            
+            #region FindTableIndex(int tableId)
+            /// <summary>
+            /// This method returns the Table Index
+            /// </summary>
+            public int FindTableIndex(int tableId)
+            {
+                // initial value
+                int index = -1;
+
+                // local
+                int tempIndex = -1;
+
+                // If the Tables collection exists and has one or more items
+                if (ListHelper.HasOneOrMoreItems(Tables))
+                {
+                    // Iterate the collection of DTNTable objects
+                    foreach (DTNTable table in Tables)
+                    {
+                        // Increment the value for tempIndex
+                        tempIndex++;
+
+                        // if this is the item being sought
+                        if (table.TableId == tableId)
+                        {
+                            // set the return value
+                            index = tempIndex;
+
+                            // break out of the loop
+                            break;
+                        }
+                    }
+                }
+                
+                // return value
+                return index;
             }
             #endregion
             

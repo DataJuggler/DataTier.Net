@@ -2,7 +2,6 @@
 
 #region using statements
 
-using DataJuggler.Net;
 using DataJuggler.Core.UltimateHelper;
 using DataJuggler.Win.Controls;
 using DataJuggler.Win.Controls.Interfaces;
@@ -10,6 +9,7 @@ using DataGateway;
 using ObjectLibrary.BusinessObjects;
 using System.IO;
 using System;
+using DataJuggler.Net;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -94,6 +94,8 @@ namespace DataTierClient.Controls
                 int attempts = 0;
                 string path = "";
                 string path2 = "";
+                bool filesCreated = false;
+                string message = "";
 
                 try
                 {
@@ -118,13 +120,13 @@ namespace DataTierClient.Controls
                         process.StartInfo = startInfo;
                         process.Start();
 
-                        // next I am performing a wait for the files to be hear, which on different people's machines
-                        // and different internet connection speeds I am allowing up to 5 seconds. My machine takes
-                        // about half a second maybe more, so 5 should be enough or give up. If it doesn't work for 
-                        // you and you haven't upgraded since George W was President of the US, buy a new computer.
-                        // If your internet is just slow because you are still on dial up in 2019, sorry you cheap skate.
-                        // If you live in a rural area and dial up is all you can get, forgive the preceding comment.
-                        // I shouldn't write comments after 1.5 beers.
+                        // next I am performing a wait for the files to be here, which on different people's machines
+                        // speeds I am allowing up to 5 seconds. My machine takes about half a second maybe more, 
+                        // so 5 should be enough or give up. If it doesn't work for and you haven't upgraded your
+                        // computer in a while, maybe you should buy a new computer.
+                        
+                        // If your internet is slow and this takes longer than 5 seconds let me know and I will extend 
+                        // the wait.
 
                         do
                         {
@@ -146,6 +148,9 @@ namespace DataTierClient.Controls
                             // if the file exists
                             if (File.Exists(path))
                             {
+                                // The files were created
+                                filesCreated = true;
+
                                 // break out of the loop
                                 break;
                             }
@@ -155,66 +160,78 @@ namespace DataTierClient.Controls
                          // Wait one extra half second after the file is avialable before trying to modify it
                         System.Threading.Thread.Sleep(500);
 
-                        // ***************************************
-                        // ************** DataWatcher.cs Class *************
-                        // ***************************************
+                        // if the files were created
+                        if (filesCreated)
+                        {
+                            // ***************************************
+                            // ************** DataWatcher.cs Class *************
+                            // ***************************************
 
-                        // Now the file must be read
-                        string fileText = File.ReadAllText(path);
+                            // Now the file must be read
+                            string fileText = File.ReadAllText(path);
 
-                        // now create the replaceParameter values
-                        string tableName = table.TableName;
-                        string variableName = CSharpClassWriter.CapitalizeFirstCharEx(table.TableName, true);
-                        string pluralTableName = PluralWordHelper.GetPluralName(table.TableName, false);
-                        string pluralVariableName = PluralWordHelper.GetPluralName(table.TableName, true);
+                            // now create the replaceParameter values
+                            string tableName = table.TableName;
+                            string variableName = CSharpClassWriter.CapitalizeFirstCharEx(table.TableName, true);
+                            string pluralTableName = PluralWordHelper.GetPluralName(table.TableName, false);
+                            string pluralVariableName = PluralWordHelper.GetPluralName(table.TableName, true);
                         
-                        // Replace out the fileText replacement parameters
-                        fileText = fileText.Replace("[TableName]", tableName);
-                        fileText = fileText.Replace("[VariableName]", variableName);
-                        fileText = fileText.Replace("[PluralVariableName]", pluralVariableName);
+                            // Replace out the fileText replacement parameters
+                            fileText = fileText.Replace("[TableName]", tableName);
+                            fileText = fileText.Replace("[VariableName]", variableName);
+                            fileText = fileText.Replace("[PluralVariableName]", pluralVariableName);
 
-                        // Delete the current file at path 
-                        File.Delete(path);
+                            // Delete the current file at path 
+                            File.Delete(path);
 
-                        // rename the file
-                        path = path.Replace("DataWatcher.cs", Table.TableName + "DataWatcher.cs");
+                            // rename the file
+                            path = path.Replace("DataWatcher.cs", Table.TableName + "DataWatcher.cs");
 
-                        // Write out the next text
-                        File.WriteAllText(path, fileText);
+                            // Write out the next text
+                            File.WriteAllText(path, fileText);
 
-                        // ***************************************
-                        // ************** Service.cs Class *************
-                        // ***************************************
+                            // ***************************************
+                            // ************** Service.cs Class *************
+                            // ***************************************
 
-                        // now change path to the Service class
-                        path2 = Path.Combine(Project.ServicesFolder, ServiceFileName);
+                            // now change path to the Service class
+                            path2 = Path.Combine(Project.ServicesFolder, ServiceFileName);
 
-                        // Now the file must be read
-                        fileText = File.ReadAllText(path2);
+                            // Now the file must be read
+                            fileText = File.ReadAllText(path2);
 
-                        // Replace out the fileText replacement parameters
-                        fileText = fileText.Replace("[TableName]", tableName);
-                        fileText = fileText.Replace("[VariableName]", variableName);
-                        fileText = fileText.Replace("[PluralVariableName]", pluralVariableName);
-                        fileText = fileText.Replace("[PluralTableName]", pluralTableName);
+                            // Replace out the fileText replacement parameters
+                            fileText = fileText.Replace("[TableName]", tableName);
+                            fileText = fileText.Replace("[VariableName]", variableName);
+                            fileText = fileText.Replace("[PluralVariableName]", pluralVariableName);
+                            fileText = fileText.Replace("[PluralTableName]", pluralTableName);
 
-                        // Delete the current file at path2
-                        File.Delete(path2);
+                            // Delete the current file at path2
+                            File.Delete(path2);
 
-                        // rename the file
-                        path2 = path2.Replace("Service.cs", Table.TableName + "Service.cs");
+                            // rename the file
+                            path2 = path2.Replace("Service.cs", Table.TableName + "Service.cs");
 
-                        // Write out the next text
-                        File.WriteAllText(path2, fileText);
+                            // Write out the next text
+                            File.WriteAllText(path2, fileText);
 
-                        // Show a message
-                        string message = "The following classes were created:" + Environment.NewLine + path + Environment.NewLine + path2;
+                            // Show a message
+                            message = "The following classes were created:" + Environment.NewLine + path + Environment.NewLine + path2;
 
-                        // Hide the graph
-                        Graph.Visible = false;
+                            // Hide the graph
+                            Graph.Visible = false;
 
-                        // Show the user a message
-                        MessageBoxHelper.ShowMessage(message, "Files Created");
+                            // Show the user a message
+                            MessageBoxHelper.ShowMessage(message, "Files Created");
+                        }
+                        else
+                        {
+                            // change the message
+                            message = "Oops, something went wrong. Step through the code in DataTier.Net.Client.Controls.BlazorDataServices.cs, event name CreateBlazorServicesButton_Click.";
+
+                            // Show the user a message
+                            MessageBoxHelper.ShowMessage(message, "Files Could Not Be Created", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
                     }
                 }
                 catch (Exception error)

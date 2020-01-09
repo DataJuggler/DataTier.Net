@@ -14,6 +14,7 @@ using ObjectLibrary.Enumerations;
 using ObjectLibrary.BusinessObjects;
 using System.IO;
 using DataTierClient.Forms;
+using System.Collections.Generic;
 
 #endregion
 
@@ -113,18 +114,30 @@ namespace DataTierClient.Controls
                     // if the SelectedProject exists
                     if ((HasSelectedProject) && (TextHelper.Exists(SelectedProject.ProjectFolder)))
                     {
-                        // Create a Process to launch a command window (hidden) to create the item templates
-                        Process process = new Process();
-                        ProcessStartInfo startInfo = new ProcessStartInfo();
-                        startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                        startInfo.FileName = "cmd.exe";
-                        startInfo.WorkingDirectory = SelectedProject.ProjectFolder;
-                        startInfo.Arguments = "/C " + CreateDataTier;
-                        process.StartInfo = startInfo;
-                        process.Start();
+                        // Test if there are any files in this directory
+                        List<string> files = FileHelper.GetFiles(SelectedProject.ProjectFolder, "", false);
 
-                        // show the user a message
-                        MessageBoxHelper.ShowMessage("Your DataTier has been created.", "DataTier Created");
+                        // If the files collection exists and has one or more items
+                        if (ListHelper.HasOneOrMoreItems(files))
+                        {
+                            // show the user a message
+                            MessageBoxHelper.ShowMessage("The Project Folder is not empty. You must select an empty folder for a Dot Net Core data-tier.", "Project Folder Is Not Empty");
+                        }
+                        else
+                        {
+                            // Create a Process to launch a command window (hidden) to create the item templates
+                            Process process = new Process();
+                            ProcessStartInfo startInfo = new ProcessStartInfo();
+                            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.WorkingDirectory = SelectedProject.ProjectFolder;
+                            startInfo.Arguments = "/C " + CreateDataTier;
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            // show the user a message
+                            MessageBoxHelper.ShowMessage("Your DataTier has been created.", "DataTier Created");
+                        }
                     }
                     else
                     {
@@ -207,7 +220,7 @@ namespace DataTierClient.Controls
                 if (HasSelectedProject)
                 {
                     // Set the value
-                    SelectedProject.BindingCallbackOption = (BindingCallbackOptionEnum) selectedIndex;
+                    SelectedProject.BindingCallbackOption = (BindingCallbackOptionEnum) selectedIndex;                   
                 }
 
                 // Enable or disable controls
@@ -444,7 +457,7 @@ namespace DataTierClient.Controls
                     // Do not show for .Net Framework projects
                     this.BlazorServicesCheckBox.Visible = false;
                     this.CreateDotNetCoreProject.Visible = false;
-                     this.BindingCallbackOptionControl.Visible = false;
+                    this.BindingCallbackOptionControl.Visible = false;
                 }
 
                 // refresh controls
@@ -471,11 +484,11 @@ namespace DataTierClient.Controls
 
         #region Properties
 
-        #region EditMode
-        /// <summary>
-        /// Is this an existing project or a new project.
-        /// </summary>
-        public bool EditMode
+            #region EditMode
+            /// <summary>
+            /// Is this an existing project or a new project.
+            /// </summary>
+            public bool EditMode
             {
                 get
                 {

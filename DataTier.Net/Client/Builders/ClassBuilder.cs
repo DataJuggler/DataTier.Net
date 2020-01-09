@@ -318,15 +318,22 @@ namespace DataTierClient.Builders
                 sqlConnector.DatabaseConnection.Close();
 
                 // if there are one or more tables
-                if ((ListHelper.HasOneOrMoreItems(database.Tables)) && (ListHelper.HasOneOrMoreItems(enumerations)))
+                if (ListHelper.HasOneOrMoreItems(database.Tables)) 
                 {
                     // iterate the collection of tables                    
                     foreach (DataTable table in database.Tables)
                     {
-                        // if there are one or more fields
-                        if (ListHelper.HasOneOrMoreItems(table.Fields))
+                        // if a DotNetCore project and EnableBlazorFeatures is true and BindingCallBack option is set to CreateBinding
+                        if ((currentProject.DotNetCore) && (currentProject.EnableBlazorFeatures) && (currentProject.BindingCallbackOption == BindingCallbackOptionEnum.Create_Binding))
                         {
-                               // iterate the fields
+                            // Create the BindingCall back needs to be set to true to code generate the Callback.
+                            table.CreateBindingCallback = true;
+                        }
+
+                        // if there are one or more fields
+                        if (ListHelper.HasOneOrMoreItems(table.Fields, enumerations))
+                        {
+                            // iterate the fields
                             foreach (DataField field in table.Fields)
                             {
                                 // now iterate te enumerations                
