@@ -153,6 +153,7 @@ namespace DataTierClient.Forms
             this.StatusListBox.AutoArrange = false;
             this.StatusListBox.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StatusListBox.FullRowSelect = true;
+            this.StatusListBox.HideSelection = false;
             this.StatusListBox.Location = new System.Drawing.Point(20, 170);
             this.StatusListBox.Name = "StatusListBox";
             this.StatusListBox.Size = new System.Drawing.Size(482, 440);
@@ -390,6 +391,7 @@ namespace DataTierClient.Forms
             this.CheckForUpdatesCheckBox.Name = "CheckForUpdatesCheckBox";
             this.CheckForUpdatesCheckBox.Size = new System.Drawing.Size(319, 32);
             this.CheckForUpdatesCheckBox.TabIndex = 105;
+            this.CheckForUpdatesCheckBox.Visible = false;
             // 
             // BottomPanel
             // 

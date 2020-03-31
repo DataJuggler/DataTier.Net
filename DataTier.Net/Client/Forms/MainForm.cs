@@ -1206,141 +1206,141 @@ namespace DataTierClient.Forms
             /// </summary>
             public Admin CheckForUpdate()
             {
-                // initial value
+                //// initial value
                 Admin update = null;
 
-                // what has changed? Code? SQL? Both?
-                bool codeHasChanged = false;
-                bool sqlHasChanged = false;
-                bool codeVersionUpdated = false;
-                bool sqlHashUpdated = false;
-                string sqlHash = "";
+                //// what has changed? Code? SQL? Both?
+                //bool codeHasChanged = false;
+                //bool sqlHasChanged = false;
+                //bool codeVersionUpdated = false;
+                //bool sqlHashUpdated = false;
+                //string sqlHash = "";
 
-                // Create a new instance of a 'Gateway' object.
-                Gateway gateway = new Gateway();
+                //// Create a new instance of a 'Gateway' object.
+                //Gateway gateway = new Gateway();
 
-                try
-                {
-                    // get the client
-                    using (var client = new WebClient())
-                    {
-                        // get the result
-                        string updateXmlText = client.DownloadString(UpdateCheckXml);
+                //try
+                //{
+                //    // get the client
+                //    using (var client = new WebClient())
+                //    {
+                //        // get the result
+                //        string updateXmlText = client.DownloadString(UpdateCheckXml);
 
-                        // if the string was found
-                        if (TextHelper.Exists(updateXmlText))
-                        {
-                            // create an adminParser
-                            AdminParser parser = new AdminParser();
+                //        // if the string was found
+                //        if (TextHelper.Exists(updateXmlText))
+                //        {
+                //            // create an adminParser
+                //            AdminParser parser = new AdminParser();
 
-                            // load the admin from the web
-                            update = parser.ParseAdmin(updateXmlText);
+                //            // load the admin from the web
+                //            update = parser.ParseAdmin(updateXmlText);
 
-                            // If the update object exists
-                            if (NullHelper.Exists(update))
-                            {
-                                // find the first admin
-                                Admin admin = gateway.FindFirstAdmin();
+                //            // If the update object exists
+                //            if (NullHelper.Exists(update))
+                //            {
+                //                // find the first admin
+                //                Admin admin = gateway.FindFirstAdmin();
 
-                                // if the admin object does not exist
-                                if (NullHelper.IsNull(admin))
-                                {
-                                    // create an admin object
-                                    admin = new Admin();
+                //                // if the admin object does not exist
+                //                if (NullHelper.IsNull(admin))
+                //                {
+                //                    // create an admin object
+                //                    admin = new Admin();
 
-                                    // default to true unless turned off
-                                    admin.CheckForUpdates = true;
-                                    admin.CodeVersion = Application.ProductVersion.Substring(0, Application.ProductVersion.Length - 2);
-                                    admin.GitCommit = update.GitCommit;
-                                    admin.LastUpdated = DateTime.Now;
+                //                    // default to true unless turned off
+                //                    admin.CheckForUpdates = true;
+                //                    admin.CodeVersion = Application.ProductVersion.Substring(0, Application.ProductVersion.Length - 2);
+                //                    admin.GitCommit = update.GitCommit;
+                //                    admin.LastUpdated = DateTime.Now;
                                     
-                                    // now save
-                                    bool saved = gateway.SaveAdmin(ref admin);
-                                }
+                //                    // now save
+                //                    bool saved = gateway.SaveAdmin(ref admin);
+                //                }
 
-                                // if the current admin object exists
-                                if (NullHelper.Exists(admin))
-                                {
-                                    // determine what has changed
-                                    codeHasChanged = (admin.CodeVersion != update.CodeVersion);
-                                    sqlHasChanged = CryptographyHelper.VerifyHash(admin.SchemaHash, update.SchemaHash);
-                                }
-                            }
-                        }
-                    }
+                //                // if the current admin object exists
+                //                if (NullHelper.Exists(admin))
+                //                {
+                //                    // determine what has changed
+                //                    codeHasChanged = (admin.CodeVersion != update.CodeVersion);
+                //                    sqlHasChanged = CryptographyHelper.VerifyHash(admin.SchemaHash, update.SchemaHash);
+                //                }
+                //            }
+                //        }
+                //    }
 
-                    // if the code or SQL has changed
-                    if ((codeHasChanged) || (sqlHasChanged))
-                    {
-                        // get the installedVersion
-                        string installedCodeVersion = Application.ProductVersion.Substring(0, Application.ProductVersion.Length - 2);
+                //    // if the code or SQL has changed
+                //    if ((codeHasChanged) || (sqlHasChanged))
+                //    {
+                //        // get the installedVersion
+                //        string installedCodeVersion = Application.ProductVersion.Substring(0, Application.ProductVersion.Length - 2);
 
-                        // test if the user has updated
-                        if ((codeHasChanged) && (update.CodeVersion == installedCodeVersion)) 
-                        {
-                            // the code has been updated
-                            codeHasChanged = false;
+                //        // test if the user has updated
+                //        if ((codeHasChanged) && (update.CodeVersion == installedCodeVersion)) 
+                //        {
+                //            // the code has been updated
+                //            codeHasChanged = false;
 
-                            // the Admin object must be updated
-                            codeVersionUpdated = true;
-                        }
+                //            // the Admin object must be updated
+                //            codeVersionUpdated = true;
+                //        }
 
-                        // if the sqlHasChanged from the Admin to the Update Version, check if the
-                        // Sql Has Been Fixed
-                        if (sqlHasChanged)
-                        {
-                            // Get the hash
-                            sqlHash = GetSqlHash();
+                //        // if the sqlHasChanged from the Admin to the Update Version, check if the
+                //        // Sql Has Been Fixed
+                //        if (sqlHasChanged)
+                //        {
+                //            // Get the hash
+                //            sqlHash = GetSqlHash();
 
-                            // if the SQL now matches
-                            if (TextHelper.IsEqual(sqlHash, update.SchemaHash))
-                            {
-                                // the sql is updated now
-                                sqlHasChanged = false;
+                //            // if the SQL now matches
+                //            if (TextHelper.IsEqual(sqlHash, update.SchemaHash))
+                //            {
+                //                // the sql is updated now
+                //                sqlHasChanged = false;
 
-                                 // the Admin object must be updated with the new SqlHash
-                                sqlHashUpdated = true;
-                            }
-                        }
+                //                 // the Admin object must be updated with the new SqlHash
+                //                sqlHashUpdated = true;
+                //            }
+                //        }
 
-                        // if the adminUpdateRequired is true
-                        if ((codeVersionUpdated) || (sqlHashUpdated))
-                        {
-                            // codeVersionUpdated is true
-                            if (codeVersionUpdated)
-                            {
-                                // update the CodeVersion
-                                admin.CodeVersion = installedCodeVersion;
-                            }
+                //        // if the adminUpdateRequired is true
+                //        if ((codeVersionUpdated) || (sqlHashUpdated))
+                //        {
+                //            // codeVersionUpdated is true
+                //            if (codeVersionUpdated)
+                //            {
+                //                // update the CodeVersion
+                //                admin.CodeVersion = installedCodeVersion;
+                //            }
 
-                            // if updated
-                            if (sqlHashUpdated)
-                            {
-                                // set the new hash
-                                admin.SchemaHash = sqlHash;
-                            }
+                //            // if updated
+                //            if (sqlHashUpdated)
+                //            {
+                //                // set the new hash
+                //                admin.SchemaHash = sqlHash;
+                //            }
 
-                            // Save the admin
-                            bool saved = gateway.SaveAdmin(ref admin);
-                        }
-                        else
-                        {
-                            // Create a new instance of an 'UpdateForm' object.
-                            UpdateForm form = new UpdateForm();
+                //            // Save the admin
+                //            bool saved = gateway.SaveAdmin(ref admin);
+                //        }
+                //        else
+                //        {
+                //            // Create a new instance of an 'UpdateForm' object.
+                //            UpdateForm form = new UpdateForm();
 
-                            // setup the form
-                            form.Setup(sqlHasChanged);
+                //            // setup the form
+                //            form.Setup(sqlHasChanged);
 
-                            // Show the Form
-                            form.ShowDialog();
-                        }
-                    }
-                }
-                catch (Exception error)
-                {   
-                    // for debugging for now
-                    DebugHelper.WriteDebugError("CheckForUpdate", this.Name, error);
-                }
+                //            // Show the Form
+                //            form.ShowDialog();
+                //        }
+                //    }
+                //}
+                //catch (Exception error)
+                //{   
+                //    // for debugging for now
+                //    DebugHelper.WriteDebugError("CheckForUpdate", this.Name, error);
+                //}
 
                 // return value
                 return update;
@@ -2097,30 +2097,30 @@ namespace DataTierClient.Forms
                     // Create the gateway
                     this.Gateway = new Gateway();
 
-                    // Load the Admin object
-                    this.Admin = Gateway.FindFirstAdmin();
+                    //// Load the Admin object
+                    //this.Admin = Gateway.FindFirstAdmin();
 
-                    // if the value for HasAdmin is true
-                    if (HasAdmin)
-                    {
-                        // set the value of checked
-                        CheckForUpdatesCheckBox.Checked = Admin.CheckForUpdates;
+                    //// if the value for HasAdmin is true
+                    //if (HasAdmin)
+                    //{
+                    //    // set the value of checked
+                    //    CheckForUpdatesCheckBox.Checked = Admin.CheckForUpdates;
 
-                        // if Check For Updates is true
-                        if (Admin.CheckForUpdates)
-                        {
-                            // Check the web for the latest version
-                            CheckForUpdate();
-                        }
-                    }
-                    else
-                    {
-                        // here we are checking for an update, and if it doesn't exist the Admin object is created with CheckForUpdate
-                        // Set to true until turned off
+                    //    // if Check For Updates is true
+                    //    if (Admin.CheckForUpdates)
+                    //    {
+                    //        // Check the web for the latest version
+                    //        CheckForUpdate();
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    // here we are checking for an update, and if it doesn't exist the Admin object is created with CheckForUpdate
+                    //    // Set to true until turned off
 
-                        // Check the web for the latest version
-                        CheckForUpdate();
-                    }
+                    //    // Check the web for the latest version
+                    //    CheckForUpdate();
+                    //}
                 
                     // Load Projects
                     this.AllProjects = this.Gateway.LoadProjects();
