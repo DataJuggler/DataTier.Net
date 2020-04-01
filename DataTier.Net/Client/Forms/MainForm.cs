@@ -1967,9 +1967,6 @@ namespace DataTierClient.Forms
                     this.EditProjectButton.Enabled = false;
                     this.CloseProjectButton.Enabled = false;
 
-                    // Setup the Listener
-                    this.CheckForUpdatesCheckBox.CheckChangedListener = this;
-                
                     // Enable Controls
                     UIEnable();
                 }
