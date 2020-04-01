@@ -3,18 +3,20 @@
   <PropertyGroup>
     
     <PackageType>Template</PackageType>
-    <PackageVersion>2.1.2</PackageVersion>
+    <PackageVersion>2.4.0</PackageVersion>
     <PackageId>DataJuggler.DataTier.Net.Core.ProjectTemplates</PackageId>
     <Title>DataJuggler.DataTier.Net.Core.ProjectTemplates</Title>
     <Authors>Data Juggler</Authors>
-    <Description>This is a new set of templates to use when creating a project for DataTier.Net targeting DotNetCore 3.0.</Description>
+    <Description>This is a new set of templates to use when creating a project for DataTier.Net targeting DotNetCore 3.1</Description>
     <PackageTags>DataTier.Net;DataTier.Net.Core;C#;SQL;SQLServer;EntityFrameworkAlternative;</PackageTags>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <ContentTargetFolders>content</ContentTargetFolders>
-    <Version>2.1.2</Version>
+    <Version>2.4.0</Version>
     <Product>DataJuggler.DataTier.Net.Core.ProjectTemplate</Product>
+    <ApplicationIcon>Data Juggler.ico</ApplicationIcon>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
   </PropertyGroup>
   

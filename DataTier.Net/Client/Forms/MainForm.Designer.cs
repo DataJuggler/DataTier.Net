@@ -70,7 +70,6 @@ namespace DataTierClient.Forms
             this.RunSetupButton = new System.Windows.Forms.Label();
             this.MainPanel = new DataTierClient.Objects.PanelExtender();
             this.RightContainer = new DataTierClient.Objects.PanelExtender();
-            this.CheckForUpdatesCheckBox = new DataJuggler.Win.Controls.LabelCheckBoxControl();
             this.BottomPanel = new DataTierClient.Objects.PanelExtender();
             this.YouTubeButtonRightMarginPanel = new DataTierClient.Objects.PanelExtender();
             this.BottomRightMarginpanel = new DataTierClient.Objects.PanelExtender();
@@ -153,6 +152,7 @@ namespace DataTierClient.Forms
             this.StatusListBox.AutoArrange = false;
             this.StatusListBox.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StatusListBox.FullRowSelect = true;
+            this.StatusListBox.HideSelection = false;
             this.StatusListBox.Location = new System.Drawing.Point(20, 170);
             this.StatusListBox.Name = "StatusListBox";
             this.StatusListBox.Size = new System.Drawing.Size(482, 440);
@@ -364,7 +364,6 @@ namespace DataTierClient.Forms
             // 
             // RightContainer
             // 
-            this.RightContainer.Controls.Add(this.CheckForUpdatesCheckBox);
             this.RightContainer.Controls.Add(this.BottomPanel);
             this.RightContainer.Controls.Add(this.RightPanel);
             this.RightContainer.Dock = System.Windows.Forms.DockStyle.Right;
@@ -372,24 +371,6 @@ namespace DataTierClient.Forms
             this.RightContainer.Name = "RightContainer";
             this.RightContainer.Size = new System.Drawing.Size(380, 649);
             this.RightContainer.TabIndex = 112;
-            // 
-            // CheckForUpdatesCheckBox
-            // 
-            this.CheckForUpdatesCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.CheckForUpdatesCheckBox.CheckBoxHorizontalOffSet = 0;
-            this.CheckForUpdatesCheckBox.CheckBoxVerticalOffSet = 4;
-            this.CheckForUpdatesCheckBox.CheckChangedListener = null;
-            this.CheckForUpdatesCheckBox.Checked = false;
-            this.CheckForUpdatesCheckBox.Editable = true;
-            this.CheckForUpdatesCheckBox.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CheckForUpdatesCheckBox.LabelColor = System.Drawing.Color.LemonChiffon;
-            this.CheckForUpdatesCheckBox.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CheckForUpdatesCheckBox.LabelText = "Check For Updates On Startup:";
-            this.CheckForUpdatesCheckBox.LabelWidth = 300;
-            this.CheckForUpdatesCheckBox.Location = new System.Drawing.Point(31, 13);
-            this.CheckForUpdatesCheckBox.Name = "CheckForUpdatesCheckBox";
-            this.CheckForUpdatesCheckBox.Size = new System.Drawing.Size(319, 32);
-            this.CheckForUpdatesCheckBox.TabIndex = 105;
             // 
             // BottomPanel
             // 
@@ -584,7 +565,6 @@ namespace DataTierClient.Forms
         private System.Windows.Forms.Label RunSetupButton;
         private PanelExtender MainPanel;
         private PanelExtender RightContainer;
-        private DataJuggler.Win.Controls.LabelCheckBoxControl CheckForUpdatesCheckBox;
         private PanelExtender BottomPanel;
         private System.Windows.Forms.Button YouTubeButton;
         private PanelExtender YouTubeButtonRightMarginPanel;
