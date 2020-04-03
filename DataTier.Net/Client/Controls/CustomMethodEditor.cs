@@ -1336,7 +1336,7 @@ namespace DataTierClient.Controls
             {
                 // local (default to true)
                 bool enabled = true;
-                bool orderByVisible = false;
+                bool orderByVisible = true;
                 bool topRowsVisible = true;
                 
                 // If the MethodInfo object exists
