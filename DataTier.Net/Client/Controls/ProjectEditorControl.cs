@@ -131,6 +131,10 @@ namespace DataTierClient.Controls
                             // if the value for installed is true
                             if (installed)
                             {
+                                 // update anything
+                                Refresh();
+                                Application.DoEvents();
+
                                 // Create a Process to launch a command window (hidden) to create the item templates
                                 Process process = new Process();
                                 ProcessStartInfo startInfo = new ProcessStartInfo();
@@ -141,15 +145,37 @@ namespace DataTierClient.Controls
                                 process.StartInfo = startInfo;
                                 process.Start();
 
+                                // get the solution path
+                                string solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net.Core.ClassLibrary.sln");
+
+                                // Set the startTime
+                                DateTime startTime = DateTime.Now;
+
+                               do
+                               {
+                                    // Get the currentTime
+                                    DateTime currentTime = DateTime.Now;
+                                
+                                    // has 5 secondes elapsed
+                                    if (currentTime.Subtract(startTime).TotalSeconds >= 5)
+                                    {
+                                        // give up after 5 seconds
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        // if the solutionPath exists
+                                        if (File.Exists(solutionPath))
+                                        {
+                                            // break out of the loop
+                                            break;
+                                        }
+                                    }
+                               } while (true);
+
                                 // update anything
                                 Refresh();
                                 Application.DoEvents();
-
-                                // Give enough time to create the project
-                                System.Threading.Thread.Sleep(1000);
-
-                                // get the solution path
-                                string solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net.Core.ClassLibrary.sln");
 
                                 // if the solutionPath exists
                                 if (File.Exists(solutionPath))
