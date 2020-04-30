@@ -34,8 +34,8 @@ namespace DataTierClient.Controls
         private bool userCancelled;
         private bool databaseSchemaClicked;
         private const string DatabaseName = "DataTier.Net.Database";
-        private const string DotNetCoreProjectTemplates = "dotnet new -i DataJuggler.DataTier.Net.Core.ProjectTemplates";
-        private const string UninstallDotNetCoreProjectTemplates = "dotnet new -u DataJuggler.DataTier.Net.Core.ProjectTemplates";
+        public const string DotNetCoreProjectTemplates = "dotnet new -i DataJuggler.DataTier.Net.Core.ProjectTemplates";
+        public const string UninstallDotNetCoreProjectTemplates = "dotnet new -u DataJuggler.DataTier.Net.Core.ProjectTemplates";
         #endregion
         
         #region Constructor

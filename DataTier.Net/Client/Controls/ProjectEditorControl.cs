@@ -125,18 +125,44 @@ namespace DataTierClient.Controls
                         }
                         else
                         {
-                            // Create a Process to launch a command window (hidden) to create the item templates
-                            Process process = new Process();
-                            ProcessStartInfo startInfo = new ProcessStartInfo();
-                            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.WorkingDirectory = SelectedProject.ProjectFolder;
-                            startInfo.Arguments = "/C " + CreateDataTier;
-                            process.StartInfo = startInfo;
-                            process.Start();
+                            // Install the templates
+                            bool installed = InstallDataTierNetTemplates();
 
-                            // show the user a message
-                            MessageBoxHelper.ShowMessage("Your DataTier has been created.", "DataTier Created");
+                            // if the value for installed is true
+                            if (installed)
+                            {
+                                // Create a Process to launch a command window (hidden) to create the item templates
+                                Process process = new Process();
+                                ProcessStartInfo startInfo = new ProcessStartInfo();
+                                startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                                startInfo.FileName = "cmd.exe";
+                                startInfo.WorkingDirectory = SelectedProject.ProjectFolder;
+                                startInfo.Arguments = "/C " + CreateDataTier;
+                                process.StartInfo = startInfo;
+                                process.Start();
+
+                                // update anything
+                                Refresh();
+                                Application.DoEvents();
+
+                                // Give enough time to create the project
+                                System.Threading.Thread.Sleep(1000);
+
+                                // get the solution path
+                                string solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net.Core.ClassLibrary.sln");
+
+                                // if the solutionPath exists
+                                if (File.Exists(solutionPath))
+                                {
+                                    // show the user a message
+                                    MessageBoxHelper.ShowMessage("Your DataTier has been created.", "DataTier Created");
+                                }
+                                else
+                                {
+                                    // show the user a message
+                                    MessageBoxHelper.ShowMessage("Oops. Something went wrong", "Data Tier Not Created");
+                                }
+                            }
                         }
                     }
                     else
@@ -384,6 +410,46 @@ namespace DataTierClient.Controls
             }
             #endregion
 
+            #region InstallDataTierNetTemplates()
+            /// <summary>
+            /// This method Install Data Tier Net Templates
+            /// </summary>
+            public bool InstallDataTierNetTemplates()
+            {
+                // initial value
+                bool installed = false;
+
+                try               
+                 {
+                     // Create a Process to launch a command window (hidden) to create the item templates
+                    Process process = new Process();
+                    ProcessStartInfo startInfo = new ProcessStartInfo();
+                    startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    startInfo.FileName = "cmd.exe";
+                    startInfo.Arguments = "/C " + SetupControl.DotNetCoreProjectTemplates;
+                    process.StartInfo = startInfo;
+                    process.Start();
+
+                    // Set to true
+                    installed = true;
+                 }
+                 catch (Exception error)
+                 {
+                    // set to false
+                    installed = false;
+
+                    // Set the error
+                    DebugHelper.WriteDebugError("DotNetCoreLabel_Click", this.Name, error);
+
+                    // show the user a message
+                    MessageBoxHelper.ShowMessage("The DataTier.Net.Core.Project Templates could not be installed. Ensure you are connected to the internet and try again.", "Insteall Templates Failed");
+                 }
+
+                 // return value
+                 return installed;
+            }
+            #endregion
+            
             #region OnTabButtonClicked(TabButton tabButton)
             /// <summary>
             /// A tab button was clicked. 
