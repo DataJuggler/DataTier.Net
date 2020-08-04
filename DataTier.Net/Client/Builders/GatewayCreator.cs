@@ -279,7 +279,9 @@ namespace DataTierClient.Builders
                     if ((TextHelper.Exists(gatewayPath)) && (File.Exists(gatewayPath)))
                     {
                         // get the copyFileName
-                        string copyFileName = gatewayPath.Substring(0, gatewayPath.Length - 3) + ".backup.cs";
+                        // Update for .Net Core, now this has to be cs.backup instead of backup.cs, because
+                        // .Net Core and file nesting will make the file appear in the project.
+                        string copyFileName = gatewayPath.Substring(0, gatewayPath.Length - 3) + ".cs.backup";
 
                         // make a copy of the file
                         File.Copy(gatewayPath, copyFileName, true);

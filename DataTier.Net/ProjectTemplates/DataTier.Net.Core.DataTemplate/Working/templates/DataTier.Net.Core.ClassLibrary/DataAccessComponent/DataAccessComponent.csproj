@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Version>2.4.0</Version>
+    <Version>2.4.2</Version>
     <PackageId>DataJuggler.DataTier.Net.Core.DataAccessComponent</PackageId>
     <Authors>DataJuggler</Authors>
     <Company>DataJuggler</Company>
@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="DataJuggler.Net.Core" Version="2.1.5" />
-    <PackageReference Include="DataJuggler.UltimateHelper.Core" Version="1.2.0" />
+    <PackageReference Include="DataJuggler.UltimateHelper.Core" Version="1.2.6" />
   </ItemGroup>
 
   <ItemGroup>

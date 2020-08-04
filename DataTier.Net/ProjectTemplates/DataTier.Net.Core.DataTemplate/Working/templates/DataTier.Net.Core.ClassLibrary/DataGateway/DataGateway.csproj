@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Version>2.4.0</Version>
+    <Version>2.4.2</Version>
     <PackageId>DataJuggler.DataTier.Net.Core.DataGateway</PackageId>
     <Authors>DataJuggler</Authors>
     <Company>DataJuggler</Company>

@@ -22,6 +22,31 @@ namespace DataGateway.Services
     {
 
         #region Methods
+
+            #region Find[TableName]([ParameterDataType] [PrimaryKey])
+            /// <summary>
+            /// This method is used to find a [TableName] object by the primary key [PrimaryKey].
+            /// </summary>
+            /// <returns></returns>
+            public static Task<[TableName]> FindUser([ParameterDataType] [PrimaryKey])
+            {
+                // initial value
+                [TableName] [VariableName] = null;
+                
+                // If the id is set
+                if (id > 0)
+                {
+                    // Create a new instance of a 'Gateway' object, and set the connectionName
+                    Gateway gateway = new Gateway(Connection.Name);
+                    
+                    // load the [VariableName]
+                    [VariableName] = gateway.Find[TableName]([DataType] [PrimaryKey]);
+                }
+                
+                // return value
+                return Task.FromResult([VariableName]);
+            }
+            #endregion
             
             #region Get[TableName]List()
             /// <summary>
