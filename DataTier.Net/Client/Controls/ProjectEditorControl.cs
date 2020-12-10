@@ -32,6 +32,9 @@ namespace DataTierClient.Controls
         private ActiveControlEnum nextControl;
         private ActiveControlEnum prevControl;
         private const string CreateDataTier = "dotnet new DataJuggler.DataTier.Net5.ProjectTemplates";
+        
+        // Used to install the Project Templates on the ProjectEditorControl.cs
+        private const int GraphWidth = 268;
         #endregion 
         
         #region Constructor
@@ -162,11 +165,11 @@ namespace DataTierClient.Controls
                                     // set the width
                                     width += 5;
 
-                                    // if above the maximum width (I know hard coding is bad, but this works)
-                                    if (width >= 268)
+                                    // if above the maximum width (268)
+                                    if (width >= GraphWidth)
                                     {
-                                        // Cap
-                                        Graph.Width = 268;
+                                        // cap
+                                        width = GraphWidth;
                                     }
 
                                     // set the width
