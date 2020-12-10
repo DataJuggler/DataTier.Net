@@ -163,7 +163,7 @@ namespace DataTierClient.Controls
                                     DateTime currentTime = DateTime.Now;
 
                                     // set the width
-                                    width += 5;
+                                    width++;
 
                                     // if above the maximum width (268)
                                     if (width >= GraphWidth)
