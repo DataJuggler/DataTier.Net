@@ -30,7 +30,7 @@ namespace ObjectLibrary.BusinessObjects
         private string dataWriterNamespace;
         private int dataWriterReferencesSetId;
         private DateTime dateModified;
-        private bool dotNetCore;
+        private bool dotNet5;
         private bool enableBlazorFeatures;
         private string objectFolder;
         private string objectNamespace;
@@ -262,16 +262,16 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
 
-            #region bool DotNetCore
-            public bool DotNetCore
+            #region bool DotNet5
+            public bool DotNet5
             {
                 get
                 {
-                    return dotNetCore;
+                    return dotNet5;
                 }
                 set
                 {
-                    dotNetCore = value;
+                    dotNet5 = value;
                 }
             }
             #endregion

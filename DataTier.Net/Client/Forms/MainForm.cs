@@ -624,9 +624,9 @@ namespace DataTierClient.Forms
 					// enable controls
 				    UIEnable();
 
-                    // Only launch the VisualStudio Project Updater if this new files were added and this is not a DotNetCore project
-                    // This is only needed for DotNetFramework. DotNetCore adds all files by default (reason #5 DotNetCore is growing on me)
-                    if ((this.HasFileManager) && (FileManager.WereNewFilesCreated) && (!this.OpenProject.DotNetCore))
+                    // Only launch the VisualStudio Project Updater if this new files were added and this is not a DotNet5 project
+                    // This is only needed for DotNetFramework. DotNet5 adds all files by default (reason #5 DotNet5 is growing on me)
+                    if ((this.HasFileManager) && (FileManager.WereNewFilesCreated) && (!this.OpenProject.DotNet5))
                     {
                         // include the files generated in the project.
                         IncludeProjectFiles();
@@ -1952,6 +1952,8 @@ namespace DataTierClient.Forms
 
                     // Load Projects
                     this.AllProjects = this.Gateway.LoadProjects();
+
+                    Exception error = gateway.GetLastException();
                  
                     // Create the AppController
                     this.AppController = new ApplicationController();

@@ -1185,7 +1185,7 @@ namespace DataTierClient.Builders
                     WriteComment("If " + objectAndFieldName + " does not exist.");
                     
                     // Write line to test 
-                    WriteLine("if ((" + objectAndFieldName + " == null) || (" + objectAndFieldName + ".Year < 1900))");
+                    WriteLine("if (" + objectAndFieldName + ".Year < 1900)");
                     
                     // Write Open Bracket and increase Identity
                     WriteOpenBracket(true);
@@ -1211,9 +1211,6 @@ namespace DataTierClient.Builders
                     
                     // Write Close Bracket
                     WriteCloseBracket(true);
-                
-                    // Write Blank Line
-                    WriteLine();
                 }
             } 
             #endregion

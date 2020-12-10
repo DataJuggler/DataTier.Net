@@ -323,8 +323,8 @@ namespace DataTierClient.Builders
                     // iterate the collection of tables                    
                     foreach (DataTable table in database.Tables)
                     {
-                        // if a DotNetCore project and EnableBlazorFeatures is true and BindingCallBack option is set to CreateBinding
-                        if ((currentProject.DotNetCore) && (currentProject.EnableBlazorFeatures) && (currentProject.BindingCallbackOption == BindingCallbackOptionEnum.Create_Binding))
+                        // if a DotNet5 project and EnableBlazorFeatures is true and BindingCallBack option is set to CreateBinding
+                        if ((currentProject.DotNet5) && (currentProject.EnableBlazorFeatures) && (currentProject.BindingCallbackOption == BindingCallbackOptionEnum.Create_Binding))
                         {
                             // Create the BindingCall back needs to be set to true to code generate the Callback.
                             table.CreateBindingCallback = true;

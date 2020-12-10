@@ -34,8 +34,8 @@ namespace DataTierClient.Controls
         private bool userCancelled;
         private bool databaseSchemaClicked;
         private const string DatabaseName = "DataTier.Net.Database";
-        public const string DotNetCoreProjectTemplates = "dotnet new -i DataJuggler.DataTier.Net.Core.ProjectTemplates";
-        public const string UninstallDotNetCoreProjectTemplates = "dotnet new -u DataJuggler.DataTier.Net.Core.ProjectTemplates";
+        public const string DotNet5ProjectTemplates = "dotnet new -i DataJuggler.DataTier.Net5.ProjectTemplates";
+        public const string UninstallDotNet5ProjectTemplates = "dotnet new -u DataJuggler.DataTier.Net5.ProjectTemplates";
         #endregion
         
         #region Constructor
@@ -134,11 +134,11 @@ namespace DataTierClient.Controls
             }
             #endregion
             
-            #region DotNetCoreLabel_Click(object sender, EventArgs e)
+            #region DotNet5Label_Click(object sender, EventArgs e)
             /// <summary>
-            /// event is fired when the 'DotNetCoreLabel' is clicked.
+            /// event is fired when the 'DotNet5Label_Click' is clicked.
             /// </summary>
-            private void DotNetCoreLabel_Click(object sender, EventArgs e)
+            private void DotNet5Label_Click(object sender, EventArgs e)
             {
                  try               
                  {
@@ -147,20 +147,20 @@ namespace DataTierClient.Controls
                     ProcessStartInfo startInfo = new ProcessStartInfo();
                     startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                     startInfo.FileName = "cmd.exe";
-                    startInfo.Arguments = "/C " + DotNetCoreProjectTemplates;
+                    startInfo.Arguments = "/C " + DotNet5ProjectTemplates;
                     process.StartInfo = startInfo;
                     process.Start();
 
                     // Show the user a message
-                    MessageBoxHelper.ShowMessage("DataJuggler.DataTier.Net.Core.ProjectTemplates were installed onto your computer.", "Install Complete");
+                    MessageBoxHelper.ShowMessage("DataJuggler.DataTier.Net5.ProjectTemplates were installed onto your computer.", "Install Complete");
                  }
                  catch (Exception error)
                  {
                      // Set the error
-                    DebugHelper.WriteDebugError("DotNetCoreLabel_Click", this.Name, error);
+                    DebugHelper.WriteDebugError("DotNet5Label_Click", this.Name, error);
 
                     // show the user a message
-                    MessageBoxHelper.ShowMessage("The DataTier.Net.Core.Project Templates could not be installed. Ensure you are connected to the internet and try again.", "Insteall Templates Failed");
+                    MessageBoxHelper.ShowMessage("The DataTier.Net5.Project Templates could not be installed. Ensure you are connected to the internet and try again.", "Insteall Templates Failed");
                  }
             }
             #endregion
@@ -278,11 +278,11 @@ namespace DataTierClient.Controls
             }
         #endregion
 
-            #region UninstallDotNetCoreLabel_Click(object sender, EventArgs e)
+            #region UninstallDotNet5Label_Click(object sender, EventArgs e)
             /// <summary>
-            /// event is fired when the 'UninstallDotNetCoreLabel' is clicked.
+            /// event is fired when the 'UninstallDotNet5Label' is clicked.
             /// </summary>
-            private void UninstallDotNetCoreLabel_Click(object sender, EventArgs e)
+            private void UninstallDotNet5Label_Click(object sender, EventArgs e)
             {
                 try               
                  {
@@ -291,7 +291,7 @@ namespace DataTierClient.Controls
                     ProcessStartInfo startInfo = new ProcessStartInfo();
                     startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                     startInfo.FileName = "cmd.exe";
-                    startInfo.Arguments = "/C " + UninstallDotNetCoreProjectTemplates;
+                    startInfo.Arguments = "/C " + UninstallDotNet5ProjectTemplates;
                     process.StartInfo = startInfo;
                     process.Start();
 
@@ -301,7 +301,7 @@ namespace DataTierClient.Controls
                  catch (Exception error)
                  {
                      // Set the error
-                    DebugHelper.WriteDebugError("UninstallDotNetCoreLabel_Click", this.Name, error);
+                    DebugHelper.WriteDebugError("UninstallDotNet5_Click", this.Name, error);
 
                     // show the user a message
                     MessageBoxHelper.ShowMessage("The DataTier.Net.Core.Project Templates could not be uninstalled.", "Uninsteall Templates Failed");

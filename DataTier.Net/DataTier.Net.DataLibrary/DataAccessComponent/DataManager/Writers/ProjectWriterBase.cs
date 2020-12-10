@@ -219,8 +219,8 @@ namespace DataAccessComponent.DataManager.Writers
                     // set parameters[13]
                     parameters[13] = param;
 
-                    // Create [DotNetCore] parameter
-                    param = new SqlParameter("@DotNetCore", project.DotNetCore);
+                    // Create [DotNet5] parameter
+                    param = new SqlParameter("@DotNet5", project.DotNet5);
 
                     // set parameters[14]
                     parameters[14] = param;
@@ -458,8 +458,8 @@ namespace DataAccessComponent.DataManager.Writers
                     // set parameters[13]
                     parameters[13] = param;
 
-                    // Create parameter for [DotNetCore]
-                    param = new SqlParameter("@DotNetCore", project.DotNetCore);
+                    // Create parameter for [DotNet5]
+                    param = new SqlParameter("@DotNet5", project.DotNet5);
 
                     // set parameters[14]
                     parameters[14] = param;

@@ -1,0 +1,57 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    
+    <PackageType>Template</PackageType>
+    <PackageVersion>2.5.2</PackageVersion>
+    <PackageId>DataJuggler.DataTier.Net5.ProjectTemplates</PackageId>
+    <Title>DataJuggler.DataTier.Net5.ProjectTemplates</Title>
+    <Authors>Data Juggler</Authors>
+    <Description>This is a new set of templates to use when creating a project for DataTier.Net targeting .Net 5.0
+</Description>
+    <PackageTags>DataTier.Net;DataTier.Net5;C#;SQL;SQLServer;EntityFrameworkAlternative;</PackageTags>
+    <TargetFramework>net5.0</TargetFramework>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <Version>2.5.2</Version>
+    <Product>DataJuggler.DataTier.Net5.ProjectTemplate</Product>
+    <ApplicationIcon></ApplicationIcon>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/DataJuggler/DataTier.Net</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/DataJuggler/DataTier.Net.git</RepositoryUrl>
+    <RepositoryType>Git/GitHub</RepositoryType>
+    <PackageReleaseNotes>Update 12.10.2020 (wee hours of the AM): I fixed a couple of Nuget references for the .Net 5 DataTier.Net5.Projects that are created. Hopefully this will work.
+
+Update 12.9.2020: Working version second attempt. I still had some bad references in my first try. I think this 
+version will work.
+
+This is the first version for .Net 5.</PackageReleaseNotes>
+    <PackageLicenseFile>License.txt</PackageLicenseFile>
+
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" />
+    <Compile Remove="**\*" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="..\..\..\..\..\DataJuggler.Net5\License\License.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+  
+</Project>
+
+
+
+    
+    
+    
+
+
+  
+
+

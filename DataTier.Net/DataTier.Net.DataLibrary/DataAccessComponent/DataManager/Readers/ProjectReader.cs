@@ -50,7 +50,7 @@ namespace DataAccessComponent.DataManager.Readers
                 int dataWriterNamespacefield = 11;
                 int dataWriterReferencesSetIdfield = 12;
                 int dateModifiedfield = 13;
-                int dotNetCorefield = 14;
+                int dotNet5field = 14;
                 int enableBlazorFeaturesfield = 15;
                 int objectFolderfield = 16;
                 int objectNamespacefield = 17;
@@ -84,7 +84,7 @@ namespace DataAccessComponent.DataManager.Readers
                     project.DataWriterNamespace = DataHelper.ParseString(dataRow.ItemArray[dataWriterNamespacefield]);
                     project.DataWriterReferencesSetId = DataHelper.ParseInteger(dataRow.ItemArray[dataWriterReferencesSetIdfield], 0);
                     project.DateModified = DataHelper.ParseDate(dataRow.ItemArray[dateModifiedfield]);
-                    project.DotNetCore = DataHelper.ParseBoolean(dataRow.ItemArray[dotNetCorefield], false);
+                    project.DotNet5 = DataHelper.ParseBoolean(dataRow.ItemArray[dotNet5field], false);
                     project.EnableBlazorFeatures = DataHelper.ParseBoolean(dataRow.ItemArray[enableBlazorFeaturesfield], false);
                     project.ObjectFolder = DataHelper.ParseString(dataRow.ItemArray[objectFolderfield]);
                     project.ObjectNamespace = DataHelper.ParseString(dataRow.ItemArray[objectNamespacefield]);

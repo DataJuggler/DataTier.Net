@@ -31,7 +31,7 @@ namespace DataTierClient.Controls
         #region Private Variables
         private ActiveControlEnum nextControl;
         private ActiveControlEnum prevControl;
-        private const string CreateDataTier = "dotnet new DataTier.Net.Core.ProjectTemplates";
+        private const string CreateDataTier = "dotnet new DataJuggler.DataTier.Net5.ProjectTemplates";
         #endregion 
         
         #region Constructor
@@ -103,11 +103,11 @@ namespace DataTierClient.Controls
             }
             #endregion
             
-            #region CreateDotNetCoreProject_Click(object sender, EventArgs e)
+            #region CreateDotNet5Project_Click(object sender, EventArgs e)
             /// <summary>
-            /// event is fired when the 'CreateDotNetCoreProject' is clicked.
+            /// event is fired when the 'CreateDotNet5Project_Click' is clicked.
             /// </summary>
-            private void CreateDotNetCoreProject_Click(object sender, EventArgs e)
+            private void CreateDotNet5Project_Click(object sender, EventArgs e)
             {
                 try
                 {
@@ -146,20 +146,43 @@ namespace DataTierClient.Controls
                                 process.Start();
 
                                 // get the solution path
-                                string solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net.Core.ClassLibrary.sln");
+                                string solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net5.ClassLibrary.sln");
 
                                 // Set the startTime
                                 DateTime startTime = DateTime.Now;
+
+                                // for the graph
+                                int width = 0;
 
                                do
                                {
                                     // Get the currentTime
                                     DateTime currentTime = DateTime.Now;
-                                
-                                    // has 5 secondes elapsed
-                                    if (currentTime.Subtract(startTime).TotalSeconds >= 5)
+
+                                    // set the width
+                                    width += 5;
+
+                                    // if above the maximum width (I know hard coding is bad, but this works)
+                                    if (width >= 268)
                                     {
-                                        // give up after 5 seconds
+                                        // Cap
+                                        Graph.Width = 268;
+                                    }
+
+                                    // set the width
+                                    Graph.Width = width;
+
+                                    // Show the Graph
+                                    Graph.Visible = true;
+
+                                    // Do Events
+                                    this.Refresh();
+                                    Application.DoEvents();
+
+                                    // has 5 secondes elapsed
+                                    if (currentTime.Subtract(startTime).TotalSeconds >= 10)
+                                    {
+                                        // give up after 10 seconds
                                         break;
                                     }
                                     else
@@ -171,7 +194,13 @@ namespace DataTierClient.Controls
                                             break;
                                         }
                                     }
+
+
+
                                } while (true);
+
+                               // hide the graph
+                               Graph.Visible = false;
 
                                 // update anything
                                 Refresh();
@@ -200,7 +229,7 @@ namespace DataTierClient.Controls
                 catch (Exception error)
                 {
                     // Set the error
-                    DebugHelper.WriteDebugError("CreateBlazorServicesButton_LinkClicked", this.Name, error);
+                    DebugHelper.WriteDebugError("CreateDotNet5Button_LinkClicked", this.Name, error);
 
                     // show the user a message
                     MessageBoxHelper.ShowMessage("The datatier could not be created in the Project Folder. Ensure you are connected to the internet and that you have permission to write to the Project Folder.", "Create DataTier Failed");
@@ -208,17 +237,17 @@ namespace DataTierClient.Controls
             }
             #endregion
             
-            #region DotNetCoreCheckBox_CheckedChanged(object sender, EventArgs e)
+            #region DotNet5CheckBox_CheckedChanged(object sender, EventArgs e)
             /// <summary>
             /// event is fired when Dot Net Core Check Box _ Checked Changed
             /// </summary>
-            private void DotNetCoreCheckBox_CheckedChanged(object sender, EventArgs e)
+            private void DotNet5CheckBox_CheckedChanged(object sender, EventArgs e)
             {
                 // if the value for HasSelectedProject is true
                 if (HasSelectedProject)
                 {
                     // set the value
-                    SelectedProject.DotNetCore = DotNetCoreCheckBox.Checked;
+                    SelectedProject.DotNet5 = DotNet5CheckBox.Checked;
                 }
 
                 // Enable or disable controls
@@ -344,7 +373,7 @@ namespace DataTierClient.Controls
                 // locals
                 string projectName = "";
                 string projectFolder = "";
-                bool dotNetCore = false;
+                bool dotNet5 = false;
                 bool enableBlazorFeatures = false;
                 int bindingIndex = -1;
                 
@@ -354,7 +383,7 @@ namespace DataTierClient.Controls
                     // set values
                     projectName = this.SelectedProject.ProjectName;
                     projectFolder = this.SelectedProject.ProjectFolder;
-                    dotNetCore = SelectedProject.DotNetCore;
+                    dotNet5 = SelectedProject.DotNet5;
                     enableBlazorFeatures = SelectedProject.EnableBlazorFeatures;
                     bindingIndex = FindBindingIndex(SelectedProject.BindingCallbackOption);
                 }
@@ -362,7 +391,7 @@ namespace DataTierClient.Controls
                 // dislay values now
                 this.ProjectNameTextBox.Text = projectName;
                 this.ProjectFolderTextBox.Text = projectFolder;
-                this.DotNetCoreCheckBox.Checked = dotNetCore;
+                this.DotNet5CheckBox.Checked = dotNet5;
                 this.BlazorServicesCheckBox.Checked = enableBlazorFeatures;
                 this.BindingCallbackOptionControl.SelectedIndex = bindingIndex;
                                 
@@ -452,7 +481,7 @@ namespace DataTierClient.Controls
                     ProcessStartInfo startInfo = new ProcessStartInfo();
                     startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                     startInfo.FileName = "cmd.exe";
-                    startInfo.Arguments = "/C " + SetupControl.DotNetCoreProjectTemplates;
+                    startInfo.Arguments = "/C " + SetupControl.DotNet5ProjectTemplates;
                     process.StartInfo = startInfo;
                     process.Start();
 
@@ -465,10 +494,10 @@ namespace DataTierClient.Controls
                     installed = false;
 
                     // Set the error
-                    DebugHelper.WriteDebugError("DotNetCoreLabel_Click", this.Name, error);
+                    DebugHelper.WriteDebugError("InstallDataTierNetTemplates", this.Name, error);
 
                     // show the user a message
-                    MessageBoxHelper.ShowMessage("The DataTier.Net.Core.Project Templates could not be installed. Ensure you are connected to the internet and try again.", "Insteall Templates Failed");
+                    MessageBoxHelper.ShowMessage("The DataTier.Net5.Project Templates could not be installed. Ensure you are connected to the internet and try again.", "Insteall Templates Failed");
                  }
 
                  // return value
@@ -535,20 +564,20 @@ namespace DataTierClient.Controls
                 // if the value for HasSelectedProject is true
                 if (HasSelectedProject)
                 {
-                    // Show Enable BlazorServices for DotNetCore projects only
-                    this.BlazorServicesCheckBox.Visible = SelectedProject.DotNetCore;
+                    // Show Enable BlazorServices for DotNet5 projects only
+                    this.BlazorServicesCheckBox.Visible = SelectedProject.DotNet5;
 
                     // Enable Blazor Features to true
                     this.BindingCallbackOptionControl.Visible = SelectedProject.EnableBlazorFeatures;
 
-                    // Show the CreateDotNetCoreProject control if DotNetCore
-                    this.CreateDotNetCoreProject.Visible = SelectedProject.DotNetCore;
+                    // Show the CreateDotNet5Project control if DotNet5
+                    this.CreateDotNet5Project.Visible = SelectedProject.DotNet5;
                 }
                 else
                 {
                     // Do not show for .Net Framework projects
                     this.BlazorServicesCheckBox.Visible = false;
-                    this.CreateDotNetCoreProject.Visible = false;
+                    this.CreateDotNet5Project.Visible = false;
                     this.BindingCallbackOptionControl.Visible = false;
                 }
 

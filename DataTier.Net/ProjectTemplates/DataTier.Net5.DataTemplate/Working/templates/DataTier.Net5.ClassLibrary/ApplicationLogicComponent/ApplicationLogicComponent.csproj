@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Version>2.5.1</Version>
+    <PackageId>DataJuggler.DataTier.Net.ApplicationLogicComponent</PackageId>
+    <Authors>DataJuggler</Authors>
+    <Product>DataJuggler.DataTier.Net.ApplicationLogicComponent</Product>
+    <Description>This is one of the four projects that make up a DataTier.Net project template.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DataJuggler.UltimateHelper" Version="1.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccessComponent\DataAccessComponent.csproj" />
+    <ProjectReference Include="..\ObjectLibrary\ObjectLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="DataOperations\" />
+  </ItemGroup>
+
+</Project>

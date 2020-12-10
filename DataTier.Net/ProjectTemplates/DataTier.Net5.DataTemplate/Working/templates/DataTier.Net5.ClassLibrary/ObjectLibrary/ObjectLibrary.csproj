@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <PackageId>DataJuggler.DataTier.Net5.ObjectLibrary</PackageId>
+    <Version>2.5.1</Version>
+    <Authors>DataJuggler</Authors>
+    <Company>DataJuggler</Company>
+    <Description>This is one of four projects that make up a DataTier.Net5 DataTier</Description>
+  </PropertyGroup>
+
+  
+
+</Project>

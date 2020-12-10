@@ -866,8 +866,8 @@ namespace DataTierClient.Controls
             public void UIEnable()
             {
                 // local
-                bool showBlazorFeatures = ((HasProject) && (Project.EnableBlazorFeatures) && (Project.DotNetCore));
-                bool showCreateBindingCallbackControl = ((HasProject) && (Project.EnableBlazorFeatures) && (Project.BindingCallbackOption == BindingCallbackOptionEnum.Allow_Binding) && (Project.DotNetCore));
+                bool showBlazorFeatures = ((HasProject) && (Project.EnableBlazorFeatures) && (Project.DotNet5));
+                bool showCreateBindingCallbackControl = ((HasProject) && (Project.EnableBlazorFeatures) && (Project.BindingCallbackOption == BindingCallbackOptionEnum.Allow_Binding) && (Project.DotNet5));
 
                 // if there is a SelectedTable
                 if ((this.HasSelectedTable) && (!this.SelectedTable.Exclude))
