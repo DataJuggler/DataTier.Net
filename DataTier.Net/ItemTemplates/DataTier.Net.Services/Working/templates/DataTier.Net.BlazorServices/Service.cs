@@ -3,7 +3,7 @@
 #region using statements
 
 using ApplicationLogicComponent.Connection;
-using DataJuggler.UltimateHelper.Core;
+using DataJuggler.UltimateHelper;
 using DataGateway;
 using ObjectLibrary.BusinessObjects;
 using System.Collections.Generic;

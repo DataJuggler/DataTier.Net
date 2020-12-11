@@ -36,14 +36,13 @@ namespace DataTierClient.Controls
     {
         
         #region Private Variables
-        private const string ItemTemplateInstall = "dotnet new -i DataJuggler.DataTier.Net.Core.ItemTemplates.BlazorDataServices";
-        private const string ItemTemplateUninstall = "dotnet new -u DataJuggler.DataTier.Net.Core.ItemTemplates.BlazorDataServices";
-        private const string CreateServices = "dotnet new DataTier.Net.Core.ItemTemplates.BlazorDataServices";
+        private const string ItemTemplateInstall = "dotnet new --i DataJuggler.DataTier.Net5.ItemTemplates.BlazorDataServices";
+        private const string ItemTemplateUninstall = "dotnet new -u DataJuggler.DataTier.Net5.ItemTemplates.BlazorDataServices";
+        private const string CreateServices = "dotnet new DataTier.Net5.ItemTemplates.BlazorDataServices";
         private const string DataWatcherFileName = "DataWatcher.cs";
         private const string ServiceFileName = "Service.cs";
         private Project project;
         private DTNTable table;
-        private string servicesFolder;
         #endregion
         
         #region Constructor
@@ -374,9 +373,6 @@ namespace DataTierClient.Controls
                     // Save the project
                     saved = gateway.SaveProject(ref project);
 
-                    // Set the ServicesFolder so save is not enabled again unless a change occurs
-                    ServicesFolder = project.ServicesFolder;
-
                     // Show the user a message
                     MessageBoxHelper.ShowMessage("All changes have been saved.", "Save Complete");
                 }
@@ -398,13 +394,6 @@ namespace DataTierClient.Controls
                 // store the args
                 Project = project;
                 Table = table;
-
-                // if the value for HasProject is true
-                if (HasProject)
-                {
-                    // store the ServicesFolder now, and if it changes later then the Save button becomes enabled.
-                    ServicesFolder = project.ServicesFolder;
-                }
 
                 // if the value for HasServicesFolder is false
                 if (!HasServicesFolder)
@@ -449,15 +438,15 @@ namespace DataTierClient.Controls
 
         #region Properties
 
-        #region CreateParams
-        /// <summary>
-        /// This property here is what did the trick to reduce the flickering.
-        /// I also needed to make all of the controls Double Buffered, but
-        /// this was the final touch. It is a little slow when you switch tabs
-        /// but that is because the repainting is finishing before control is
-        /// returned.
-        /// </summary>
-        protected override CreateParams CreateParams
+            #region CreateParams
+            /// <summary>
+            /// This property here is what did the trick to reduce the flickering.
+            /// I also needed to make all of the controls Double Buffered, but
+            /// this was the final touch. It is a little slow when you switch tabs
+            /// but that is because the repainting is finishing before control is
+            /// returned.
+            /// </summary>
+            protected override CreateParams CreateParams
             {
                 get
                 {
@@ -541,8 +530,21 @@ namespace DataTierClient.Controls
             /// </summary>
             public string ServicesFolder
             {
-                get { return servicesFolder; }
-                set { servicesFolder = value; }
+                get 
+                {
+                    // initial value
+                    string servicesFolder = "";
+
+                    // if the value for HasProject is true
+                    if (HasProject)
+                    {
+                        // return value
+                        servicesFolder = Project.ServicesFolder;
+                    }
+
+                    // return value
+                    return servicesFolder;
+                } 
             }
             #endregion
             

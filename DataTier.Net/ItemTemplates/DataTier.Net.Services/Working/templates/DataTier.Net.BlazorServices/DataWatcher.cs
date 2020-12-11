@@ -1,8 +1,8 @@
 ﻿
 #region using statements
 
-using DataJuggler.Net.Core.Enumerations;
-using DataJuggler.UltimateHelper.Core;
+using DataJuggler.Net5.Enumerations;
+using DataJuggler.UltimateHelper;
 using ObjectLibrary.BusinessObjects;
 using System.Collections.Generic;
 

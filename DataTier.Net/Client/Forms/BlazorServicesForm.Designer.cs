@@ -39,7 +39,6 @@
             this.BlazorDataServicesControl.Location = new System.Drawing.Point(0, 0);
             this.BlazorDataServicesControl.Name = "BlazorDataServicesControl";
             this.BlazorDataServicesControl.Project = null;
-            this.BlazorDataServicesControl.ServicesFolder = null;
             this.BlazorDataServicesControl.Size = new System.Drawing.Size(724, 361);
             this.BlazorDataServicesControl.TabIndex = 0;
             this.BlazorDataServicesControl.Table = null;

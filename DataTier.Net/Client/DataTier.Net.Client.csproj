@@ -510,6 +510,7 @@
     <Compile Include="Forms\VisualStudioProjectUpdateForm.Designer.cs">
       <DependentUpon>VisualStudioProjectUpdateForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Objects\AppSettingsObject.cs" />
     <Compile Include="ClientUtil\ButtonManager.cs" />
     <Compile Include="Objects\CodeFileInfo.cs" />
