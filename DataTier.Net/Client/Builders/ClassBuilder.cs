@@ -232,7 +232,7 @@ namespace DataTierClient.Builders
                 this.Setup(currentProject);
                
                 // Create New ClassWriter Object
-                CSharpClassWriter classWriter = new CSharpClassWriter(fileManager, BusinessObjectPass);
+                CSharpClassWriter classWriter = new CSharpClassWriter(fileManager, BusinessObjectPass, false, currentProject.DotNet5);
 
                 // Add Databases
                 AddDatabases(ref currentProject);

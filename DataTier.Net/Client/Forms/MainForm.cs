@@ -673,7 +673,7 @@ namespace DataTierClient.Forms
                         string rootControllerPath = this.OpenProject.ControllerFolder;
                         
                         // Create ControllerManagerCreator
-                        ControllerManagerCreator creator = new ControllerManagerCreator(DataTables, convertedReferences, rootControllerPath, projectName, nameSpaceName, this.FileManager);
+                        ControllerManagerCreator creator = new ControllerManagerCreator(DataTables, convertedReferences, rootControllerPath, projectName, nameSpaceName, this.FileManager, OpenProject.DotNet5);
                         
                         // local for created
                         success = creator.CreateControllerManager(this.DataTables);
@@ -717,7 +717,7 @@ namespace DataTierClient.Forms
                     string rootControllerPath = this.OpenProject.ControllerFolder;
 
                     // Create ControllerManagerCreator
-                    ControllerCreator creator = new ControllerCreator(DataTables, convertedReferences, rootControllerPath, projectName, nameSpaceName, this.FileManager);
+                    ControllerCreator creator = new ControllerCreator(DataTables, convertedReferences, rootControllerPath, projectName, nameSpaceName, this.FileManager, OpenProject.DotNet5);
 
                     // local for created
                     creator.CreateControllers(this.DataTables);
@@ -764,7 +764,7 @@ namespace DataTierClient.Forms
                     string nameSpace = this.OpenProject.DataManagerNamespace;
 
                     // Create 
-                    ObjectManagerCreator creator = new ObjectManagerCreator(this.DataTables, convertedReferences, rootDataManagerPath, nameSpace, fileManager);
+                    ObjectManagerCreator creator = new ObjectManagerCreator(this.DataTables, convertedReferences, rootDataManagerPath, nameSpace, fileManager, OpenProject.DotNet5);
 
                     // local for created
                     creator.CreateObjectManagers(this.DataTables);
@@ -810,7 +810,7 @@ namespace DataTierClient.Forms
                     string rootDataOperationsPath = this.OpenProject.DataOperationsFolder;
 
                     // Create DataOperationsManagerCreator
-                    DataOperationsManagerCreator creator = new DataOperationsManagerCreator(this.DataTables, convertedReferences, rootDataOperationsPath, projectName, nameSpaceName, this.FileManager);
+                    DataOperationsManagerCreator creator = new DataOperationsManagerCreator(this.DataTables, convertedReferences, rootDataOperationsPath, projectName, nameSpaceName, this.FileManager, OpenProject.DotNet5);
 
                     // local for created
                     success = creator.CreateDataOperationsManager(this.DataTables);
@@ -852,7 +852,7 @@ namespace DataTierClient.Forms
                     string rootDataOperationsPath = this.OpenProject.DataOperationsFolder;
 
                     // Create 
-                    DataOperationMethodCreator creator = new DataOperationMethodCreator(this.DataTables, convertedReferences, rootDataOperationsPath, nameSpaceName, this.FileManager);
+                    DataOperationMethodCreator creator = new DataOperationMethodCreator(this.DataTables, convertedReferences, rootDataOperationsPath, nameSpaceName, FileManager, OpenProject.DotNet5);
 
                     // local for created
                     creator.CreateDataOperationMethods(this.DataTables);
@@ -898,7 +898,7 @@ namespace DataTierClient.Forms
                         // Get namespace and project namew
                         string nameSpace = this.OpenProject.DataWriterNamespace;
                         string rootDataWriterPath = this.OpenProject.DataWriterFolder;
-                        DataWriterCreator writer = new DataWriterCreator(this.DataTables, convertedReferences, rootDataWriterPath, nameSpace, this.FileManager);
+                        DataWriterCreator writer = new DataWriterCreator(this.DataTables, convertedReferences, rootDataWriterPath, nameSpace, this.FileManager, OpenProject.DotNet5);
 
                         // Write Classes
                         writer.CreateObjectWriters();
@@ -946,7 +946,7 @@ namespace DataTierClient.Forms
                         string nameSpace = this.OpenProject.DataWriterNamespace;
                         string projectName = this.OpenProject.ProjectName;
                         string gatewayPath = FindGatewayPath(this.OpenProject.ProjectFolder);
-                        GatewayCreator writer = new GatewayCreator(DataTables, convertedReferences, gatewayPath, projectName, nameSpace, this.FileManager);
+                        GatewayCreator writer = new GatewayCreator(DataTables, convertedReferences, gatewayPath, projectName, nameSpace, this.FileManager, OpenProject.DotNet5);
 
                         // Write Classes
                         writer.CreateGatewayMethods();
@@ -991,7 +991,7 @@ namespace DataTierClient.Forms
                         DataJuggler.Net.ReferencesSet convertedReferences = classBuilder.ConvertReferences(references, "ObjectReaders");
                         
                         // Create writer
-                        DataObjectReaderCreator writer = new DataObjectReaderCreator(this.DataTables, convertedReferences, this.OpenProject.ReaderFolder, this.OpenProject.ReaderNamespace, this.FileManager);
+                        DataObjectReaderCreator writer = new DataObjectReaderCreator(DataTables, convertedReferences, OpenProject.ReaderFolder, OpenProject.ReaderNamespace, FileManager, OpenProject.DotNet5);
                         
                         // Write Classes
                         writer.CreateObjectReaders();
@@ -1094,7 +1094,7 @@ namespace DataTierClient.Forms
                         string rootDataManagerPath = this.OpenProject.DataManagerFolder;
 
                         // Create 
-                        DataManagerCreator creator = new DataManagerCreator(this.DataTables, convertedReferences, rootDataManagerPath, this.OpenProject.ProjectName, nameSpaceName, this.FileManager);
+                        DataManagerCreator creator = new DataManagerCreator(this.DataTables, convertedReferences, rootDataManagerPath, OpenProject.ProjectName, nameSpaceName, this.FileManager, OpenProject.DotNet5);
 
                         // local for created
                         creator.CreateDataManager(this.DataTables);
@@ -1178,7 +1178,7 @@ namespace DataTierClient.Forms
                     string nameSpace = this.OpenProject.StoredProcedureObjectNamespace;
 
                     // Create 
-                    StoredProcedureObjectCreator creator = new StoredProcedureObjectCreator(this.DataTables, convertedReferences, rootStoredProceduresPath, nameSpace, this.FileManager);
+                    StoredProcedureObjectCreator creator = new StoredProcedureObjectCreator(this.DataTables, convertedReferences, rootStoredProceduresPath, nameSpace, this.FileManager, OpenProject.DotNet5);
 
                     // local for created
                     creator.CreateStoredProcedureObjects(this.DataTables);
@@ -1563,18 +1563,8 @@ namespace DataTierClient.Forms
                 try
                 {
                     // local
-                    string filePath = this.OpenProject.StoredProcsFolder;
+                    string filePath = Path.Combine(OpenProject.StoredProcsFolder, "StoredProcedures.sql");
                     
-                    // If this filePath does not end in a backslash
-                    if(!filePath.EndsWith(@"\"))
-                    {
-                        // Set the filePath
-                        filePath = filePath + @"\";
-                    }
-                    
-                    // Append StoredProcedures.sql
-                    filePath = filePath + "StoredProcedures.sql";
-
                     // If the database exists
                     if (NullHelper.Exists(db, db.Tables, Gateway))
                     {
@@ -1676,7 +1666,7 @@ namespace DataTierClient.Forms
                     string reference = "    ";
 
                     // get the reference name
-                    reference = reference + projectReference.ReferenceName;
+                    reference += projectReference.ReferenceName;
                     
                     // Add this item to the list box
                     this.StatusListBox.Items.Add(reference);
@@ -2640,7 +2630,7 @@ namespace DataTierClient.Forms
                         listItem.ImageIndex = 0;
 
                         // Update Text
-                        listItem.Text = listItem.Text + "Done.";
+                        listItem.Text += "Done.";
                     }
                     else
                     {
@@ -2648,7 +2638,7 @@ namespace DataTierClient.Forms
                         listItem.ImageIndex = 1;
 
                         // Update Text
-                        listItem.Text = listItem.Text + "Failed.";
+                        listItem.Text += "Failed.";
                     }
 
                     // refresh

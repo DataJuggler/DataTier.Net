@@ -33,7 +33,7 @@ namespace DataTierClient.Builders
         /// <summary>
         /// Create a new instance of DataWriterCreator
         /// </summary>
-        public DataWriterCreator(List<DataTable> dataTablesArg, ReferencesSet objectReferencesArg, string rootDataWriterPathArg, string nameSpaceNameArg, ProjectFileManager fileManager) : base(fileManager, false)
+        public DataWriterCreator(List<DataTable> dataTablesArg, ReferencesSet objectReferencesArg, string rootDataWriterPathArg, string nameSpaceNameArg, ProjectFileManager fileManager, bool dotNet5Project) : base(fileManager, false, dotNet5Project)
 		{   
 		    // Set Properties
 		    this.DataTables = dataTablesArg;

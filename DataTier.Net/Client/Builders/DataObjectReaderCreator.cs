@@ -35,7 +35,7 @@ namespace DataTierClient.Builders
         /// <summary>
         /// Create a new instance of DataObjectReaderCreator
         /// </summary>
-        public DataObjectReaderCreator(List<DataTable> dataTablesArg, ReferencesSet objectReferencesArg, string rootDataObjectPathArg, string nameSpaceNameArg, ProjectFileManager fileManager) : base(fileManager, false)
+        public DataObjectReaderCreator(List<DataTable> dataTablesArg, ReferencesSet objectReferencesArg, string rootDataObjectPathArg, string nameSpaceNameArg, ProjectFileManager fileManager, bool dotNet5Project) : base(fileManager, false, dotNet5Project)
 		{   
 		    // Set Properties
 		    this.DataTables = dataTablesArg;
@@ -49,7 +49,7 @@ namespace DataTierClient.Builders
         /// <summary>
         /// Create a new instance of DataObjectReaderCreator
         /// </summary>
-        public DataObjectReaderCreator(DataTable dataTableArg, ReferencesSet objectReferencesArg, string rootDataObjectPathArg, string nameSpaceNameArg, ProjectFileManager fileManager) : base(fileManager, false)
+        public DataObjectReaderCreator(DataTable dataTableArg, ReferencesSet objectReferencesArg, string rootDataObjectPathArg, string nameSpaceNameArg, ProjectFileManager fileManager, bool dotNet5Project) : base(fileManager, false, dotNet5Project)
 		{   
 		    // Set Properties
 		    this.DataTable = dataTableArg;

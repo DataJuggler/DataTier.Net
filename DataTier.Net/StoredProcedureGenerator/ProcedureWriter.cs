@@ -7,11 +7,9 @@ using DataJuggler.Core.UltimateHelper.Objects;
 using ObjectLibrary.BusinessObjects;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using DataJuggler.Net;
 using System.IO;
-using System.Windows.Forms;
 using DataTier.Net.StoredProcedureGenerator.Enumerations;
 
 #endregion

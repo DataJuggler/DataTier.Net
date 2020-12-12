@@ -33,7 +33,7 @@ namespace DataTierClient.Builders
 		/// <summary>
         /// Create a new instance of ControllerManagerCreator
         /// </summary>
-        public StoredProcedureObjectCreator(List<DataTable> dataTablesArg, ReferencesSet objectReferencesArg, string rootStoredProceduresPathArg, string nameSpaceNameArg, ProjectFileManager fileManager) : base(fileManager, false)
+        public StoredProcedureObjectCreator(List<DataTable> dataTablesArg, ReferencesSet objectReferencesArg, string rootStoredProceduresPathArg, string nameSpaceNameArg, ProjectFileManager fileManager, bool dotNet5Project) : base(fileManager, false, dotNet5Project)
 		{   
 		    // Set Properties
 		    this.DataTables = dataTablesArg;

@@ -435,7 +435,7 @@ namespace DataTierClient.Controls
                         DataJuggler.Net.ReferencesSet convertedReferences = classBuilder.ConvertReferences(references, "ObjectReaders");
 
                         // convert the DTNTable to DataJuggler.Net.DataTable
-                        DataTable dataTable = DataConverter.ConvertDataTable(methodInfo.SelectedTable, this.Project);
+                        DataTable dataTable = DataConverter.ConvertDataTable(methodInfo.SelectedTable, Project);
 
                         // If the dataTable object exists
                         if (NullHelper.Exists(dataTable))
@@ -444,7 +444,7 @@ namespace DataTierClient.Controls
                             this.ProjectFileManager = new ProjectFileManager();
 
                             // Create writer
-                            DataObjectReaderCreator writer = new DataObjectReaderCreator(dataTable, convertedReferences, this.Project.ReaderFolder, this.Project.ReaderNamespace, this.ProjectFileManager);
+                            DataObjectReaderCreator writer = new DataObjectReaderCreator(dataTable, convertedReferences, Project.ReaderFolder, Project.ReaderNamespace, ProjectFileManager, Project.DotNet5);
                         
                             // Write Class
                             MethodInfo.CustomReader.FieldSet.DataFields = writer.CreateObjectReader(dataTable, MethodInfo.CustomReader);
@@ -847,14 +847,14 @@ namespace DataTierClient.Controls
                 CodeLine codeLine = null;
                 string variableName = null;
                 int spaces = 0;
-                string indent = "";
-                string indent2 = "";
+                string indent;
+                string indent2;
                 string indent3 = "";
-                string openBracket = "";
-                string closeBracket = "";
-                string openBracket2 = "";
-                string closeBracket2 = "";
-                string parameterLine = "";
+                string openBracket;
+                string closeBracket;
+                string openBracket2;
+                string closeBracket2;
+                string parameterLine;
                 bool abort = false;
                 List<CodeLine> createPrimaryKeyParameters = new List<CodeLine>();
 
@@ -2678,7 +2678,7 @@ namespace DataTierClient.Controls
                         listItem.ImageIndex = 0;
 
                         // Update Text
-                        listItem.Text = listItem.Text + "Done.";
+                        listItem.Text += "Done.";
 
                         // if no space between the period and Done
                         if (listItem.Text.Contains(".Done"))
