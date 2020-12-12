@@ -28,7 +28,7 @@ namespace DataGateway.Services
             /// This method is used to find a [TableName] object by the primary key [PrimaryKey].
             /// </summary>
             /// <returns></returns>
-            public static Task<[TableName]> FindUser([ParameterDataType] [PrimaryKey])
+            public static Task<[TableName]> Find[TableName]([ParameterDataType] [PrimaryKey])
             {
                 // initial value
                 [TableName] [VariableName] = null;
@@ -40,7 +40,7 @@ namespace DataGateway.Services
                     Gateway gateway = new Gateway(Connection.Name);
                     
                     // load the [VariableName]
-                    [VariableName] = gateway.Find[TableName]([DataType] [PrimaryKey]);
+                    [VariableName] = gateway.Find[TableName]([PrimaryKey]);
                 }
                 
                 // return value

@@ -3,7 +3,7 @@
   <PropertyGroup>
     
     <PackageType>Template</PackageType>
-    <PackageVersion>2.5.2</PackageVersion>
+    <PackageVersion>2.5.4</PackageVersion>
     <PackageId>DataJuggler.DataTier.Net5.ProjectTemplates</PackageId>
     <Title>DataJuggler.DataTier.Net5.ProjectTemplates</Title>
     <Authors>Data Juggler</Authors>
@@ -14,7 +14,7 @@
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <ContentTargetFolders>content</ContentTargetFolders>
-    <Version>2.5.3</Version>
+    <Version>2.5.4</Version>
     <Product>DataJuggler.DataTier.Net5.ProjectTemplate</Product>
     <ApplicationIcon></ApplicationIcon>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

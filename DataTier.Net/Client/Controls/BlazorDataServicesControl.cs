@@ -174,12 +174,28 @@ namespace DataTierClient.Controls
                             string variableName = CSharpClassWriter.CapitalizeFirstCharEx(table.TableName, true);
                             string pluralTableName = PluralWordHelper.GetPluralName(table.TableName, false);
                             string pluralVariableName = PluralWordHelper.GetPluralName(table.TableName, true);
+                            string primaryKeyDataType = "";
+                            string primaryKeyName = "";
+                            
+                            // Update 12.12.2020: The DataService (for Blazor) requires the PrimaryKey
+                            // cataType and field name.
+                            DTNField field = FindPrimaryKey(table);
+
+                            // if the field was found
+                            if (NullHelper.Exists(field))
+                            {
+                                // get the dataType
+                                primaryKeyDataType = field.DataType.ToString().ToLower();
+                                primaryKeyName = CSharpClassWriter.CapitalizeFirstCharEx(field.EnumDataTypeName, true);
+                            }
+
+                            // string parameterDataType = FindPrimaryKey
                         
                             // Replace out the fileText replacement parameters
                             fileText = fileText.Replace("[TableName]", tableName);
                             fileText = fileText.Replace("[VariableName]", variableName);
                             fileText = fileText.Replace("[PluralVariableName]", pluralVariableName);
-
+                           
                             // Delete the current file at path 
                             File.Delete(path);
 
@@ -204,6 +220,8 @@ namespace DataTierClient.Controls
                             fileText = fileText.Replace("[VariableName]", variableName);
                             fileText = fileText.Replace("[PluralVariableName]", pluralVariableName);
                             fileText = fileText.Replace("[PluralTableName]", pluralTableName);
+                            fileText = fileText.Replace("[ParameterDataType]", primaryKeyDataType);
+                            fileText = fileText.Replace("[PrimaryKey]", primaryKeyName);
 
                             // Delete the current file at path2
                             File.Delete(path2);
@@ -326,6 +344,41 @@ namespace DataTierClient.Controls
 
         #region Methods
 
+            #region FindPrimaryKey(DTNTable table)
+            /// <summary>
+            /// This method returns the Primary Key for a table.
+            /// This method is for single field Primary Keys, not 
+            /// Composite primary keys consisting of multiple fields.
+            /// You can manually add a second jparameter if needed for now.
+            /// </summary>
+            public DTNField FindPrimaryKey(DTNTable table)
+            {
+                // initial value
+                DTNField primaryKey = null;
+
+                // if the table has fields
+                if ((NullHelper.Exists(table)) && (table.HasFields))
+                {
+                    // iterate the fields
+                    foreach (DTNField field in table.Fields)    
+                    {
+                        // the field is a PrimaryKey
+                        if (field.PrimaryKey)
+                        {
+                            // set the reeturn value
+                            primaryKey = field;
+
+                            // no reason to stick around until multiple primary key fields is handled.
+                            break;
+                        }
+                    }
+                }
+                
+                // return value
+                return primaryKey;
+            }
+            #endregion
+            
             #region Init()
             /// <summary>
             /// This method  This method performs initializations for this object.

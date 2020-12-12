@@ -3,7 +3,7 @@
   <PropertyGroup>
     
     <PackageType>Template</PackageType>
-    <PackageVersion>2.5.0</PackageVersion>
+    <PackageVersion>2.5.3</PackageVersion>
     <PackageId>DataJuggler.DataTier.Net5.ItemTemplates.BlazorDataServices</PackageId>
     <Title>DataJuggler.DataTier.Net5.ItemTemplates.BlazorDataServices</Title>
     <Authors>Data Juggler</Authors>
@@ -13,12 +13,14 @@
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <ContentTargetFolders>content</ContentTargetFolders>
-    <Version>2.5.1</Version>
+    <Version>2.5.3</Version>
     <Product>DataJuggler.DataTier.Net5.ItemTemplates.BlazorDataServices</Product>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseFile>License.txt</PackageLicenseFile>
     <RepositoryUrl>github.com/DataJuggler/DataTier.Net</RepositoryUrl>
     <RepositoryType>Git / Git Hub.</RepositoryType>
+    <AssemblyVersion>2.5.3.0</AssemblyVersion>
+    <FileVersion>2.5.3.0</FileVersion>
 
   </PropertyGroup>
   
