@@ -10,6 +10,7 @@ using ObjectLibrary.BusinessObjects;
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using DataJuggler.Net.Enumerations;
 
 #endregion
 

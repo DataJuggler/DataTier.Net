@@ -386,7 +386,7 @@ namespace DataGateway
             public bool DeleteFieldSetFieldsForFieldSetId(int fieldSetId)
             {
                 // initial value
-                bool deleted = false;
+                bool deleted;
         
                 // Create a new instance of a 'FieldSetField' object.
                 FieldSetField tempFieldSetField = new FieldSetField();                

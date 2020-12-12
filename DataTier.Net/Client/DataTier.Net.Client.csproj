@@ -801,7 +801,6 @@
     <None Include="Resources\DataTier.Net.Blazor.png" />
     <None Include="Resources\DataTier.Net.Blazor1.png" />
     <None Include="Resources\Next.png" />
-    <Content Include="Tools.ico" />
     <Content Include="Xml\Files\DataTier.Net.Update.xml" />
     <Content Include="Xml\Files\DeserializedFieldSet.xml" />
     <Content Include="Xml\Files\SelectedFieldSet.xml" />

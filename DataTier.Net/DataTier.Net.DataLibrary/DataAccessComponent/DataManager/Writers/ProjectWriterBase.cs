@@ -10,6 +10,7 @@ using ObjectLibrary.BusinessObjects;
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using DataJuggler.Net.Enumerations;
 
 #endregion
 
@@ -205,7 +206,7 @@ namespace DataAccessComponent.DataManager.Writers
                     param = new SqlParameter("@DateModified", SqlDbType.DateTime);
 
                     // If project.DateModified does not exist.
-                    if ((project.DateModified == null) || (project.DateModified.Year < 1900))
+                    if (project.DateModified.Year < 1900)
                     {
                         // Set the value to 1/1/1900
                         param.Value = new DateTime(1900, 1, 1);
@@ -215,7 +216,6 @@ namespace DataAccessComponent.DataManager.Writers
                         // Set the parameter value
                         param.Value = project.DateModified;
                     }
-
                     // set parameters[13]
                     parameters[13] = param;
 
@@ -443,7 +443,7 @@ namespace DataAccessComponent.DataManager.Writers
                     param = new SqlParameter("@DateModified", SqlDbType.DateTime);
 
                     // If project.DateModified does not exist.
-                    if ((project.DateModified == null) || (project.DateModified.Year < 1900))
+                    if (project.DateModified.Year < 1900)
                     {
                         // Set the value to 1/1/1900
                         param.Value = new DateTime(1900, 1, 1);
@@ -453,7 +453,6 @@ namespace DataAccessComponent.DataManager.Writers
                         // Set the parameter value
                         param.Value = project.DateModified;
                     }
-
 
                     // set parameters[13]
                     parameters[13] = param;

@@ -10,6 +10,7 @@ using ObjectLibrary.BusinessObjects;
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using DataJuggler.Net.Enumerations;
 
 #endregion
 
@@ -145,7 +146,7 @@ namespace DataAccessComponent.DataManager.Writers
                     param = new SqlParameter("@LastUpdated", SqlDbType.DateTime);
 
                     // If admin.LastUpdated does not exist.
-                    if ((admin.LastUpdated == null) || (admin.LastUpdated.Year < 1900))
+                    if (admin.LastUpdated.Year < 1900)
                     {
                         // Set the value to 1/1/1900
                         param.Value = new DateTime(1900, 1, 1);
@@ -155,7 +156,6 @@ namespace DataAccessComponent.DataManager.Writers
                         // Set the parameter value
                         param.Value = admin.LastUpdated;
                     }
-
                     // set parameters[3]
                     parameters[3] = param;
 
@@ -239,7 +239,7 @@ namespace DataAccessComponent.DataManager.Writers
                     param = new SqlParameter("@LastUpdated", SqlDbType.DateTime);
 
                     // If admin.LastUpdated does not exist.
-                    if ((admin.LastUpdated == null) || (admin.LastUpdated.Year < 1900))
+                    if (admin.LastUpdated.Year < 1900)
                     {
                         // Set the value to 1/1/1900
                         param.Value = new DateTime(1900, 1, 1);
@@ -249,7 +249,6 @@ namespace DataAccessComponent.DataManager.Writers
                         // Set the parameter value
                         param.Value = admin.LastUpdated;
                     }
-
 
                     // set parameters[3]
                     parameters[3] = param;

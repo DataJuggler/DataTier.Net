@@ -32,7 +32,7 @@ namespace DataTierClient.Builders
 		/// <summary>
         /// Create a new instance of ControllerManagerCreator
         /// </summary>
-        public DataOperationsManagerCreator(List<DataTable> dataTablesArg, ReferencesSet objectReferencesArg, string rootDataOperationsPathArg, string projectNameArg, string nameSpaceNameArg, ProjectFileManager fileManager, bool dotNet5Project) : base(fileManager, false, dotNet5Project)
+        public DataOperationsManagerCreator(List<DataTable> dataTablesArg, ReferencesSet objectReferencesArg, string rootDataOperationsPathArg, string projectNameArg, string nameSpaceNameArg, ProjectFileManager fileManager, bool dotNet5Project) : base(fileManager, false, false, dotNet5Project)
 		{   
 		    // Set Properties
 		    this.DataTables = dataTablesArg;

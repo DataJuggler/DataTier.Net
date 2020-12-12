@@ -5,6 +5,8 @@
 using System;
 using System.Collections.Generic;
 using DataJuggler.Net;
+using DataJuggler.Core.UltimateHelper;
+using DataJuggler.Core.UltimateHelper.Objects;
 using System.Text;
 using System.IO;
 
@@ -32,7 +34,7 @@ namespace DataTierClient.Builders
 		/// <summary>
         /// Create a new instance of DataManagerCreator
         /// </summary>
-        public DataManagerCreator(List<DataTable> dataTablesArg, ReferencesSet objectReferencesArg, string rootDataManagerPathArg, string projectNameArg, string nameSpaceNameArg, ProjectFileManager fileManager, bool dotNet5Project) : base(fileManager, false, dotNet5Project)
+        public DataManagerCreator(List<DataTable> dataTablesArg, ReferencesSet objectReferencesArg, string rootDataManagerPathArg, string projectNameArg, string nameSpaceNameArg, ProjectFileManager fileManager, bool dotNet5Project) : base(fileManager, false, false, dotNet5Project)
 		{   
 		    // Set Properties
 		    this.DataTables = dataTablesArg;
@@ -149,8 +151,18 @@ namespace DataTierClient.Builders
                     // if file exists on hard drive
                     if(File.Exists(fileName))
                     {
-                        // set created to true
-                        created = true;
+                        // get the text
+                        string text = File.ReadAllText(fileName);
+
+                        // if the text exists
+                        if (TextHelper.Exists(text))
+                        {
+                            // get the lines from this file text
+                            List<TextLine> lines = WordParser.GetTextLines(text);
+
+                            // If there are not multiple lines, this was not created
+                            created = ListHelper.HasOneOrMoreItems(lines);
+                        }
                     }
                 }
                 

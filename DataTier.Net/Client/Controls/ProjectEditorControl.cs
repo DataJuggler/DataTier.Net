@@ -163,7 +163,10 @@ namespace DataTierClient.Controls
                                     DateTime currentTime = DateTime.Now;
 
                                     // set the width
-                                    width++;
+                                    width += 2;
+
+                                    // sleep for 1/40 of a second
+                                    System.Threading.Thread.Sleep(25);
 
                                     // if above the maximum width (268)
                                     if (width >= GraphWidth)
@@ -251,6 +254,52 @@ namespace DataTierClient.Controls
                 {
                     // set the value
                     SelectedProject.DotNet5 = DotNet5CheckBox.Checked;
+
+                    // This has to be called
+                    if (ListHelper.HasOneOrMoreItems(SelectedProject.AllReferences))
+                    {
+                        // here we must swap out DataJuggler.Net for DataJuggler.Net5
+
+                        // iteratet he referencesSet
+                        foreach (ReferencesSet referencesSet in SelectedProject.AllReferences)
+                        {
+                            // if the references exist
+                            if (referencesSet.HasReferences)
+                            {  
+                                // iterate the references
+                                foreach (ProjectReference reference in referencesSet.References)
+                                {
+                                    // if DotNet5
+                                    if (SelectedProject.DotNet5)
+                                    {
+                                        // if this is the reference for DataJuggler.Net
+                                        if (TextHelper.IsEqual(reference.ReferenceName, "DataJuggler.Net", true, true))
+                                        {  
+                                            // Change to .Net5
+                                            reference.ReferenceName = "DataJuggler.Net5";
+
+                                            // break out of the loop
+                                            break;
+                                        }
+                                    }
+                                    // if this is the reference for DataJuggler.Net
+                                    if (TextHelper.IsEqual(reference.ReferenceName, "DataJuggler.Net5", true, true))
+                                    {  
+                                        // Change to .Net
+                                        reference.ReferenceName = "DataJuggler.Net";
+
+                                        // break out of the loop
+                                        break;
+                                    }
+                                }
+                            }                            
+                        }
+                    }
+                    else
+                    {
+                        // Create the references
+                        SelectedProject.CreateDefaultReferences();
+                    }
                 }
 
                 // Enable or disable controls

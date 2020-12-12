@@ -8,6 +8,7 @@ using DataAccessComponent.StoredProcedureManager.InsertProcedures;
 using DataAccessComponent.StoredProcedureManager.UpdateProcedures;
 using DataJuggler.Net;
 using System;
+using DataJuggler.Net.Enumerations;
 
 #endregion
 

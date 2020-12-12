@@ -33,7 +33,7 @@ namespace DataTierClient.Builders
 		/// <summary>
         /// Create a new instance of ControllerManagerCreator
         /// </summary>
-        public StoredProcedureObjectCreator(List<DataTable> dataTablesArg, ReferencesSet objectReferencesArg, string rootStoredProceduresPathArg, string nameSpaceNameArg, ProjectFileManager fileManager, bool dotNet5Project) : base(fileManager, false, dotNet5Project)
+        public StoredProcedureObjectCreator(List<DataTable> dataTablesArg, ReferencesSet objectReferencesArg, string rootStoredProceduresPathArg, string nameSpaceNameArg, ProjectFileManager fileManager, bool dotNet5Project) : base(fileManager, false, false, dotNet5Project)
 		{   
 		    // Set Properties
 		    this.DataTables = dataTablesArg;
@@ -267,7 +267,7 @@ namespace DataTierClient.Builders
                 WriteLine();
 
                 // Write Private Variables
-                WritePrivateVariables(dataTable, procType);
+                WritePrivateVariables(dataTable);
 
                 // Write Constructor
                 WriteConstructor(dataTable, procType);
@@ -644,7 +644,7 @@ namespace DataTierClient.Builders
             /// This method writes the private variables for a 
             /// ControllerManager.
             /// </summary>
-            private void WritePrivateVariables(DataTable dataTable, StoredProcedureTypes procType)
+            private void WritePrivateVariables(DataTable dataTable)
             {
                 // Begin Region Static Methods
                 BeginRegion("Private Variables");
