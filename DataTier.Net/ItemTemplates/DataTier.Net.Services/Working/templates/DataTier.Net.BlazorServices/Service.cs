@@ -33,8 +33,8 @@ namespace DataGateway.Services
                 // initial value
                 [TableName] [VariableName] = null;
                 
-                // If the id is set
-                if (id > 0)
+                // If the [PrimaryKey] is set
+                if ([PrimaryKey] > 0)
                 {
                     // Create a new instance of a 'Gateway' object, and set the connectionName
                     Gateway gateway = new Gateway(Connection.Name);
@@ -86,7 +86,7 @@ namespace DataGateway.Services
                     Gateway gateway = new Gateway(Connection.Name);
                     
                     // load the sites
-                    deleted = gateway.Delete[TableName]([VariableName].Id);
+                    deleted = gateway.Delete[TableName]([VariableName].[PrimaryKeyPropertyName]);
                 }
                 
                 // return the value of deleted

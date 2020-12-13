@@ -20,7 +20,7 @@
     <RepositoryUrl>github.com/DataJuggler/DataTier.Net</RepositoryUrl>
     <RepositoryType>Git / Git Hub.</RepositoryType>
     <AssemblyVersion>2.5.4.0</AssemblyVersion>
-    <FileVersion>2.5.4.0</FileVersion>
+    <FileVersion>2.5.3.0</FileVersion>
 
   </PropertyGroup>
   
