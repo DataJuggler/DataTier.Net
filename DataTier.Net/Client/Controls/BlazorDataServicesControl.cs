@@ -102,7 +102,7 @@ namespace DataTierClient.Controls
                     if ((HasServicesFolder) && (HasTable))
                     {
                         // Setup the Graph
-                        Graph.Maximum = 10;
+                        Graph.Maximum = 20;
                         Graph.Minimum = 0;
                         Graph.Value = 0;
 
@@ -154,7 +154,7 @@ namespace DataTierClient.Controls
                                 break;
                             }
                         }
-                        while (attempts < 10);
+                        while (attempts < 20);
 
                          // Wait one extra half second after the file is avialable before trying to modify it
                         System.Threading.Thread.Sleep(500);
@@ -175,7 +175,7 @@ namespace DataTierClient.Controls
                             string pluralTableName = PluralWordHelper.GetPluralName(table.TableName, false);
                             string pluralVariableName = PluralWordHelper.GetPluralName(table.TableName, true);
                             string primaryKeyDataType = "";
-                            string primaryKeyName = "";
+                            string primaryKeyVariableName = "";
                             
                             // Update 12.12.2020: The DataService (for Blazor) requires the PrimaryKey
                             // cataType and field name.
@@ -186,7 +186,14 @@ namespace DataTierClient.Controls
                             {
                                 // get the dataType
                                 primaryKeyDataType = field.DataType.ToString().ToLower();
-                                primaryKeyName = CSharpClassWriter.CapitalizeFirstCharEx(field.EnumDataTypeName, true);
+                                primaryKeyVariableName = CSharpClassWriter.CapitalizeFirstCharEx(field.FieldName, true);
+
+                                // if an autonumber identity field (which most will be)
+                                if (primaryKeyDataType == "autonumber")
+                                {
+                                    // switch to int
+                                    primaryKeyDataType = "int";
+                                }
                             }
 
                             // string parameterDataType = FindPrimaryKey
@@ -221,7 +228,7 @@ namespace DataTierClient.Controls
                             fileText = fileText.Replace("[PluralVariableName]", pluralVariableName);
                             fileText = fileText.Replace("[PluralTableName]", pluralTableName);
                             fileText = fileText.Replace("[ParameterDataType]", primaryKeyDataType);
-                            fileText = fileText.Replace("[PrimaryKey]", primaryKeyName);
+                            fileText = fileText.Replace("[PrimaryKey]", primaryKeyVariableName);
 
                             // Delete the current file at path2
                             File.Delete(path2);

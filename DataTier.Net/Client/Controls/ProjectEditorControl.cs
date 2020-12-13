@@ -1,6 +1,7 @@
 
 #region using statements
 
+using DataGateway;
 using DataJuggler.Core.UltimateHelper;
 using DataJuggler.Win.Controls;
 using DataJuggler.Win.Controls.Interfaces;
@@ -277,6 +278,15 @@ namespace DataTierClient.Controls
                                         {  
                                             // Change to .Net5
                                             reference.ReferenceName = "DataJuggler.Net5";
+
+                                            // Create a new instance of a 'Gateway' object.
+                                            Gateway gateway = new Gateway();
+
+                                            // Clonse this
+                                            ProjectReference projectReference = reference.Clone();
+
+                                            // perform the save so this persists
+                                            bool saved = gateway.SaveProjectReference(ref projectReference);
 
                                             // break out of the loop
                                             break;
