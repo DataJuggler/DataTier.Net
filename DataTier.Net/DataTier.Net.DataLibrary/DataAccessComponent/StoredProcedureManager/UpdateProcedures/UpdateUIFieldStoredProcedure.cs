@@ -1,18 +1,5 @@
 
 
-#region using statements
-
-using DataAccessComponent.StoredProcedureManager.DeleteProcedures;
-using DataAccessComponent.StoredProcedureManager.FetchProcedures;
-using DataAccessComponent.StoredProcedureManager.InsertProcedures;
-using DataAccessComponent.StoredProcedureManager.UpdateProcedures;
-using DataJuggler.Net;
-using System;
-using DataJuggler.Net.Enumerations;
-
-#endregion
-
-
 namespace DataAccessComponent.StoredProcedureManager.UpdateProcedures
 {
 

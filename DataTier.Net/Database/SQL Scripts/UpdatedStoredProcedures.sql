@@ -1,4 +1,4 @@
-Use [DataTier.Net.Database.Dev]
+Use [DataTier.Net.Database]
 
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
