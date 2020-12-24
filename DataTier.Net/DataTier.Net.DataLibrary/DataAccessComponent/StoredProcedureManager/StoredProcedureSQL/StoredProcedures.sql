@@ -1546,6 +1546,7 @@ Create PROCEDURE DTNTable_Insert
     @CreateBindingCallback bit,
     @DatabaseId int,
     @Exclude bit,
+    @Excluded bit,
     @IsView bit,
     @ProjectId int,
     @Scope int,
@@ -1561,10 +1562,10 @@ BEGIN
 
     -- Begin Insert Statement
     Insert Into [DTNTable]
-    ([ClassFileName],[ClassName],[CreateBindingCallback],[DatabaseId],[Exclude],[IsView],[ProjectId],[Scope],[Serializable],[TableName])
+    ([ClassFileName],[ClassName],[CreateBindingCallback],[DatabaseId],[Exclude],[Excluded],[IsView],[ProjectId],[Scope],[Serializable],[TableName])
 
     -- Begin Values List
-    Values(@ClassFileName, @ClassName, @CreateBindingCallback, @DatabaseId, @Exclude, @IsView, @ProjectId, @Scope, @Serializable, @TableName)
+    Values(@ClassFileName, @ClassName, @CreateBindingCallback, @DatabaseId, @Exclude, @Excluded, @IsView, @ProjectId, @Scope, @Serializable, @TableName)
 
     -- Return ID of new record
     SELECT SCOPE_IDENTITY()
@@ -1613,6 +1614,7 @@ Create PROCEDURE DTNTable_Update
     @CreateBindingCallback bit,
     @DatabaseId int,
     @Exclude bit,
+    @Excluded bit,
     @IsView bit,
     @ProjectId int,
     @Scope int,
@@ -1636,6 +1638,7 @@ BEGIN
     [CreateBindingCallback] = @CreateBindingCallback,
     [DatabaseId] = @DatabaseId,
     [Exclude] = @Exclude,
+    [Excluded] = @Excluded,
     [IsView] = @IsView,
     [ProjectId] = @ProjectId,
     [Scope] = @Scope,
@@ -1694,7 +1697,7 @@ BEGIN
     SET NOCOUNT ON
 
     -- Begin Select Statement
-    Select [ClassFileName],[ClassName],[CreateBindingCallback],[DatabaseId],[Exclude],[IsView],[ProjectId],[Scope],[Serializable],[TableId],[TableName]
+    Select [ClassFileName],[ClassName],[CreateBindingCallback],[DatabaseId],[Exclude],[Excluded],[IsView],[ProjectId],[Scope],[Serializable],[TableId],[TableName]
 
     -- From tableName
     From [DTNTable]
@@ -1802,7 +1805,7 @@ BEGIN
     SET NOCOUNT ON
 
     -- Begin Select Statement
-    Select [ClassFileName],[ClassName],[CreateBindingCallback],[DatabaseId],[Exclude],[IsView],[ProjectId],[Scope],[Serializable],[TableId],[TableName]
+    Select [ClassFileName],[ClassName],[CreateBindingCallback],[DatabaseId],[Exclude],[Excluded],[IsView],[ProjectId],[Scope],[Serializable],[TableId],[TableName]
 
     -- From tableName
     From [DTNTable]

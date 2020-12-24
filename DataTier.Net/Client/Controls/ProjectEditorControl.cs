@@ -197,7 +197,7 @@ namespace DataTierClient.Controls
                                     DateTime currentTime = DateTime.Now;
 
                                     // set the width
-                                    width += 2;
+                                    width += 1;
 
                                     // sleep for 1/40 of a second
                                     System.Threading.Thread.Sleep(25);
@@ -219,10 +219,10 @@ namespace DataTierClient.Controls
                                     this.Refresh();
                                     Application.DoEvents();
 
-                                    // has 5 secondes elapsed
-                                    if (currentTime.Subtract(startTime).TotalSeconds >= 10)
+                                    // has 15 secondes elapsed
+                                    if (currentTime.Subtract(startTime).TotalSeconds >= 15)
                                     {
-                                        // give up after 10 seconds
+                                        // give up after 15 seconds
                                         break;
                                     }
                                     else
@@ -234,8 +234,6 @@ namespace DataTierClient.Controls
                                             break;
                                         }
                                     }
-
-
 
                                } while (true);
 

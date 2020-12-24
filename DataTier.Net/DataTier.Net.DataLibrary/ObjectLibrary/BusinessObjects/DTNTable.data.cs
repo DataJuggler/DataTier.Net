@@ -22,6 +22,7 @@ namespace ObjectLibrary.BusinessObjects
         private bool createBindingCallback;
         private int databaseId;
         private bool exclude;
+        private bool excluded;
         private bool isView;
         private int projectId;
         private ScopeEnum scope;
@@ -114,6 +115,20 @@ namespace ObjectLibrary.BusinessObjects
                 set
                 {
                     exclude = value;
+                }
+            }
+            #endregion
+
+            #region bool Excluded
+            public bool Excluded
+            {
+                get
+                {
+                    return excluded;
+                }
+                set
+                {
+                    excluded = value;
                 }
             }
             #endregion

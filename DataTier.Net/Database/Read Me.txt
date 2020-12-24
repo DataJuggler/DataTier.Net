@@ -1,3 +1,22 @@
+Update 12.24.2020: I added 2 new tables and 1 new field to the database.
+
+New field UIFolder was added to the Projects table.
+
+Two new tables:
+UIField
+UserInterface
+
+I am working on a new user interface designer, so I hope to be able to create data editors for Window Forms and Blazor to save some of the work of creating new projects.
+
+If you are new to DataTier.Net, create a new SQL Server database and then execute the SQL Script DataTier.Net.Database.Schema.sql, located in the 
+Database\SQL Scripts folder of this project.
+
+Existing Users:
+
+Run the UpdatedProjectsTableAndAddUserInterfaceAndUIFieldTables.sql and then execute the stored proc UpdatedStoredProcedures.sql and your database will be up to date.
+
+This change was needed to create a new UI Builder.
+
 Update 6.1.2019: I now have DataTier.Net as its own repo.
 
 I may a decision to make the download smaller, I now only include the SQL Scripts to create the database.

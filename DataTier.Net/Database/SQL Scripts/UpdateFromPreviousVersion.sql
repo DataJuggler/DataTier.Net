@@ -1,3 +1,33 @@
+/*
+	This update is used to bring the previous version up to the current version of the code.
+	If you are new DataTier.Net and just created your project, you don't need this.
+	
+	This is only for updating existing databases.
+
+	After executing this, you will need to execute the UpdatedStoredProcedures.sql.
+
+	To confirm your DataTier.Net database is up to date, follow these steps:
+	Create a database called it DataTier.Net.Database2 
+
+	Excecute the latest script, and make sure to change the use database line to:
+
+	Use [DataTier.Net.Database2] (or whatever you called the new database)
+
+	Clone or download DB Compare:
+	https://github.com/DataJuggler/DBCompare
+
+	Enter a connection string to both databases
+	Set DataTier.Net.Database2 as the source
+	Set DataTier.Net.Database as the Target
+
+	Run the compare.
+
+	You will see a report of any schema differences.
+
+
+
+*/
+
 Alter Table Project
 Add UIFolderPath nvarchar(255) null
 
@@ -49,6 +79,15 @@ CREATE TABLE [dbo].[UIField](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+
+-- Update to fix Dot Net 5 tables that were excluded, and then recreated again
+
+Alter Table DTNTable
+Add Excluded bit
+Go
+
+Update DTNTable
+Set Excluded = Excluded
 
 
 

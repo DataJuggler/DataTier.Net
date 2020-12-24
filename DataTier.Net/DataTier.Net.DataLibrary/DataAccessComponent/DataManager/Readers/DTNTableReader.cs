@@ -42,12 +42,13 @@ namespace DataAccessComponent.DataManager.Readers
                 int createBindingCallbackfield = 2;
                 int databaseIdfield = 3;
                 int excludefield = 4;
-                int isViewfield = 5;
-                int projectIdfield = 6;
-                int scopefield = 7;
-                int serializablefield = 8;
-                int tableIdfield = 9;
-                int tableNamefield = 10;
+                int excludedfield = 5;
+                int isViewfield = 6;
+                int projectIdfield = 7;
+                int scopefield = 8;
+                int serializablefield = 9;
+                int tableIdfield = 10;
+                int tableNamefield = 11;
 
                 try
                 {
@@ -57,6 +58,7 @@ namespace DataAccessComponent.DataManager.Readers
                     dTNTable.CreateBindingCallback = DataHelper.ParseBoolean(dataRow.ItemArray[createBindingCallbackfield], false);
                     dTNTable.DatabaseId = DataHelper.ParseInteger(dataRow.ItemArray[databaseIdfield], 0);
                     dTNTable.Exclude = DataHelper.ParseBoolean(dataRow.ItemArray[excludefield], false);
+                    dTNTable.Excluded = DataHelper.ParseBoolean(dataRow.ItemArray[excludedfield], false);
                     dTNTable.IsView = DataHelper.ParseBoolean(dataRow.ItemArray[isViewfield], false);
                     dTNTable.ProjectId = DataHelper.ParseInteger(dataRow.ItemArray[projectIdfield], 0);
                     dTNTable.Scope = (ScopeEnum) DataHelper.ParseInteger(dataRow.ItemArray[scopefield], 0);

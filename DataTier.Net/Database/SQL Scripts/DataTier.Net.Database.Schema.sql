@@ -1,7 +1,6 @@
 USE [DataTier.Net.Database]
 GO
-
-/****** Object:  Table [dbo].[DTNField]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  Table [dbo].[DTNField]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -32,7 +31,7 @@ CREATE TABLE [dbo].[DTNField](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[FieldSet]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  Table [dbo].[FieldSet]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -52,7 +51,7 @@ CREATE TABLE [dbo].[FieldSet](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[FieldSetField]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  Table [dbo].[FieldSetField]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -69,7 +68,7 @@ CREATE TABLE [dbo].[FieldSetField](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  View [dbo].[FieldSetFieldView]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  View [dbo].[FieldSetFieldView]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -83,7 +82,7 @@ FROM  dbo.FieldSetField INNER JOIN
         dbo.FieldSet ON dbo.FieldSetField.FieldSetId = dbo.FieldSet.FieldSetId INNER JOIN
         dbo.DTNField ON dbo.FieldSetField.FieldId = dbo.DTNField.FieldId
 GO
-/****** Object:  Table [dbo].[Admin]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  Table [dbo].[Admin]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -101,7 +100,7 @@ CREATE TABLE [dbo].[Admin](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[CustomReader]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  Table [dbo].[CustomReader]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -119,7 +118,7 @@ CREATE TABLE [dbo].[CustomReader](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DTNDatabase]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  Table [dbo].[DTNDatabase]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -143,7 +142,7 @@ CREATE TABLE [dbo].[DTNDatabase](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DTNProcedure]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  Table [dbo].[DTNProcedure]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -160,7 +159,7 @@ CREATE TABLE [dbo].[DTNProcedure](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DTNTable]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  Table [dbo].[DTNTable]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -177,13 +176,14 @@ CREATE TABLE [dbo].[DTNTable](
 	[Exclude] [bit] NULL,
 	[IsView] [bit] NULL,
 	[CreateBindingCallback] [bit] NULL,
+	[Excluded] [bit] NULL,
  CONSTRAINT [PK_DTNTable] PRIMARY KEY CLUSTERED 
 (
 	[TableId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Enumeration]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  Table [dbo].[Enumeration]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -199,7 +199,7 @@ CREATE TABLE [dbo].[Enumeration](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Method]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  Table [dbo].[Method]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -234,7 +234,7 @@ CREATE TABLE [dbo].[Method](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Project]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  Table [dbo].[Project]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -277,7 +277,7 @@ CREATE TABLE [dbo].[Project](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ProjectReference]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  Table [dbo].[ProjectReference]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -292,7 +292,7 @@ CREATE TABLE [dbo].[ProjectReference](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ReferencesSet]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  Table [dbo].[ReferencesSet]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -307,7 +307,7 @@ CREATE TABLE [dbo].[ReferencesSet](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UIField]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  Table [dbo].[UIField]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -330,7 +330,7 @@ CREATE TABLE [dbo].[UIField](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UserInterface]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  Table [dbo].[UserInterface]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -438,7 +438,7 @@ ON DELETE CASCADE
 GO
 ALTER TABLE [dbo].[ReferencesSet] CHECK CONSTRAINT [FK_ProjectId_ProjectId3]
 GO
-/****** Object:  StoredProcedure [dbo].[Admin_Delete]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[Admin_Delete]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -467,7 +467,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[Admin_FetchAll]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[Admin_FetchAll]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -493,7 +493,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[Admin_Find]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[Admin_Find]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -525,7 +525,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[Admin_Insert]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[Admin_Insert]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -562,7 +562,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[Admin_Update]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[Admin_Update]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -603,7 +603,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[CustomReader_Delete]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[CustomReader_Delete]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -632,7 +632,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[CustomReader_FetchAll]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[CustomReader_FetchAll]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -658,7 +658,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[CustomReader_FetchAllForTable]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[CustomReader_FetchAllForTable]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -696,7 +696,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[CustomReader_Find]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[CustomReader_Find]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -728,7 +728,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[CustomReader_Insert]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[CustomReader_Insert]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -765,7 +765,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[CustomReader_Update]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[CustomReader_Update]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -806,7 +806,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[DTNDatabase_Delete]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[DTNDatabase_Delete]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -835,7 +835,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[DTNDatabase_FetchAll]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[DTNDatabase_FetchAll]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -861,7 +861,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[DTNDatabase_FetchAllForProject]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[DTNDatabase_FetchAllForProject]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -898,7 +898,7 @@ set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 
 GO
-/****** Object:  StoredProcedure [dbo].[DTNDatabase_Find]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[DTNDatabase_Find]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -930,7 +930,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[DTNDatabase_Insert]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[DTNDatabase_Insert]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -973,7 +973,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[DTNDatabase_Update]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[DTNDatabase_Update]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1026,7 +1026,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[DTNField_Delete]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[DTNField_Delete]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1055,7 +1055,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[DTNField_FetchAll]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[DTNField_FetchAll]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1081,7 +1081,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[DTNField_FetchAllForTableId]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[DTNField_FetchAllForTableId]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1121,7 +1121,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[DTNField_Find]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[DTNField_Find]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1153,7 +1153,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[DTNField_Insert]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[DTNField_Insert]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1203,7 +1203,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[DTNField_Update]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[DTNField_Update]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1270,7 +1270,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[DTNProcedure_Delete]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[DTNProcedure_Delete]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1299,7 +1299,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[DTNProcedure_FetchAll]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[DTNProcedure_FetchAll]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1325,7 +1325,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[DTNProcedure_Find]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[DTNProcedure_Find]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1357,7 +1357,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[DTNProcedure_Insert]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[DTNProcedure_Insert]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1393,7 +1393,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[DTNProcedure_Update]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[DTNProcedure_Update]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1432,7 +1432,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[DTNTable_Delete]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[DTNTable_Delete]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1461,7 +1461,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[DTNTable_DeleteAllForProject]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[DTNTable_DeleteAllForProject]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1493,7 +1493,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[DTNTable_FetchAll]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[DTNTable_FetchAll]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1509,7 +1509,7 @@ BEGIN
     SET NOCOUNT ON
 
     -- Begin Select Statement
-    Select [ClassFileName],[ClassName],[CreateBindingCallback],[DatabaseId],[Exclude],[IsView],[ProjectId],[Scope],[Serializable],[TableId],[TableName]
+    Select [ClassFileName],[ClassName],[CreateBindingCallback],[DatabaseId],[Exclude],[Excluded],[IsView],[ProjectId],[Scope],[Serializable],[TableId],[TableName]
 
     -- From tableName
     From [DTNTable]
@@ -1519,13 +1519,13 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[DTNTable_FetchAllByProjectId]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[DTNTable_FetchAllByProjectId]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-Create PROCEDURE [dbo].[DTNTable_FetchAllByProjectId]
+CREATE PROCEDURE [dbo].[DTNTable_FetchAllByProjectId]
 
     -- Create @ProjectId Paramater
     @ProjectId int
@@ -1539,7 +1539,7 @@ BEGIN
     SET NOCOUNT ON
 
     -- Begin Select Statement
-    Select [ClassFileName],[ClassName],[CreateBindingCallback],[DatabaseId],[Exclude],[IsView],[ProjectId],[Scope],[Serializable],[TableId],[TableName]
+    Select [ClassFileName],[ClassName],[CreateBindingCallback],[DatabaseId],[Exclude],[Excluded],[IsView],[ProjectId],[Scope],[Serializable],[TableId],[TableName]
 
     -- From tableName
     From [DTNTable]
@@ -1552,7 +1552,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[DTNTable_Find]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[DTNTable_Find]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1571,7 +1571,7 @@ BEGIN
     SET NOCOUNT ON
 
     -- Begin Select Statement
-    Select [ClassFileName],[ClassName],[CreateBindingCallback],[DatabaseId],[Exclude],[IsView],[ProjectId],[Scope],[Serializable],[TableId],[TableName]
+    Select [ClassFileName],[ClassName],[CreateBindingCallback],[DatabaseId],[Exclude],[Excluded],[IsView],[ProjectId],[Scope],[Serializable],[TableId],[TableName]
 
     -- From tableName
     From [DTNTable]
@@ -1584,7 +1584,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[DTNTable_Insert]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[DTNTable_Insert]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1598,6 +1598,7 @@ Create PROCEDURE [dbo].[DTNTable_Insert]
     @CreateBindingCallback bit,
     @DatabaseId int,
     @Exclude bit,
+    @Excluded bit,
     @IsView bit,
     @ProjectId int,
     @Scope int,
@@ -1613,10 +1614,10 @@ BEGIN
 
     -- Begin Insert Statement
     Insert Into [DTNTable]
-    ([ClassFileName],[ClassName],[CreateBindingCallback],[DatabaseId],[Exclude],[IsView],[ProjectId],[Scope],[Serializable],[TableName])
+    ([ClassFileName],[ClassName],[CreateBindingCallback],[DatabaseId],[Exclude],[Excluded],[IsView],[ProjectId],[Scope],[Serializable],[TableName])
 
     -- Begin Values List
-    Values(@ClassFileName, @ClassName, @CreateBindingCallback, @DatabaseId, @Exclude, @IsView, @ProjectId, @Scope, @Serializable, @TableName)
+    Values(@ClassFileName, @ClassName, @CreateBindingCallback, @DatabaseId, @Exclude, @Excluded, @IsView, @ProjectId, @Scope, @Serializable, @TableName)
 
     -- Return ID of new record
     SELECT SCOPE_IDENTITY()
@@ -1626,7 +1627,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[DTNTable_Update]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[DTNTable_Update]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1640,6 +1641,7 @@ Create PROCEDURE [dbo].[DTNTable_Update]
     @CreateBindingCallback bit,
     @DatabaseId int,
     @Exclude bit,
+    @Excluded bit,
     @IsView bit,
     @ProjectId int,
     @Scope int,
@@ -1663,6 +1665,7 @@ BEGIN
     [CreateBindingCallback] = @CreateBindingCallback,
     [DatabaseId] = @DatabaseId,
     [Exclude] = @Exclude,
+    [Excluded] = @Excluded,
     [IsView] = @IsView,
     [ProjectId] = @ProjectId,
     [Scope] = @Scope,
@@ -1677,7 +1680,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[Enumeration_Delete]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[Enumeration_Delete]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1706,7 +1709,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[Enumeration_FetchAll]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[Enumeration_FetchAll]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1732,7 +1735,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[Enumeration_FetchAllForProject]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[Enumeration_FetchAllForProject]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1772,7 +1775,7 @@ set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 
 GO
-/****** Object:  StoredProcedure [dbo].[Enumeration_Find]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[Enumeration_Find]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1804,7 +1807,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[Enumeration_Insert]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[Enumeration_Insert]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1839,7 +1842,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[Enumeration_Update]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[Enumeration_Update]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1876,7 +1879,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[FieldSet_Delete]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[FieldSet_Delete]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1905,7 +1908,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[FieldSet_FetchAll]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[FieldSet_FetchAll]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1931,7 +1934,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[FieldSet_FetchAllForTable]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[FieldSet_FetchAllForTable]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1965,7 +1968,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[FieldSet_FetchAllInParameterModeForTable]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[FieldSet_FetchAllInParameterModeForTable]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2000,7 +2003,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[FieldSet_Find]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[FieldSet_Find]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2032,7 +2035,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[FieldSet_Insert]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[FieldSet_Insert]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2071,7 +2074,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[FieldSet_Update]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[FieldSet_Update]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2116,7 +2119,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[FieldSetField_Delete]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[FieldSetField_Delete]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2145,7 +2148,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[FieldSetField_DeleteAllForFieldSetId]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[FieldSetField_DeleteAllForFieldSetId]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2176,7 +2179,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[FieldSetField_FetchAll]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[FieldSetField_FetchAll]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2202,7 +2205,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[FieldSetField_FetchAllForFieldSetId]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[FieldSetField_FetchAllForFieldSetId]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2235,7 +2238,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[FieldSetField_Find]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[FieldSetField_Find]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2267,7 +2270,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[FieldSetField_Insert]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[FieldSetField_Insert]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2303,7 +2306,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[FieldSetField_Update]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[FieldSetField_Update]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2342,7 +2345,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[FieldSetFieldView_FetchAll]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[FieldSetFieldView_FetchAll]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2368,7 +2371,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[FieldSetFieldView_FetchAllByFieldSetId]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[FieldSetFieldView_FetchAllByFieldSetId]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2404,7 +2407,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[Method_Delete]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[Method_Delete]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2433,7 +2436,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[Method_FetchAll]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[Method_FetchAll]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2459,7 +2462,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[Method_FetchAllByProjectId]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[Method_FetchAllByProjectId]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2495,7 +2498,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[Method_FetchAllForTable]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[Method_FetchAllForTable]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2531,7 +2534,7 @@ END
 -- Thank you for using DataTier.Net.
 
 GO
-/****** Object:  StoredProcedure [dbo].[Method_Find]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[Method_Find]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2563,7 +2566,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[Method_FindByName]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[Method_FindByName]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2595,7 +2598,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[Method_Insert]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[Method_Insert]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2649,7 +2652,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[Method_Update]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[Method_Update]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2724,7 +2727,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[Project_Delete]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[Project_Delete]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2753,7 +2756,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[Project_FetchAll]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[Project_FetchAll]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2779,7 +2782,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[Project_Find]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[Project_Find]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2811,7 +2814,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[Project_Insert]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[Project_Insert]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2873,7 +2876,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[Project_Update]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[Project_Update]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2964,7 +2967,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[ProjectReference_Delete]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[ProjectReference_Delete]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2993,7 +2996,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[ProjectReference_FetchAll]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[ProjectReference_FetchAll]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3019,7 +3022,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[ProjectReference_FetchAllForReferencesSet]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[ProjectReference_FetchAllForReferencesSet]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3059,7 +3062,7 @@ set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 
 GO
-/****** Object:  StoredProcedure [dbo].[ProjectReference_Find]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[ProjectReference_Find]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3091,7 +3094,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[ProjectReference_Insert]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[ProjectReference_Insert]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3125,7 +3128,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[ProjectReference_Update]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[ProjectReference_Update]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3160,7 +3163,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[ReferencesSet_Delete]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[ReferencesSet_Delete]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3189,7 +3192,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[ReferencesSet_FetchAll]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[ReferencesSet_FetchAll]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3215,7 +3218,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[ReferencesSet_Find]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[ReferencesSet_Find]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3247,7 +3250,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[ReferencesSet_Insert]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[ReferencesSet_Insert]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3281,7 +3284,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[ReferencesSet_Update]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[ReferencesSet_Update]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3316,7 +3319,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[UIField_Delete]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[UIField_Delete]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3345,7 +3348,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[UIField_FetchAll]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[UIField_FetchAll]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3371,7 +3374,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[UIField_Find]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[UIField_Find]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3403,7 +3406,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[UIField_FindByUserInterfaceId]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[UIField_FindByUserInterfaceId]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3435,7 +3438,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[UIField_Insert]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[UIField_Insert]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3477,7 +3480,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[UIField_Update]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[UIField_Update]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3528,7 +3531,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[UpdateProcPermissions]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[UpdateProcPermissions]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS OFF
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3585,7 +3588,7 @@ DECLARE cursorSP CURSOR FOR
 
 
 GO
-/****** Object:  StoredProcedure [dbo].[UserInterface_Delete]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[UserInterface_Delete]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3614,7 +3617,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[UserInterface_FetchAll]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[UserInterface_FetchAll]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3643,7 +3646,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[UserInterface_Find]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[UserInterface_Find]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3675,7 +3678,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[UserInterface_FindByProjectId]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[UserInterface_FindByProjectId]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3713,7 +3716,7 @@ END
 -- Thank you for using DataTier.Net.
 
 GO
-/****** Object:  StoredProcedure [dbo].[UserInterface_Insert]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[UserInterface_Insert]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3750,7 +3753,7 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
-/****** Object:  StoredProcedure [dbo].[UserInterface_Update]    Script Date: 12/24/2020 12:07:21 AM ******/
+/****** Object:  StoredProcedure [dbo].[UserInterface_Update]    Script Date: 12/24/2020 4:56:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON

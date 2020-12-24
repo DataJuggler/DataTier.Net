@@ -466,9 +466,9 @@ namespace DataTierClient.Controls
                 this.OpenProject = openProject;
 
                 // locals
-                 DataJuggler.Net.DataField parameter = null;
-                 List<DataJuggler.Net.DataField> parameters = null;
-                 ProcedureWriter writer = null;
+                DataJuggler.Net.DataField parameter = null;
+                List<DataJuggler.Net.DataField> parameters = null;
+                ProcedureWriter writer = null;
 
                 // If the MethodInfo object exists
                 if (this.HasMethodInfo)
@@ -588,77 +588,109 @@ namespace DataTierClient.Controls
                             }
                         }
                     }
-
-                    // get the procedureText
-                    string procedureText = writer.TextWriter.ToString();
-
-                    // Show the Where Panel if CustomWhere is true
-                    WherePanel.Visible = MethodInfo.UseCustomWhere;
-
-                    // if CustomWhere
-                    if (MethodInfo.UseCustomWhere)
+                    else if ((MethodInfo.ParameterType == ParameterTypeEnum.No_Parameters))
                     {
-                        // now the existing where text must be replaced
-                        int whereIndex = procedureText.ToLower().IndexOf("where [");
+                        // Create a new instance of a 'ProcedureWriter' object (in TextWriter mode).
+                        writer = new ProcedureWriter(true);
 
-                        // if the WhereText does not exist yet
-                        if ((!MethodInfo.HasWhereText) && (whereIndex > 0))
+                        // if this is a FindByField method
+                        if (writer.HasTextWriter) 
                         {
-                            // Set the text as it is now
-                            string whereText = procedureText.Substring(whereIndex);
-
-                            // If the whereText string exists
-                            if (TextHelper.Exists(whereText))
+                            // If Delete By is the Method Type
+                            if (MethodInfo.MethodType == MethodTypeEnum.Delete_By)
                             {
-                                // get the textLines
-                                List<TextLine> textLines = WordParser.GetTextLines(whereText);
-
-                                // If the textLines collection exists and has one or more items
-                                if (ListHelper.HasOneOrMoreItems(textLines))
-                                {
-                                    // Create a new instance of a 'StringBuilder' object.
-                                    StringBuilder sb = new StringBuilder();
-
-                                    // add each textLine of the Where Clause except the last one
-                                    foreach (TextLine textLine in textLines)
-                                    {
-                                        // if this is the End line
-                                        if (!textLine.Text.ToLower().StartsWith("end"))
-                                        {
-                                            // Add this line
-                                            sb.Append(textLine.Text);
-                                        }
-                                    }
-
-                                    // Get the Where Clause
-                                    MethodInfo.WhereText = sb.ToString().Trim();
-                                }
+                                // Write out the Delete Proc
+                                writer.CreateDeleteProc(table, MethodInfo.ProcedureName, parameters);
                             }
-                        }
-
-                        // Set the WhereText
-                        WhereTextBox.Text = MethodInfo.WhereText;
-                        
-                        // if the whereIndex was found
-                        if (whereIndex >= 0)
-                        {
-                            // if the WhereText does not already exist
-                            if (!TextHelper.Exists(MethodInfo.WhereText))
+                            // If Find By is the Method Type
+                            if (MethodInfo.MethodType == MethodTypeEnum.Find_By) 
                             {
-                                // Set the default WhereText
-                                MethodInfo.WhereText = procedureText.Substring(whereIndex);
+                                // create a find procedure
+                                writer.CreateFindProc(table, false, MethodInfo.ProcedureName, parameters, MethodInfo.CustomReader, orderByField, orderByFieldSet);
                             }
-
-                            // set the new ProcedureText
-                            procedureText = procedureText.Substring(0, whereIndex) + MethodInfo.WhereText + Environment.NewLine + Environment.NewLine + "END";                        
+                            // if Load By is the Method Type
+                            else if (MethodInfo.MethodType == MethodTypeEnum.Load_By) 
+                            {
+                                // create a find procedure
+                                writer.CreateFindProc(table, true, MethodInfo.ProcedureName, parameters, MethodInfo.CustomReader, orderByField, orderByFieldSet);
+                            }
                         }
                     }
 
-                    // Remove any double blank lines
-                    procedureText = CodeLineHelper.RemoveDoubleBlankLines(procedureText);
+                    // if the writer exists
+                    if (NullHelper.Exists(writer))
+                    {
+                        // get the procedureText
+                        string procedureText = writer.TextWriter.ToString();
 
-                    // display the procedure As Is for now.
-                    this.ProcedureTextBox.Text = procedureText;
+                        // Show the Where Panel if CustomWhere is true
+                        WherePanel.Visible = MethodInfo.UseCustomWhere;
+
+                        // if CustomWhere
+                        if (MethodInfo.UseCustomWhere)
+                        {
+                            // now the existing where text must be replaced
+                            int whereIndex = procedureText.ToLower().IndexOf("where [");
+
+                            // if the WhereText does not exist yet
+                            if ((!MethodInfo.HasWhereText) && (whereIndex > 0))
+                            {
+                                // Set the text as it is now
+                                string whereText = procedureText.Substring(whereIndex);
+
+                                // If the whereText string exists
+                                if (TextHelper.Exists(whereText))
+                                {
+                                    // get the textLines
+                                    List<TextLine> textLines = WordParser.GetTextLines(whereText);
+
+                                    // If the textLines collection exists and has one or more items
+                                    if (ListHelper.HasOneOrMoreItems(textLines))
+                                    {
+                                        // Create a new instance of a 'StringBuilder' object.
+                                        StringBuilder sb = new StringBuilder();
+
+                                        // add each textLine of the Where Clause except the last one
+                                        foreach (TextLine textLine in textLines)
+                                        {
+                                            // if this is the End line
+                                            if (!textLine.Text.ToLower().StartsWith("end"))
+                                            {
+                                                // Add this line
+                                                sb.Append(textLine.Text);
+                                            }
+                                        }
+
+                                        // Get the Where Clause
+                                        MethodInfo.WhereText = sb.ToString().Trim();
+                                    }
+                                }
+                            }
+
+                            // Set the WhereText
+                            WhereTextBox.Text = MethodInfo.WhereText;
+                        
+                            // if the whereIndex was found
+                            if (whereIndex >= 0)
+                            {
+                                // if the WhereText does not already exist
+                                if (!TextHelper.Exists(MethodInfo.WhereText))
+                                {
+                                    // Set the default WhereText
+                                    MethodInfo.WhereText = procedureText.Substring(whereIndex);
+                                }
+
+                                // set the new ProcedureText
+                                procedureText = procedureText.Substring(0, whereIndex) + MethodInfo.WhereText + Environment.NewLine + Environment.NewLine + "END";                        
+                            }
+                        }
+
+                         // Remove any double blank lines
+                        procedureText = CodeLineHelper.RemoveDoubleBlankLines(procedureText);
+
+                        // display the procedure As Is for now.
+                        this.ProcedureTextBox.Text = procedureText;
+                    }
                 }
             }
             #endregion

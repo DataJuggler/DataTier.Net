@@ -624,13 +624,38 @@ namespace DataTierClient.Forms
 					// enable controls
 				    UIEnable();
 
+                     // adding a new variable to see if we need to force the Project Updater to show
+                    // even for a Dot Net 5 project.
+                    bool forceProjectUpdate = false;
+
                     // Only launch the VisualStudio Project Updater if this new files were added and this is not a DotNet5 project
-                    // This is only needed for DotNetFramework. DotNet5 adds all files by default (reason #5 DotNet5 is growing on me)
-                    if ((this.HasFileManager) && (FileManager.WereNewFilesCreated) && (!this.OpenProject.DotNet5))
+                    // This is only needed for DotNetFramework. 
+                    // DotNet5 adds all files by default (reason #5 DotNet5 is growing on me)
+                    // However, if a file was ever excluded, it has to be included.
+                    if ((this.HasFileManager) && (FileManager.WereNewFilesCreated))
                     {
-                        // include the files generated in the project.
-                        IncludeProjectFiles();
+                        // If the value for the property OpenProject.DotNet5 is true
+                        if (OpenProject.DotNet5)
+                        {
+                            // if we find any excluded tables, then we need to force 
+                            forceProjectUpdate = CheckForceProjectUpdate();
+                        }
+                        else
+                        {
+                            // .Net Framework projects always have to be updated
+                            forceProjectUpdate = true;
+                        }
+
+                        // if the value for forceProjectUpdate is true
+                        if (forceProjectUpdate)
+                        {
+                            // include the files generated in the project.
+                            IncludeProjectFiles();
+                        }
                     }
+
+                    // Update the value for Excluded after a build.
+                    StoreExcludedTables();
 				}
 				catch (Exception)
 				{
@@ -1200,6 +1225,54 @@ namespace DataTierClient.Forms
             } 
             #endregion
 
+            #region CheckForceProjectUpdate()
+            /// <summary>
+            /// This method returns the If We Need To Force Project Update.
+            /// This is for a DotNet5 project that was previously excluded
+            /// </summary>
+            public bool CheckForceProjectUpdate()
+            {
+                // initial value
+                bool forceProjectUpdate = false;
+                
+                 // if the Databases collection exist
+                if (OpenProject.HasDatabases)
+                {
+                    // iterate the databases
+                    foreach (DTNDatabase database in OpenProject.Databases)
+                    {
+                        // if the value for forceProjectUpdate is true
+                        if (forceProjectUpdate)
+                        {
+                            // break out of loop;
+                            break;
+                        }
+
+                        // if this database has tables
+                        if (NullHelper.Exists(database.Tables))
+                        {
+                            // iterate the tables
+                            foreach (DTNTable table in database.Tables)
+                            {
+                                // If this table is excluded
+                                if ((table.Excluded && !table.Exclude))
+                                {
+                                    // set to true
+                                    forceProjectUpdate = true;
+
+                                    // break out of loop
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                // return value
+                return forceProjectUpdate;
+            }
+            #endregion
+            
             #region ConfirmDelete(string itemType)
             /// <summary>
             /// If the user confirms deleting
@@ -2460,6 +2533,46 @@ namespace DataTierClient.Forms
                     // Hide any controls that are in the way of the AdverSkyControls
                     this.RightPanel.Visible = false;
                     this.StatusListBox.Visible = false;
+                }
+            }
+            #endregion
+            
+            #region StoreExcludedTables()
+            /// <summary>
+            /// This method Store Excluded Tables
+            /// </summary>
+            public void StoreExcludedTables()
+            {
+                // local
+                bool saved = false;
+
+                // if the Databases collection exist
+                if (OpenProject.HasDatabases)
+                {
+                    // iterate the databases
+                    foreach (DTNDatabase database in OpenProject.Databases)
+                    {
+                        // if this database has tables
+                        if (NullHelper.Exists(database.Tables))
+                        {
+                            // iterate the tables
+                            foreach (DTNTable table in database.Tables)
+                            {
+                                // If the values are not for equal
+                                if (table.Exclude != table.Excluded)
+                                {
+                                    // Toggle the value of Excluded to the value of Exclude
+                                    table.Excluded = table.Exclude;
+
+                                    // Clone this object
+                                    DTNTable clone = table.Clone();
+
+                                    // Perform the save
+                                    saved = this.Gateway.SaveDTNTable(ref clone);
+                                }
+                            }
+                        }
+                    }
                 }
             }
             #endregion

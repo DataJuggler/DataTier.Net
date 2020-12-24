@@ -118,7 +118,7 @@ namespace DataAccessComponent.DataManager.Writers
             internal static SqlParameter[] CreateInsertParameters(DTNTable dTNTable)
             {
                 // Initial Values
-                SqlParameter[] parameters = new SqlParameter[10];
+                SqlParameter[] parameters = new SqlParameter[11];
                 SqlParameter param = null;
 
                 // verify dTNTableexists
@@ -154,35 +154,41 @@ namespace DataAccessComponent.DataManager.Writers
                     // set parameters[4]
                     parameters[4] = param;
 
-                    // Create [IsView] parameter
-                    param = new SqlParameter("@IsView", dTNTable.IsView);
+                    // Create [Excluded] parameter
+                    param = new SqlParameter("@Excluded", dTNTable.Excluded);
 
                     // set parameters[5]
                     parameters[5] = param;
 
-                    // Create [ProjectId] parameter
-                    param = new SqlParameter("@ProjectId", dTNTable.ProjectId);
+                    // Create [IsView] parameter
+                    param = new SqlParameter("@IsView", dTNTable.IsView);
 
                     // set parameters[6]
                     parameters[6] = param;
 
-                    // Create [Scope] parameter
-                    param = new SqlParameter("@Scope", dTNTable.Scope);
+                    // Create [ProjectId] parameter
+                    param = new SqlParameter("@ProjectId", dTNTable.ProjectId);
 
                     // set parameters[7]
                     parameters[7] = param;
 
-                    // Create [Serializable] parameter
-                    param = new SqlParameter("@Serializable", dTNTable.Serializable);
+                    // Create [Scope] parameter
+                    param = new SqlParameter("@Scope", dTNTable.Scope);
 
                     // set parameters[8]
                     parameters[8] = param;
 
-                    // Create [TableName] parameter
-                    param = new SqlParameter("@TableName", dTNTable.TableName);
+                    // Create [Serializable] parameter
+                    param = new SqlParameter("@Serializable", dTNTable.Serializable);
 
                     // set parameters[9]
                     parameters[9] = param;
+
+                    // Create [TableName] parameter
+                    param = new SqlParameter("@TableName", dTNTable.TableName);
+
+                    // set parameters[10]
+                    parameters[10] = param;
                 }
 
                 // return value
@@ -229,7 +235,7 @@ namespace DataAccessComponent.DataManager.Writers
             internal static SqlParameter[] CreateUpdateParameters(DTNTable dTNTable)
             {
                 // Initial Values
-                SqlParameter[] parameters = new SqlParameter[11];
+                SqlParameter[] parameters = new SqlParameter[12];
                 SqlParameter param = null;
 
                 // verify dTNTableexists
@@ -265,39 +271,45 @@ namespace DataAccessComponent.DataManager.Writers
                     // set parameters[4]
                     parameters[4] = param;
 
-                    // Create parameter for [IsView]
-                    param = new SqlParameter("@IsView", dTNTable.IsView);
+                    // Create parameter for [Excluded]
+                    param = new SqlParameter("@Excluded", dTNTable.Excluded);
 
                     // set parameters[5]
                     parameters[5] = param;
 
-                    // Create parameter for [ProjectId]
-                    param = new SqlParameter("@ProjectId", dTNTable.ProjectId);
+                    // Create parameter for [IsView]
+                    param = new SqlParameter("@IsView", dTNTable.IsView);
 
                     // set parameters[6]
                     parameters[6] = param;
 
-                    // Create parameter for [Scope]
-                    param = new SqlParameter("@Scope", dTNTable.Scope);
+                    // Create parameter for [ProjectId]
+                    param = new SqlParameter("@ProjectId", dTNTable.ProjectId);
 
                     // set parameters[7]
                     parameters[7] = param;
 
-                    // Create parameter for [Serializable]
-                    param = new SqlParameter("@Serializable", dTNTable.Serializable);
+                    // Create parameter for [Scope]
+                    param = new SqlParameter("@Scope", dTNTable.Scope);
 
                     // set parameters[8]
                     parameters[8] = param;
 
-                    // Create parameter for [TableName]
-                    param = new SqlParameter("@TableName", dTNTable.TableName);
+                    // Create parameter for [Serializable]
+                    param = new SqlParameter("@Serializable", dTNTable.Serializable);
 
                     // set parameters[9]
                     parameters[9] = param;
 
+                    // Create parameter for [TableName]
+                    param = new SqlParameter("@TableName", dTNTable.TableName);
+
+                    // set parameters[10]
+                    parameters[10] = param;
+
                     // Create parameter for [TableId]
                     param = new SqlParameter("@TableId", dTNTable.TableId);
-                    parameters[10] = param;
+                    parameters[11] = param;
                 }
 
                 // return value
