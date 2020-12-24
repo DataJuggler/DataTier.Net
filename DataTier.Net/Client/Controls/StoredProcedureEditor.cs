@@ -69,51 +69,6 @@ namespace DataTierClient.Controls
             }
             #endregion
 
-            #region EditStoredProcedureReferencesSetButton_Click(object sender, EventArgs e)
-            /// <summary>
-            /// This event edits the SelectedReferencesSet.
-            /// </summary>
-            /// <param name="sender"></param>
-            /// <param name="e"></param>
-            private void EditStoredProcedureReferencesSetButton_Click(object sender, EventArgs e)
-            {
-                // Edit the references set
-                ReferencesSet refSet = ReferencesSetManager.EditReferencesSet(this.SelectedReferencesSet, this.SelectedProject);
-
-                // Display selected references
-                DisplaySelectedReferences(refSet); 
-            } 
-            #endregion
-
-            #region NewStoredProcedureReferencesSetButton_Click(object sender, EventArgs e)
-            /// <summary>
-            /// This event creates a new ReferencesSet for the StoredProcedureReferencesSet.
-            /// </summary>
-            /// <param name="sender"></param>
-            /// <param name="e"></param>
-            private void NewStoredProcedureReferencesSetButton_Click(object sender, EventArgs e)
-            {
-                // create references set
-                ReferencesSet refSet = ReferencesSetManager.CreateNewReferencesSet(this.SelectedProject);
-
-                // if the refSet exists
-                if (refSet != null)
-                {
-                    // set selected references set
-                    this.SelectedReferencesSet = refSet;
-
-                    // add this refernce to all references
-                    this.SelectedProject.AllReferences.Add(refSet);
-
-                    // set the references set
-                    this.SelectedProject.StoredProcedureReferencesSet = refSet;
-                }
-
-                // Display selected references
-                DisplaySelectedReferences(refSet);
-            } 
-            #endregion
-
             #region StoredProcedureFolderTextBox_TextChanged(object sender, EventArgs e)
             /// <summary>
             /// This event browses for the StoredProcedureFolder.
@@ -151,39 +106,6 @@ namespace DataTierClient.Controls
                     // Enable Controls
                     UIEnable();
                 }  
-            } 
-            #endregion
-
-            #region StoredProcedureReferencesComboBox_SelectedIndexChanged(object sender, EventArgs e)
-            /// <summary>
-            /// The SelectedReferencesSet has changed.
-            /// </summary>
-            /// <param name="sender"></param>
-            /// <param name="e"></param>
-            private void StoredProcedureReferencesComboBox_SelectedIndexChanged(object sender, EventArgs e)
-            {
-                // if the SelectedProject exists
-                if (this.SelectedProject != null)
-                {
-                    // Create the references set
-                    ReferencesSet refSet = this.StoredProcedureReferencesComboBox.SelectedItem as ReferencesSet;
-
-                    // if the references set exists
-                    if (refSet != null)
-                    {
-                        // set the SelectedReferencesSet
-                        this.SelectedReferencesSet = refSet;
-
-                        // set the ReferencesSet
-                        this.SelectedProject.StoredProcedureReferencesSet = refSet;
-
-                        // Set the ReaderReferencesSetID
-                        this.SelectedProject.StoredProcedureReferencesSetId = refSet.ReferencesSetId;
-                    }
-
-                    // Enable Controls
-                    UIEnable();
-                } 
             } 
             #endregion
 
@@ -246,41 +168,12 @@ namespace DataTierClient.Controls
                     // display the namespace
                     this.StoredProcedureNamespaceTextBox.Text = this.SelectedProject.StoredProcedureObjectNamespace;
 
-                    // display the object references set
-                    this.DisplaySelectedReferences(this.SelectedProject.StoredProcedureReferencesSet);
-                    
                     // Display the stored procs folder
                     this.StoredProcedureSQLFolderTextBox.Text = this.SelectedProject.StoredProcsFolder;
                 }
 
                 // Enable Controls
                 UIEnable();
-            }
-            #endregion
-
-            #region DisplaySelectedReferences(ReferencesSet refSet)
-            /// <summary>
-            /// This method displays the selected referencesSet
-            /// </summary>
-            /// <param name="refSet"></param>
-            private void DisplaySelectedReferences(ReferencesSet refSet)
-            {
-                // if refSet exists
-                if (refSet != null)
-                {
-                    // Load the references combo 
-                    ReferencesSetManager.LoadReferencesSetComboBox(this.SelectedProject.AllReferences, this.StoredProcedureReferencesComboBox);
-
-                    // Get the selected index
-                    int index = this.StoredProcedureReferencesComboBox.Items.IndexOf(refSet);
-
-                    // if the index exists
-                    if (index >= 0)
-                    {
-                        // set the selected index
-                        this.StoredProcedureReferencesComboBox.SelectedIndex = index;
-                    }
-                }
             }
             #endregion
 
@@ -309,22 +202,6 @@ namespace DataTierClient.Controls
 
                         // required
                         break;
-
-                    case "New":
-
-                        // Call the NewStoredProcedureReferencesSetButton_Click event
-                        NewStoredProcedureReferencesSetButton_Click(this, null);
-
-                        // required
-                        break;
-
-                    case "Edit":
-
-                        // Call the EditStoredProcedureReferencesSetButton_Click event
-                        EditStoredProcedureReferencesSetButton_Click(this, null);
-
-                        // required
-                        break;
                 }
             }
             #endregion
@@ -341,9 +218,6 @@ namespace DataTierClient.Controls
                     // Enable Controls on the project wizard
                     this.ParentProjectWizard.UIEnable();
                 }
-
-                // Enable the Edit button
-                this.EditStoredProcedureReferencesSetButton.Enabled = (this.SelectedReferencesSet != null);
             }
             #endregion
 

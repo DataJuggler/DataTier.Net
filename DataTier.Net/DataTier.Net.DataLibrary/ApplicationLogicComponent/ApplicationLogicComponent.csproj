@@ -95,6 +95,8 @@
     <Compile Include="Controllers\ProjectReferenceController.cs" />
     <Compile Include="Controllers\ReferencesSetController.cs" />
     <Compile Include="Controllers\SystemController.cs" />
+    <Compile Include="Controllers\UIFieldController.cs" />
+    <Compile Include="Controllers\UserInterfaceController.cs" />
     <Compile Include="DataOperations\AdminMethods.cs" />
     <Compile Include="DataOperations\CustomReaderMethods.cs" />
     <Compile Include="DataOperations\DTNDatabaseMethods.cs" />
@@ -116,6 +118,8 @@
     <Compile Include="DataOperations\SystemMethods.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DataOperations\UIFieldMethods.cs" />
+    <Compile Include="DataOperations\UserInterfaceMethods.cs" />
     <Compile Include="Exceptions\NoProjectSelectedException.cs" />
     <Compile Include="DataBridge\DataBridgeManager.cs" />
     <Compile Include="DataBridge\DataBridgeEnumerations.cs" />

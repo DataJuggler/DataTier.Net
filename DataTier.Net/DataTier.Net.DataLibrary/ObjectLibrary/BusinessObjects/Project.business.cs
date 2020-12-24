@@ -212,34 +212,6 @@ namespace ObjectLibrary.BusinessObjects
                 this.WriterReferencesSet.References.Add(new ProjectReference("System.Data"));
                 this.WriterReferencesSet.References.Add(new ProjectReference("System.Data.SqlClient"));
                 this.AllReferences.Add(this.WriterReferencesSet);
-
-                // Set StoredProcedure Namespace
-                this.StoredProcedureObjectNamespace = "DataAccessComponent.StoredProcedureManager";
-                
-                // Stored Procedure References
-                this.StoredProcedureReferencesSet = new ReferencesSet("StoredProcedures");
-                
-                // Set Stored Procedure References
-                this.StoredProcedureReferencesSet.References.Add(new ProjectReference("System"));                
-                this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.DeleteProcedures"));
-                this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.FetchProcedures"));
-                this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.InsertProcedures"));
-                this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.UpdateProcedures"));
-
-                // If the value for the property this.DotNet5 is true
-                if (this.DotNet5)
-                {
-                    // Add a reference to .Net5 version
-                    this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataJuggler.Net5"));
-                }
-                else
-                {
-                    // Add a reference to .Net Framework version
-                    this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataJuggler.Net"));
-                }
-
-                // Now add to AllReferences
-                this.AllReferences.Add(this.StoredProcedureReferencesSet);
             }
             #endregion
 

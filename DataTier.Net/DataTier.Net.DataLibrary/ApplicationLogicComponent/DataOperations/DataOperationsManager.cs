@@ -44,6 +44,8 @@ namespace ApplicationLogicComponent.DataOperations
         private ProjectMethods projectMethods;
         private ProjectReferenceMethods projectreferenceMethods;
         private ReferencesSetMethods referencessetMethods;
+        private UIFieldMethods uifieldMethods;
+        private UserInterfaceMethods userinterfaceMethods;
         #endregion
 
         #region Constructor
@@ -84,6 +86,8 @@ namespace ApplicationLogicComponent.DataOperations
                 this.ProjectMethods = new ProjectMethods(this.DataManager);
                 this.ProjectReferenceMethods = new ProjectReferenceMethods(this.DataManager);
                 this.ReferencesSetMethods = new ReferencesSetMethods(this.DataManager);
+                this.UIFieldMethods = new UIFieldMethods(this.DataManager);
+                this.UserInterfaceMethods = new UserInterfaceMethods(this.DataManager);
             }
             #endregion
 
@@ -216,6 +220,22 @@ namespace ApplicationLogicComponent.DataOperations
             {
                 get { return referencessetMethods; }
                 set { referencessetMethods = value; }
+            }
+            #endregion
+
+            #region UIFieldMethods
+            public UIFieldMethods UIFieldMethods
+            {
+                get { return uifieldMethods; }
+                set { uifieldMethods = value; }
+            }
+            #endregion
+
+            #region UserInterfaceMethods
+            public UserInterfaceMethods UserInterfaceMethods
+            {
+                get { return userinterfaceMethods; }
+                set { userinterfaceMethods = value; }
             }
             #endregion
 

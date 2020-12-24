@@ -43,6 +43,8 @@ namespace DataAccessComponent.DataManager
         private ProjectManager projectManager;
         private ProjectReferenceManager projectreferenceManager;
         private ReferencesSetManager referencessetManager;
+        private UIFieldManager uifieldManager;
+        private UserInterfaceManager userinterfaceManager;
         #endregion
 
         #region Constructor
@@ -86,6 +88,8 @@ namespace DataAccessComponent.DataManager
                 this.ProjectManager = new ProjectManager(this);
                 this.ProjectReferenceManager = new ProjectReferenceManager(this);
                 this.ReferencesSetManager = new ReferencesSetManager(this);
+                this.UIFieldManager = new UIFieldManager(this);
+                this.UserInterfaceManager = new UserInterfaceManager(this);
             }
             #endregion
 
@@ -218,6 +222,22 @@ namespace DataAccessComponent.DataManager
             {
                 get { return referencessetManager; }
                 set { referencessetManager = value; }
+            }
+            #endregion
+
+            #region UIFieldManager
+            public UIFieldManager UIFieldManager
+            {
+                get { return uifieldManager; }
+                set { uifieldManager = value; }
+            }
+            #endregion
+
+            #region UserInterfaceManager
+            public UserInterfaceManager UserInterfaceManager
+            {
+                get { return userinterfaceManager; }
+                set { userinterfaceManager = value; }
             }
             #endregion
 

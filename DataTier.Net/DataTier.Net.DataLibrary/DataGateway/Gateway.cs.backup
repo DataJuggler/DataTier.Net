@@ -581,6 +581,80 @@ namespace DataGateway
             }
             #endregion
         
+            #region DeleteUIField(int id, UIField tempUIField = null)
+            /// <summary>
+            /// This method is used to delete UIField objects.
+            /// </summary>
+            /// <param name="id">Delete the UIField with this id</param>
+            /// <param name="tempUIField">Pass in a tempUIField to perform a custom delete.</param>
+            public bool DeleteUIField(int id, UIField tempUIField = null)
+            {
+                // initial value
+                bool deleted = false;
+        
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // if the tempUIField does not exist
+                    if (tempUIField == null)
+                    {
+                        // create a temp UIField
+                        tempUIField = new UIField();
+                    }
+        
+                    // if the id is set
+                    if (id > 0)
+                    {
+                        // set the primary key
+                        tempUIField.UpdateIdentity(id);
+                    }
+        
+                    // perform the delete
+                    deleted = this.AppController.ControllerManager.UIFieldController.Delete(tempUIField);
+                }
+        
+                // return value
+                return deleted;
+            }
+            #endregion
+        
+            #region DeleteUserInterface(int id, UserInterface tempUserInterface = null)
+            /// <summary>
+            /// This method is used to delete UserInterface objects.
+            /// </summary>
+            /// <param name="id">Delete the UserInterface with this id</param>
+            /// <param name="tempUserInterface">Pass in a tempUserInterface to perform a custom delete.</param>
+            public bool DeleteUserInterface(int id, UserInterface tempUserInterface = null)
+            {
+                // initial value
+                bool deleted = false;
+        
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // if the tempUserInterface does not exist
+                    if (tempUserInterface == null)
+                    {
+                        // create a temp UserInterface
+                        tempUserInterface = new UserInterface();
+                    }
+        
+                    // if the id is set
+                    if (id > 0)
+                    {
+                        // set the primary key
+                        tempUserInterface.UpdateIdentity(id);
+                    }
+        
+                    // perform the delete
+                    deleted = this.AppController.ControllerManager.UserInterfaceController.Delete(tempUserInterface);
+                }
+        
+                // return value
+                return deleted;
+            }
+            #endregion
+        
             #region ExecuteNonQuery(string procedureName, SqlParameter[] sqlParameters)
             /// <summary>
             /// This method Executes a Non Query StoredProcedure
@@ -1191,6 +1265,132 @@ namespace DataGateway
             }
             #endregion
 
+            #region FindUIField(int id, UIField tempUIField = null)
+            /// <summary>
+            /// This method is used to find 'UIField' objects.
+            /// </summary>
+            /// <param name="id">Find the UIField with this id</param>
+            /// <param name="tempUIField">Pass in a tempUIField to perform a custom find.</param>
+            public UIField FindUIField(int id, UIField tempUIField = null)
+            {
+                // initial value
+                UIField uIField = null;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // if the tempUIField does not exist
+                    if (tempUIField == null)
+                    {
+                        // create a temp UIField
+                        tempUIField = new UIField();
+                    }
+
+                    // if the id is set
+                    if (id > 0)
+                    {
+                        // set the primary key
+                        tempUIField.UpdateIdentity(id);
+                    }
+
+                    // perform the find
+                    uIField = this.AppController.ControllerManager.UIFieldController.Find(tempUIField);
+                }
+
+                // return value
+                return uIField;
+            }
+            #endregion
+
+            #region FindUIFieldByUserInterfaceId(int userInterfaceId)
+            /// <summary>
+            /// This method is used to find 'UIField' objects for the UserInterfaceId given.
+            /// </summary>
+            public UIField FindUIFieldByUserInterfaceId(int userInterfaceId)
+            {
+                // initial value
+                UIField uIField = null;
+                
+                // Create a temp UIField object
+                UIField tempUIField = new UIField();
+                
+                // Set the value for FindByUserInterfaceId to true
+                tempUIField.FindByUserInterfaceId = true;
+                
+                // Set the value for UserInterfaceId
+                tempUIField.UserInterfaceId = userInterfaceId;
+                
+                // Perform the find
+                uIField = FindUIField(0, tempUIField);
+                
+                // return value
+                return uIField;
+            }
+            #endregion
+            
+            #region FindUserInterface(int id, UserInterface tempUserInterface = null)
+            /// <summary>
+            /// This method is used to find 'UserInterface' objects.
+            /// </summary>
+            /// <param name="id">Find the UserInterface with this id</param>
+            /// <param name="tempUserInterface">Pass in a tempUserInterface to perform a custom find.</param>
+            public UserInterface FindUserInterface(int id, UserInterface tempUserInterface = null)
+            {
+                // initial value
+                UserInterface userInterface = null;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // if the tempUserInterface does not exist
+                    if (tempUserInterface == null)
+                    {
+                        // create a temp UserInterface
+                        tempUserInterface = new UserInterface();
+                    }
+
+                    // if the id is set
+                    if (id > 0)
+                    {
+                        // set the primary key
+                        tempUserInterface.UpdateIdentity(id);
+                    }
+
+                    // perform the find
+                    userInterface = this.AppController.ControllerManager.UserInterfaceController.Find(tempUserInterface);
+                }
+
+                // return value
+                return userInterface;
+            }
+            #endregion
+
+            #region FindUserInterfaceByProjectId(int projectId)
+            /// <summary>
+            /// This method is used to find 'UserInterface' objects for the ProjectId given.
+            /// </summary>
+            public UserInterface FindUserInterfaceByProjectId(int projectId)
+            {
+                // initial value
+                UserInterface userInterface = null;
+                
+                // Create a temp UserInterface object
+                UserInterface tempUserInterface = new UserInterface();
+                
+                // Set the value for FindByProjectId to true
+                tempUserInterface.FindByProjectId = true;
+                
+                // Set the value for ProjectId
+                tempUserInterface.ProjectId = projectId;
+                
+                // Perform the find
+                userInterface = FindUserInterface(0, tempUserInterface);
+                
+                // return value
+                return userInterface;
+            }
+            #endregion
+            
             #region GetDataConnector()
             /// <summary>
             /// This method (safely) returns the Data Connector from the
@@ -1913,6 +2113,48 @@ namespace DataGateway
             }
             #endregion
 
+            #region LoadUIFields(UIField tempUIField = null)
+            /// <summary>
+            /// This method loads a collection of 'UIField' objects.
+            /// </summary>
+            public List<UIField> LoadUIFields(UIField tempUIField = null)
+            {
+                // initial value
+                List<UIField> uIFields = null;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // perform the load
+                    uIFields = this.AppController.ControllerManager.UIFieldController.FetchAll(tempUIField);
+                }
+
+                // return value
+                return uIFields;
+            }
+            #endregion
+
+            #region LoadUserInterfaces(UserInterface tempUserInterface = null)
+            /// <summary>
+            /// This method loads a collection of 'UserInterface' objects.
+            /// </summary>
+            public List<UserInterface> LoadUserInterfaces(UserInterface tempUserInterface = null)
+            {
+                // initial value
+                List<UserInterface> userInterfaces = null;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // perform the load
+                    userInterfaces = this.AppController.ControllerManager.UserInterfaceController.FetchAll(tempUserInterface);
+                }
+
+                // return value
+                return userInterfaces;
+            }
+            #endregion
+
             #region Save(ref ReferencesSet referencesSet, bool saveChildren)
             /// <summary>
             /// This method saves a ReferencesSet
@@ -2347,6 +2589,50 @@ namespace DataGateway
             }
             #endregion
 
+            #region SaveUIField(ref UIField uIField)
+            /// <summary>
+            /// This method is used to save 'UIField' objects.
+            /// </summary>
+            /// <param name="uIField">The UIField to save.</param>
+            public bool SaveUIField(ref UIField uIField)
+            {
+                // initial value
+                bool saved = false;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // perform the save
+                    saved = this.AppController.ControllerManager.UIFieldController.Save(ref uIField);
+                }
+
+                // return value
+                return saved;
+            }
+            #endregion
+
+            #region SaveUserInterface(ref UserInterface userInterface)
+            /// <summary>
+            /// This method is used to save 'UserInterface' objects.
+            /// </summary>
+            /// <param name="userInterface">The UserInterface to save.</param>
+            public bool SaveUserInterface(ref UserInterface userInterface)
+            {
+                // initial value
+                bool saved = false;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // perform the save
+                    saved = this.AppController.ControllerManager.UserInterfaceController.Save(ref userInterface);
+                }
+
+                // return value
+                return saved;
+            }
+            #endregion
+
         #endregion
 
         #region Properties
@@ -2385,4 +2671,3 @@ namespace DataGateway
     #endregion
 
 }
-

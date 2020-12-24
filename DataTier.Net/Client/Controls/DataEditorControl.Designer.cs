@@ -75,6 +75,7 @@ namespace DataTierClient.Controls
             this.CreateBindingCallbackControl = new DataJuggler.Win.Controls.LabelCheckBoxControl();
             this.AllButton = new System.Windows.Forms.Label();
             this.NoneButton = new System.Windows.Forms.Label();
+            this.UICreatorButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // TablesListBox
@@ -172,7 +173,7 @@ namespace DataTierClient.Controls
             this.RemoveTableButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.RemoveTableButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RemoveTableButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.RemoveTableButton.Location = new System.Drawing.Point(360, 269);
+            this.RemoveTableButton.Location = new System.Drawing.Point(360, 268);
             this.RemoveTableButton.Name = "RemoveTableButton";
             this.RemoveTableButton.Size = new System.Drawing.Size(232, 40);
             this.RemoveTableButton.TabIndex = 97;
@@ -193,7 +194,7 @@ namespace DataTierClient.Controls
             this.CreateMethodButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CreateMethodButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CreateMethodButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.CreateMethodButton.Location = new System.Drawing.Point(360, 77);
+            this.CreateMethodButton.Location = new System.Drawing.Point(360, 76);
             this.CreateMethodButton.Name = "CreateMethodButton";
             this.CreateMethodButton.Size = new System.Drawing.Size(232, 40);
             this.CreateMethodButton.TabIndex = 100;
@@ -214,7 +215,7 @@ namespace DataTierClient.Controls
             this.ManageMethodButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ManageMethodButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ManageMethodButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.ManageMethodButton.Location = new System.Drawing.Point(360, 125);
+            this.ManageMethodButton.Location = new System.Drawing.Point(360, 124);
             this.ManageMethodButton.Name = "ManageMethodButton";
             this.ManageMethodButton.Size = new System.Drawing.Size(232, 40);
             this.ManageMethodButton.TabIndex = 101;
@@ -235,7 +236,7 @@ namespace DataTierClient.Controls
             this.ManageReadersButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ManageReadersButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ManageReadersButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.ManageReadersButton.Location = new System.Drawing.Point(360, 221);
+            this.ManageReadersButton.Location = new System.Drawing.Point(360, 220);
             this.ManageReadersButton.Name = "ManageReadersButton";
             this.ManageReadersButton.Size = new System.Drawing.Size(232, 40);
             this.ManageReadersButton.TabIndex = 102;
@@ -256,7 +257,7 @@ namespace DataTierClient.Controls
             this.ManageFieldSetsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ManageFieldSetsButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ManageFieldSetsButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.ManageFieldSetsButton.Location = new System.Drawing.Point(360, 173);
+            this.ManageFieldSetsButton.Location = new System.Drawing.Point(360, 172);
             this.ManageFieldSetsButton.Name = "ManageFieldSetsButton";
             this.ManageFieldSetsButton.Size = new System.Drawing.Size(232, 40);
             this.ManageFieldSetsButton.TabIndex = 103;
@@ -277,7 +278,7 @@ namespace DataTierClient.Controls
             this.BlazorFeaturesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BlazorFeaturesButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BlazorFeaturesButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.BlazorFeaturesButton.Location = new System.Drawing.Point(363, 315);
+            this.BlazorFeaturesButton.Location = new System.Drawing.Point(360, 360);
             this.BlazorFeaturesButton.Name = "BlazorFeaturesButton";
             this.BlazorFeaturesButton.Size = new System.Drawing.Size(232, 40);
             this.BlazorFeaturesButton.TabIndex = 104;
@@ -301,7 +302,7 @@ namespace DataTierClient.Controls
             this.CreateBindingCallbackControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CreateBindingCallbackControl.LabelText = "Create Callback:";
             this.CreateBindingCallbackControl.LabelWidth = 160;
-            this.CreateBindingCallbackControl.Location = new System.Drawing.Point(383, 363);
+            this.CreateBindingCallbackControl.Location = new System.Drawing.Point(384, 406);
             this.CreateBindingCallbackControl.Name = "CreateBindingCallbackControl";
             this.CreateBindingCallbackControl.Size = new System.Drawing.Size(176, 28);
             this.CreateBindingCallbackControl.TabIndex = 105;
@@ -332,10 +333,31 @@ namespace DataTierClient.Controls
             this.NoneButton.MouseEnter += new System.EventHandler(this.Button_Enter);
             this.NoneButton.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
+            // UICreatorButton
+            // 
+            this.UICreatorButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
+            this.UICreatorButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.UICreatorButton.FlatAppearance.BorderSize = 0;
+            this.UICreatorButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.UICreatorButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.UICreatorButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.UICreatorButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UICreatorButton.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.UICreatorButton.Location = new System.Drawing.Point(363, 314);
+            this.UICreatorButton.Name = "UICreatorButton";
+            this.UICreatorButton.Size = new System.Drawing.Size(232, 40);
+            this.UICreatorButton.TabIndex = 108;
+            this.UICreatorButton.Text = "UI Creator";
+            this.UICreatorButton.UseVisualStyleBackColor = true;
+            this.UICreatorButton.Visible = false;
+            this.UICreatorButton.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.UICreatorButton.MouseLeave += new System.EventHandler(this.Button_Leave);
+            // 
             // DataEditorControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Linen;
+            this.Controls.Add(this.UICreatorButton);
             this.Controls.Add(this.NoneButton);
             this.Controls.Add(this.AllButton);
             this.Controls.Add(this.CreateBindingCallbackControl);
@@ -369,6 +391,7 @@ namespace DataTierClient.Controls
         private DataJuggler.Win.Controls.LabelCheckBoxControl CreateBindingCallbackControl;
         private System.Windows.Forms.Label AllButton;
         private System.Windows.Forms.Label NoneButton;
+        private System.Windows.Forms.Button UICreatorButton;
     }
     #endregion
 

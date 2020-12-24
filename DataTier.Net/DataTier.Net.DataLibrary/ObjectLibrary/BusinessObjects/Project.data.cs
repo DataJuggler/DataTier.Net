@@ -47,6 +47,7 @@ namespace ObjectLibrary.BusinessObjects
         private string storedProcedureObjectNamespace;
         private int storedProcedureReferencesSetId;
         private string storedProcsFolder;
+        private string uIFolderPath;
         #endregion
 
         #region Methods
@@ -479,6 +480,20 @@ namespace ObjectLibrary.BusinessObjects
                 set
                 {
                     storedProcsFolder = value;
+                }
+            }
+            #endregion
+
+            #region string UIFolderPath
+            public string UIFolderPath
+            {
+                get
+                {
+                    return uIFolderPath;
+                }
+                set
+                {
+                    uIFolderPath = value;
                 }
             }
             #endregion

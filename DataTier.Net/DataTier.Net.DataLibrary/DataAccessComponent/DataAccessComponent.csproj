@@ -93,6 +93,10 @@
     <Compile Include="DataManager\Readers\ProjectReader.cs" />
     <Compile Include="DataManager\Readers\ProjectReferenceReader.cs" />
     <Compile Include="DataManager\Readers\ReferencesSetReader.cs" />
+    <Compile Include="DataManager\Readers\UIFieldReader.cs" />
+    <Compile Include="DataManager\Readers\UserInterfaceReader.cs" />
+    <Compile Include="DataManager\UIFieldManager.cs" />
+    <Compile Include="DataManager\UserInterfaceManager.cs" />
     <Compile Include="DataManager\Writers\AdminWriter.cs" />
     <Compile Include="DataManager\Writers\AdminWriterBase.cs" />
     <Compile Include="DataManager\Writers\CustomReaderWriter.cs" />
@@ -132,6 +136,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DataManager\DataManager.cs" />
+    <Compile Include="DataManager\Writers\UIFieldWriter.cs" />
+    <Compile Include="DataManager\Writers\UIFieldWriterBase.cs" />
+    <Compile Include="DataManager\Writers\UserInterfaceWriter.cs" />
+    <Compile Include="DataManager\Writers\UserInterfaceWriterBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataManager\DataConnector.cs" />
     <Compile Include="StoredProcedureManager\DeleteProcedures\DeleteAdminStoredProcedure.cs" />
@@ -147,6 +155,8 @@
     <Compile Include="StoredProcedureManager\DeleteProcedures\DeleteProjectReferenceStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\DeleteProcedures\DeleteProjectStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\DeleteProcedures\DeleteReferencesSetStoredProcedure.cs" />
+    <Compile Include="StoredProcedureManager\DeleteProcedures\DeleteUIFieldStoredProcedure.cs" />
+    <Compile Include="StoredProcedureManager\DeleteProcedures\DeleteUserInterfaceStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FetchAllAdminsStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FetchAllCustomReadersStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FetchAllDTNDatabasesStoredProcedure.cs" />
@@ -161,6 +171,8 @@
     <Compile Include="StoredProcedureManager\FetchProcedures\FetchAllProjectReferencesStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FetchAllProjectsStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FetchAllReferencesSetsStoredProcedure.cs" />
+    <Compile Include="StoredProcedureManager\FetchProcedures\FetchAllUIFieldsStoredProcedure.cs" />
+    <Compile Include="StoredProcedureManager\FetchProcedures\FetchAllUserInterfacesStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FindAdminStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FindCustomReaderStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FindDTNDatabaseStoredProcedure.cs" />
@@ -175,6 +187,8 @@
     <Compile Include="StoredProcedureManager\FetchProcedures\FindProjectReferenceStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FindProjectStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FindReferencesSetStoredProcedure.cs" />
+    <Compile Include="StoredProcedureManager\FetchProcedures\FindUIFieldStoredProcedure.cs" />
+    <Compile Include="StoredProcedureManager\FetchProcedures\FindUserInterfaceStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\InsertProcedures\InsertAdminStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\InsertProcedures\InsertCustomReaderStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\InsertProcedures\InsertDTNDatabaseStoredProcedure.cs" />
@@ -188,6 +202,8 @@
     <Compile Include="StoredProcedureManager\InsertProcedures\InsertProjectReferenceStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\InsertProcedures\InsertProjectStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\InsertProcedures\InsertReferencesSetStoredProcedure.cs" />
+    <Compile Include="StoredProcedureManager\InsertProcedures\InsertUIFieldStoredProcedure.cs" />
+    <Compile Include="StoredProcedureManager\InsertProcedures\InsertUserInterfaceStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\StoredProcedure.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -210,6 +226,8 @@
     <Compile Include="StoredProcedureManager\UpdateProcedures\UpdateProjectReferenceStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\UpdateProcedures\UpdateProjectStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\UpdateProcedures\UpdateReferencesSetStoredProcedure.cs" />
+    <Compile Include="StoredProcedureManager\UpdateProcedures\UpdateUIFieldStoredProcedure.cs" />
+    <Compile Include="StoredProcedureManager\UpdateProcedures\UpdateUserInterfaceStoredProcedure.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data Juggler.ico" />

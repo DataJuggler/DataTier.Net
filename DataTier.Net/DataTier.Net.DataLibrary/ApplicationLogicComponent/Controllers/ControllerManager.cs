@@ -40,6 +40,8 @@ namespace ApplicationLogicComponent.Controllers
         private ProjectController projectController;
         private ProjectReferenceController projectreferenceController;
         private ReferencesSetController referencessetController;
+        private UIFieldController uifieldController;
+        private UserInterfaceController userinterfaceController;
         #endregion
 
         #region Constructor
@@ -80,6 +82,8 @@ namespace ApplicationLogicComponent.Controllers
                 this.ProjectController = new ProjectController(this.ErrorProcessor, this.AppController);
                 this.ProjectReferenceController = new ProjectReferenceController(this.ErrorProcessor, this.AppController);
                 this.ReferencesSetController = new ReferencesSetController(this.ErrorProcessor, this.AppController);
+                this.UIFieldController = new UIFieldController(this.ErrorProcessor, this.AppController);
+                this.UserInterfaceController = new UserInterfaceController(this.ErrorProcessor, this.AppController);
             }
             #endregion
 
@@ -212,6 +216,22 @@ namespace ApplicationLogicComponent.Controllers
             {
                 get { return referencessetController; }
                 set { referencessetController = value; }
+            }
+            #endregion
+
+            #region UIFieldController
+            public UIFieldController UIFieldController
+            {
+                get { return uifieldController; }
+                set { uifieldController = value; }
+            }
+            #endregion
+
+            #region UserInterfaceController
+            public UserInterfaceController UserInterfaceController
+            {
+                get { return userinterfaceController; }
+                set { userinterfaceController = value; }
             }
             #endregion
 

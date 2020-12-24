@@ -762,6 +762,7 @@
   <ItemGroup>
     <Content Include="Data Juggler.ico" />
     <Content Include="DataTier.Net.ico" />
+    <None Include="Images\AutoFill Child Folders.png" />
     <Content Include="Images\OrderBy.png" />
     <Content Include="Images\Parameter Mode.png" />
     <None Include="Images\V.png" />

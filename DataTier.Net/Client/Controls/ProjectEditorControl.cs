@@ -32,6 +32,7 @@ namespace DataTierClient.Controls
         #region Private Variables
         private ActiveControlEnum nextControl;
         private ActiveControlEnum prevControl;
+        private bool showAutoFillHelp;
         private const string CreateDataTier = "dotnet new DataJuggler.DataTier.Net5.ProjectTemplates";
         
         // Used to install the Project Templates on the ProjectEditorControl.cs
@@ -54,13 +55,27 @@ namespace DataTierClient.Controls
         
         #region Events
             
+            #region AutoFillChildFolderInfo_Click(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when the 'AutoFillChildFolderInfo' is clicked.
+            /// </summary>
+            private void AutoFillChildFolderInfo_Click(object sender, EventArgs e)
+            {
+                // toggle back to false
+                this.ShowAutoFillHelp = false;
+
+                // Hide this control
+                UIEnable();
+            }
+            #endregion
+            
             #region BlazorServicesCheckBox_CheckedChanged(object sender, EventArgs e)
             /// <summary>
             /// event is fired when Blazor Services Check Box _ Checked Changed
             /// </summary>
             private void BlazorServicesCheckBox_CheckedChanged(object sender, EventArgs e)
             {
-                 // if the value for HasSelectedProject is true
+                // if the value for HasSelectedProject is true
                 if (HasSelectedProject)
                 {
                     // set the value
@@ -85,6 +100,24 @@ namespace DataTierClient.Controls
             }
             #endregion
 
+            #region BrowseUIPathButton_Click(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when the 'BrowseUIPathButton' is clicked.
+            /// </summary>
+            private void BrowseUIPathButton_Click(object sender, EventArgs e)
+            {
+                // if the value for HasSelectedProject is true
+                if (HasSelectedProject)
+                {
+                    // set the value
+                    SelectedProject.UIFolderPath = this.UIFolderTextBox.Text;
+                }
+
+                // Enable or disable controls
+                UIEnable();
+            }
+            #endregion
+            
             #region Button_Enter(object sender, EventArgs e)
             /// <summary>
             /// event is fired when Button _ Enter
@@ -414,7 +447,7 @@ namespace DataTierClient.Controls
                 if (this.SelectedProject != null)
                 {
                     // Set the ProjectName
-                    this.SelectedProject.ProjectName = this.ProjectNameTextBox.Text.ToString();
+                    this.SelectedProject.ProjectName = this.ProjectNameTextBox.Text;
 
                     // Enable Controls
                     UIEnable();
@@ -422,6 +455,41 @@ namespace DataTierClient.Controls
             }
             #endregion
         
+            #region ShowAutoFillHelpButton_Click(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when the 'ShowAutoFillHelpButton' is clicked.
+            /// </summary>
+            private void ShowAutoFillHelpButton_Click(object sender, EventArgs e)
+            {
+                // Toggle
+                this.ShowAutoFillHelp = !this.ShowAutoFillHelp;
+
+                // Update the UI
+                UIEnable();
+            }
+            #endregion
+            
+            #region UIFolderTextBox_TextChanged(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when UI Folder Text Box _ Text Changed
+            /// </summary>
+            private void UIFolderTextBox_TextChanged(object sender, EventArgs e)
+            {
+                 // if the SelectedProject exists
+                if (this.HasSelectedProject)
+                {
+                    // Set the ProjectFolder
+                    this.SelectedProject.UIFolderPath = this.UIFolderTextBox.Text;
+                    
+                    // get a reference to the ProjectFolder 
+                    string projectFolder = this.SelectedProject.ProjectFolder;
+                 
+                    // Enable Controls
+                    UIEnable();
+                }
+            }
+            #endregion
+            
         #endregion
         
         #region Methods
@@ -438,6 +506,7 @@ namespace DataTierClient.Controls
                 bool dotNet5 = false;
                 bool enableBlazorFeatures = false;
                 int bindingIndex = -1;
+                string uiFolderPath = "";
                 
                 // if the SelectedProject Exists
                 if(this.SelectedProject != null)
@@ -448,6 +517,7 @@ namespace DataTierClient.Controls
                     dotNet5 = SelectedProject.DotNet5;
                     enableBlazorFeatures = SelectedProject.EnableBlazorFeatures;
                     bindingIndex = FindBindingIndex(SelectedProject.BindingCallbackOption);
+                    uiFolderPath = SelectedProject.UIFolderPath;
                 }
                 
                 // dislay values now
@@ -456,6 +526,7 @@ namespace DataTierClient.Controls
                 this.DotNet5CheckBox.Checked = dotNet5;
                 this.BlazorServicesCheckBox.Checked = enableBlazorFeatures;
                 this.BindingCallbackOptionControl.SelectedIndex = bindingIndex;
+                this.UIFolderTextBox.Text = uiFolderPath;
                                 
                 // Enable controls
                 UIEnable();
@@ -643,6 +714,17 @@ namespace DataTierClient.Controls
                     this.BindingCallbackOptionControl.Visible = false;
                 }
 
+                // if the value for ShowAutoFillHelp is true
+                if (ShowAutoFillHelp)
+                {
+                    // position the control
+                    this.AutoFillChildFolderInfo.Left = (this.Width - this.AutoFillChildFolderInfo.Width) / 2;
+                    this.AutoFillChildFolderInfo.Top = (this.Height - this.AutoFillChildFolderInfo.Height) / 2;
+                }
+                
+                // Show or hide the AutoFill Help
+                this.AutoFillChildFolderInfo.Visible = this.ShowAutoFillHelp;
+
                 // refresh controls
                 this.Refresh();
             }
@@ -826,6 +908,17 @@ namespace DataTierClient.Controls
                     // return value
                     return selectedProject;
                 }
+            }
+        #endregion
+
+            #region ShowAutoFillHelp
+            /// <summary>
+            /// This property gets or sets the value for 'ShowAutoFillHelp'.
+            /// </summary>
+            public bool ShowAutoFillHelp
+            {
+                get { return showAutoFillHelp; }
+                set { showAutoFillHelp = value; }
             }
         #endregion
 

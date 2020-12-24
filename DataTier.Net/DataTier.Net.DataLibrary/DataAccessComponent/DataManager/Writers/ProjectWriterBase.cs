@@ -118,7 +118,7 @@ namespace DataAccessComponent.DataManager.Writers
             internal static SqlParameter[] CreateInsertParameters(Project project)
             {
                 // Initial Values
-                SqlParameter[] parameters = new SqlParameter[29];
+                SqlParameter[] parameters = new SqlParameter[30];
                 SqlParameter param = null;
 
                 // verify projectexists
@@ -308,6 +308,12 @@ namespace DataAccessComponent.DataManager.Writers
 
                     // set parameters[28]
                     parameters[28] = param;
+
+                    // Create [UIFolderPath] parameter
+                    param = new SqlParameter("@UIFolderPath", project.UIFolderPath);
+
+                    // set parameters[29]
+                    parameters[29] = param;
                 }
 
                 // return value
@@ -354,7 +360,7 @@ namespace DataAccessComponent.DataManager.Writers
             internal static SqlParameter[] CreateUpdateParameters(Project project)
             {
                 // Initial Values
-                SqlParameter[] parameters = new SqlParameter[30];
+                SqlParameter[] parameters = new SqlParameter[31];
                 SqlParameter param = null;
 
                 // verify projectexists
@@ -547,9 +553,15 @@ namespace DataAccessComponent.DataManager.Writers
                     // set parameters[28]
                     parameters[28] = param;
 
+                    // Create parameter for [UIFolderPath]
+                    param = new SqlParameter("@UIFolderPath", project.UIFolderPath);
+
+                    // set parameters[29]
+                    parameters[29] = param;
+
                     // Create parameter for [ProjectId]
                     param = new SqlParameter("@ProjectId", project.ProjectId);
-                    parameters[29] = param;
+                    parameters[30] = param;
                 }
 
                 // return value

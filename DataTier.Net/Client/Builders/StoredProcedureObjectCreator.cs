@@ -222,10 +222,10 @@ namespace DataTierClient.Builders
                 // Create file
                 CreateFile(fileName, DataManager.ProjectTypeEnum.DAC);
 
-                // Write References
-                WriteReferences(this.ObjectReferences);
-
-                // Write Blank Line
+                // Update 12.23.2020: Stored procedures do not need any using statements
+                
+                // Write 2 Blank Lines
+                WriteLine();
                 WriteLine();
 
                 // Write NameSpace

@@ -67,6 +67,7 @@ namespace DataAccessComponent.DataManager.Readers
                 int storedProcedureObjectNamespacefield = 27;
                 int storedProcedureReferencesSetIdfield = 28;
                 int storedProcsFolderfield = 29;
+                int uIFolderPathfield = 30;
 
                 try
                 {
@@ -101,6 +102,7 @@ namespace DataAccessComponent.DataManager.Readers
                     project.StoredProcedureObjectNamespace = DataHelper.ParseString(dataRow.ItemArray[storedProcedureObjectNamespacefield]);
                     project.StoredProcedureReferencesSetId = DataHelper.ParseInteger(dataRow.ItemArray[storedProcedureReferencesSetIdfield], 0);
                     project.StoredProcsFolder = DataHelper.ParseString(dataRow.ItemArray[storedProcsFolderfield]);
+                    project.UIFolderPath = DataHelper.ParseString(dataRow.ItemArray[uIFolderPathfield]);
                 }
                 catch
                 {

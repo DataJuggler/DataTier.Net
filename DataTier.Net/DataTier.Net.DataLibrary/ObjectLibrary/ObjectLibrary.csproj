@@ -102,6 +102,10 @@
     <Compile Include="BusinessObjects\ProjectReference.data.cs" />
     <Compile Include="BusinessObjects\ReferencesSet.business.cs" />
     <Compile Include="BusinessObjects\ReferencesSet.data.cs" />
+    <Compile Include="BusinessObjects\UIField.business.cs" />
+    <Compile Include="BusinessObjects\UIField.data.cs" />
+    <Compile Include="BusinessObjects\UserInterface.business.cs" />
+    <Compile Include="BusinessObjects\UserInterface.data.cs" />
     <Compile Include="BusinessObjects\VisualStudioSolution.cs" />
     <Compile Include="Enumerations\ObjectLibrary.Enumerations.cs" />
     <Compile Include="Parsers\DataTier.Net.Parser.cs" />
