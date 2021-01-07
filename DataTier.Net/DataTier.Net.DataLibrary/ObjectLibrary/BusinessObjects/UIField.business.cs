@@ -3,7 +3,6 @@
 
 using ObjectLibrary.Enumerations;
 using System;
-using DataJuggler.Net.Enumerations;
 
 #endregion
 

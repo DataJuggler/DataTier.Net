@@ -7,7 +7,6 @@ using ObjectLibrary.Enumerations;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using DataJuggler.Net.Enumerations;
 
 #endregion
 

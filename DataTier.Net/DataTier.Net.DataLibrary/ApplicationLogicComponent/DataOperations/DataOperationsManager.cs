@@ -12,7 +12,6 @@ using DataAccessComponent.StoredProcedureManager.UpdateProcedures;
 using ObjectLibrary.BusinessObjects;
 using System;
 using System.Collections.Generic;
-using DataJuggler.Net.Enumerations;
 
 #endregion
 
