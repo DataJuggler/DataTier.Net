@@ -39,6 +39,21 @@ namespace ApplicationLogicComponent.Reflection
         }
         #endregion
 
+        #region Methods
+
+            #region ToString()
+            /// <summary>
+            /// method returns the String
+            /// </summary>
+            public override string ToString()
+            {
+                // override the default type display
+                return this.FieldName + " = " + this.FieldValue;
+            }
+            #endregion
+            
+        #endregion
+
         #region Properties
 
         #region FieldName

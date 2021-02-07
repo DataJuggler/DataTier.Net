@@ -115,7 +115,7 @@ namespace ObjectLibrary.BusinessObjects
 
             #region CreateDefaultReferences()
             /// <summary>
-            /// This method creates the default references.
+            /// This method creates the default references. Comment so this shows up in changes.
             /// </summary>
             public void CreateDefaultReferences()
             {
@@ -212,6 +212,21 @@ namespace ObjectLibrary.BusinessObjects
                 this.WriterReferencesSet.References.Add(new ProjectReference("System.Data"));
                 this.WriterReferencesSet.References.Add(new ProjectReference("System.Data.SqlClient"));
                 this.AllReferences.Add(this.WriterReferencesSet);
+
+                 // Set StoredProcedure Namespace
+                this.StoredProcedureObjectNamespace = "DataAccessComponent.StoredProcedureManager";
+                
+                // Stored Procedure References
+                this.StoredProcedureReferencesSet = new ReferencesSet("StoredProcedures");
+                
+                // Set Stored Procedure References
+                this.StoredProcedureReferencesSet.References.Add(new ProjectReference("System"));
+                this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataJuggler.Net5"));
+                this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.DeleteProcedures"));
+                this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.FetchProcedures"));
+                this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.InsertProcedures"));
+                this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.UpdateProcedures"));
+                this.AllReferences.Add(this.StoredProcedureReferencesSet);
             }
             #endregion
 
