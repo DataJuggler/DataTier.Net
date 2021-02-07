@@ -19,6 +19,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using DataTierClient.Xml.Writers;
 
 #endregion
 
@@ -41,6 +42,7 @@ namespace DataTierClient.Controls
         private const string CreateServices = "dotnet new DataTier.Net5.ItemTemplates.BlazorDataServices";
         private const string DataWatcherFileName = "DataWatcher.cs";
         private const string ServiceFileName = "Service.cs";
+        private string initialProject;
         private Project project;
         private DTNTable table;
         #endregion
@@ -304,7 +306,7 @@ namespace DataTierClient.Controls
             /// event is fired when On Text Changed
             /// </summary>
             public void OnTextChanged(Control sender, string text)
-            {
+            {  
                 // if the value for HasProject is true
                 if (HasProject)
                 {
@@ -314,6 +316,7 @@ namespace DataTierClient.Controls
 
                 // Enable or disable controls
                 UIEnable();
+
             }
             #endregion
             
@@ -435,6 +438,12 @@ namespace DataTierClient.Controls
 
                     // Show the user a message
                     MessageBoxHelper.ShowMessage("All changes have been saved.", "Save Complete");
+
+                    // create the writer
+                    ProjectsWriter writer = new ProjectsWriter();
+
+                    // reset the InitialProject
+                    InitialProject = writer.ExportProject(Project);
                 }
 
                 // Enable controls
@@ -462,6 +471,12 @@ namespace DataTierClient.Controls
                     Project.ServicesFolder = Path.Combine(Project.ProjectFolder, @"DataGateway\Services");
                 }
 
+                // Create a new instance of a 'ProjectsWriter' object.
+                ProjectsWriter writer = new ProjectsWriter();
+
+                // Set the InitialProject text so we can compare later
+                this.InitialProject = writer.ExportProject(this.Project);
+
                 // Display the Text
                 ServicesFolderControl.Text = Project.ServicesFolder;
 
@@ -486,8 +501,27 @@ namespace DataTierClient.Controls
             /// </summary>
             public void UIEnable()
             {
-                // if the Project Exists and the ServiceFolder exists and the ServiceFolders are different
-                bool enabledSaveButton = ((HasProject) && (!TextHelper.IsEqual(Project.ServicesFolder, ServicesFolder)));
+                // local
+                bool enabledSaveButton = false;
+
+                // if the value for HasInitialProject is true
+                if (HasInitialProject)
+                {
+                    // if the Project Exists and the ServiceFolder exists and the ServiceFolders are different
+                    // Create a new instance of a 'ProjectsWriter' object.
+                    ProjectsWriter writer = new ProjectsWriter();
+
+                    // Set the InitialProject text so we can compare later
+                    string currentProject = writer.ExportProject(this.Project);
+
+                    // set the value for enabledSaveButton
+                    enabledSaveButton = !TextHelper.IsEqual(InitialProject, currentProject);
+                }
+                else
+                {
+                    // set to true
+                    enabledSaveButton = true;
+                }
 
                 // set the value
                 SaveCancelControl.EnableSaveButton = enabledSaveButton;
@@ -522,6 +556,23 @@ namespace DataTierClient.Controls
             }
             #endregion
 
+            #region HasInitialProject
+            /// <summary>
+            /// This property returns true if the 'InitialProject' exists.
+            /// </summary>
+            public bool HasInitialProject
+            {
+                get
+                {
+                    // initial value
+                    bool hasInitialProject = (!String.IsNullOrEmpty(this.InitialProject));
+                    
+                    // return value
+                    return hasInitialProject;
+                }
+            }
+            #endregion
+            
             #region HasProject
             /// <summary>
             /// This property returns true if this object has a 'Project'.
@@ -570,6 +621,17 @@ namespace DataTierClient.Controls
                     // return value
                     return hasTable;
                 }
+            }
+            #endregion
+            
+            #region InitialProject
+            /// <summary>
+            /// This property gets or sets the value for 'InitialProject'.
+            /// </summary>
+            public string InitialProject
+            {
+                get { return initialProject; }
+                set { initialProject = value; }
             }
             #endregion
             
