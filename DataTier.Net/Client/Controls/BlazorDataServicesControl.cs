@@ -37,8 +37,8 @@ namespace DataTierClient.Controls
     {
         
         #region Private Variables
-        private const string ItemTemplateInstall = "dotnet new --i DataJuggler.DataTier.Net5.ItemTemplates.BlazorDataServices";
-        private const string ItemTemplateUninstall = "dotnet new -u DataJuggler.DataTier.Net5.ItemTemplates.BlazorDataServices";
+        private const string ItemTemplateInstall = "dotnet new --install DataJuggler.DataTier.Net5.ItemTemplates.BlazorDataServices::2.5.4";
+        private const string ItemTemplateUninstall = "dotnet new -uninstall DataJuggler.DataTier.Net5.ItemTemplates.BlazorDataServices";
         private const string CreateServices = "dotnet new DataTier.Net5.ItemTemplates.BlazorDataServices";
         private const string DataWatcherFileName = "DataWatcher.cs";
         private const string ServiceFileName = "Service.cs";
