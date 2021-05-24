@@ -178,6 +178,7 @@ namespace DataTierClient.Controls
                             string pluralVariableName = PluralWordHelper.GetPluralName(table.TableName, true);
                             string primaryKeyDataType = "";
                             string primaryKeyVariableName = "";
+                            string primaryKeyPropertyName = "";
                             
                             // Update 12.12.2020: The DataService (for Blazor) requires the PrimaryKey
                             // cataType and field name.
@@ -189,6 +190,7 @@ namespace DataTierClient.Controls
                                 // get the dataType
                                 primaryKeyDataType = field.DataType.ToString().ToLower();
                                 primaryKeyVariableName = CSharpClassWriter.CapitalizeFirstCharEx(field.FieldName, true);
+                                primaryKeyPropertyName = CSharpClassWriter.CapitalizeFirstCharEx(field.FieldName, false);
 
                                 // if an autonumber identity field (which most will be)
                                 if (primaryKeyDataType == "autonumber")
@@ -231,6 +233,7 @@ namespace DataTierClient.Controls
                             fileText = fileText.Replace("[PluralTableName]", pluralTableName);
                             fileText = fileText.Replace("[ParameterDataType]", primaryKeyDataType);
                             fileText = fileText.Replace("[PrimaryKey]", primaryKeyVariableName);
+                            fileText = fileText.Replace("[PrimaryKeyPropertyName]", primaryKeyPropertyName);
 
                             // Delete the current file at path2
                             File.Delete(path2);
