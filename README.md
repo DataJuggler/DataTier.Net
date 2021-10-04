@@ -1,3 +1,7 @@
+Update 7.13.2021: .Net Framework Templates have a bug I caused when I moved CryptographyHelper to its own projects. The easy fix is just remove any of the code for CryptographyHelper, and get rid of any calls that have a useEncryption. I was planning on only making updates to .Net 5, but I will see if I can fix this when I get some time.
+
+For .Net 5 projects, this is not an issue.
+
 ## Welcome To DataTier.Net Home
 
 <img src=https://github.com/DataJuggler/SharedRepo/blob/master/Shared/Images/DataTier.Net%20Ad.png>
