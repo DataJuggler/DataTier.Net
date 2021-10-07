@@ -33,7 +33,8 @@ namespace DataTierClient.Controls
         private ActiveControlEnum nextControl;
         private ActiveControlEnum prevControl;
         private bool showAutoFillHelp;
-        private const string CreateDataTier = "dotnet new DataJuggler.DataTier.Net5.ProjectTemplates";
+        private const string CreateDataTier = "dotnet new DataTier.Net5.ProjectTemplates";
+        private const string InstallDataTier = "dotnet new --install DataJuggler.DataTier.Net5.ProjectTemplates";
         
         // Used to install the Project Templates on the ProjectEditorControl.cs
         private const int GraphWidth = 268;
@@ -175,6 +176,35 @@ namespace DataTierClient.Controls
                                 // Create a Process to launch a command window (hidden) to create the item templates
                                 Process process = new Process();
                                 ProcessStartInfo startInfo = new ProcessStartInfo();
+                                startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                                startInfo.FileName = "cmd.exe";
+                                startInfo.WorkingDirectory = SelectedProject.ProjectFolder;
+                                startInfo.Arguments = "/C " + InstallDataTier;
+                                process.StartInfo = startInfo;
+                                process.Start();
+
+                                // wait a small delay
+                                int second = DateTime.Now.Second;
+                                int newSecond = 0;
+                                int duration = 0;
+
+                                do
+                                {
+                                    // Get the new second
+                                    newSecond = DateTime.Now.Second;
+
+                                    // if a second changed
+                                    if (newSecond != second)
+                                    {
+                                        // Increment the value for duration
+                                        duration++;
+                                    }
+
+                                } while (duration < 2);
+
+                                // Create a Process to launch a command window (hidden) to create the item templates
+                                process = new Process();
+                                startInfo = new ProcessStartInfo();
                                 startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                                 startInfo.FileName = "cmd.exe";
                                 startInfo.WorkingDirectory = SelectedProject.ProjectFolder;
