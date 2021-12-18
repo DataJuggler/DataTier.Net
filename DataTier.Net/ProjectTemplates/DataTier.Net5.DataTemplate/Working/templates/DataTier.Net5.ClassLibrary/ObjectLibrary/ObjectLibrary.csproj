@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <PackageId>DataJuggler.DataTier.Net5.ObjectLibrary</PackageId>
     <Version>2.5.6</Version>
     <Authors>DataJuggler</Authors>
@@ -14,3 +14,5 @@
   </ItemGroup>
   
 </Project>
+
+

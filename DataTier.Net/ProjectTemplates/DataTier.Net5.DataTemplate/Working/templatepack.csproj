@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     
@@ -10,7 +10,7 @@
     <Description>This is a new set of templates to use when creating a project for DataTier.Net targeting .Net 5.0
 </Description>
     <PackageTags>DataTier.Net;DataTier.Net5;C#;SQL;SQLServer;EntityFrameworkAlternative;</PackageTags>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <ContentTargetFolders>content</ContentTargetFolders>
@@ -53,5 +53,7 @@ This is the first version for .Net 5.</PackageReleaseNotes>
 
 
   
+
+
 
 

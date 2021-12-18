@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    
+    <PackageType>Template</PackageType>
+    <PackageVersion>6.0.0</PackageVersion>
+    <PackageId>DataJuggler.DataTier.Net6.ProjectTemplates</PackageId>
+    <Title>DataJuggler.DataTier.Net6.ProjectTemplates</Title>
+    <Authors>Data Juggler</Authors>
+    <Description>This is a new set of templates to use when creating a project for DataTier.Net targeting .Net 6.0
+</Description>
+    <PackageTags>DataTier.Net;DataTier.Net6;C#;SQL;SQLServer;EntityFrameworkAlternative;</PackageTags>
+    <TargetFramework>net6.0</TargetFramework>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <Version>6.0.0</Version>
+    <Product>DataJuggler.DataTier.Net6.ProjectTemplate</Product>
+    <ApplicationIcon></ApplicationIcon>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/DataJuggler/DataTier.Net</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/DataJuggler/DataTier.Net.git</RepositoryUrl>
+    <RepositoryType>Git/GitHub</RepositoryType>
+    <PackageReleaseNotes>		
+		Update 12.18.2021: This is the first version for .Net6</PackageReleaseNotes>
+    <Nullable>disable</Nullable>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" />
+    <Compile Remove="**\*" />
+    <Compile Remove="templates\DataTier.Net6.ClassLibrary\.vs\**" />
+    <Content Remove="templates\DataTier.Net6.ClassLibrary\.vs\**" />
+    <EmbeddedResource Remove="templates\DataTier.Net6.ClassLibrary\.vs\**" />
+    <None Remove="templates\DataTier.Net6.ClassLibrary\.vs\**" />
+  </ItemGroup>
+  
+</Project>
+
+
+
+    
+    
+    
+
+
+  
+
+

@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Version>2.5.6</Version>
-    <PackageId>DataJuggler.DataTier.Net5.DataGateway</PackageId>
+    <Version>6.0.0</Version>
+    <PackageId>DataJuggler.DataTier.Net6.DataGateway</PackageId>
     <Authors>DataJuggler</Authors>
     <Company>DataJuggler</Company>
-    <Description>This is one of the four projects that make up a DataTier.Net5.ProjectTemplate</Description>
+    <Description>This is one of the four projects that make up a DataTier.Net6. ProjectTemplate</Description>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,5 +20,7 @@
   </ItemGroup>
 
 </Project>
+
+
 
 

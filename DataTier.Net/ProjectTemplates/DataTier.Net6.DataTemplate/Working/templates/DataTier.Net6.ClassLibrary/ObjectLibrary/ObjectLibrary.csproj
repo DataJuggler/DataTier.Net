@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <PackageId>DataJuggler.DataTier.Net6.ObjectLibrary</PackageId>
+    <Version>6.0.0</Version>
+    <Authors>DataJuggler</Authors>
+    <Company>DataJuggler</Company>
+    <Description>This is one of four projects that make up a DataTier.Net6 DataTier</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DataJuggler.Net6" Version="6.0.0" />
+  </ItemGroup>
+  
+</Project>
+
+
+
+
+
