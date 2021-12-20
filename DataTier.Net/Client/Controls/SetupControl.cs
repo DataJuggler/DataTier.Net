@@ -36,6 +36,8 @@ namespace DataTierClient.Controls
         private const string DatabaseName = "DataTier.Net.Database";
         public const string DotNet5ProjectTemplates = "dotnet new -install DataJuggler.DataTier.Net5.ProjectTemplates";
         public const string UninstallDotNet5ProjectTemplates = "dotnet new -uninstall DataJuggler.DataTier.Net5.ProjectTemplates";
+        public const string DotNet6ProjectTemplates = "dotnet new -install DataJuggler.DataTier.Net6.ProjectTemplates";
+        public const string UninstallDotNet6ProjectTemplates = "dotnet new -uninstall DataJuggler.DataTier.Net6.ProjectTemplates";
         #endregion
         
         #region Constructor
@@ -72,12 +74,7 @@ namespace DataTierClient.Controls
             private void Button_Leave(object sender, EventArgs e)
             {
                 // Change the cursor back to the default pointer
-                Cursor = Cursors.Default;
-
-                // hide all 3 info labels
-                InfoLabel1.Visible = false;
-                InfoLabel2.Visible = false;
-                InfoLabel3.Visible = false;
+                Cursor = Cursors.Default;              
             }
             #endregion
             
@@ -198,14 +195,34 @@ namespace DataTierClient.Controls
             }
             #endregion
             
-            #region InstallDatabaseSchemaButton_MouseHover(object sender, EventArgs e)
+            #region InstallDotNet6Label_Click(object sender, EventArgs e)
             /// <summary>
-            /// event is fired when Install Database Schema Button _ Mouse Hover
+            /// event is fired when the 'InstallDotNet6Label' is clicked.
             /// </summary>
-            private void InstallDatabaseSchemaButton_MouseHover(object sender, EventArgs e)
+            private void InstallDotNet6Label_Click(object sender, EventArgs e)
             {
-                // set to visible
-                InfoLabel1.Visible = true;
+                try               
+                 {
+                     // Create a Process to launch a command window (hidden) to create the item templates
+                    Process process = new Process();
+                    ProcessStartInfo startInfo = new ProcessStartInfo();
+                    startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    startInfo.FileName = "cmd.exe";
+                    startInfo.Arguments = "/C " + DotNet6ProjectTemplates;
+                    process.StartInfo = startInfo;
+                    process.Start();
+
+                    // Show the user a message
+                    MessageBoxHelper.ShowMessage("DataJuggler.DataTier.Net6.ProjectTemplates were installed onto your computer.", "Install Complete");
+                 }
+                 catch (Exception error)
+                 {
+                     // Set the error
+                    DebugHelper.WriteDebugError("DotNet6Label_Click", this.Name, error);
+
+                    // show the user a message
+                    MessageBoxHelper.ShowMessage("The DataTier.Net6.Project Templates could not be installed. Ensure you are connected to the internet and try again.", "Insteall Templates Failed");
+                 }
             }
             #endregion
             
@@ -256,8 +273,7 @@ namespace DataTierClient.Controls
             public void OnCheckChanged(LabelCheckBoxControl sender, bool isChecked)
             {
                 // Show or hide the InfoLabel and InfoLabel1 basedup isChecked value.
-                InfoLabel.Visible = !isChecked;
-                InfoLabel1.Visible = isChecked;
+                InfoLabel.Visible = !isChecked;                
                 ClickHere.Visible = ((isChecked) && (!DatabaseSchemaClicked));
 
                 // there is only one label check box control so this has to be the DatabaseCreatedCheckBox
@@ -294,9 +310,9 @@ namespace DataTierClient.Controls
                     startInfo.Arguments = "/C " + UninstallDotNet5ProjectTemplates;
                     process.StartInfo = startInfo;
                     process.Start();
-
+                    
                     // Show the user a message
-                    MessageBoxHelper.ShowMessage("DataJuggler.DataTier.Net.Core.ProjectTemplates were uninstalled from your computer.", "Uninstall Complete");
+                    MessageBoxHelper.ShowMessage("DataJuggler.DataTier.Net5.ProjectTemplates were uninstalled from your computer.", "Uninstall Complete");
                  }
                  catch (Exception error)
                  {
@@ -304,7 +320,38 @@ namespace DataTierClient.Controls
                     DebugHelper.WriteDebugError("UninstallDotNet5_Click", this.Name, error);
 
                     // show the user a message
-                    MessageBoxHelper.ShowMessage("The DataTier.Net.Core.Project Templates could not be uninstalled.", "Uninsteall Templates Failed");
+                    MessageBoxHelper.ShowMessage("The DataTier.Net5.Project Templates could not be uninstalled.", "Uninsteall Templates Failed");
+                 }
+            }
+            #endregion
+            
+            #region UninstallDotNet6Label_Click(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when the 'UninstallDotNet6Label' is clicked.
+            /// </summary>
+            private void UninstallDotNet6Label_Click(object sender, EventArgs e)
+            {
+                try               
+                 {
+                     // Create a Process to launch a command window (hidden) to create the item templates
+                    Process process = new Process();
+                    ProcessStartInfo startInfo = new ProcessStartInfo();
+                    startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    startInfo.FileName = "cmd.exe";
+                    startInfo.Arguments = "/C " + UninstallDotNet6ProjectTemplates;
+                    process.StartInfo = startInfo;
+                    process.Start();
+
+                    // Show the user a message
+                    MessageBoxHelper.ShowMessage("DataJuggler.DataTier.Net6.ProjectTemplates were uninstalled from your computer.", "Uninstall Complete");
+                 }
+                 catch (Exception error)
+                 {
+                     // Set the error
+                    DebugHelper.WriteDebugError("UninstallDotNet6_Click", this.Name, error);
+
+                    // show the user a message
+                    MessageBoxHelper.ShowMessage("The DataTier.Net6.ProjectTemplates could not be uninstalled.", "Uninsteall Templates Failed");
                  }
             }
             #endregion
@@ -405,7 +452,6 @@ namespace DataTierClient.Controls
         #endregion
 
         #endregion
-
     }
     #endregion
 

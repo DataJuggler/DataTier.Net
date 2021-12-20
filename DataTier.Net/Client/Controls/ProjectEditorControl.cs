@@ -16,6 +16,7 @@ using ObjectLibrary.BusinessObjects;
 using System.IO;
 using DataTierClient.Forms;
 using System.Collections.Generic;
+using DataJuggler.Net.Enumerations;
 
 #endregion
 
@@ -33,9 +34,11 @@ namespace DataTierClient.Controls
         private ActiveControlEnum nextControl;
         private ActiveControlEnum prevControl;
         private bool showAutoFillHelp;
-        private const string CreateDataTier = "dotnet new DataTier.Net5.ProjectTemplates";
-        private const string InstallDataTier = "dotnet new --install DataJuggler.DataTier.Net5.ProjectTemplates";
-        
+        private const string CreateDataTierNet5 = "dotnet new DataTier.Net5.ProjectTemplates";
+        private const string InstallDataTierNet5 = "dotnet new --install DataJuggler.DataTier.Net5.ProjectTemplates";
+        private const string CreateDataTierNet6 = "dotnet new DataTier.Net6.ProjectTemplates";
+        private const string InstallDataTierNet6 = "dotnet new --install DataJuggler.DataTier.Net6.ProjectTemplates";
+
         // Used to install the Project Templates on the ProjectEditorControl.cs
         private const int GraphWidth = 268;
         #endregion 
@@ -141,11 +144,11 @@ namespace DataTierClient.Controls
             }
             #endregion
             
-            #region CreateDotNet5Project_Click(object sender, EventArgs e)
+            #region CreateDotNetProject_Click(object sender, EventArgs e)
             /// <summary>
-            /// event is fired when the 'CreateDotNet5Project_Click' is clicked.
+            /// event is fired when the 'CreateDotNetProject_Click' is clicked.
             /// </summary>
-            private void CreateDotNet5Project_Click(object sender, EventArgs e)
+            private void CreateDotNetProject_Click(object sender, EventArgs e)
             {
                 try
                 {
@@ -169,20 +172,6 @@ namespace DataTierClient.Controls
                             // if the value for installed is true
                             if (installed)
                             {
-                                 // update anything
-                                Refresh();
-                                Application.DoEvents();
-
-                                // Create a Process to launch a command window (hidden) to create the item templates
-                                Process process = new Process();
-                                ProcessStartInfo startInfo = new ProcessStartInfo();
-                                startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                                startInfo.FileName = "cmd.exe";
-                                startInfo.WorkingDirectory = SelectedProject.ProjectFolder;
-                                startInfo.Arguments = "/C " + InstallDataTier;
-                                process.StartInfo = startInfo;
-                                process.Start();
-
                                 // wait a small delay
                                 int second = DateTime.Now.Second;
                                 int newSecond = 0;
@@ -203,17 +192,35 @@ namespace DataTierClient.Controls
                                 } while (duration < 2);
 
                                 // Create a Process to launch a command window (hidden) to create the item templates
-                                process = new Process();
-                                startInfo = new ProcessStartInfo();
+                                Process process = new Process();
+                                ProcessStartInfo startInfo = new ProcessStartInfo();
                                 startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                                 startInfo.FileName = "cmd.exe";
                                 startInfo.WorkingDirectory = SelectedProject.ProjectFolder;
-                                startInfo.Arguments = "/C " + CreateDataTier;
+
+                                if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net5)
+                                {
+                                    // if Net5
+                                    startInfo.Arguments = "/C " + CreateDataTierNet5;
+                                }
+                                else
+                                {
+                                    // if Net6
+                                    startInfo.Arguments = "/C " + CreateDataTierNet6;
+                                }
+
                                 process.StartInfo = startInfo;
                                 process.Start();
 
-                                // get the solution path
-                                string solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net5.ClassLibrary.sln");
+                                // get the solution path - default to DotNet6
+                                string solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net6.ClassLibrary.sln");
+
+                                // if Net5
+                                if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net5)
+                                {
+                                    // switch for Net6
+                                    solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net5.ClassLibrary.sln");
+                                }
 
                                 // Set the startTime
                                 DateTime startTime = DateTime.Now;
@@ -297,84 +304,11 @@ namespace DataTierClient.Controls
                 catch (Exception error)
                 {
                     // Set the error
-                    DebugHelper.WriteDebugError("CreateDotNet5Button_LinkClicked", this.Name, error);
+                    DebugHelper.WriteDebugError("CreateDotNetProject_Clicked", this.Name, error);
 
                     // show the user a message
                     MessageBoxHelper.ShowMessage("The datatier could not be created in the Project Folder. Ensure you are connected to the internet and that you have permission to write to the Project Folder.", "Create DataTier Failed");
                 }
-            }
-            #endregion
-            
-            #region DotNet5CheckBox_CheckedChanged(object sender, EventArgs e)
-            /// <summary>
-            /// event is fired when Dot Net Core Check Box _ Checked Changed
-            /// </summary>
-            private void DotNet5CheckBox_CheckedChanged(object sender, EventArgs e)
-            {
-                // if the value for HasSelectedProject is true
-                if (HasSelectedProject)
-                {
-                    // set the value
-                    SelectedProject.DotNet5 = DotNet5CheckBox.Checked;
-
-                    // This has to be called
-                    if (ListHelper.HasOneOrMoreItems(SelectedProject.AllReferences))
-                    {
-                        // here we must swap out DataJuggler.Net for DataJuggler.Net5
-
-                        // iteratet he referencesSet
-                        foreach (ReferencesSet referencesSet in SelectedProject.AllReferences)
-                        {
-                            // if the references exist
-                            if (referencesSet.HasReferences)
-                            {  
-                                // iterate the references
-                                foreach (ProjectReference reference in referencesSet.References)
-                                {
-                                    // if DotNet5
-                                    if (SelectedProject.DotNet5)
-                                    {
-                                        // if this is the reference for DataJuggler.Net
-                                        if (TextHelper.IsEqual(reference.ReferenceName, "DataJuggler.Net", true, true))
-                                        {  
-                                            // Change to .Net5
-                                            reference.ReferenceName = "DataJuggler.Net5";
-
-                                            // Create a new instance of a 'Gateway' object.
-                                            Gateway gateway = new Gateway();
-
-                                            // Clonse this
-                                            ProjectReference projectReference = reference.Clone();
-
-                                            // perform the save so this persists
-                                            bool saved = gateway.SaveProjectReference(ref projectReference);
-
-                                            // break out of the loop
-                                            break;
-                                        }
-                                    }
-                                    // if this is the reference for DataJuggler.Net
-                                    if (TextHelper.IsEqual(reference.ReferenceName, "DataJuggler.Net5", true, true))
-                                    {  
-                                        // Change to .Net
-                                        reference.ReferenceName = "DataJuggler.Net";
-
-                                        // break out of the loop
-                                        break;
-                                    }
-                                }
-                            }                            
-                        }
-                    }
-                    else
-                    {
-                        // Create the references
-                        SelectedProject.CreateDefaultReferences();
-                    }
-                }
-
-                // Enable or disable controls
-                UIEnable();
             }
             #endregion
             
@@ -423,8 +357,16 @@ namespace DataTierClient.Controls
                 // if the value for HasSelectedProject is true
                 if (HasSelectedProject)
                 {
-                    // Set the value
-                    SelectedProject.BindingCallbackOption = (BindingCallbackOptionEnum) selectedIndex;                   
+                    if (TextHelper.IsEqual(control.Name, BindingCallbackOptionControl.Name))
+                    {
+                        // Set the BindingCallbackOption
+                        SelectedProject.BindingCallbackOption = (BindingCallbackOptionEnum) selectedIndex;                   
+                    }
+                    else if (TextHelper.IsEqual(control.Name, ProjectTypeControl.Name))
+                    {
+                        // Set the ProjectType
+                        SelectedProject.TargetFramework = (TargetFrameworkEnum) (selectedIndex + 4);
+                    }
                 }
 
                 // Enable or disable controls
@@ -531,9 +473,9 @@ namespace DataTierClient.Controls
                 // locals
                 string projectName = "";
                 string projectFolder = "";
-                bool dotNet5 = false;
                 bool enableBlazorFeatures = false;
                 int bindingIndex = -1;
+                int projectTypeIndex = ProjectTypeControl.FindItemIndexByValue("Net6");
                 string uiFolderPath = "";
                 
                 // if the SelectedProject Exists
@@ -541,20 +483,20 @@ namespace DataTierClient.Controls
                 {
                     // set values
                     projectName = this.SelectedProject.ProjectName;
-                    projectFolder = this.SelectedProject.ProjectFolder;
-                    dotNet5 = SelectedProject.DotNet5;
+                    projectFolder = this.SelectedProject.ProjectFolder;                    
                     enableBlazorFeatures = SelectedProject.EnableBlazorFeatures;
                     bindingIndex = FindBindingIndex(SelectedProject.BindingCallbackOption);
+                    projectTypeIndex = ProjectTypeControl.FindItemIndexByValue(SelectedProject.TargetFramework.ToString());
                     uiFolderPath = SelectedProject.UIFolderPath;
                 }
                 
                 // dislay values now
-                this.ProjectNameTextBox.Text = projectName;
-                this.ProjectFolderTextBox.Text = projectFolder;
-                this.DotNet5CheckBox.Checked = dotNet5;
-                this.BlazorServicesCheckBox.Checked = enableBlazorFeatures;
-                this.BindingCallbackOptionControl.SelectedIndex = bindingIndex;
-                this.UIFolderTextBox.Text = uiFolderPath;
+                ProjectNameTextBox.Text = projectName;
+                ProjectFolderTextBox.Text = projectFolder;
+                ProjectTypeControl.SelectedIndex = projectTypeIndex;
+                BlazorServicesCheckBox.Checked = enableBlazorFeatures;
+                BindingCallbackOptionControl.SelectedIndex = bindingIndex;
+                UIFolderTextBox.Text = uiFolderPath;
                                 
                 // Enable controls
                 UIEnable();
@@ -622,7 +564,19 @@ namespace DataTierClient.Controls
                 this.NextControl = ActiveControlEnum.DatabasesTab;
 
                 // Load the binding choices
-                this.BindingCallbackOptionControl.LoadItems(typeof(BindingCallbackOptionEnum));
+                BindingCallbackOptionControl.LoadItems(typeof(BindingCallbackOptionEnum));
+
+                // Load the ProjectTypes combo box
+                ProjectTypeControl.LoadItems(typeof(TargetFrameworkEnum));
+
+                // Setup the listener
+                ProjectTypeControl.SelectedIndexListener = this;
+
+                // Set the SelectedIndex
+                ProjectTypeControl.SelectedIndex = ProjectTypeControl.FindItemIndexByValue("Net6");
+
+                // Should call UIEnable
+                OnSelectedIndexChanged(ProjectTypeControl, ProjectTypeControl.SelectedIndex, ProjectTypeControl.SelectedObject);
             }
             #endregion
 
@@ -642,8 +596,20 @@ namespace DataTierClient.Controls
                     ProcessStartInfo startInfo = new ProcessStartInfo();
                     startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                     startInfo.FileName = "cmd.exe";
-                    startInfo.Arguments = "/C " + SetupControl.DotNet5ProjectTemplates;
+
+                    if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net5)
+                    {
+                        // Use Net5
+                        startInfo.Arguments = "/C " + InstallDataTierNet5;
+                    }
+                    else
+                    {
+                        // Use Net6
+                        startInfo.Arguments = "/C " + InstallDataTierNet6;
+                    }
                     process.StartInfo = startInfo;
+
+                    // Start
                     process.Start();
 
                     // Set to true
@@ -658,7 +624,7 @@ namespace DataTierClient.Controls
                     DebugHelper.WriteDebugError("InstallDataTierNetTemplates", this.Name, error);
 
                     // show the user a message
-                    MessageBoxHelper.ShowMessage("The DataTier.Net5.Project Templates could not be installed. Ensure you are connected to the internet and try again.", "Insteall Templates Failed");
+                    MessageBoxHelper.ShowMessage("The DataTier.Net.Project Templates could not be installed. Ensure you are connected to the internet and try again.", "Install Templates Failed");
                  }
 
                  // return value
@@ -725,20 +691,20 @@ namespace DataTierClient.Controls
                 // if the value for HasSelectedProject is true
                 if (HasSelectedProject)
                 {
-                    // Show Enable BlazorServices for DotNet5 projects only
-                    this.BlazorServicesCheckBox.Visible = SelectedProject.DotNet5;
+                    // Show Enable BlazorServices for DotNet5 or DotNet6 projects only
+                    this.BlazorServicesCheckBox.Visible = SelectedProject.IsDotNetCore;
 
                     // Enable Blazor Features to true
                     this.BindingCallbackOptionControl.Visible = SelectedProject.EnableBlazorFeatures;
 
                     // Show the CreateDotNet5Project control if DotNet5
-                    this.CreateDotNet5Project.Visible = SelectedProject.DotNet5;
+                    this.CreateDotNetProject.Visible = SelectedProject.IsDotNetCore;
                 }
                 else
                 {
                     // Do not show for .Net Framework projects
                     this.BlazorServicesCheckBox.Visible = false;
-                    this.CreateDotNet5Project.Visible = false;
+                    this.CreateDotNetProject.Visible = false;
                     this.BindingCallbackOptionControl.Visible = false;
                 }
 
@@ -760,12 +726,12 @@ namespace DataTierClient.Controls
 
             #region ValidateSelectedProject()
             /// <summary>
-            /// Validate the selected project.
+            /// Validate the selected project. This is required for the interface. Not actually used.
             /// </summary>
             public bool ValidateSelectedProject()
             {
                 // initial value
-                bool valid = false;
+                bool valid = true;
                 
                 // return value
                 return valid;

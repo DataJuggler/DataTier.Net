@@ -35,8 +35,9 @@
             // SetupControl
             // 
             this.SetupControl.BackColor = System.Drawing.Color.Transparent;
-            this.SetupControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("SetupControl.BackgroundImage")));
+            this.SetupControl.BackgroundImage = global::DataTierClient.Properties.Resources.Setup1;
             this.SetupControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.SetupControl.DatabaseSchemaClicked = false;
             this.SetupControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SetupControl.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SetupControl.ForeColor = System.Drawing.Color.GhostWhite;
@@ -44,6 +45,7 @@
             this.SetupControl.Name = "SetupControl";
             this.SetupControl.Size = new System.Drawing.Size(1080, 720);
             this.SetupControl.TabIndex = 0;
+            this.SetupControl.Load += new System.EventHandler(this.SetupControl_Load);
             // 
             // SetupForm
             // 

@@ -192,10 +192,10 @@ namespace DataTierClient.Xml.Writers
                     sb.Append(indentString2);
                     sb.Append("<DateModified>" + project.DateModified + "</DateModified>" + Environment.NewLine);
 
-                    // Write out the value for DotNet5
+                    // Write out the value for TargetFramework
 
                     sb.Append(indentString2);
-                    sb.Append("<DotNet5>" + project.DotNet5 + "</DotNet5>" + Environment.NewLine);
+                    sb.Append("<TargetFramework>" + project.TargetFramework + "</TargetFramework>" + Environment.NewLine);
 
                     // Write out the value for EnableBlazorFeatures
 

@@ -4,6 +4,7 @@
 
 using DataJuggler.Core.UltimateHelper;
 using DataJuggler.Net;
+using DataJuggler.Net.Enumerations;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -33,7 +34,7 @@ namespace DataTierClient.Builders
 		/// <summary>
         /// Create a new instance of ControllerManagerCreator
         /// </summary>
-        public ControllerCreator(List<DataTable> dataTablesArg, ReferencesSet objectReferencesArg, string rootControllerPathArg, string projectNameArg, string nameSpaceNameArg, ProjectFileManager fileManager, bool dotNet5Project) : base(fileManager, false, false, dotNet5Project)
+        public ControllerCreator(List<DataTable> dataTablesArg, ReferencesSet objectReferencesArg, string rootControllerPathArg, string projectNameArg, string nameSpaceNameArg, ProjectFileManager fileManager, TargetFrameworkEnum targetFramework) : base(fileManager, false, false, targetFramework)
 		{   
 		    // Set Properties
 		    this.DataTables = dataTablesArg;

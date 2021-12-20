@@ -10,6 +10,7 @@ using System.Text;
 using System.IO;
 using System.Collections.Generic;
 using DataTierClient.ClientUtil;
+using DataJuggler.Net.Enumerations;
 
 #endregion
 
@@ -34,7 +35,7 @@ namespace DataTierClient.Builders
 		/// <summary>
         /// Create a new instance of ControllerManagerCreator
         /// </summary>
-        public ObjectManagerCreator(List<DataTable> dataTablesArg, ReferencesSet objectReferencesArg, string rootDataManagerPathArg, string nameSpaceNameArg, ProjectFileManager fileManager, bool dotNet5Project) : base(fileManager, false, false, dotNet5Project)
+        public ObjectManagerCreator(List<DataTable> dataTablesArg, ReferencesSet objectReferencesArg, string rootDataManagerPathArg, string nameSpaceNameArg, ProjectFileManager fileManager, TargetFrameworkEnum targetFramework) : base(fileManager, false, false, targetFramework)
 		{   
 		    // Set Properties
 		    this.DataTables = dataTablesArg;

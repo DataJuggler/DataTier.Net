@@ -154,7 +154,7 @@ namespace ObjectLibrary.Enumerations
         WindowsAuthentication = 0,
         SQLServerAuthentication = 1
     }
-    #endregion
+    #endregion    
 
     #region UserResponseEnum
     /// <summary>

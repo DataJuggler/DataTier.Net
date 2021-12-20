@@ -10,6 +10,7 @@ using DataTier.Net.StoredProcedureGenerator;
 using System.Text;
 using System.Collections.Generic;
 using DataTierClient.ClientUtil;
+using DataJuggler.Net.Enumerations;
 
 #endregion
 
@@ -35,7 +36,7 @@ namespace DataTierClient.Builders
         /// <summary>
         /// Create a new instance of DataObjectReaderCreator
         /// </summary>
-        public DataObjectReaderCreator(List<DataTable> dataTablesArg, ReferencesSet objectReferencesArg, string rootDataObjectPathArg, string nameSpaceNameArg, ProjectFileManager fileManager, bool dotNet5Project) : base(fileManager, false, false, dotNet5Project)
+        public DataObjectReaderCreator(List<DataTable> dataTablesArg, ReferencesSet objectReferencesArg, string rootDataObjectPathArg, string nameSpaceNameArg, ProjectFileManager fileManager, TargetFrameworkEnum targetFramework) : base(fileManager, false, false, targetFramework)
 		{   
 		    // Set Properties
 		    this.DataTables = dataTablesArg;
@@ -49,7 +50,7 @@ namespace DataTierClient.Builders
         /// <summary>
         /// Create a new instance of DataObjectReaderCreator
         /// </summary>
-        public DataObjectReaderCreator(DataTable dataTableArg, ReferencesSet objectReferencesArg, string rootDataObjectPathArg, string nameSpaceNameArg, ProjectFileManager fileManager, bool dotNet5Project) : base(fileManager, false, false, dotNet5Project)
+        public DataObjectReaderCreator(DataTable dataTableArg, ReferencesSet objectReferencesArg, string rootDataObjectPathArg, string nameSpaceNameArg, ProjectFileManager fileManager, TargetFrameworkEnum targetFramework) : base(fileManager, false, false, targetFramework)
 		{   
 		    // Set Properties
 		    this.DataTable = dataTableArg;

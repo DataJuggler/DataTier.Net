@@ -8,6 +8,7 @@ using DataJuggler.Core.UltimateHelper;
 using DataJuggler.Core.UltimateHelper.Objects;
 using DataJuggler.Net;
 using DataJuggler.Net.Cryptography;
+using DataJuggler.Net.Enumerations;
 using DataJuggler.Win.Controls;
 using DataJuggler.Win.Controls.Interfaces;
 using DataTier.Net.StoredProcedureGenerator;
@@ -635,7 +636,7 @@ namespace DataTierClient.Forms
                     if ((this.HasFileManager) && (FileManager.WereNewFilesCreated))
                     {
                         // If the value for the property OpenProject.DotNet5 is true
-                        if (OpenProject.DotNet5)
+                        if (OpenProject.TargetFramework != TargetFrameworkEnum.NetFramework)
                         {
                             // if we find any excluded tables, then we need to force 
                             forceProjectUpdate = CheckForceProjectUpdate();
@@ -696,9 +697,12 @@ namespace DataTierClient.Forms
                         string nameSpaceName = this.OpenProject.ControllerNamespace;
                         string projectName = this.OpenProject.ProjectName;
                         string rootControllerPath = this.OpenProject.ControllerFolder;
+
+                        // 12.19.2021
+                        TargetFrameworkEnum targetFramework = (TargetFrameworkEnum) OpenProject.TargetFramework;
                         
                         // Create ControllerManagerCreator
-                        ControllerManagerCreator creator = new ControllerManagerCreator(DataTables, convertedReferences, rootControllerPath, projectName, nameSpaceName, this.FileManager, OpenProject.DotNet5);
+                        ControllerManagerCreator creator = new ControllerManagerCreator(DataTables, convertedReferences, rootControllerPath, projectName, nameSpaceName, this.FileManager, targetFramework);
                         
                         // local for created
                         success = creator.CreateControllerManager(this.DataTables);
@@ -741,8 +745,11 @@ namespace DataTierClient.Forms
                     string projectName = this.OpenProject.ProjectName;
                     string rootControllerPath = this.OpenProject.ControllerFolder;
 
+                    // 12.19.2021
+                    TargetFrameworkEnum targetFramework = (TargetFrameworkEnum) OpenProject.TargetFramework;
+
                     // Create ControllerManagerCreator
-                    ControllerCreator creator = new ControllerCreator(DataTables, convertedReferences, rootControllerPath, projectName, nameSpaceName, this.FileManager, OpenProject.DotNet5);
+                    ControllerCreator creator = new ControllerCreator(DataTables, convertedReferences, rootControllerPath, projectName, nameSpaceName, this.FileManager, targetFramework);
 
                     // local for created
                     creator.CreateControllers(this.DataTables);
@@ -788,8 +795,11 @@ namespace DataTierClient.Forms
                     // Set namespace
                     string nameSpace = this.OpenProject.DataManagerNamespace;
 
+                    // 12.19.2021
+                    TargetFrameworkEnum targetFramework = (TargetFrameworkEnum) OpenProject.TargetFramework;
+
                     // Create 
-                    ObjectManagerCreator creator = new ObjectManagerCreator(this.DataTables, convertedReferences, rootDataManagerPath, nameSpace, fileManager, OpenProject.DotNet5);
+                    ObjectManagerCreator creator = new ObjectManagerCreator(this.DataTables, convertedReferences, rootDataManagerPath, nameSpace, fileManager, targetFramework);
 
                     // local for created
                     creator.CreateObjectManagers(this.DataTables);
@@ -834,8 +844,11 @@ namespace DataTierClient.Forms
                     string projectName = this.OpenProject.ProjectName;
                     string rootDataOperationsPath = this.OpenProject.DataOperationsFolder;
 
+                    // 12.19.2021
+                    TargetFrameworkEnum targetFramework = (TargetFrameworkEnum) OpenProject.TargetFramework;
+
                     // Create DataOperationsManagerCreator
-                    DataOperationsManagerCreator creator = new DataOperationsManagerCreator(this.DataTables, convertedReferences, rootDataOperationsPath, projectName, nameSpaceName, this.FileManager, OpenProject.DotNet5);
+                    DataOperationsManagerCreator creator = new DataOperationsManagerCreator(this.DataTables, convertedReferences, rootDataOperationsPath, projectName, nameSpaceName, this.FileManager, targetFramework);
 
                     // local for created
                     success = creator.CreateDataOperationsManager(this.DataTables);
@@ -876,8 +889,11 @@ namespace DataTierClient.Forms
                     string nameSpaceName = this.OpenProject.DataOperationsNamespace;
                     string rootDataOperationsPath = this.OpenProject.DataOperationsFolder;
 
+                    // 12.19.2021
+                    TargetFrameworkEnum targetFramework = (TargetFrameworkEnum) OpenProject.TargetFramework;
+
                     // Create 
-                    DataOperationMethodCreator creator = new DataOperationMethodCreator(this.DataTables, convertedReferences, rootDataOperationsPath, nameSpaceName, FileManager, OpenProject.DotNet5);
+                    DataOperationMethodCreator creator = new DataOperationMethodCreator(this.DataTables, convertedReferences, rootDataOperationsPath, nameSpaceName, FileManager, targetFramework);
 
                     // local for created
                     creator.CreateDataOperationMethods(this.DataTables);
@@ -923,7 +939,12 @@ namespace DataTierClient.Forms
                         // Get namespace and project namew
                         string nameSpace = this.OpenProject.DataWriterNamespace;
                         string rootDataWriterPath = this.OpenProject.DataWriterFolder;
-                        DataWriterCreator writer = new DataWriterCreator(this.DataTables, convertedReferences, rootDataWriterPath, nameSpace, this.FileManager, OpenProject.DotNet5);
+
+                        // 12.19.2021
+                        TargetFrameworkEnum targetFramework = (TargetFrameworkEnum) OpenProject.TargetFramework;
+                        
+                        // create the writer
+                        DataWriterCreator writer = new DataWriterCreator(this.DataTables, convertedReferences, rootDataWriterPath, nameSpace, this.FileManager, targetFramework);
 
                         // Write Classes
                         writer.CreateObjectWriters();
@@ -971,7 +992,12 @@ namespace DataTierClient.Forms
                         string nameSpace = this.OpenProject.DataWriterNamespace;
                         string projectName = this.OpenProject.ProjectName;
                         string gatewayPath = FindGatewayPath(this.OpenProject.ProjectFolder);
-                        GatewayCreator writer = new GatewayCreator(DataTables, convertedReferences, gatewayPath, projectName, nameSpace, this.FileManager, OpenProject.DotNet5);
+
+                        // 12.19.2021
+                        TargetFrameworkEnum targetFramework = (TargetFrameworkEnum) OpenProject.TargetFramework;
+
+                        // create the writer
+                        GatewayCreator writer = new GatewayCreator(DataTables, convertedReferences, gatewayPath, projectName, nameSpace, this.FileManager, targetFramework);
 
                         // Write Classes
                         writer.CreateGatewayMethods();
@@ -1015,8 +1041,11 @@ namespace DataTierClient.Forms
                         List<ProjectReference> references = this.OpenProject.ReaderReferencesSet.References;
                         DataJuggler.Net.ReferencesSet convertedReferences = classBuilder.ConvertReferences(references, "ObjectReaders");
                         
+                        // 12.19.2021
+                        TargetFrameworkEnum targetFramework = (TargetFrameworkEnum) OpenProject.TargetFramework;
+
                         // Create writer
-                        DataObjectReaderCreator writer = new DataObjectReaderCreator(DataTables, convertedReferences, OpenProject.ReaderFolder, OpenProject.ReaderNamespace, FileManager, OpenProject.DotNet5);
+                        DataObjectReaderCreator writer = new DataObjectReaderCreator(DataTables, convertedReferences, OpenProject.ReaderFolder, OpenProject.ReaderNamespace, FileManager, targetFramework);
                         
                         // Write Classes
                         writer.CreateObjectReaders();
@@ -1118,8 +1147,11 @@ namespace DataTierClient.Forms
                         string nameSpaceName = this.OpenProject.DataManagerNamespace;
                         string rootDataManagerPath = this.OpenProject.DataManagerFolder;
 
+                        // 12.19.2021
+                        TargetFrameworkEnum targetFramework = (TargetFrameworkEnum) OpenProject.TargetFramework;
+
                         // Create 
-                        DataManagerCreator creator = new DataManagerCreator(this.DataTables, convertedReferences, rootDataManagerPath, OpenProject.ProjectName, nameSpaceName, this.FileManager, OpenProject.DotNet5);
+                        DataManagerCreator creator = new DataManagerCreator(this.DataTables, convertedReferences, rootDataManagerPath, OpenProject.ProjectName, nameSpaceName, this.FileManager, targetFramework);
 
                         // local for created
                         creator.CreateDataManager(this.DataTables);
@@ -1202,8 +1234,11 @@ namespace DataTierClient.Forms
                     // set namespace
                     string nameSpace = this.OpenProject.StoredProcedureObjectNamespace;
 
+                    // 12.19.2021
+                    TargetFrameworkEnum targetFramework = (TargetFrameworkEnum) OpenProject.TargetFramework;
+
                     // Create 
-                    StoredProcedureObjectCreator creator = new StoredProcedureObjectCreator(this.DataTables, convertedReferences, rootStoredProceduresPath, nameSpace, this.FileManager, OpenProject.DotNet5);
+                    StoredProcedureObjectCreator creator = new StoredProcedureObjectCreator(this.DataTables, convertedReferences, rootStoredProceduresPath, nameSpace, this.FileManager, targetFramework);
 
                     // local for created
                     creator.CreateStoredProcedureObjects(this.DataTables);

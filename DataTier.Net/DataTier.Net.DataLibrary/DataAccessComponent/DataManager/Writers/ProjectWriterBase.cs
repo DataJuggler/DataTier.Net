@@ -218,92 +218,92 @@ namespace DataAccessComponent.DataManager.Writers
                     // set parameters[13]
                     parameters[13] = param;
 
-                    // Create [DotNet5] parameter
-                    param = new SqlParameter("@DotNet5", project.DotNet5);
+                    // Create [EnableBlazorFeatures] parameter
+                    param = new SqlParameter("@EnableBlazorFeatures", project.EnableBlazorFeatures);
 
                     // set parameters[14]
                     parameters[14] = param;
 
-                    // Create [EnableBlazorFeatures] parameter
-                    param = new SqlParameter("@EnableBlazorFeatures", project.EnableBlazorFeatures);
+                    // Create [ObjectFolder] parameter
+                    param = new SqlParameter("@ObjectFolder", project.ObjectFolder);
 
                     // set parameters[15]
                     parameters[15] = param;
 
-                    // Create [ObjectFolder] parameter
-                    param = new SqlParameter("@ObjectFolder", project.ObjectFolder);
+                    // Create [ObjectNamespace] parameter
+                    param = new SqlParameter("@ObjectNamespace", project.ObjectNamespace);
 
                     // set parameters[16]
                     parameters[16] = param;
 
-                    // Create [ObjectNamespace] parameter
-                    param = new SqlParameter("@ObjectNamespace", project.ObjectNamespace);
+                    // Create [ObjectReferencesSetId] parameter
+                    param = new SqlParameter("@ObjectReferencesSetId", project.ObjectReferencesSetId);
 
                     // set parameters[17]
                     parameters[17] = param;
 
-                    // Create [ObjectReferencesSetId] parameter
-                    param = new SqlParameter("@ObjectReferencesSetId", project.ObjectReferencesSetId);
+                    // Create [ProjectFolder] parameter
+                    param = new SqlParameter("@ProjectFolder", project.ProjectFolder);
 
                     // set parameters[18]
                     parameters[18] = param;
 
-                    // Create [ProjectFolder] parameter
-                    param = new SqlParameter("@ProjectFolder", project.ProjectFolder);
+                    // Create [ProjectName] parameter
+                    param = new SqlParameter("@ProjectName", project.ProjectName);
 
                     // set parameters[19]
                     parameters[19] = param;
 
-                    // Create [ProjectName] parameter
-                    param = new SqlParameter("@ProjectName", project.ProjectName);
+                    // Create [ReaderFolder] parameter
+                    param = new SqlParameter("@ReaderFolder", project.ReaderFolder);
 
                     // set parameters[20]
                     parameters[20] = param;
 
-                    // Create [ReaderFolder] parameter
-                    param = new SqlParameter("@ReaderFolder", project.ReaderFolder);
+                    // Create [ReaderNamespace] parameter
+                    param = new SqlParameter("@ReaderNamespace", project.ReaderNamespace);
 
                     // set parameters[21]
                     parameters[21] = param;
 
-                    // Create [ReaderNamespace] parameter
-                    param = new SqlParameter("@ReaderNamespace", project.ReaderNamespace);
+                    // Create [ReaderReferencesSetId] parameter
+                    param = new SqlParameter("@ReaderReferencesSetId", project.ReaderReferencesSetId);
 
                     // set parameters[22]
                     parameters[22] = param;
 
-                    // Create [ReaderReferencesSetId] parameter
-                    param = new SqlParameter("@ReaderReferencesSetId", project.ReaderReferencesSetId);
+                    // Create [ServicesFolder] parameter
+                    param = new SqlParameter("@ServicesFolder", project.ServicesFolder);
 
                     // set parameters[23]
                     parameters[23] = param;
 
-                    // Create [ServicesFolder] parameter
-                    param = new SqlParameter("@ServicesFolder", project.ServicesFolder);
+                    // Create [StoredProcedureObjectFolder] parameter
+                    param = new SqlParameter("@StoredProcedureObjectFolder", project.StoredProcedureObjectFolder);
 
                     // set parameters[24]
                     parameters[24] = param;
 
-                    // Create [StoredProcedureObjectFolder] parameter
-                    param = new SqlParameter("@StoredProcedureObjectFolder", project.StoredProcedureObjectFolder);
+                    // Create [StoredProcedureObjectNamespace] parameter
+                    param = new SqlParameter("@StoredProcedureObjectNamespace", project.StoredProcedureObjectNamespace);
 
                     // set parameters[25]
                     parameters[25] = param;
 
-                    // Create [StoredProcedureObjectNamespace] parameter
-                    param = new SqlParameter("@StoredProcedureObjectNamespace", project.StoredProcedureObjectNamespace);
+                    // Create [StoredProcedureReferencesSetId] parameter
+                    param = new SqlParameter("@StoredProcedureReferencesSetId", project.StoredProcedureReferencesSetId);
 
                     // set parameters[26]
                     parameters[26] = param;
 
-                    // Create [StoredProcedureReferencesSetId] parameter
-                    param = new SqlParameter("@StoredProcedureReferencesSetId", project.StoredProcedureReferencesSetId);
+                    // Create [StoredProcsFolder] parameter
+                    param = new SqlParameter("@StoredProcsFolder", project.StoredProcsFolder);
 
                     // set parameters[27]
                     parameters[27] = param;
 
-                    // Create [StoredProcsFolder] parameter
-                    param = new SqlParameter("@StoredProcsFolder", project.StoredProcsFolder);
+                    // Create [TargetFramework] parameter
+                    param = new SqlParameter("@TargetFramework", project.TargetFramework);
 
                     // set parameters[28]
                     parameters[28] = param;
@@ -462,92 +462,92 @@ namespace DataAccessComponent.DataManager.Writers
                     // set parameters[13]
                     parameters[13] = param;
 
-                    // Create parameter for [DotNet5]
-                    param = new SqlParameter("@DotNet5", project.DotNet5);
+                    // Create parameter for [EnableBlazorFeatures]
+                    param = new SqlParameter("@EnableBlazorFeatures", project.EnableBlazorFeatures);
 
                     // set parameters[14]
                     parameters[14] = param;
 
-                    // Create parameter for [EnableBlazorFeatures]
-                    param = new SqlParameter("@EnableBlazorFeatures", project.EnableBlazorFeatures);
+                    // Create parameter for [ObjectFolder]
+                    param = new SqlParameter("@ObjectFolder", project.ObjectFolder);
 
                     // set parameters[15]
                     parameters[15] = param;
 
-                    // Create parameter for [ObjectFolder]
-                    param = new SqlParameter("@ObjectFolder", project.ObjectFolder);
+                    // Create parameter for [ObjectNamespace]
+                    param = new SqlParameter("@ObjectNamespace", project.ObjectNamespace);
 
                     // set parameters[16]
                     parameters[16] = param;
 
-                    // Create parameter for [ObjectNamespace]
-                    param = new SqlParameter("@ObjectNamespace", project.ObjectNamespace);
+                    // Create parameter for [ObjectReferencesSetId]
+                    param = new SqlParameter("@ObjectReferencesSetId", project.ObjectReferencesSetId);
 
                     // set parameters[17]
                     parameters[17] = param;
 
-                    // Create parameter for [ObjectReferencesSetId]
-                    param = new SqlParameter("@ObjectReferencesSetId", project.ObjectReferencesSetId);
+                    // Create parameter for [ProjectFolder]
+                    param = new SqlParameter("@ProjectFolder", project.ProjectFolder);
 
                     // set parameters[18]
                     parameters[18] = param;
 
-                    // Create parameter for [ProjectFolder]
-                    param = new SqlParameter("@ProjectFolder", project.ProjectFolder);
+                    // Create parameter for [ProjectName]
+                    param = new SqlParameter("@ProjectName", project.ProjectName);
 
                     // set parameters[19]
                     parameters[19] = param;
 
-                    // Create parameter for [ProjectName]
-                    param = new SqlParameter("@ProjectName", project.ProjectName);
+                    // Create parameter for [ReaderFolder]
+                    param = new SqlParameter("@ReaderFolder", project.ReaderFolder);
 
                     // set parameters[20]
                     parameters[20] = param;
 
-                    // Create parameter for [ReaderFolder]
-                    param = new SqlParameter("@ReaderFolder", project.ReaderFolder);
+                    // Create parameter for [ReaderNamespace]
+                    param = new SqlParameter("@ReaderNamespace", project.ReaderNamespace);
 
                     // set parameters[21]
                     parameters[21] = param;
 
-                    // Create parameter for [ReaderNamespace]
-                    param = new SqlParameter("@ReaderNamespace", project.ReaderNamespace);
+                    // Create parameter for [ReaderReferencesSetId]
+                    param = new SqlParameter("@ReaderReferencesSetId", project.ReaderReferencesSetId);
 
                     // set parameters[22]
                     parameters[22] = param;
 
-                    // Create parameter for [ReaderReferencesSetId]
-                    param = new SqlParameter("@ReaderReferencesSetId", project.ReaderReferencesSetId);
+                    // Create parameter for [ServicesFolder]
+                    param = new SqlParameter("@ServicesFolder", project.ServicesFolder);
 
                     // set parameters[23]
                     parameters[23] = param;
 
-                    // Create parameter for [ServicesFolder]
-                    param = new SqlParameter("@ServicesFolder", project.ServicesFolder);
+                    // Create parameter for [StoredProcedureObjectFolder]
+                    param = new SqlParameter("@StoredProcedureObjectFolder", project.StoredProcedureObjectFolder);
 
                     // set parameters[24]
                     parameters[24] = param;
 
-                    // Create parameter for [StoredProcedureObjectFolder]
-                    param = new SqlParameter("@StoredProcedureObjectFolder", project.StoredProcedureObjectFolder);
+                    // Create parameter for [StoredProcedureObjectNamespace]
+                    param = new SqlParameter("@StoredProcedureObjectNamespace", project.StoredProcedureObjectNamespace);
 
                     // set parameters[25]
                     parameters[25] = param;
 
-                    // Create parameter for [StoredProcedureObjectNamespace]
-                    param = new SqlParameter("@StoredProcedureObjectNamespace", project.StoredProcedureObjectNamespace);
+                    // Create parameter for [StoredProcedureReferencesSetId]
+                    param = new SqlParameter("@StoredProcedureReferencesSetId", project.StoredProcedureReferencesSetId);
 
                     // set parameters[26]
                     parameters[26] = param;
 
-                    // Create parameter for [StoredProcedureReferencesSetId]
-                    param = new SqlParameter("@StoredProcedureReferencesSetId", project.StoredProcedureReferencesSetId);
+                    // Create parameter for [StoredProcsFolder]
+                    param = new SqlParameter("@StoredProcsFolder", project.StoredProcsFolder);
 
                     // set parameters[27]
                     parameters[27] = param;
 
-                    // Create parameter for [StoredProcsFolder]
-                    param = new SqlParameter("@StoredProcsFolder", project.StoredProcsFolder);
+                    // Create parameter for [TargetFramework]
+                    param = new SqlParameter("@TargetFramework", project.TargetFramework);
 
                     // set parameters[28]
                     parameters[28] = param;

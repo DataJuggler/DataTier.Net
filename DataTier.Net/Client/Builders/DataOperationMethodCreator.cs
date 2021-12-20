@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using DataJuggler.Net;
 using System.Text;
 using System.IO;
+using DataJuggler.Net.Enumerations;
 
 #endregion
 
@@ -32,7 +33,7 @@ namespace DataTierClient.Builders
 		/// <summary>
         /// Create a new instance of ControllerManagerCreator
         /// </summary>
-        public DataOperationMethodCreator(List<DataTable> dataTablesArg, ReferencesSet objectReferencesArg, string rootDataOperationsPathArg, string nameSpaceNameArg, ProjectFileManager fileManager, bool dotNet5Project) : base(fileManager, false, false, dotNet5Project)
+        public DataOperationMethodCreator(List<DataTable> dataTablesArg, ReferencesSet objectReferencesArg, string rootDataOperationsPathArg, string nameSpaceNameArg, ProjectFileManager fileManager, TargetFrameworkEnum targetFramework) : base(fileManager, false, false, targetFramework)
 		{   
 		    // Set Properties
 		    this.DataTables = dataTablesArg;

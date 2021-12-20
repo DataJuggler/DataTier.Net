@@ -2,6 +2,7 @@
 
 #region using statements
 
+using DataJuggler.Net.Enumerations;
 using ObjectLibrary.BusinessObjects;
 using ObjectLibrary.Enumerations;
 using System;
@@ -50,22 +51,22 @@ namespace DataAccessComponent.DataManager.Readers
                 int dataWriterNamespacefield = 11;
                 int dataWriterReferencesSetIdfield = 12;
                 int dateModifiedfield = 13;
-                int dotNet5field = 14;
-                int enableBlazorFeaturesfield = 15;
-                int objectFolderfield = 16;
-                int objectNamespacefield = 17;
-                int objectReferencesSetIdfield = 18;
-                int projectFolderfield = 19;
-                int projectIdfield = 20;
-                int projectNamefield = 21;
-                int readerFolderfield = 22;
-                int readerNamespacefield = 23;
-                int readerReferencesSetIdfield = 24;
-                int servicesFolderfield = 25;
-                int storedProcedureObjectFolderfield = 26;
-                int storedProcedureObjectNamespacefield = 27;
-                int storedProcedureReferencesSetIdfield = 28;
-                int storedProcsFolderfield = 29;
+                int enableBlazorFeaturesfield = 14;
+                int objectFolderfield = 15;
+                int objectNamespacefield = 16;
+                int objectReferencesSetIdfield = 17;
+                int projectFolderfield = 18;
+                int projectIdfield = 19;
+                int projectNamefield = 20;
+                int readerFolderfield = 21;
+                int readerNamespacefield = 22;
+                int readerReferencesSetIdfield = 23;
+                int servicesFolderfield = 24;
+                int storedProcedureObjectFolderfield = 25;
+                int storedProcedureObjectNamespacefield = 26;
+                int storedProcedureReferencesSetIdfield = 27;
+                int storedProcsFolderfield = 28;
+                int targetFrameworkfield = 29;
                 int uIFolderPathfield = 30;
 
                 try
@@ -85,7 +86,6 @@ namespace DataAccessComponent.DataManager.Readers
                     project.DataWriterNamespace = DataHelper.ParseString(dataRow.ItemArray[dataWriterNamespacefield]);
                     project.DataWriterReferencesSetId = DataHelper.ParseInteger(dataRow.ItemArray[dataWriterReferencesSetIdfield], 0);
                     project.DateModified = DataHelper.ParseDate(dataRow.ItemArray[dateModifiedfield]);
-                    project.DotNet5 = DataHelper.ParseBoolean(dataRow.ItemArray[dotNet5field], false);
                     project.EnableBlazorFeatures = DataHelper.ParseBoolean(dataRow.ItemArray[enableBlazorFeaturesfield], false);
                     project.ObjectFolder = DataHelper.ParseString(dataRow.ItemArray[objectFolderfield]);
                     project.ObjectNamespace = DataHelper.ParseString(dataRow.ItemArray[objectNamespacefield]);
@@ -101,6 +101,7 @@ namespace DataAccessComponent.DataManager.Readers
                     project.StoredProcedureObjectNamespace = DataHelper.ParseString(dataRow.ItemArray[storedProcedureObjectNamespacefield]);
                     project.StoredProcedureReferencesSetId = DataHelper.ParseInteger(dataRow.ItemArray[storedProcedureReferencesSetIdfield], 0);
                     project.StoredProcsFolder = DataHelper.ParseString(dataRow.ItemArray[storedProcsFolderfield]);
+                    project.TargetFramework = (TargetFrameworkEnum) DataHelper.ParseInteger(dataRow.ItemArray[targetFrameworkfield], 0);
                     project.UIFolderPath = DataHelper.ParseString(dataRow.ItemArray[uIFolderPathfield]);
                 }
                 catch

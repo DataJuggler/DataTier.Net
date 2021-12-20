@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
+using DataJuggler.Net.Enumerations;
 
 #endregion
 
@@ -866,8 +867,8 @@ namespace DataTierClient.Controls
             public void UIEnable()
             {
                 // local
-                bool showBlazorFeatures = ((HasProject) && (Project.EnableBlazorFeatures) && (Project.DotNet5));
-                bool showCreateBindingCallbackControl = ((HasProject) && (Project.EnableBlazorFeatures) && (Project.BindingCallbackOption == BindingCallbackOptionEnum.Allow_Binding) && (Project.DotNet5));
+                bool showBlazorFeatures = ((HasProject) && (Project.EnableBlazorFeatures) && (Project.TargetFramework != TargetFrameworkEnum.NetFramework));
+                bool showCreateBindingCallbackControl = ((HasProject) && (Project.EnableBlazorFeatures) && (Project.BindingCallbackOption == BindingCallbackOptionEnum.Allow_Binding) && (Project.TargetFramework != TargetFrameworkEnum.NetFramework));
 
                 // if there is a SelectedTable
                 if ((this.HasSelectedTable) && (!this.SelectedTable.Exclude))

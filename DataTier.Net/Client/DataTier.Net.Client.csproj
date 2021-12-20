@@ -59,8 +59,8 @@
     <Reference Include="DataJuggler.Core.UltimateHelper, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\DataJuggler.Core.UltimateHelper.1.5.0\lib\net461\DataJuggler.Core.UltimateHelper.dll</HintPath>
     </Reference>
-    <Reference Include="DataJuggler.Net, Version=5.8.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DataJuggler.Net.5.8.2\lib\net461\DataJuggler.Net.dll</HintPath>
+    <Reference Include="DataJuggler.Net">
+      <HintPath>..\..\packages\DataJuggler.Net.6.0.0\bin\Release\DataJuggler.Net.dll</HintPath>
     </Reference>
     <Reference Include="DataJuggler.Net.Cryptography, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\DataJuggler.Net.Cryptography.1.0.0\lib\net461\DataJuggler.Net.Cryptography.dll</HintPath>
@@ -118,8 +118,8 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="XmlMirror.Runtime, Version=2.2.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\XmlMirror.Runtime.2.2.1\lib\net461\XmlMirror.Runtime.dll</HintPath>
+    <Reference Include="XmlMirror.Runtime, Version=2.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\XmlMirror.Runtime.2.2.2\lib\net48\XmlMirror.Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -762,7 +762,6 @@
     <Compile Include="Enumerations\DataTierClient.Enumerations.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data Juggler.ico" />
     <Content Include="DataTier.Net.ico" />
     <None Include="Images\AutoFill Child Folders.png" />
     <Content Include="Images\OrderBy.png" />
@@ -804,7 +803,9 @@
     <None Include="Resources\DataTier.Net.Blazor.png" />
     <None Include="Resources\DataTier.Net.Blazor1.png" />
     <None Include="Resources\Next.png" />
-    <Content Include="Tools.ico" />
+    <None Include="Resources\Setup.png" />
+    <None Include="Resources\Setup1.png" />
+    <None Include="Resources\Setup3.png" />
     <Content Include="Xml\Files\DataTier.Net.Update.xml" />
     <Content Include="Xml\Files\DeserializedFieldSet.xml" />
     <Content Include="Xml\Files\SelectedFieldSet.xml" />

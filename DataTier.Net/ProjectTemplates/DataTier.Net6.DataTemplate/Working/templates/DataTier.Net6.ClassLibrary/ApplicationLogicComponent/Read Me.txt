@@ -1,3 +1,7 @@
+Update 12.19.2021: Making Progress.
+
+News: No News
+
 Update 12.18.2021: Attempting to make it work for 2022 and .Net 6
 
 --

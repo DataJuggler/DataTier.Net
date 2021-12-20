@@ -62,10 +62,14 @@ namespace DataTierClient.Forms
                     return userCancelled;
                 }
             }
-            #endregion
+        #endregion
 
         #endregion
 
+        private void SetupControl_Load(object sender, EventArgs e)
+        {
+
+        }
     }
     #endregion
 

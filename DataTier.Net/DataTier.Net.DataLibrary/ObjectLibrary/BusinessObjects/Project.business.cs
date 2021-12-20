@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using ObjectLibrary.Enumerations;
 using System.Text;
+using DataJuggler.Net.Enumerations;
 
 #endregion
 
@@ -30,7 +31,7 @@ namespace ObjectLibrary.BusinessObjects
         public ReferencesSet writerReferencesSet;
         public ReferencesSet storedProcedureReferencesSet;
 		private List<Enumeration> enumerations;
-        private List<DTNTable> tables;        
+        private List<DTNTable> tables;           
         #endregion
 
         #region Constructor
@@ -326,6 +327,9 @@ namespace ObjectLibrary.BusinessObjects
                 
                 // Create Default References
                 this.CreateDefaultReferences();
+
+                // New projects now default to .net6
+                TargetFramework = TargetFrameworkEnum.Net6;
             }
             #endregion
 
@@ -507,6 +511,40 @@ namespace ObjectLibrary.BusinessObjects
                     
                     // return value
                     return hasTables;
+                }
+            }
+            #endregion
+
+            #region IsDotNetCore
+            /// <summary>
+            /// this read only property returns true if the TargetFramework is .Net5 or .Net6
+            /// </summary>
+            public bool IsDotNetCore
+            {
+                get
+                {
+                    // initial value
+                    bool isDotNetCore = (TargetFramework != TargetFrameworkEnum.NetFramework);
+
+                    // return value
+                    return isDotNetCore;
+                }
+            }
+            #endregion
+
+            #region IsDotNetFramework
+            /// <summary>
+            /// this read only property returns true if the TargetFramework is NetFramework
+            /// </summary>
+            public bool IsDotNetFramework
+            {
+                get
+                {
+                    // initial value
+                    bool isDotNetFramework = (TargetFramework == TargetFrameworkEnum.NetFramework);
+
+                    // return value
+                    return isDotNetFramework;
                 }
             }
             #endregion

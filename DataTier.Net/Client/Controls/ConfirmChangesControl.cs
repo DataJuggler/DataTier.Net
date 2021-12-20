@@ -18,6 +18,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
+using DataJuggler.Net.Enumerations;
 
 #endregion
 
@@ -443,8 +444,11 @@ namespace DataTierClient.Controls
                             // create the ProjectFileManager
                             this.ProjectFileManager = new ProjectFileManager();
 
+                            // 12.19.2021
+                            TargetFrameworkEnum targetFramework = (TargetFrameworkEnum) Project.TargetFramework;
+
                             // Create writer
-                            DataObjectReaderCreator writer = new DataObjectReaderCreator(dataTable, convertedReferences, Project.ReaderFolder, Project.ReaderNamespace, ProjectFileManager, Project.DotNet5);
+                            DataObjectReaderCreator writer = new DataObjectReaderCreator(dataTable, convertedReferences, Project.ReaderFolder, Project.ReaderNamespace, ProjectFileManager, targetFramework);
                         
                             // Write Class
                             MethodInfo.CustomReader.FieldSet.DataFields = writer.CreateObjectReader(dataTable, MethodInfo.CustomReader);

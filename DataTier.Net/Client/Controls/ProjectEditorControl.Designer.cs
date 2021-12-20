@@ -25,10 +25,9 @@ namespace DataTierClient.Controls
         private TabButton EnumerationsButton;
         private TabButton BrowseProjectFolderButton;
         private System.Windows.Forms.Button HelpButton;
-        private System.Windows.Forms.CheckBox DotNet5CheckBox;
         private System.Windows.Forms.CheckBox BlazorServicesCheckBox;
         private DataJuggler.Win.Controls.LabelComboBoxControl BindingCallbackOptionControl;
-        private System.Windows.Forms.Label CreateDotNet5Project;
+        private System.Windows.Forms.Label CreateDotNetProject;
         #endregion
         
         #region Methods
@@ -61,10 +60,9 @@ namespace DataTierClient.Controls
             this.ProjectFolderLabel = new System.Windows.Forms.Label();
             this.ProjectNameLabel = new System.Windows.Forms.Label();
             this.AutoFillChildFoldersCheckBox = new System.Windows.Forms.CheckBox();
-            this.DotNet5CheckBox = new System.Windows.Forms.CheckBox();
             this.BlazorServicesCheckBox = new System.Windows.Forms.CheckBox();
             this.BindingCallbackOptionControl = new DataJuggler.Win.Controls.LabelComboBoxControl();
-            this.CreateDotNet5Project = new System.Windows.Forms.Label();
+            this.CreateDotNetProject = new System.Windows.Forms.Label();
             this.Graph = new System.Windows.Forms.Label();
             this.UIFolderTextBox = new System.Windows.Forms.TextBox();
             this.UIPathLabel = new System.Windows.Forms.Label();
@@ -74,6 +72,7 @@ namespace DataTierClient.Controls
             this.HelpButton = new System.Windows.Forms.Button();
             this.BrowseProjectFolderButton = new DataTierClient.Controls.TabButton();
             this.EnumerationsButton = new DataTierClient.Controls.TabButton();
+            this.ProjectTypeControl = new DataJuggler.Win.Controls.LabelComboBoxControl();
             ((System.ComponentModel.ISupportInitialize)(this.AutoFillChildFolderInfo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -128,23 +127,11 @@ namespace DataTierClient.Controls
             this.AutoFillChildFoldersCheckBox.Text = "Auto Fill Child Folders";
             this.AutoFillChildFoldersCheckBox.UseVisualStyleBackColor = true;
             // 
-            // DotNet5CheckBox
-            // 
-            this.DotNet5CheckBox.AutoSize = true;
-            this.DotNet5CheckBox.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DotNet5CheckBox.Location = new System.Drawing.Point(90, 169);
-            this.DotNet5CheckBox.Name = "DotNet5CheckBox";
-            this.DotNet5CheckBox.Size = new System.Drawing.Size(163, 22);
-            this.DotNet5CheckBox.TabIndex = 82;
-            this.DotNet5CheckBox.Text = "Dot Net 5 Project";
-            this.DotNet5CheckBox.UseVisualStyleBackColor = true;
-            this.DotNet5CheckBox.CheckedChanged += new System.EventHandler(this.DotNet5CheckBox_CheckedChanged);
-            // 
             // BlazorServicesCheckBox
             // 
             this.BlazorServicesCheckBox.AutoSize = true;
             this.BlazorServicesCheckBox.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BlazorServicesCheckBox.Location = new System.Drawing.Point(90, 201);
+            this.BlazorServicesCheckBox.Location = new System.Drawing.Point(90, 233);
             this.BlazorServicesCheckBox.Name = "BlazorServicesCheckBox";
             this.BlazorServicesCheckBox.Size = new System.Drawing.Size(213, 22);
             this.BlazorServicesCheckBox.TabIndex = 83;
@@ -169,7 +156,7 @@ namespace DataTierClient.Controls
             this.BindingCallbackOptionControl.LabelTopMargin = 0;
             this.BindingCallbackOptionControl.LabelWidth = 96;
             this.BindingCallbackOptionControl.List = null;
-            this.BindingCallbackOptionControl.Location = new System.Drawing.Point(293, 198);
+            this.BindingCallbackOptionControl.Location = new System.Drawing.Point(293, 230);
             this.BindingCallbackOptionControl.Name = "BindingCallbackOptionControl";
             this.BindingCallbackOptionControl.SelectedIndex = -1;
             this.BindingCallbackOptionControl.SelectedIndexListener = null;
@@ -179,19 +166,19 @@ namespace DataTierClient.Controls
             this.BindingCallbackOptionControl.TabIndex = 84;
             this.BindingCallbackOptionControl.Visible = false;
             // 
-            // CreateDotNet5Project
+            // CreateDotNetProject
             // 
-            this.CreateDotNet5Project.AutoSize = true;
-            this.CreateDotNet5Project.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CreateDotNet5Project.Location = new System.Drawing.Point(347, 139);
-            this.CreateDotNet5Project.Name = "CreateDotNet5Project";
-            this.CreateDotNet5Project.Size = new System.Drawing.Size(271, 18);
-            this.CreateDotNet5Project.TabIndex = 85;
-            this.CreateDotNet5Project.Text = "Create DataTier in Project Folder";
-            this.CreateDotNet5Project.Visible = false;
-            this.CreateDotNet5Project.Click += new System.EventHandler(this.CreateDotNet5Project_Click);
-            this.CreateDotNet5Project.MouseEnter += new System.EventHandler(this.Button_Enter);
-            this.CreateDotNet5Project.MouseLeave += new System.EventHandler(this.Button_Leave);
+            this.CreateDotNetProject.AutoSize = true;
+            this.CreateDotNetProject.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CreateDotNetProject.Location = new System.Drawing.Point(347, 139);
+            this.CreateDotNetProject.Name = "CreateDotNetProject";
+            this.CreateDotNetProject.Size = new System.Drawing.Size(271, 18);
+            this.CreateDotNetProject.TabIndex = 85;
+            this.CreateDotNetProject.Text = "Create DataTier in Project Folder";
+            this.CreateDotNetProject.Visible = false;
+            this.CreateDotNetProject.Click += new System.EventHandler(this.CreateDotNetProject_Click);
+            this.CreateDotNetProject.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.CreateDotNetProject.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
             // Graph
             // 
@@ -226,7 +213,7 @@ namespace DataTierClient.Controls
             this.AutoFillChildFolderInfo.BackgroundImage = global::DataTierClient.Properties.Resources.AutoFill_Child_Folders;
             this.AutoFillChildFolderInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.AutoFillChildFolderInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.AutoFillChildFolderInfo.Location = new System.Drawing.Point(48, 19);
+            this.AutoFillChildFolderInfo.Location = new System.Drawing.Point(2048, 19);
             this.AutoFillChildFolderInfo.Name = "AutoFillChildFolderInfo";
             this.AutoFillChildFolderInfo.Size = new System.Drawing.Size(600, 160);
             this.AutoFillChildFolderInfo.TabIndex = 91;
@@ -320,20 +307,45 @@ namespace DataTierClient.Controls
             this.EnumerationsButton.Size = new System.Drawing.Size(132, 28);
             this.EnumerationsButton.TabIndex = 79;
             // 
+            // ProjectTypeControl
+            // 
+            this.ProjectTypeControl.BackColor = System.Drawing.Color.Transparent;
+            this.ProjectTypeControl.ComboBoxLeftMargin = 1;
+            this.ProjectTypeControl.ComboBoxText = "";
+            this.ProjectTypeControl.ComoboBoxFont = null;
+            this.ProjectTypeControl.Editable = true;
+            this.ProjectTypeControl.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProjectTypeControl.HideLabel = false;
+            this.ProjectTypeControl.LabelBottomMargin = 0;
+            this.ProjectTypeControl.LabelColor = System.Drawing.SystemColors.ControlText;
+            this.ProjectTypeControl.LabelFont = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProjectTypeControl.LabelText = "Project Type:";
+            this.ProjectTypeControl.LabelTopMargin = 0;
+            this.ProjectTypeControl.LabelWidth = 120;
+            this.ProjectTypeControl.List = null;
+            this.ProjectTypeControl.Location = new System.Drawing.Point(90, 186);
+            this.ProjectTypeControl.Name = "ProjectTypeControl";
+            this.ProjectTypeControl.SelectedIndex = -1;
+            this.ProjectTypeControl.SelectedIndexListener = null;
+            this.ProjectTypeControl.Size = new System.Drawing.Size(360, 28);
+            this.ProjectTypeControl.Sorted = true;
+            this.ProjectTypeControl.Source = null;
+            this.ProjectTypeControl.TabIndex = 92;
+            // 
             // ProjectEditorControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.ProjectTypeControl);
             this.Controls.Add(this.AutoFillChildFolderInfo);
             this.Controls.Add(this.ShowAutoFillHelpButton);
             this.Controls.Add(this.BrowseUIPathButton);
             this.Controls.Add(this.UIFolderTextBox);
             this.Controls.Add(this.UIPathLabel);
             this.Controls.Add(this.Graph);
-            this.Controls.Add(this.CreateDotNet5Project);
+            this.Controls.Add(this.CreateDotNetProject);
             this.Controls.Add(this.BindingCallbackOptionControl);
             this.Controls.Add(this.BlazorServicesCheckBox);
-            this.Controls.Add(this.DotNet5CheckBox);
             this.Controls.Add(this.HelpButton);
             this.Controls.Add(this.BrowseProjectFolderButton);
             this.Controls.Add(this.EnumerationsButton);
@@ -360,6 +372,7 @@ namespace DataTierClient.Controls
         private System.Windows.Forms.Label UIPathLabel;
         private System.Windows.Forms.Button ShowAutoFillHelpButton;
         private System.Windows.Forms.PictureBox AutoFillChildFolderInfo;
+        private DataJuggler.Win.Controls.LabelComboBoxControl ProjectTypeControl;
     }
     #endregion
 

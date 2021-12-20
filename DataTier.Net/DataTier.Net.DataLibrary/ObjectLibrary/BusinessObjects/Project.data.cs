@@ -2,11 +2,11 @@
 
 #region using statements
 
+using DataJuggler.Net.Enumerations;
 using ObjectLibrary.Enumerations;
 using System;
 
 #endregion
-
 
 namespace ObjectLibrary.BusinessObjects
 {
@@ -30,7 +30,6 @@ namespace ObjectLibrary.BusinessObjects
         private string dataWriterNamespace;
         private int dataWriterReferencesSetId;
         private DateTime dateModified;
-        private bool dotNet5;
         private bool enableBlazorFeatures;
         private string objectFolder;
         private string objectNamespace;
@@ -46,6 +45,7 @@ namespace ObjectLibrary.BusinessObjects
         private string storedProcedureObjectNamespace;
         private int storedProcedureReferencesSetId;
         private string storedProcsFolder;
+        private TargetFrameworkEnum targetFramework;
         private string uIFolderPath;
         #endregion
 
@@ -263,20 +263,6 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
 
-            #region bool DotNet5
-            public bool DotNet5
-            {
-                get
-                {
-                    return dotNet5;
-                }
-                set
-                {
-                    dotNet5 = value;
-                }
-            }
-            #endregion
-
             #region bool EnableBlazorFeatures
             public bool EnableBlazorFeatures
             {
@@ -479,6 +465,20 @@ namespace ObjectLibrary.BusinessObjects
                 set
                 {
                     storedProcsFolder = value;
+                }
+            }
+            #endregion
+
+            #region TargetFrameworkEnum TargetFramework
+            public TargetFrameworkEnum TargetFramework
+            {
+                get
+                {
+                    return targetFramework;
+                }
+                set
+                {
+                    targetFramework = value;
                 }
             }
             #endregion

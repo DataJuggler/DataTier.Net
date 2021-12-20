@@ -2,6 +2,7 @@
 
 #region using statements
 
+using DataJuggler.Net.Enumerations;
 using ObjectLibrary.Enumerations;
 using System;
 

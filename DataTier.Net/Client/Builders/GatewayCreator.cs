@@ -12,6 +12,7 @@ using DataJuggler.Net;
 using System.IO;
 using DataTierClient.Objects;
 using DataTierClient.ClientUtil;
+using DataJuggler.Net.Enumerations;
 
 #endregion
 
@@ -38,7 +39,7 @@ namespace DataTierClient.Builders
 		/// <summary>
         /// Create a new instance of GatewayCreator
         /// </summary>
-        public GatewayCreator(List<DataTable> dataTablesArg, ReferencesSet objectReferencesArg, string gatewayPathArg, string projectNameArg, string nameSpaceNameArg, ProjectFileManager fileManager, bool dotNet5Project) : base(fileManager, false, false, dotNet5Project)
+        public GatewayCreator(List<DataTable> dataTablesArg, ReferencesSet objectReferencesArg, string gatewayPathArg, string projectNameArg, string nameSpaceNameArg, ProjectFileManager fileManager, TargetFrameworkEnum targetFramework) : base(fileManager, false, false, targetFramework)
 		{   
 		    // Set Properties
 		    this.DataTables = dataTablesArg;
