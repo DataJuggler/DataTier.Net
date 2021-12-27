@@ -328,7 +328,7 @@ namespace DataTierClient.Controls
             this.ProjectTypeControl.SelectedIndex = -1;
             this.ProjectTypeControl.SelectedIndexListener = null;
             this.ProjectTypeControl.Size = new System.Drawing.Size(360, 28);
-            this.ProjectTypeControl.Sorted = true;
+            this.ProjectTypeControl.Sorted = false;
             this.ProjectTypeControl.Source = null;
             this.ProjectTypeControl.TabIndex = 92;
             // 
