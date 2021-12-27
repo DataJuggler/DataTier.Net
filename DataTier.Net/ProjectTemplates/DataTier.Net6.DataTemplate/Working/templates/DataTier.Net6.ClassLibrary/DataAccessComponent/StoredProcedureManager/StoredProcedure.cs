@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using ObjectLibrary.Enumerations;
 using DataJuggler.Net6.Enumerations;
 
