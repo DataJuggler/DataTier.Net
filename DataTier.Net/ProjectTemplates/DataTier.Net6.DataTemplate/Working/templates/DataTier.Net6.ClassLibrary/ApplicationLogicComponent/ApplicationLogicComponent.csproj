@@ -1,7 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+	<TargetFramework>net6.0</TargetFramework>
     <Version>6.0.0</Version>
     <PackageId>DataJuggler.DataTier.Net.ApplicationLogicComponent</PackageId>
     <Authors>DataJuggler</Authors>

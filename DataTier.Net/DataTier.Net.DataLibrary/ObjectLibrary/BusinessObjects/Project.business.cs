@@ -211,7 +211,20 @@ namespace ObjectLibrary.BusinessObjects
                 this.WriterReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.InsertProcedures"));
                 this.WriterReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.UpdateProcedures"));
                 this.WriterReferencesSet.References.Add(new ProjectReference("System.Data"));
-                this.WriterReferencesSet.References.Add(new ProjectReference("System.Data.SqlClient"));
+                
+                // if .NET6
+                if (TargetFramework == TargetFrameworkEnum.Net6)
+                {
+                    // Switch to Microsoft
+                    this.WriterReferencesSet.References.Add(new ProjectReference("Microsoft.Data.SqlClient"));
+                }
+                else
+                {
+                    // I think .NET5 and .NETFramework botgh need this. Will answer this question soon.
+                    this.WriterReferencesSet.References.Add(new ProjectReference("System.Data.SqlClient"));  
+                }
+                
+                // Add this references set
                 this.AllReferences.Add(this.WriterReferencesSet);
 
                  // Set StoredProcedure Namespace
@@ -222,7 +235,24 @@ namespace ObjectLibrary.BusinessObjects
                 
                 // Set Stored Procedure References
                 this.StoredProcedureReferencesSet.References.Add(new ProjectReference("System"));
-                this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataJuggler.Net5"));
+                
+                // If .NET6
+                if (TargetFramework == TargetFrameworkEnum.Net6)
+                {
+                    // .NET6
+                    this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataJuggler.Net6"));
+                }
+                else if (TargetFramework == TargetFrameworkEnum.Net5)
+                {  
+                    // .NET5
+                    this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataJuggler.Net5"));
+                }
+                else
+                {
+                    // .NETFramework
+                    this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataJuggler.Net"));
+                }
+
                 this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.DeleteProcedures"));
                 this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.FetchProcedures"));
                 this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.InsertProcedures"));

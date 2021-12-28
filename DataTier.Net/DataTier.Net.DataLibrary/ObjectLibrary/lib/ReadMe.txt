@@ -1,6 +1,6 @@
 Update Version 6.0.0: This project has been updated to version 6.0.0, 
-howerver it is still for .NET Framework 4.8. Use DataJuggler.Net5 or DataJuggler.Net6
-for newer projects.
+howerver it still has to Target .NET Framework 4.8 because of the reference to VisualStudio's
+DTE (Design Time Enviroment). You can however create a project for .NET5 or .NET6
 
 Note to self: Output of this folder needs to be copied to the lib folder. I am just doing it
 manually since I do not update this project often.
