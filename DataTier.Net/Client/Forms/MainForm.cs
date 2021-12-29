@@ -932,6 +932,16 @@ namespace DataTierClient.Forms
                         // Create ClassBuilder
                         ClassBuilder classBuilder = new ClassBuilder(false);
 
+                        // 12.19.2021
+                        TargetFrameworkEnum targetFramework = (TargetFrameworkEnum) OpenProject.TargetFramework;
+
+                        // if not .NET6, this needs to be reloaded
+                        if (targetFramework != TargetFrameworkEnum.Net6)
+                        {
+                            // reload
+                            OpenProject.CreateDefaultReferences();
+                        }
+
                         // load references
                         List<ProjectReference> references = this.OpenProject.WriterReferencesSet.References;
                         DataJuggler.Net.ReferencesSet convertedReferences = classBuilder.ConvertReferences(references, "Writers");
@@ -940,9 +950,6 @@ namespace DataTierClient.Forms
                         string nameSpace = this.OpenProject.DataWriterNamespace;
                         string rootDataWriterPath = this.OpenProject.DataWriterFolder;
 
-                        // 12.19.2021
-                        TargetFrameworkEnum targetFramework = (TargetFrameworkEnum) OpenProject.TargetFramework;
-                        
                         // create the writer
                         DataWriterCreator writer = new DataWriterCreator(this.DataTables, convertedReferences, rootDataWriterPath, nameSpace, this.FileManager, targetFramework);
 

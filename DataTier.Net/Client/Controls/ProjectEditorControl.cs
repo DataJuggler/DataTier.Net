@@ -351,6 +351,8 @@ namespace DataTierClient.Controls
             #region OnSelectedIndexChanged(LabelComboBoxControl control, int selectedIndex, object selectedItem)
             /// <summary>
             /// event is fired when a selection is made in the 'On'.
+            /// Changing the TargetFramework will revert any custom references saved back to default.
+            /// Sorry, not sure how else to do this.
             /// </summary>
             public void OnSelectedIndexChanged(LabelComboBoxControl control, int selectedIndex, object selectedItem)
             {
@@ -366,6 +368,9 @@ namespace DataTierClient.Controls
                     {
                         // Set the ProjectType
                         SelectedProject.TargetFramework = (TargetFrameworkEnum) (selectedIndex + 4);
+
+                        // References have to change if this changes
+                        SelectedProject.CreateDefaultReferences();
                     }
                 }
 

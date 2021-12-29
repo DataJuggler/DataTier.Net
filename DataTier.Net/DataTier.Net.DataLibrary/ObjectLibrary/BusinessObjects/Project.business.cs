@@ -212,7 +212,7 @@ namespace ObjectLibrary.BusinessObjects
                 this.WriterReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.UpdateProcedures"));
                 this.WriterReferencesSet.References.Add(new ProjectReference("System.Data"));
                 
-                // if .NET6
+                // if .NET6 (maybe .NET5 can use this?)
                 if (TargetFramework == TargetFrameworkEnum.Net6)
                 {
                     // Switch to Microsoft
@@ -354,12 +354,12 @@ namespace ObjectLibrary.BusinessObjects
 
                 // Create the Tables collection
                 this.Tables = new List<DTNTable>();
-                
-                // Create Default References
-                this.CreateDefaultReferences();
 
                 // New projects now default to .net6
                 TargetFramework = TargetFrameworkEnum.Net6;
+                
+                // Create Default References
+                this.CreateDefaultReferences();
             }
             #endregion
 
