@@ -1,3 +1,12 @@
+Update 12.30.2021: DataTier.Net 3.0 was just released. The new version allows you to target .NET Framework, .NET5 or .NET6.
+
+I just published a new video last night that shows you how to clone DataTier.Net and install the DataTier.Net.Database.
+
+Why I Use DataTier.Net instead of Entity Framework
+https://youtu.be/2cnDuax3amE
+
+In this little over an hour video I clone DataTier.Net and create the DataTier.Net.Database and then create a one table SQL Server database named Runner.
+
 Update 7.13.2021: .Net Framework Templates have a bug I caused when I moved CryptographyHelper to its own projects. The easy fix is just remove any of the code for CryptographyHelper, and get rid of any calls that have a useEncryption. I was planning on only making updates to .Net 5, but I will see if I can fix this when I get some time.
 
 For .Net 5 projects, this is not an issue.
