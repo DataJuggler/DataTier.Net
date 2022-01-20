@@ -92,8 +92,7 @@ namespace DataTierClient.Controls
                 this.WriterEditor.BackColor = System.Drawing.Color.Transparent;
                 this.WriterEditor.Dock = System.Windows.Forms.DockStyle.Fill;
                 this.WriterEditor.Location = new System.Drawing.Point(0, 0);
-                this.WriterEditor.Name = "WriterEditor";
-                this.WriterEditor.SelectedReferencesSet = null;
+                this.WriterEditor.Name = "WriterEditor";                
                 this.WriterEditor.Size = new System.Drawing.Size(680, 308);
                 this.WriterEditor.TabIndex = 9;
                 // 
@@ -102,8 +101,7 @@ namespace DataTierClient.Controls
                 this.ControllerEditor.BackColor = System.Drawing.Color.Transparent;
                 this.ControllerEditor.Dock = System.Windows.Forms.DockStyle.Fill;
                 this.ControllerEditor.Location = new System.Drawing.Point(0, 0);
-                this.ControllerEditor.Name = "ControllerEditor";
-                this.ControllerEditor.SelectedReferencesSet = null;
+                this.ControllerEditor.Name = "ControllerEditor";                
                 this.ControllerEditor.Size = new System.Drawing.Size(680, 308);
                 this.ControllerEditor.TabIndex = 7;
                 // 
@@ -112,8 +110,7 @@ namespace DataTierClient.Controls
                 this.DataOperationsEditor.BackColor = System.Drawing.Color.Transparent;
                 this.DataOperationsEditor.Dock = System.Windows.Forms.DockStyle.Fill;
                 this.DataOperationsEditor.Location = new System.Drawing.Point(0, 0);
-                this.DataOperationsEditor.Name = "DataOperationsEditor";
-                this.DataOperationsEditor.SelectedReferencesSet = null;
+                this.DataOperationsEditor.Name = "DataOperationsEditor";                
                 this.DataOperationsEditor.Size = new System.Drawing.Size(680, 308);
                 this.DataOperationsEditor.TabIndex = 6;
                 // 
@@ -122,8 +119,7 @@ namespace DataTierClient.Controls
                 this.DataManagerEditor.BackColor = System.Drawing.Color.Transparent;
                 this.DataManagerEditor.Dock = System.Windows.Forms.DockStyle.Fill;
                 this.DataManagerEditor.Location = new System.Drawing.Point(0, 0);
-                this.DataManagerEditor.Name = "DataManagerEditor";
-                this.DataManagerEditor.SelectedReferencesSet = null;
+                this.DataManagerEditor.Name = "DataManagerEditor";                
                 this.DataManagerEditor.Size = new System.Drawing.Size(680, 308);
                 this.DataManagerEditor.TabIndex = 5;
                 // 
@@ -133,7 +129,6 @@ namespace DataTierClient.Controls
                 this.DataObjectsEditor.Dock = System.Windows.Forms.DockStyle.Fill;
                 this.DataObjectsEditor.Location = new System.Drawing.Point(0, 0);
                 this.DataObjectsEditor.Name = "DataObjectsEditor";                
-                this.DataObjectsEditor.SelectedReferencesSet = null;
                 this.DataObjectsEditor.Size = new System.Drawing.Size(680, 308);
                 this.DataObjectsEditor.TabIndex = 4;
                 // 
@@ -142,8 +137,7 @@ namespace DataTierClient.Controls
                 this.ReaderEditor.BackColor = System.Drawing.Color.Transparent;
                 this.ReaderEditor.Dock = System.Windows.Forms.DockStyle.Fill;
                 this.ReaderEditor.Location = new System.Drawing.Point(0, 0);
-                this.ReaderEditor.Name = "ReaderEditor";
-                this.ReaderEditor.SelectedReferencesSet = null;
+                this.ReaderEditor.Name = "ReaderEditor";                
                 this.ReaderEditor.Size = new System.Drawing.Size(680, 308);
                 this.ReaderEditor.TabIndex = 8;
                 // 
@@ -174,8 +168,7 @@ namespace DataTierClient.Controls
                 this.StoredProcedureEditor.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 this.StoredProcedureEditor.Location = new System.Drawing.Point(0, 0);
                 this.StoredProcedureEditor.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-                this.StoredProcedureEditor.Name = "StoredProcedureEditor";
-                this.StoredProcedureEditor.SelectedReferencesSet = null;
+                this.StoredProcedureEditor.Name = "StoredProcedureEditor";                
                 this.StoredProcedureEditor.Size = new System.Drawing.Size(680, 308);
                 this.StoredProcedureEditor.TabIndex = 11;
                 // 

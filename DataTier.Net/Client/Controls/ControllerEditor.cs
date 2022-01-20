@@ -472,6 +472,9 @@ namespace DataTierClient.Controls
             /// This property is the selected Project
             /// being created or edited.
             /// </summary>
+            [Browsable(false)]
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
             public Project SelectedProject
             {
                 get
@@ -496,10 +499,17 @@ namespace DataTierClient.Controls
             /// <summary>
             /// The selected references set being edited.
             /// </summary>
+            
+            [Browsable(false)]
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
             public ReferencesSet SelectedReferencesSet
             {
                 get { return selectedReferencesSet; }
-                set { selectedReferencesSet = value; }
+                set 
+                { 
+                    selectedReferencesSet = value;
+                }
             }
             #endregion
 

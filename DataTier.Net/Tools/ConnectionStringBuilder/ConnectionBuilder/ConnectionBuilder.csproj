@@ -95,6 +95,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data Juggler.ico" />
     <Content Include="lib\DataJuggler.Win.Controls Read Me.txt" />
     <Content Include="Tools.ico" />
     <None Include="Resources\LinenBackground.jpg" />
@@ -103,7 +104,6 @@
     <None Include="Images\Success.png" />
     <None Include="Images\Failure.png" />
     <None Include="Images\Copied.jpg" />
-    <Content Include="Data Juggler.ico" />
     <Content Include="Key.ico" />
   </ItemGroup>
   <ItemGroup />

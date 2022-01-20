@@ -580,7 +580,10 @@ namespace DataTierClient.Controls
             public ReferencesSet SelectedReferencesSet
             {
                 get { return selectedRefSet; }
-                set { selectedRefSet = value; }
+                set 
+                { 
+                    selectedRefSet = value;
+                }
             }
             #endregion
 

@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using ObjectLibrary.BusinessObjects;
 using DataTierClient.Controls.Interfaces;
 using DataGateway;
+using System.ComponentModel;
 
 #endregion
 
@@ -178,6 +179,10 @@ namespace DataTierClient.Controls
                             this.ParentForm.Close();
                         }
                     }
+                    else
+                    {
+                        string exception = gateway.GetLastException().ToString();
+                    }
                 }
             }
             #endregion
@@ -286,6 +291,9 @@ namespace DataTierClient.Controls
             /// <summary>
             /// This property gets or sets the value for 'OriginalReference'.
             /// </summary>
+            [Browsable(false)]
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
             public ProjectReference OriginalReference
             {
                 get { return originalReference; }
@@ -296,11 +304,25 @@ namespace DataTierClient.Controls
             #region ParentReferenceSet
             /// <summary>
             /// The reference set that is this object's parent.
-            /// </summary>
+            /// </summary>            
+            [Browsable(false)]
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
             public ReferencesSet ParentReferenceSet
             {
                 get { return parentReferenceSet; }
-                set { parentReferenceSet = value; }
+                set 
+                {
+                    if ((value != null) && (value.ReferencesSetId > 0))
+                    {
+                        parentReferenceSet = value;
+                    }
+                    else
+                    {
+                        // debug where this is coming from
+                        int x = 0;
+                    }
+                }
             }
             #endregion
 
@@ -308,6 +330,9 @@ namespace DataTierClient.Controls
             /// <summary>
             /// The ProjectReference being created or edited.
             /// </summary>
+            [Browsable(false)]
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
             public ProjectReference SelectedReference
             {
                 get { return selectedReference; }

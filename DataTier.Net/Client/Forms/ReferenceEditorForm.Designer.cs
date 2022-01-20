@@ -54,10 +54,7 @@ namespace DataTierClient.Forms
             this.ReferenceEditor.BackColor = System.Drawing.Color.Linen;
             this.ReferenceEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ReferenceEditor.Location = new System.Drawing.Point(0, 0);
-            this.ReferenceEditor.Name = "ReferenceEditor";
-            this.ReferenceEditor.OriginalReference = null;
-            this.ReferenceEditor.ParentReferenceSet = null;
-            this.ReferenceEditor.SelectedReference = null;
+            this.ReferenceEditor.Name = "ReferenceEditor";            
             this.ReferenceEditor.Size = new System.Drawing.Size(664, 136);
             this.ReferenceEditor.TabIndex = 0;
             this.ReferenceEditor.UserCancelled = true;

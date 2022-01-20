@@ -128,6 +128,7 @@ namespace ObjectLibrary.BusinessObjects
 
                 // Create Object References
                 this.ObjectReferencesSet.References.Add(new ProjectReference("System"));
+                this.ObjectReferencesSet.References.Add(new ProjectReference("ObjectLibrary.Enumerations"));
                 
                 // Add this references set to All Refrences
                 this.AllReferences.Add(this.ObjectReferencesSet);
@@ -195,6 +196,7 @@ namespace ObjectLibrary.BusinessObjects
                 this.ReaderReferencesSet.References.Add(new ProjectReference("System.Collections.Generic"));
                 this.ReaderReferencesSet.References.Add(new ProjectReference("System.Data"));
                 this.ReaderReferencesSet.References.Add(new ProjectReference("ObjectLibrary.BusinessObjects"));
+                this.ReaderReferencesSet.References.Add(new ProjectReference("ObjectLibrary.Enumerations"));
                 this.AllReferences.Add(this.ReaderReferencesSet);
 
                 // Set Writer Namespace
