@@ -488,11 +488,18 @@ namespace ObjectLibrary.BusinessObjects
                     if (index >= 0)
                     {
                         // remove this item
-                        WriterReferencesSet.References.RemoveAt(index);    
-                    }
+                        WriterReferencesSet.References.RemoveAt(index);
+                        
+                        // now find this index
+                        index = FindReferenceIndex(WriterReferencesSet.References, "Microsoft.Data.SqlClient");
 
-                    // Switch to Microsoft
-                    WriterReferencesSet.References.Add(new ProjectReference("Microsoft.Data.SqlClient"));
+                        // only add if not already there
+                        if (index < 0)
+                        {
+                            // Switch to Microsoft
+                            WriterReferencesSet.References.Add(new ProjectReference("Microsoft.Data.SqlClient"));
+                        }
+                    }
                 }
                 else
                 {
@@ -508,8 +515,15 @@ namespace ObjectLibrary.BusinessObjects
                         WriterReferencesSet.References.RemoveAt(index);    
                     }
 
-                    // I think .NET5 and .NETFramework both need this. Will answer this question soon.
-                    this.WriterReferencesSet.References.Add(new ProjectReference("System.Data.SqlClient"));  
+                    // now find this index
+                    index = FindReferenceIndex(WriterReferencesSet.References, "System.Data.SqlClient");
+
+                    // only add if not already there
+                    if (index < 0)
+                    {
+                        // I think .NET5 and .NETFramework both need this. Will answer this question soon.
+                        this.WriterReferencesSet.References.Add(new ProjectReference("System.Data.SqlClient"));  
+                    }
                 }
 
                 // *********************************************************************
@@ -566,7 +580,7 @@ namespace ObjectLibrary.BusinessObjects
                 else if (index2 >= 0)
                 {
                     // remove this item
-                    StoredProcedureReferencesSet.References.RemoveAt(index);
+                    StoredProcedureReferencesSet.References.RemoveAt(index2);
 
                     // item was removed
                     itemRemoved = true;
@@ -575,11 +589,18 @@ namespace ObjectLibrary.BusinessObjects
                 // if the value for itemRemoved is true
                 if (itemRemoved)
                 {
-                    // create a new projectReference
-                    ProjectReference projectReference = new ProjectReference(dataJugglerNetReferenceName);
+                    // get the index of dataJugglerNetReferenceName
+                    index = FindReferenceIndex(StoredProcedureReferencesSet.References, dataJugglerNetReferenceName);
 
-                    // add this item
-                    StoredProcedureReferencesSet.References.Add(projectReference);
+                    // only add if not already there
+                    if (index < 0)
+                    {
+                        // create a new projectReference
+                        ProjectReference projectReference = new ProjectReference(dataJugglerNetReferenceName);
+
+                        // add this item
+                        StoredProcedureReferencesSet.References.Add(projectReference);
+                    }
                 }
             }
             #endregion
