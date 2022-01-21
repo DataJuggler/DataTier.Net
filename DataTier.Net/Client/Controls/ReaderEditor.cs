@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using DataTierClient.ClientUtil;
 using ObjectLibrary.BusinessObjects;
+using System.Linq;
 
 #endregion
 
@@ -233,7 +234,7 @@ namespace DataTierClient.Controls
                 if (refSet != null)
                 {
                     // Load the references combo 
-                    ReferencesSetManager.LoadReferencesSetComboBox(this.SelectedProject.AllReferences, this.ReaderReferencesSetComboBox);
+                    ReferencesSetManager.LoadReferencesSetComboBox(this.SelectedProject.AllReferences.ToList(), this.ReaderReferencesSetComboBox);
 
                     // Get the selected index
                     int index = this.ReaderReferencesSetComboBox.Items.IndexOf(refSet);

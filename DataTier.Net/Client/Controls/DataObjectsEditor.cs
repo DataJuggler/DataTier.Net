@@ -9,6 +9,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 using ObjectLibrary.BusinessObjects;
+using System.Linq;
 
 #endregion
 
@@ -231,7 +232,7 @@ namespace DataTierClient.Controls
                 if (refSet != null)
                 {
                     // Load the references combo 
-                    ReferencesSetManager.LoadReferencesSetComboBox(this.SelectedProject.AllReferences, this.ObjectReferencesComboBox);
+                    ReferencesSetManager.LoadReferencesSetComboBox(this.SelectedProject.AllReferences.ToList(), this.ObjectReferencesComboBox);
 
                     // Get the selected index
                     int index = this.ObjectReferencesComboBox.Items.IndexOf(refSet);
@@ -435,6 +436,9 @@ namespace DataTierClient.Controls
             /// <summary>
             /// The selected references set being edited.
             /// </summary>
+            [Browsable(false)]
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
             public ReferencesSet SelectedReferencesSet
             {
                 get { return selectedReferencesSet; }
@@ -447,6 +451,9 @@ namespace DataTierClient.Controls
             /// This property is the selected Project
             /// being created or edited.
             /// </summary>
+            [Browsable(false)]
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
             public Project SelectedProject
             {
                 get

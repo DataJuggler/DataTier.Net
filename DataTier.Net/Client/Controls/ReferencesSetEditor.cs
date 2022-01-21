@@ -9,6 +9,7 @@ using DataTierClient.Controls.Interfaces;
 using DataTierClient.Forms;
 using ObjectLibrary.BusinessObjects;
 using DataGateway;
+using System.ComponentModel;
 
 #endregion
 
@@ -544,6 +545,9 @@ namespace DataTierClient.Controls
             /// <summary>
             /// This property gets or sets the value for 'OriginalSet'.
             /// </summary>
+            [Browsable(false)]
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
             public ReferencesSet OriginalSet
             {
                 get { return originalSet; }
@@ -555,6 +559,9 @@ namespace DataTierClient.Controls
             /// <summary>
             /// The SelectedProject.
             /// </summary>
+            [Browsable(false)]
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
             public Project SelectedProject
             {
                 get { return selectedProject; }
@@ -566,6 +573,9 @@ namespace DataTierClient.Controls
             /// <summary>
             /// The SelecedReference from the grid.
             /// </summary>
+            [Browsable(false)]
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
             public ProjectReference SelectedReference
             {
                 get { return selectedReference; }
@@ -577,12 +587,23 @@ namespace DataTierClient.Controls
             /// <summary>
             /// The ReferencesSet currently being created or edited.
             /// </summary>
+            [Browsable(false)]
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
             public ReferencesSet SelectedReferencesSet
             {
                 get { return selectedRefSet; }
                 set 
                 { 
-                    selectedRefSet = value;
+                    if ((value != null) && (value.ReferencesSetId > 0))
+                    {
+                        selectedRefSet = value;
+                    }
+                    else
+                    {
+                        // debug where this is coming from
+                        int x = 0;
+                    }
                 }
             }
             #endregion

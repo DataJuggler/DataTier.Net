@@ -357,35 +357,6 @@ namespace ApplicationLogicComponent.Connection
                     }
                 }
             }
-
-            // this is for debugging only and can be safely 
-            // removed.
-            string visualStudioAppConfigFile = @"D:\Projects\RAD\RAD\System\app.config";
-
-            // if the app.config file exists here then this is my machine 
-            // (Corby). I am copying this file because it is hard to keep
-            // track of two seperate app.config files. This will update
-            // both with the same values.
-            if (System.IO.File.Exists(visualStudioAppConfigFile))
-            {
-                // save path to both places
-                xmlDoc.Save(visualStudioAppConfigFile);
-            }
-
-            // Save the app.config file
-            string fileName = AppConfigFileName();
-
-            // verify fileName exists
-            if (File.Exists(fileName))
-            {
-                // Save the app.config file.
-                xmlDoc.Save(fileName);
-
-                // update the current configuration settings
-                xmlDoc.Save(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
-            }
-
-
         }
         #endregion
 

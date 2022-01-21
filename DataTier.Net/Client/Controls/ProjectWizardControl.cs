@@ -456,7 +456,7 @@ namespace DataTierClient.Controls
             {
                  // Set Properties
                  this.SelectedProject = projectArg;
-                 
+
                  // Set ParentMainForm
                  this.ParentMainForm = mainForm;
                  

@@ -369,8 +369,10 @@ namespace DataTierClient.Controls
                         // Set the ProjectType
                         SelectedProject.TargetFramework = (TargetFrameworkEnum) (selectedIndex + 4);
 
-                        // References have to change if this changes
-                        SelectedProject.CreateDefaultReferences();
+                        // The DataJuggler.Net Reference Must Be Changed, based on the target framework
+
+                        // DataJuggler.Net Reference has to change if this changes
+                        SelectedProject.UpdateReferences();
                     }
                 }
 

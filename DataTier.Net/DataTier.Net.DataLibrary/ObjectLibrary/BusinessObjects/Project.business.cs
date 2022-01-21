@@ -222,7 +222,7 @@ namespace ObjectLibrary.BusinessObjects
                 }
                 else
                 {
-                    // I think .NET5 and .NETFramework botgh need this. Will answer this question soon.
+                    // I think .NET5 and .NETFramework both need this. Will answer this question soon.
                     this.WriterReferencesSet.References.Add(new ProjectReference("System.Data.SqlClient"));  
                 }
                 
@@ -263,6 +263,44 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
 
+            #region FindReferenceIndex(List<ProjectReference> references, string name)
+            /// <summary>
+            /// returns the Reference Index
+            /// </summary>
+            public int FindReferenceIndex(List<ProjectReference> references, string name)
+            {
+                // initial value
+                int index = -1;
+
+                // local
+                int tempIndex = -1;
+
+                // If the references object exists
+                if ((references != null) && (references.Count > 0))
+                {   
+                    // Iterate the collection of ProjectReference objects
+                    foreach (ProjectReference reference in references)
+                    {
+                        // Increment the value for tempIndex
+                        tempIndex++;
+
+                        // if this is the item being sought
+                        if (reference.ReferenceName == name)
+                        {
+                            // set the return value
+                            index = tempIndex;
+
+                            // break out of the loop
+                            break;
+                        }
+                    }
+                }
+                
+                // return value
+                return index;
+            }
+            #endregion
+            
             #region GetDatabaseIndex(int databaseId)
             /// <summary>
             /// This method returns the Database Index
@@ -350,7 +388,7 @@ namespace ObjectLibrary.BusinessObjects
                 
                 // Create AllReferences
                 this.AllReferences = new List<ReferencesSet>();
-                
+
                 // Create Enumerations
                 this.Enumerations = new List<Enumeration>();
 
@@ -426,6 +464,126 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
         
+            #region UpdateReferences()
+            /// <summary>
+            /// Update Data Juggler Net Reference
+            /// </summary>
+            public void UpdateReferences()
+            {
+                // local
+                int index = -1;
+                int index2 = -1;
+
+                // *********************************************************************
+                // ***********   System.Data.SqlClienta and Microsoft.Data.SqlClient    ************
+                // *********************************************************************
+
+                // if .NET6 (maybe .NET5 can use this?)
+                if (TargetFramework == TargetFrameworkEnum.Net6)
+                {
+                    // find the index of System.Data.SqlClient
+                    index = FindReferenceIndex(WriterReferencesSet.References, "System.Data.SqlClient");
+
+                    // if the index was found
+                    if (index >= 0)
+                    {
+                        // remove this item
+                        WriterReferencesSet.References.RemoveAt(index);    
+                    }
+
+                    // Switch to Microsoft
+                    WriterReferencesSet.References.Add(new ProjectReference("Microsoft.Data.SqlClient"));
+                }
+                else
+                {
+                    // .NET5 / .NETFramework
+
+                    // find the index of Microsoft.Data.SqlClient
+                    index = FindReferenceIndex(WriterReferencesSet.References, "Microsoft.Data.SqlClient");
+
+                    // if the index was found
+                    if (index >= 0)
+                    {
+                        // remove this item
+                        WriterReferencesSet.References.RemoveAt(index);    
+                    }
+
+                    // I think .NET5 and .NETFramework both need this. Will answer this question soon.
+                    this.WriterReferencesSet.References.Add(new ProjectReference("System.Data.SqlClient"));  
+                }
+
+                // *********************************************************************
+                // **********   DataJuggler.Net, DataJuggler.Net5 and DataJuggler.Net6    **********
+                // *********************************************************************
+
+                // local
+                string dataJugglerNetReferenceName = "";
+                bool itemRemoved = false;
+
+                // if .NETFramework
+                if (TargetFramework == TargetFrameworkEnum.NetFramework)
+                {
+                    // Set the DataJuggler.Net Reference name
+                    dataJugglerNetReferenceName = "DataJuggler.Net";
+
+                    // find the index of Microsoft.Data.SqlClient
+                    index = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net5");
+                    index2 = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net6");
+                }
+                else if (TargetFramework == TargetFrameworkEnum.Net5)
+                {
+                    // Set the DataJuggler.Net Reference name
+                    dataJugglerNetReferenceName = "DataJuggler.Net5";
+
+                    // find the index of Microsoft.Data.SqlClient
+                    index = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net");
+                    index2 = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net6");
+                }
+                else
+                {
+                    // .Net6
+
+                    // Set the DataJuggler.Net Reference name
+                    dataJugglerNetReferenceName = "DataJuggler.Net6";
+
+                    // find the index of DataJuggler.Net and DataJuggler.Net5
+                    index = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net");
+                    index2 = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net5");
+                }
+
+                // only one of these can fire, so indexes do not get out of wack
+
+                // if the index was found
+                if (index >= 0)
+                {
+                    // remove this item
+                    StoredProcedureReferencesSet.References.RemoveAt(index);    
+
+                    // an item was removed
+                    itemRemoved = true;
+                }
+                // if the index2 was found
+                else if (index2 >= 0)
+                {
+                    // remove this item
+                    StoredProcedureReferencesSet.References.RemoveAt(index);
+
+                    // item was removed
+                    itemRemoved = true;
+                }
+
+                // if the value for itemRemoved is true
+                if (itemRemoved)
+                {
+                    // create a new projectReference
+                    ProjectReference projectReference = new ProjectReference(dataJugglerNetReferenceName);
+
+                    // add this item
+                    StoredProcedureReferencesSet.References.Add(projectReference);
+                }
+            }
+            #endregion
+            
         #endregion
 
         #region Properties
@@ -441,6 +599,30 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
 
+            #region AllReferencesCount
+            /// <summary>
+            /// This read only property returns the value for 'AllReferencesCount'.
+            /// </summary>
+            public int AllReferencesCount
+            {
+                get
+                {
+                    // initial value
+                    int allReferencesCount = 0;
+                    
+                    // If the AllReferences object exists
+                    if (AllReferences != null)
+                    {
+                        // set the return value
+                        allReferencesCount = AllReferences.Count;
+                    }
+                    
+                    // return value
+                    return allReferencesCount;
+                }
+            }
+            #endregion
+            
             #region ControllerReferencesSet
             /// <summary>
             /// The controller references set.

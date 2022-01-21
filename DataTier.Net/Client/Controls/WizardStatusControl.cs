@@ -106,7 +106,7 @@ namespace DataTierClient.Controls
             {
                 // if this object has a ParentProjectWizard
                 if (this.HasParentProjectWizard)
-                {
+                {  
                     // Notify parent that this button was selected.
                     this.ParentProjectWizard.ButtonSelected(ActiveControlEnum.DataObjectsTab);
                 }
