@@ -278,6 +278,27 @@ namespace DataTierClient.Controls
                         
                             // required
                             break;
+
+                        case 3:
+
+                             // Enable the single field control
+                            this.ParameterFieldControl.Editable = true;
+
+                            // Disable the multiple fields control
+                            this.ParameterFieldSetControl.Editable = false;
+
+                            // Set the Text
+                            this.MethodNameControl.Text = "Update" + SelectedTable.TableName;
+                        
+                            // Set the ProcedureName Text root
+                            this.ProcedureNameControl.Text = this.SelectedTable.TableName + "_" + "Update";
+
+                            // Set to editable in case Delete was previously selected
+                            this.UpdateOnBuildCheckbox.Checked = true;
+                            this.UpdateOnBuildCheckbox.Editable = true;
+
+                            // required
+                            break;
                     }
                 }
 
@@ -1174,7 +1195,7 @@ namespace DataTierClient.Controls
                 this.EditParametersSetButton.Enabled = false;
 
                 // Remove the Unknown item
-                this.MethodTypeControl.Items.RemoveAt(this.MethodTypeControl.Items.Count - 1);
+                this.MethodTypeControl.Items.RemoveAt(this.MethodTypeControl.FindItemIndexByValue("Unknown"));
 
                 // Load the Order By Type Control
                 OrderByTypeControl.LoadItems(typeof(OrderByTypeEnum));
@@ -1338,15 +1359,16 @@ namespace DataTierClient.Controls
                 bool enabled = true;
                 bool orderByVisible = true;
                 bool topRowsVisible = true;
+                bool customReaderVisible = true;
                 
                 // If the MethodInfo object exists
-                if (this.HasMethodInfo)
+                if (HasMethodInfo)
                 {
                     // if Delete
-                    if (MethodInfo.MethodType == MethodTypeEnum.Delete_By)
+                    if ((MethodInfo.MethodType == MethodTypeEnum.Delete_By) || (MethodInfo.MethodType == MethodTypeEnum.Update))
                     {
                         // remote the selection
-                        this.UpdateOnBuildCheckbox.Checked = false;
+                        UpdateOnBuildCheckbox.Checked = false;
 
                         // not enabled for Delete
                         enabled = false;
@@ -1354,20 +1376,21 @@ namespace DataTierClient.Controls
                          // set to true
                         orderByVisible = false;
                         topRowsVisible = false;
+                        customReaderVisible = false;
                     }
                     else
                     {
                         // remote the selection
-                        this.UpdateOnBuildCheckbox.Checked = true;
+                        UpdateOnBuildCheckbox.Checked = true;
                     }
 
                     // Enable if the ParamterType is FieldSet
-                    this.ParameterFieldSetControl.Enabled = (MethodInfo.ParameterType == ParameterTypeEnum.Field_Set);
-                    this.ParameterFieldSetControl.Editable = (MethodInfo.ParameterType == ParameterTypeEnum.Field_Set);
+                    ParameterFieldSetControl.Enabled = (MethodInfo.ParameterType == ParameterTypeEnum.Field_Set);
+                    ParameterFieldSetControl.Editable = (MethodInfo.ParameterType == ParameterTypeEnum.Field_Set);
 
                     // Enable if the ParameterFieldControl if this is a Single Field parameter
-                    this.ParameterFieldControl.Enabled = (MethodInfo.ParameterType == ParameterTypeEnum.Single_Field);
-                    this.ParameterFieldControl.Editable = (MethodInfo.ParameterType == ParameterTypeEnum.Single_Field);
+                    ParameterFieldControl.Enabled = (MethodInfo.ParameterType == ParameterTypeEnum.Single_Field);
+                    ParameterFieldControl.Editable = (MethodInfo.ParameterType == ParameterTypeEnum.Single_Field);
 
                     // Update 8.11.2019: The ParametersControl.LabelText needs to reflect the correct case, singular or plural
                     if (MethodInfo.ParameterType == ParameterTypeEnum.Field_Set)
@@ -1452,13 +1475,16 @@ namespace DataTierClient.Controls
                 }
 
                 // if this table is a View, show the icon for IsViewIcon
-                this.IsViewIcon.Visible = ((this.HasSelectedTable) && (this.SelectedTable.IsView));
+                IsViewIcon.Visible = ((HasSelectedTable) && (SelectedTable.IsView));
 
-                this.UpdateOnBuildCheckbox.Editable = enabled;
-                this.UseCustomReaderCheckBox.Editable = enabled;
-                this.CustomReaderControl.Editable = enabled;
-                this.EditReadersButton.Enabled = enabled;
-                this.TopRowsControl.Visible = topRowsVisible;
+                UpdateOnBuildCheckbox.Editable = enabled;
+                EditReadersButton.Visible = customReaderVisible;
+                UseCustomReaderCheckBox.Visible = customReaderVisible;
+                UseCustomReaderCheckBox.Editable = enabled;
+                CustomReaderControl.Visible = customReaderVisible;
+                CustomReaderControl.Editable = enabled;
+                EditReadersButton.Enabled = enabled;
+                TopRowsControl.Visible = topRowsVisible;
 
                 // refresh everything
                 Refresh();  

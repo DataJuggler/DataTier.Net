@@ -109,7 +109,7 @@ namespace DataTierClient.Controls
             this.CustomReaderControl.LabelTopMargin = 0;
             this.CustomReaderControl.LabelWidth = 188;
             this.CustomReaderControl.List = null;
-            this.CustomReaderControl.Location = new System.Drawing.Point(20, 420);
+            this.CustomReaderControl.Location = new System.Drawing.Point(20, 419);
             this.CustomReaderControl.Name = "CustomReaderControl";
             this.CustomReaderControl.SelectedIndex = -1;
             this.CustomReaderControl.SelectedIndexListener = null;
@@ -444,7 +444,7 @@ namespace DataTierClient.Controls
             this.EditReadersButton.ButtonText = "...";
             this.EditReadersButton.Enabled = false;
             this.EditReadersButton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EditReadersButton.Location = new System.Drawing.Point(640, 420);
+            this.EditReadersButton.Location = new System.Drawing.Point(640, 419);
             this.EditReadersButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.EditReadersButton.Name = "EditReadersButton";
             this.EditReadersButton.NotSelectedImage = null;
@@ -472,7 +472,7 @@ namespace DataTierClient.Controls
             this.OrderByFieldSetControl.LabelTopMargin = 0;
             this.OrderByFieldSetControl.LabelWidth = 188;
             this.OrderByFieldSetControl.List = null;
-            this.OrderByFieldSetControl.Location = new System.Drawing.Point(20, 500);
+            this.OrderByFieldSetControl.Location = new System.Drawing.Point(20, 499);
             this.OrderByFieldSetControl.Name = "OrderByFieldSetControl";
             this.OrderByFieldSetControl.SelectedIndex = -1;
             this.OrderByFieldSetControl.SelectedIndexListener = null;
@@ -490,7 +490,7 @@ namespace DataTierClient.Controls
             this.EditOrderByFieldSetsButton.ButtonText = "...";
             this.EditOrderByFieldSetsButton.Enabled = false;
             this.EditOrderByFieldSetsButton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EditOrderByFieldSetsButton.Location = new System.Drawing.Point(640, 500);
+            this.EditOrderByFieldSetsButton.Location = new System.Drawing.Point(640, 499);
             this.EditOrderByFieldSetsButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.EditOrderByFieldSetsButton.Name = "EditOrderByFieldSetsButton";
             this.EditOrderByFieldSetsButton.NotSelectedImage = null;
@@ -518,7 +518,7 @@ namespace DataTierClient.Controls
             this.OrderByTypeControl.LabelTopMargin = 0;
             this.OrderByTypeControl.LabelWidth = 188;
             this.OrderByTypeControl.List = null;
-            this.OrderByTypeControl.Location = new System.Drawing.Point(20, 460);
+            this.OrderByTypeControl.Location = new System.Drawing.Point(20, 459);
             this.OrderByTypeControl.Name = "OrderByTypeControl";
             this.OrderByTypeControl.SelectedIndex = -1;
             this.OrderByTypeControl.SelectedIndexListener = null;
@@ -543,7 +543,7 @@ namespace DataTierClient.Controls
             this.OrderByFieldControl.LabelTopMargin = 0;
             this.OrderByFieldControl.LabelWidth = 188;
             this.OrderByFieldControl.List = null;
-            this.OrderByFieldControl.Location = new System.Drawing.Point(20, 500);
+            this.OrderByFieldControl.Location = new System.Drawing.Point(20, 499);
             this.OrderByFieldControl.Name = "OrderByFieldControl";
             this.OrderByFieldControl.SelectedIndex = -1;
             this.OrderByFieldControl.SelectedIndexListener = null;
@@ -566,7 +566,7 @@ namespace DataTierClient.Controls
             this.DescendingCheckBox.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DescendingCheckBox.LabelText = "Descending:";
             this.DescendingCheckBox.LabelWidth = 188;
-            this.DescendingCheckBox.Location = new System.Drawing.Point(20, 534);
+            this.DescendingCheckBox.Location = new System.Drawing.Point(20, 533);
             this.DescendingCheckBox.Name = "DescendingCheckBox";
             this.DescendingCheckBox.Size = new System.Drawing.Size(226, 28);
             this.DescendingCheckBox.TabIndex = 1004;
@@ -584,7 +584,7 @@ namespace DataTierClient.Controls
             this.TopRowsControl.LabelText = "Select Top Rows:";
             this.TopRowsControl.LabelTopMargin = 2;
             this.TopRowsControl.LabelWidth = 188;
-            this.TopRowsControl.Location = new System.Drawing.Point(316, 340);
+            this.TopRowsControl.Location = new System.Drawing.Point(316, 380);
             this.TopRowsControl.MultiLine = false;
             this.TopRowsControl.Name = "TopRowsControl";
             this.TopRowsControl.OnTextChangedListener = null;
@@ -611,9 +611,9 @@ namespace DataTierClient.Controls
             this.CustomWhereCheckBox.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomWhereCheckBox.LabelText = "Custom Where:";
             this.CustomWhereCheckBox.LabelWidth = 188;
-            this.CustomWhereCheckBox.Location = new System.Drawing.Point(316, 380);
+            this.CustomWhereCheckBox.Location = new System.Drawing.Point(437, 340);
             this.CustomWhereCheckBox.Name = "CustomWhereCheckBox";
-            this.CustomWhereCheckBox.Size = new System.Drawing.Size(226, 28);
+            this.CustomWhereCheckBox.Size = new System.Drawing.Size(207, 28);
             this.CustomWhereCheckBox.TabIndex = 1006;
             // 
             // CustomMethodEditor

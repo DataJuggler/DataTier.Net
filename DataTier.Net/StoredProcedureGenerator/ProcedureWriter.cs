@@ -1154,6 +1154,124 @@ namespace DataTier.Net.StoredProcedureGenerator
             }
             #endregion
 
+            #region CreateUpdateProc(DataTable dataTable, string procedureName, DataField parameterField)
+            /// <summary>
+            /// This method creates the delete procedure
+            /// </summary>
+            /// <param name="dataTable">The table to create the Update Procedure for.</param>
+            /// <param name="procedureName">The name of the Update Procedure to create</param>
+            /// <param name="parameterField">The field to use as a parameter</param>
+            public void CreateUpdateProc(DataTable dataTable, string procedureName, DataField parameterField)
+            {
+                // get the parameterName
+                string parameterName = "";
+
+                // Perform the Procedure Innitialization
+                InitProcedure(dataTable, ProcedureTypeEnum.Update, procedureName, parameterField);
+
+                // Write the Field Parameter
+                parameterName = WriteFieldParameter(parameterField);
+
+                // create a delimiter to parse on spaces only
+                char[] delimiter = { ' ' };
+
+                // get the words
+                List<Word> words = WordParser.GetWords(parameterName, delimiter);
+
+                // if there  are one or more words
+                if (ListHelper.HasOneOrMoreItems(words))
+                {
+                    // now set the parameterName to the firstWord
+                    parameterName = words[0].Text;
+                }
+
+                // Write BeginProcedure
+                WriteBeginProcedure();
+
+                // Write Comment Begin Update Statement
+                WriteComment("Begin Update Statement");
+
+                // Write Procedure 
+                WriteLine("Update [" + dataTable.Name + "]");
+
+                // Update must be written by user
+
+                // Write Blank Line
+                WriteLine();
+
+                 // Write Comment Begin Update Statement
+                WriteComment("Write Where Clause");
+
+                // set the WhereClause
+                string whereClause = "Where [" + parameterField.FieldName + "] = " + parameterName;
+
+                // Write the Where Clause
+                WriteLine(whereClause);
+
+                // Write Blank Line
+                WriteLine();
+
+                // Write End Procedure
+                WriteEndProcedure();
+            }
+            #endregion
+
+            #region CreateUpdateProc(DataTable dataTable, string procedureName, List<DataField> parameters
+            /// <summary>
+            /// This method creates the update procedure for a fieldset
+            /// </summary>
+            /// <param name="dataTable">The table to create the Delete Procedure for.</param>
+            /// <param name="procedureName">The name of the Delete Procedure to create</param>
+            /// <param name="parameterField">The field to use as a parameter</param>
+            public void CreateUpdateProc(DataTable dataTable, string procedureName, List<DataField> parameters)
+            {
+                // Perform the Procedure Innitialization
+                InitProcedure(dataTable, ProcedureTypeEnum.Update, procedureName, parameters);
+
+                // Write the Field Parameters
+                WriteFieldParameters(parameters);
+
+                // Write BeginProcedure
+                WriteBeginProcedure();
+
+                // Write Comment Begin Delete Statement
+                WriteComment("Begin Update Statement");
+
+                // Write Procedure 
+                WriteLine("Update [" + dataTable.Name + "]");
+
+                // if exactly two fields
+                if ((ListHelper.HasXOrMoreItems(parameters, 2)) && (parameters.Count == 2))
+                {
+                    // Write Blank Line
+                    WriteLine();
+
+                    // Write a comment
+                    WriteComment("Update List");
+
+                    // This is intended to be 1st parameter = 
+                    string line = "Set [" + parameters[0].DBFieldName + "] = @" + parameters[0].FieldName;
+                    WriteLine(line);
+
+                    // Write Blank Line
+                    WriteLine();
+
+                    // Write a comment
+                    WriteComment("Where Clause");
+
+                    // Write WhereClaus
+                    line = "Where [" + parameters[1].DBFieldName + "] = @" + parameters[1].FieldName;
+                    WriteLine(line);
+                }
+                
+                // Write Blank Line
+                WriteLine();
+
+                // Write End Procedure
+                WriteEndProcedure();
+            }
+            #endregion
+
             #region CreateValuesList(DataList<Fields> dataList, bool ignorePrimaryKey)
             /// <summary>
             /// Create values list
@@ -1504,9 +1622,9 @@ namespace DataTier.Net.StoredProcedureGenerator
 
                 // Write Blank Line
                 WriteLine();
-
+                
                 // Write No Count
-                WriteNoCount();
+                WriteNoCount();               
 
                 // Write Blank Line
                 WriteLine();

@@ -59,6 +59,14 @@ namespace ObjectLibrary.Parsers
 
                         // required
                         break;
+
+                    case "Update":                    
+
+                       // set methodType
+                        methodType = MethodTypeEnum.Update;
+
+                        // required
+                        break;
                 }
                 
                 // return value

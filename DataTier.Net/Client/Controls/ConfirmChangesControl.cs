@@ -684,6 +684,11 @@ namespace DataTierClient.Controls
                                 // set the methodDescription
                                 methodDescription = indent + "/// This method is used to load '" + methodInfo.SelectedTable.ClassName + "' objects for the " + methodInfo.ParameterField.FieldName + " given.";
                             }
+                            else if (methodInfo.MethodType == MethodTypeEnum.Update)
+                            {
+                                // set the methodDescription
+                                methodDescription = indent + "/// This method is used to update '" + methodInfo.SelectedTable.ClassName + "' objects for the " + methodInfo.ParameterField.FieldName + " given.";                                
+                            }
                         }
                         else if ((methodInfo.ParameterType == ParameterTypeEnum.Field_Set) && (methodInfo.HasParameterFieldSet))
                         {  
@@ -703,6 +708,11 @@ namespace DataTierClient.Controls
                             {
                                 // set the methodDescription
                                 methodDescription = indent + "/// This method is used to load '" + methodInfo.SelectedTable.ClassName + "' objects by " + methodInfo.ParameterFieldSet.Name;
+                            }
+                            else if (methodInfo.MethodType == MethodTypeEnum.Update)
+                            {
+                                // set the methodDescription
+                                methodDescription = indent + "/// This method is used to update '" + methodInfo.SelectedTable.ClassName + "' objects by the " + methodInfo.ParameterFieldSet.Name + " given.";                                
                             }
                         }
                     }
@@ -860,6 +870,7 @@ namespace DataTierClient.Controls
                 string closeBracket2;
                 string parameterLine;
                 bool abort = false;
+                int returnValueIndex = -1;
                 List<CodeLine> createPrimaryKeyParameters = new List<CodeLine>();
 
                 // If the MethodInfo object exists
@@ -871,8 +882,8 @@ namespace DataTierClient.Controls
                     // get the instanciateIndex
                     instanciateIndex = CodeLineHelper.GetIndex(method, "// instanciate");
 
-                    // If this is a Find By procedure
-                    if (MethodInfo.MethodType == MethodTypeEnum.Find_By)
+                    // If this is a Find By or Update By procedure
+                    if ((MethodInfo.MethodType == MethodTypeEnum.Find_By) || (MethodInfo.MethodType == MethodTypeEnum.Update))
                     {
                         // set the createParametersIndex
                         createParametersIndex = CodeLineHelper.GetIndex(method, "// Now create parameters for this procedure");
@@ -933,7 +944,7 @@ namespace DataTierClient.Controls
                             closeBracket = indent + "}";
                             
                             // get 4 extra spaces
-                            indent2 = TextHelper.Indent(spaces + 4);
+                            indent2 = TextHelper.Indent(spaces + 8);
 
                             // Write out the test to change the procedureName                            
                             createParametersIndex = HandleChangeProcedureName(ref method, spaces, indent, indent2, variableName, createParametersIndex, storedProcedureVariableName, openBracket, closeBracket, false);
@@ -991,7 +1002,7 @@ namespace DataTierClient.Controls
                         else if (MethodInfo.MethodType == MethodTypeEnum.Load_By)
                         {
                             // get the first openBracketIndex
-                            int returnValueIndex = CodeLineHelper.GetIndex(method, "// return value");
+                            returnValueIndex = CodeLineHelper.GetIndex(method, "// return value");
 
                             // If the value for returnValueIndex is greater than zero
                             if (returnValueIndex > 0)
@@ -1064,7 +1075,7 @@ namespace DataTierClient.Controls
                                 // Insert a blank codeLine
                                 returnValueIndex = CodeLineHelper.InsertCodeLine(ref method, indent3, returnValueIndex);
 
-                                 // if this is a SingleField Parameter
+                                // if this is a SingleField Parameter
                                 if ((MethodInfo.ParameterType == ParameterTypeEnum.Single_Field) && (MethodInfo.HasParameterField))
                                 {
                                     // string for change the procedureName
@@ -1109,6 +1120,120 @@ namespace DataTierClient.Controls
 
                                 // Insert a blank codeLine
                                 returnValueIndex = CodeLineHelper.InsertCodeLine(ref method, indent, returnValueIndex);
+                            }
+                        }
+                        else if (MethodInfo.MethodType == MethodTypeEnum.Update)
+                        {
+                            // set this
+                            spaces = 16;
+
+                             // set the indent to use
+                            indent = TextHelper.Indent(spaces);
+
+                            // get the next level of indention
+                            indent2 = TextHelper.Indent(spaces + 4);
+
+                            // set the text for the third level of indention
+                            indent3 = TextHelper.Indent(spaces + 8);
+
+                            // set the open and close brackets
+                            openBracket = indent2 + "{";
+                            closeBracket = indent2 + "}";
+
+                            // set the open and close brackets for indention level 2
+                            openBracket2 = indent3 + "{";
+                            closeBracket2 = indent3 + "}";
+
+                            // if this is a SingleField Parameter
+                            if ((MethodInfo.ParameterType == ParameterTypeEnum.Single_Field) && (MethodInfo.HasParameterField))
+                            {
+                                // Update Single Field & No Parameter has not been written yet. 
+
+                                // string for change the procedureName
+                                string createParameterComment = indent3 + "// Create the @" + MethodInfo.ParameterField.FieldName + " parameter";
+
+                                // Insert a codeLine
+                                returnValueIndex = CodeLineHelper.InsertCodeLine(ref method, createParameterComment, returnValueIndex);
+
+                                // set the parameterLine
+                                parameterLine = indent3 + storedProcedureVariableName + ".Parameters = SqlParameterHelper.CreateSqlParameters(\"@" + MethodInfo.ParameterField.FieldName + "\", " + variableName + "." + MethodInfo.ParameterField.FieldName + ");";
+
+                                // Insert a codeLine
+                                returnValueIndex = CodeLineHelper.InsertCodeLine(ref method, parameterLine, returnValueIndex);
+                            }
+                            else if ((MethodInfo.ParameterType == ParameterTypeEnum.Field_Set) && (MethodInfo.HasParameterFieldSet) && (MethodInfo.ParameterFieldSet.HasFields))
+                            {
+                                // Write a blank link
+                                returnValueIndex =  CodeLineHelper.InsertCodeLine(ref method, indent, createParametersIndex);
+
+                                // Write Coment                                
+                                string comment = indent2 + "// If the value for " + MethodInfo.PropertyName + " is true";
+
+                                // Write the comment
+                                returnValueIndex =  CodeLineHelper.InsertCodeLine(ref method, comment, returnValueIndex);
+
+                                // build the string
+                                string ifStatement = indent2 + "if (" + variableName + "." + MethodInfo.PropertyName + ")";
+
+                                // Write the IfStatement
+                                returnValueIndex =  CodeLineHelper.InsertCodeLine(ref method, ifStatement, returnValueIndex);
+
+                                // Insert the open bracket
+                                returnValueIndex = CodeLineHelper.InsertCodeLine(ref method, openBracket, returnValueIndex);
+
+                                // Write Comment Change ProcedureName
+
+                                // Need 4 more spaces here                                
+                                comment = indent3 + "// change procedure name";
+                                returnValueIndex = CodeLineHelper.InsertCodeLine(ref method, comment, returnValueIndex);
+
+                                  // now change the procedureName
+                                string changeProcedureNameText = GetChangeProcedureNameText(indent3, storedProcedureVariableName, MethodInfo.ProcedureName);
+
+                                // Insert the change procedureName
+                                returnValueIndex = CodeLineHelper.InsertCodeLine(ref method, changeProcedureNameText, returnValueIndex);
+
+                                // Write a blank line
+                                returnValueIndex = CodeLineHelper.InsertCodeLine(ref method, indent3, returnValueIndex);
+
+                                // string for change the procedureName
+                                string createParametersComment = indent3 + "// Create the " + MethodInfo.ParameterFieldSet.Name + " field set parameters";
+
+                                // Insert a codeLine
+                                returnValueIndex = CodeLineHelper.InsertCodeLine(ref method, createParametersComment, returnValueIndex);
+
+                                // get the parameterLine
+                                parameterLine = GetFieldSetParameterLine(MethodInfo.ParameterFieldSet, indent3, storedProcedureVariableName, variableName, ref abort);
+
+                                // Insert a codeLine
+                                returnValueIndex = CodeLineHelper.InsertCodeLine(ref method, parameterLine, returnValueIndex);
+
+                                // Insert the close bracket
+                                returnValueIndex = CodeLineHelper.InsertCodeLine(ref method, closeBracket, returnValueIndex);
+
+                                // set the elseText
+                                string elseText = indent2 + "else";
+
+                                // Insert a codeLine
+                                returnValueIndex = CodeLineHelper.InsertCodeLine(ref method, elseText, returnValueIndex);
+
+                                // Insert the open bracket
+                                returnValueIndex = CodeLineHelper.InsertCodeLine(ref method, openBracket, returnValueIndex);
+
+                                // get this line
+                                string line = method[returnValueIndex].Text;
+
+                                // Push the existing line four spaces to the right
+                                method[returnValueIndex].Text = "    " + line;
+
+                                // Move the line above it also                                
+                                line = method[returnValueIndex + 1].Text;
+
+                                // Push the existing line four spaces to the right
+                                method[returnValueIndex + 1].Text = "    " + line;
+
+                                // Insert the close bracket
+                                returnValueIndex = CodeLineHelper.InsertCodeLine(ref method, closeBracket, returnValueIndex + 2);                               
                             }
                         }
                     }                    
@@ -1681,6 +1806,17 @@ namespace DataTierClient.Controls
                             // Write out the file text 
                             CodeLineHelper.WriteFileText(codeLines, writerFile, true);
                         }
+                    }
+                    else if (MethodInfo.MethodType == MethodTypeEnum.Update)
+                    {
+                        // get the changeProcedureNameText
+                        string changeProcedureNameText = GetChangeProcedureNameText(indent2, storedProcedureVariableName, MethodInfo.ProcedureName);
+
+                        // test if this line is already written
+                        index = CodeLineHelper.GetIndex(method, changeProcedureNameText, true);
+
+                        // AbortWriterInsert if the index was found
+                        AbortWriterInsert = (index > -1);
                     }
                 }
             }
@@ -2258,8 +2394,8 @@ namespace DataTierClient.Controls
                 // local
                 CodeLine codeLine = null;
                 int spaces = 0;
-                string indent = "";
-                string indent2 = "";
+                string indent = "        ";
+                string indent2 = "            ";
                 string methodReturnValue = "";
                 string tempVariableName = "";
                 string parameterFieldDataType = "";
@@ -2291,6 +2427,11 @@ namespace DataTierClient.Controls
                         // set the methodReturnValue
                         methodReturnValue = "deleted";
                     }
+                    else if (MethodInfo.MethodType == MethodTypeEnum.Update)
+                    {
+                        // set the methodReturnValue
+                        methodReturnValue = "saved";
+                    }
                     else
                     {
                         // set the variableName
@@ -2309,10 +2450,7 @@ namespace DataTierClient.Controls
 
                     // if this a SingleField procedure and the ParameterField exists
                     if ((MethodInfo.ParameterType == ParameterTypeEnum.Single_Field) && (MethodInfo.HasParameterField))
-                    {
-                        // set the parametersList (I will remove this commented out line once this is tested. 2.2.2019)
-                        // parametersList = parameterFieldDataType + " " + CSharpClassWriter.LowerCaseFirstCharEx(MethodInfo.ParameterField.FieldName);
-
+                    {                        
                         // Get the parametersList from the MethodInfo object instead
                         parametersList = MethodInfo.Parameters;
 
@@ -2369,7 +2507,7 @@ namespace DataTierClient.Controls
                         codeLine = codeLines[insertIndex];
 
                         // set the spaces
-                        spaces = TextHelper.GetSpacesCount(codeLine.Text);
+                        spaces = TextHelper.GetSpacesCount(codeLine.Text) + 4;
 
                         // set the indent
                         indent = TextHelper.Indent(spaces);
@@ -2428,6 +2566,11 @@ namespace DataTierClient.Controls
                             // set the methodDeclaration
                             methodDeclaration = indent + "public List<" + MethodInfo.SelectedTable.ClassName + "> " + MethodInfo.MethodName + "(" + MethodInfo.Parameters + ")";
                         }
+                        else if (MethodInfo.MethodType == MethodTypeEnum.Update)
+                        {
+                            // set the methodDeclaration
+                            methodDeclaration = indent + "public bool " + MethodInfo.MethodName + "(" + MethodInfo.Parameters + ")";
+                        }
 
                         // Insert a codeLine
                         insertIndex = CodeLineHelper.InsertCodeLine(ref codeLines, methodDeclaration, insertIndex);
@@ -2460,12 +2603,20 @@ namespace DataTierClient.Controls
                             // get the initialValue
                             initialValue = indent2 + "List<" + MethodInfo.SelectedTable.ClassName + "> " + methodReturnValue + " = null;";    
                         }
+                        else if (MethodInfo.MethodType == MethodTypeEnum.Update)
+                        {
+                            // set the initialValue
+                            initialValue = indent2 + "bool " + methodReturnValue + " = false;";
+                        }
 
                         // write out a blank line
                         insertIndex = CodeLineHelper.InsertCodeLine(ref codeLines, initialValue, insertIndex);
 
                         // write out a blank line
                         insertIndex = CodeLineHelper.InsertCodeLine(ref codeLines, indent2, insertIndex);
+
+                        // attemp to find the PrimaryKey
+                        DTNField primaryKey = BlazorDataServicesControl.FindPrimaryKey(MethodInfo.SelectedTable);
 
                         // set the createTempObjectComment
                         string createTempObjectComment = indent2 + "// Create a temp " + MethodInfo.SelectedTable.ClassName + " object";
@@ -2588,6 +2739,22 @@ namespace DataTierClient.Controls
                                 // write out a blank line
                                 insertIndex = CodeLineHelper.InsertCodeLine(ref codeLines, indent2, insertIndex);
                             }
+
+                            if ((MethodInfo.MethodType == MethodTypeEnum.Update) && (primaryKey.DataType == DataTypeEnum.Autonumber))
+                            {
+                                // write out a comment
+                                string setMaxIdComment = indent2 + "// set Id to max int value so an Update occurs, not an Insert";
+                                insertIndex = CodeLineHelper.InsertCodeLine(ref codeLines, setMaxIdComment, insertIndex);
+
+                                // set the comment                                
+                                setParameterFieldValue = indent2 + tempVariableName + ".UpdateIdentity(Int32.MaxValue);";
+
+                                // write out the line to UpdateIdentity
+                                insertIndex = CodeLineHelper.InsertCodeLine(ref codeLines, setParameterFieldValue, insertIndex);
+
+                                // write out a blank line
+                                insertIndex = CodeLineHelper.InsertCodeLine(ref codeLines, indent2, insertIndex);
+                            }                            
                         }
 
                         // set the action
@@ -2599,14 +2766,18 @@ namespace DataTierClient.Controls
                             // change the action to fix the comment
                             action = "delete";
                         }
+                        else if (MethodInfo.MethodType == MethodTypeEnum.Update)
+                        {
+                            action = "save";
+                        }
 
                         // set the performActionComment
                         string performActionComment = indent2 + "// Perform the " + action;
 
-                         // write out a blank line
+                            // write out a blank line
                         insertIndex = CodeLineHelper.InsertCodeLine(ref codeLines, performActionComment, insertIndex);
 
-                         // if this is a Find or a Delete
+                            // if this is a Find or a Delete
                         if ((MethodInfo.MethodType == MethodTypeEnum.Find_By) || (MethodInfo.MethodType == MethodTypeEnum.Delete_By))
                         {
                             // set the performAction
@@ -2617,7 +2788,15 @@ namespace DataTierClient.Controls
                             // set the performAction
                             performAction = indent2 + methodReturnValue + " = " + MethodInfo.BaseMethodName + "(" + tempVariableName + ");";
                         }
+                        else if (MethodInfo.MethodType == MethodTypeEnum.Update)
+                        {
+                            // ensure it is Save not Update here
+                            string methodName = MethodInfo.BaseMethodName.Replace("Update", "Save");
 
+                            // set the performAction
+                            performAction = indent2 + methodReturnValue + " = " + methodName + "(ref " + tempVariableName + ");";
+                        }
+                        
                         // write out a blank line
                         insertIndex = CodeLineHelper.InsertCodeLine(ref codeLines, performAction, insertIndex);
 
@@ -2650,13 +2829,13 @@ namespace DataTierClient.Controls
 
                         // Insert a blank codeLine
                         insertIndex = CodeLineHelper.InsertCodeLine(ref codeLines, indent, insertIndex);
+
+                            // Write out the codeLines
+                        CodeLineHelper.WriteFileText(codeLines, gatewayFile, true);
+
+                        // the gateway file was updated
+                        updated = true;                        
                     }
-
-                    // Write out the codeLines
-                    CodeLineHelper.WriteFileText(codeLines, gatewayFile, true);
-
-                    // the gateway file was updated
-                    updated = true; 
                 }
                 
                 // return value
@@ -2743,6 +2922,11 @@ namespace DataTierClient.Controls
                         // set the baseMethodName
                         baseMethodName = "Delete" + MethodInfo.SelectedTable.TableName;
                     }
+                    else if (MethodInfo.MethodType == MethodTypeEnum.Update)
+                    {
+                        // set the baseMethodName
+                        baseMethodName = "Update" + MethodInfo.SelectedTable.TableName;
+                    }
 
                     // set the BaseMethodName (needed in the Gateway)
                     MethodInfo.BaseMethodName = baseMethodName;
@@ -2777,23 +2961,6 @@ namespace DataTierClient.Controls
                         {
                             // first we must determine if the write overrides message is present in the file
                             bool isOverridesMessagePresent = CodeLineHelper.IsOverridesWarningPresent(codeLines);
-
-                            /*
-                                I know the if statements below could be organized as shown below,
-                                but I think it needs to be done in the order coded, even though this line of code
-                                is duplicated:
-
-                                HandleCopyAndModifyMethodCall(...) with the exact same parameters.
-
-                                if (IsWriterMethodPresent)
-                                {
-                                    HandleUpdateMethod(...
-                                }
-                                else
-                                {
-                                    HandleCopyAndModifyMethodCall(...
-                                }
-                            */
 
                             // if the overridesMessage is present
                             if (isOverridesMessagePresent)

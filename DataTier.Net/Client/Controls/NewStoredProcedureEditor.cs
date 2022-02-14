@@ -548,6 +548,11 @@ namespace DataTierClient.Controls
                                 // create a find procedure
                                 writer.CreateFindProc(table, true, MethodInfo.ProcedureName, parameter, customReader, orderByField, orderByFieldSet, methodInfo.OrderByDescending, methodInfo.TopRows);
                             }
+                            else if (MethodInfo.MethodType == MethodTypeEnum.Update)
+                            {   
+                                // Update a single field (you have to write some of this yourself)
+                                writer.CreateUpdateProc(table, MethodInfo.ProcedureName, parameter);
+                            }
                         }
                     }
                     else if ((MethodInfo.ParameterType == ParameterTypeEnum.Field_Set) && (MethodInfo.HasParameterFieldSet) && (MethodInfo.ParameterFieldSet.HasFields))
@@ -586,6 +591,11 @@ namespace DataTierClient.Controls
                                 // create a find procedure
                                 writer.CreateFindProc(table, true, MethodInfo.ProcedureName, parameters, MethodInfo.CustomReader, orderByField, orderByFieldSet);
                             }
+                            else if (MethodInfo.MethodType == MethodTypeEnum.Update)
+                            {
+                                // create a find procedure
+                                writer.CreateUpdateProc(table, MethodInfo.ProcedureName, parameters);
+                            }
                         }
                     }
                     else if ((MethodInfo.ParameterType == ParameterTypeEnum.No_Parameters))
@@ -613,6 +623,12 @@ namespace DataTierClient.Controls
                             {
                                 // create a find procedure
                                 writer.CreateFindProc(table, true, MethodInfo.ProcedureName, parameters, MethodInfo.CustomReader, orderByField, orderByFieldSet);
+                            }
+                             // if Load By is the Method Type
+                            else if (MethodInfo.MethodType == MethodTypeEnum.Update) 
+                            {
+                                // create an update procedure
+                                writer.CreateUpdateProc(table, MethodInfo.ProcedureName, parameters);
                             }
                         }
                     }

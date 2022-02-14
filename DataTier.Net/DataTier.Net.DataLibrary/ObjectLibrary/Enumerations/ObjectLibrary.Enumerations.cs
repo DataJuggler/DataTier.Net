@@ -99,14 +99,15 @@ namespace ObjectLibrary.Enumerations
     #region MethodTypeEnum
     /// <summary>
     /// This enumeration is for the type of Method.
-    /// The method creator supports Find By Field(s), Load By Field(s)
+    /// The method creator supports Find By Field(s), Load By Field(s), Update By Field(s)
     /// </summary>
     public enum MethodTypeEnum : int
     {
         Unknown = 0,
         Delete_By = -1,
         Find_By = 1,
-        Load_By = 2
+        Load_By = 2,
+        Update = 3
     }
     #endregion
 

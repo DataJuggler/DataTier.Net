@@ -364,7 +364,7 @@ namespace DataTierClient.Controls
             /// Composite primary keys consisting of multiple fields.
             /// You can manually add a second jparameter if needed for now.
             /// </summary>
-            public DTNField FindPrimaryKey(DTNTable table)
+            public static DTNField FindPrimaryKey(DTNTable table)
             {
                 // initial value
                 DTNField primaryKey = null;
