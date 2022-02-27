@@ -639,7 +639,7 @@ namespace DataTierClient.Forms
                 string directory = AppDomain.CurrentDomain.BaseDirectory;
 
                 // this is visual studio
-                bool isVisualStudio = ((directory.Contains("debug")) || (directory.Contains("release")));
+                bool isVisualStudio = ((directory.ToLower().Contains("debug")) || (directory.ToLower().Contains("release")));
                 if (!isVisualStudio)
                 {
                     // Get the appConfig path
