@@ -66,10 +66,6 @@ namespace DataTierClient.Forms
 
         #endregion
 
-        private void SetupControl_Load(object sender, EventArgs e)
-        {
-
-        }
     }
     #endregion
 

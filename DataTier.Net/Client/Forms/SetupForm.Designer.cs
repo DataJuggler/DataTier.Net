@@ -44,8 +44,7 @@
             this.SetupControl.Location = new System.Drawing.Point(0, 0);
             this.SetupControl.Name = "SetupControl";
             this.SetupControl.Size = new System.Drawing.Size(1080, 720);
-            this.SetupControl.TabIndex = 0;
-            this.SetupControl.Load += new System.EventHandler(this.SetupControl_Load);
+            this.SetupControl.TabIndex = 0;            
             // 
             // SetupForm
             // 

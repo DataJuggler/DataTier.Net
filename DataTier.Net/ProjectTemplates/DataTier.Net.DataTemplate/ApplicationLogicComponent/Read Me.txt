@@ -1,4 +1,7 @@
-Update 8.22.2019: I made a breaking chagne to the templates where I removed the Security Folder from
+Update 2.19.2022: I updated the .NET Framework project templates to .NET Framework 4.8, and updated the nuget 
+packages for those also.
+
+Update 8.22.2019: I made a breaking change to the templates where I removed the Security Folder from
 the ApplicationLogicComponent project, as this folder contained classes that became UltimateHelper.
 
 I now require two references after you create the project.

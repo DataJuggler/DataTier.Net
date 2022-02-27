@@ -2,8 +2,12 @@
   <TemplateData>
     <Name>DataGateway</Name>
     <Description>Create a new DataGateway which is part of a DataTier.Net class library.</Description>
-    <ProjectType>CSharp</ProjectType>
-    <ProjectSubType>
+    <ProjectType>csharp</ProjectType>
+    <LanguageTag>csharp</LanguageTag>
+    <PlatformTag>windows</PlatformTag>
+    <ProjectTypeTag>console</ProjectTypeTag>
+    <ProjectTypeTag>desktop</ProjectTypeTag>
+    <ProjectTypeTag>web</ProjectTypeTag>
     </ProjectSubType>
     <SortOrder>1000</SortOrder>
     <CreateNewFolder>true</CreateNewFolder>

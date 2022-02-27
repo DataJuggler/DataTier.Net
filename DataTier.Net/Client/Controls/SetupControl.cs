@@ -175,22 +175,71 @@ namespace DataTierClient.Controls
                 // get the path to the sql
                 string path = "../../../Database/SQL Scripts/DataTier.Net.Database.Schema.sql";
 
+                // set path2
+                string path2 = "SQL Scripts/DataTier.Net.Database.Schema.sql";
+
+                // local
+                bool started = false;
+
                 // if the path exists
-                if (File.Exists(path))
+                if ((File.Exists(path)) || (File.Exists(path2)))
                 {
                     try
                     {
                         // get the fullPath
                         string fullPath = Path.GetFullPath(path);
 
-                        // launch SQL Server Management Studio if installed
-                        System.Diagnostics.Process.Start(fullPath);
+                        // if the file exists, than this is Visual Studio
+                        if (File.Exists(fullPath))
+                        {
+                            // launch SQL Server Management Studio if installed
+                            System.Diagnostics.Process.Start(fullPath);
+
+                            // set to true
+                            started = true;
+                        }
+                        else
+                        {
+                            // set fullPath for exe version
+                            fullPath = Path.GetFullPath(path2);
+
+                            // if the file exists
+                            if (File.Exists(fullPath))
+                            {
+                                // launch SQL Server Management Studio if installed
+                                System.Diagnostics.Process.Start(fullPath);
+
+                                // set to true
+                                started = true;
+                            }
+                            else
+                            {
+                                // Show the user a message
+                                MessageBox.Show("SQL Script could not be located. Find and execute the script DataTier.Net.Database.Schema.sql", "File Not Found");
+                            }
+                        }
                     }
                     catch (Exception error)
                     {
                         // for debugging only
                         DebugHelper.WriteDebugError("InstallDatabaseSchemaButton_Click", this.Name, error);  
+
+                        // Show a message
+                        MessageBox.Show("An error occurred launching SQL Server Management Studio", "Error Launching SSMS");
                     }
+                }
+                else
+                {
+                    // Set the message box
+                    MessageBox.Show("Could not located the SQL Scripts path. Look for the file 'DataTier.Net.Database.Schema.sql in the install directory for DataTier.Net", "File Not Found");
+                }
+
+                // if started is true
+                if (started)
+                {
+                    // Show Info Label2
+                    InfoLabel.Visible = false;
+                    InfoLabel2.Visible = true;
                 }
             }
             #endregion

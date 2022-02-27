@@ -16,6 +16,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Reflection;
 
 #endregion
 
@@ -38,6 +39,7 @@ namespace DataTierClient.Forms
         private int setupCompleteIndex;
         private int useEncryptionIndex;
         private int encryptionKeyIndex;
+        private bool isExecutableConfig;
         private const string HTMLCommentStart = "<!--";
         private const string ConnectionStringStart = "<add key=\"ConnectionString\" value=";
         private const string SetupCompleteStart = "<add key=\"SetupComplete\" value=";
@@ -309,9 +311,13 @@ namespace DataTierClient.Forms
                     // Install the ConnectionString in the app.config
                     InstallConnectionString(connectionStringLine);                    
                 }
-                catch
-                {   
-                    
+                catch (Exception error)
+                {  
+                    // forr debugging only
+                    DebugHelper.WriteDebugError("InstallConnectionString_Click", "ConnectionStringBuilderForm", error);
+
+                    // Show user a message
+                    MessageBox.Show("An error occurred updating your config file: " + error.ToString(), "Update Config Error");
                 }
             }
             #endregion
@@ -583,6 +589,35 @@ namespace DataTierClient.Forms
             }
             #endregion
             
+            #region GetAssemblyConfigPath()
+            /// <summary>
+            /// returns the Assembly Location
+            /// </summary>
+            public string GetAssemblyConfigPath()
+            {
+                // initial value
+                string assemblyConfigPath = "";
+
+                try
+                {
+                    string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+                    UriBuilder uri = new UriBuilder(codeBase);
+                    string path = Uri.UnescapeDataString(uri.Path);                    
+
+                    // Set the return value
+                    assemblyConfigPath = TextHelper.CombineStrings(path, ".config");
+                }
+                catch (Exception error)
+                {
+                    // Write error
+                    DebugHelper.WriteDebugError("GetAssemblyLocation", "ConnectionStringForm", error);
+                }                
+                
+                // return value
+                return assemblyConfigPath;
+            }
+            #endregion
+            
             #region GetConnectionStringLine()
             /// <summary>
             /// This method returns the Connection String Line
@@ -600,6 +635,19 @@ namespace DataTierClient.Forms
                 
                  // set the appConfig file location relative to bin\debug
                 string appConfig = "../../App.config";
+
+                string directory = AppDomain.CurrentDomain.BaseDirectory;
+
+                // this is visual studio
+                bool isVisualStudio = ((directory.Contains("debug")) || (directory.Contains("release")));
+                if (!isVisualStudio)
+                {
+                    // Get the appConfig path
+                    appConfig = GetAssemblyConfigPath();
+
+                    // This was the executable config
+                    IsExecutableConfig = true;
+                }
 
                 // if the file exists
                 if (File.Exists(appConfig))
@@ -655,6 +703,16 @@ namespace DataTierClient.Forms
                             }
                         }
                     }
+                    else
+                    {
+                        // Show a message to user
+                        MessageBox.Show("Assembly path is wrong: " + appConfig, "Invalid Path");
+                    }
+                }
+                else
+                {
+                    // Show a message to user
+                    MessageBox.Show("Assembly path is wrong: " + appConfig, "Invalid Path");
                 }
                 
                 // return value
@@ -835,10 +893,19 @@ namespace DataTierClient.Forms
                             // if the text exist
                             if (TextHelper.Exists(updatedAppConfigText))
                             {
-                                // Delete the AppConfig file
-                                File.Delete(AppConfigPath);
+                                // if this is not the executable config
+                                if (!IsExecutableConfig)
+                                {
+                                    // Delete the AppConfig file
+                                    File.Delete(AppConfigPath);                                   
+                                }
+                                else
+                                {
+                                    // in this case, we are adding a an extra extension to mark this file
+                                    AppConfigPath += ".newconfig";
+                                }
 
-                                // write out the app.config text
+                                 // write out the app.config text
                                 File.AppendAllText(AppConfigPath, updatedAppConfigText);
                                 
                                 // success
@@ -1090,6 +1157,17 @@ namespace DataTierClient.Forms
                     // return value
                     return hasSetupCompleteIndex;
                 }
+            }
+            #endregion
+            
+            #region IsExecutableConfig
+            /// <summary>
+            /// This property gets or sets the value for 'IsExecutableConfig'.
+            /// </summary>
+            public bool IsExecutableConfig
+            {
+                get { return isExecutableConfig; }
+                set { isExecutableConfig = value; }
             }
             #endregion
             

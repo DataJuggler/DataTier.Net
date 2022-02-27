@@ -102,7 +102,7 @@ namespace DataTierClient.Controls
             this.InstallDatabaseSchemaButton.Enabled = false;
             this.InstallDatabaseSchemaButton.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.InstallDatabaseSchemaButton.ForeColor = System.Drawing.Color.DarkGray;
-            this.InstallDatabaseSchemaButton.Location = new System.Drawing.Point(314, 70);
+            this.InstallDatabaseSchemaButton.Location = new System.Drawing.Point(314, 75);
             this.InstallDatabaseSchemaButton.Name = "InstallDatabaseSchemaButton";
             this.InstallDatabaseSchemaButton.Size = new System.Drawing.Size(400, 28);
             this.InstallDatabaseSchemaButton.TabIndex = 110;
@@ -180,11 +180,9 @@ namespace DataTierClient.Controls
             this.InfoLabel2.ForeColor = System.Drawing.Color.LemonChiffon;
             this.InfoLabel2.Location = new System.Drawing.Point(767, 141);
             this.InfoLabel2.Name = "InfoLabel2";
-            this.InfoLabel2.Size = new System.Drawing.Size(278, 119);
+            this.InfoLabel2.Size = new System.Drawing.Size(278, 206);
             this.InfoLabel2.TabIndex = 115;
-            this.InfoLabel2.Text = "Install the DataTier.Net Project Templates for .Net Framework into Visual Studio " +
-    "2017 or 2019 or both.\r\n\r\nFor Visual Studio 2022, install .Net5 or .Net6 project " +
-    "templates.";
+            this.InfoLabel2.Text = resources.GetString("InfoLabel2.Text");
             this.InfoLabel2.Visible = false;
             // 
             // InfoLabel
@@ -203,7 +201,7 @@ namespace DataTierClient.Controls
             // 
             this.ClickHere.BackgroundImage = global::DataTierClient.Properties.Resources.Click_Here_Orange_Transparent1;
             this.ClickHere.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClickHere.Location = new System.Drawing.Point(188, 83);
+            this.ClickHere.Location = new System.Drawing.Point(188, 73);
             this.ClickHere.Name = "ClickHere";
             this.ClickHere.Size = new System.Drawing.Size(150, 64);
             this.ClickHere.TabIndex = 118;

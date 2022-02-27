@@ -1,0 +1,9 @@
+Update: 2.21.2022
+Run DataTier.Net to install the templates.
+
+These templates will install the .NET Framework project templates for a VS 2019 project.
+
+These templates have been updated to .NET Framework 4.8. I tried to create an install for VS 2022, and kept running into problems, and I 
+do not create new .NET Framework projects any more. I wanted this just to have a release version of DataTier.NET.
+
+Hopefully everything works.

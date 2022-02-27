@@ -1,3 +1,5 @@
+Update 2.19.2022: I updated this project to .NET Framework 4.8.
+
 Update 8.22.2019: I made a breaking chagne to the templates where I removed the Security Folder from
 the ApplicationLogicComponent project, as this folder contained classes that became UltimateHelper.
 

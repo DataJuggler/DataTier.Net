@@ -2233,6 +2233,15 @@
         ZCiZOqaOqWPqmDqmjqlj6pg6fnCPpL5T0/4/MBu2HoHU7UIAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="InfoLabel2.Text" xml:space="preserve">
+    <value>Install the DataTier.Net Project Templates for .Net Framework into 
+Visual Studio 2019.
+
+For Visual Studio 2022, install .Net5 or .Net6 project templates.
+
+Note: .NET5 and .NET6 project templates are installed when you
+create a new project in the Project Wizard.</value>
+  </data>
   <data name="ViewPDFButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAu
