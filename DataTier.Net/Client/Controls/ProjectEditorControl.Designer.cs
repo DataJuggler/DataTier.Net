@@ -196,6 +196,7 @@ namespace DataTierClient.Controls
             this.UIFolderTextBox.Name = "UIFolderTextBox";
             this.UIFolderTextBox.Size = new System.Drawing.Size(373, 27);
             this.UIFolderTextBox.TabIndex = 88;
+            this.UIFolderTextBox.Visible = false;
             this.UIFolderTextBox.TextChanged += new System.EventHandler(this.UIFolderTextBox_TextChanged);
             // 
             // UIPathLabel
@@ -207,6 +208,7 @@ namespace DataTierClient.Controls
             this.UIPathLabel.TabIndex = 87;
             this.UIPathLabel.Text = "UI Folder:";
             this.UIPathLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.UIPathLabel.Visible = false;
             // 
             // AutoFillChildFolderInfo
             // 
@@ -254,6 +256,7 @@ namespace DataTierClient.Controls
             this.BrowseUIPathButton.ShowNotSelectedImageWhenDisabled = true;
             this.BrowseUIPathButton.Size = new System.Drawing.Size(40, 28);
             this.BrowseUIPathButton.TabIndex = 89;
+            this.BrowseUIPathButton.Visible = false;
             this.BrowseUIPathButton.Click += new System.EventHandler(this.BrowseUIPathButton_Click);
             this.BrowseUIPathButton.MouseEnter += new System.EventHandler(this.Button_Enter);
             this.BrowseUIPathButton.MouseLeave += new System.EventHandler(this.Button_Leave);
