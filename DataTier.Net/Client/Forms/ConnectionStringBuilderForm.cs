@@ -11,6 +11,7 @@ using DataJuggler.Win.Controls;
 using DataJuggler.Win.Controls.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -317,7 +318,7 @@ namespace DataTierClient.Forms
                     DebugHelper.WriteDebugError("InstallConnectionString_Click", "ConnectionStringBuilderForm", error);
 
                     // Show user a message
-                    MessageBox.Show("An error occurred updating your config file: " + error.ToString(), "Update Config Error");
+                    MessageBox.Show("An error occurred updating your configuration: " + error.ToString(), "Update Config Error");
                 }
             }
             #endregion
@@ -589,35 +590,6 @@ namespace DataTierClient.Forms
             }
             #endregion
             
-            #region GetAssemblyConfigPath()
-            /// <summary>
-            /// returns the Assembly Location
-            /// </summary>
-            public string GetAssemblyConfigPath()
-            {
-                // initial value
-                string assemblyConfigPath = "";
-
-                try
-                {
-                    string codeBase = Assembly.GetExecutingAssembly().CodeBase;
-                    UriBuilder uri = new UriBuilder(codeBase);
-                    string path = Uri.UnescapeDataString(uri.Path);                    
-
-                    // Set the return value
-                    assemblyConfigPath = TextHelper.CombineStrings(path, ".config");
-                }
-                catch (Exception error)
-                {
-                    // Write error
-                    DebugHelper.WriteDebugError("GetAssemblyLocation", "ConnectionStringForm", error);
-                }                
-                
-                // return value
-                return assemblyConfigPath;
-            }
-            #endregion
-            
             #region GetConnectionStringLine()
             /// <summary>
             /// This method returns the Connection String Line
@@ -640,17 +612,10 @@ namespace DataTierClient.Forms
 
                 // this is visual studio
                 bool isVisualStudio = ((directory.ToLower().Contains("debug")) || (directory.ToLower().Contains("release")));
-                if (!isVisualStudio)
-                {
-                    // Get the appConfig path
-                    appConfig = GetAssemblyConfigPath();
-
-                    // This was the executable config
-                    IsExecutableConfig = true;
-                }
-
-                // if the file exists
-                if (File.Exists(appConfig))
+                IsExecutableConfig = !isVisualStudio;
+                
+                // if this is VisualStudio
+                if ((isVisualStudio) && (File.Exists(appConfig)))
                 {
                     // get the full path
                     string fullPath = Path.GetFullPath(appConfig);
@@ -706,13 +671,8 @@ namespace DataTierClient.Forms
                     else
                     {
                         // Show a message to user
-                        MessageBox.Show("Assembly path is wrong: " + appConfig, "Invalid Path");
+                        MessageBox.Show("Error: 002: Error reading connection string: " + appConfig, "Invalid Configuration");
                     }
-                }
-                else
-                {
-                    // Show a message to user
-                    MessageBox.Show("Assembly path is wrong: " + appConfig, "Invalid Path");
                 }
                 
                 // return value
@@ -822,106 +782,151 @@ namespace DataTierClient.Forms
                 string newText = "";
                 string encryptedConnectionString = "";
                 TextLine useEncryptionTextLine = null;
-                
-                // verify the AppConfigPath was found
-                if ((HasAppConfigPath) && (File.Exists(AppConfigPath)))
+                bool started = false;
+
+                // if we are running as an exe
+                if (IsExecutableConfig)
                 {
-                    // if the AppConfigTextLinex collection exists and the ConnectionStringIndex is set and in range
-                    if ((ListHelper.HasOneOrMoreItems(AppConfigTextLines)) && (HasConnectionStringIndex) && (ConnectionStringIndex < AppConfigTextLines.Count))
+                    // Set the value
+                    bool environmentVariableSet = ApplicationLogicComponent.Connection.EnvironmentVariableHelper.SetEnvironmentVariableValue(MainForm.DataTierNetConnectionName, ConnectionString);
+
+                    // if the value for environmentVariableSet is true
+                    if (environmentVariableSet)
                     {
-                        // If the connectionStringLine object exists
-                        if ((NullHelper.Exists(connectionStringLine)) && (TextHelper.Exists(ConnectionString)))
+                        // success
+                        UserCancelled = false;
+
+                        // Change the text to finished
+                        this.CancelButton.Text = "Finished";
+
+                        // just in case this is visible after a Test still
+                        this.CopiedImage.Visible = false;
+
+                        // Show the Installed Image
+                        this.InstalledImage.Visible = true;
+                                
+                        // Start the timer (this form will close in 5 seconds if the user doesn't close it sooner)
+                        InstalledTimer.Enabled = true;
+                    }
+                    else
+                    { 
+                        // Show a message here
+                        MessageBox.Show("The environment variable could not be set. Run DataTier.Net as an administrator and this should solve the issue, or run DataTier.Net via Visual Studio.", "Install Connection String Failed");
+                    }
+                }
+                else
+                {
+                    // verify the AppConfigPath was found
+                    if ((HasAppConfigPath) && (File.Exists(AppConfigPath)))
+                    {
+                        // if the AppConfigTextLinex collection exists and the ConnectionStringIndex is set and in range
+                        if ((ListHelper.HasOneOrMoreItems(AppConfigTextLines)) && (HasConnectionStringIndex) && (ConnectionStringIndex < AppConfigTextLines.Count))
                         {
-                            // if UseEncryption is true
-                            if (UseEncryptionCheckBox.Checked)
+                            // If the connectionStringLine object exists
+                            if ((NullHelper.Exists(connectionStringLine)) && (TextHelper.Exists(ConnectionString)))
                             {
-                                // get the textLine for useEncryption (this also sets the useEncryptionIndex
-                                useEncryptionTextLine = GetUseEncryptionTextLine(UseCustomKeyCheckBox.Checked);
-
-                                // if use custom encryption key
-                                if ((UseCustomKeyCheckBox.Checked) && (EncryptionKeyControl.HasText))
+                                // if UseEncryption is true
+                                if (UseEncryptionCheckBox.Checked)
                                 {
-                                    // get the encryptionKey value
-                                    string encryptionKey = EncryptionKeyControl.Text;
+                                    // get the textLine for useEncryption (this also sets the useEncryptionIndex
+                                    useEncryptionTextLine = GetUseEncryptionTextLine(UseCustomKeyCheckBox.Checked);
 
-                                    // Encrypt the ConnectrionString using the EncryptionKey provided by user
-                                    encryptedConnectionString = CryptographyHelper.EncryptString(ConnectionString, encryptionKey);
+                                    // if use custom encryption key
+                                    if ((UseCustomKeyCheckBox.Checked) && (EncryptionKeyControl.HasText))
+                                    {
+                                        // get the encryptionKey value
+                                        string encryptionKey = EncryptionKeyControl.Text;
+
+                                        // Encrypt the ConnectrionString using the EncryptionKey provided by user
+                                        encryptedConnectionString = CryptographyHelper.EncryptString(ConnectionString, encryptionKey);
+                                    }
+                                    else
+                                    {
+                                        // Encrypt the ConnectrionString using the default EncryptionKey 
+                                        encryptedConnectionString = CryptographyHelper.EncryptString(ConnectionString);
+                                    }
+
+                                    // Get the nextText
+                                    newText = "    <add key=\"ConnectionString\" value=\"" + encryptedConnectionString + "\" />";
                                 }
                                 else
                                 {
-                                    // Encrypt the ConnectrionString using the default EncryptionKey 
-                                    encryptedConnectionString = CryptographyHelper.EncryptString(ConnectionString);
+                                    // Get the nextText
+                                    newText = "    <add key=\"ConnectionString\" value=\"" + ConnectionString + "\" />";
                                 }
 
-                                // Get the nextText
-                                newText = "    <add key=\"ConnectionString\" value=\"" + encryptedConnectionString + "\" />";
-                            }
-                            else
-                            {
-                                // Get the nextText
-                                newText = "    <add key=\"ConnectionString\" value=\"" + ConnectionString + "\" />";
-                            }
+                                // If the UseEncryptionIndex value is set
+                                if (UseEncryptionIndex > 0)
+                                {
+                                    // Change the text from false to true in UseEncryptionIndex Line
+                                    AppConfigTextLines[UseEncryptionIndex].Text = "    " + UseEncryptionStart + "\"" + "true" + "\"" + " />";
+                                }
 
-                            // If the UseEncryptionIndex value is set
-                            if (UseEncryptionIndex > 0)
-                            {
-                                // Change the text from false to true in UseEncryptionIndex Line
-                                AppConfigTextLines[UseEncryptionIndex].Text = "    " + UseEncryptionStart + "\"" + "true" + "\"" + " />";
-                            }
+                                // If the EncryptionKeyIndex value is set
+                                if (EncryptionKeyIndex > 0)
+                                {
+                                    // local
+                                    string encryptedEncryptionKey = CryptographyHelper.EncryptString(EncryptionKeyControl.Text);
 
-                            // If the EncryptionKeyIndex value is set
-                            if (EncryptionKeyIndex > 0)
-                            {
-                                // local
-                                string encryptedEncryptionKey = CryptographyHelper.EncryptString(EncryptionKeyControl.Text);
+                                    // Change the text from false to true in UseEncryptionIndex Line
+                                    AppConfigTextLines[EncryptionKeyIndex].Text = "    " + EncryptionKeyStart + "\"" + encryptedEncryptionKey + "\"" + " />";
+                                }
 
-                                // Change the text from false to true in UseEncryptionIndex Line
-                                AppConfigTextLines[EncryptionKeyIndex].Text = "    " + EncryptionKeyStart + "\"" + encryptedEncryptionKey + "\"" + " />";
-                            }
+                                // Replace out all false values for true
 
-                            // Replace out all false values for true
-
-                            // Change the text to true in SetupComplete Line
-                            AppConfigTextLines[SetupCompleteIndex].Text = "    " + SetupCompleteStart + "\"" + "true" + "\"" + " />";
+                                // Change the text to true in SetupComplete Line
+                                AppConfigTextLines[SetupCompleteIndex].Text = "    " + SetupCompleteStart + "\"" + "true" + "\"" + " />";
                             
-                            // set the text for this line
-                            AppConfigTextLines[ConnectionStringIndex].Text = newText;        
+                                // set the text for this line
+                                AppConfigTextLines[ConnectionStringIndex].Text = newText;        
 
-                            // Get the text
-                            string updatedAppConfigText = WriteOutAppConfigText();
+                                // Get the text
+                                string updatedAppConfigText = WriteOutAppConfigText();
 
-                            // if the text exist
-                            if (TextHelper.Exists(updatedAppConfigText))
-                            {
-                                // if this is not the executable config
-                                if (!IsExecutableConfig)
+                                // if the text exist
+                                if (TextHelper.Exists(updatedAppConfigText))
                                 {
-                                    // Delete the AppConfig file
-                                    File.Delete(AppConfigPath);                                   
-                                }
-                                else
-                                {
-                                    // in this case, we are adding a an extra extension to mark this file
-                                    AppConfigPath += ".newconfig";
-                                }
-
-                                 // write out the app.config text
-                                File.AppendAllText(AppConfigPath, updatedAppConfigText);
+                                    // if this is not the executable config
+                                    if (!IsExecutableConfig)
+                                    {
+                                        // Delete the AppConfig file
+                                        File.Delete(AppConfigPath);  
                                 
-                                // success
-                                UserCancelled = false;
+                                        // write out the app.config text
+                                        File.AppendAllText(AppConfigPath, updatedAppConfigText);
+                                    }
+                                    else
+                                    {
+                                        // in this case, we are adding a an extra extension to mark this file
+                                        AppConfigPath += ".newconfig";
 
-                                // just in case this is visible after a Test still
-                                this.CopiedImage.Visible = false;
-
-                                // Show the Installed Image
-                                this.InstalledImage.Visible = true;
-
-                                // Change the text to finished
-                                this.CancelButton.Text = "Finished";
+                                        Process process = new Process();
+                
+                                        process.StartInfo = new ProcessStartInfo();
+                                        { 
+                                            // Set the working directory                    
+                                            process.StartInfo.UseShellExecute = true;
+                                            process.StartInfo.FileName = @"..\..\Tools\ConfigUpdater\ConfigUpdater.exe";
+                                            process.StartInfo.Arguments = AppConfigPath;
+                                        };
+                                        started = process.Start();
+                                    }
                                 
-                                // Start the timer (this form will close in 5 seconds if the user doesn't close it sooner)
-                                InstalledTimer.Enabled = true;
+                                    // success
+                                    UserCancelled = false;
+
+                                    // just in case this is visible after a Test still
+                                    this.CopiedImage.Visible = false;
+
+                                    // Show the Installed Image
+                                    this.InstalledImage.Visible = true;
+
+                                    // Change the text to finished
+                                    this.CancelButton.Text = "Finished";
+                                
+                                    // Start the timer (this form will close in 5 seconds if the user doesn't close it sooner)
+                                    InstalledTimer.Enabled = true;
+                                }
                             }
                         }
                     }

@@ -83,7 +83,7 @@ namespace DataTierClient.Controls
             /// event is fired when the 'CancelButton' is clicked.
             /// </summary>
             private void CancelButton_Click(object sender, EventArgs e)
-            {
+            {  
                 // close this app
                 userCancelled = true;
 

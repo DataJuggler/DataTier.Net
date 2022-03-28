@@ -57,6 +57,7 @@ namespace DataTierClient.Forms
         private string storedProceduresSQLPath;
         private Admin admin;
         private const string UpdateCheckXml = @"https://datajuggler.com/Updates/DataTier.Net.Update.xml";
+        internal const string DataTierNetConnectionName = "DataTierNetConnection";
         #endregion
         
         #region Constructor
@@ -1941,6 +1942,16 @@ namespace DataTierClient.Forms
 
                 // Set the value for SetupComplete
                 this.SetupComplete = BooleanHelper.ParseBoolean(ConfigurationHelper.ReadAppSetting("SetupComplete"), false, false);
+
+                // 3.1.2022: Adding a check to see if the connection string can be found in the EnvironmentVariable
+                if (!SetupComplete)
+                {
+                    // Get the connection name
+                    string connectionString = EnvironmentVariableHelper.GetEnvironmentVariableValue(DataTierNetConnectionName);
+
+                    // If this is set, we can grab the connection string from here.
+                    SetupComplete = TextHelper.Exists(connectionString);
+                }
 
                 // If the Setup is not complete, show the Setup Form
                 if (!SetupComplete)

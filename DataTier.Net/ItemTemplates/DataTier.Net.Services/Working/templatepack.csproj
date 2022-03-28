@@ -3,24 +3,24 @@
   <PropertyGroup>
     
     <PackageType>Template</PackageType>
-    <PackageVersion>2.5.4</PackageVersion>
-    <PackageId>DataJuggler.DataTier.Net5.ItemTemplates.BlazorDataServices</PackageId>
-    <Title>DataJuggler.DataTier.Net5.ItemTemplates.BlazorDataServices</Title>
+    <PackageVersion>3.0.0</PackageVersion>
+    <PackageId>DataJuggler.DataTier.Net6.ItemTemplates.BlazorDataServices</PackageId>
+    <Title>DataJuggler.DataTier.Net6.ItemTemplates.BlazorDataServices</Title>
     <Authors>Data Juggler</Authors>
     <Description>This item template creates two files, a DataWatcher and a Service. This package is meant to be installed via DataTier.Net, as there are few variables that have to replaced and I haven't figured out Dot Net Core replacement paremeters yet, so I am rolling my own replacement of parameters after install.</Description>
-    <PackageTags>DataTier.Net;DataTier.Net5;C#;SQL;SQLServer;EntityFrameworkAlternative;</PackageTags>
-    <TargetFramework>net5.0</TargetFramework>
+    <PackageTags>DataTier.Net;DataTier.Net6;C#;SQL;SQLServer;EntityFrameworkAlternative;</PackageTags>
+    <TargetFramework>net6.0</TargetFramework>
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <ContentTargetFolders>content</ContentTargetFolders>
-    <Version>2.5.4</Version>
-    <Product>DataJuggler.DataTier.Net5.ItemTemplates.BlazorDataServices</Product>
+    <Version>3.0.0</Version>
+    <Product>DataJuggler.DataTier.Net6.ItemTemplates.BlazorDataServices</Product>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseFile>License.txt</PackageLicenseFile>
     <RepositoryUrl>github.com/DataJuggler/DataTier.Net</RepositoryUrl>
     <RepositoryType>Git / Git Hub.</RepositoryType>
-    <AssemblyVersion>2.5.4.0</AssemblyVersion>
-    <FileVersion>2.5.4.0</FileVersion>
+    <AssemblyVersion>3.0.0</AssemblyVersion>
+    <FileVersion>3.0.0</FileVersion>
 
   </PropertyGroup>
   

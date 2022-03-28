@@ -40,26 +40,7 @@ namespace DataTierClient.Objects
         }
         #endregion
 
-        #region Methods
-
-            #region AddSetupCompleteValue(bool setupCompleteValue)
-            /// <summary>
-            /// This method adds an a text line to the AppSeetingsLines for the Setup Complete Value
-            /// </summary>
-            internal void AddSetupCompleteValue(bool setupCompleteValue)
-            {
-                // local
-                string setupCompleteLineTemplate = "    <add key=\"SetupComplete\" value=\"" + setupCompleteValue.ToString() + "\"/>";
-                TextLine setupCompleteLine = new TextLine(setupCompleteLineTemplate);
-
-                // if the AppSettingsLines collection exist
-                if (this.HasAppSettingsLines)
-                {
-                    // insert this line just after the appSettings line
-                    this.AppSettingsLines.Insert(1, setupCompleteLine);
-                }
-            }
-            #endregion
+        #region Methods            
 
             #region GetAppSettingsText()
             /// <summary>
@@ -134,33 +115,7 @@ namespace DataTierClient.Objects
                 appSettingsLines = new List<TextLine>();
                 linesAfterAppSettings = new List<TextLine>();
             }
-            #endregion
-            
-            #region UpdateSetupCompleteValue(bool setupCompleteValue)
-            /// <summary>
-            /// This method updates the text line for SetupComplete
-            /// </summary>
-            internal void UpdateSetupCompleteValue(bool setupCompleteValue)
-            {
-                // local
-                string setupCompleteLineTemplate = "    <add key=\"SetupComplete\" value=\"" + setupCompleteValue.ToString() + "\"/>";
-
-                // if the AppSettingsLines collection exist
-                if (this.HasAppSettingsLines)
-                {
-                    // Iterate the items in the collection
-                    foreach (TextLine textLine in this.AppSettingsLines)
-                    {
-                        // if the textLine
-                        if ((textLine.Text != null) && (textLine.Text.Contains("SetupComplete")))
-                        {
-                            // update the text of this  line
-                            textLine.Text = setupCompleteLineTemplate;
-                        }
-                    }                    
-                }
-            }
-            #endregion
+            #endregion            
             
         #endregion
 

@@ -3,6 +3,7 @@
 #region using statements
 
 using DataJuggler.Core.UltimateHelper;
+using DataJuggler.Net.Enumerations;
 using DataJuggler.Win.Controls;
 using DataJuggler.Win.Controls.Interfaces;
 using DataGateway;
@@ -37,9 +38,12 @@ namespace DataTierClient.Controls
     {
         
         #region Private Variables
-        private const string ItemTemplateInstall = "dotnet new --install DataJuggler.DataTier.Net5.ItemTemplates.BlazorDataServices::2.5.4";
-        private const string ItemTemplateUninstall = "dotnet new -uninstall DataJuggler.DataTier.Net5.ItemTemplates.BlazorDataServices";
-        private const string CreateServices = "dotnet new DataTier.Net5.ItemTemplates.BlazorDataServices";
+        private const string ItemTemplateInstall5 = "dotnet new --install DataJuggler.DataTier.Net5.ItemTemplates.BlazorDataServices::2.5.4";
+        private const string ItemTemplateUninstall5 = "dotnet new -uninstall DataJuggler.DataTier.Net5.ItemTemplates.BlazorDataServices";
+        private const string CreateServices5 = "dotnet new DataTier.Net5.ItemTemplates.BlazorDataServices";
+        private const string ItemTemplateInstall6 = "dotnet new --install DataJuggler.DataTier.Net6.ItemTemplates.BlazorDataServices::3.0.0";
+        private const string ItemTemplateUninstall6 = "dotnet new -uninstall DataJuggler.DataTier.Net6.ItemTemplates.BlazorDataServices";
+        private const string CreateServices6 = "dotnet new DataTier.Net6.ItemTemplates.BlazorDataServices";
         private const string DataWatcherFileName = "DataWatcher.cs";
         private const string ServiceFileName = "Service.cs";
         private string initialProject;
@@ -117,7 +121,18 @@ namespace DataTierClient.Controls
                         startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                         startInfo.FileName = "cmd.exe";
                         startInfo.WorkingDirectory = Project.ServicesFolder;
-                        startInfo.Arguments = "/C " + CreateServices;
+
+                        if (Project.TargetFramework == TargetFrameworkEnum.Net5)
+                        {
+                            // Install for .NET5
+                            startInfo.Arguments = "/C " + CreateServices5;
+                        }
+                        else
+                        {
+                            // Install for .NET6
+                            startInfo.Arguments = "/C " + CreateServices6;
+                        }
+
                         process.StartInfo = startInfo;
                         process.Start();
 
@@ -286,12 +301,31 @@ namespace DataTierClient.Controls
                     ProcessStartInfo startInfo = new ProcessStartInfo();
                     startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                     startInfo.FileName = "cmd.exe";
-                    startInfo.Arguments = "/C " + ItemTemplateInstall;
+                    
+                    if (Project.TargetFramework == TargetFrameworkEnum.Net5)
+                    {
+                        startInfo.Arguments = "/C " + ItemTemplateInstall5;
+                    }
+                    else
+                    {
+                        startInfo.Arguments = "/C " + ItemTemplateInstall6;
+                    }
+                    
+                    
                     process.StartInfo = startInfo;
                     process.Start();
 
-                    // show the user a message
-                    MessageBoxHelper.ShowMessage("The Blazor Data Services Item Templates Have Been Installed", "Install Complete");
+                    // if .NET5
+                    if (Project.TargetFramework == TargetFrameworkEnum.Net5)
+                    {
+                        // show the user a message
+                        MessageBoxHelper.ShowMessage("The Blazor Data Services Item Templates Have Been Installed for .NET5", "Install Complete");
+                    }
+                    else
+                    {
+                        // show the user a message
+                        MessageBoxHelper.ShowMessage("The Blazor Data Services Item Templates Have Been Installed For .NET6", "Install Complete");
+                    }
                 }
                 catch (Exception error)
                 {
@@ -335,7 +369,7 @@ namespace DataTierClient.Controls
                     ProcessStartInfo startInfo = new ProcessStartInfo();
                     startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                     startInfo.FileName = "cmd.exe";
-                    startInfo.Arguments = "/C " + ItemTemplateUninstall;
+                    startInfo.Arguments = "/C " + ItemTemplateUninstall5;
                     process.StartInfo = startInfo;
                     process.Start();
 
@@ -492,6 +526,20 @@ namespace DataTierClient.Controls
 
                 // Setup the CancelButton to use Done instead of Cancel
                 this.SaveCancelControl.SetupCancelButton("Done", 80);
+
+                // if .NET5
+                if (Project.TargetFramework == TargetFrameworkEnum.Net5)
+                {
+                    // Set the Text for .NET5
+                    InstallBlazorServicesButton.Text = "Install DataJuggler.DataTier.Net5.ItemTemplates.BlazorDataServices";
+                    UninstallBlazorServicesButton.Text = "Uninstall DataJuggler.DataTier.Net5.ItemTemplates.BlazorDataServices";
+                }
+                else
+                {
+                    // Set the Text for .NET6
+                    InstallBlazorServicesButton.Text = "Install DataJuggler.DataTier.Net6.ItemTemplates.BlazorDataServices";
+                    UninstallBlazorServicesButton.Text = "Uninstall DataJuggler.DataTier.Net6.ItemTemplates.BlazorDataServices";
+                }
                
                 // Enable or disable controls
                 UIEnable();
