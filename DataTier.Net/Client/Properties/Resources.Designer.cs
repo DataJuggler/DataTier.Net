@@ -343,6 +343,16 @@ namespace DataTierClient.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Project_Folder__NET5_or__NET6 {
+            get {
+                object obj = ResourceManager.GetObject("Project Folder .NET5 or .NET6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ReaderMode {
             get {
                 object obj = ResourceManager.GetObject("ReaderMode", resourceCulture);

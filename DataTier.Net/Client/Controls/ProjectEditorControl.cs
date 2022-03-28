@@ -340,11 +340,22 @@ namespace DataTierClient.Controls
             /// </summary>
             private void HelpButton_Click(object sender, EventArgs e)
             {
-                // Create the helpForm
-                HelpForm helpForm = new HelpForm();
+                if (SelectedProject.TargetFramework == TargetFrameworkEnum.NetFramework)
+                {
+                    // Create the helpForm
+                    HelpForm helpForm = new HelpForm();
 
-                // Show the helpForm
-                helpForm.ShowDialog();
+                    // Show the helpForm
+                    helpForm.ShowDialog();
+                }
+                else
+                {
+                    // Create the helpForm
+                    HelpForm2 helpForm2 = new HelpForm2();
+
+                    // Show the helpForm2
+                    helpForm2.ShowDialog();
+                }
             }
             #endregion
             
