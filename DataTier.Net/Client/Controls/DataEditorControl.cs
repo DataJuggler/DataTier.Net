@@ -881,8 +881,7 @@ namespace DataTierClient.Controls
                     this.CreateMethodButton.Visible = true;
                     this.ManageReadersButton.Visible = true;
                     this.ManageFieldSetsButton.Visible = true;
-                    this.ManageMethodButton.Visible = true;
-                    this.UICreatorButton.Visible = true;
+                    this.ManageMethodButton.Visible = true;                    
                     this.BlazorFeaturesButton.Visible = showBlazorFeatures;
                     this.CreateBindingCallbackControl.Visible = showCreateBindingCallbackControl;
                 }
@@ -891,8 +890,7 @@ namespace DataTierClient.Controls
                     // Erase the Name
                     this.SelectedTableTextBox.Text = String.Empty;
                     
-                    // Hide this buttons
-                    this.UICreatorButton.Visible = false;
+                    // Hide this buttons                    
                     this.RemoveTableButton.Visible = false;
                     this.CreateMethodButton.Visible = false;
                     this.ManageReadersButton.Visible = false;

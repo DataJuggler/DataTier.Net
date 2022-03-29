@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Windows.Forms;
 using System.Reflection;
@@ -309,7 +310,7 @@ namespace DataTierClient.Forms
                     // get the connection string line from the app.config
                     TextLine connectionStringLine = GetConnectionStringLine();
 
-                    // Install the ConnectionString in the app.config
+                    // Install the ConnectionString in the app.config or System Environment Variable
                     InstallConnectionString(connectionStringLine);                    
                 }
                 catch (Exception error)
@@ -608,6 +609,7 @@ namespace DataTierClient.Forms
                  // set the appConfig file location relative to bin\debug
                 string appConfig = "../../App.config";
 
+                // Get the executing assembly's folder
                 string directory = AppDomain.CurrentDomain.BaseDirectory;
 
                 // this is visual studio
@@ -787,31 +789,39 @@ namespace DataTierClient.Forms
                 // if we are running as an exe
                 if (IsExecutableConfig)
                 {
-                    // Set the value
-                    bool environmentVariableSet = ApplicationLogicComponent.Connection.EnvironmentVariableHelper.SetEnvironmentVariableValue(MainForm.DataTierNetConnectionName, ConnectionString);
-
-                    // if the value for environmentVariableSet is true
-                    if (environmentVariableSet)
+                    if (IsAdministrator)
                     {
-                        // success
-                        UserCancelled = false;
+                        // Set the value
+                        bool environmentVariableSet = ApplicationLogicComponent.Connection.EnvironmentVariableHelper.SetEnvironmentVariableValue(MainForm.DataTierNetConnectionName, ConnectionString);
 
-                        // Change the text to finished
-                        this.CancelButton.Text = "Finished";
+                        // if the value for environmentVariableSet is true
+                        if (environmentVariableSet)
+                        {
+                            // success
+                            UserCancelled = false;
 
-                        // just in case this is visible after a Test still
-                        this.CopiedImage.Visible = false;
+                            // Change the text to finished
+                            this.CancelButton.Text = "Finished";
 
-                        // Show the Installed Image
-                        this.InstalledImage.Visible = true;
+                            // just in case this is visible after a Test still
+                            this.CopiedImage.Visible = false;
+
+                            // Show the Installed Image
+                            this.InstalledImage.Visible = true;
                                 
-                        // Start the timer (this form will close in 5 seconds if the user doesn't close it sooner)
-                        InstalledTimer.Enabled = true;
+                            // Start the timer (this form will close in 5 seconds if the user doesn't close it sooner)
+                            InstalledTimer.Enabled = true;
+                        }
+                        else
+                        { 
+                            // Show a message here
+                            MessageBox.Show("The environment variable could not be set. Create a System Environment Variable named DataTierNetConnection or Run DataTier.Net as an administrator and this should solve the issue, or run DataTier.Net via Visual Studio.", "Install Connection String Failed");
+                        }
                     }
                     else
-                    { 
-                        // Show a message here
-                        MessageBox.Show("The environment variable could not be set. Run DataTier.Net as an administrator and this should solve the issue, or run DataTier.Net via Visual Studio.", "Install Connection String Failed");
+                    {
+                         // Show a message here
+                        MessageBox.Show("The environment variable could not be set. Create a System Environment Variable named DataTierNetConnection or Run DataTier.Net as an administrator and this should solve the issue, or run DataTier.Net via Visual Studio.", "Install Connection String Failed");
                     }
                 }
                 else
@@ -1161,6 +1171,21 @@ namespace DataTierClient.Forms
                     
                     // return value
                     return hasSetupCompleteIndex;
+                }
+            }
+            #endregion
+            
+            #region IsAdministrator
+            /// <summary>
+            /// This read only property returns the value for 'IsAdministrator'.
+            /// </summary>
+            public static bool IsAdministrator
+            {
+                get
+                {
+                    var identity = WindowsIdentity.GetCurrent();
+                    var principal = new WindowsPrincipal(identity);
+                    return principal.IsInRole(WindowsBuiltInRole.Administrator);
                 }
             }
             #endregion

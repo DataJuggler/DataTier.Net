@@ -599,11 +599,6 @@ namespace DataTierClient.Controls
                     {
                         selectedRefSet = value;
                     }
-                    else
-                    {
-                        // debug where this is coming from
-                        int x = 0;
-                    }
                 }
             }
             #endregion

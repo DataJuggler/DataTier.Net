@@ -422,6 +422,13 @@ namespace DataTierClient.Forms
                 // get the path to the file 
                 string path = Path.GetFullPath(@"../../../Class Room/Documents/DataTier.Net Quick Start.pdf");
 
+                // if this is the InstalledVersion
+                if (IsInstalledVersion)
+                {
+                    // Get the path in the ProgramFiles folder
+                    path = Path.GetFullPath(@"Class Room/Documents/DataTier.Net Quick Start.pdf");
+                }
+
                 // if the path exists
                 if (File.Exists(path))
                 {
@@ -444,6 +451,13 @@ namespace DataTierClient.Forms
             {
                 // get the path to the file 
                 string path = Path.GetFullPath(@"../../../Class Room/Documents/DataTier.Net Users Guide.pdf");
+
+                // if this is the InstalledVersion
+                if (IsInstalledVersion)
+                {
+                    // Get the path in the ProgramFiles folder
+                    path = Path.GetFullPath(@"Class Room/Documents/DataTier.Net Users Guide.pdf");
+                }
 
                 // if the path exists
                 if (File.Exists(path))
@@ -468,6 +482,13 @@ namespace DataTierClient.Forms
                 // get the path to the file 
                 string path = Path.GetFullPath(@"../../../Class Room/Documents/DataTier.Net Quick Start.docx");
 
+                // if this is the InstalledVersion
+                if (IsInstalledVersion)
+                {
+                    // Get the path in the ProgramFiles folder
+                    path = Path.GetFullPath(@"Class Room/Documents/DataTier.Net Quick Start.docx");
+                }
+                
                 // if the path exists
                 if (File.Exists(path))
                 {
@@ -490,6 +511,13 @@ namespace DataTierClient.Forms
             {
                 // get the path to the file 
                 string path = Path.GetFullPath(@"../../../Class Room/Documents/DataTier.Net Users Guide.docx");
+
+                 // if this is the InstalledVersion
+                if (IsInstalledVersion)
+                {
+                    // Get the path in the ProgramFiles folder
+                    path = Path.GetFullPath(@"Class Room/Documents/DataTier.Net Users Guide.docx");
+                }
                 
                 // if the path exists
                 if (File.Exists(path))
@@ -2845,6 +2873,31 @@ namespace DataTierClient.Forms
                 set { buttonManager = value; }
             }
             #endregion
+
+            #region CreatedFilesCount
+            /// <summary>
+            /// The number of files from the FileManager
+            /// that were created during a build.
+            /// </summary>
+            public int CreatedFilesCount
+            {
+                get 
+                { 
+                    // initial value
+                    int createdFilesCount = 0;
+                    
+                    // if the file manager exists
+                    if ((this.FileManager != null) && (this.FileManager.Files != null))
+                    {
+                        // set the created files count
+                        createdFilesCount = this.FileManager.Files.Count;
+                    }
+                    
+                    // return value
+                    return createdFilesCount;
+                }
+            }
+            #endregion
             
             #region CreateParams
             /// <summary>
@@ -3044,31 +3097,6 @@ namespace DataTierClient.Forms
             }
             #endregion
 
-            #region CreatedFilesCount
-            /// <summary>
-            /// The number of files from the FileManager
-            /// that were created during a build.
-            /// </summary>
-            public int CreatedFilesCount
-            {
-                get 
-                { 
-                    // initial value
-                    int createdFilesCount = 0;
-                    
-                    // if the file manager exists
-                    if ((this.FileManager != null) && (this.FileManager.Files != null))
-                    {
-                        // set the created files count
-                        createdFilesCount = this.FileManager.Files.Count;
-                    }
-                    
-                    // return value
-                    return createdFilesCount;
-                }
-            }
-            #endregion
-
             #region HasStoredProceduresSQLPath
             /// <summary>
             /// This property returns true if the 'StoredProceduresSQLPath' exists.
@@ -3082,6 +3110,46 @@ namespace DataTierClient.Forms
                     
                     // return value
                     return hasStoredProceduresSQLPath;
+                }
+            }
+            #endregion
+            
+            #region IsInstalledVersion
+            /// <summary>
+            /// This read only property returns the value for 'IsInstalledVersion'.
+            /// </summary>
+            public bool IsInstalledVersion
+            {
+                get
+                {
+                    // initial value
+                    bool isInstalledVersion = !IsVisualStudio;
+                    
+                    // return value
+                    return isInstalledVersion;
+                }
+            }
+            #endregion
+            
+            #region IsVisualStudio
+            /// <summary>
+            /// This read only property returns the value for 'IsVisualStudio'.
+            /// </summary>
+            public bool IsVisualStudio
+            {
+                get
+                {
+                    // initial value
+                    bool isVisualStudio = false;
+                    
+                    // Get the executing assembly's folder
+                    string directory = AppDomain.CurrentDomain.BaseDirectory;
+                    
+                    // this is visual studio
+                    isVisualStudio = ((directory.ToLower().Contains("debug")) || (directory.ToLower().Contains("release")));
+                    
+                    // return value
+                    return isVisualStudio;
                 }
             }
             #endregion
@@ -3167,7 +3235,7 @@ namespace DataTierClient.Forms
                 get { return storedProceduresSQLPath; }
                 set { storedProceduresSQLPath = value; }
             }
-        #endregion
+            #endregion
 
         #endregion
 
