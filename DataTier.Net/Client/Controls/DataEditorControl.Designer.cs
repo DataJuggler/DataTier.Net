@@ -75,7 +75,6 @@ namespace DataTierClient.Controls
             this.CreateBindingCallbackControl = new DataJuggler.Win.Controls.LabelCheckBoxControl();
             this.AllButton = new System.Windows.Forms.Label();
             this.NoneButton = new System.Windows.Forms.Label();
-            this.UICreatorButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // TablesListBox
@@ -278,7 +277,7 @@ namespace DataTierClient.Controls
             this.BlazorFeaturesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BlazorFeaturesButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BlazorFeaturesButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.BlazorFeaturesButton.Location = new System.Drawing.Point(360, 360);
+            this.BlazorFeaturesButton.Location = new System.Drawing.Point(360, 314);
             this.BlazorFeaturesButton.Name = "BlazorFeaturesButton";
             this.BlazorFeaturesButton.Size = new System.Drawing.Size(232, 40);
             this.BlazorFeaturesButton.TabIndex = 104;
@@ -302,7 +301,7 @@ namespace DataTierClient.Controls
             this.CreateBindingCallbackControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CreateBindingCallbackControl.LabelText = "Create Callback:";
             this.CreateBindingCallbackControl.LabelWidth = 160;
-            this.CreateBindingCallbackControl.Location = new System.Drawing.Point(384, 406);
+            this.CreateBindingCallbackControl.Location = new System.Drawing.Point(382, 364);
             this.CreateBindingCallbackControl.Name = "CreateBindingCallbackControl";
             this.CreateBindingCallbackControl.Size = new System.Drawing.Size(176, 28);
             this.CreateBindingCallbackControl.TabIndex = 105;
@@ -333,35 +332,13 @@ namespace DataTierClient.Controls
             this.NoneButton.MouseEnter += new System.EventHandler(this.Button_Enter);
             this.NoneButton.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
-            // UICreatorButton
-            // 
-            this.UICreatorButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
-            this.UICreatorButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.UICreatorButton.FlatAppearance.BorderSize = 0;
-            this.UICreatorButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.UICreatorButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.UICreatorButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.UICreatorButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UICreatorButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.UICreatorButton.Location = new System.Drawing.Point(363, 314);
-            this.UICreatorButton.Name = "UICreatorButton";
-            this.UICreatorButton.Size = new System.Drawing.Size(232, 40);
-            this.UICreatorButton.TabIndex = 108;
-            this.UICreatorButton.Text = "UI Creator";
-            this.UICreatorButton.UseVisualStyleBackColor = true;
-            this.UICreatorButton.Visible = false;
-            this.UICreatorButton.MouseEnter += new System.EventHandler(this.Button_Enter);
-            this.UICreatorButton.MouseLeave += new System.EventHandler(this.Button_Leave);
-            // 
             // DataEditorControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Linen;
-            this.Controls.Add(this.UICreatorButton);
             this.Controls.Add(this.NoneButton);
             this.Controls.Add(this.AllButton);
             this.Controls.Add(this.CreateBindingCallbackControl);
-            this.Controls.Add(this.BlazorFeaturesButton);
             this.Controls.Add(this.ManageFieldSetsButton);
             this.Controls.Add(this.ManageReadersButton);
             this.Controls.Add(this.ManageMethodButton);
@@ -376,6 +353,7 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.ExcludeTableLabel);
             this.Controls.Add(this.SaveCancelControl);
             this.Controls.Add(this.TablesListBox);
+            this.Controls.Add(this.BlazorFeaturesButton);
             this.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "DataEditorControl";
             this.Size = new System.Drawing.Size(964, 496);
@@ -391,7 +369,6 @@ namespace DataTierClient.Controls
         private DataJuggler.Win.Controls.LabelCheckBoxControl CreateBindingCallbackControl;
         private System.Windows.Forms.Label AllButton;
         private System.Windows.Forms.Label NoneButton;
-        private System.Windows.Forms.Button UICreatorButton;
     }
     #endregion
 
