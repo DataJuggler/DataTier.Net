@@ -414,6 +414,12 @@ namespace DataTierClient.Controls
                 // get the path to the file 
                 string path = Path.GetFullPath(@"../../../Class Room/Documents/DataTier.Net Quick Start.pdf");
 
+                // if the value for IsInstalledVersion is true
+                if (IsInstalledVersion)
+                {
+                    path = Path.GetFullPath(@"Class Room/Documents/DataTier.Net Quick Start.pdf");
+                }
+
                 // if the path exists
                 if (File.Exists(path))
                 {
@@ -436,6 +442,13 @@ namespace DataTierClient.Controls
             {
                 // get the path to the file 
                 string path = Path.GetFullPath(@"../../../Class Room/Documents/DataTier.Net Quick Start.docx");
+
+                // if the value for IsInstalledVersion is true
+                if (IsInstalledVersion)
+                {
+                    // change the path to the install folder
+                    path = Path.GetFullPath(@"Class Room/Documents/DataTier.Net Quick Start.docx");
+                }
 
                 // if the path exists
                 if (File.Exists(path))
@@ -469,6 +482,46 @@ namespace DataTierClient.Controls
             }
         #endregion
 
+            #region IsInstalledVersion
+            /// <summary>
+            /// This read only property returns the value for 'IsInstalledVersion'.
+            /// </summary>
+            public bool IsInstalledVersion
+            {
+                get
+                {
+                    // initial value
+                    bool isInstalledVersion = !IsVisualStudio;
+                    
+                    // return value
+                    return isInstalledVersion;
+                }
+            }
+            #endregion
+            
+            #region IsVisualStudio
+            /// <summary>
+            /// This read only property returns the value for 'IsVisualStudio'.
+            /// </summary>
+            public bool IsVisualStudio
+            {
+                get
+                {
+                    // initial value
+                    bool isVisualStudio = false;
+                    
+                    // Get the executing assembly's folder
+                    string directory = AppDomain.CurrentDomain.BaseDirectory;
+                    
+                    // this is visual studio
+                    isVisualStudio = ((directory.ToLower().Contains("debug")) || (directory.ToLower().Contains("release")));
+                    
+                    // return value
+                    return isVisualStudio;
+                }
+            }
+            #endregion
+
         #endregion
 
         #region Properties
@@ -501,6 +554,7 @@ namespace DataTierClient.Controls
         #endregion
 
         #endregion
+
     }
     #endregion
 

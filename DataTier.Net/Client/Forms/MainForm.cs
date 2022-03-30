@@ -318,7 +318,7 @@ namespace DataTierClient.Forms
                 bool restartRequired = false;
 
                 // if the user did not cancel
-                if (!userCancelledSetup)
+                if ((!userCancelledSetup) && (!SetupComplete))
                 {
                     // A restart is required if the user did not cancel
                     restartRequired = true;
