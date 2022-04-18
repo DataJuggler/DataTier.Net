@@ -2,12 +2,12 @@
 
 #region using statements
 
+using System;
+using ObjectLibrary.BusinessObjects;
 using DataAccessComponent.StoredProcedureManager.DeleteProcedures;
 using DataAccessComponent.StoredProcedureManager.FetchProcedures;
 using DataAccessComponent.StoredProcedureManager.InsertProcedures;
 using DataAccessComponent.StoredProcedureManager.UpdateProcedures;
-using ObjectLibrary.BusinessObjects;
-using System;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -117,41 +117,47 @@ namespace DataAccessComponent.DataManager.Writers
             internal static SqlParameter[] CreateInsertParameters(UserInterface userInterface)
             {
                 // Initial Values
-                SqlParameter[] parameters = new SqlParameter[5];
+                SqlParameter[] parameters = new SqlParameter[6];
                 SqlParameter param = null;
 
                 // verify userInterfaceexists
                 if(userInterface != null)
                 {
-                    // Create [Name] parameter
-                    param = new SqlParameter("@Name", userInterface.Name);
+                    // Create [DataSourceName] parameter
+                    param = new SqlParameter("@DataSourceName", userInterface.DataSourceName);
 
                     // set parameters[0]
                     parameters[0] = param;
 
-                    // Create [Path] parameter
-                    param = new SqlParameter("@Path", userInterface.Path);
+                    // Create [DataSourceType] parameter
+                    param = new SqlParameter("@DataSourceType", userInterface.DataSourceType);
 
                     // set parameters[1]
                     parameters[1] = param;
 
-                    // Create [ProjectId] parameter
-                    param = new SqlParameter("@ProjectId", userInterface.ProjectId);
+                    // Create [Name] parameter
+                    param = new SqlParameter("@Name", userInterface.Name);
 
                     // set parameters[2]
                     parameters[2] = param;
 
-                    // Create [TableName] parameter
-                    param = new SqlParameter("@TableName", userInterface.TableName);
+                    // Create [Path] parameter
+                    param = new SqlParameter("@Path", userInterface.Path);
 
                     // set parameters[3]
                     parameters[3] = param;
 
-                    // Create [UIType] parameter
-                    param = new SqlParameter("@UIType", userInterface.UIType);
+                    // Create [ProjectId] parameter
+                    param = new SqlParameter("@ProjectId", userInterface.ProjectId);
 
                     // set parameters[4]
                     parameters[4] = param;
+
+                    // Create [UIType] parameter
+                    param = new SqlParameter("@UIType", userInterface.UIType);
+
+                    // set parameters[5]
+                    parameters[5] = param;
                 }
 
                 // return value
@@ -198,45 +204,51 @@ namespace DataAccessComponent.DataManager.Writers
             internal static SqlParameter[] CreateUpdateParameters(UserInterface userInterface)
             {
                 // Initial Values
-                SqlParameter[] parameters = new SqlParameter[6];
+                SqlParameter[] parameters = new SqlParameter[7];
                 SqlParameter param = null;
 
                 // verify userInterfaceexists
                 if(userInterface != null)
                 {
-                    // Create parameter for [Name]
-                    param = new SqlParameter("@Name", userInterface.Name);
+                    // Create parameter for [DataSourceName]
+                    param = new SqlParameter("@DataSourceName", userInterface.DataSourceName);
 
                     // set parameters[0]
                     parameters[0] = param;
 
-                    // Create parameter for [Path]
-                    param = new SqlParameter("@Path", userInterface.Path);
+                    // Create parameter for [DataSourceType]
+                    param = new SqlParameter("@DataSourceType", userInterface.DataSourceType);
 
                     // set parameters[1]
                     parameters[1] = param;
 
-                    // Create parameter for [ProjectId]
-                    param = new SqlParameter("@ProjectId", userInterface.ProjectId);
+                    // Create parameter for [Name]
+                    param = new SqlParameter("@Name", userInterface.Name);
 
                     // set parameters[2]
                     parameters[2] = param;
 
-                    // Create parameter for [TableName]
-                    param = new SqlParameter("@TableName", userInterface.TableName);
+                    // Create parameter for [Path]
+                    param = new SqlParameter("@Path", userInterface.Path);
 
                     // set parameters[3]
                     parameters[3] = param;
 
-                    // Create parameter for [UIType]
-                    param = new SqlParameter("@UIType", userInterface.UIType);
+                    // Create parameter for [ProjectId]
+                    param = new SqlParameter("@ProjectId", userInterface.ProjectId);
 
                     // set parameters[4]
                     parameters[4] = param;
 
+                    // Create parameter for [UIType]
+                    param = new SqlParameter("@UIType", userInterface.UIType);
+
+                    // set parameters[5]
+                    parameters[5] = param;
+
                     // Create parameter for [Id]
                     param = new SqlParameter("@Id", userInterface.Id);
-                    parameters[5] = param;
+                    parameters[6] = param;
                 }
 
                 // return value

@@ -17,11 +17,12 @@ namespace ObjectLibrary.BusinessObjects
     {
 
         #region Private Variables
+        private string dataSourceName;
+        private int dataSourceType;
         private int id;
         private string name;
         private string path;
         private int projectId;
-        private string tableName;
         private int uIType;
         #endregion
 
@@ -42,6 +43,34 @@ namespace ObjectLibrary.BusinessObjects
         #endregion
 
         #region Properties
+
+            #region string DataSourceName
+            public string DataSourceName
+            {
+                get
+                {
+                    return dataSourceName;
+                }
+                set
+                {
+                    dataSourceName = value;
+                }
+            }
+            #endregion
+
+            #region int DataSourceType
+            public int DataSourceType
+            {
+                get
+                {
+                    return dataSourceType;
+                }
+                set
+                {
+                    dataSourceType = value;
+                }
+            }
+            #endregion
 
             #region int Id
             public int Id
@@ -91,20 +120,6 @@ namespace ObjectLibrary.BusinessObjects
                 set
                 {
                     projectId = value;
-                }
-            }
-            #endregion
-
-            #region string TableName
-            public string TableName
-            {
-                get
-                {
-                    return tableName;
-                }
-                set
-                {
-                    tableName = value;
                 }
             }
             #endregion

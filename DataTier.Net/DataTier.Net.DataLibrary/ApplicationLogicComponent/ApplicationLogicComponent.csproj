@@ -41,8 +41,8 @@
     <Reference Include="DataJuggler.Core.UltimateHelper, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\DataJuggler.Core.UltimateHelper.1.6.0\lib\net48\DataJuggler.Core.UltimateHelper.dll</HintPath>
     </Reference>
-    <Reference Include="DataJuggler.Net, Version=6.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\DataJuggler.Net.6.0.4\lib\net48\DataJuggler.Net.dll</HintPath>
+    <Reference Include="DataJuggler.Net, Version=6.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\DataJuggler.Net.6.0.5\lib\net48\DataJuggler.Net.dll</HintPath>
     </Reference>
     <Reference Include="DataJuggler.Net.Cryptography, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\DataJuggler.Net.Cryptography.1.0.0\lib\net461\DataJuggler.Net.Cryptography.dll</HintPath>
@@ -79,6 +79,8 @@
     <Compile Include="Connection\EnvironmentVariableHelper.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
+    <Compile Include="Controllers\ControlInfoController.cs" />
+    <Compile Include="Controllers\ControlInfoDetailController.cs" />
     <Compile Include="Controllers\ControllerManager.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -91,14 +93,19 @@
     <Compile Include="Controllers\FieldSetController.cs" />
     <Compile Include="Controllers\FieldSetFieldController.cs" />
     <Compile Include="Controllers\FieldSetFieldViewController.cs" />
+    <Compile Include="Controllers\FieldViewController.cs" />
     <Compile Include="Controllers\MethodController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\ProjectReferenceController.cs" />
+    <Compile Include="Controllers\ProjectReferencesViewController.cs" />
     <Compile Include="Controllers\ReferencesSetController.cs" />
     <Compile Include="Controllers\SystemController.cs" />
     <Compile Include="Controllers\UIFieldController.cs" />
+    <Compile Include="Controllers\UIObjectController.cs" />
     <Compile Include="Controllers\UserInterfaceController.cs" />
     <Compile Include="DataOperations\AdminMethods.cs" />
+    <Compile Include="DataOperations\ControlInfoDetailMethods.cs" />
+    <Compile Include="DataOperations\ControlInfoMethods.cs" />
     <Compile Include="DataOperations\CustomReaderMethods.cs" />
     <Compile Include="DataOperations\DTNDatabaseMethods.cs" />
     <Compile Include="DataOperations\DTNFieldMethods.cs" />
@@ -108,6 +115,7 @@
     <Compile Include="DataOperations\FieldSetFieldMethods.cs" />
     <Compile Include="DataOperations\FieldSetFieldViewMethods.cs" />
     <Compile Include="DataOperations\FieldSetMethods.cs" />
+    <Compile Include="DataOperations\FieldViewMethods.cs" />
     <Compile Include="DataOperations\MethodMethods.cs" />
     <Compile Include="DataOperations\PolymorphicObject.cs">
       <SubType>Code</SubType>
@@ -115,11 +123,13 @@
     <Compile Include="DataOperations\DataOperationsManager.cs" />
     <Compile Include="DataOperations\ProjectMethods.cs" />
     <Compile Include="DataOperations\ProjectReferenceMethods.cs" />
+    <Compile Include="DataOperations\ProjectReferencesViewMethods.cs" />
     <Compile Include="DataOperations\ReferencesSetMethods.cs" />
     <Compile Include="DataOperations\SystemMethods.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DataOperations\UIFieldMethods.cs" />
+    <Compile Include="DataOperations\UIObjectMethods.cs" />
     <Compile Include="DataOperations\UserInterfaceMethods.cs" />
     <Compile Include="Exceptions\NoProjectSelectedException.cs" />
     <Compile Include="DataBridge\DataBridgeManager.cs" />

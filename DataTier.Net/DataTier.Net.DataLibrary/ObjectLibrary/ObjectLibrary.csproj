@@ -41,8 +41,8 @@
     <Reference Include="DataJuggler.Core.UltimateHelper, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\DataJuggler.Core.UltimateHelper.1.6.0\lib\net48\DataJuggler.Core.UltimateHelper.dll</HintPath>
     </Reference>
-    <Reference Include="DataJuggler.Net, Version=6.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\DataJuggler.Net.6.0.4\lib\net48\DataJuggler.Net.dll</HintPath>
+    <Reference Include="DataJuggler.Net, Version=6.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\DataJuggler.Net.6.0.5\lib\net48\DataJuggler.Net.dll</HintPath>
     </Reference>
     <Reference Include="DataJuggler.Net.Cryptography, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\DataJuggler.Net.Cryptography.1.0.0\lib\net461\DataJuggler.Net.Cryptography.dll</HintPath>
@@ -76,6 +76,10 @@
   <ItemGroup>
     <Compile Include="BusinessObjects\Admin.business.cs" />
     <Compile Include="BusinessObjects\Admin.data.cs" />
+    <Compile Include="BusinessObjects\ControlInfo.business.cs" />
+    <Compile Include="BusinessObjects\ControlInfo.data.cs" />
+    <Compile Include="BusinessObjects\ControlInfoDetail.business.cs" />
+    <Compile Include="BusinessObjects\ControlInfoDetail.data.cs" />
     <Compile Include="BusinessObjects\CustomReader.business.cs" />
     <Compile Include="BusinessObjects\CustomReader.data.cs" />
     <Compile Include="BusinessObjects\DTNDatabase.business.cs" />
@@ -94,16 +98,22 @@
     <Compile Include="BusinessObjects\FieldSetField.data.cs" />
     <Compile Include="BusinessObjects\FieldSetFieldView.business.cs" />
     <Compile Include="BusinessObjects\FieldSetFieldView.data.cs" />
+    <Compile Include="BusinessObjects\FieldView.business.cs" />
+    <Compile Include="BusinessObjects\FieldView.data.cs" />
     <Compile Include="BusinessObjects\Method.business.cs" />
     <Compile Include="BusinessObjects\Method.data.cs" />
     <Compile Include="BusinessObjects\Project.business.cs" />
     <Compile Include="BusinessObjects\Project.data.cs" />
     <Compile Include="BusinessObjects\ProjectReference.business.cs" />
     <Compile Include="BusinessObjects\ProjectReference.data.cs" />
+    <Compile Include="BusinessObjects\ProjectReferencesView.business.cs" />
+    <Compile Include="BusinessObjects\ProjectReferencesView.data.cs" />
     <Compile Include="BusinessObjects\ReferencesSet.business.cs" />
     <Compile Include="BusinessObjects\ReferencesSet.data.cs" />
     <Compile Include="BusinessObjects\UIField.business.cs" />
     <Compile Include="BusinessObjects\UIField.data.cs" />
+    <Compile Include="BusinessObjects\UIObject.business.cs" />
+    <Compile Include="BusinessObjects\UIObject.data.cs" />
     <Compile Include="BusinessObjects\UserInterface.business.cs" />
     <Compile Include="BusinessObjects\UserInterface.data.cs" />
     <Compile Include="BusinessObjects\VisualStudioSolution.cs" />

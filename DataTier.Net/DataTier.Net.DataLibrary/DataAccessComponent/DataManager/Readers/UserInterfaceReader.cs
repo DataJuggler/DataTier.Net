@@ -37,21 +37,23 @@ namespace DataAccessComponent.DataManager.Readers
                 UserInterface userInterface = new UserInterface();
 
                 // Create field Integers
-                int idfield = 0;
-                int namefield = 1;
-                int pathfield = 2;
-                int projectIdfield = 3;
-                int tableNamefield = 4;
-                int uITypefield = 5;
+                int dataSourceNamefield = 0;
+                int dataSourceTypefield = 1;
+                int idfield = 2;
+                int namefield = 3;
+                int pathfield = 4;
+                int projectIdfield = 5;
+                int uITypefield = 6;
 
                 try
                 {
                     // Load Each field
+                    userInterface.DataSourceName = DataHelper.ParseString(dataRow.ItemArray[dataSourceNamefield]);
+                    userInterface.DataSourceType = DataHelper.ParseInteger(dataRow.ItemArray[dataSourceTypefield], 0);
                     userInterface.UpdateIdentity(DataHelper.ParseInteger(dataRow.ItemArray[idfield], 0));
                     userInterface.Name = DataHelper.ParseString(dataRow.ItemArray[namefield]);
                     userInterface.Path = DataHelper.ParseString(dataRow.ItemArray[pathfield]);
                     userInterface.ProjectId = DataHelper.ParseInteger(dataRow.ItemArray[projectIdfield], 0);
-                    userInterface.TableName = DataHelper.ParseString(dataRow.ItemArray[tableNamefield]);
                     userInterface.UIType = DataHelper.ParseInteger(dataRow.ItemArray[uITypefield], 0);
                 }
                 catch

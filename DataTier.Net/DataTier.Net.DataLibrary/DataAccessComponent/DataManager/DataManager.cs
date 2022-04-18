@@ -29,6 +29,8 @@ namespace DataAccessComponent.DataManager
         private DataConnector dataConnector;
         private string connectionName;
         private AdminManager adminManager;
+        private ControlInfoManager controlinfoManager;
+        private ControlInfoDetailManager controlinfodetailManager;
         private CustomReaderManager customreaderManager;
         private DTNDatabaseManager dtndatabaseManager;
         private DTNFieldManager dtnfieldManager;
@@ -38,11 +40,14 @@ namespace DataAccessComponent.DataManager
         private FieldSetManager fieldsetManager;
         private FieldSetFieldManager fieldsetfieldManager;
         private FieldSetFieldViewManager fieldsetfieldviewManager;
+        private FieldViewManager fieldviewManager;
         private MethodManager methodManager;
         private ProjectManager projectManager;
         private ProjectReferenceManager projectreferenceManager;
+        private ProjectReferencesViewManager projectreferencesviewManager;
         private ReferencesSetManager referencessetManager;
         private UIFieldManager uifieldManager;
+        private UIObjectManager uiobjectManager;
         private UserInterfaceManager userinterfaceManager;
         #endregion
 
@@ -74,6 +79,8 @@ namespace DataAccessComponent.DataManager
 
                 // Create Child Object Managers
                 this.AdminManager = new AdminManager(this);
+                this.ControlInfoManager = new ControlInfoManager(this);
+                this.ControlInfoDetailManager = new ControlInfoDetailManager(this);
                 this.CustomReaderManager = new CustomReaderManager(this);
                 this.DTNDatabaseManager = new DTNDatabaseManager(this);
                 this.DTNFieldManager = new DTNFieldManager(this);
@@ -83,11 +90,14 @@ namespace DataAccessComponent.DataManager
                 this.FieldSetManager = new FieldSetManager(this);
                 this.FieldSetFieldManager = new FieldSetFieldManager(this);
                 this.FieldSetFieldViewManager = new FieldSetFieldViewManager(this);
+                this.FieldViewManager = new FieldViewManager(this);
                 this.MethodManager = new MethodManager(this);
                 this.ProjectManager = new ProjectManager(this);
                 this.ProjectReferenceManager = new ProjectReferenceManager(this);
+                this.ProjectReferencesViewManager = new ProjectReferencesViewManager(this);
                 this.ReferencesSetManager = new ReferencesSetManager(this);
                 this.UIFieldManager = new UIFieldManager(this);
+                this.UIObjectManager = new UIObjectManager(this);
                 this.UserInterfaceManager = new UserInterfaceManager(this);
             }
             #endregion
@@ -117,6 +127,22 @@ namespace DataAccessComponent.DataManager
             {
                 get { return adminManager; }
                 set { adminManager = value; }
+            }
+            #endregion
+
+            #region ControlInfoManager
+            public ControlInfoManager ControlInfoManager
+            {
+                get { return controlinfoManager; }
+                set { controlinfoManager = value; }
+            }
+            #endregion
+
+            #region ControlInfoDetailManager
+            public ControlInfoDetailManager ControlInfoDetailManager
+            {
+                get { return controlinfodetailManager; }
+                set { controlinfodetailManager = value; }
             }
             #endregion
 
@@ -192,6 +218,14 @@ namespace DataAccessComponent.DataManager
             }
             #endregion
 
+            #region FieldViewManager
+            public FieldViewManager FieldViewManager
+            {
+                get { return fieldviewManager; }
+                set { fieldviewManager = value; }
+            }
+            #endregion
+
             #region MethodManager
             public MethodManager MethodManager
             {
@@ -216,6 +250,14 @@ namespace DataAccessComponent.DataManager
             }
             #endregion
 
+            #region ProjectReferencesViewManager
+            public ProjectReferencesViewManager ProjectReferencesViewManager
+            {
+                get { return projectreferencesviewManager; }
+                set { projectreferencesviewManager = value; }
+            }
+            #endregion
+
             #region ReferencesSetManager
             public ReferencesSetManager ReferencesSetManager
             {
@@ -229,6 +271,14 @@ namespace DataAccessComponent.DataManager
             {
                 get { return uifieldManager; }
                 set { uifieldManager = value; }
+            }
+            #endregion
+
+            #region UIObjectManager
+            public UIObjectManager UIObjectManager
+            {
+                get { return uiobjectManager; }
+                set { uiobjectManager = value; }
             }
             #endregion
 

@@ -38,31 +38,51 @@ namespace DataAccessComponent.DataManager.Readers
 
                 // Create field Integers
                 int captionfield = 0;
-                int dataTypefield = 1;
-                int dTNFieldIdfield = 2;
-                int fieldOrdinalfield = 3;
-                int idfield = 4;
-                int maxLengthfield = 5;
-                int maxRangefield = 6;
-                int minLengthfield = 7;
-                int minRangefield = 8;
-                int requiredfield = 9;
-                int userInterfaceIdfield = 10;
+                int controlTypefield = 1;
+                int dataTypefield = 2;
+                int defaultValuefield = 3;
+                int displayOrderfield = 4;
+                int dTNFieldIdfield = 5;
+                int fieldOrdinalfield = 6;
+                int heightfield = 7;
+                int idfield = 8;
+                int leftfield = 9;
+                int maxLengthfield = 10;
+                int maxRangefield = 11;
+                int minLengthfield = 12;
+                int minRangefield = 13;
+                int requiredfield = 14;
+                int requiredMessagefield = 15;
+                int topfield = 16;
+                int uIObjectIdfield = 17;
+                int userInterfaceIdfield = 18;
+                int validationMessagefield = 19;
+                int widthfield = 20;
 
                 try
                 {
                     // Load Each field
                     uIField.Caption = DataHelper.ParseString(dataRow.ItemArray[captionfield]);
+                    uIField.ControlType = DataHelper.ParseInteger(dataRow.ItemArray[controlTypefield], 0);
                     uIField.DataType = (DataTypeEnum) DataHelper.ParseInteger(dataRow.ItemArray[dataTypefield], 0);
+                    uIField.DefaultValue = DataHelper.ParseString(dataRow.ItemArray[defaultValuefield]);
+                    uIField.DisplayOrder = DataHelper.ParseInteger(dataRow.ItemArray[displayOrderfield], 0);
                     uIField.DTNFieldId = DataHelper.ParseInteger(dataRow.ItemArray[dTNFieldIdfield], 0);
                     uIField.FieldOrdinal = DataHelper.ParseInteger(dataRow.ItemArray[fieldOrdinalfield], 0);
+                    uIField.Height = DataHelper.ParseInteger(dataRow.ItemArray[heightfield], 0);
                     uIField.UpdateIdentity(DataHelper.ParseInteger(dataRow.ItemArray[idfield], 0));
+                    uIField.Left = DataHelper.ParseInteger(dataRow.ItemArray[leftfield], 0);
                     uIField.MaxLength = DataHelper.ParseInteger(dataRow.ItemArray[maxLengthfield], 0);
                     uIField.MaxRange = DataHelper.ParseDouble(dataRow.ItemArray[maxRangefield], 0);
                     uIField.MinLength = DataHelper.ParseInteger(dataRow.ItemArray[minLengthfield], 0);
                     uIField.MinRange = DataHelper.ParseDouble(dataRow.ItemArray[minRangefield], 0);
                     uIField.Required = DataHelper.ParseBoolean(dataRow.ItemArray[requiredfield], false);
+                    uIField.RequiredMessage = DataHelper.ParseString(dataRow.ItemArray[requiredMessagefield]);
+                    uIField.Top = DataHelper.ParseInteger(dataRow.ItemArray[topfield], 0);
+                    uIField.UIObjectId = DataHelper.ParseInteger(dataRow.ItemArray[uIObjectIdfield], 0);
                     uIField.UserInterfaceId = DataHelper.ParseInteger(dataRow.ItemArray[userInterfaceIdfield], 0);
+                    uIField.ValidationMessage = DataHelper.ParseString(dataRow.ItemArray[validationMessagefield]);
+                    uIField.Width = DataHelper.ParseInteger(dataRow.ItemArray[widthfield], 0);
                 }
                 catch
                 {

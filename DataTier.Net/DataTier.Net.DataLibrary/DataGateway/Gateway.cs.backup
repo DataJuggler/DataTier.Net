@@ -82,6 +82,80 @@ namespace DataGateway
             }
             #endregion
         
+            #region DeleteControlInfo(int id, ControlInfo tempControlInfo = null)
+            /// <summary>
+            /// This method is used to delete ControlInfo objects.
+            /// </summary>
+            /// <param name="id">Delete the ControlInfo with this id</param>
+            /// <param name="tempControlInfo">Pass in a tempControlInfo to perform a custom delete.</param>
+            public bool DeleteControlInfo(int id, ControlInfo tempControlInfo = null)
+            {
+                // initial value
+                bool deleted = false;
+        
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // if the tempControlInfo does not exist
+                    if (tempControlInfo == null)
+                    {
+                        // create a temp ControlInfo
+                        tempControlInfo = new ControlInfo();
+                    }
+        
+                    // if the id is set
+                    if (id > 0)
+                    {
+                        // set the primary key
+                        tempControlInfo.UpdateIdentity(id);
+                    }
+        
+                    // perform the delete
+                    deleted = this.AppController.ControllerManager.ControlInfoController.Delete(tempControlInfo);
+                }
+        
+                // return value
+                return deleted;
+            }
+            #endregion
+        
+            #region DeleteControlInfoDetail(int id, ControlInfoDetail tempControlInfoDetail = null)
+            /// <summary>
+            /// This method is used to delete ControlInfoDetail objects.
+            /// </summary>
+            /// <param name="id">Delete the ControlInfoDetail with this id</param>
+            /// <param name="tempControlInfoDetail">Pass in a tempControlInfoDetail to perform a custom delete.</param>
+            public bool DeleteControlInfoDetail(int id, ControlInfoDetail tempControlInfoDetail = null)
+            {
+                // initial value
+                bool deleted = false;
+        
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // if the tempControlInfoDetail does not exist
+                    if (tempControlInfoDetail == null)
+                    {
+                        // create a temp ControlInfoDetail
+                        tempControlInfoDetail = new ControlInfoDetail();
+                    }
+        
+                    // if the id is set
+                    if (id > 0)
+                    {
+                        // set the primary key
+                        tempControlInfoDetail.UpdateIdentity(id);
+                    }
+        
+                    // perform the delete
+                    deleted = this.AppController.ControllerManager.ControlInfoDetailController.Delete(tempControlInfoDetail);
+                }
+        
+                // return value
+                return deleted;
+            }
+            #endregion
+        
             #region DeleteCustomReader(int customReaderId, CustomReader tempCustomReader = null)
             /// <summary>
             /// This method is used to delete CustomReader objects.
@@ -618,6 +692,43 @@ namespace DataGateway
             }
             #endregion
         
+            #region DeleteUIObject(int id, UIObject tempUIObject = null)
+            /// <summary>
+            /// This method is used to delete UIObject objects.
+            /// </summary>
+            /// <param name="id">Delete the UIObject with this id</param>
+            /// <param name="tempUIObject">Pass in a tempUIObject to perform a custom delete.</param>
+            public bool DeleteUIObject(int id, UIObject tempUIObject = null)
+            {
+                // initial value
+                bool deleted = false;
+        
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // if the tempUIObject does not exist
+                    if (tempUIObject == null)
+                    {
+                        // create a temp UIObject
+                        tempUIObject = new UIObject();
+                    }
+        
+                    // if the id is set
+                    if (id > 0)
+                    {
+                        // set the primary key
+                        tempUIObject.UpdateIdentity(id);
+                    }
+        
+                    // perform the delete
+                    deleted = this.AppController.ControllerManager.UIObjectController.Delete(tempUIObject);
+                }
+        
+                // return value
+                return deleted;
+            }
+            #endregion
+        
             #region DeleteUserInterface(int id, UserInterface tempUserInterface = null)
             /// <summary>
             /// This method is used to delete UserInterface objects.
@@ -735,6 +846,80 @@ namespace DataGateway
 
                 // return value
                 return admin;
+            }
+            #endregion
+
+            #region FindControlInfo(int id, ControlInfo tempControlInfo = null)
+            /// <summary>
+            /// This method is used to find 'ControlInfo' objects.
+            /// </summary>
+            /// <param name="id">Find the ControlInfo with this id</param>
+            /// <param name="tempControlInfo">Pass in a tempControlInfo to perform a custom find.</param>
+            public ControlInfo FindControlInfo(int id, ControlInfo tempControlInfo = null)
+            {
+                // initial value
+                ControlInfo controlInfo = null;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // if the tempControlInfo does not exist
+                    if (tempControlInfo == null)
+                    {
+                        // create a temp ControlInfo
+                        tempControlInfo = new ControlInfo();
+                    }
+
+                    // if the id is set
+                    if (id > 0)
+                    {
+                        // set the primary key
+                        tempControlInfo.UpdateIdentity(id);
+                    }
+
+                    // perform the find
+                    controlInfo = this.AppController.ControllerManager.ControlInfoController.Find(tempControlInfo);
+                }
+
+                // return value
+                return controlInfo;
+            }
+            #endregion
+
+            #region FindControlInfoDetail(int id, ControlInfoDetail tempControlInfoDetail = null)
+            /// <summary>
+            /// This method is used to find 'ControlInfoDetail' objects.
+            /// </summary>
+            /// <param name="id">Find the ControlInfoDetail with this id</param>
+            /// <param name="tempControlInfoDetail">Pass in a tempControlInfoDetail to perform a custom find.</param>
+            public ControlInfoDetail FindControlInfoDetail(int id, ControlInfoDetail tempControlInfoDetail = null)
+            {
+                // initial value
+                ControlInfoDetail controlInfoDetail = null;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // if the tempControlInfoDetail does not exist
+                    if (tempControlInfoDetail == null)
+                    {
+                        // create a temp ControlInfoDetail
+                        tempControlInfoDetail = new ControlInfoDetail();
+                    }
+
+                    // if the id is set
+                    if (id > 0)
+                    {
+                        // set the primary key
+                        tempControlInfoDetail.UpdateIdentity(id);
+                    }
+
+                    // perform the find
+                    controlInfoDetail = this.AppController.ControllerManager.ControlInfoDetailController.Find(tempControlInfoDetail);
+                }
+
+                // return value
+                return controlInfoDetail;
             }
             #endregion
 
@@ -1328,6 +1513,43 @@ namespace DataGateway
             }
             #endregion
             
+            #region FindUIObject(int id, UIObject tempUIObject = null)
+            /// <summary>
+            /// This method is used to find 'UIObject' objects.
+            /// </summary>
+            /// <param name="id">Find the UIObject with this id</param>
+            /// <param name="tempUIObject">Pass in a tempUIObject to perform a custom find.</param>
+            public UIObject FindUIObject(int id, UIObject tempUIObject = null)
+            {
+                // initial value
+                UIObject uIObject = null;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // if the tempUIObject does not exist
+                    if (tempUIObject == null)
+                    {
+                        // create a temp UIObject
+                        tempUIObject = new UIObject();
+                    }
+
+                    // if the id is set
+                    if (id > 0)
+                    {
+                        // set the primary key
+                        tempUIObject.UpdateIdentity(id);
+                    }
+
+                    // perform the find
+                    uIObject = this.AppController.ControllerManager.UIObjectController.Find(tempUIObject);
+                }
+
+                // return value
+                return uIObject;
+            }
+            #endregion
+
             #region FindUserInterface(int id, UserInterface tempUserInterface = null)
             /// <summary>
             /// This method is used to find 'UserInterface' objects.
@@ -1494,6 +1716,48 @@ namespace DataGateway
                     
                 // return value
                 return project;
+            }
+            #endregion
+
+            #region LoadControlInfoDetails(ControlInfoDetail tempControlInfoDetail = null)
+            /// <summary>
+            /// This method loads a collection of 'ControlInfoDetail' objects.
+            /// </summary>
+            public List<ControlInfoDetail> LoadControlInfoDetails(ControlInfoDetail tempControlInfoDetail = null)
+            {
+                // initial value
+                List<ControlInfoDetail> controlInfoDetails = null;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // perform the load
+                    controlInfoDetails = this.AppController.ControllerManager.ControlInfoDetailController.FetchAll(tempControlInfoDetail);
+                }
+
+                // return value
+                return controlInfoDetails;
+            }
+            #endregion
+
+            #region LoadControlInfos(ControlInfo tempControlInfo = null)
+            /// <summary>
+            /// This method loads a collection of 'ControlInfo' objects.
+            /// </summary>
+            public List<ControlInfo> LoadControlInfos(ControlInfo tempControlInfo = null)
+            {
+                // initial value
+                List<ControlInfo> controlInfos = null;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // perform the load
+                    controlInfos = this.AppController.ControllerManager.ControlInfoController.FetchAll(tempControlInfo);
+                }
+
+                // return value
+                return controlInfos;
             }
             #endregion
 
@@ -1884,6 +2148,27 @@ namespace DataGateway
             }
             #endregion
 
+            #region LoadFieldViews(FieldView tempFieldView = null)
+            /// <summary>
+            /// This method loads a collection of 'FieldView' objects.
+            /// </summary>
+            public List<FieldView> LoadFieldViews(FieldView tempFieldView = null)
+            {
+                // initial value
+                List<FieldView> fieldViews = null;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // perform the load
+                    fieldViews = this.AppController.ControllerManager.FieldViewController.FetchAll(tempFieldView);
+                }
+
+                // return value
+                return fieldViews;
+            }
+            #endregion
+
             #region LoadMethods(Method tempMethod = null)
             /// <summary>
             /// This method loads a collection of 'Method' objects.
@@ -2044,6 +2329,27 @@ namespace DataGateway
             }
             #endregion
 
+            #region LoadProjectReferencesViews(ProjectReferencesView tempProjectReferencesView = null)
+            /// <summary>
+            /// This method loads a collection of 'ProjectReferencesView' objects.
+            /// </summary>
+            public List<ProjectReferencesView> LoadProjectReferencesViews(ProjectReferencesView tempProjectReferencesView = null)
+            {
+                // initial value
+                List<ProjectReferencesView> projectReferencesViews = null;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // perform the load
+                    projectReferencesViews = this.AppController.ControllerManager.ProjectReferencesViewController.FetchAll(tempProjectReferencesView);
+                }
+
+                // return value
+                return projectReferencesViews;
+            }
+            #endregion
+
             #region LoadProjects(Project tempProject = null)
             /// <summary>
             /// This method loads a collection of 'Project' objects.
@@ -2134,6 +2440,27 @@ namespace DataGateway
             }
             #endregion
 
+            #region LoadUIObjects(UIObject tempUIObject = null)
+            /// <summary>
+            /// This method loads a collection of 'UIObject' objects.
+            /// </summary>
+            public List<UIObject> LoadUIObjects(UIObject tempUIObject = null)
+            {
+                // initial value
+                List<UIObject> uIObjects = null;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // perform the load
+                    uIObjects = this.AppController.ControllerManager.UIObjectController.FetchAll(tempUIObject);
+                }
+
+                // return value
+                return uIObjects;
+            }
+            #endregion
+
             #region LoadUserInterfaces(UserInterface tempUserInterface = null)
             /// <summary>
             /// This method loads a collection of 'UserInterface' objects.
@@ -2214,6 +2541,50 @@ namespace DataGateway
                 {
                     // perform the save
                     saved = this.AppController.ControllerManager.AdminController.Save(ref admin);
+                }
+
+                // return value
+                return saved;
+            }
+            #endregion
+
+            #region SaveControlInfo(ref ControlInfo controlInfo)
+            /// <summary>
+            /// This method is used to save 'ControlInfo' objects.
+            /// </summary>
+            /// <param name="controlInfo">The ControlInfo to save.</param>
+            public bool SaveControlInfo(ref ControlInfo controlInfo)
+            {
+                // initial value
+                bool saved = false;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // perform the save
+                    saved = this.AppController.ControllerManager.ControlInfoController.Save(ref controlInfo);
+                }
+
+                // return value
+                return saved;
+            }
+            #endregion
+
+            #region SaveControlInfoDetail(ref ControlInfoDetail controlInfoDetail)
+            /// <summary>
+            /// This method is used to save 'ControlInfoDetail' objects.
+            /// </summary>
+            /// <param name="controlInfoDetail">The ControlInfoDetail to save.</param>
+            public bool SaveControlInfoDetail(ref ControlInfoDetail controlInfoDetail)
+            {
+                // initial value
+                bool saved = false;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // perform the save
+                    saved = this.AppController.ControllerManager.ControlInfoDetailController.Save(ref controlInfoDetail);
                 }
 
                 // return value
@@ -2604,6 +2975,28 @@ namespace DataGateway
                 {
                     // perform the save
                     saved = this.AppController.ControllerManager.UIFieldController.Save(ref uIField);
+                }
+
+                // return value
+                return saved;
+            }
+            #endregion
+
+            #region SaveUIObject(ref UIObject uIObject)
+            /// <summary>
+            /// This method is used to save 'UIObject' objects.
+            /// </summary>
+            /// <param name="uIObject">The UIObject to save.</param>
+            public bool SaveUIObject(ref UIObject uIObject)
+            {
+                // initial value
+                bool saved = false;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // perform the save
+                    saved = this.AppController.ControllerManager.UIObjectController.Save(ref uIObject);
                 }
 
                 // return value

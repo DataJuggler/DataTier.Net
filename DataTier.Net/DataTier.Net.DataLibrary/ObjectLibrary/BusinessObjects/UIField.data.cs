@@ -18,16 +18,26 @@ namespace ObjectLibrary.BusinessObjects
 
         #region Private Variables
         private string caption;
+        private int controlType;
         private DataTypeEnum dataType;
+        private string defaultValue;
+        private int displayOrder;
         private int dTNFieldId;
         private int fieldOrdinal;
+        private int height;
         private int id;
+        private int left;
         private int maxLength;
         private double maxRange;
         private int minLength;
         private double minRange;
         private bool required;
+        private string requiredMessage;
+        private int top;
+        private int uIObjectId;
         private int userInterfaceId;
+        private string validationMessage;
+        private int width;
         #endregion
 
         #region Methods
@@ -62,6 +72,20 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
 
+            #region int ControlType
+            public int ControlType
+            {
+                get
+                {
+                    return controlType;
+                }
+                set
+                {
+                    controlType = value;
+                }
+            }
+            #endregion
+
             #region DataTypeEnum DataType
             public DataTypeEnum DataType
             {
@@ -72,6 +96,34 @@ namespace ObjectLibrary.BusinessObjects
                 set
                 {
                     dataType = value;
+                }
+            }
+            #endregion
+
+            #region string DefaultValue
+            public string DefaultValue
+            {
+                get
+                {
+                    return defaultValue;
+                }
+                set
+                {
+                    defaultValue = value;
+                }
+            }
+            #endregion
+
+            #region int DisplayOrder
+            public int DisplayOrder
+            {
+                get
+                {
+                    return displayOrder;
+                }
+                set
+                {
+                    displayOrder = value;
                 }
             }
             #endregion
@@ -104,12 +156,40 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
 
+            #region int Height
+            public int Height
+            {
+                get
+                {
+                    return height;
+                }
+                set
+                {
+                    height = value;
+                }
+            }
+            #endregion
+
             #region int Id
             public int Id
             {
                 get
                 {
                     return id;
+                }
+            }
+            #endregion
+
+            #region int Left
+            public int Left
+            {
+                get
+                {
+                    return left;
+                }
+                set
+                {
+                    left = value;
                 }
             }
             #endregion
@@ -184,6 +264,48 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
 
+            #region string RequiredMessage
+            public string RequiredMessage
+            {
+                get
+                {
+                    return requiredMessage;
+                }
+                set
+                {
+                    requiredMessage = value;
+                }
+            }
+            #endregion
+
+            #region int Top
+            public int Top
+            {
+                get
+                {
+                    return top;
+                }
+                set
+                {
+                    top = value;
+                }
+            }
+            #endregion
+
+            #region int UIObjectId
+            public int UIObjectId
+            {
+                get
+                {
+                    return uIObjectId;
+                }
+                set
+                {
+                    uIObjectId = value;
+                }
+            }
+            #endregion
+
             #region int UserInterfaceId
             public int UserInterfaceId
             {
@@ -194,6 +316,34 @@ namespace ObjectLibrary.BusinessObjects
                 set
                 {
                     userInterfaceId = value;
+                }
+            }
+            #endregion
+
+            #region string ValidationMessage
+            public string ValidationMessage
+            {
+                get
+                {
+                    return validationMessage;
+                }
+                set
+                {
+                    validationMessage = value;
+                }
+            }
+            #endregion
+
+            #region int Width
+            public int Width
+            {
+                get
+                {
+                    return width;
+                }
+                set
+                {
+                    width = value;
                 }
             }
             #endregion

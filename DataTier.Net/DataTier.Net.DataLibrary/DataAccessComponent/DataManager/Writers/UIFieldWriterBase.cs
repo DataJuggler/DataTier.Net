@@ -2,12 +2,12 @@
 
 #region using statements
 
+using System;
+using ObjectLibrary.BusinessObjects;
 using DataAccessComponent.StoredProcedureManager.DeleteProcedures;
 using DataAccessComponent.StoredProcedureManager.FetchProcedures;
 using DataAccessComponent.StoredProcedureManager.InsertProcedures;
 using DataAccessComponent.StoredProcedureManager.UpdateProcedures;
-using ObjectLibrary.BusinessObjects;
-using System;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -117,7 +117,7 @@ namespace DataAccessComponent.DataManager.Writers
             internal static SqlParameter[] CreateInsertParameters(UIField uIField)
             {
                 // Initial Values
-                SqlParameter[] parameters = new SqlParameter[10];
+                SqlParameter[] parameters = new SqlParameter[20];
                 SqlParameter param = null;
 
                 // verify uIFieldexists
@@ -129,59 +129,119 @@ namespace DataAccessComponent.DataManager.Writers
                     // set parameters[0]
                     parameters[0] = param;
 
-                    // Create [DataType] parameter
-                    param = new SqlParameter("@DataType", uIField.DataType);
+                    // Create [ControlType] parameter
+                    param = new SqlParameter("@ControlType", uIField.ControlType);
 
                     // set parameters[1]
                     parameters[1] = param;
 
-                    // Create [DTNFieldId] parameter
-                    param = new SqlParameter("@DTNFieldId", uIField.DTNFieldId);
+                    // Create [DataType] parameter
+                    param = new SqlParameter("@DataType", uIField.DataType);
 
                     // set parameters[2]
                     parameters[2] = param;
 
-                    // Create [FieldOrdinal] parameter
-                    param = new SqlParameter("@FieldOrdinal", uIField.FieldOrdinal);
+                    // Create [DefaultValue] parameter
+                    param = new SqlParameter("@DefaultValue", uIField.DefaultValue);
 
                     // set parameters[3]
                     parameters[3] = param;
 
-                    // Create [MaxLength] parameter
-                    param = new SqlParameter("@MaxLength", uIField.MaxLength);
+                    // Create [DisplayOrder] parameter
+                    param = new SqlParameter("@DisplayOrder", uIField.DisplayOrder);
 
                     // set parameters[4]
                     parameters[4] = param;
 
-                    // Create [MaxRange] parameter
-                    param = new SqlParameter("@MaxRange", uIField.MaxRange);
+                    // Create [DTNFieldId] parameter
+                    param = new SqlParameter("@DTNFieldId", uIField.DTNFieldId);
 
                     // set parameters[5]
                     parameters[5] = param;
 
-                    // Create [MinLength] parameter
-                    param = new SqlParameter("@MinLength", uIField.MinLength);
+                    // Create [FieldOrdinal] parameter
+                    param = new SqlParameter("@FieldOrdinal", uIField.FieldOrdinal);
 
                     // set parameters[6]
                     parameters[6] = param;
 
-                    // Create [MinRange] parameter
-                    param = new SqlParameter("@MinRange", uIField.MinRange);
+                    // Create [Height] parameter
+                    param = new SqlParameter("@Height", uIField.Height);
 
                     // set parameters[7]
                     parameters[7] = param;
 
-                    // Create [Required] parameter
-                    param = new SqlParameter("@Required", uIField.Required);
+                    // Create [Left] parameter
+                    param = new SqlParameter("@Left", uIField.Left);
 
                     // set parameters[8]
                     parameters[8] = param;
 
-                    // Create [UserInterfaceId] parameter
-                    param = new SqlParameter("@UserInterfaceId", uIField.UserInterfaceId);
+                    // Create [MaxLength] parameter
+                    param = new SqlParameter("@MaxLength", uIField.MaxLength);
 
                     // set parameters[9]
                     parameters[9] = param;
+
+                    // Create [MaxRange] parameter
+                    param = new SqlParameter("@MaxRange", uIField.MaxRange);
+
+                    // set parameters[10]
+                    parameters[10] = param;
+
+                    // Create [MinLength] parameter
+                    param = new SqlParameter("@MinLength", uIField.MinLength);
+
+                    // set parameters[11]
+                    parameters[11] = param;
+
+                    // Create [MinRange] parameter
+                    param = new SqlParameter("@MinRange", uIField.MinRange);
+
+                    // set parameters[12]
+                    parameters[12] = param;
+
+                    // Create [Required] parameter
+                    param = new SqlParameter("@Required", uIField.Required);
+
+                    // set parameters[13]
+                    parameters[13] = param;
+
+                    // Create [RequiredMessage] parameter
+                    param = new SqlParameter("@RequiredMessage", uIField.RequiredMessage);
+
+                    // set parameters[14]
+                    parameters[14] = param;
+
+                    // Create [Top] parameter
+                    param = new SqlParameter("@Top", uIField.Top);
+
+                    // set parameters[15]
+                    parameters[15] = param;
+
+                    // Create [UIObjectId] parameter
+                    param = new SqlParameter("@UIObjectId", uIField.UIObjectId);
+
+                    // set parameters[16]
+                    parameters[16] = param;
+
+                    // Create [UserInterfaceId] parameter
+                    param = new SqlParameter("@UserInterfaceId", uIField.UserInterfaceId);
+
+                    // set parameters[17]
+                    parameters[17] = param;
+
+                    // Create [ValidationMessage] parameter
+                    param = new SqlParameter("@ValidationMessage", uIField.ValidationMessage);
+
+                    // set parameters[18]
+                    parameters[18] = param;
+
+                    // Create [Width] parameter
+                    param = new SqlParameter("@Width", uIField.Width);
+
+                    // set parameters[19]
+                    parameters[19] = param;
                 }
 
                 // return value
@@ -228,7 +288,7 @@ namespace DataAccessComponent.DataManager.Writers
             internal static SqlParameter[] CreateUpdateParameters(UIField uIField)
             {
                 // Initial Values
-                SqlParameter[] parameters = new SqlParameter[11];
+                SqlParameter[] parameters = new SqlParameter[21];
                 SqlParameter param = null;
 
                 // verify uIFieldexists
@@ -240,63 +300,123 @@ namespace DataAccessComponent.DataManager.Writers
                     // set parameters[0]
                     parameters[0] = param;
 
-                    // Create parameter for [DataType]
-                    param = new SqlParameter("@DataType", uIField.DataType);
+                    // Create parameter for [ControlType]
+                    param = new SqlParameter("@ControlType", uIField.ControlType);
 
                     // set parameters[1]
                     parameters[1] = param;
 
-                    // Create parameter for [DTNFieldId]
-                    param = new SqlParameter("@DTNFieldId", uIField.DTNFieldId);
+                    // Create parameter for [DataType]
+                    param = new SqlParameter("@DataType", uIField.DataType);
 
                     // set parameters[2]
                     parameters[2] = param;
 
-                    // Create parameter for [FieldOrdinal]
-                    param = new SqlParameter("@FieldOrdinal", uIField.FieldOrdinal);
+                    // Create parameter for [DefaultValue]
+                    param = new SqlParameter("@DefaultValue", uIField.DefaultValue);
 
                     // set parameters[3]
                     parameters[3] = param;
 
-                    // Create parameter for [MaxLength]
-                    param = new SqlParameter("@MaxLength", uIField.MaxLength);
+                    // Create parameter for [DisplayOrder]
+                    param = new SqlParameter("@DisplayOrder", uIField.DisplayOrder);
 
                     // set parameters[4]
                     parameters[4] = param;
 
-                    // Create parameter for [MaxRange]
-                    param = new SqlParameter("@MaxRange", uIField.MaxRange);
+                    // Create parameter for [DTNFieldId]
+                    param = new SqlParameter("@DTNFieldId", uIField.DTNFieldId);
 
                     // set parameters[5]
                     parameters[5] = param;
 
-                    // Create parameter for [MinLength]
-                    param = new SqlParameter("@MinLength", uIField.MinLength);
+                    // Create parameter for [FieldOrdinal]
+                    param = new SqlParameter("@FieldOrdinal", uIField.FieldOrdinal);
 
                     // set parameters[6]
                     parameters[6] = param;
 
-                    // Create parameter for [MinRange]
-                    param = new SqlParameter("@MinRange", uIField.MinRange);
+                    // Create parameter for [Height]
+                    param = new SqlParameter("@Height", uIField.Height);
 
                     // set parameters[7]
                     parameters[7] = param;
 
-                    // Create parameter for [Required]
-                    param = new SqlParameter("@Required", uIField.Required);
+                    // Create parameter for [Left]
+                    param = new SqlParameter("@Left", uIField.Left);
 
                     // set parameters[8]
                     parameters[8] = param;
 
-                    // Create parameter for [UserInterfaceId]
-                    param = new SqlParameter("@UserInterfaceId", uIField.UserInterfaceId);
+                    // Create parameter for [MaxLength]
+                    param = new SqlParameter("@MaxLength", uIField.MaxLength);
 
                     // set parameters[9]
                     parameters[9] = param;
 
+                    // Create parameter for [MaxRange]
+                    param = new SqlParameter("@MaxRange", uIField.MaxRange);
+
+                    // set parameters[10]
+                    parameters[10] = param;
+
+                    // Create parameter for [MinLength]
+                    param = new SqlParameter("@MinLength", uIField.MinLength);
+
+                    // set parameters[11]
+                    parameters[11] = param;
+
+                    // Create parameter for [MinRange]
+                    param = new SqlParameter("@MinRange", uIField.MinRange);
+
+                    // set parameters[12]
+                    parameters[12] = param;
+
+                    // Create parameter for [Required]
+                    param = new SqlParameter("@Required", uIField.Required);
+
+                    // set parameters[13]
+                    parameters[13] = param;
+
+                    // Create parameter for [RequiredMessage]
+                    param = new SqlParameter("@RequiredMessage", uIField.RequiredMessage);
+
+                    // set parameters[14]
+                    parameters[14] = param;
+
+                    // Create parameter for [Top]
+                    param = new SqlParameter("@Top", uIField.Top);
+
+                    // set parameters[15]
+                    parameters[15] = param;
+
+                    // Create parameter for [UIObjectId]
+                    param = new SqlParameter("@UIObjectId", uIField.UIObjectId);
+
+                    // set parameters[16]
+                    parameters[16] = param;
+
+                    // Create parameter for [UserInterfaceId]
+                    param = new SqlParameter("@UserInterfaceId", uIField.UserInterfaceId);
+
+                    // set parameters[17]
+                    parameters[17] = param;
+
+                    // Create parameter for [ValidationMessage]
+                    param = new SqlParameter("@ValidationMessage", uIField.ValidationMessage);
+
+                    // set parameters[18]
+                    parameters[18] = param;
+
+                    // Create parameter for [Width]
+                    param = new SqlParameter("@Width", uIField.Width);
+
+                    // set parameters[19]
+                    parameters[19] = param;
+
                     // Create parameter for [Id]
                     param = new SqlParameter("@Id", uIField.Id);
-                    parameters[10] = param;
+                    parameters[20] = param;
                 }
 
                 // return value

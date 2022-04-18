@@ -30,6 +30,8 @@ namespace ApplicationLogicComponent.DataOperations
         private DataManager dataManager;
         private SystemMethods systemMethods;
         private AdminMethods adminMethods;
+        private ControlInfoMethods controlinfoMethods;
+        private ControlInfoDetailMethods controlinfodetailMethods;
         private CustomReaderMethods customreaderMethods;
         private DTNDatabaseMethods dtndatabaseMethods;
         private DTNFieldMethods dtnfieldMethods;
@@ -39,11 +41,14 @@ namespace ApplicationLogicComponent.DataOperations
         private FieldSetMethods fieldsetMethods;
         private FieldSetFieldMethods fieldsetfieldMethods;
         private FieldSetFieldViewMethods fieldsetfieldviewMethods;
+        private FieldViewMethods fieldviewMethods;
         private MethodMethods methodMethods;
         private ProjectMethods projectMethods;
         private ProjectReferenceMethods projectreferenceMethods;
+        private ProjectReferencesViewMethods projectreferencesviewMethods;
         private ReferencesSetMethods referencessetMethods;
         private UIFieldMethods uifieldMethods;
+        private UIObjectMethods uiobjectMethods;
         private UserInterfaceMethods userinterfaceMethods;
         #endregion
 
@@ -72,6 +77,8 @@ namespace ApplicationLogicComponent.DataOperations
                 // Create Child DataOperatonMethods
                 this.SystemMethods = new SystemMethods();
                 this.AdminMethods = new AdminMethods(this.DataManager);
+                this.ControlInfoMethods = new ControlInfoMethods(this.DataManager);
+                this.ControlInfoDetailMethods = new ControlInfoDetailMethods(this.DataManager);
                 this.CustomReaderMethods = new CustomReaderMethods(this.DataManager);
                 this.DTNDatabaseMethods = new DTNDatabaseMethods(this.DataManager);
                 this.DTNFieldMethods = new DTNFieldMethods(this.DataManager);
@@ -81,11 +88,14 @@ namespace ApplicationLogicComponent.DataOperations
                 this.FieldSetMethods = new FieldSetMethods(this.DataManager);
                 this.FieldSetFieldMethods = new FieldSetFieldMethods(this.DataManager);
                 this.FieldSetFieldViewMethods = new FieldSetFieldViewMethods(this.DataManager);
+                this.FieldViewMethods = new FieldViewMethods(this.DataManager);
                 this.MethodMethods = new MethodMethods(this.DataManager);
                 this.ProjectMethods = new ProjectMethods(this.DataManager);
                 this.ProjectReferenceMethods = new ProjectReferenceMethods(this.DataManager);
+                this.ProjectReferencesViewMethods = new ProjectReferencesViewMethods(this.DataManager);
                 this.ReferencesSetMethods = new ReferencesSetMethods(this.DataManager);
                 this.UIFieldMethods = new UIFieldMethods(this.DataManager);
+                this.UIObjectMethods = new UIObjectMethods(this.DataManager);
                 this.UserInterfaceMethods = new UserInterfaceMethods(this.DataManager);
             }
             #endregion
@@ -115,6 +125,22 @@ namespace ApplicationLogicComponent.DataOperations
             {
                 get { return adminMethods; }
                 set { adminMethods = value; }
+            }
+            #endregion
+
+            #region ControlInfoMethods
+            public ControlInfoMethods ControlInfoMethods
+            {
+                get { return controlinfoMethods; }
+                set { controlinfoMethods = value; }
+            }
+            #endregion
+
+            #region ControlInfoDetailMethods
+            public ControlInfoDetailMethods ControlInfoDetailMethods
+            {
+                get { return controlinfodetailMethods; }
+                set { controlinfodetailMethods = value; }
             }
             #endregion
 
@@ -190,6 +216,14 @@ namespace ApplicationLogicComponent.DataOperations
             }
             #endregion
 
+            #region FieldViewMethods
+            public FieldViewMethods FieldViewMethods
+            {
+                get { return fieldviewMethods; }
+                set { fieldviewMethods = value; }
+            }
+            #endregion
+
             #region MethodMethods
             public MethodMethods MethodMethods
             {
@@ -214,6 +248,14 @@ namespace ApplicationLogicComponent.DataOperations
             }
             #endregion
 
+            #region ProjectReferencesViewMethods
+            public ProjectReferencesViewMethods ProjectReferencesViewMethods
+            {
+                get { return projectreferencesviewMethods; }
+                set { projectreferencesviewMethods = value; }
+            }
+            #endregion
+
             #region ReferencesSetMethods
             public ReferencesSetMethods ReferencesSetMethods
             {
@@ -227,6 +269,14 @@ namespace ApplicationLogicComponent.DataOperations
             {
                 get { return uifieldMethods; }
                 set { uifieldMethods = value; }
+            }
+            #endregion
+
+            #region UIObjectMethods
+            public UIObjectMethods UIObjectMethods
+            {
+                get { return uiobjectMethods; }
+                set { uiobjectMethods = value; }
             }
             #endregion
 
