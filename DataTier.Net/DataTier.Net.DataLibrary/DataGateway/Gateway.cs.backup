@@ -655,6 +655,80 @@ namespace DataGateway
             }
             #endregion
         
+            #region DeleteUIControlDetail(int id, UIControlDetail tempUIControlDetail = null)
+            /// <summary>
+            /// This method is used to delete UIControlDetail objects.
+            /// </summary>
+            /// <param name="id">Delete the UIControlDetail with this id</param>
+            /// <param name="tempUIControlDetail">Pass in a tempUIControlDetail to perform a custom delete.</param>
+            public bool DeleteUIControlDetail(int id, UIControlDetail tempUIControlDetail = null)
+            {
+                // initial value
+                bool deleted = false;
+        
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // if the tempUIControlDetail does not exist
+                    if (tempUIControlDetail == null)
+                    {
+                        // create a temp UIControlDetail
+                        tempUIControlDetail = new UIControlDetail();
+                    }
+        
+                    // if the id is set
+                    if (id > 0)
+                    {
+                        // set the primary key
+                        tempUIControlDetail.UpdateIdentity(id);
+                    }
+        
+                    // perform the delete
+                    deleted = this.AppController.ControllerManager.UIControlDetailController.Delete(tempUIControlDetail);
+                }
+        
+                // return value
+                return deleted;
+            }
+            #endregion
+        
+            #region DeleteUIControlTemplate(int id, UIControlTemplate tempUIControlTemplate = null)
+            /// <summary>
+            /// This method is used to delete UIControlTemplate objects.
+            /// </summary>
+            /// <param name="id">Delete the UIControlTemplate with this id</param>
+            /// <param name="tempUIControlTemplate">Pass in a tempUIControlTemplate to perform a custom delete.</param>
+            public bool DeleteUIControlTemplate(int id, UIControlTemplate tempUIControlTemplate = null)
+            {
+                // initial value
+                bool deleted = false;
+        
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // if the tempUIControlTemplate does not exist
+                    if (tempUIControlTemplate == null)
+                    {
+                        // create a temp UIControlTemplate
+                        tempUIControlTemplate = new UIControlTemplate();
+                    }
+        
+                    // if the id is set
+                    if (id > 0)
+                    {
+                        // set the primary key
+                        tempUIControlTemplate.UpdateIdentity(id);
+                    }
+        
+                    // perform the delete
+                    deleted = this.AppController.ControllerManager.UIControlTemplateController.Delete(tempUIControlTemplate);
+                }
+        
+                // return value
+                return deleted;
+            }
+            #endregion
+        
             #region DeleteUIField(int id, UIField tempUIField = null)
             /// <summary>
             /// This method is used to delete UIField objects.
@@ -1447,6 +1521,80 @@ namespace DataGateway
 
                 // return value
                 return referencesSet;
+            }
+            #endregion
+
+            #region FindUIControlDetail(int id, UIControlDetail tempUIControlDetail = null)
+            /// <summary>
+            /// This method is used to find 'UIControlDetail' objects.
+            /// </summary>
+            /// <param name="id">Find the UIControlDetail with this id</param>
+            /// <param name="tempUIControlDetail">Pass in a tempUIControlDetail to perform a custom find.</param>
+            public UIControlDetail FindUIControlDetail(int id, UIControlDetail tempUIControlDetail = null)
+            {
+                // initial value
+                UIControlDetail uIControlDetail = null;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // if the tempUIControlDetail does not exist
+                    if (tempUIControlDetail == null)
+                    {
+                        // create a temp UIControlDetail
+                        tempUIControlDetail = new UIControlDetail();
+                    }
+
+                    // if the id is set
+                    if (id > 0)
+                    {
+                        // set the primary key
+                        tempUIControlDetail.UpdateIdentity(id);
+                    }
+
+                    // perform the find
+                    uIControlDetail = this.AppController.ControllerManager.UIControlDetailController.Find(tempUIControlDetail);
+                }
+
+                // return value
+                return uIControlDetail;
+            }
+            #endregion
+
+            #region FindUIControlTemplate(int id, UIControlTemplate tempUIControlTemplate = null)
+            /// <summary>
+            /// This method is used to find 'UIControlTemplate' objects.
+            /// </summary>
+            /// <param name="id">Find the UIControlTemplate with this id</param>
+            /// <param name="tempUIControlTemplate">Pass in a tempUIControlTemplate to perform a custom find.</param>
+            public UIControlTemplate FindUIControlTemplate(int id, UIControlTemplate tempUIControlTemplate = null)
+            {
+                // initial value
+                UIControlTemplate uIControlTemplate = null;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // if the tempUIControlTemplate does not exist
+                    if (tempUIControlTemplate == null)
+                    {
+                        // create a temp UIControlTemplate
+                        tempUIControlTemplate = new UIControlTemplate();
+                    }
+
+                    // if the id is set
+                    if (id > 0)
+                    {
+                        // set the primary key
+                        tempUIControlTemplate.UpdateIdentity(id);
+                    }
+
+                    // perform the find
+                    uIControlTemplate = this.AppController.ControllerManager.UIControlTemplateController.Find(tempUIControlTemplate);
+                }
+
+                // return value
+                return uIControlTemplate;
             }
             #endregion
 
@@ -2419,6 +2567,48 @@ namespace DataGateway
             }
             #endregion
 
+            #region LoadUIControlDetails(UIControlDetail tempUIControlDetail = null)
+            /// <summary>
+            /// This method loads a collection of 'UIControlDetail' objects.
+            /// </summary>
+            public List<UIControlDetail> LoadUIControlDetails(UIControlDetail tempUIControlDetail = null)
+            {
+                // initial value
+                List<UIControlDetail> uIControlDetails = null;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // perform the load
+                    uIControlDetails = this.AppController.ControllerManager.UIControlDetailController.FetchAll(tempUIControlDetail);
+                }
+
+                // return value
+                return uIControlDetails;
+            }
+            #endregion
+
+            #region LoadUIControlTemplates(UIControlTemplate tempUIControlTemplate = null)
+            /// <summary>
+            /// This method loads a collection of 'UIControlTemplate' objects.
+            /// </summary>
+            public List<UIControlTemplate> LoadUIControlTemplates(UIControlTemplate tempUIControlTemplate = null)
+            {
+                // initial value
+                List<UIControlTemplate> uIControlTemplates = null;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // perform the load
+                    uIControlTemplates = this.AppController.ControllerManager.UIControlTemplateController.FetchAll(tempUIControlTemplate);
+                }
+
+                // return value
+                return uIControlTemplates;
+            }
+            #endregion
+
             #region LoadUIFields(UIField tempUIField = null)
             /// <summary>
             /// This method loads a collection of 'UIField' objects.
@@ -2953,6 +3143,50 @@ namespace DataGateway
                 {
                     // perform the save
                     saved = this.AppController.ControllerManager.ReferencesSetController.Save(ref referencesSet);
+                }
+
+                // return value
+                return saved;
+            }
+            #endregion
+
+            #region SaveUIControlDetail(ref UIControlDetail uIControlDetail)
+            /// <summary>
+            /// This method is used to save 'UIControlDetail' objects.
+            /// </summary>
+            /// <param name="uIControlDetail">The UIControlDetail to save.</param>
+            public bool SaveUIControlDetail(ref UIControlDetail uIControlDetail)
+            {
+                // initial value
+                bool saved = false;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // perform the save
+                    saved = this.AppController.ControllerManager.UIControlDetailController.Save(ref uIControlDetail);
+                }
+
+                // return value
+                return saved;
+            }
+            #endregion
+
+            #region SaveUIControlTemplate(ref UIControlTemplate uIControlTemplate)
+            /// <summary>
+            /// This method is used to save 'UIControlTemplate' objects.
+            /// </summary>
+            /// <param name="uIControlTemplate">The UIControlTemplate to save.</param>
+            public bool SaveUIControlTemplate(ref UIControlTemplate uIControlTemplate)
+            {
+                // initial value
+                bool saved = false;
+
+                // if the AppController exists
+                if (this.HasAppController)
+                {
+                    // perform the save
+                    saved = this.AppController.ControllerManager.UIControlTemplateController.Save(ref uIControlTemplate);
                 }
 
                 // return value

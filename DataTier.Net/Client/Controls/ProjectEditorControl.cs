@@ -45,7 +45,7 @@ namespace DataTierClient.Controls
         
         #region Constructor
         /// <summary>
-        /// Create a new instance of a ProjectInfoControl.
+        /// Create a new instance of a ProjectEditorControl.
         /// </summary>
         public ProjectEditorControl()
         {

@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{70E97B98-9BE2-4747-A3AF-1C274AE401CE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataJuggler.Win.Controls</RootNamespace>
+    <AssemblyName>DataJuggler.Win.Controls</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DataJuggler.Core.UltimateHelper, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DataJuggler.Core.UltimateHelper.1.6.0\lib\net48\DataJuggler.Core.UltimateHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Interfaces\ICheckChangedListener.cs" />
+    <Compile Include="Interfaces\IListEditorHost.cs" />
+    <Compile Include="Interfaces\ISliderValueChangedListener.cs" />
+    <Compile Include="Interfaces\ITabHostControlParent.cs" />
+    <Compile Include="Interfaces\IPrimaryKey.cs" />
+    <Compile Include="Interfaces\ITextChanged.cs" />
+    <Compile Include="LabelCheckBoxControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LabelCheckBoxControl.designer.cs">
+      <DependentUpon>LabelCheckBoxControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Enumerations\ClientEnumerations.cs" />
+    <Compile Include="Interfaces\IFieldValueControl.cs" />
+    <Compile Include="Interfaces\ISaveCancelHost.cs" />
+    <Compile Include="Interfaces\ISelectedIndexListener.cs" />
+    <Compile Include="LabelComboBoxControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LabelComboBoxControl.designer.cs">
+      <DependentUpon>LabelComboBoxControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LabelLabelControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LabelLabelControl.Designer.cs">
+      <DependentUpon>LabelLabelControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LabelTextBoxBrowserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LabelTextBoxBrowserControl.Designer.cs">
+      <DependentUpon>LabelTextBoxBrowserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LabelTextBoxControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LabelTextBoxControl.designer.cs">
+      <DependentUpon>LabelTextBoxControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListEditorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ListEditorControl.Designer.cs">
+      <DependentUpon>ListEditorControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Objects\Item.business.cs" />
+    <Compile Include="Objects\Item.data.cs" />
+    <Compile Include="Objects\PanelExtender.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SaveCancelControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SaveCancelControl.designer.cs">
+      <DependentUpon>SaveCancelControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabButton.Designer.cs">
+      <DependentUpon>TabButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabHostControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabHostControl.Designer.cs">
+      <DependentUpon>TabHostControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabImagesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabImagesControl.Designer.cs">
+      <DependentUpon>TabImagesControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Util\ListHelper.cs" />
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="LabelCheckBoxControl.resx">
+      <DependentUpon>LabelCheckBoxControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LabelComboBoxControl.resx">
+      <DependentUpon>LabelComboBoxControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LabelLabelControl.resx">
+      <DependentUpon>LabelLabelControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LabelTextBoxBrowserControl.resx">
+      <DependentUpon>LabelTextBoxBrowserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LabelTextBoxControl.resx">
+      <DependentUpon>LabelTextBoxControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListEditorControl.resx">
+      <DependentUpon>ListEditorControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SaveCancelControl.resx">
+      <DependentUpon>SaveCancelControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabButton.resx">
+      <DependentUpon>TabButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabHostControl.resx">
+      <DependentUpon>TabHostControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabImagesControl.resx">
+      <DependentUpon>TabImagesControl.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Resources\WoodButtonWidth640.png" />
+    <None Include="Resources\Deep Black.jpg" />
+    <None Include="Resources\WoodButtonWidth640Disabled.png" />
+    <Content Include="Data Juggler.ico" />
+    <Content Include="Tools.ico" />
+    <None Include="Resources\DarkButton.png" />
+    <None Include="Images\DarkBlueButton.png" />
+    <Content Include="lib\DataJuggler.Win.Controls Read Me.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

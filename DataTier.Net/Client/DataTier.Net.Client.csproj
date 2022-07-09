@@ -65,9 +65,6 @@
     <Reference Include="DataJuggler.Net.Cryptography, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\DataJuggler.Net.Cryptography.1.0.0\lib\net461\DataJuggler.Net.Cryptography.dll</HintPath>
     </Reference>
-    <Reference Include="DataJuggler.Win.Controls, Version=5.6.10.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DataJuggler.Win.Controls.5.6.10\lib\net461\DataJuggler.Win.Controls.dll</HintPath>
-    </Reference>
     <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Program Files\Microsoft Visual Studio 9.0\Common7\IDE\PublicAssemblies\EnvDTE.dll</HintPath>
@@ -76,11 +73,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Program Files\Microsoft Visual Studio 9.0\Common7\IDE\PublicAssemblies\EnvDTE80.dll</HintPath>
     </Reference>
-    <Reference Include="Konscious.Security.Cryptography.Argon2, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Konscious.Security.Cryptography.Argon2.1.2.1\lib\net46\Konscious.Security.Cryptography.Argon2.dll</HintPath>
+    <Reference Include="Konscious.Security.Cryptography.Argon2, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Konscious.Security.Cryptography.Argon2.1.3.0\lib\net46\Konscious.Security.Cryptography.Argon2.dll</HintPath>
     </Reference>
-    <Reference Include="Konscious.Security.Cryptography.Blake2, Version=1.0.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Konscious.Security.Cryptography.Blake2.1.0.9\lib\net46\Konscious.Security.Cryptography.Blake2.dll</HintPath>
+    <Reference Include="Konscious.Security.Cryptography.Blake2, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Konscious.Security.Cryptography.Blake2.1.1.0\lib\net46\Konscious.Security.Cryptography.Blake2.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=13.100.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
@@ -100,6 +97,9 @@
       <HintPath>..\..\..\..\Program Files (x86)\Microsoft SQL Server\130\SDK\Assemblies\Microsoft.SqlServer.SqlEnum.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -111,9 +111,15 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
@@ -771,7 +777,6 @@
     <Compile Include="Enumerations\DataTierClient.Enumerations.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data Juggler.ico" />
     <Content Include="DataTier.Net.ico" />
     <None Include="Images\AutoFill Child Folders.png" />
     <Content Include="Images\OrderBy.png" />
@@ -794,7 +799,6 @@
     <None Include="Resources\arrow-down.png" />
     <None Include="Resources\arrow-up-gray.png" />
     <None Include="Resources\arrow-down-gray.png" />
-    <Content Include="lib\DataJuggler.Win.Controls Read Me.txt" />
     <Content Include="lib\ReadMe.txt" />
     <Content Include="Resources\BlackButton.png" />
     <None Include="Resources\OrangeBackground.jpg" />
@@ -836,6 +840,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\DataJuggler.Win.Controls\DataJuggler.Win.Controls.csproj">
+      <Project>{70e97b98-9be2-4747-a3af-1c274ae401ce}</Project>
+      <Name>DataJuggler.Win.Controls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataTier.Net.DataLibrary\ApplicationLogicComponent\ApplicationLogicComponent.csproj">
       <Project>{dbcfccf2-c6b3-402d-905f-0eba77f8e9b3}</Project>
       <Name>ApplicationLogicComponent</Name>

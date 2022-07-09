@@ -26,8 +26,6 @@ namespace ApplicationLogicComponent.Controllers
         private ErrorHandler errorProcessor;
         private ApplicationController appController;
         private AdminController adminController;
-        private ControlInfoController controlinfoController;
-        private ControlInfoDetailController controlinfodetailController;
         private CustomReaderController customreaderController;
         private DTNDatabaseController dtndatabaseController;
         private DTNFieldController dtnfieldController;
@@ -43,9 +41,6 @@ namespace ApplicationLogicComponent.Controllers
         private ProjectReferenceController projectreferenceController;
         private ProjectReferencesViewController projectreferencesviewController;
         private ReferencesSetController referencessetController;
-        private UIFieldController uifieldController;
-        private UIObjectController uiobjectController;
-        private UserInterfaceController userinterfaceController;
         #endregion
 
         #region Constructor
@@ -73,8 +68,6 @@ namespace ApplicationLogicComponent.Controllers
             {
                 // Create Child Controllers
                 this.AdminController = new AdminController(this.ErrorProcessor, this.AppController);
-                this.ControlInfoController = new ControlInfoController(this.ErrorProcessor, this.AppController);
-                this.ControlInfoDetailController = new ControlInfoDetailController(this.ErrorProcessor, this.AppController);
                 this.CustomReaderController = new CustomReaderController(this.ErrorProcessor, this.AppController);
                 this.DTNDatabaseController = new DTNDatabaseController(this.ErrorProcessor, this.AppController);
                 this.DTNFieldController = new DTNFieldController(this.ErrorProcessor, this.AppController);
@@ -89,10 +82,7 @@ namespace ApplicationLogicComponent.Controllers
                 this.ProjectController = new ProjectController(this.ErrorProcessor, this.AppController);
                 this.ProjectReferenceController = new ProjectReferenceController(this.ErrorProcessor, this.AppController);
                 this.ProjectReferencesViewController = new ProjectReferencesViewController(this.ErrorProcessor, this.AppController);
-                this.ReferencesSetController = new ReferencesSetController(this.ErrorProcessor, this.AppController);
-                this.UIFieldController = new UIFieldController(this.ErrorProcessor, this.AppController);
-                this.UIObjectController = new UIObjectController(this.ErrorProcessor, this.AppController);
-                this.UserInterfaceController = new UserInterfaceController(this.ErrorProcessor, this.AppController);
+                this.ReferencesSetController = new ReferencesSetController(this.ErrorProcessor, this.AppController);               
             }
             #endregion
 
@@ -121,22 +111,6 @@ namespace ApplicationLogicComponent.Controllers
             {
                 get { return adminController; }
                 set { adminController = value; }
-            }
-            #endregion
-
-            #region ControlInfoController
-            public ControlInfoController ControlInfoController
-            {
-                get { return controlinfoController; }
-                set { controlinfoController = value; }
-            }
-            #endregion
-
-            #region ControlInfoDetailController
-            public ControlInfoDetailController ControlInfoDetailController
-            {
-                get { return controlinfodetailController; }
-                set { controlinfodetailController = value; }
             }
             #endregion
 
@@ -257,30 +231,6 @@ namespace ApplicationLogicComponent.Controllers
             {
                 get { return referencessetController; }
                 set { referencessetController = value; }
-            }
-            #endregion
-
-            #region UIFieldController
-            public UIFieldController UIFieldController
-            {
-                get { return uifieldController; }
-                set { uifieldController = value; }
-            }
-            #endregion
-
-            #region UIObjectController
-            public UIObjectController UIObjectController
-            {
-                get { return uiobjectController; }
-                set { uiobjectController = value; }
-            }
-            #endregion
-
-            #region UserInterfaceController
-            public UserInterfaceController UserInterfaceController
-            {
-                get { return userinterfaceController; }
-                set { userinterfaceController = value; }
             }
             #endregion
 

@@ -30,8 +30,6 @@ namespace ApplicationLogicComponent.DataOperations
         private DataManager dataManager;
         private SystemMethods systemMethods;
         private AdminMethods adminMethods;
-        private ControlInfoMethods controlinfoMethods;
-        private ControlInfoDetailMethods controlinfodetailMethods;
         private CustomReaderMethods customreaderMethods;
         private DTNDatabaseMethods dtndatabaseMethods;
         private DTNFieldMethods dtnfieldMethods;
@@ -47,9 +45,6 @@ namespace ApplicationLogicComponent.DataOperations
         private ProjectReferenceMethods projectreferenceMethods;
         private ProjectReferencesViewMethods projectreferencesviewMethods;
         private ReferencesSetMethods referencessetMethods;
-        private UIFieldMethods uifieldMethods;
-        private UIObjectMethods uiobjectMethods;
-        private UserInterfaceMethods userinterfaceMethods;
         #endregion
 
         #region Constructor
@@ -77,8 +72,6 @@ namespace ApplicationLogicComponent.DataOperations
                 // Create Child DataOperatonMethods
                 this.SystemMethods = new SystemMethods();
                 this.AdminMethods = new AdminMethods(this.DataManager);
-                this.ControlInfoMethods = new ControlInfoMethods(this.DataManager);
-                this.ControlInfoDetailMethods = new ControlInfoDetailMethods(this.DataManager);
                 this.CustomReaderMethods = new CustomReaderMethods(this.DataManager);
                 this.DTNDatabaseMethods = new DTNDatabaseMethods(this.DataManager);
                 this.DTNFieldMethods = new DTNFieldMethods(this.DataManager);
@@ -93,10 +86,7 @@ namespace ApplicationLogicComponent.DataOperations
                 this.ProjectMethods = new ProjectMethods(this.DataManager);
                 this.ProjectReferenceMethods = new ProjectReferenceMethods(this.DataManager);
                 this.ProjectReferencesViewMethods = new ProjectReferencesViewMethods(this.DataManager);
-                this.ReferencesSetMethods = new ReferencesSetMethods(this.DataManager);
-                this.UIFieldMethods = new UIFieldMethods(this.DataManager);
-                this.UIObjectMethods = new UIObjectMethods(this.DataManager);
-                this.UserInterfaceMethods = new UserInterfaceMethods(this.DataManager);
+                this.ReferencesSetMethods = new ReferencesSetMethods(this.DataManager);               
             }
             #endregion
 
@@ -125,22 +115,6 @@ namespace ApplicationLogicComponent.DataOperations
             {
                 get { return adminMethods; }
                 set { adminMethods = value; }
-            }
-            #endregion
-
-            #region ControlInfoMethods
-            public ControlInfoMethods ControlInfoMethods
-            {
-                get { return controlinfoMethods; }
-                set { controlinfoMethods = value; }
-            }
-            #endregion
-
-            #region ControlInfoDetailMethods
-            public ControlInfoDetailMethods ControlInfoDetailMethods
-            {
-                get { return controlinfodetailMethods; }
-                set { controlinfodetailMethods = value; }
             }
             #endregion
 
@@ -261,30 +235,6 @@ namespace ApplicationLogicComponent.DataOperations
             {
                 get { return referencessetMethods; }
                 set { referencessetMethods = value; }
-            }
-            #endregion
-
-            #region UIFieldMethods
-            public UIFieldMethods UIFieldMethods
-            {
-                get { return uifieldMethods; }
-                set { uifieldMethods = value; }
-            }
-            #endregion
-
-            #region UIObjectMethods
-            public UIObjectMethods UIObjectMethods
-            {
-                get { return uiobjectMethods; }
-                set { uiobjectMethods = value; }
-            }
-            #endregion
-
-            #region UserInterfaceMethods
-            public UserInterfaceMethods UserInterfaceMethods
-            {
-                get { return userinterfaceMethods; }
-                set { userinterfaceMethods = value; }
             }
             #endregion
 

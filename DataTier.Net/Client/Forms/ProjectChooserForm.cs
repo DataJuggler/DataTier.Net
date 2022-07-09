@@ -9,6 +9,7 @@ using DataGateway;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Linq;
 
 #endregion
 
@@ -222,8 +223,14 @@ namespace DataTierClient.Forms
                 // if the AllProjects exist
                 if(this.AllProjects != null)
                 {
+                    // Sort the projects
+                    List<Project> projects = AllProjects.OrderBy(x => x.ProjectName).ToList();
+
+                    // update the list to be sorted
+                    AllProjects = projects;
+
                     // if the all projects exist
-                    foreach(Project project in this.AllProjects)
+                    foreach(Project project in AllProjects)
                     {
                         // Add this item
                         this.ProjectsListBox.Items.Add(project);

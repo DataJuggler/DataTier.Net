@@ -47,14 +47,17 @@
     <Reference Include="DataJuggler.Net.Cryptography, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\DataJuggler.Net.Cryptography.1.0.0\lib\net461\DataJuggler.Net.Cryptography.dll</HintPath>
     </Reference>
-    <Reference Include="Konscious.Security.Cryptography.Argon2, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Konscious.Security.Cryptography.Argon2.1.2.1\lib\net46\Konscious.Security.Cryptography.Argon2.dll</HintPath>
+    <Reference Include="Konscious.Security.Cryptography.Argon2, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Konscious.Security.Cryptography.Argon2.1.3.0\lib\net46\Konscious.Security.Cryptography.Argon2.dll</HintPath>
     </Reference>
-    <Reference Include="Konscious.Security.Cryptography.Blake2, Version=1.0.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Konscious.Security.Cryptography.Blake2.1.0.9\lib\net46\Konscious.Security.Cryptography.Blake2.dll</HintPath>
+    <Reference Include="Konscious.Security.Cryptography.Blake2, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Konscious.Security.Cryptography.Blake2.1.1.0\lib\net46\Konscious.Security.Cryptography.Blake2.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -62,9 +65,15 @@
     <Reference Include="System.Data.SqlClient, Version=4.6.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\System.Data.SqlClient.4.8.3\lib\net461\System.Data.SqlClient.dll</HintPath>
     </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -101,12 +110,6 @@
     <Compile Include="DataManager\Readers\ProjectReferenceReader.cs" />
     <Compile Include="DataManager\Readers\ProjectReferencesViewReader.cs" />
     <Compile Include="DataManager\Readers\ReferencesSetReader.cs" />
-    <Compile Include="DataManager\Readers\UIFieldReader.cs" />
-    <Compile Include="DataManager\Readers\UIObjectReader.cs" />
-    <Compile Include="DataManager\Readers\UserInterfaceReader.cs" />
-    <Compile Include="DataManager\UIFieldManager.cs" />
-    <Compile Include="DataManager\UIObjectManager.cs" />
-    <Compile Include="DataManager\UserInterfaceManager.cs" />
     <Compile Include="DataManager\Writers\AdminWriter.cs" />
     <Compile Include="DataManager\Writers\AdminWriterBase.cs" />
     <Compile Include="DataManager\Writers\ControlInfoDetailWriter.cs" />
@@ -154,12 +157,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DataManager\DataManager.cs" />
-    <Compile Include="DataManager\Writers\UIFieldWriter.cs" />
-    <Compile Include="DataManager\Writers\UIFieldWriterBase.cs" />
-    <Compile Include="DataManager\Writers\UIObjectWriter.cs" />
-    <Compile Include="DataManager\Writers\UIObjectWriterBase.cs" />
-    <Compile Include="DataManager\Writers\UserInterfaceWriter.cs" />
-    <Compile Include="DataManager\Writers\UserInterfaceWriterBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataManager\DataConnector.cs" />
     <Compile Include="StoredProcedureManager\DeleteProcedures\DeleteAdminStoredProcedure.cs" />
@@ -177,9 +174,6 @@
     <Compile Include="StoredProcedureManager\DeleteProcedures\DeleteProjectReferenceStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\DeleteProcedures\DeleteProjectStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\DeleteProcedures\DeleteReferencesSetStoredProcedure.cs" />
-    <Compile Include="StoredProcedureManager\DeleteProcedures\DeleteUIFieldStoredProcedure.cs" />
-    <Compile Include="StoredProcedureManager\DeleteProcedures\DeleteUIObjectStoredProcedure.cs" />
-    <Compile Include="StoredProcedureManager\DeleteProcedures\DeleteUserInterfaceStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FetchAllAdminsStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FetchAllControlInfoDetailsStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FetchAllControlInfosStoredProcedure.cs" />
@@ -198,9 +192,6 @@
     <Compile Include="StoredProcedureManager\FetchProcedures\FetchAllProjectReferencesViewsStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FetchAllProjectsStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FetchAllReferencesSetsStoredProcedure.cs" />
-    <Compile Include="StoredProcedureManager\FetchProcedures\FetchAllUIFieldsStoredProcedure.cs" />
-    <Compile Include="StoredProcedureManager\FetchProcedures\FetchAllUIObjectsStoredProcedure.cs" />
-    <Compile Include="StoredProcedureManager\FetchProcedures\FetchAllUserInterfacesStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FindAdminStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FindControlInfoDetailStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FindControlInfoStoredProcedure.cs" />
@@ -217,9 +208,6 @@
     <Compile Include="StoredProcedureManager\FetchProcedures\FindProjectReferenceStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FindProjectStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\FetchProcedures\FindReferencesSetStoredProcedure.cs" />
-    <Compile Include="StoredProcedureManager\FetchProcedures\FindUIFieldStoredProcedure.cs" />
-    <Compile Include="StoredProcedureManager\FetchProcedures\FindUIObjectStoredProcedure.cs" />
-    <Compile Include="StoredProcedureManager\FetchProcedures\FindUserInterfaceStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\InsertProcedures\InsertAdminStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\InsertProcedures\InsertControlInfoDetailStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\InsertProcedures\InsertControlInfoStoredProcedure.cs" />
@@ -235,9 +223,6 @@
     <Compile Include="StoredProcedureManager\InsertProcedures\InsertProjectReferenceStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\InsertProcedures\InsertProjectStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\InsertProcedures\InsertReferencesSetStoredProcedure.cs" />
-    <Compile Include="StoredProcedureManager\InsertProcedures\InsertUIFieldStoredProcedure.cs" />
-    <Compile Include="StoredProcedureManager\InsertProcedures\InsertUIObjectStoredProcedure.cs" />
-    <Compile Include="StoredProcedureManager\InsertProcedures\InsertUserInterfaceStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\StoredProcedure.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -262,9 +247,6 @@
     <Compile Include="StoredProcedureManager\UpdateProcedures\UpdateProjectReferenceStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\UpdateProcedures\UpdateProjectStoredProcedure.cs" />
     <Compile Include="StoredProcedureManager\UpdateProcedures\UpdateReferencesSetStoredProcedure.cs" />
-    <Compile Include="StoredProcedureManager\UpdateProcedures\UpdateUIFieldStoredProcedure.cs" />
-    <Compile Include="StoredProcedureManager\UpdateProcedures\UpdateUIObjectStoredProcedure.cs" />
-    <Compile Include="StoredProcedureManager\UpdateProcedures\UpdateUserInterfaceStoredProcedure.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data Juggler.ico" />

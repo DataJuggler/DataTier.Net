@@ -6,7 +6,7 @@ Go
 -- =========================================================
 -- Procure Name: Admin_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Insert a new Admin
 -- =========================================================
 
@@ -68,7 +68,7 @@ Go
 -- =========================================================
 -- Procure Name: Admin_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Update an existing Admin
 -- =========================================================
 
@@ -134,7 +134,7 @@ Go
 -- =========================================================
 -- Procure Name: Admin_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Find an existing Admin
 -- =========================================================
 
@@ -191,7 +191,7 @@ Go
 -- =========================================================
 -- Procure Name: Admin_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Delete an existing Admin
 -- =========================================================
 
@@ -245,7 +245,7 @@ Go
 -- =========================================================
 -- Procure Name: Admin_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Returns all Admin objects
 -- =========================================================
 
@@ -294,574 +294,9 @@ set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 Go
 -- =========================================================
--- Procure Name: ControlInfo_Insert
--- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
--- Description:    Insert a new ControlInfo
--- =========================================================
-
--- Check if the procedure already exists
-IF EXISTS (select * from syscomments where id = object_id ('ControlInfo_Insert'))
-
-    -- Procedure Does Exist, Drop First
-    BEGIN
-
-        -- Execute Drop
-        Drop Procedure ControlInfo_Insert
-
-        -- Test if procedure was dropped
-        IF OBJECT_ID('dbo.ControlInfo_Insert') IS NOT NULL
-
-            -- Print Line Drop Failed
-            PRINT '<<< Drop Failed On Procedure ControlInfo_Insert >>>'
-
-        Else
-
-            -- Print Line Procedure Dropped
-            PRINT '<<< Drop Suceeded On Procedure ControlInfo_Insert >>>'
-
-    End
-
-GO
-
-Create PROCEDURE ControlInfo_Insert
-
-    -- Add the parameters for the stored procedure here
-    @Name nvarchar(50),
-    @PackageName nvarchar(50)
-
-AS
-BEGIN
-
-    -- SET NOCOUNT ON added to prevent extra result sets from
-    -- interfering with SELECT statements.
-    SET NOCOUNT ON
-
-    -- Begin Insert Statement
-    Insert Into [ControlInfo]
-    ([Name],[PackageName])
-
-    -- Begin Values List
-    Values(@Name, @PackageName)
-
-    -- Return ID of new record
-    SELECT SCOPE_IDENTITY()
-
-END
-
-set ANSI_NULLS ON
-set QUOTED_IDENTIFIER ON
-Go
--- =========================================================
--- Procure Name: ControlInfo_Update
--- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
--- Description:    Update an existing ControlInfo
--- =========================================================
-
--- Check if the procedure already exists
-IF EXISTS (select * from syscomments where id = object_id ('ControlInfo_Update'))
-
-    -- Procedure Does Exist, Drop First
-    BEGIN
-
-        -- Execute Drop
-        Drop Procedure ControlInfo_Update
-
-        -- Test if procedure was dropped
-        IF OBJECT_ID('dbo.ControlInfo_Update') IS NOT NULL
-
-            -- Print Line Drop Failed
-            PRINT '<<< Drop Failed On Procedure ControlInfo_Update >>>'
-
-        Else
-
-            -- Print Line Procedure Dropped
-            PRINT '<<< Drop Suceeded On Procedure ControlInfo_Update >>>'
-
-    End
-
-GO
-
-Create PROCEDURE ControlInfo_Update
-
-    -- Add the parameters for the stored procedure here
-    @Id int,
-    @Name nvarchar(50),
-    @PackageName nvarchar(50)
-
-AS
-BEGIN
-
-    -- SET NOCOUNT ON added to prevent extra result sets from
-    -- interfering with SELECT statements.
-    SET NOCOUNT ON
-
-    -- Begin Update Statement
-    Update [ControlInfo]
-
-    -- Update Each field
-    Set [Name] = @Name,
-    [PackageName] = @PackageName
-
-    -- Update Matching Record
-    Where [Id] = @Id
-
-END
-
-set ANSI_NULLS ON
-set QUOTED_IDENTIFIER ON
-Go
--- =========================================================
--- Procure Name: ControlInfo_Find
--- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
--- Description:    Find an existing ControlInfo
--- =========================================================
-
--- Check if the procedure already exists
-IF EXISTS (select * from syscomments where id = object_id ('ControlInfo_Find'))
-
-    -- Procedure Does Exist, Drop First
-    BEGIN
-
-        -- Execute Drop
-        Drop Procedure ControlInfo_Find
-
-        -- Test if procedure was dropped
-        IF OBJECT_ID('dbo.ControlInfo_Find') IS NOT NULL
-
-            -- Print Line Drop Failed
-            PRINT '<<< Drop Failed On Procedure ControlInfo_Find >>>'
-
-        Else
-
-            -- Print Line Procedure Dropped
-            PRINT '<<< Drop Suceeded On Procedure ControlInfo_Find >>>'
-
-    End
-
-GO
-
-Create PROCEDURE ControlInfo_Find
-
-    -- Primary Key Paramater
-    @Id int
-
-AS
-BEGIN
-
-    -- SET NOCOUNT ON added to prevent extra result sets from
-    -- interfering with SELECT statements.
-    SET NOCOUNT ON
-
-    -- Begin Select Statement
-    Select [Id],[Name],[PackageName]
-
-    -- From tableName
-    From [ControlInfo]
-
-    -- Find Matching Record
-    Where [Id] = @Id
-
-END
-
-set ANSI_NULLS ON
-set QUOTED_IDENTIFIER ON
-Go
--- =========================================================
--- Procure Name: ControlInfo_Delete
--- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
--- Description:    Delete an existing ControlInfo
--- =========================================================
-
--- Check if the procedure already exists
-IF EXISTS (select * from syscomments where id = object_id ('ControlInfo_Delete'))
-
-    -- Procedure Does Exist, Drop First
-    BEGIN
-
-        -- Execute Drop
-        Drop Procedure ControlInfo_Delete
-
-        -- Test if procedure was dropped
-        IF OBJECT_ID('dbo.ControlInfo_Delete') IS NOT NULL
-
-            -- Print Line Drop Failed
-            PRINT '<<< Drop Failed On Procedure ControlInfo_Delete >>>'
-
-        Else
-
-            -- Print Line Procedure Dropped
-            PRINT '<<< Drop Suceeded On Procedure ControlInfo_Delete >>>'
-
-    End
-
-GO
-
-Create PROCEDURE ControlInfo_Delete
-
-    -- Primary Key Paramater
-    @Id int
-
-AS
-BEGIN
-
-    -- SET NOCOUNT ON added to prevent extra result sets from
-    -- interfering with SELECT statements.
-    SET NOCOUNT ON
-
-    -- Begin Delete Statement
-    Delete From [ControlInfo]
-
-    -- Delete Matching Record
-    Where [Id] = @Id
-
-END
-
-set ANSI_NULLS ON
-set QUOTED_IDENTIFIER ON
-Go
--- =========================================================
--- Procure Name: ControlInfo_FetchAll
--- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
--- Description:    Returns all ControlInfo objects
--- =========================================================
-
--- Check if the procedure already exists
-IF EXISTS (select * from syscomments where id = object_id ('ControlInfo_FetchAll'))
-
-    -- Procedure Does Exist, Drop First
-    BEGIN
-
-        -- Execute Drop
-        Drop Procedure ControlInfo_FetchAll
-
-        -- Test if procedure was dropped
-        IF OBJECT_ID('dbo.ControlInfo_FetchAll') IS NOT NULL
-
-            -- Print Line Drop Failed
-            PRINT '<<< Drop Failed On Procedure ControlInfo_FetchAll >>>'
-
-        Else
-
-            -- Print Line Procedure Dropped
-            PRINT '<<< Drop Suceeded On Procedure ControlInfo_FetchAll >>>'
-
-    End
-
-GO
-
-Create PROCEDURE ControlInfo_FetchAll
-
-AS
-BEGIN
-
-    -- SET NOCOUNT ON added to prevent extra result sets from
-    -- interfering with SELECT statements.
-    SET NOCOUNT ON
-
-    -- Begin Select Statement
-    Select [Id],[Name],[PackageName]
-
-    -- From tableName
-    From [ControlInfo]
-
-END
-
-set ANSI_NULLS ON
-set QUOTED_IDENTIFIER ON
-Go
--- =========================================================
--- Procure Name: ControlInfoDetail_Insert
--- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
--- Description:    Insert a new ControlInfoDetail
--- =========================================================
-
--- Check if the procedure already exists
-IF EXISTS (select * from syscomments where id = object_id ('ControlInfoDetail_Insert'))
-
-    -- Procedure Does Exist, Drop First
-    BEGIN
-
-        -- Execute Drop
-        Drop Procedure ControlInfoDetail_Insert
-
-        -- Test if procedure was dropped
-        IF OBJECT_ID('dbo.ControlInfoDetail_Insert') IS NOT NULL
-
-            -- Print Line Drop Failed
-            PRINT '<<< Drop Failed On Procedure ControlInfoDetail_Insert >>>'
-
-        Else
-
-            -- Print Line Procedure Dropped
-            PRINT '<<< Drop Suceeded On Procedure ControlInfoDetail_Insert >>>'
-
-    End
-
-GO
-
-Create PROCEDURE ControlInfoDetail_Insert
-
-    -- Add the parameters for the stored procedure here
-    @CodeText nvarchar(255),
-    @DisplayOrder int,
-    @UIControlId int
-
-AS
-BEGIN
-
-    -- SET NOCOUNT ON added to prevent extra result sets from
-    -- interfering with SELECT statements.
-    SET NOCOUNT ON
-
-    -- Begin Insert Statement
-    Insert Into [ControlInfoDetail]
-    ([CodeText],[DisplayOrder],[UIControlId])
-
-    -- Begin Values List
-    Values(@CodeText, @DisplayOrder, @UIControlId)
-
-    -- Return ID of new record
-    SELECT SCOPE_IDENTITY()
-
-END
-
-set ANSI_NULLS ON
-set QUOTED_IDENTIFIER ON
-Go
--- =========================================================
--- Procure Name: ControlInfoDetail_Update
--- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
--- Description:    Update an existing ControlInfoDetail
--- =========================================================
-
--- Check if the procedure already exists
-IF EXISTS (select * from syscomments where id = object_id ('ControlInfoDetail_Update'))
-
-    -- Procedure Does Exist, Drop First
-    BEGIN
-
-        -- Execute Drop
-        Drop Procedure ControlInfoDetail_Update
-
-        -- Test if procedure was dropped
-        IF OBJECT_ID('dbo.ControlInfoDetail_Update') IS NOT NULL
-
-            -- Print Line Drop Failed
-            PRINT '<<< Drop Failed On Procedure ControlInfoDetail_Update >>>'
-
-        Else
-
-            -- Print Line Procedure Dropped
-            PRINT '<<< Drop Suceeded On Procedure ControlInfoDetail_Update >>>'
-
-    End
-
-GO
-
-Create PROCEDURE ControlInfoDetail_Update
-
-    -- Add the parameters for the stored procedure here
-    @CodeText nvarchar(255),
-    @DisplayOrder int,
-    @Id int,
-    @UIControlId int
-
-AS
-BEGIN
-
-    -- SET NOCOUNT ON added to prevent extra result sets from
-    -- interfering with SELECT statements.
-    SET NOCOUNT ON
-
-    -- Begin Update Statement
-    Update [ControlInfoDetail]
-
-    -- Update Each field
-    Set [CodeText] = @CodeText,
-    [DisplayOrder] = @DisplayOrder,
-    [UIControlId] = @UIControlId
-
-    -- Update Matching Record
-    Where [Id] = @Id
-
-END
-
-set ANSI_NULLS ON
-set QUOTED_IDENTIFIER ON
-Go
--- =========================================================
--- Procure Name: ControlInfoDetail_Find
--- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
--- Description:    Find an existing ControlInfoDetail
--- =========================================================
-
--- Check if the procedure already exists
-IF EXISTS (select * from syscomments where id = object_id ('ControlInfoDetail_Find'))
-
-    -- Procedure Does Exist, Drop First
-    BEGIN
-
-        -- Execute Drop
-        Drop Procedure ControlInfoDetail_Find
-
-        -- Test if procedure was dropped
-        IF OBJECT_ID('dbo.ControlInfoDetail_Find') IS NOT NULL
-
-            -- Print Line Drop Failed
-            PRINT '<<< Drop Failed On Procedure ControlInfoDetail_Find >>>'
-
-        Else
-
-            -- Print Line Procedure Dropped
-            PRINT '<<< Drop Suceeded On Procedure ControlInfoDetail_Find >>>'
-
-    End
-
-GO
-
-Create PROCEDURE ControlInfoDetail_Find
-
-    -- Primary Key Paramater
-    @Id int
-
-AS
-BEGIN
-
-    -- SET NOCOUNT ON added to prevent extra result sets from
-    -- interfering with SELECT statements.
-    SET NOCOUNT ON
-
-    -- Begin Select Statement
-    Select [CodeText],[DisplayOrder],[Id],[UIControlId]
-
-    -- From tableName
-    From [ControlInfoDetail]
-
-    -- Find Matching Record
-    Where [Id] = @Id
-
-END
-
-set ANSI_NULLS ON
-set QUOTED_IDENTIFIER ON
-Go
--- =========================================================
--- Procure Name: ControlInfoDetail_Delete
--- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
--- Description:    Delete an existing ControlInfoDetail
--- =========================================================
-
--- Check if the procedure already exists
-IF EXISTS (select * from syscomments where id = object_id ('ControlInfoDetail_Delete'))
-
-    -- Procedure Does Exist, Drop First
-    BEGIN
-
-        -- Execute Drop
-        Drop Procedure ControlInfoDetail_Delete
-
-        -- Test if procedure was dropped
-        IF OBJECT_ID('dbo.ControlInfoDetail_Delete') IS NOT NULL
-
-            -- Print Line Drop Failed
-            PRINT '<<< Drop Failed On Procedure ControlInfoDetail_Delete >>>'
-
-        Else
-
-            -- Print Line Procedure Dropped
-            PRINT '<<< Drop Suceeded On Procedure ControlInfoDetail_Delete >>>'
-
-    End
-
-GO
-
-Create PROCEDURE ControlInfoDetail_Delete
-
-    -- Primary Key Paramater
-    @Id int
-
-AS
-BEGIN
-
-    -- SET NOCOUNT ON added to prevent extra result sets from
-    -- interfering with SELECT statements.
-    SET NOCOUNT ON
-
-    -- Begin Delete Statement
-    Delete From [ControlInfoDetail]
-
-    -- Delete Matching Record
-    Where [Id] = @Id
-
-END
-
-set ANSI_NULLS ON
-set QUOTED_IDENTIFIER ON
-Go
--- =========================================================
--- Procure Name: ControlInfoDetail_FetchAll
--- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
--- Description:    Returns all ControlInfoDetail objects
--- =========================================================
-
--- Check if the procedure already exists
-IF EXISTS (select * from syscomments where id = object_id ('ControlInfoDetail_FetchAll'))
-
-    -- Procedure Does Exist, Drop First
-    BEGIN
-
-        -- Execute Drop
-        Drop Procedure ControlInfoDetail_FetchAll
-
-        -- Test if procedure was dropped
-        IF OBJECT_ID('dbo.ControlInfoDetail_FetchAll') IS NOT NULL
-
-            -- Print Line Drop Failed
-            PRINT '<<< Drop Failed On Procedure ControlInfoDetail_FetchAll >>>'
-
-        Else
-
-            -- Print Line Procedure Dropped
-            PRINT '<<< Drop Suceeded On Procedure ControlInfoDetail_FetchAll >>>'
-
-    End
-
-GO
-
-Create PROCEDURE ControlInfoDetail_FetchAll
-
-AS
-BEGIN
-
-    -- SET NOCOUNT ON added to prevent extra result sets from
-    -- interfering with SELECT statements.
-    SET NOCOUNT ON
-
-    -- Begin Select Statement
-    Select [CodeText],[DisplayOrder],[Id],[UIControlId]
-
-    -- From tableName
-    From [ControlInfoDetail]
-
-END
-
-set ANSI_NULLS ON
-set QUOTED_IDENTIFIER ON
-Go
--- =========================================================
 -- Procure Name: CustomReader_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Insert a new CustomReader
 -- =========================================================
 
@@ -923,7 +358,7 @@ Go
 -- =========================================================
 -- Procure Name: CustomReader_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Update an existing CustomReader
 -- =========================================================
 
@@ -989,7 +424,7 @@ Go
 -- =========================================================
 -- Procure Name: CustomReader_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Find an existing CustomReader
 -- =========================================================
 
@@ -1046,7 +481,7 @@ Go
 -- =========================================================
 -- Procure Name: CustomReader_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Delete an existing CustomReader
 -- =========================================================
 
@@ -1100,7 +535,7 @@ Go
 -- =========================================================
 -- Procure Name: CustomReader_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Returns all CustomReader objects
 -- =========================================================
 
@@ -1151,7 +586,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNDatabase_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Insert a new DTNDatabase
 -- =========================================================
 
@@ -1219,7 +654,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNDatabase_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Update an existing DTNDatabase
 -- =========================================================
 
@@ -1297,7 +732,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNDatabase_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Find an existing DTNDatabase
 -- =========================================================
 
@@ -1354,7 +789,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNDatabase_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Delete an existing DTNDatabase
 -- =========================================================
 
@@ -1408,7 +843,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNDatabase_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Returns all DTNDatabase objects
 -- =========================================================
 
@@ -1459,7 +894,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNField_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Insert a new DTNField
 -- =========================================================
 
@@ -1534,7 +969,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNField_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Update an existing DTNField
 -- =========================================================
 
@@ -1626,7 +1061,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNField_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Find an existing DTNField
 -- =========================================================
 
@@ -1683,7 +1118,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNField_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Delete an existing DTNField
 -- =========================================================
 
@@ -1737,7 +1172,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNField_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Returns all DTNField objects
 -- =========================================================
 
@@ -1788,7 +1223,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNProcedure_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Insert a new DTNProcedure
 -- =========================================================
 
@@ -1849,7 +1284,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNProcedure_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Update an existing DTNProcedure
 -- =========================================================
 
@@ -1913,7 +1348,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNProcedure_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Find an existing DTNProcedure
 -- =========================================================
 
@@ -1970,7 +1405,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNProcedure_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Delete an existing DTNProcedure
 -- =========================================================
 
@@ -2024,7 +1459,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNProcedure_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Returns all DTNProcedure objects
 -- =========================================================
 
@@ -2075,7 +1510,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNTable_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Insert a new DTNTable
 -- =========================================================
 
@@ -2143,7 +1578,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNTable_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Update an existing DTNTable
 -- =========================================================
 
@@ -2221,7 +1656,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNTable_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Find an existing DTNTable
 -- =========================================================
 
@@ -2278,7 +1713,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNTable_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Delete an existing DTNTable
 -- =========================================================
 
@@ -2332,7 +1767,7 @@ Go
 -- =========================================================
 -- Procure Name: DTNTable_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Returns all DTNTable objects
 -- =========================================================
 
@@ -2383,7 +1818,7 @@ Go
 -- =========================================================
 -- Procure Name: Enumeration_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Insert a new Enumeration
 -- =========================================================
 
@@ -2443,7 +1878,7 @@ Go
 -- =========================================================
 -- Procure Name: Enumeration_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Update an existing Enumeration
 -- =========================================================
 
@@ -2505,7 +1940,7 @@ Go
 -- =========================================================
 -- Procure Name: Enumeration_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Find an existing Enumeration
 -- =========================================================
 
@@ -2562,7 +1997,7 @@ Go
 -- =========================================================
 -- Procure Name: Enumeration_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Delete an existing Enumeration
 -- =========================================================
 
@@ -2616,7 +2051,7 @@ Go
 -- =========================================================
 -- Procure Name: Enumeration_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Returns all Enumeration objects
 -- =========================================================
 
@@ -2667,7 +2102,7 @@ Go
 -- =========================================================
 -- Procure Name: FieldSet_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Insert a new FieldSet
 -- =========================================================
 
@@ -2731,7 +2166,7 @@ Go
 -- =========================================================
 -- Procure Name: FieldSet_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Update an existing FieldSet
 -- =========================================================
 
@@ -2801,7 +2236,7 @@ Go
 -- =========================================================
 -- Procure Name: FieldSet_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Find an existing FieldSet
 -- =========================================================
 
@@ -2858,7 +2293,7 @@ Go
 -- =========================================================
 -- Procure Name: FieldSet_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Delete an existing FieldSet
 -- =========================================================
 
@@ -2912,7 +2347,7 @@ Go
 -- =========================================================
 -- Procure Name: FieldSet_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Returns all FieldSet objects
 -- =========================================================
 
@@ -2963,7 +2398,7 @@ Go
 -- =========================================================
 -- Procure Name: FieldSetField_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Insert a new FieldSetField
 -- =========================================================
 
@@ -3024,7 +2459,7 @@ Go
 -- =========================================================
 -- Procure Name: FieldSetField_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Update an existing FieldSetField
 -- =========================================================
 
@@ -3088,7 +2523,7 @@ Go
 -- =========================================================
 -- Procure Name: FieldSetField_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Find an existing FieldSetField
 -- =========================================================
 
@@ -3145,7 +2580,7 @@ Go
 -- =========================================================
 -- Procure Name: FieldSetField_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Delete an existing FieldSetField
 -- =========================================================
 
@@ -3199,7 +2634,7 @@ Go
 -- =========================================================
 -- Procure Name: FieldSetField_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Returns all FieldSetField objects
 -- =========================================================
 
@@ -3250,7 +2685,7 @@ Go
 -- =========================================================
 -- Procure Name: FieldSetFieldView_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Returns all FieldSetFieldView objects
 -- =========================================================
 
@@ -3301,7 +2736,7 @@ Go
 -- =========================================================
 -- Procure Name: FieldView_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Returns all FieldView objects
 -- =========================================================
 
@@ -3352,7 +2787,7 @@ Go
 -- =========================================================
 -- Procure Name: Method_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Insert a new Method
 -- =========================================================
 
@@ -3431,7 +2866,7 @@ Go
 -- =========================================================
 -- Procure Name: Method_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Update an existing Method
 -- =========================================================
 
@@ -3531,7 +2966,7 @@ Go
 -- =========================================================
 -- Procure Name: Method_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Find an existing Method
 -- =========================================================
 
@@ -3588,7 +3023,7 @@ Go
 -- =========================================================
 -- Procure Name: Method_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Delete an existing Method
 -- =========================================================
 
@@ -3642,7 +3077,7 @@ Go
 -- =========================================================
 -- Procure Name: Method_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Returns all Method objects
 -- =========================================================
 
@@ -3693,7 +3128,7 @@ Go
 -- =========================================================
 -- Procure Name: Project_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Insert a new Project
 -- =========================================================
 
@@ -3780,7 +3215,7 @@ Go
 -- =========================================================
 -- Procure Name: Project_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Update an existing Project
 -- =========================================================
 
@@ -3896,7 +3331,7 @@ Go
 -- =========================================================
 -- Procure Name: Project_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Find an existing Project
 -- =========================================================
 
@@ -3953,7 +3388,7 @@ Go
 -- =========================================================
 -- Procure Name: Project_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Delete an existing Project
 -- =========================================================
 
@@ -4007,7 +3442,7 @@ Go
 -- =========================================================
 -- Procure Name: Project_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Returns all Project objects
 -- =========================================================
 
@@ -4058,7 +3493,7 @@ Go
 -- =========================================================
 -- Procure Name: ProjectReference_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Insert a new ProjectReference
 -- =========================================================
 
@@ -4117,7 +3552,7 @@ Go
 -- =========================================================
 -- Procure Name: ProjectReference_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Update an existing ProjectReference
 -- =========================================================
 
@@ -4177,7 +3612,7 @@ Go
 -- =========================================================
 -- Procure Name: ProjectReference_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Find an existing ProjectReference
 -- =========================================================
 
@@ -4234,7 +3669,7 @@ Go
 -- =========================================================
 -- Procure Name: ProjectReference_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Delete an existing ProjectReference
 -- =========================================================
 
@@ -4288,7 +3723,7 @@ Go
 -- =========================================================
 -- Procure Name: ProjectReference_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Returns all ProjectReference objects
 -- =========================================================
 
@@ -4339,7 +3774,7 @@ Go
 -- =========================================================
 -- Procure Name: ProjectReferencesView_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Returns all ProjectReferencesView objects
 -- =========================================================
 
@@ -4390,7 +3825,7 @@ Go
 -- =========================================================
 -- Procure Name: ReferencesSet_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Insert a new ReferencesSet
 -- =========================================================
 
@@ -4449,7 +3884,7 @@ Go
 -- =========================================================
 -- Procure Name: ReferencesSet_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Update an existing ReferencesSet
 -- =========================================================
 
@@ -4509,7 +3944,7 @@ Go
 -- =========================================================
 -- Procure Name: ReferencesSet_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Find an existing ReferencesSet
 -- =========================================================
 
@@ -4566,7 +4001,7 @@ Go
 -- =========================================================
 -- Procure Name: ReferencesSet_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Delete an existing ReferencesSet
 -- =========================================================
 
@@ -4620,7 +4055,7 @@ Go
 -- =========================================================
 -- Procure Name: ReferencesSet_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Returns all ReferencesSet objects
 -- =========================================================
 
@@ -4669,9 +4104,604 @@ set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 Go
 -- =========================================================
+-- Procure Name: UIControlDetail_Insert
+-- Author:           Data Juggler - Data Tier.Net Procedure Generator
+-- Create Date:   5/24/2022
+-- Description:    Insert a new UIControlDetail
+-- =========================================================
+
+-- Check if the procedure already exists
+IF EXISTS (select * from syscomments where id = object_id ('UIControlDetail_Insert'))
+
+    -- Procedure Does Exist, Drop First
+    BEGIN
+
+        -- Execute Drop
+        Drop Procedure UIControlDetail_Insert
+
+        -- Test if procedure was dropped
+        IF OBJECT_ID('dbo.UIControlDetail_Insert') IS NOT NULL
+
+            -- Print Line Drop Failed
+            PRINT '<<< Drop Failed On Procedure UIControlDetail_Insert >>>'
+
+        Else
+
+            -- Print Line Procedure Dropped
+            PRINT '<<< Drop Suceeded On Procedure UIControlDetail_Insert >>>'
+
+    End
+
+GO
+
+Create PROCEDURE UIControlDetail_Insert
+
+    -- Add the parameters for the stored procedure here
+    @Indent int,
+    @LineNumber int,
+    @LineText nvarchar(512),
+    @UIControlId int
+
+AS
+BEGIN
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    -- Begin Insert Statement
+    Insert Into [UIControlDetail]
+    ([Indent],[LineNumber],[LineText],[UIControlId])
+
+    -- Begin Values List
+    Values(@Indent, @LineNumber, @LineText, @UIControlId)
+
+    -- Return ID of new record
+    SELECT SCOPE_IDENTITY()
+
+END
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+Go
+-- =========================================================
+-- Procure Name: UIControlDetail_Update
+-- Author:           Data Juggler - Data Tier.Net Procedure Generator
+-- Create Date:   5/24/2022
+-- Description:    Update an existing UIControlDetail
+-- =========================================================
+
+-- Check if the procedure already exists
+IF EXISTS (select * from syscomments where id = object_id ('UIControlDetail_Update'))
+
+    -- Procedure Does Exist, Drop First
+    BEGIN
+
+        -- Execute Drop
+        Drop Procedure UIControlDetail_Update
+
+        -- Test if procedure was dropped
+        IF OBJECT_ID('dbo.UIControlDetail_Update') IS NOT NULL
+
+            -- Print Line Drop Failed
+            PRINT '<<< Drop Failed On Procedure UIControlDetail_Update >>>'
+
+        Else
+
+            -- Print Line Procedure Dropped
+            PRINT '<<< Drop Suceeded On Procedure UIControlDetail_Update >>>'
+
+    End
+
+GO
+
+Create PROCEDURE UIControlDetail_Update
+
+    -- Add the parameters for the stored procedure here
+    @Id int,
+    @Indent int,
+    @LineNumber int,
+    @LineText nvarchar(512),
+    @UIControlId int
+
+AS
+BEGIN
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    -- Begin Update Statement
+    Update [UIControlDetail]
+
+    -- Update Each field
+    Set [Indent] = @Indent,
+    [LineNumber] = @LineNumber,
+    [LineText] = @LineText,
+    [UIControlId] = @UIControlId
+
+    -- Update Matching Record
+    Where [Id] = @Id
+
+END
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+Go
+-- =========================================================
+-- Procure Name: UIControlDetail_Find
+-- Author:           Data Juggler - Data Tier.Net Procedure Generator
+-- Create Date:   5/24/2022
+-- Description:    Find an existing UIControlDetail
+-- =========================================================
+
+-- Check if the procedure already exists
+IF EXISTS (select * from syscomments where id = object_id ('UIControlDetail_Find'))
+
+    -- Procedure Does Exist, Drop First
+    BEGIN
+
+        -- Execute Drop
+        Drop Procedure UIControlDetail_Find
+
+        -- Test if procedure was dropped
+        IF OBJECT_ID('dbo.UIControlDetail_Find') IS NOT NULL
+
+            -- Print Line Drop Failed
+            PRINT '<<< Drop Failed On Procedure UIControlDetail_Find >>>'
+
+        Else
+
+            -- Print Line Procedure Dropped
+            PRINT '<<< Drop Suceeded On Procedure UIControlDetail_Find >>>'
+
+    End
+
+GO
+
+Create PROCEDURE UIControlDetail_Find
+
+    -- Primary Key Paramater
+    @Id int
+
+AS
+BEGIN
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    -- Begin Select Statement
+    Select [Id],[Indent],[LineNumber],[LineText],[UIControlId]
+
+    -- From tableName
+    From [UIControlDetail]
+
+    -- Find Matching Record
+    Where [Id] = @Id
+
+END
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+Go
+-- =========================================================
+-- Procure Name: UIControlDetail_Delete
+-- Author:           Data Juggler - Data Tier.Net Procedure Generator
+-- Create Date:   5/24/2022
+-- Description:    Delete an existing UIControlDetail
+-- =========================================================
+
+-- Check if the procedure already exists
+IF EXISTS (select * from syscomments where id = object_id ('UIControlDetail_Delete'))
+
+    -- Procedure Does Exist, Drop First
+    BEGIN
+
+        -- Execute Drop
+        Drop Procedure UIControlDetail_Delete
+
+        -- Test if procedure was dropped
+        IF OBJECT_ID('dbo.UIControlDetail_Delete') IS NOT NULL
+
+            -- Print Line Drop Failed
+            PRINT '<<< Drop Failed On Procedure UIControlDetail_Delete >>>'
+
+        Else
+
+            -- Print Line Procedure Dropped
+            PRINT '<<< Drop Suceeded On Procedure UIControlDetail_Delete >>>'
+
+    End
+
+GO
+
+Create PROCEDURE UIControlDetail_Delete
+
+    -- Primary Key Paramater
+    @Id int
+
+AS
+BEGIN
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    -- Begin Delete Statement
+    Delete From [UIControlDetail]
+
+    -- Delete Matching Record
+    Where [Id] = @Id
+
+END
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+Go
+-- =========================================================
+-- Procure Name: UIControlDetail_FetchAll
+-- Author:           Data Juggler - Data Tier.Net Procedure Generator
+-- Create Date:   5/24/2022
+-- Description:    Returns all UIControlDetail objects
+-- =========================================================
+
+-- Check if the procedure already exists
+IF EXISTS (select * from syscomments where id = object_id ('UIControlDetail_FetchAll'))
+
+    -- Procedure Does Exist, Drop First
+    BEGIN
+
+        -- Execute Drop
+        Drop Procedure UIControlDetail_FetchAll
+
+        -- Test if procedure was dropped
+        IF OBJECT_ID('dbo.UIControlDetail_FetchAll') IS NOT NULL
+
+            -- Print Line Drop Failed
+            PRINT '<<< Drop Failed On Procedure UIControlDetail_FetchAll >>>'
+
+        Else
+
+            -- Print Line Procedure Dropped
+            PRINT '<<< Drop Suceeded On Procedure UIControlDetail_FetchAll >>>'
+
+    End
+
+GO
+
+Create PROCEDURE UIControlDetail_FetchAll
+
+AS
+BEGIN
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    -- Begin Select Statement
+    Select [Id],[Indent],[LineNumber],[LineText],[UIControlId]
+
+    -- From tableName
+    From [UIControlDetail]
+
+END
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+Go
+-- =========================================================
+-- Procure Name: UIControlTemplate_Insert
+-- Author:           Data Juggler - Data Tier.Net Procedure Generator
+-- Create Date:   5/24/2022
+-- Description:    Insert a new UIControlTemplate
+-- =========================================================
+
+-- Check if the procedure already exists
+IF EXISTS (select * from syscomments where id = object_id ('UIControlTemplate_Insert'))
+
+    -- Procedure Does Exist, Drop First
+    BEGIN
+
+        -- Execute Drop
+        Drop Procedure UIControlTemplate_Insert
+
+        -- Test if procedure was dropped
+        IF OBJECT_ID('dbo.UIControlTemplate_Insert') IS NOT NULL
+
+            -- Print Line Drop Failed
+            PRINT '<<< Drop Failed On Procedure UIControlTemplate_Insert >>>'
+
+        Else
+
+            -- Print Line Procedure Dropped
+            PRINT '<<< Drop Suceeded On Procedure UIControlTemplate_Insert >>>'
+
+    End
+
+GO
+
+Create PROCEDURE UIControlTemplate_Insert
+
+    -- Add the parameters for the stored procedure here
+    @ControlType int,
+    @DesignerTemplateId int,
+    @GlobalUsingsTemplateId int,
+    @Name nvarchar(50),
+    @NugetPackage nvarchar(100),
+    @Path nvarchar(512),
+    @ProgramFileTemplateId int,
+    @ProjectTemplateId int,
+    @ResourcesTemplateId int,
+    @ResxTemplateId int,
+    @Version nvarchar(50)
+
+AS
+BEGIN
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    -- Begin Insert Statement
+    Insert Into [UIControlTemplate]
+    ([ControlType],[DesignerTemplateId],[GlobalUsingsTemplateId],[Name],[NugetPackage],[Path],[ProgramFileTemplateId],[ProjectTemplateId],[ResourcesTemplateId],[ResxTemplateId],[Version])
+
+    -- Begin Values List
+    Values(@ControlType, @DesignerTemplateId, @GlobalUsingsTemplateId, @Name, @NugetPackage, @Path, @ProgramFileTemplateId, @ProjectTemplateId, @ResourcesTemplateId, @ResxTemplateId, @Version)
+
+    -- Return ID of new record
+    SELECT SCOPE_IDENTITY()
+
+END
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+Go
+-- =========================================================
+-- Procure Name: UIControlTemplate_Update
+-- Author:           Data Juggler - Data Tier.Net Procedure Generator
+-- Create Date:   5/24/2022
+-- Description:    Update an existing UIControlTemplate
+-- =========================================================
+
+-- Check if the procedure already exists
+IF EXISTS (select * from syscomments where id = object_id ('UIControlTemplate_Update'))
+
+    -- Procedure Does Exist, Drop First
+    BEGIN
+
+        -- Execute Drop
+        Drop Procedure UIControlTemplate_Update
+
+        -- Test if procedure was dropped
+        IF OBJECT_ID('dbo.UIControlTemplate_Update') IS NOT NULL
+
+            -- Print Line Drop Failed
+            PRINT '<<< Drop Failed On Procedure UIControlTemplate_Update >>>'
+
+        Else
+
+            -- Print Line Procedure Dropped
+            PRINT '<<< Drop Suceeded On Procedure UIControlTemplate_Update >>>'
+
+    End
+
+GO
+
+Create PROCEDURE UIControlTemplate_Update
+
+    -- Add the parameters for the stored procedure here
+    @ControlType int,
+    @DesignerTemplateId int,
+    @GlobalUsingsTemplateId int,
+    @Id int,
+    @Name nvarchar(50),
+    @NugetPackage nvarchar(100),
+    @Path nvarchar(512),
+    @ProgramFileTemplateId int,
+    @ProjectTemplateId int,
+    @ResourcesTemplateId int,
+    @ResxTemplateId int,
+    @Version nvarchar(50)
+
+AS
+BEGIN
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    -- Begin Update Statement
+    Update [UIControlTemplate]
+
+    -- Update Each field
+    Set [ControlType] = @ControlType,
+    [DesignerTemplateId] = @DesignerTemplateId,
+    [GlobalUsingsTemplateId] = @GlobalUsingsTemplateId,
+    [Name] = @Name,
+    [NugetPackage] = @NugetPackage,
+    [Path] = @Path,
+    [ProgramFileTemplateId] = @ProgramFileTemplateId,
+    [ProjectTemplateId] = @ProjectTemplateId,
+    [ResourcesTemplateId] = @ResourcesTemplateId,
+    [ResxTemplateId] = @ResxTemplateId,
+    [Version] = @Version
+
+    -- Update Matching Record
+    Where [Id] = @Id
+
+END
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+Go
+-- =========================================================
+-- Procure Name: UIControlTemplate_Find
+-- Author:           Data Juggler - Data Tier.Net Procedure Generator
+-- Create Date:   5/24/2022
+-- Description:    Find an existing UIControlTemplate
+-- =========================================================
+
+-- Check if the procedure already exists
+IF EXISTS (select * from syscomments where id = object_id ('UIControlTemplate_Find'))
+
+    -- Procedure Does Exist, Drop First
+    BEGIN
+
+        -- Execute Drop
+        Drop Procedure UIControlTemplate_Find
+
+        -- Test if procedure was dropped
+        IF OBJECT_ID('dbo.UIControlTemplate_Find') IS NOT NULL
+
+            -- Print Line Drop Failed
+            PRINT '<<< Drop Failed On Procedure UIControlTemplate_Find >>>'
+
+        Else
+
+            -- Print Line Procedure Dropped
+            PRINT '<<< Drop Suceeded On Procedure UIControlTemplate_Find >>>'
+
+    End
+
+GO
+
+Create PROCEDURE UIControlTemplate_Find
+
+    -- Primary Key Paramater
+    @Id int
+
+AS
+BEGIN
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    -- Begin Select Statement
+    Select [ControlType],[DesignerTemplateId],[GlobalUsingsTemplateId],[Id],[Name],[NugetPackage],[Path],[ProgramFileTemplateId],[ProjectTemplateId],[ResourcesTemplateId],[ResxTemplateId],[Version]
+
+    -- From tableName
+    From [UIControlTemplate]
+
+    -- Find Matching Record
+    Where [Id] = @Id
+
+END
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+Go
+-- =========================================================
+-- Procure Name: UIControlTemplate_Delete
+-- Author:           Data Juggler - Data Tier.Net Procedure Generator
+-- Create Date:   5/24/2022
+-- Description:    Delete an existing UIControlTemplate
+-- =========================================================
+
+-- Check if the procedure already exists
+IF EXISTS (select * from syscomments where id = object_id ('UIControlTemplate_Delete'))
+
+    -- Procedure Does Exist, Drop First
+    BEGIN
+
+        -- Execute Drop
+        Drop Procedure UIControlTemplate_Delete
+
+        -- Test if procedure was dropped
+        IF OBJECT_ID('dbo.UIControlTemplate_Delete') IS NOT NULL
+
+            -- Print Line Drop Failed
+            PRINT '<<< Drop Failed On Procedure UIControlTemplate_Delete >>>'
+
+        Else
+
+            -- Print Line Procedure Dropped
+            PRINT '<<< Drop Suceeded On Procedure UIControlTemplate_Delete >>>'
+
+    End
+
+GO
+
+Create PROCEDURE UIControlTemplate_Delete
+
+    -- Primary Key Paramater
+    @Id int
+
+AS
+BEGIN
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    -- Begin Delete Statement
+    Delete From [UIControlTemplate]
+
+    -- Delete Matching Record
+    Where [Id] = @Id
+
+END
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+Go
+-- =========================================================
+-- Procure Name: UIControlTemplate_FetchAll
+-- Author:           Data Juggler - Data Tier.Net Procedure Generator
+-- Create Date:   5/24/2022
+-- Description:    Returns all UIControlTemplate objects
+-- =========================================================
+
+-- Check if the procedure already exists
+IF EXISTS (select * from syscomments where id = object_id ('UIControlTemplate_FetchAll'))
+
+    -- Procedure Does Exist, Drop First
+    BEGIN
+
+        -- Execute Drop
+        Drop Procedure UIControlTemplate_FetchAll
+
+        -- Test if procedure was dropped
+        IF OBJECT_ID('dbo.UIControlTemplate_FetchAll') IS NOT NULL
+
+            -- Print Line Drop Failed
+            PRINT '<<< Drop Failed On Procedure UIControlTemplate_FetchAll >>>'
+
+        Else
+
+            -- Print Line Procedure Dropped
+            PRINT '<<< Drop Suceeded On Procedure UIControlTemplate_FetchAll >>>'
+
+    End
+
+GO
+
+Create PROCEDURE UIControlTemplate_FetchAll
+
+AS
+BEGIN
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    -- Begin Select Statement
+    Select [ControlType],[DesignerTemplateId],[GlobalUsingsTemplateId],[Id],[Name],[NugetPackage],[Path],[ProgramFileTemplateId],[ProjectTemplateId],[ResourcesTemplateId],[ResxTemplateId],[Version]
+
+    -- From tableName
+    From [UIControlTemplate]
+
+END
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+Go
+-- =========================================================
 -- Procure Name: UIField_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Insert a new UIField
 -- =========================================================
 
@@ -4748,7 +4778,7 @@ Go
 -- =========================================================
 -- Procure Name: UIField_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Update an existing UIField
 -- =========================================================
 
@@ -4844,7 +4874,7 @@ Go
 -- =========================================================
 -- Procure Name: UIField_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Find an existing UIField
 -- =========================================================
 
@@ -4901,7 +4931,7 @@ Go
 -- =========================================================
 -- Procure Name: UIField_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Delete an existing UIField
 -- =========================================================
 
@@ -4955,7 +4985,7 @@ Go
 -- =========================================================
 -- Procure Name: UIField_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Returns all UIField objects
 -- =========================================================
 
@@ -5006,7 +5036,7 @@ Go
 -- =========================================================
 -- Procure Name: UIObject_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Insert a new UIObject
 -- =========================================================
 
@@ -5074,7 +5104,7 @@ Go
 -- =========================================================
 -- Procure Name: UIObject_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Update an existing UIObject
 -- =========================================================
 
@@ -5152,7 +5182,7 @@ Go
 -- =========================================================
 -- Procure Name: UIObject_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Find an existing UIObject
 -- =========================================================
 
@@ -5209,7 +5239,7 @@ Go
 -- =========================================================
 -- Procure Name: UIObject_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Delete an existing UIObject
 -- =========================================================
 
@@ -5263,7 +5293,7 @@ Go
 -- =========================================================
 -- Procure Name: UIObject_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Returns all UIObject objects
 -- =========================================================
 
@@ -5312,9 +5342,305 @@ set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 Go
 -- =========================================================
+-- Procure Name: UIProject_Insert
+-- Author:           Data Juggler - Data Tier.Net Procedure Generator
+-- Create Date:   5/24/2022
+-- Description:    Insert a new UIProject
+-- =========================================================
+
+-- Check if the procedure already exists
+IF EXISTS (select * from syscomments where id = object_id ('UIProject_Insert'))
+
+    -- Procedure Does Exist, Drop First
+    BEGIN
+
+        -- Execute Drop
+        Drop Procedure UIProject_Insert
+
+        -- Test if procedure was dropped
+        IF OBJECT_ID('dbo.UIProject_Insert') IS NOT NULL
+
+            -- Print Line Drop Failed
+            PRINT '<<< Drop Failed On Procedure UIProject_Insert >>>'
+
+        Else
+
+            -- Print Line Procedure Dropped
+            PRINT '<<< Drop Suceeded On Procedure UIProject_Insert >>>'
+
+    End
+
+GO
+
+Create PROCEDURE UIProject_Insert
+
+    -- Add the parameters for the stored procedure here
+    @Icon nvarchar(255),
+    @IsBlazor bit,
+    @IsWindowsForm bit,
+    @Name nvarchar(50),
+    @NewItemName nvarchar(50),
+    @NewProjectCLI nvarchar(255),
+    @UIControlTemplateId int
+
+AS
+BEGIN
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    -- Begin Insert Statement
+    Insert Into [UIProject]
+    ([Icon],[IsBlazor],[IsWindowsForm],[Name],[NewItemName],[NewProjectCLI],[UIControlTemplateId])
+
+    -- Begin Values List
+    Values(@Icon, @IsBlazor, @IsWindowsForm, @Name, @NewItemName, @NewProjectCLI, @UIControlTemplateId)
+
+    -- Return ID of new record
+    SELECT SCOPE_IDENTITY()
+
+END
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+Go
+-- =========================================================
+-- Procure Name: UIProject_Update
+-- Author:           Data Juggler - Data Tier.Net Procedure Generator
+-- Create Date:   5/24/2022
+-- Description:    Update an existing UIProject
+-- =========================================================
+
+-- Check if the procedure already exists
+IF EXISTS (select * from syscomments where id = object_id ('UIProject_Update'))
+
+    -- Procedure Does Exist, Drop First
+    BEGIN
+
+        -- Execute Drop
+        Drop Procedure UIProject_Update
+
+        -- Test if procedure was dropped
+        IF OBJECT_ID('dbo.UIProject_Update') IS NOT NULL
+
+            -- Print Line Drop Failed
+            PRINT '<<< Drop Failed On Procedure UIProject_Update >>>'
+
+        Else
+
+            -- Print Line Procedure Dropped
+            PRINT '<<< Drop Suceeded On Procedure UIProject_Update >>>'
+
+    End
+
+GO
+
+Create PROCEDURE UIProject_Update
+
+    -- Add the parameters for the stored procedure here
+    @Icon nvarchar(255),
+    @Id int,
+    @IsBlazor bit,
+    @IsWindowsForm bit,
+    @Name nvarchar(50),
+    @NewItemName nvarchar(50),
+    @NewProjectCLI nvarchar(255),
+    @UIControlTemplateId int
+
+AS
+BEGIN
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    -- Begin Update Statement
+    Update [UIProject]
+
+    -- Update Each field
+    Set [Icon] = @Icon,
+    [IsBlazor] = @IsBlazor,
+    [IsWindowsForm] = @IsWindowsForm,
+    [Name] = @Name,
+    [NewItemName] = @NewItemName,
+    [NewProjectCLI] = @NewProjectCLI,
+    [UIControlTemplateId] = @UIControlTemplateId
+
+    -- Update Matching Record
+    Where [Id] = @Id
+
+END
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+Go
+-- =========================================================
+-- Procure Name: UIProject_Find
+-- Author:           Data Juggler - Data Tier.Net Procedure Generator
+-- Create Date:   5/24/2022
+-- Description:    Find an existing UIProject
+-- =========================================================
+
+-- Check if the procedure already exists
+IF EXISTS (select * from syscomments where id = object_id ('UIProject_Find'))
+
+    -- Procedure Does Exist, Drop First
+    BEGIN
+
+        -- Execute Drop
+        Drop Procedure UIProject_Find
+
+        -- Test if procedure was dropped
+        IF OBJECT_ID('dbo.UIProject_Find') IS NOT NULL
+
+            -- Print Line Drop Failed
+            PRINT '<<< Drop Failed On Procedure UIProject_Find >>>'
+
+        Else
+
+            -- Print Line Procedure Dropped
+            PRINT '<<< Drop Suceeded On Procedure UIProject_Find >>>'
+
+    End
+
+GO
+
+Create PROCEDURE UIProject_Find
+
+    -- Primary Key Paramater
+    @Id int
+
+AS
+BEGIN
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    -- Begin Select Statement
+    Select [Icon],[Id],[IsBlazor],[IsWindowsForm],[Name],[NewItemName],[NewProjectCLI],[UIControlTemplateId]
+
+    -- From tableName
+    From [UIProject]
+
+    -- Find Matching Record
+    Where [Id] = @Id
+
+END
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+Go
+-- =========================================================
+-- Procure Name: UIProject_Delete
+-- Author:           Data Juggler - Data Tier.Net Procedure Generator
+-- Create Date:   5/24/2022
+-- Description:    Delete an existing UIProject
+-- =========================================================
+
+-- Check if the procedure already exists
+IF EXISTS (select * from syscomments where id = object_id ('UIProject_Delete'))
+
+    -- Procedure Does Exist, Drop First
+    BEGIN
+
+        -- Execute Drop
+        Drop Procedure UIProject_Delete
+
+        -- Test if procedure was dropped
+        IF OBJECT_ID('dbo.UIProject_Delete') IS NOT NULL
+
+            -- Print Line Drop Failed
+            PRINT '<<< Drop Failed On Procedure UIProject_Delete >>>'
+
+        Else
+
+            -- Print Line Procedure Dropped
+            PRINT '<<< Drop Suceeded On Procedure UIProject_Delete >>>'
+
+    End
+
+GO
+
+Create PROCEDURE UIProject_Delete
+
+    -- Primary Key Paramater
+    @Id int
+
+AS
+BEGIN
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    -- Begin Delete Statement
+    Delete From [UIProject]
+
+    -- Delete Matching Record
+    Where [Id] = @Id
+
+END
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+Go
+-- =========================================================
+-- Procure Name: UIProject_FetchAll
+-- Author:           Data Juggler - Data Tier.Net Procedure Generator
+-- Create Date:   5/24/2022
+-- Description:    Returns all UIProject objects
+-- =========================================================
+
+-- Check if the procedure already exists
+IF EXISTS (select * from syscomments where id = object_id ('UIProject_FetchAll'))
+
+    -- Procedure Does Exist, Drop First
+    BEGIN
+
+        -- Execute Drop
+        Drop Procedure UIProject_FetchAll
+
+        -- Test if procedure was dropped
+        IF OBJECT_ID('dbo.UIProject_FetchAll') IS NOT NULL
+
+            -- Print Line Drop Failed
+            PRINT '<<< Drop Failed On Procedure UIProject_FetchAll >>>'
+
+        Else
+
+            -- Print Line Procedure Dropped
+            PRINT '<<< Drop Suceeded On Procedure UIProject_FetchAll >>>'
+
+    End
+
+GO
+
+Create PROCEDURE UIProject_FetchAll
+
+AS
+BEGIN
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    -- Begin Select Statement
+    Select [Icon],[Id],[IsBlazor],[IsWindowsForm],[Name],[NewItemName],[NewProjectCLI],[UIControlTemplateId]
+
+    -- From tableName
+    From [UIProject]
+
+END
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+Go
+-- =========================================================
 -- Procure Name: UserInterface_Insert
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Insert a new UserInterface
 -- =========================================================
 
@@ -5377,7 +5703,7 @@ Go
 -- =========================================================
 -- Procure Name: UserInterface_Update
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Update an existing UserInterface
 -- =========================================================
 
@@ -5445,7 +5771,7 @@ Go
 -- =========================================================
 -- Procure Name: UserInterface_Find
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Find an existing UserInterface
 -- =========================================================
 
@@ -5502,7 +5828,7 @@ Go
 -- =========================================================
 -- Procure Name: UserInterface_Delete
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Delete an existing UserInterface
 -- =========================================================
 
@@ -5556,7 +5882,7 @@ Go
 -- =========================================================
 -- Procure Name: UserInterface_FetchAll
 -- Author:           Data Juggler - Data Tier.Net Procedure Generator
--- Create Date:   4/14/2022
+-- Create Date:   5/24/2022
 -- Description:    Returns all UserInterface objects
 -- =========================================================
 

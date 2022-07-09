@@ -29,8 +29,6 @@ namespace DataAccessComponent.DataManager
         private DataConnector dataConnector;
         private string connectionName;
         private AdminManager adminManager;
-        private ControlInfoManager controlinfoManager;
-        private ControlInfoDetailManager controlinfodetailManager;
         private CustomReaderManager customreaderManager;
         private DTNDatabaseManager dtndatabaseManager;
         private DTNFieldManager dtnfieldManager;
@@ -46,9 +44,6 @@ namespace DataAccessComponent.DataManager
         private ProjectReferenceManager projectreferenceManager;
         private ProjectReferencesViewManager projectreferencesviewManager;
         private ReferencesSetManager referencessetManager;
-        private UIFieldManager uifieldManager;
-        private UIObjectManager uiobjectManager;
-        private UserInterfaceManager userinterfaceManager;
         #endregion
 
         #region Constructor
@@ -79,8 +74,6 @@ namespace DataAccessComponent.DataManager
 
                 // Create Child Object Managers
                 this.AdminManager = new AdminManager(this);
-                this.ControlInfoManager = new ControlInfoManager(this);
-                this.ControlInfoDetailManager = new ControlInfoDetailManager(this);
                 this.CustomReaderManager = new CustomReaderManager(this);
                 this.DTNDatabaseManager = new DTNDatabaseManager(this);
                 this.DTNFieldManager = new DTNFieldManager(this);
@@ -96,9 +89,6 @@ namespace DataAccessComponent.DataManager
                 this.ProjectReferenceManager = new ProjectReferenceManager(this);
                 this.ProjectReferencesViewManager = new ProjectReferencesViewManager(this);
                 this.ReferencesSetManager = new ReferencesSetManager(this);
-                this.UIFieldManager = new UIFieldManager(this);
-                this.UIObjectManager = new UIObjectManager(this);
-                this.UserInterfaceManager = new UserInterfaceManager(this);
             }
             #endregion
 
@@ -127,22 +117,6 @@ namespace DataAccessComponent.DataManager
             {
                 get { return adminManager; }
                 set { adminManager = value; }
-            }
-            #endregion
-
-            #region ControlInfoManager
-            public ControlInfoManager ControlInfoManager
-            {
-                get { return controlinfoManager; }
-                set { controlinfoManager = value; }
-            }
-            #endregion
-
-            #region ControlInfoDetailManager
-            public ControlInfoDetailManager ControlInfoDetailManager
-            {
-                get { return controlinfodetailManager; }
-                set { controlinfodetailManager = value; }
             }
             #endregion
 
@@ -263,30 +237,6 @@ namespace DataAccessComponent.DataManager
             {
                 get { return referencessetManager; }
                 set { referencessetManager = value; }
-            }
-            #endregion
-
-            #region UIFieldManager
-            public UIFieldManager UIFieldManager
-            {
-                get { return uifieldManager; }
-                set { uifieldManager = value; }
-            }
-            #endregion
-
-            #region UIObjectManager
-            public UIObjectManager UIObjectManager
-            {
-                get { return uiobjectManager; }
-                set { uiobjectManager = value; }
-            }
-            #endregion
-
-            #region UserInterfaceManager
-            public UserInterfaceManager UserInterfaceManager
-            {
-                get { return userinterfaceManager; }
-                set { userinterfaceManager = value; }
             }
             #endregion
 

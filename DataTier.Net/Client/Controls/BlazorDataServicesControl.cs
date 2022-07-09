@@ -194,6 +194,23 @@ namespace DataTierClient.Controls
                             string primaryKeyDataType = "";
                             string primaryKeyVariableName = "";
                             string primaryKeyPropertyName = "";
+
+                            // Update 6.9.2022: Fixing bug if the Table Name is plural, you end up with a Foreach Loop
+                            // with the same name CustomerSales customerSales in customerSales
+                            if (TextHelper.IsEqual(variableName, pluralVariableName))
+                            {
+                                // if ends with s
+                                if (variableName.EndsWith("s"))
+                                {
+                                    // Remove the last s
+                                    variableName = variableName.Substring(0, variableName.Length -1);
+                                }
+                                else
+                                {
+                                    // safeguard ijn case it happens some other way (I don't think this will ever get hit)
+                                    pluralVariableName = pluralVariableName + "list";
+                                }
+                            }
                             
                             // Update 12.12.2020: The DataService (for Blazor) requires the PrimaryKey
                             // cataType and field name.

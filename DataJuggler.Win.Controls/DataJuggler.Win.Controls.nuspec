@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://github.com/DataJuggler/SharedRepo/tree/master/License</licenseUrl>
+    <projectUrl>https://github.com/DataJuggler/DataJuggler.Win.Controls</projectUrl>
+    <iconUrl>https://github.com/DataJuggler/SharedRepo/blob/master/Win/RandomBanner/RandomBanner/Resources/DataJuggler.Win.Controls.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>This is the first update now that this project is on GitHub. There are a few breaking changes as it has been 4 years since I released on NuGet.
+        I have been using this project but I since Code Plex shut down I didn't update NuGet because I forgot about it.
+      Now that the project is on GitHub, I will be updating more often. Sorry for the long delays. 
+    </releaseNotes>
+    <copyright>Copyright 2019</copyright>
+    <tags>DataJuggler DataJuggler.Net Win Controls Windows Form LabelTextBoxControl LabelComboBoxControl LabelCheckBoxControl Codey</tags>
+    <dependencies>
+      <dependency id="DataJuggler.Core.UltimateHelper" version="(1.3.5,)" include="contentFiles, build" />
+    </dependencies>
+  </metadata>
+</package>
