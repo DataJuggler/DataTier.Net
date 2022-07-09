@@ -86,7 +86,7 @@ namespace ApplicationLogicComponent.DataOperations
                 this.ProjectMethods = new ProjectMethods(this.DataManager);
                 this.ProjectReferenceMethods = new ProjectReferenceMethods(this.DataManager);
                 this.ProjectReferencesViewMethods = new ProjectReferencesViewMethods(this.DataManager);
-                this.ReferencesSetMethods = new ReferencesSetMethods(this.DataManager);               
+                this.ReferencesSetMethods = new ReferencesSetMethods(this.DataManager);
             }
             #endregion
 

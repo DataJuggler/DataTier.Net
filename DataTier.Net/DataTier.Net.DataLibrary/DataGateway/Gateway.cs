@@ -1190,7 +1190,7 @@ namespace DataGateway
                 return referencesSet;
             }
             #endregion
-            
+
             #region GetDataConnector()
             /// <summary>
             /// This method (safely) returns the Data Connector from the

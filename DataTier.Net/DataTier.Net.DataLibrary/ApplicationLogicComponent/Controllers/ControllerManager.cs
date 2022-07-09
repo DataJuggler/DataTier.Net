@@ -82,7 +82,7 @@ namespace ApplicationLogicComponent.Controllers
                 this.ProjectController = new ProjectController(this.ErrorProcessor, this.AppController);
                 this.ProjectReferenceController = new ProjectReferenceController(this.ErrorProcessor, this.AppController);
                 this.ProjectReferencesViewController = new ProjectReferencesViewController(this.ErrorProcessor, this.AppController);
-                this.ReferencesSetController = new ReferencesSetController(this.ErrorProcessor, this.AppController);               
+                this.ReferencesSetController = new ReferencesSetController(this.ErrorProcessor, this.AppController);
             }
             #endregion
 
