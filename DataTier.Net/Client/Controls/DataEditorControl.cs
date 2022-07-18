@@ -873,6 +873,13 @@ namespace DataTierClient.Controls
                 // if there is a SelectedTable
                 if ((this.HasSelectedTable) && (!this.SelectedTable.Exclude))
                 {
+                    // if this Table is a View
+                    if (SelectedTable.IsView)
+                    {
+                        // do not show the checkbox for views
+                        showCreateBindingCallbackControl = false;
+                    }
+
                     // Display the Name
                     this.SelectedTableTextBox.Text = this.SelectedTable.TableName;
                     
