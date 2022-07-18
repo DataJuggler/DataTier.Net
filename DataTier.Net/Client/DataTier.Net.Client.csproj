@@ -152,6 +152,7 @@
     <Compile Include="ClientUtil\ReferencesSetManager.cs" />
     <Compile Include="ClientUtil\SerializationManager.cs" />
     <Compile Include="ClientUtil\SQLSMOHelper.cs" />
+    <Compile Include="ClientUtil\TextLineHelper.cs" />
     <Compile Include="ClientUtil\VisualStudioHelper.cs" />
     <Compile Include="Controls\BlazorDataServicesControl.cs">
       <SubType>UserControl</SubType>

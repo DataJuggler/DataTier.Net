@@ -21,6 +21,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using DataTierClient.Xml.Writers;
+using DataJuggler.Core.UltimateHelper.Objects;
+using DataTierClient.ClientUtil;
+using DataTierClient.Objects;
 
 #endregion
 
@@ -183,10 +186,8 @@ namespace DataTierClient.Controls
                             // ************** DataWatcher.cs Class *************
                             // ***************************************
 
-                            // Now the file must be read
-                            string fileText = File.ReadAllText(path);
-
-                            // now create the replaceParameter values
+                            // locals
+                            string fileText = "";
                             string tableName = table.TableName;
                             string variableName = CSharpClassWriter.CapitalizeFirstCharEx(table.TableName, true);
                             string pluralTableName = PluralWordHelper.GetPluralName(table.TableName, false);
@@ -195,58 +196,72 @@ namespace DataTierClient.Controls
                             string primaryKeyVariableName = "";
                             string primaryKeyPropertyName = "";
 
-                            // Update 6.9.2022: Fixing bug if the Table Name is plural, you end up with a Foreach Loop
-                            // with the same name CustomerSales customerSales in customerSales
-                            if (TextHelper.IsEqual(variableName, pluralVariableName))
+                            // if this table is a view
+                            if (Table.IsView)
                             {
-                                // if ends with s
-                                if (variableName.EndsWith("s"))
-                                {
-                                    // Remove the last s
-                                    variableName = variableName.Substring(0, variableName.Length -1);
-                                }
-                                else
-                                {
-                                    // safeguard ijn case it happens some other way (I don't think this will ever get hit)
-                                    pluralVariableName = pluralVariableName + "list";
-                                }
+                                // views do not need a DataWatcher class
+                                File.Delete(path);
                             }
+                            else
+                            {
+                                // Now the file must be read
+                                fileText = File.ReadAllText(path);
+
+                               
+
+                                // Update 6.9.2022: Fixing bug if the Table Name is plural, you end up with a Foreach Loop
+                                // with the same name CustomerSales customerSales in customerSales
+                                if (TextHelper.IsEqual(variableName, pluralVariableName))
+                                {
+                                    // if ends with s
+                                    if (variableName.EndsWith("s"))
+                                    {
+                                        // Remove the last s
+                                        variableName = variableName.Substring(0, variableName.Length -1);
+                                    }
+                                    else
+                                    {
+                                        // safeguard ijn case it happens some other way (I don't think this will ever get hit)
+                                        pluralVariableName = pluralVariableName + "list";
+                                    }
+                                }
                             
-                            // Update 12.12.2020: The DataService (for Blazor) requires the PrimaryKey
-                            // cataType and field name.
-                            DTNField field = FindPrimaryKey(table);
+                                // Update 12.12.2020: The DataService (for Blazor) requires the PrimaryKey
+                                // cataType and field name.
+                                DTNField field = FindPrimaryKey(table);
 
-                            // if the field was found
-                            if (NullHelper.Exists(field))
-                            {
-                                // get the dataType
-                                primaryKeyDataType = field.DataType.ToString().ToLower();
-                                primaryKeyVariableName = CSharpClassWriter.CapitalizeFirstCharEx(field.FieldName, true);
-                                primaryKeyPropertyName = CSharpClassWriter.CapitalizeFirstCharEx(field.FieldName, false);
-
-                                // if an autonumber identity field (which most will be)
-                                if (primaryKeyDataType == "autonumber")
+                                // if the field was found
+                                if (NullHelper.Exists(field))
                                 {
-                                    // switch to int
-                                    primaryKeyDataType = "int";
+                                    // get the dataType
+                                    primaryKeyDataType = field.DataType.ToString().ToLower();
+                                    primaryKeyVariableName = CSharpClassWriter.CapitalizeFirstCharEx(field.FieldName, true);
+                                    primaryKeyPropertyName = CSharpClassWriter.CapitalizeFirstCharEx(field.FieldName, false);
+
+                                    // if an autonumber identity field (which most will be)
+                                    if (primaryKeyDataType == "autonumber")
+                                    {
+                                        // switch to int
+                                        primaryKeyDataType = "int";
+                                    }
                                 }
-                            }
 
-                            // string parameterDataType = FindPrimaryKey
+                                // string parameterDataType = FindPrimaryKey
                         
-                            // Replace out the fileText replacement parameters
-                            fileText = fileText.Replace("[TableName]", tableName);
-                            fileText = fileText.Replace("[VariableName]", variableName);
-                            fileText = fileText.Replace("[PluralVariableName]", pluralVariableName);
+                                // Replace out the fileText replacement parameters
+                                fileText = fileText.Replace("[TableName]", tableName);
+                                fileText = fileText.Replace("[VariableName]", variableName);
+                                fileText = fileText.Replace("[PluralVariableName]", pluralVariableName);
                            
-                            // Delete the current file at path 
-                            File.Delete(path);
+                                // Delete the current file at path 
+                                File.Delete(path);
 
-                            // rename the file
-                            path = path.Replace("DataWatcher.cs", Table.TableName + "DataWatcher.cs");
+                                // rename the file
+                                path = path.Replace("DataWatcher.cs", Table.TableName + "DataWatcher.cs");
 
-                            // Write out the next text
-                            File.WriteAllText(path, fileText);
+                                // Write out the next text
+                                File.WriteAllText(path, fileText);
+                            }
 
                             // ***************************************
                             // ************** Service.cs Class *************
@@ -273,11 +288,44 @@ namespace DataTierClient.Controls
                             // rename the file
                             path2 = path2.Replace("Service.cs", Table.TableName + "Service.cs");
 
+                            // if this table is a view
+                            if (Table.IsView)
+                            {
+                                // Views do not have Find, Remove and Save methods, so they must be removed them from the template
+
+                                // Get the textLines
+                                List<TextLine> textLines = TextHelper.GetTextLines(fileText);
+
+                                // If the textLines collection exists and has one or more items
+                                if (ListHelper.HasOneOrMoreItems(textLines))
+                                {
+                                    // Remove a region - parse to codeLine and back many times, not good but it shoiuld work.
+                                    textLines = RemoveRegion(textLines, "Find");
+
+                                    // Remove a region
+                                    textLines = RemoveRegion(textLines, "Remove");
+
+                                    // Remove a region
+                                    textLines = RemoveRegion(textLines, "Save", true);
+                                    
+                                    // Export the lines back to text
+                                    fileText = TextLineHelper.ExportTextLines(textLines);
+                                }
+                            }
+
                             // Write out the next text
                             File.WriteAllText(path2, fileText);
 
-                            // Show a message
-                            message = "The following classes were created:" + Environment.NewLine + path + Environment.NewLine + path2;
+                            if (Table.IsView)
+                            {
+                                // set the message to exclude the DataWatcher
+                                message = "The following class was created:" + Environment.NewLine + path2;
+                            }
+                            else
+                            {
+                                // set the message to include the DataWatcher
+                                message = "The following classes were created:" + Environment.NewLine + path + Environment.NewLine + path2;
+                            }
 
                             // Hide the graph
                             Graph.Visible = false;
@@ -505,6 +553,92 @@ namespace DataTierClient.Controls
 
                 // return value
                 return saved;
+            }
+            #endregion
+            
+            #region RemoveRegion()
+            /// <summary>
+            /// returns a list of Region
+            /// </summary>
+            /// <param name="textLines">The collection of textLines to remove from</param>
+            /// <param name="regionNameStartsWith">The Name of the region to remove.</param>
+            /// <param name="removeDoubleBlankLines">The last time this is called, this needs to be true to fix all the left over blank lines</param>
+            public List<TextLine> RemoveRegion(List<TextLine> textLines, string regionNameStartsWith, bool removeDoubleBlankLines = false)
+            {  
+                // Create the codeLines
+                List<CodeLine> codeLines = CodeLineHelper.CreateCodeLines(textLines);
+
+                // locals
+                int startIndex = -1;
+                int endIndex = -1;
+                int index = -1;
+                bool regionThatWillBeRemovedOn = false;
+                    
+                // If the codeLines collection exists and has one or more items
+                if (ListHelper.HasOneOrMoreItems(codeLines))
+                {
+                    // Iterate the collection of CodeLine objects
+                    foreach (CodeLine codeLine in codeLines)
+                    {
+                        // increment the index
+                        index++;
+
+                        // if the value for regionThatWillBeRemovedOn is true
+                        if ((regionThatWillBeRemovedOn) && (codeLine.IsEndRegion))
+                        {  
+                            // set the endIndex
+                            endIndex = index;
+
+                            // region has finished
+                            regionThatWillBeRemovedOn = false;
+
+                            // exit
+                            break;
+                        }
+                        else
+                        {
+                            // if the codeLine exists
+                            if (codeLine.IsRegion)
+                            {
+                                // if this is the region being sought
+                                if (codeLine.RegionName.StartsWith(regionNameStartsWith))
+                                {
+                                    // set the startIndex
+                                    startIndex = index;    
+
+                                    // Set to true
+                                    regionThatWillBeRemovedOn = true;  
+                                }
+                            }
+                        }
+                    }
+
+                    // if the startIndex is set and the endIndex is greater than startIndex and ensure endIndex is in range
+                    if ((startIndex >= 0) && (endIndex > startIndex) && (endIndex < codeLines.Count))
+                    {
+                        // get the count removed
+                        int count = endIndex - startIndex + 1;
+
+                        // Remove the Region
+                        codeLines.RemoveRange(startIndex, count);
+
+                        // if the value for removeDoubleBlankLines is true
+                        if (removeDoubleBlankLines)
+                        {
+                            // remove the extra blank lines
+                            codeLines = CodeLineHelper.RemoveConsecutiveBlankLines(codeLines, 1);
+                        }
+
+                        // Get the fileText again
+                        string fileText = CodeLineHelper.ExportCodeLines(codeLines);
+
+                        // Parse again - I know this is inefficient doing this 3 times, just need to get this done and this is easiest.
+                        textLines = TextHelper.GetTextLines(fileText);
+                    }
+                }
+
+                // return value
+                return textLines;
             }
             #endregion
             

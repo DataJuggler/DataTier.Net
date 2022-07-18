@@ -9,6 +9,7 @@ using ObjectLibrary.BusinessObjects;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 
 #endregion
 
@@ -1451,6 +1452,13 @@ namespace DataGateway
                 {
                     // perform the load
                     dTNTables = this.AppController.ControllerManager.DTNTableController.FetchAll(tempDTNTable);
+
+                    // fixing bug table names are not displayed in the correct order
+                    if (ListHelper.HasOneOrMoreItems(dTNTables))
+                    {
+                        // sort the list alphabetically on load so always will be in the correct order
+                        dTNTables = dTNTables.OrderBy(x => x.TableName).ToList();
+                    }
                 }
 
                 // return value
