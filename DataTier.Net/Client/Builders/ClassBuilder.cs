@@ -232,7 +232,7 @@ namespace DataTierClient.Builders
                 // Create DataManager
                 this.Setup(currentProject);
 
-                // 12.19.2021
+                // This can not be .NET Framework, .NET5, .NET6 or .NET7.
                 TargetFrameworkEnum targetFramework = (TargetFrameworkEnum) currentProject.TargetFramework;
                
                 // Create New ClassWriter Object
