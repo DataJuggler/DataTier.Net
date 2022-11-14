@@ -47,7 +47,10 @@ namespace DataTierClient.Controls
         private const string ItemTemplateInstall6 = "dotnet new --install DataJuggler.DataTier.Net6.ItemTemplates.BlazorDataServices::3.0.0";
         private const string ItemTemplateUninstall6 = "dotnet new -uninstall DataJuggler.DataTier.Net6.ItemTemplates.BlazorDataServices";
         private const string CreateServices6 = "dotnet new DataTier.Net6.ItemTemplates.BlazorDataServices";
+        private const string ItemTemplateInstall7 = "dotnet new --install DataJuggler.DataTier.Net6.ItemTemplates.BlazorDataServices::7.0.0";
+        private const string ItemTemplateUninstall7 = "dotnet new -uninstall DataJuggler.DataTier.Net7.ItemTemplates.BlazorDataServices";        
         private const string DataWatcherFileName = "DataWatcher.cs";
+        private const string CreateServices7 = "dotnet new DataTier.Net7.ItemTemplates.BlazorDataServices";
         private const string ServiceFileName = "Service.cs";
         private string initialProject;
         private Project project;
@@ -130,10 +133,15 @@ namespace DataTierClient.Controls
                             // Install for .NET5
                             startInfo.Arguments = "/C " + CreateServices5;
                         }
-                        else
+                        else if (Project.TargetFramework == TargetFrameworkEnum.Net6)
                         {
                             // Install for .NET6
                             startInfo.Arguments = "/C " + CreateServices6;
+                        }
+                        else
+                        {
+                            // Install for .NET7
+                            startInfo.Arguments = "/C " + CreateServices7;
                         }
 
                         process.StartInfo = startInfo;
@@ -371,9 +379,13 @@ namespace DataTierClient.Controls
                     {
                         startInfo.Arguments = "/C " + ItemTemplateInstall5;
                     }
-                    else
+                    else if (Project.TargetFramework == TargetFrameworkEnum.Net6)
                     {
                         startInfo.Arguments = "/C " + ItemTemplateInstall6;
+                    }
+                    else
+                    {
+                        startInfo.Arguments = "/C " + ItemTemplateInstall7;
                     }
                     
                     
@@ -386,10 +398,15 @@ namespace DataTierClient.Controls
                         // show the user a message
                         MessageBoxHelper.ShowMessage("The Blazor Data Services Item Templates Have Been Installed for .NET5", "Install Complete");
                     }
-                    else
+                    else if (Project.TargetFramework == TargetFrameworkEnum.Net6)
                     {
                         // show the user a message
                         MessageBoxHelper.ShowMessage("The Blazor Data Services Item Templates Have Been Installed For .NET6", "Install Complete");
+                    }
+                    else
+                    {
+                        // show the user a message
+                        MessageBoxHelper.ShowMessage("The Blazor Data Services Item Templates Have Been Installed For .NET7", "Install Complete");
                     }
                 }
                 catch (Exception error)
@@ -685,11 +702,17 @@ namespace DataTierClient.Controls
                     InstallBlazorServicesButton.Text = "Install DataJuggler.DataTier.Net5.ItemTemplates.BlazorDataServices";
                     UninstallBlazorServicesButton.Text = "Uninstall DataJuggler.DataTier.Net5.ItemTemplates.BlazorDataServices";
                 }
-                else
+                else if (Project.TargetFramework == TargetFrameworkEnum.Net6)
                 {
                     // Set the Text for .NET6
                     InstallBlazorServicesButton.Text = "Install DataJuggler.DataTier.Net6.ItemTemplates.BlazorDataServices";
                     UninstallBlazorServicesButton.Text = "Uninstall DataJuggler.DataTier.Net6.ItemTemplates.BlazorDataServices";
+                }
+                else
+                {
+                    // Set the Text for .NET7
+                    InstallBlazorServicesButton.Text = "Install DataJuggler.DataTier.Net7.ItemTemplates.BlazorDataServices";
+                    UninstallBlazorServicesButton.Text = "Uninstall DataJuggler.DataTier.Net7.ItemTemplates.BlazorDataServices";
                 }
                
                 // Enable or disable controls

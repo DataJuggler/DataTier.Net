@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    
+    <PackageType>Template</PackageType>
+    <PackageVersion>7.0.2</PackageVersion>
+    <PackageId>DataJuggler.DataTier.Net7.ProjectTemplates</PackageId>
+    <Title>DataJuggler.DataTier.Net7.ProjectTemplates</Title>
+    <Authors>Data Juggler</Authors>
+    <Description>This is a new set of templates to use when creating a project for DataTier.Net targeting .Net 7.0
+</Description>
+    <PackageTags>DataTier.Net;DataTier.Net7;C#;SQL;SQLServer;EntityFrameworkAlternative;</PackageTags>
+    <TargetFramework>net7.0</TargetFramework>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <Version>7.0.1</Version>
+    <Product>DataJuggler.DataTier.Net7.ProjectTemplate</Product>
+    <ApplicationIcon></ApplicationIcon>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/DataJuggler/DataTier.Net</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/DataJuggler/DataTier.Net.git</RepositoryUrl>
+    <RepositoryType>Git/GitHub</RepositoryType>
+    <PackageReleaseNotes>Update 11.14.2022: I am testing the .NET 7 version now.</PackageReleaseNotes>
+    <Nullable>disable</Nullable>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackAsTool>True</PackAsTool>
+
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" />
+    <Compile Remove="**\*" />
+    <Compile Remove="templates\DataTier.Net7.ClassLibrary\.vs\**" />
+    <Content Remove="templates\DataTier.Net7.ClassLibrary\.vs\**" />
+    <EmbeddedResource Remove="templates\DataTier.Net7.ClassLibrary\.vs\**" />
+    <None Remove="templates\DataTier.Net7.ClassLibrary\.vs\**" />
+  </ItemGroup>
+  
+</Project>
+
+
+
+    
+    
+    
+
+
+  
+
+

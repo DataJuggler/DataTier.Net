@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Data Juggler")]
 [assembly: AssemblyProduct("DataTier.Net.StoredProcedureGenerator")]
-[assembly: AssemblyCopyright("Copyright © Data Juggler 2018 - 2020 Shared Open Source on Git Hub. https://github.com/DataJuggler/DataTier.Net")]
+[assembly: AssemblyCopyright("Copyright © Data Juggler 2018 - 2022 Shared Open Source on Git Hub. https://github.com/DataJuggler/DataTier.Net")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -31,5 +31,5 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("2.5.6.0")]
-[assembly: AssemblyFileVersion("2.5.6.0")]
+[assembly: AssemblyVersion("4.0.0.0")]
+[assembly: AssemblyFileVersion("4.0.0.0")]

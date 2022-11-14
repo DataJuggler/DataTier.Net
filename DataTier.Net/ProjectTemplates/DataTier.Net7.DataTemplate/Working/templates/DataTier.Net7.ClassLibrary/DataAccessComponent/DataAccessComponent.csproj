@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+    <TargetFramework>net7.0</TargetFramework>
+    <Version>7.0.0</Version>
+    <PackageId>DataJuggler.DataTier.Net7.DataAccessComponent</PackageId>
+    <Authors>DataJuggler</Authors>
+    <Company>DataJuggler</Company>
+    <Description>This is one of the four projects that make up a DataTier.Net7.ProjectTemplate</Description>
+    <PackageProjectUrl>github.com/DataJuggler/DataTier.Net</PackageProjectUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DataJuggler.Net7" Version="7.0.1" />
+    <PackageReference Include="DataJuggler.UltimateHelper" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ObjectLibrary\ObjectLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DataManager\Readers\" />
+    <Folder Include="DataManager\Writers\" />
+    <Folder Include="StoredProcedureManager\DeleteProcedures\" />
+    <Folder Include="StoredProcedureManager\FetchProcedures\" />
+    <Folder Include="StoredProcedureManager\InsertProcedures\" />
+    <Folder Include="StoredProcedureManager\UpdateProcedures\" />
+  </ItemGroup>
+
+</Project>
+
+
+
+
+

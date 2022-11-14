@@ -214,8 +214,8 @@ namespace ObjectLibrary.BusinessObjects
                 this.WriterReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.UpdateProcedures"));
                 this.WriterReferencesSet.References.Add(new ProjectReference("System.Data"));
                 
-                // if .NET6 (maybe .NET5 can use this?)
-                if (TargetFramework == TargetFrameworkEnum.Net6)
+                // if .NET6 or .NET7
+                if ((TargetFramework == TargetFrameworkEnum.Net6) || (TargetFramework == TargetFrameworkEnum.Net7))
                 {
                     // Switch to Microsoft
                     this.WriterReferencesSet.References.Add(new ProjectReference("Microsoft.Data.SqlClient"));
@@ -238,8 +238,13 @@ namespace ObjectLibrary.BusinessObjects
                 // Set Stored Procedure References
                 this.StoredProcedureReferencesSet.References.Add(new ProjectReference("System"));
                 
-                // If .NET6
-                if (TargetFramework == TargetFrameworkEnum.Net6)
+                // If .NET7
+                if (TargetFramework == TargetFrameworkEnum.Net7)
+                {
+                    // .NET7
+                    this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataJuggler.Net7"));
+                }
+                else if (TargetFramework == TargetFrameworkEnum.Net6)
                 {
                     // .NET6
                     this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataJuggler.Net6"));
@@ -395,8 +400,8 @@ namespace ObjectLibrary.BusinessObjects
                 // Create the Tables collection
                 this.Tables = new List<DTNTable>();
 
-                // New projects now default to .net6
-                TargetFramework = TargetFrameworkEnum.Net6;
+                // New projects now default to .NET 7
+                TargetFramework = TargetFrameworkEnum.Net7;
                 
                 // Create Default References
                 this.CreateDefaultReferences();
@@ -473,13 +478,14 @@ namespace ObjectLibrary.BusinessObjects
                 // local
                 int index = -1;
                 int index2 = -1;
+                int index3 = -1;
 
                 // *********************************************************************
-                // ***********   System.Data.SqlClienta and Microsoft.Data.SqlClient    ************
+                // ***********   System.Data.SqlClient and Microsoft.Data.SqlClient    ************
                 // *********************************************************************
 
-                // if .NET6 (maybe .NET5 can use this?)
-                if (TargetFramework == TargetFrameworkEnum.Net6)
+                // if .NET 6 or .NET 7
+                if ((TargetFramework == TargetFrameworkEnum.Net6) || (TargetFramework == TargetFrameworkEnum.Net7))
                 {
                     // find the index of System.Data.SqlClient
                     index = FindReferenceIndex(WriterReferencesSet.References, "System.Data.SqlClient");
@@ -526,9 +532,9 @@ namespace ObjectLibrary.BusinessObjects
                     }
                 }
 
-                // *********************************************************************
-                // **********   DataJuggler.Net, DataJuggler.Net5 and DataJuggler.Net6    **********
-                // *********************************************************************
+                // *********************************************************************************
+                // *******  DataJuggler.Net, DataJuggler.Net5 and DataJuggler.Net6 and DataJuggler.Net7    ********
+                // *********************************************************************************
 
                 // local
                 string dataJugglerNetReferenceName = "";
@@ -543,6 +549,7 @@ namespace ObjectLibrary.BusinessObjects
                     // find the index of Microsoft.Data.SqlClient
                     index = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net5");
                     index2 = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net6");
+                    index3 = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net7");
                 }
                 else if (TargetFramework == TargetFrameworkEnum.Net5)
                 {
@@ -552,17 +559,28 @@ namespace ObjectLibrary.BusinessObjects
                     // find the index of Microsoft.Data.SqlClient
                     index = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net");
                     index2 = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net6");
+                    index3 = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net7");
                 }
-                else
+                else if (TargetFramework == TargetFrameworkEnum.Net6)
                 {
-                    // .Net6
-
                     // Set the DataJuggler.Net Reference name
                     dataJugglerNetReferenceName = "DataJuggler.Net6";
 
                     // find the index of DataJuggler.Net and DataJuggler.Net5
                     index = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net");
                     index2 = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net5");
+                    index3 = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net7");
+                }
+                else
+                {
+                    // .NET 7
+                    // Set the DataJuggler.Net Reference name
+                    dataJugglerNetReferenceName = "DataJuggler.Net7";
+
+                    // find the index of DataJuggler.Net and DataJuggler.Net5
+                    index = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net");
+                    index2 = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net5");
+                    index3 = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net6");
                 }
 
                 // only one of these can fire, so indexes do not get out of wack
@@ -576,11 +594,22 @@ namespace ObjectLibrary.BusinessObjects
                     // an item was removed
                     itemRemoved = true;
                 }
+
                 // if the index2 was found
-                else if (index2 >= 0)
+                if (index2 >= 0)
                 {
                     // remove this item
                     StoredProcedureReferencesSet.References.RemoveAt(index2);
+
+                    // item was removed
+                    itemRemoved = true;
+                }
+
+                // if the index3 was found
+                if (index3 >= 0)
+                {
+                    // remove this item
+                    StoredProcedureReferencesSet.References.RemoveAt(index3);
 
                     // item was removed
                     itemRemoved = true;
@@ -752,7 +781,7 @@ namespace ObjectLibrary.BusinessObjects
 
             #region IsDotNetCore
             /// <summary>
-            /// this read only property returns true if the TargetFramework is .Net5 or .Net6
+            /// this read only property returns true if the TargetFramework is .Net5 or .Net6 or .Net7
             /// </summary>
             public bool IsDotNetCore
             {

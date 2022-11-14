@@ -38,6 +38,8 @@ namespace DataTierClient.Controls
         private const string InstallDataTierNet5 = "dotnet new --install DataJuggler.DataTier.Net5.ProjectTemplates";
         private const string CreateDataTierNet6 = "dotnet new DataTier.Net6.ProjectTemplates";
         private const string InstallDataTierNet6 = "dotnet new --install DataJuggler.DataTier.Net6.ProjectTemplates";
+        private const string CreateDataTierNet7 = "dotnet new DataTier.Net7.ProjectTemplates";
+        private const string InstallDataTierNet7 = "dotnet new --install DataJuggler.DataTier.Net7.ProjectTemplates";
 
         // Used to install the Project Templates on the ProjectEditorControl.cs
         private const int GraphWidth = 268;
@@ -203,20 +205,31 @@ namespace DataTierClient.Controls
                                     // if Net5
                                     startInfo.Arguments = "/C " + CreateDataTierNet5;
                                 }
+                                else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net6)
+                                {
+                                    // if Net5
+                                    startInfo.Arguments = "/C " + CreateDataTierNet6;
+                                }
                                 else
                                 {
                                     // if Net6
-                                    startInfo.Arguments = "/C " + CreateDataTierNet6;
+                                    startInfo.Arguments = "/C " + CreateDataTierNet7;
                                 }
 
                                 process.StartInfo = startInfo;
                                 process.Start();
 
                                 // get the solution path - default to DotNet6
-                                string solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net6.ClassLibrary.sln");
+                                string solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net7.ClassLibrary.sln");
 
+                                // if .NET 6
+                                if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net6)
+                                {
+                                    // switch for Net6
+                                    solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net6.ClassLibrary.sln");
+                                }
                                 // if Net5
-                                if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net5)
+                                else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net5)
                                 {
                                     // switch for Net6
                                     solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net5.ClassLibrary.sln");
@@ -591,7 +604,7 @@ namespace DataTierClient.Controls
                 ProjectTypeControl.SelectedIndexListener = this;
 
                 // Set the SelectedIndex
-                ProjectTypeControl.SelectedIndex = ProjectTypeControl.FindItemIndexByValue("Net6");
+                ProjectTypeControl.SelectedIndex = ProjectTypeControl.FindItemIndexByValue("Net7");
 
                 // Should call UIEnable
                 OnSelectedIndexChanged(ProjectTypeControl, ProjectTypeControl.SelectedIndex, ProjectTypeControl.SelectedObject);
@@ -620,11 +633,18 @@ namespace DataTierClient.Controls
                         // Use Net5
                         startInfo.Arguments = "/C " + InstallDataTierNet5;
                     }
-                    else
+                    else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net6)
                     {
                         // Use Net6
                         startInfo.Arguments = "/C " + InstallDataTierNet6;
                     }
+                    else
+                    {
+                        // Default to .NET 7                        
+                        startInfo.Arguments = "/C " + InstallDataTierNet7;
+                    }
+
+                    // Set the StartInfo
                     process.StartInfo = startInfo;
 
                     // Start

@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+    <TargetFramework>net7.0</TargetFramework>
+    <Version>7.0.0</Version>
+    <PackageId>DataJuggler.DataTier.Net7.DataGateway</PackageId>
+    <Authors>DataJuggler</Authors>
+    <Company>DataJuggler</Company>
+    <Description>This is one of the four projects that make up a DataTier.Net7. ProjectTemplate</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Gateway.backup.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ApplicationLogicComponent\ApplicationLogicComponent.csproj" />
+    <ProjectReference Include="..\DataAccessComponent\DataAccessComponent.csproj" />
+    <ProjectReference Include="..\ObjectLibrary\ObjectLibrary.csproj" />
+  </ItemGroup>
+
+</Project>
+
+
+
+

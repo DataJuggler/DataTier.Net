@@ -1,10 +1,10 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "Data Juggler",
-  "classifications": [ "ClassLibrary", "DataJuggler.DataTier.Net6.ItemTemplates.BlazorDataServices", "BlazorDataServices", "DataTier.Net6.ItemTemplates.BlazorDataServices", "C#9" ],
-  "identity": "DataJuggler.DataTier.Net6.ItemTemplates.BlazorDataServices",
+  "classifications": [ "ClassLibrary", "DataJuggler.DataTier.Net7.ItemTemplates.BlazorDataServices", "BlazorDataServices", "DataTier.Net7.ItemTemplates.BlazorDataServices", "C#11" ],
+  "identity": "DataJuggler.DataTier.Net7.ItemTemplates.BlazorDataServices",
   "name": "DataJuggler.DataTier.Net.ItemTemplates.BlazorDataServices",
-  "shortName": "DataTier.Net6.ItemTemplates.BlazorDataServices",
+  "shortName": "DataTier.Net7.ItemTemplates.BlazorDataServices",
   "tags": {
     "language": "C#",
     "type": "item"

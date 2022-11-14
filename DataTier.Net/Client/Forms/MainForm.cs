@@ -941,8 +941,8 @@ namespace DataTierClient.Forms
                         // 12.19.2021
                         TargetFrameworkEnum targetFramework = (TargetFrameworkEnum) OpenProject.TargetFramework;
 
-                        // if not .NET6, this needs to be reloaded
-                        if (targetFramework != TargetFrameworkEnum.Net6)
+                        // if not .NET7, this needs to be reloaded
+                        if (targetFramework != TargetFrameworkEnum.Net7)
                         {
                             // reload
                             OpenProject.CreateDefaultReferences();

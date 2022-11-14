@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("DataAccessComponent")]
-[assembly: AssemblyDescription("This object serves as the data tier for this application.")]
+[assembly: AssemblyDescription("This object serves as the data access component for this application.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Data Juggler")]
 [assembly: AssemblyProduct("DataAccessComponent")]
@@ -31,5 +31,5 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("2.5.6.0")]
-[assembly: AssemblyFileVersion("2.5.6.0")]
+[assembly: AssemblyVersion("4.0.0.0")]
+[assembly: AssemblyFileVersion("4.0.0.0")]
