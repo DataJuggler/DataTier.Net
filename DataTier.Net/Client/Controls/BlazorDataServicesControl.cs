@@ -42,15 +42,15 @@ namespace DataTierClient.Controls
         
         #region Private Variables
         private const string ItemTemplateInstall5 = "dotnet new --install DataJuggler.DataTier.Net5.ItemTemplates.BlazorDataServices::2.5.4";
-        private const string ItemTemplateUninstall5 = "dotnet new -uninstall DataJuggler.DataTier.Net5.ItemTemplates.BlazorDataServices";
-        private const string CreateServices5 = "dotnet new DataTier.Net5.ItemTemplates.BlazorDataServices";
+        private const string ItemTemplateUninstall5 = "dotnet new -uninstall DataJuggler.DataTier.Net5.ItemTemplates.BlazorDataServices";        
         private const string ItemTemplateInstall6 = "dotnet new --install DataJuggler.DataTier.Net6.ItemTemplates.BlazorDataServices::3.0.0";
         private const string ItemTemplateUninstall6 = "dotnet new -uninstall DataJuggler.DataTier.Net6.ItemTemplates.BlazorDataServices";
+        private const string ItemTemplateInstall7 = "dotnet new --install DataJuggler.DataTier.Net7.ItemTemplates.BlazorDataServices::7.0.0";
+        private const string ItemTemplateUninstall7 = "dotnet new -uninstall DataJuggler.DataTier.Net7.ItemTemplates.BlazorDataServices";                
+        private const string CreateServices5 = "dotnet new DataTier.Net5.ItemTemplates.BlazorDataServices";
         private const string CreateServices6 = "dotnet new DataTier.Net6.ItemTemplates.BlazorDataServices";
-        private const string ItemTemplateInstall7 = "dotnet new --install DataJuggler.DataTier.Net6.ItemTemplates.BlazorDataServices::7.0.0";
-        private const string ItemTemplateUninstall7 = "dotnet new -uninstall DataJuggler.DataTier.Net7.ItemTemplates.BlazorDataServices";        
-        private const string DataWatcherFileName = "DataWatcher.cs";
         private const string CreateServices7 = "dotnet new DataTier.Net7.ItemTemplates.BlazorDataServices";
+        private const string DataWatcherFileName = "DataWatcher.cs";
         private const string ServiceFileName = "Service.cs";
         private string initialProject;
         private Project project;
@@ -111,7 +111,7 @@ namespace DataTierClient.Controls
                 try
                 {
                     // if the value for HasServicesFolder is true
-                    if ((HasServicesFolder) && (HasTable))
+                    if ((HasServicesFolder) && (HasTable) && (Project.TargetFramework != TargetFrameworkEnum.NetFramework))
                     {
                         // Setup the Graph
                         Graph.Maximum = 20;
@@ -155,6 +155,9 @@ namespace DataTierClient.Controls
                         // If your internet is slow and this takes longer than 5 seconds let me know and I will extend 
                         // the wait.
 
+                        // Update 1.18.2023: Moving this to outside the loop
+                        path = Path.Combine(Project.ServicesFolder, DataWatcherFileName);
+
                         do
                         {
                             // Increment the value for attempt
@@ -168,9 +171,6 @@ namespace DataTierClient.Controls
 
                             // Try every half second
                             System.Threading.Thread.Sleep(500);
-
-                            // get the path
-                            path = Path.Combine(Project.ServicesFolder, DataWatcherFileName);
 
                             // if the file exists
                             if (File.Exists(path))
