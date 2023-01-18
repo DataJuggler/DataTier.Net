@@ -1,4 +1,7 @@
-Update 3.30.2022: DataTier.Net 6.0.4 fixes bugs related to Creating Blazor Data Services for .NEt6. The Blazor Data Services Control was only showing .NET5.
+Update 1.18.2023: DataTier.Net now allows you to target .NET Framework, .NET5, .NET6 or .NET7 (Default).
+There is also a release version now in case you do not want to installed Visual Studio 2019, which is required to use the source code version.
+
+Update 3.30.2022: DataJuggler.Net 6.0.4 fixes bugs related to Creating Blazor Data Services for .NEt6. The Blazor Data Services Control was only showing .NET5.
 Also, DataJuggler.Net was updated because the writing of references was writing for .NET5.
 
 Update 12.30.2021: DataTier.Net 3.0 was just released. The new version allows you to target .NET Framework, .NET5 or .NET6.
