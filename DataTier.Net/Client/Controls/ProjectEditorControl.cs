@@ -627,6 +627,7 @@ namespace DataTierClient.Controls
                     ProcessStartInfo startInfo = new ProcessStartInfo();
                     startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                     startInfo.FileName = "cmd.exe";
+                    startInfo.WorkingDirectory = SelectedProject.ProjectFolder;
 
                     if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net5)
                     {
