@@ -21,7 +21,7 @@ For .Net 5 projects, this is not an issue.
 
 ## Welcome To DataTier.Net Home
 
-<img src=https://github.com/DataJuggler/SharedRepo/blob/master/Shared/Images/DataTier.Net%20Ad.png>
+<img src=https://github.com/DataJuggler/SharedRepo/blob/master/Shared/Images/DataTier.Net%20Ad.png height=420 width=420>
 
 <b>Setup Instructions - 3 Easy Steps</b>
 
