@@ -1961,6 +1961,7 @@ namespace DataTierClient.Forms
                 // local
                 bool userCancelledSetup = false;
                 bool restartRequired = false;
+                string connectionString = "";
 
                 // Adding the version number (taking off the last .0. Probably will never be used).
                 this.Text = "DataTier.Net - Version " + Application.ProductVersion.Substring(0, Application.ProductVersion.Length - 2);
@@ -1969,16 +1970,26 @@ namespace DataTierClient.Forms
                 ButtonManager = new ButtonManager();
 
                 // Set the value for SetupComplete
-                this.SetupComplete = BooleanHelper.ParseBoolean(ConfigurationHelper.ReadAppSetting("SetupComplete"), false, false);
+                SetupComplete = BooleanHelper.ParseBoolean(ConfigurationHelper.ReadAppSetting("SetupComplete"), false, false);
+
+                // if SetupComplete is true
+                if (SetupComplete)
+                {
+                    // Get the connection name
+                    connectionString = ConfigurationHelper.ReadAppSetting("ConnectionString");
+
+                    // If this is set, we can grab the connection string from here.
+                    SetupComplete = TextHelper.Exists(connectionString) && connectionString.Length > 1;
+                }
 
                 // 3.1.2022: Adding a check to see if the connection string can be found in the EnvironmentVariable
                 if (!SetupComplete)
                 {
                     // Get the connection name
-                    string connectionString = EnvironmentVariableHelper.GetEnvironmentVariableValue(DataTierNetConnectionName);
+                    connectionString = EnvironmentVariableHelper.GetEnvironmentVariableValue(DataTierNetConnectionName);
 
                     // If this is set, we can grab the connection string from here.
-                    SetupComplete = TextHelper.Exists(connectionString);
+                    SetupComplete = TextHelper.Exists(connectionString) && connectionString.Length > 1;
                 }
 
                 // If the Setup is not complete, show the Setup Form
@@ -1995,8 +2006,8 @@ namespace DataTierClient.Forms
                     }
                 }
 
-                // If the Setup Control is not visible
-                if (this.SetupComplete)
+                // If Setup is complete
+                if (SetupComplete)
                 {
                     // Connect To The Local Database
                     bool connected = TestDatabaseConnection();
