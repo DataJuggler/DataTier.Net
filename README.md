@@ -1,3 +1,5 @@
+Update 3.12.2023: I fixed the install version path not opening the SQL Scripts required to install DataTier.Net.
+
 Update 1.18.2023: DataTier.Net now allows you to target .NET Framework, .NET5, .NET6 or .NET7 (Default).
 There is also a release version now in case you do not want to installed Visual Studio 2019, which is required to use the source code version.
 
@@ -19,7 +21,7 @@ For .Net 5 projects, this is not an issue.
 
 ## Welcome To DataTier.Net Home
 
-<img src=https://github.com/DataJuggler/SharedRepo/blob/master/Shared/Images/DataTier.Net%20Ad.png>
+<img src=https://github.com/DataJuggler/SharedRepo/blob/master/Shared/Images/DataTier.Net%20Ad.png height=320 width=320>
 
 <b>Setup Instructions - 3 Easy Steps</b>
 
