@@ -1961,37 +1961,16 @@ namespace DataTierClient.Forms
                 // local
                 bool userCancelledSetup = false;
                 bool restartRequired = false;
-                string connectionString = "";
-
+               
                 // Adding the version number (taking off the last .0. Probably will never be used).
                 this.Text = "DataTier.Net - Version " + Application.ProductVersion.Substring(0, Application.ProductVersion.Length - 2);
 
                 // Create the buttonManager
                 ButtonManager = new ButtonManager();
 
-                // Set the value for SetupComplete
-                SetupComplete = BooleanHelper.ParseBoolean(ConfigurationHelper.ReadAppSetting("SetupComplete"), false, false);
-
-                // if SetupComplete is true
-                if (SetupComplete)
-                {
-                    // Get the connection name
-                    connectionString = ConfigurationHelper.ReadAppSetting("ConnectionString");
-
-                    // If this is set, we can grab the connection string from here.
-                    SetupComplete = TextHelper.Exists(connectionString) && connectionString.Length > 1;
-                }
-
-                // 3.1.2022: Adding a check to see if the connection string can be found in the EnvironmentVariable
-                if (!SetupComplete)
-                {
-                    // Get the connection name
-                    connectionString = EnvironmentVariableHelper.GetEnvironmentVariableValue(DataTierNetConnectionName);
-
-                    // If this is set, we can grab the connection string from here.
-                    SetupComplete = TextHelper.Exists(connectionString) && connectionString.Length > 1;
-                }
-
+                // Test the database connection, if this fails, it will run setup again
+                SetupComplete = TestDatabaseConnection();
+               
                 // If the Setup is not complete, show the Setup Form
                 if (!SetupComplete)
                 {
