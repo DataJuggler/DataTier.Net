@@ -2239,8 +2239,9 @@ Visual Studio 2019.
 
 For Visual Studio 2022, install .Net5 or .Net6 project templates.
 
-Note: .NET5 and .NET6 project templates are installed when you
-create a new project in the Project Wizard.</value>
+Note: .NET5, .NET6 and  .NET7 project templates are installed when you
+create a new project in the Project Wizard.
+</value>
   </data>
   <data name="ViewPDFButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

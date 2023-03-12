@@ -406,6 +406,37 @@ namespace DataTierClient.Controls
             }
             #endregion
             
+            #region UninstallDotNet7Label_Click(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when the 'UninstallDotNet7Label' is clicked.
+            /// </summary>
+            private void UninstallDotNet7Label_Click(object sender, EventArgs e)
+            {
+                try               
+                 {
+                     // Create a Process to launch a command window (hidden) to create the item templates
+                    Process process = new Process();
+                    ProcessStartInfo startInfo = new ProcessStartInfo();
+                    startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    startInfo.FileName = "cmd.exe";
+                    startInfo.Arguments = "/C " + UninstallDotNet6ProjectTemplates;
+                    process.StartInfo = startInfo;
+                    process.Start();
+
+                    // Show the user a message
+                    MessageBoxHelper.ShowMessage("DataJuggler.DataTier.Net7.ProjectTemplates were uninstalled from your computer.", "Uninstall Complete");
+                 }
+                 catch (Exception error)
+                 {
+                     // Set the error
+                    DebugHelper.WriteDebugError("UninstallDotNet6_Click", this.Name, error);
+
+                    // show the user a message
+                    MessageBoxHelper.ShowMessage("The DataTier.Net7.ProjectTemplates could not be uninstalled.", "Uninsteall Templates Failed");
+                 }
+            }
+            #endregion
+            
             #region ViewPDFButton_Click(object sender, EventArgs e)
             /// <summary>
             /// event is fired when the 'ViewPDFButton' is clicked.
@@ -555,7 +586,6 @@ namespace DataTierClient.Controls
         #endregion
 
         #endregion
-
     }
     #endregion
 

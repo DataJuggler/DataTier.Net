@@ -29,9 +29,7 @@ namespace DataTierClient.Controls
         private System.Windows.Forms.Button ViewPDFButton;
         private System.Windows.Forms.Button ViewWordButton;
         private System.Windows.Forms.Label UsersGuideLabel;
-        private System.Windows.Forms.Label InstallDotNet5Label;
         private System.Windows.Forms.Label FrameworkLabel;
-        private System.Windows.Forms.Label UninstallDotNet5Label;
         #endregion
         
         #region Methods
@@ -71,11 +69,10 @@ namespace DataTierClient.Controls
             this.ViewPDFButton = new System.Windows.Forms.Button();
             this.ViewWordButton = new System.Windows.Forms.Button();
             this.UsersGuideLabel = new System.Windows.Forms.Label();
-            this.InstallDotNet5Label = new System.Windows.Forms.Label();
             this.FrameworkLabel = new System.Windows.Forms.Label();
             this.UninstallDotNet5Label = new System.Windows.Forms.Label();
             this.UninstallDotNet6Label = new System.Windows.Forms.Label();
-            this.InstallDotNet6Label = new System.Windows.Forms.Label();
+            this.UninstallDotNet7Label = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ClickHere)).BeginInit();
             this.SuspendLayout();
             // 
@@ -250,20 +247,6 @@ namespace DataTierClient.Controls
             this.UsersGuideLabel.TabIndex = 121;
             this.UsersGuideLabel.Text = "DataTier.Net Quick Start";
             // 
-            // InstallDotNet5Label
-            // 
-            this.InstallDotNet5Label.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.InstallDotNet5Label.ForeColor = System.Drawing.Color.GhostWhite;
-            this.InstallDotNet5Label.Location = new System.Drawing.Point(318, 204);
-            this.InstallDotNet5Label.Name = "InstallDotNet5Label";
-            this.InstallDotNet5Label.Size = new System.Drawing.Size(436, 26);
-            this.InstallDotNet5Label.TabIndex = 122;
-            this.InstallDotNet5Label.Text = "Install .Net 5 Project Templates\r\n\r\n\r\n\r\n";
-            this.InstallDotNet5Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.InstallDotNet5Label.Click += new System.EventHandler(this.DotNet5Label_Click);
-            this.InstallDotNet5Label.MouseEnter += new System.EventHandler(this.Button_Enter);
-            this.InstallDotNet5Label.MouseLeave += new System.EventHandler(this.Button_Leave);
-            // 
             // FrameworkLabel
             // 
             this.FrameworkLabel.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -279,7 +262,7 @@ namespace DataTierClient.Controls
             // 
             this.UninstallDotNet5Label.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UninstallDotNet5Label.ForeColor = System.Drawing.Color.GhostWhite;
-            this.UninstallDotNet5Label.Location = new System.Drawing.Point(318, 230);
+            this.UninstallDotNet5Label.Location = new System.Drawing.Point(318, 209);
             this.UninstallDotNet5Label.Name = "UninstallDotNet5Label";
             this.UninstallDotNet5Label.Size = new System.Drawing.Size(436, 35);
             this.UninstallDotNet5Label.TabIndex = 124;
@@ -293,7 +276,7 @@ namespace DataTierClient.Controls
             // 
             this.UninstallDotNet6Label.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UninstallDotNet6Label.ForeColor = System.Drawing.Color.GhostWhite;
-            this.UninstallDotNet6Label.Location = new System.Drawing.Point(318, 289);
+            this.UninstallDotNet6Label.Location = new System.Drawing.Point(318, 241);
             this.UninstallDotNet6Label.Name = "UninstallDotNet6Label";
             this.UninstallDotNet6Label.Size = new System.Drawing.Size(436, 35);
             this.UninstallDotNet6Label.TabIndex = 126;
@@ -301,17 +284,17 @@ namespace DataTierClient.Controls
             this.UninstallDotNet6Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.UninstallDotNet6Label.Click += new System.EventHandler(this.UninstallDotNet6Label_Click);
             // 
-            // InstallDotNet6Label
+            // UninstallDotNet7Label
             // 
-            this.InstallDotNet6Label.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.InstallDotNet6Label.ForeColor = System.Drawing.Color.GhostWhite;
-            this.InstallDotNet6Label.Location = new System.Drawing.Point(318, 263);
-            this.InstallDotNet6Label.Name = "InstallDotNet6Label";
-            this.InstallDotNet6Label.Size = new System.Drawing.Size(436, 26);
-            this.InstallDotNet6Label.TabIndex = 125;
-            this.InstallDotNet6Label.Text = "Install .Net 6 Project Templates\r\n\r\n\r\n\r\n";
-            this.InstallDotNet6Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.InstallDotNet6Label.Click += new System.EventHandler(this.InstallDotNet6Label_Click);
+            this.UninstallDotNet7Label.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UninstallDotNet7Label.ForeColor = System.Drawing.Color.GhostWhite;
+            this.UninstallDotNet7Label.Location = new System.Drawing.Point(318, 276);
+            this.UninstallDotNet7Label.Name = "UninstallDotNet7Label";
+            this.UninstallDotNet7Label.Size = new System.Drawing.Size(436, 35);
+            this.UninstallDotNet7Label.TabIndex = 127;
+            this.UninstallDotNet7Label.Text = "Uninstall .Net 7 Project Templates\r\n\r\n\r\n\r\n\r\n";
+            this.UninstallDotNet7Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.UninstallDotNet7Label.Click += new System.EventHandler(this.UninstallDotNet7Label_Click);
             // 
             // SetupControl
             // 
@@ -319,11 +302,10 @@ namespace DataTierClient.Controls
             this.BackColor = System.Drawing.Color.Transparent;
             this.BackgroundImage = global::DataTierClient.Properties.Resources.Setup3;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Controls.Add(this.UninstallDotNet7Label);
             this.Controls.Add(this.UninstallDotNet6Label);
-            this.Controls.Add(this.InstallDotNet6Label);
             this.Controls.Add(this.UninstallDotNet5Label);
             this.Controls.Add(this.FrameworkLabel);
-            this.Controls.Add(this.InstallDotNet5Label);
             this.Controls.Add(this.ViewPDFButton);
             this.Controls.Add(this.ViewWordButton);
             this.Controls.Add(this.UsersGuideLabel);
@@ -349,8 +331,9 @@ namespace DataTierClient.Controls
 
         #endregion
 
+        private System.Windows.Forms.Label UninstallDotNet5Label;
         private System.Windows.Forms.Label UninstallDotNet6Label;
-        private System.Windows.Forms.Label InstallDotNet6Label;
+        private System.Windows.Forms.Label UninstallDotNet7Label;
     }
     #endregion
 
