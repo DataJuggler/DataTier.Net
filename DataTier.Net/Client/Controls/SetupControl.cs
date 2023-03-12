@@ -176,7 +176,8 @@ namespace DataTierClient.Controls
                 string path = "../../../Database/SQL Scripts/DataTier.Net.Database.Schema.sql";
 
                 // set path2
-                string path2 = "SQL Scripts/DataTier.Net.Database.Schema.sql";
+                FileInfo fileInfo = new FileInfo(Application.ExecutablePath);
+                string path2 = Path.Combine(fileInfo.DirectoryName,  @"SQL Scripts\DataTier.Net.Database.Schema.sql");
 
                 // local
                 bool started = false;
