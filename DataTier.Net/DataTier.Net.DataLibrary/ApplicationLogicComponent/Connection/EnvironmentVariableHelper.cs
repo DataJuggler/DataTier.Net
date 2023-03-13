@@ -29,7 +29,7 @@ namespace ApplicationLogicComponent.Connection
                     if (Environment.OSVersion.Platform == PlatformID.Win32NT)
                     {
                         // Change the directory to %WINDIR%
-                        value = Environment.GetEnvironmentVariable(variableName, EnvironmentVariableTarget.Machine);
+                        value = Environment.GetEnvironmentVariable(variableName, EnvironmentVariableTarget.User);
                     }
                 }
                 catch (Exception error)
@@ -58,7 +58,7 @@ namespace ApplicationLogicComponent.Connection
                     if (Environment.OSVersion.Platform == PlatformID.Win32NT)
                     {
                         // Create the EnvironmentVariable value
-                        Environment.SetEnvironmentVariable(variableName, value, EnvironmentVariableTarget.Machine);
+                        Environment.SetEnvironmentVariable(variableName, value, EnvironmentVariableTarget.User);
 
                         // set the value
                         valueSet = true;

@@ -123,8 +123,12 @@ namespace ApplicationLogicComponent.Connection
                     dataManager.DataConnector.Close();
                 }
 
-                // Open Connection
-                dataManager.DataConnector.Open();
+                // if the connection string has been set
+                if (!String.IsNullOrEmpty(dataManager.DataConnector.ConnectionString))
+                {
+                    // Open Connection
+                    dataManager.DataConnector.Open();
+                }
             }
             catch (Exception error)
             {

@@ -199,7 +199,7 @@ namespace DataTierClient.Forms
             this.InstallConnectionStringButton.Name = "InstallConnectionStringButton";
             this.InstallConnectionStringButton.Size = new System.Drawing.Size(450, 40);
             this.InstallConnectionStringButton.TabIndex = 7;
-            this.InstallConnectionStringButton.Text = "Install Conn String && Update App.config";
+            this.InstallConnectionStringButton.Text = "Install Connection String";
             this.InstallConnectionStringButton.UseVisualStyleBackColor = false;
             this.InstallConnectionStringButton.EnabledChanged += new System.EventHandler(this.Button_EnabledChanged);
             this.InstallConnectionStringButton.Click += new System.EventHandler(this.InstallConnectionStringButton_Click);
@@ -493,7 +493,7 @@ namespace DataTierClient.Forms
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImage = global::DataTierClient.Properties.Resources.LinenBackground;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(792, 625);
+            this.ClientSize = new System.Drawing.Size(792, 634);
             this.Controls.Add(this.TestButton);
             this.Controls.Add(this.CopiedImage);
             this.Controls.Add(this.StatusImage);

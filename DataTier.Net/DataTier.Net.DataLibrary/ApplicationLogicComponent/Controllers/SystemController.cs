@@ -59,7 +59,7 @@ namespace ApplicationLogicComponent.Controllers
             string objectName = "ApplicationLogicComponent.Controller.System.SystemController";
 
             try
-            {
+            {  
                 // Create Delegate For DataOperation
                 ApplicationController.DataOperationMethod testDataConnection = this.DataBridge.DataOperations.SystemMethods.TestDataConnection;
 
@@ -69,11 +69,15 @@ namespace ApplicationLogicComponent.Controllers
                 // Perform DataOperation
                 PolymorphicObject connectedObject = this.DataBridge.PerformDataOperation(methodName, objectName, testDataConnection, parameters);
 
-                // If method returned "true" value.
-                if (connectedObject.Boolean.Value == NullableBooleanEnum.True)
+                // if the object exists
+                if (connectedObject != null)
                 {
-                    // set connected to true.
-                    connected = true;
+                    // If method returned "true" value.
+                    if (connectedObject.Boolean.Value == NullableBooleanEnum.True)
+                    {
+                        // set connected to true.
+                        connected = true;
+                    }
                 }
             }
             catch (Exception error)

@@ -308,10 +308,10 @@ namespace DataTierClient.Forms
                 try
                 {
                     // get the connection string line from the app.config
-                    TextLine connectionStringLine = GetConnectionStringLine();
+                    // TextLine connectionStringLine = GetConnectionStringLine();
 
-                    // Install the ConnectionString in the app.config or System Environment Variable
-                    InstallConnectionString(connectionStringLine);                    
+                    // Install the ConnectionString in a User Level Environment Variable
+                    InstallConnectionString();                    
                 }
                 catch (Exception error)
                 {  
@@ -771,174 +771,43 @@ namespace DataTierClient.Forms
             }
             #endregion
 
-            #region InstallConnectionString(TextLine connectionStringLine)
+            #region InstallConnectionString()
             /// <summary>
             /// This method returns the Connection String
             /// </summary>
-            public bool InstallConnectionString(TextLine connectionStringLine)
+            public bool InstallConnectionString()
             {
                 // initial value
                 bool installed = false;
 
-                // locals
-                string newText = "";
-                string encryptedConnectionString = "";
-                TextLine useEncryptionTextLine = null;
-                bool started = false;
-
-                // if we are running as an exe
-                if (IsExecutableConfig)
+                // If the ConnectionString string exists
+                if (TextHelper.Exists(ConnectionString))
                 {
-                    if (IsAdministrator)
+                    // Set the value
+                    bool environmentVariableSet = ApplicationLogicComponent.Connection.EnvironmentVariableHelper.SetEnvironmentVariableValue(MainForm.DataTierNetConnectionName, ConnectionString);
+
+                    // if the value for environmentVariableSet is true
+                    if (environmentVariableSet)
                     {
-                        // Set the value
-                        bool environmentVariableSet = ApplicationLogicComponent.Connection.EnvironmentVariableHelper.SetEnvironmentVariableValue(MainForm.DataTierNetConnectionName, ConnectionString);
+                        // success
+                        UserCancelled = false;
 
-                        // if the value for environmentVariableSet is true
-                        if (environmentVariableSet)
-                        {
-                            // success
-                            UserCancelled = false;
+                        // Change the text to finished
+                        this.CancelButton.Text = "Finished";
 
-                            // Change the text to finished
-                            this.CancelButton.Text = "Finished";
+                        // just in case this is visible after a Test still
+                        this.CopiedImage.Visible = false;
 
-                            // just in case this is visible after a Test still
-                            this.CopiedImage.Visible = false;
-
-                            // Show the Installed Image
-                            this.InstalledImage.Visible = true;
+                        // Show the Installed Image
+                        this.InstalledImage.Visible = true;
                                 
-                            // Start the timer (this form will close in 5 seconds if the user doesn't close it sooner)
-                            InstalledTimer.Enabled = true;
-                        }
-                        else
-                        { 
-                            // Show a message here
-                            MessageBox.Show("The environment variable could not be set. Create a System Environment Variable named DataTierNetConnection or Run DataTier.Net as an administrator and this should solve the issue, or run DataTier.Net via Visual Studio.", "Install Connection String Failed");
-                        }
+                        // Start the timer (this form will close in 5 seconds if the user doesn't close it sooner)
+                        InstalledTimer.Enabled = true;
                     }
                     else
                     {
-                         // Show a message here
-                        MessageBox.Show("The environment variable could not be set. Create a System Environment Variable named DataTierNetConnection or Run DataTier.Net as an administrator and this should solve the issue, or run DataTier.Net via Visual Studio.", "Install Connection String Failed");
-                    }
-                }
-                else
-                {
-                    // verify the AppConfigPath was found
-                    if ((HasAppConfigPath) && (File.Exists(AppConfigPath)))
-                    {
-                        // if the AppConfigTextLinex collection exists and the ConnectionStringIndex is set and in range
-                        if ((ListHelper.HasOneOrMoreItems(AppConfigTextLines)) && (HasConnectionStringIndex) && (ConnectionStringIndex < AppConfigTextLines.Count))
-                        {
-                            // If the connectionStringLine object exists
-                            if ((NullHelper.Exists(connectionStringLine)) && (TextHelper.Exists(ConnectionString)))
-                            {
-                                // if UseEncryption is true
-                                if (UseEncryptionCheckBox.Checked)
-                                {
-                                    // get the textLine for useEncryption (this also sets the useEncryptionIndex
-                                    useEncryptionTextLine = GetUseEncryptionTextLine(UseCustomKeyCheckBox.Checked);
-
-                                    // if use custom encryption key
-                                    if ((UseCustomKeyCheckBox.Checked) && (EncryptionKeyControl.HasText))
-                                    {
-                                        // get the encryptionKey value
-                                        string encryptionKey = EncryptionKeyControl.Text;
-
-                                        // Encrypt the ConnectrionString using the EncryptionKey provided by user
-                                        encryptedConnectionString = CryptographyHelper.EncryptString(ConnectionString, encryptionKey);
-                                    }
-                                    else
-                                    {
-                                        // Encrypt the ConnectrionString using the default EncryptionKey 
-                                        encryptedConnectionString = CryptographyHelper.EncryptString(ConnectionString);
-                                    }
-
-                                    // Get the nextText
-                                    newText = "    <add key=\"ConnectionString\" value=\"" + encryptedConnectionString + "\" />";
-                                }
-                                else
-                                {
-                                    // Get the nextText
-                                    newText = "    <add key=\"ConnectionString\" value=\"" + ConnectionString + "\" />";
-                                }
-
-                                // If the UseEncryptionIndex value is set
-                                if (UseEncryptionIndex > 0)
-                                {
-                                    // Change the text from false to true in UseEncryptionIndex Line
-                                    AppConfigTextLines[UseEncryptionIndex].Text = "    " + UseEncryptionStart + "\"" + "true" + "\"" + " />";
-                                }
-
-                                // If the EncryptionKeyIndex value is set
-                                if (EncryptionKeyIndex > 0)
-                                {
-                                    // local
-                                    string encryptedEncryptionKey = CryptographyHelper.EncryptString(EncryptionKeyControl.Text);
-
-                                    // Change the text from false to true in UseEncryptionIndex Line
-                                    AppConfigTextLines[EncryptionKeyIndex].Text = "    " + EncryptionKeyStart + "\"" + encryptedEncryptionKey + "\"" + " />";
-                                }
-
-                                // Replace out all false values for true
-
-                                // Change the text to true in SetupComplete Line
-                                AppConfigTextLines[SetupCompleteIndex].Text = "    " + SetupCompleteStart + "\"" + "true" + "\"" + " />";
-                            
-                                // set the text for this line
-                                AppConfigTextLines[ConnectionStringIndex].Text = newText;        
-
-                                // Get the text
-                                string updatedAppConfigText = WriteOutAppConfigText();
-
-                                // if the text exist
-                                if (TextHelper.Exists(updatedAppConfigText))
-                                {
-                                    // if this is not the executable config
-                                    if (!IsExecutableConfig)
-                                    {
-                                        // Delete the AppConfig file
-                                        File.Delete(AppConfigPath);  
-                                
-                                        // write out the app.config text
-                                        File.AppendAllText(AppConfigPath, updatedAppConfigText);
-                                    }
-                                    else
-                                    {
-                                        // in this case, we are adding a an extra extension to mark this file
-                                        AppConfigPath += ".newconfig";
-
-                                        Process process = new Process();
-                
-                                        process.StartInfo = new ProcessStartInfo();
-                                        { 
-                                            // Set the working directory                    
-                                            process.StartInfo.UseShellExecute = true;
-                                            process.StartInfo.FileName = @"..\..\Tools\ConfigUpdater\ConfigUpdater.exe";
-                                            process.StartInfo.Arguments = AppConfigPath;
-                                        };
-                                        started = process.Start();
-                                    }
-                                
-                                    // success
-                                    UserCancelled = false;
-
-                                    // just in case this is visible after a Test still
-                                    this.CopiedImage.Visible = false;
-
-                                    // Show the Installed Image
-                                    this.InstalledImage.Visible = true;
-
-                                    // Change the text to finished
-                                    this.CancelButton.Text = "Finished";
-                                
-                                    // Start the timer (this form will close in 5 seconds if the user doesn't close it sooner)
-                                    InstalledTimer.Enabled = true;
-                                }
-                            }
-                        }
+                        // Show a message here
+                        MessageBox.Show("The environment variable could not be set. Create a User Level Environment Variable named DataTierNetConnection and set the value to your connection string.", "Install Connection String Failed");
                     }
                 }
                 
