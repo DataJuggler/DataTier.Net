@@ -64,7 +64,6 @@ namespace DataTierClient.Controls
             this.MethodsListBox.Location = new System.Drawing.Point(20, 28);
             this.MethodsListBox.Name = "MethodsListBox";
             this.MethodsListBox.Size = new System.Drawing.Size(380, 130);
-            this.MethodsListBox.Sorted = true;
             this.MethodsListBox.TabIndex = 96;
             this.MethodsListBox.SelectedIndexChanged += new System.EventHandler(this.MethodsListBox_SelectedIndexChanged);
             this.MethodsListBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.MethodsListBox_MouseDoubleClick);
