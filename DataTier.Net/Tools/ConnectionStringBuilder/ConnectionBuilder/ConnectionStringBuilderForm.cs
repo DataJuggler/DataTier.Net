@@ -453,7 +453,7 @@ namespace ConnectionBuilder
                     DebugHelper.WriteDebugError("TestDatabaseConnection_Click", this.Name, error);
                     
                     // Show a success message
-                    MessageBox.Show("A connection to the database count not be estalished.", "Connection Test Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("A connection to the database could not be estalished.", "Connection Test Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             #endregion
