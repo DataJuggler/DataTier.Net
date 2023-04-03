@@ -19,7 +19,7 @@ namespace ConnectionBuilder
         private System.Windows.Forms.RadioButton SQLServerAuthenticationRadioButton;
         private System.Windows.Forms.RadioButton WindowsAuthenticationRadioButton;
         private System.Windows.Forms.Button BuildConnectionStringButton;
-        private new System.Windows.Forms.Button DoneButton;
+        private System.Windows.Forms.Button DoneButton;
         private System.Windows.Forms.Button CopyButton;
         private System.Windows.Forms.Button TestDatabaseConnectionButton;
         private DataJuggler.Win.Controls.LabelTextBoxControl DatabaseNameControl;
@@ -27,7 +27,6 @@ namespace ConnectionBuilder
         private DataJuggler.Win.Controls.LabelTextBoxControl DatabaseUserControl;
         private DataJuggler.Win.Controls.LabelTextBoxControl DatabasePasswordControl;
         private DataJuggler.Win.Controls.LabelTextBoxControl ConnectionstringControl;
-        private System.Windows.Forms.Button EncryptAndCopyButton;
         #endregion
         
         #region Methods
@@ -67,14 +66,13 @@ namespace ConnectionBuilder
             this.DatabaseUserControl = new DataJuggler.Win.Controls.LabelTextBoxControl();
             this.DatabasePasswordControl = new DataJuggler.Win.Controls.LabelTextBoxControl();
             this.ConnectionstringControl = new DataJuggler.Win.Controls.LabelTextBoxControl();
-            this.EncryptAndCopyButton = new System.Windows.Forms.Button();
-            this.UseEncryptionCheckBox = new DataJuggler.Win.Controls.LabelCheckBoxControl();
-            this.EncryptionKeyControl = new DataJuggler.Win.Controls.LabelTextBoxControl();
-            this.UseCustomKeyCheckBox = new DataJuggler.Win.Controls.LabelCheckBoxControl();
             this.StatusLabel = new System.Windows.Forms.Label();
             this.StatusImage = new System.Windows.Forms.PictureBox();
             this.CopiedImage = new System.Windows.Forms.PictureBox();
             this.CopiedTimer = new System.Windows.Forms.Timer(this.components);
+            this.IncludeEncryptCheckBox = new DataJuggler.Win.Controls.LabelCheckBoxControl();
+            this.label1 = new System.Windows.Forms.Label();
+            this.EncryptValueComboBox = new DataJuggler.Win.Controls.LabelComboBoxControl();
             ((System.ComponentModel.ISupportInitialize)(this.StatusImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CopiedImage)).BeginInit();
             this.SuspendLayout();
@@ -317,13 +315,13 @@ namespace ConnectionBuilder
             this.ConnectionstringControl.LabelText = "Connection String:";
             this.ConnectionstringControl.LabelTopMargin = 0;
             this.ConnectionstringControl.LabelWidth = 240;
-            this.ConnectionstringControl.Location = new System.Drawing.Point(32, 320);
+            this.ConnectionstringControl.Location = new System.Drawing.Point(32, 324);
             this.ConnectionstringControl.MultiLine = true;
             this.ConnectionstringControl.Name = "ConnectionstringControl";
             this.ConnectionstringControl.OnTextChangedListener = null;
             this.ConnectionstringControl.PasswordMode = false;
             this.ConnectionstringControl.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.ConnectionstringControl.Size = new System.Drawing.Size(720, 137);
+            this.ConnectionstringControl.Size = new System.Drawing.Size(720, 134);
             this.ConnectionstringControl.TabIndex = 6;
             this.ConnectionstringControl.TextBoxBottomMargin = 0;
             this.ConnectionstringControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
@@ -331,98 +329,10 @@ namespace ConnectionBuilder
             this.ConnectionstringControl.TextBoxFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ConnectionstringControl.TextBoxTopMargin = 0;
             // 
-            // EncryptAndCopyButton
-            // 
-            this.EncryptAndCopyButton.BackColor = System.Drawing.Color.Transparent;
-            this.EncryptAndCopyButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("EncryptAndCopyButton.BackgroundImage")));
-            this.EncryptAndCopyButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.EncryptAndCopyButton.Enabled = false;
-            this.EncryptAndCopyButton.FlatAppearance.BorderSize = 0;
-            this.EncryptAndCopyButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.EncryptAndCopyButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.EncryptAndCopyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.EncryptAndCopyButton.Font = new System.Drawing.Font("Verdana", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EncryptAndCopyButton.ForeColor = System.Drawing.Color.DarkGray;
-            this.EncryptAndCopyButton.Location = new System.Drawing.Point(333, 570);
-            this.EncryptAndCopyButton.Name = "EncryptAndCopyButton";
-            this.EncryptAndCopyButton.Size = new System.Drawing.Size(200, 36);
-            this.EncryptAndCopyButton.TabIndex = 11;
-            this.EncryptAndCopyButton.Text = "Encrypt && Copy";
-            this.EncryptAndCopyButton.UseVisualStyleBackColor = false;
-            this.EncryptAndCopyButton.EnabledChanged += new System.EventHandler(this.Button_EnabledChanged);
-            this.EncryptAndCopyButton.Click += new System.EventHandler(this.EncryptAndCopyButton_Click);
-            this.EncryptAndCopyButton.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
-            this.EncryptAndCopyButton.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
-            // 
-            // UseEncryptionCheckBox
-            // 
-            this.UseEncryptionCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.UseEncryptionCheckBox.CheckBoxHorizontalOffSet = 0;
-            this.UseEncryptionCheckBox.CheckBoxVerticalOffSet = 4;
-            this.UseEncryptionCheckBox.CheckChangedListener = null;
-            this.UseEncryptionCheckBox.Checked = false;
-            this.UseEncryptionCheckBox.Editable = true;
-            this.UseEncryptionCheckBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UseEncryptionCheckBox.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.UseEncryptionCheckBox.LabelFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UseEncryptionCheckBox.LabelText = "Use Encryption:";
-            this.UseEncryptionCheckBox.LabelWidth = 240;
-            this.UseEncryptionCheckBox.Location = new System.Drawing.Point(32, 236);
-            this.UseEncryptionCheckBox.Name = "UseEncryptionCheckBox";
-            this.UseEncryptionCheckBox.Size = new System.Drawing.Size(290, 24);
-            this.UseEncryptionCheckBox.TabIndex = 12;
-            // 
-            // EncryptionKeyControl
-            // 
-            this.EncryptionKeyControl.BackColor = System.Drawing.Color.Transparent;
-            this.EncryptionKeyControl.BottomMargin = 0;
-            this.EncryptionKeyControl.Editable = false;
-            this.EncryptionKeyControl.Enabled = false;
-            this.EncryptionKeyControl.Encrypted = false;
-            this.EncryptionKeyControl.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EncryptionKeyControl.LabelBottomMargin = 0;
-            this.EncryptionKeyControl.LabelColor = System.Drawing.Color.DarkGray;
-            this.EncryptionKeyControl.LabelFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EncryptionKeyControl.LabelText = "Encryption Key:";
-            this.EncryptionKeyControl.LabelTopMargin = 0;
-            this.EncryptionKeyControl.LabelWidth = 240;
-            this.EncryptionKeyControl.Location = new System.Drawing.Point(32, 276);
-            this.EncryptionKeyControl.MultiLine = false;
-            this.EncryptionKeyControl.Name = "EncryptionKeyControl";
-            this.EncryptionKeyControl.OnTextChangedListener = null;
-            this.EncryptionKeyControl.PasswordMode = false;
-            this.EncryptionKeyControl.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.EncryptionKeyControl.Size = new System.Drawing.Size(720, 30);
-            this.EncryptionKeyControl.TabIndex = 13;
-            this.EncryptionKeyControl.TextBoxBottomMargin = 0;
-            this.EncryptionKeyControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
-            this.EncryptionKeyControl.TextBoxEditableColor = System.Drawing.Color.White;
-            this.EncryptionKeyControl.TextBoxFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EncryptionKeyControl.TextBoxTopMargin = 0;
-            // 
-            // UseCustomKeyCheckBox
-            // 
-            this.UseCustomKeyCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.UseCustomKeyCheckBox.CheckBoxHorizontalOffSet = 0;
-            this.UseCustomKeyCheckBox.CheckBoxVerticalOffSet = 4;
-            this.UseCustomKeyCheckBox.CheckChangedListener = null;
-            this.UseCustomKeyCheckBox.Checked = false;
-            this.UseCustomKeyCheckBox.Editable = false;
-            this.UseCustomKeyCheckBox.Enabled = false;
-            this.UseCustomKeyCheckBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UseCustomKeyCheckBox.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.UseCustomKeyCheckBox.LabelFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UseCustomKeyCheckBox.LabelText = "Use Custom Key:";
-            this.UseCustomKeyCheckBox.LabelWidth = 200;
-            this.UseCustomKeyCheckBox.Location = new System.Drawing.Point(300, 236);
-            this.UseCustomKeyCheckBox.Name = "UseCustomKeyCheckBox";
-            this.UseCustomKeyCheckBox.Size = new System.Drawing.Size(270, 24);
-            this.UseCustomKeyCheckBox.TabIndex = 14;
-            // 
             // StatusLabel
             // 
             this.StatusLabel.BackColor = System.Drawing.Color.Transparent;
-            this.StatusLabel.Location = new System.Drawing.Point(387, 468);
+            this.StatusLabel.Location = new System.Drawing.Point(387, 473);
             this.StatusLabel.Name = "StatusLabel";
             this.StatusLabel.Size = new System.Drawing.Size(308, 37);
             this.StatusLabel.TabIndex = 15;
@@ -435,7 +345,7 @@ namespace ConnectionBuilder
             this.StatusImage.BackColor = System.Drawing.Color.Transparent;
             this.StatusImage.BackgroundImage = global::ConnectionBuilder.Properties.Resources.Success;
             this.StatusImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.StatusImage.Location = new System.Drawing.Point(699, 464);
+            this.StatusImage.Location = new System.Drawing.Point(699, 467);
             this.StatusImage.Name = "StatusImage";
             this.StatusImage.Size = new System.Drawing.Size(48, 48);
             this.StatusImage.TabIndex = 16;
@@ -460,6 +370,62 @@ namespace ConnectionBuilder
             this.CopiedTimer.Interval = 4000;
             this.CopiedTimer.Tick += new System.EventHandler(this.CopiedTimer_Tick);
             // 
+            // IncludeEncryptCheckBox
+            // 
+            this.IncludeEncryptCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.IncludeEncryptCheckBox.CheckBoxHorizontalOffSet = 0;
+            this.IncludeEncryptCheckBox.CheckBoxVerticalOffSet = 4;
+            this.IncludeEncryptCheckBox.CheckChangedListener = null;
+            this.IncludeEncryptCheckBox.Checked = false;
+            this.IncludeEncryptCheckBox.Editable = true;
+            this.IncludeEncryptCheckBox.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IncludeEncryptCheckBox.LabelColor = System.Drawing.SystemColors.ControlText;
+            this.IncludeEncryptCheckBox.LabelFont = null;
+            this.IncludeEncryptCheckBox.LabelText = "Include Encrypt:";
+            this.IncludeEncryptCheckBox.LabelWidth = 240;
+            this.IncludeEncryptCheckBox.Location = new System.Drawing.Point(32, 286);
+            this.IncludeEncryptCheckBox.Name = "IncludeEncryptCheckBox";
+            this.IncludeEncryptCheckBox.Size = new System.Drawing.Size(280, 28);
+            this.IncludeEncryptCheckBox.TabIndex = 19;
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label1.Location = new System.Drawing.Point(54, 237);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(699, 44);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Microsoft.Data.SqlClient requires you to set Encrypt=False if your database is no" +
+    "t encrypted. Leave this checked if you are targeting .NET Core.\r\n";
+            // 
+            // EncryptValueComboBox
+            // 
+            this.EncryptValueComboBox.BackColor = System.Drawing.Color.Transparent;
+            this.EncryptValueComboBox.ComboBoxLeftMargin = 1;
+            this.EncryptValueComboBox.ComboBoxText = "";
+            this.EncryptValueComboBox.ComoboBoxFont = null;
+            this.EncryptValueComboBox.Editable = true;
+            this.EncryptValueComboBox.Enabled = false;
+            this.EncryptValueComboBox.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EncryptValueComboBox.HideLabel = false;
+            this.EncryptValueComboBox.LabelBottomMargin = 0;
+            this.EncryptValueComboBox.LabelColor = System.Drawing.SystemColors.ControlText;
+            this.EncryptValueComboBox.LabelFont = null;
+            this.EncryptValueComboBox.LabelText = "Encrypt Value:";
+            this.EncryptValueComboBox.LabelTopMargin = 0;
+            this.EncryptValueComboBox.LabelWidth = 180;
+            this.EncryptValueComboBox.List = null;
+            this.EncryptValueComboBox.Location = new System.Drawing.Point(392, 284);
+            this.EncryptValueComboBox.Name = "EncryptValueComboBox";
+            this.EncryptValueComboBox.SelectedIndex = -1;
+            this.EncryptValueComboBox.SelectedIndexListener = null;
+            this.EncryptValueComboBox.Size = new System.Drawing.Size(360, 32);
+            this.EncryptValueComboBox.Sorted = false;
+            this.EncryptValueComboBox.Source = null;
+            this.EncryptValueComboBox.TabIndex = 20;
+            // 
             // ConnectionStringBuilderForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -467,13 +433,12 @@ namespace ConnectionBuilder
             this.BackgroundImage = global::ConnectionBuilder.Properties.Resources.LinenBackground;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(792, 625);
+            this.Controls.Add(this.EncryptValueComboBox);
+            this.Controls.Add(this.IncludeEncryptCheckBox);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.CopiedImage);
             this.Controls.Add(this.StatusImage);
             this.Controls.Add(this.StatusLabel);
-            this.Controls.Add(this.UseCustomKeyCheckBox);
-            this.Controls.Add(this.EncryptionKeyControl);
-            this.Controls.Add(this.UseEncryptionCheckBox);
-            this.Controls.Add(this.EncryptAndCopyButton);
             this.Controls.Add(this.ConnectionstringControl);
             this.Controls.Add(this.DatabasePasswordControl);
             this.Controls.Add(this.DatabaseUserControl);
@@ -486,7 +451,7 @@ namespace ConnectionBuilder
             this.Controls.Add(this.SQLServerAuthenticationRadioButton);
             this.Controls.Add(this.WindowsAuthenticationRadioButton);
             this.DoubleBuffered = true;
-            this.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(808, 800);
             this.MinimizeBox = false;
@@ -504,14 +469,13 @@ namespace ConnectionBuilder
         #endregion
 
         #endregion
-
-        private DataJuggler.Win.Controls.LabelCheckBoxControl UseEncryptionCheckBox;
-        private DataJuggler.Win.Controls.LabelTextBoxControl EncryptionKeyControl;
-        private DataJuggler.Win.Controls.LabelCheckBoxControl UseCustomKeyCheckBox;
         private System.Windows.Forms.Label StatusLabel;
         private System.Windows.Forms.PictureBox StatusImage;
         private System.Windows.Forms.PictureBox CopiedImage;
         private System.Windows.Forms.Timer CopiedTimer;
+        private DataJuggler.Win.Controls.LabelCheckBoxControl IncludeEncryptCheckBox;
+        private System.Windows.Forms.Label label1;
+        private DataJuggler.Win.Controls.LabelComboBoxControl EncryptValueComboBox;
     }
     #endregion
 

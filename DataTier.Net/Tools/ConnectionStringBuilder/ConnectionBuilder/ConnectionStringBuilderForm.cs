@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DataJuggler.Core.UltimateHelper;
 using DataJuggler.Win.Controls;
 using DataJuggler.Win.Controls.Interfaces;
+using ConnectionBuilder.Enumerations;
 
 #endregion
 
@@ -24,6 +25,7 @@ namespace ConnectionBuilder
     {
         
         #region Private Variables
+        private const string ConnBuilderServerName = "ConnBuilderServerName";
         private ConnectionInfo connectionInfo;
         private bool formActivated;
         #endregion
@@ -67,7 +69,23 @@ namespace ConnectionBuilder
                     // Build the connectionString
                     connectionString = ConnectionStringHelper.BuildConnectionString(connectionInfo.DatabaseServer, connectionInfo.DatabaseName, connectionInfo.DatabaseUserName, connectionInfo.DatabasePassword);
                 }
-                
+
+                // if this value is checked
+                if (IncludeEncryptCheckBox.Checked)
+                {
+                    // if the connection string ends with a semicolon
+                    if (connectionString.EndsWith(";"))
+                    {
+                        // Append the Encrypt value
+                        connectionString += "Encrypt=" + EncryptValueComboBox.ComboBoxText + ";";
+                    }
+                    else
+                    {
+                        // Append a semicolon then the Encrypt value
+                        connectionString += ";Encrypt=" + EncryptValueComboBox.ComboBoxText + ";";
+                    }
+                }
+
                 // display the connectionString
                 this.ConnectionstringControl.Text = connectionString;
             }
@@ -189,118 +207,19 @@ namespace ConnectionBuilder
                 this.Close();
             }
             #endregion
-                     
-            #region EncryptAndCopyButton_Click(object sender, EventArgs e)
-            /// <summary>
-            /// This event is fired when the 'EncryptAndCopyButton' is clicked.
-            /// </summary>
-            private void EncryptAndCopyButton_Click(object sender, EventArgs e)
-            {
-                // locals
-                string connectionString = this.ConnectionstringControl.Text;
-                string encryptionKey = String.Empty;
-                bool useEncryption = UseCustomKeyCheckBox.Checked;
-
-                // If the connectionString string exists
-                if (TextHelper.Exists(connectionString))
-                {
-                    // if the value for useEncryption is true
-                    if (useEncryption)
-                    {
-                        // set the encryptionKey
-                        encryptionKey = EncryptionKeyControl.Text;
-                    }
-
-                    // If the encryptionKey string exists
-                    if (TextHelper.Exists(encryptionKey))
-                    {
-                        // Encrypt the Connection String
-                        string encryptedConnectionString = CryptographyManager.EncryptString(this.ConnectionstringControl.Text, encryptionKey);
-
-                        // Copy the encryptedConnectionString to the clipboard
-                        Clipboard.SetText(encryptedConnectionString);
-
-                        // Set the text
-                        this.StatusLabel.Text = "Encrypted and copied.";
-
-                        // Show Success Message
-                        this.StatusImage.BackgroundImage = Properties.Resources.Success;
-
-                        // Show the user a message
-                        ShowCopiedImage();
-                    }
-                    else
-                    {
-                        // Show a message the encryption key is required
-                        this.StatusLabel.Text = "Encryption Key Is Required.";
-                        this.StatusImage.BackgroundImage = Properties.Resources.Failure;
-                    }
-                }
-                else
-                {
-                    this.StatusLabel.Text = "Connection String Is Required.";
-                    this.StatusImage.BackgroundImage = Properties.Resources.Failure;
-                }
-            }
-            #endregion
             
-            #region OnCheckChanged(LabelCheckBoxControl sender, bool isChecked);
+            #region OnCheckChanged(LabelCheckBoxControl sender, bool isChecked)
             /// <summary>
-            /// The checkbox has been checked or unchecked.
+            /// event is fired when On Check Changed
             /// </summary>
-            /// <param name="control"></param>
-            /// <param name="selectedIndex"></param>
             public void OnCheckChanged(LabelCheckBoxControl sender, bool isChecked)
             {
-                // if this is the UseEncryptionCheckBox
-                if (sender.Name == "UseEncryptionCheckBox")
-                {
-                    // if Checked
-                    if (UseEncryptionCheckBox.Checked)
-                    {
-                        // Enable both the EncryptionKey and the EncryptAndCopy button
-                        this.UseCustomKeyCheckBox.Editable = true;
-                        this.UseCustomKeyCheckBox.Enabled = true;
-                        this.EncryptAndCopyButton.Enabled = true;
-                        this.EncryptAndCopyButton.ForeColor = Color.Black;
-                        this.EncryptAndCopyButton.BackgroundImage = Properties.Resources.WoodButtonWidth640;
-                    }
-                    else
-                    {
-                        // Disable both the EncryptionKey and the EncryptAndCopy button
-                        this.UseCustomKeyCheckBox.Editable = false;
-                        this.UseCustomKeyCheckBox.Enabled = false;
-                        this.EncryptAndCopyButton.Enabled = false;
-                        this.EncryptAndCopyButton.ForeColor = Color.DarkGray;
-                        this.EncryptAndCopyButton.BackgroundImage = Properties.Resources.WoodButtonWidth640Disabled;
-                    }
-                }
-
-                // if this is the UseCustomKeyCheckBox
-                if (sender.Name == "UseCustomKeyCheckBox")
-                {
-                    // if Checked
-                    if (UseCustomKeyCheckBox.Checked)
-                    {
-                        // Enable both the EncryptionKeyControl
-                        EncryptionKeyControl.Editable = true;
-                        EncryptionKeyControl.Enabled = true;
-                        EncryptionKeyControl.LabelColor = Color.Black;
-                    }
-                    else
-                    {
-                        // Disable both Editable and Enabled 
-                        EncryptionKeyControl.Editable = false;
-                        EncryptionKeyControl.Enabled = false;
-                        EncryptionKeyControl.LabelColor = Color.DarkGray;
-                    }
-                }
-
-                // Enable or disable buttons
+                // This will enable the check box if the IncludeEncryptCheckBox is checked, the
+                // ComboBox for EncryptValue will become enabled.
                 UIControl();
             }
             #endregion
-
+            
             #region OnTextChanged(Control control, string text)
             /// <summary>
             /// event is fired when On Text Changed
@@ -499,19 +418,24 @@ namespace ConnectionBuilder
             public void Init()
             {
                 // Create a new instance of a 'ConnectionInfo' object.
-                this.ConnectionInfo = new ConnectionInfo();
+                ConnectionInfo = new ConnectionInfo();
 
                 // Default to SQL Server Authentication at First
-                this.SQLServerAuthenticationRadioButton.Checked = true;
+                SQLServerAuthenticationRadioButton.Checked = true;
 
-                // Setup the listeners
-                this.UseEncryptionCheckBox.CheckChangedListener = this;
-                this.UseCustomKeyCheckBox.CheckChangedListener = this;
-                this.DatabaseServerControl.OnTextChangedListener = this;
-                this.DatabaseNameControl.OnTextChangedListener = this;
-                this.DatabaseUserControl.OnTextChangedListener = this;
-                this.DatabasePasswordControl.OnTextChangedListener = this;
-                this.ConnectionstringControl.OnTextChangedListener = this;
+                // Setup the listeners                
+                DatabaseServerControl.OnTextChangedListener = this;
+                DatabaseNameControl.OnTextChangedListener = this;
+                DatabaseUserControl.OnTextChangedListener = this;
+                DatabasePasswordControl.OnTextChangedListener = this;
+                ConnectionstringControl.OnTextChangedListener = this;
+                IncludeEncryptCheckBox.CheckChangedListener = this;
+                IncludeEncryptCheckBox.Checked = true;
+                EncryptValueComboBox.LoadItems(typeof(TrueFalseEnum));
+                EncryptValueComboBox.SelectedIndex = EncryptValueComboBox.FindItemIndexByValue("False");
+
+                // This will set the name of the server if you have this set in the app.config
+                DatabaseServerControl.Text = ConfigurationHelper.ReadAppSetting("ServerName");
                 
                 // Enable or disable controls
                 UIControl();
@@ -556,30 +480,18 @@ namespace ConnectionBuilder
                     // Enable the Test and Copy buttons
                     TestDatabaseConnectionButton.Enabled = true;
                     CopyButton.Enabled = true;
-                    
-                    // if Use Encryption is checked
-                    if (UseEncryptionCheckBox.Checked)
-                    {
-                        // Enable the EncryptAndCopyButton
-                        EncryptAndCopyButton.Enabled = true;
-                    }
-                    else
-                    {
-                        // Enable the EncryptAndCopyButton
-                        EncryptAndCopyButton.Enabled = false;
-                    }
                 }
                 else
                 {
                       // Disable the Test and Copy buttons
                     TestDatabaseConnectionButton.Enabled = false;
                     CopyButton.Enabled = false;
-                   
-                    // Enable the EncryptAndCopyButton
-                    EncryptAndCopyButton.Enabled = false;
                 }
+
+                // Enable the ComboBox if the checkbox is checked.
+                EncryptValueComboBox.Enabled = IncludeEncryptCheckBox.Checked;
             }
-            #endregion
+        #endregion
 
         #endregion
 

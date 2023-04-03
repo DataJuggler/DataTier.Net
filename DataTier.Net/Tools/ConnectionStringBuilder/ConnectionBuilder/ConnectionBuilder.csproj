@@ -36,8 +36,8 @@
     <ApplicationIcon>Key.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DataJuggler.Core.UltimateHelper, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DataJuggler.Core.UltimateHelper.1.5.0\lib\net461\DataJuggler.Core.UltimateHelper.dll</HintPath>
+    <Reference Include="DataJuggler.Core.UltimateHelper, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DataJuggler.Core.UltimateHelper.1.6.0\lib\net48\DataJuggler.Core.UltimateHelper.dll</HintPath>
     </Reference>
     <Reference Include="DataJuggler.Net, Version=5.7.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DataJuggler.Net.5.7.4\lib\net461\DataJuggler.Net.dll</HintPath>
@@ -66,6 +66,7 @@
     <Compile Include="ConnectionStringBuilderForm.Designer.cs">
       <DependentUpon>ConnectionStringBuilderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Enumerations\ConnectionStringBuilderEnums.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ConnectionStringBuilderForm.resx">
@@ -98,6 +99,9 @@
     <Content Include="Data Juggler.ico" />
     <Content Include="lib\DataJuggler.Win.Controls Read Me.txt" />
     <Content Include="Tools.ico" />
+    <Content Include="ReadMe.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\LinenBackground.jpg" />
     <None Include="Resources\WoodButtonWidth640.png" />
     <None Include="Resources\WoodButtonWidth640Disabled.png" />
