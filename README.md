@@ -1,4 +1,4 @@
-Update 4.3.2023: I fixed the Project Templates for .NET7. Working on a new release version now.
+Update 4.3.2023: I fixed the Project Templates for .NET7. I am Working on a new release version now.
 
 Update 3.12.2023: I fixed the install version path not opening the SQL Scripts required to install DataTier.Net.
 
