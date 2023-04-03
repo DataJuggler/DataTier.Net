@@ -128,11 +128,11 @@ namespace DataTierClient.Controls
             // 
             this.ConfigureButton.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ConfigureButton.ForeColor = System.Drawing.Color.GhostWhite;
-            this.ConfigureButton.Location = new System.Drawing.Point(394, 358);
+            this.ConfigureButton.Location = new System.Drawing.Point(377, 358);
             this.ConfigureButton.Name = "ConfigureButton";
-            this.ConfigureButton.Size = new System.Drawing.Size(240, 53);
+            this.ConfigureButton.Size = new System.Drawing.Size(277, 53);
             this.ConfigureButton.TabIndex = 112;
-            this.ConfigureButton.Text = "Build Connectionstring && Setup App.config";
+            this.ConfigureButton.Text = "Build Connectionstring && Set Environment Variable";
             this.ConfigureButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.ConfigureButton.Click += new System.EventHandler(this.ConfigureButton_Click);
             this.ConfigureButton.MouseEnter += new System.EventHandler(this.Button_Enter);
