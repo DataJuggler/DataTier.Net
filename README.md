@@ -1,3 +1,5 @@
+Update 4.3.2023: I fixed the Project Templates for .NET7. Working on a new release version now.
+
 Update 3.12.2023: I fixed the install version path not opening the SQL Scripts required to install DataTier.Net.
 
 Update 1.18.2023: DataTier.Net now allows you to target .NET Framework, .NET5, .NET6 or .NET7 (Default).
