@@ -71,7 +71,7 @@ namespace ConnectionBuilder
             this.CopiedImage = new System.Windows.Forms.PictureBox();
             this.CopiedTimer = new System.Windows.Forms.Timer(this.components);
             this.IncludeEncryptCheckBox = new DataJuggler.Win.Controls.LabelCheckBoxControl();
-            this.label1 = new System.Windows.Forms.Label();
+            this.InfoLabel = new System.Windows.Forms.Label();
             this.EncryptValueComboBox = new DataJuggler.Win.Controls.LabelComboBoxControl();
             ((System.ComponentModel.ISupportInitialize)(this.StatusImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CopiedImage)).BeginInit();
@@ -388,16 +388,16 @@ namespace ConnectionBuilder
             this.IncludeEncryptCheckBox.Size = new System.Drawing.Size(280, 28);
             this.IncludeEncryptCheckBox.TabIndex = 19;
             // 
-            // label1
+            // InfoLabel
             // 
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label1.Location = new System.Drawing.Point(54, 237);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(699, 44);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "Microsoft.Data.SqlClient requires you to set Encrypt=False if your database is no" +
+            this.InfoLabel.BackColor = System.Drawing.Color.Transparent;
+            this.InfoLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InfoLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.InfoLabel.Location = new System.Drawing.Point(54, 237);
+            this.InfoLabel.Name = "InfoLabel";
+            this.InfoLabel.Size = new System.Drawing.Size(699, 44);
+            this.InfoLabel.TabIndex = 18;
+            this.InfoLabel.Text = "Microsoft.Data.SqlClient requires you to set Encrypt=False if your database is no" +
     "t encrypted. Leave this checked if you are targeting .NET Core.\r\n";
             // 
             // EncryptValueComboBox
@@ -435,7 +435,7 @@ namespace ConnectionBuilder
             this.ClientSize = new System.Drawing.Size(792, 625);
             this.Controls.Add(this.EncryptValueComboBox);
             this.Controls.Add(this.IncludeEncryptCheckBox);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.InfoLabel);
             this.Controls.Add(this.CopiedImage);
             this.Controls.Add(this.StatusImage);
             this.Controls.Add(this.StatusLabel);
@@ -474,7 +474,7 @@ namespace ConnectionBuilder
         private System.Windows.Forms.PictureBox CopiedImage;
         private System.Windows.Forms.Timer CopiedTimer;
         private DataJuggler.Win.Controls.LabelCheckBoxControl IncludeEncryptCheckBox;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label InfoLabel;
         private DataJuggler.Win.Controls.LabelComboBoxControl EncryptValueComboBox;
     }
     #endregion

@@ -28,9 +28,6 @@ namespace DataTierClient.Forms
         private DataJuggler.Win.Controls.LabelTextBoxControl DatabaseUserControl;
         private DataJuggler.Win.Controls.LabelTextBoxControl DatabasePasswordControl;
         private DataJuggler.Win.Controls.LabelTextBoxControl ConnectionstringControl;
-        private DataJuggler.Win.Controls.LabelCheckBoxControl UseEncryptionCheckBox;
-        private DataJuggler.Win.Controls.LabelTextBoxControl EncryptionKeyControl;
-        private DataJuggler.Win.Controls.LabelCheckBoxControl UseCustomKeyCheckBox;
         private System.Windows.Forms.Label StatusLabel;
         private System.Windows.Forms.PictureBox StatusImage;
         private System.Windows.Forms.PictureBox CopiedImage;
@@ -74,9 +71,6 @@ namespace DataTierClient.Forms
             this.DatabaseUserControl = new DataJuggler.Win.Controls.LabelTextBoxControl();
             this.DatabasePasswordControl = new DataJuggler.Win.Controls.LabelTextBoxControl();
             this.ConnectionstringControl = new DataJuggler.Win.Controls.LabelTextBoxControl();
-            this.UseEncryptionCheckBox = new DataJuggler.Win.Controls.LabelCheckBoxControl();
-            this.EncryptionKeyControl = new DataJuggler.Win.Controls.LabelTextBoxControl();
-            this.UseCustomKeyCheckBox = new DataJuggler.Win.Controls.LabelCheckBoxControl();
             this.StatusLabel = new System.Windows.Forms.Label();
             this.StatusImage = new System.Windows.Forms.PictureBox();
             this.CopiedImage = new System.Windows.Forms.PictureBox();
@@ -84,6 +78,9 @@ namespace DataTierClient.Forms
             this.TestButton = new System.Windows.Forms.Button();
             this.InstalledImage = new System.Windows.Forms.PictureBox();
             this.InstalledTimer = new System.Windows.Forms.Timer(this.components);
+            this.InfoLabel = new System.Windows.Forms.Label();
+            this.EncryptValueComboBox = new DataJuggler.Win.Controls.LabelComboBoxControl();
+            this.IncludeEncryptCheckBox = new DataJuggler.Win.Controls.LabelCheckBoxControl();
             ((System.ComponentModel.ISupportInitialize)(this.StatusImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CopiedImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.InstalledImage)).BeginInit();
@@ -341,71 +338,6 @@ namespace DataTierClient.Forms
             this.ConnectionstringControl.TextBoxFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ConnectionstringControl.TextBoxTopMargin = 0;
             // 
-            // UseEncryptionCheckBox
-            // 
-            this.UseEncryptionCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.UseEncryptionCheckBox.CheckBoxHorizontalOffSet = 0;
-            this.UseEncryptionCheckBox.CheckBoxVerticalOffSet = 4;
-            this.UseEncryptionCheckBox.CheckChangedListener = null;
-            this.UseEncryptionCheckBox.Checked = false;
-            this.UseEncryptionCheckBox.Editable = true;
-            this.UseEncryptionCheckBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UseEncryptionCheckBox.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.UseEncryptionCheckBox.LabelFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UseEncryptionCheckBox.LabelText = "Use Encryption:";
-            this.UseEncryptionCheckBox.LabelWidth = 240;
-            this.UseEncryptionCheckBox.Location = new System.Drawing.Point(32, 236);
-            this.UseEncryptionCheckBox.Name = "UseEncryptionCheckBox";
-            this.UseEncryptionCheckBox.Size = new System.Drawing.Size(290, 24);
-            this.UseEncryptionCheckBox.TabIndex = 12;
-            // 
-            // EncryptionKeyControl
-            // 
-            this.EncryptionKeyControl.BackColor = System.Drawing.Color.Transparent;
-            this.EncryptionKeyControl.BottomMargin = 0;
-            this.EncryptionKeyControl.Editable = false;
-            this.EncryptionKeyControl.Enabled = false;
-            this.EncryptionKeyControl.Encrypted = false;
-            this.EncryptionKeyControl.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EncryptionKeyControl.LabelBottomMargin = 0;
-            this.EncryptionKeyControl.LabelColor = System.Drawing.Color.DarkGray;
-            this.EncryptionKeyControl.LabelFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EncryptionKeyControl.LabelText = "Encryption Key:";
-            this.EncryptionKeyControl.LabelTopMargin = 0;
-            this.EncryptionKeyControl.LabelWidth = 240;
-            this.EncryptionKeyControl.Location = new System.Drawing.Point(32, 276);
-            this.EncryptionKeyControl.MultiLine = false;
-            this.EncryptionKeyControl.Name = "EncryptionKeyControl";
-            this.EncryptionKeyControl.OnTextChangedListener = null;
-            this.EncryptionKeyControl.PasswordMode = false;
-            this.EncryptionKeyControl.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.EncryptionKeyControl.Size = new System.Drawing.Size(720, 30);
-            this.EncryptionKeyControl.TabIndex = 13;
-            this.EncryptionKeyControl.TextBoxBottomMargin = 0;
-            this.EncryptionKeyControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
-            this.EncryptionKeyControl.TextBoxEditableColor = System.Drawing.Color.White;
-            this.EncryptionKeyControl.TextBoxFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EncryptionKeyControl.TextBoxTopMargin = 0;
-            // 
-            // UseCustomKeyCheckBox
-            // 
-            this.UseCustomKeyCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.UseCustomKeyCheckBox.CheckBoxHorizontalOffSet = 0;
-            this.UseCustomKeyCheckBox.CheckBoxVerticalOffSet = 4;
-            this.UseCustomKeyCheckBox.CheckChangedListener = null;
-            this.UseCustomKeyCheckBox.Checked = false;
-            this.UseCustomKeyCheckBox.Editable = false;
-            this.UseCustomKeyCheckBox.Enabled = false;
-            this.UseCustomKeyCheckBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UseCustomKeyCheckBox.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.UseCustomKeyCheckBox.LabelFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UseCustomKeyCheckBox.LabelText = "Use Custom Key:";
-            this.UseCustomKeyCheckBox.LabelWidth = 200;
-            this.UseCustomKeyCheckBox.Location = new System.Drawing.Point(300, 236);
-            this.UseCustomKeyCheckBox.Name = "UseCustomKeyCheckBox";
-            this.UseCustomKeyCheckBox.Size = new System.Drawing.Size(270, 24);
-            this.UseCustomKeyCheckBox.TabIndex = 14;
-            // 
             // StatusLabel
             // 
             this.StatusLabel.BackColor = System.Drawing.Color.Transparent;
@@ -487,6 +419,62 @@ namespace DataTierClient.Forms
             this.InstalledTimer.Interval = 4000;
             this.InstalledTimer.Tick += new System.EventHandler(this.InstalledTimer_Tick);
             // 
+            // InfoLabel
+            // 
+            this.InfoLabel.BackColor = System.Drawing.Color.Transparent;
+            this.InfoLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InfoLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.InfoLabel.Location = new System.Drawing.Point(56, 225);
+            this.InfoLabel.Name = "InfoLabel";
+            this.InfoLabel.Size = new System.Drawing.Size(699, 44);
+            this.InfoLabel.TabIndex = 20;
+            this.InfoLabel.Text = "Microsoft.Data.SqlClient requires you to set Encrypt=False if your database is no" +
+    "t encrypted. Leave this checked if you are targeting .NET Core.\r\n";
+            // 
+            // EncryptValueComboBox
+            // 
+            this.EncryptValueComboBox.BackColor = System.Drawing.Color.Transparent;
+            this.EncryptValueComboBox.ComboBoxLeftMargin = 1;
+            this.EncryptValueComboBox.ComboBoxText = "";
+            this.EncryptValueComboBox.ComoboBoxFont = null;
+            this.EncryptValueComboBox.Editable = true;
+            this.EncryptValueComboBox.Enabled = false;
+            this.EncryptValueComboBox.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EncryptValueComboBox.HideLabel = false;
+            this.EncryptValueComboBox.LabelBottomMargin = 0;
+            this.EncryptValueComboBox.LabelColor = System.Drawing.SystemColors.ControlText;
+            this.EncryptValueComboBox.LabelFont = null;
+            this.EncryptValueComboBox.LabelText = "Encrypt Value:";
+            this.EncryptValueComboBox.LabelTopMargin = 0;
+            this.EncryptValueComboBox.LabelWidth = 180;
+            this.EncryptValueComboBox.List = null;
+            this.EncryptValueComboBox.Location = new System.Drawing.Point(392, 270);
+            this.EncryptValueComboBox.Name = "EncryptValueComboBox";
+            this.EncryptValueComboBox.SelectedIndex = -1;
+            this.EncryptValueComboBox.SelectedIndexListener = null;
+            this.EncryptValueComboBox.Size = new System.Drawing.Size(360, 32);
+            this.EncryptValueComboBox.Sorted = false;
+            this.EncryptValueComboBox.Source = null;
+            this.EncryptValueComboBox.TabIndex = 22;
+            // 
+            // IncludeEncryptCheckBox
+            // 
+            this.IncludeEncryptCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.IncludeEncryptCheckBox.CheckBoxHorizontalOffSet = 0;
+            this.IncludeEncryptCheckBox.CheckBoxVerticalOffSet = 4;
+            this.IncludeEncryptCheckBox.CheckChangedListener = null;
+            this.IncludeEncryptCheckBox.Checked = false;
+            this.IncludeEncryptCheckBox.Editable = true;
+            this.IncludeEncryptCheckBox.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IncludeEncryptCheckBox.LabelColor = System.Drawing.SystemColors.ControlText;
+            this.IncludeEncryptCheckBox.LabelFont = null;
+            this.IncludeEncryptCheckBox.LabelText = "Include Encrypt:";
+            this.IncludeEncryptCheckBox.LabelWidth = 240;
+            this.IncludeEncryptCheckBox.Location = new System.Drawing.Point(32, 272);
+            this.IncludeEncryptCheckBox.Name = "IncludeEncryptCheckBox";
+            this.IncludeEncryptCheckBox.Size = new System.Drawing.Size(280, 28);
+            this.IncludeEncryptCheckBox.TabIndex = 21;
+            // 
             // ConnectionStringBuilderForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -494,13 +482,13 @@ namespace DataTierClient.Forms
             this.BackgroundImage = global::DataTierClient.Properties.Resources.LinenBackground;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(792, 634);
+            this.Controls.Add(this.EncryptValueComboBox);
+            this.Controls.Add(this.IncludeEncryptCheckBox);
+            this.Controls.Add(this.InfoLabel);
             this.Controls.Add(this.TestButton);
             this.Controls.Add(this.CopiedImage);
             this.Controls.Add(this.StatusImage);
             this.Controls.Add(this.StatusLabel);
-            this.Controls.Add(this.UseCustomKeyCheckBox);
-            this.Controls.Add(this.EncryptionKeyControl);
-            this.Controls.Add(this.UseEncryptionCheckBox);
             this.Controls.Add(this.ConnectionstringControl);
             this.Controls.Add(this.DatabasePasswordControl);
             this.Controls.Add(this.DatabaseUserControl);
@@ -536,6 +524,9 @@ namespace DataTierClient.Forms
         private System.Windows.Forms.Button TestButton;
         private System.Windows.Forms.PictureBox InstalledImage;
         private System.Windows.Forms.Timer InstalledTimer;
+        private System.Windows.Forms.Label InfoLabel;
+        private DataJuggler.Win.Controls.LabelComboBoxControl EncryptValueComboBox;
+        private DataJuggler.Win.Controls.LabelCheckBoxControl IncludeEncryptCheckBox;
     }
     #endregion
 

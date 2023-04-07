@@ -47,6 +47,17 @@ namespace DataTierClient.Enumerations
 	}
 	#endregion
 
+    #region TrueFalseEnum
+    /// <summary>
+    /// This enum is used to load the ComboBox for Encrypt Value.
+    /// </summary>
+    public enum TrueFalseEnum
+    {
+        False = 0,
+        True = 1
+    }
+    #endregion
+
     #region VisibilityEnum : int
 	/// <summary>
     /// This enum is ued to show or hide a control, because true false is confusing

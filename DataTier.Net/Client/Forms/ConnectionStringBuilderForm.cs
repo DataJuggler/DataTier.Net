@@ -18,7 +18,7 @@ using System.Linq;
 using System.Security.Principal;
 using System.Text;
 using System.Windows.Forms;
-using System.Reflection;
+using DataTierClient.Enumerations;
 
 #endregion
 
@@ -111,6 +111,22 @@ namespace DataTierClient.Forms
                     {
                         // Build the connectionString
                         connectionString = ConnectionStringHelper.BuildConnectionString(connectionInfo.DatabaseServer, connectionInfo.DatabaseName, connectionInfo.DatabaseUserName, connectionInfo.DatabasePassword);
+                    }
+
+                    // if this value is checked
+                    if (IncludeEncryptCheckBox.Checked)
+                    {
+                        // if the connection string ends with a semicolon
+                        if (connectionString.EndsWith(";"))
+                        {
+                            // Append the Encrypt value
+                            connectionString += "Encrypt=" + EncryptValueComboBox.ComboBoxText + ";";
+                        }
+                        else
+                        {
+                            // Append a semicolon then the Encrypt value
+                            connectionString += ";Encrypt=" + EncryptValueComboBox.ComboBoxText + ";";
+                        }
                     }
 
                     // display the connectionString
@@ -244,60 +260,6 @@ namespace DataTierClient.Forms
                 this.Close();
             }
             #endregion
-                     
-            #region EncryptAndCopyButton_Click(object sender, EventArgs e)
-            /// <summary>
-            /// This event is fired when the 'EncryptAndCopyButton' is clicked.
-            /// </summary>
-            private void EncryptAndCopyButton_Click(object sender, EventArgs e)
-            {
-                // locals
-                string connectionString = this.ConnectionstringControl.Text;
-                string encryptionKey = String.Empty;
-                bool useEncryption = UseCustomKeyCheckBox.Checked;
-
-                // If the connectionString string exists
-                if (TextHelper.Exists(connectionString))
-                {
-                    // if the value for useEncryption is true
-                    if (useEncryption)
-                    {
-                        // set the encryptionKey
-                        encryptionKey = EncryptionKeyControl.Text;
-                    }
-
-                    // If the encryptionKey string exists
-                    if (TextHelper.Exists(encryptionKey))
-                    {
-                        // Encrypt the Connection String
-                        string encryptedConnectionString = CryptographyManager.EncryptString(this.ConnectionstringControl.Text, encryptionKey);
-
-                        // Copy the encryptedConnectionString to the clipboard
-                        Clipboard.SetText(encryptedConnectionString);
-
-                        // Set the text
-                        this.StatusLabel.Text = "Encrypted and copied.";
-
-                        // Show Success Message
-                        this.StatusImage.BackgroundImage = Properties.Resources.Success;
-
-                        // Show the user a message
-                        ShowCopiedImage();
-                    }
-                    else
-                    {
-                        // Show a message the encryption key is required
-                        this.StatusLabel.Text = "Encryption Key Is Required.";
-                         this.StatusImage.BackgroundImage = Properties.Resources.Failure;
-                    }
-                }
-                else
-                {
-                    this.StatusLabel.Text = "Connection String Is Required.";
-                    this.StatusImage.BackgroundImage = Properties.Resources.Failure;
-                }
-            }
-            #endregion
             
             #region InstallConnectionStringButton_Click(object sender, EventArgs e)
             /// <summary>
@@ -349,44 +311,6 @@ namespace DataTierClient.Forms
             /// <param name="selectedIndex"></param>
             public void OnCheckChanged(LabelCheckBoxControl sender, bool isChecked)
             {
-                // if this is the UseEncryptionCheckBox
-                if (sender.Name == "UseEncryptionCheckBox")
-                {
-                    // if Checked
-                    if (UseEncryptionCheckBox.Checked)
-                    {
-                        // Enable both the EncryptionKey and the EncryptAndCopy button
-                        this.UseCustomKeyCheckBox.Editable = true;
-                        this.UseCustomKeyCheckBox.Enabled = true;
-                    }
-                    else
-                    {
-                        // Disable both the EncryptionKey and the EncryptAndCopy button
-                        this.UseCustomKeyCheckBox.Editable = false;
-                        this.UseCustomKeyCheckBox.Enabled = false;
-                    }
-                }
-
-                // if this is the UseCustomKeyCheckBox
-                if (sender.Name == "UseCustomKeyCheckBox")
-                {
-                    // if Checked
-                    if (UseCustomKeyCheckBox.Checked)
-                    {
-                        // Enable both the EncryptionKeyControl
-                        EncryptionKeyControl.Editable = true;
-                        EncryptionKeyControl.Enabled = true;
-                        EncryptionKeyControl.LabelColor = Color.Black;
-                    }
-                    else
-                    {
-                        // Disable both Editable and Enabled 
-                        EncryptionKeyControl.Editable = false;
-                        EncryptionKeyControl.Enabled = false;
-                        EncryptionKeyControl.LabelColor = Color.DarkGray;
-                    }
-                }
-
                 // Enable or disable buttons
                 UIControl();
             }
@@ -755,13 +679,14 @@ namespace DataTierClient.Forms
                 this.SQLServerAuthenticationRadioButton.Checked = true;
 
                 // Setup the listeners
-                this.UseEncryptionCheckBox.CheckChangedListener = this;
-                this.UseCustomKeyCheckBox.CheckChangedListener = this;
                 this.DatabaseServerControl.OnTextChangedListener = this;
                 this.DatabaseNameControl.OnTextChangedListener = this;
                 this.DatabaseUserControl.OnTextChangedListener = this;
                 this.DatabasePasswordControl.OnTextChangedListener = this;
                 this.ConnectionstringControl.OnTextChangedListener = this;
+                IncludeEncryptCheckBox.Checked = true;
+                EncryptValueComboBox.LoadItems(typeof(TrueFalseEnum));
+                EncryptValueComboBox.SelectedIndex = EncryptValueComboBox.FindItemIndexByValue("False");
 
                 // Change the Content Alignment
                 this.ConnectionstringControl.LabelTextAlign = ContentAlignment.TopRight;
@@ -863,6 +788,9 @@ namespace DataTierClient.Forms
                     TestButton.Enabled = false;
                     CopyButton.Enabled = false;
                 }
+
+                // Enable the ComboBox if the checkbox is checked.
+                EncryptValueComboBox.Enabled = IncludeEncryptCheckBox.Checked;
             }
             #endregion
 
