@@ -1,3 +1,8 @@
+Update 4.7.2021: New video for DataTier.Net: https://youtu.be/mQRN6SYxL-s
+
+New sample project that goes with the above video: https://github.com/DataJuggler/IdeaBank
+
+
 Update 4.3.2023: I fixed the Project Templates for .NET7. I am Working on a new release version now.
 
 Update 3.12.2023: I fixed the install version path not opening the SQL Scripts required to install DataTier.Net.
