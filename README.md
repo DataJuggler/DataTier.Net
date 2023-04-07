@@ -1,4 +1,4 @@
-Update 4.7.2021: New video for DataTier.Net: https://youtu.be/mQRN6SYxL-s
+Update 4.7.2023: New video for DataTier.Net: https://youtu.be/mQRN6SYxL-s
 
 New sample project that goes with the above video: https://github.com/DataJuggler/IdeaBank
 
