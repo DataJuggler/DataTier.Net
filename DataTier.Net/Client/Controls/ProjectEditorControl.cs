@@ -34,6 +34,7 @@ namespace DataTierClient.Controls
         private ActiveControlEnum nextControl;
         private ActiveControlEnum prevControl;
         private bool showAutoFillHelp;
+        private int attempts;
         private const string CreateDataTierNet5 = "dotnet new DataTier.Net5.ProjectTemplates";
         private const string InstallDataTierNet5 = "dotnet new --install DataJuggler.DataTier.Net5.ProjectTemplates";
         private const string CreateDataTierNet6 = "dotnet new DataTier.Net6.ProjectTemplates";
@@ -270,7 +271,7 @@ namespace DataTierClient.Controls
                                     Application.DoEvents();
 
                                     // has 15 secondes elapsed
-                                    if (currentTime.Subtract(startTime).TotalSeconds >= 15)
+                                    if (currentTime.Subtract(startTime).TotalSeconds >= 30)
                                     {
                                         // give up after 15 seconds
                                         break;
@@ -620,9 +621,12 @@ namespace DataTierClient.Controls
                 // initial value
                 bool installed = false;
 
+                // Increment the value for Attempts
+                Attempts++;
+
                 try               
                  {
-                     // Create a Process to launch a command window (hidden) to create the item templates
+                    // Create a Process to launch a command window (hidden) to create the item templates
                     Process process = new Process();
                     ProcessStartInfo startInfo = new ProcessStartInfo();
                     startInfo.WindowStyle = ProcessWindowStyle.Hidden;
@@ -656,14 +660,23 @@ namespace DataTierClient.Controls
                  }
                  catch (Exception error)
                  {
-                    // set to false
-                    installed = false;
+                    // If it failed on the first attempt, try again
+                    if (Attempts < 2)
+                    {
+                        // Try again
+                        InstallDataTierNetTemplates();
+                    }
+                    else
+                    {
+                        // set to false
+                        installed = false;
 
-                    // Set the error
-                    DebugHelper.WriteDebugError("InstallDataTierNetTemplates", this.Name, error);
+                        // Set the error
+                        DebugHelper.WriteDebugError("InstallDataTierNetTemplates", this.Name, error);
 
-                    // show the user a message
-                    MessageBoxHelper.ShowMessage("The DataTier.Net.Project Templates could not be installed. Ensure you are connected to the internet and try again.", "Install Templates Failed");
+                        // show the user a message
+                        MessageBoxHelper.ShowMessage("The DataTier.Net.Project Templates could not be installed. Ensure you are connected to the internet and try again.", "Install Templates Failed");
+                    }
                  }
 
                  // return value
@@ -782,6 +795,17 @@ namespace DataTierClient.Controls
 
         #region Properties
 
+            #region Attempts
+            /// <summary>
+            /// This property gets or sets the value for 'Attempts'.
+            /// </summary>
+            public int Attempts
+            {
+                get { return attempts; }
+                set { attempts = value; }
+            }
+            #endregion
+            
             #region EditMode
             /// <summary>
             /// Is this an existing project or a new project.
