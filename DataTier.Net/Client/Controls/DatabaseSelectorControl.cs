@@ -8,6 +8,7 @@ using ObjectLibrary.BusinessObjects;
 using ObjectLibrary.Enumerations;
 using DataTierClient.Controls.Interfaces;
 using DataTierClient.Forms;
+using DataJuggler.Core.UltimateHelper;
 
 #endregion
 
@@ -140,7 +141,7 @@ namespace DataTierClient.Controls
                 catch (Exception error)
                 {
                     // for debugging only
-                    string err = error.ToString();
+                    DebugHelper.WriteDebugError("OnSave", "DatabaseSelectorControl", error);
                 }
             }
             #endregion

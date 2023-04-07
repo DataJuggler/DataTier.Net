@@ -6,11 +6,12 @@ using System;
 using System.Windows.Forms;
 using DataTierClient.ClientUtil;
 using DataTierClient.Forms;
-using System.Threading;
-using System.Data.SqlClient;
+using DataTierClient.Enumerations;
 using ObjectLibrary.BusinessObjects;
 using ObjectLibrary.Enumerations;
 using DataTierClient.Controls.Interfaces;
+using DataJuggler.Win.Controls;
+using DataJuggler.Win.Controls.Interfaces;
 
 #endregion
 
@@ -21,7 +22,7 @@ namespace DataTierClient.Controls
     /// <summary>
     /// This class is used to Register a SQLDatabase with this project.
     /// </summary>
-    public partial class SQLDatabaseEditor : UserControl, ITabButtonParent
+    public partial class SQLDatabaseEditor : UserControl, ITabButtonParent, ICheckChangedListener, ISelectedIndexListener
     {
     
         #region Private Variables
@@ -101,6 +102,31 @@ namespace DataTierClient.Controls
             }
             #endregion
 
+            #region OnCheckChanged(LabelCheckBoxControl sender, bool isChecked)
+            /// <summary>
+            /// event is fired when On Check Changed
+            /// </summary>
+            public void OnCheckChanged(LabelCheckBoxControl sender, bool isChecked)
+            {
+                // Enable the ComboBox if IncludeEncryptCheckBox is checked
+                EncryptValueComboBox.Enabled = isChecked;
+
+                // Update the ConnectionString
+                BuildConnectionString();
+            }
+            #endregion
+            
+            #region OnSelectedIndexChanged(LabelComboBoxControl control, int selectedIndex, object selectedItem)
+            /// <summary>
+            /// event is fired when a selection is made in the 'On'.
+            /// </summary>
+            public void OnSelectedIndexChanged(LabelComboBoxControl control, int selectedIndex, object selectedItem)
+            {
+                // Build the ConnectionString
+                BuildConnectionString();
+            }
+            #endregion
+            
             #region PasswordTextBox_TextChanged(object sender, EventArgs e)
             /// <summary>
             /// The Password Has Changed.
@@ -303,6 +329,22 @@ namespace DataTierClient.Controls
                     connectionString = BuildSQLConnectionString(serverName, databaseName, userName, password);
                 }
 
+                // if this value is checked
+                if (IncludeEncryptCheckBox.Checked)
+                {
+                    // if the connection string ends with a semicolon
+                    if (connectionString.EndsWith(";"))
+                    {
+                        // Append the Encrypt value
+                        connectionString += "Encrypt=" + EncryptValueComboBox.ComboBoxText + ";";
+                    }
+                    else
+                    {
+                        // Append a semicolon then the Encrypt value
+                        connectionString += ";Encrypt=" + EncryptValueComboBox.ComboBoxText + ";";
+                    }
+                }
+
                 // create the connection string
                 this.ConnectionStringTextBox.Text = connectionString;
                 
@@ -466,10 +508,23 @@ namespace DataTierClient.Controls
             private void Init()
             {
                 // Default To Windows Being Checked
-                this.WindowsRadioButton.Checked = true;
+                WindowsRadioButton.Checked = true;
                 
                 // Set Serializable to true
-                this.SerializableCheckBox.Checked = true;
+                SerializableCheckBox.Checked = true;
+
+                // Enable by default
+                EncryptValueComboBox.Enabled = true;
+
+                // Load the items
+                EncryptValueComboBox.LoadItems(typeof(TrueFalseEnum));
+
+                // Select False
+                EncryptValueComboBox.SelectedIndex = EncryptValueComboBox.FindItemIndexByValue("False");
+
+                // Setup the Listeners
+                EncryptValueComboBox.SelectedIndexListener = this;
+                IncludeEncryptCheckBox.CheckChangedListener = this;
             }
             #endregion
 
@@ -520,18 +575,18 @@ namespace DataTierClient.Controls
                 // Refresh
                 this.Refresh();
             }
-            #endregion
+        #endregion
 
         #endregion
-        
+
         #region Properties
 
-            #region AuthenticationType
-            /// <summary>
-            /// This property is used to set the type of Authentication 
-            /// used.
-            /// </summary>
-            public SQLAuthenticationTypeEnum AuthenticationType
+        #region AuthenticationType
+        /// <summary>
+        /// This property is used to set the type of Authentication 
+        /// used.
+        /// </summary>
+        public SQLAuthenticationTypeEnum AuthenticationType
             {
                 get { return authenticationType; }
                 set { authenticationType = value; }

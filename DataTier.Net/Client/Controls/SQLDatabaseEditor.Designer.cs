@@ -65,15 +65,18 @@ namespace DataTierClient.Controls
             this.DatabasesComboBox = new System.Windows.Forms.ComboBox();
             this.WindowsRadioButton = new System.Windows.Forms.RadioButton();
             this.SQLServerRadioButton = new System.Windows.Forms.RadioButton();
-            this.BrowseDatabaseButton = new TabButton();
-            this.BrowseServerButton = new TabButton();
+            this.BrowseDatabaseButton = new DataTierClient.Controls.TabButton();
+            this.BrowseServerButton = new DataTierClient.Controls.TabButton();
+            this.EncryptValueComboBox = new DataJuggler.Win.Controls.LabelComboBoxControl();
+            this.IncludeEncryptCheckBox = new DataJuggler.Win.Controls.LabelCheckBoxControl();
+            this.InfoLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // SerializableCheckBox
             // 
             this.SerializableCheckBox.AutoSize = true;
             this.SerializableCheckBox.Font = new System.Drawing.Font("Verdana", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SerializableCheckBox.Location = new System.Drawing.Point(140, 348);
+            this.SerializableCheckBox.Location = new System.Drawing.Point(140, 414);
             this.SerializableCheckBox.Name = "SerializableCheckBox";
             this.SerializableCheckBox.Size = new System.Drawing.Size(15, 14);
             this.SerializableCheckBox.TabIndex = 7;
@@ -82,7 +85,7 @@ namespace DataTierClient.Controls
             // SerializableLabel
             // 
             this.SerializableLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SerializableLabel.Location = new System.Drawing.Point(20, 344);
+            this.SerializableLabel.Location = new System.Drawing.Point(20, 410);
             this.SerializableLabel.Name = "SerializableLabel";
             this.SerializableLabel.Size = new System.Drawing.Size(116, 20);
             this.SerializableLabel.TabIndex = 92;
@@ -92,7 +95,7 @@ namespace DataTierClient.Controls
             // ConnectionStringTextBox
             // 
             this.ConnectionStringTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ConnectionStringTextBox.Location = new System.Drawing.Point(140, 220);
+            this.ConnectionStringTextBox.Location = new System.Drawing.Point(140, 286);
             this.ConnectionStringTextBox.Multiline = true;
             this.ConnectionStringTextBox.Name = "ConnectionStringTextBox";
             this.ConnectionStringTextBox.Size = new System.Drawing.Size(401, 116);
@@ -129,7 +132,7 @@ namespace DataTierClient.Controls
             // ConnectionStringLabel
             // 
             this.ConnectionStringLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ConnectionStringLabel.Location = new System.Drawing.Point(20, 224);
+            this.ConnectionStringLabel.Location = new System.Drawing.Point(20, 290);
             this.ConnectionStringLabel.Name = "ConnectionStringLabel";
             this.ConnectionStringLabel.Size = new System.Drawing.Size(116, 20);
             this.ConnectionStringLabel.TabIndex = 86;
@@ -246,10 +249,69 @@ namespace DataTierClient.Controls
             this.BrowseServerButton.TabIndex = 1;
             this.BrowseServerButton.TabStop = false;
             // 
+            // EncryptValueComboBox
+            // 
+            this.EncryptValueComboBox.BackColor = System.Drawing.Color.Transparent;
+            this.EncryptValueComboBox.ComboBoxLeftMargin = 1;
+            this.EncryptValueComboBox.ComboBoxText = "";
+            this.EncryptValueComboBox.ComoboBoxFont = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EncryptValueComboBox.Editable = true;
+            this.EncryptValueComboBox.Enabled = false;
+            this.EncryptValueComboBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EncryptValueComboBox.HideLabel = false;
+            this.EncryptValueComboBox.LabelBottomMargin = 0;
+            this.EncryptValueComboBox.LabelColor = System.Drawing.SystemColors.ControlText;
+            this.EncryptValueComboBox.LabelFont = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EncryptValueComboBox.LabelText = "Encrypt Value:";
+            this.EncryptValueComboBox.LabelTopMargin = 0;
+            this.EncryptValueComboBox.LabelWidth = 120;
+            this.EncryptValueComboBox.List = null;
+            this.EncryptValueComboBox.Location = new System.Drawing.Point(257, 249);
+            this.EncryptValueComboBox.Name = "EncryptValueComboBox";
+            this.EncryptValueComboBox.SelectedIndex = -1;
+            this.EncryptValueComboBox.SelectedIndexListener = null;
+            this.EncryptValueComboBox.Size = new System.Drawing.Size(284, 32);
+            this.EncryptValueComboBox.Sorted = false;
+            this.EncryptValueComboBox.Source = null;
+            this.EncryptValueComboBox.TabIndex = 105;
+            // 
+            // IncludeEncryptCheckBox
+            // 
+            this.IncludeEncryptCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.IncludeEncryptCheckBox.CheckBoxHorizontalOffSet = 0;
+            this.IncludeEncryptCheckBox.CheckBoxVerticalOffSet = 4;
+            this.IncludeEncryptCheckBox.CheckChangedListener = null;
+            this.IncludeEncryptCheckBox.Checked = true;
+            this.IncludeEncryptCheckBox.Editable = true;
+            this.IncludeEncryptCheckBox.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IncludeEncryptCheckBox.LabelColor = System.Drawing.SystemColors.ControlText;
+            this.IncludeEncryptCheckBox.LabelFont = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IncludeEncryptCheckBox.LabelText = "Include Encrypt:";
+            this.IncludeEncryptCheckBox.LabelWidth = 160;
+            this.IncludeEncryptCheckBox.Location = new System.Drawing.Point(-19, 251);
+            this.IncludeEncryptCheckBox.Name = "IncludeEncryptCheckBox";
+            this.IncludeEncryptCheckBox.Size = new System.Drawing.Size(185, 28);
+            this.IncludeEncryptCheckBox.TabIndex = 104;
+            // 
+            // InfoLabel
+            // 
+            this.InfoLabel.BackColor = System.Drawing.Color.Transparent;
+            this.InfoLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InfoLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.InfoLabel.Location = new System.Drawing.Point(20, 212);
+            this.InfoLabel.Name = "InfoLabel";
+            this.InfoLabel.Size = new System.Drawing.Size(513, 44);
+            this.InfoLabel.TabIndex = 103;
+            this.InfoLabel.Text = "Microsoft.Data.SqlClient requires you to set Encrypt=False if your database is no" +
+    "t encrypted. Leave this checked if you are targeting .NET Core.\r\n";
+            // 
             // SQLDatabaseEditor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Linen;
+            this.Controls.Add(this.EncryptValueComboBox);
+            this.Controls.Add(this.IncludeEncryptCheckBox);
+            this.Controls.Add(this.InfoLabel);
             this.Controls.Add(this.BrowseDatabaseButton);
             this.Controls.Add(this.BrowseServerButton);
             this.Controls.Add(this.SQLServerRadioButton);
@@ -267,14 +329,17 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.UserIDLabel);
             this.Controls.Add(this.ServerLabel);
             this.Name = "SQLDatabaseEditor";
-            this.Size = new System.Drawing.Size(560, 400);
+            this.Size = new System.Drawing.Size(560, 471);
             this.ResumeLayout(false);
             this.PerformLayout();
 
-            } 
-            #endregion
-            
+            }
         #endregion
 
+        #endregion
+
+        private DataJuggler.Win.Controls.LabelComboBoxControl EncryptValueComboBox;
+        private DataJuggler.Win.Controls.LabelCheckBoxControl IncludeEncryptCheckBox;
+        private System.Windows.Forms.Label InfoLabel;
     }
 }
