@@ -13,13 +13,13 @@ namespace ApplicationLogicComponent.Connection
 
         #region Methods
 
-            #region GetEnvironmentVariableValue(string variableName)
+            #region GetEnvironmentVariableValue(string variableName, EnvironmentVariableTarget target)
             /// <summary>
             /// This method is used to get an environment value
             /// </summary>
             /// <param name="variableName"></param>
             /// <returns></returns>
-            public static string GetEnvironmentVariableValue(string variableName)
+            public static string GetEnvironmentVariableValue(string variableName, EnvironmentVariableTarget target)
             {
                 // initial value
                 string value = "";
@@ -29,7 +29,7 @@ namespace ApplicationLogicComponent.Connection
                     if (Environment.OSVersion.Platform == PlatformID.Win32NT)
                     {
                         // Change the directory to %WINDIR%
-                        value = Environment.GetEnvironmentVariable(variableName, EnvironmentVariableTarget.User);
+                        value = Environment.GetEnvironmentVariable(variableName, target);
                     }
                 }
                 catch (Exception error)

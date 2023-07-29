@@ -68,7 +68,7 @@ namespace ApplicationLogicComponent.Connection
                 if (String.IsNullOrEmpty(dataManager.DataConnector.ConnectionString))
                 {
                     // Update: 3.1.2022: Shifting to EnvironmentVariables for release version. Might shift all, but legacy app.configs need to be kept (maybe)
-                    dataManager.DataConnector.ConnectionString = EnvironmentVariableHelper.GetEnvironmentVariableValue("DataTierNetConnection");
+                    dataManager.DataConnector.ConnectionString = EnvironmentVariableHelper.GetEnvironmentVariableValue("DataTierNetConnection", EnvironmentVariableTarget.User);
                 }
                     
                 // Test again, if the EnvironmentVariable is not set, use app.config
