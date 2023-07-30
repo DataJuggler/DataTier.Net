@@ -78,7 +78,7 @@ namespace DataTierClient.ClientUtil
                     string text = File.ReadAllText(filePath);
 
                     // get the textLines
-                    List<TextLine> textLines = WordParser.GetTextLines(text);
+                    List<TextLine> textLines = TextHelper.GetTextLines(text);
 
                     // set the return value
                     codeLines = CreateCodeLines(textLines);
@@ -134,7 +134,7 @@ namespace DataTierClient.ClientUtil
                 if (TextHelper.Exists(text))
                 {
                     // get the textLines
-                    textLines = WordParser.GetTextLines(text);
+                    textLines = TextHelper.GetTextLines(text);
                 }
 
                 // now create the codeLines from the textLines

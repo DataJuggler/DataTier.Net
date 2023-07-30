@@ -280,7 +280,7 @@ namespace DataTierClient.Controls
                         string temp = procedureText.Substring(whereIndex);
 
                         // get the textLines after this whereIndex
-                        List<TextLine> endProcedureTextLines = WordParser.GetTextLines(temp);
+                        List<TextLine> endProcedureTextLines = TextHelper.GetTextLines(temp);
                         List<TextLine> linesAfterOrderBy = new List<TextLine>();
                         string postWhereText = "";
                         
@@ -658,7 +658,7 @@ namespace DataTierClient.Controls
                                 if (TextHelper.Exists(whereText))
                                 {
                                     // get the textLines
-                                    List<TextLine> textLines = WordParser.GetTextLines(whereText);
+                                    List<TextLine> textLines = TextHelper.GetTextLines(whereText);
 
                                     // If the textLines collection exists and has one or more items
                                     if (ListHelper.HasOneOrMoreItems(textLines))

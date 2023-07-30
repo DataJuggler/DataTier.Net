@@ -6,7 +6,7 @@ namespace templatepack
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            
         }
     }
 }

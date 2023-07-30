@@ -3,36 +3,36 @@
   <PropertyGroup>
     
     <PackageType>Template</PackageType>
-    <PackageVersion>7.0.4</PackageVersion>
+    <PackageVersion>7.0.6</PackageVersion>
     <PackageId>DataJuggler.DataTier.Net7.ProjectTemplates</PackageId>
     <Title>DataJuggler.DataTier.Net7.ProjectTemplates</Title>
     <Authors>Data Juggler</Authors>
-    <Description>This is a set of templates to use when creating a project for DataTier.Net targeting .Net 7.0
-</Description>
-    <PackageTags>DataTier.Net;DataTier.Net7;C#;SQL;SQLServer;EntityFramework Alternative;</PackageTags>	
-    <TargetFramework>net7.0</TargetFramework>
+    <Description>This is a new set of templates to use when creating a project for DataTier.Net targeting .Net 7
+	</Description>
+    <PackageTags>DataTier.Net;DataTier.Net6;C#;SQL;SQLServer;EntityFrameworkAlternative;</PackageTags>
+    <TargetFramework>net6.0</TargetFramework>
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <ContentTargetFolders>content</ContentTargetFolders>
-    <Version>7.0.4</Version>
-    <Product>DataJuggler.DataTier.Net7.ProjectTemplate</Product>
+    <Version>7.0.6</Version>
+    <Product>DataJuggler.DataTier.Net6.ProjectTemplate</Product>
     <ApplicationIcon></ApplicationIcon>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/DataJuggler/DataTier.Net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/DataJuggler/DataTier.Net.git</RepositoryUrl>
     <RepositoryType>Git/GitHub</RepositoryType>
-    <PackageReleaseNotes>		
-		Update 7.29.2023: I updated this project to the latest Nuget packages for datadATADataJuggler.Net7 and DataJ
-		
+	<PackageReleaseNotes>
+		Update 7.29.2023: I updated this project to the latest Nuget packages for
+		DataJuggler.Net7 and DataJuggler.UltimateHelper.
+
 		Update 4.3.2023: I updated this project to the latest Nuget packages, which solves the bug of EnvironmentVariableHelper
 		now requires a parameter for Target (User, System or Process).
-		Update 7.29.2023:  I updated DataJuggler.Net7 and DataJuggler.UltimateHelper Nuget  packages.
 
-		Update 11.14.2022: I am testing the .NET 7 version now.</PackageReleaseNotes>
+		Update 11.14.2022: I am testing the .NET 7 version now.
+	</PackageReleaseNotes>
     <Nullable>disable</Nullable>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackAsTool>True</PackAsTool>
-    <PackageReadmeFile>templates\ReadMe.md</PackageReadmeFile>
+	<PackageReadmeFile>templates\README.md</PackageReadmeFile>
 
   </PropertyGroup>
   
@@ -46,21 +46,10 @@
   </ItemGroup>
   
   <ItemGroup>
-    <None Update="templates\ReadMe.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
+	  <None Update="templates\README.md">
+		  <Pack>True</Pack>
+		  <PackagePath>\</PackagePath>
+	  </None>
   </ItemGroup>
   
 </Project>
-
-
-
-    
-    
-    
-
-
-  
-
-

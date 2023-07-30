@@ -159,7 +159,7 @@ namespace DataTierClient.Builders
                         if (TextHelper.Exists(text))
                         {
                             // get the lines from this file text
-                            List<TextLine> lines = WordParser.GetTextLines(text);
+                            List<TextLine> lines = TextHelper.GetTextLines(text);
 
                             // If there are not multiple lines, this was not created
                             created = ListHelper.HasOneOrMoreItems(lines);

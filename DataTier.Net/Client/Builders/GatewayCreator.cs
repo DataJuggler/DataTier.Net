@@ -65,7 +65,7 @@ namespace DataTierClient.Builders
                     string gatewayText = File.ReadAllText(this.GatewayPath);
                     
                     // get the lines from the existing gateway
-                    List<TextLine> lines = WordParser.GetTextLines(gatewayText);
+                    List<TextLine> lines = TextHelper.GetTextLines(gatewayText);
 
                     // if there are lines we can proceed
                     if (ListHelper.HasOneOrMoreItems(lines))
@@ -153,7 +153,7 @@ namespace DataTierClient.Builders
                             if (textLine.Words == null)
                             {
                                 // load the words
-                                textLine.Words = WordParser.GetWords(textLine.Text);
+                                textLine.Words = TextHelper.GetWords(textLine.Text);
                             }
 
                             // create a codeLine

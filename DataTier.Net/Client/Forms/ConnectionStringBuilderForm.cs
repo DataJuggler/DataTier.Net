@@ -556,7 +556,7 @@ namespace DataTierClient.Forms
                     if (TextHelper.Exists(appConfigText))
                     {
                         // get the textLines
-                        List<TextLine> textLines = WordParser.GetTextLines(appConfigText);
+                        List<TextLine> textLines = TextHelper.GetTextLines(appConfigText);
 
                         // If the textLines collection exists and has one or more items
                         if (ListHelper.HasOneOrMoreItems(textLines))

@@ -183,7 +183,7 @@ namespace DataTier.Net.StoredProcedureGenerator
                 char[] delimiter = { ' ' };
 
                 // get the words
-                List<Word> words = WordParser.GetWords(parameterName, delimiter);
+                List<Word> words = TextHelper.GetWords(parameterName, delimiter);
 
                 // if there  are one or more words
                 if (ListHelper.HasOneOrMoreItems(words))
@@ -1176,7 +1176,7 @@ namespace DataTier.Net.StoredProcedureGenerator
                 char[] delimiter = { ' ' };
 
                 // get the words
-                List<Word> words = WordParser.GetWords(parameterName, delimiter);
+                List<Word> words = TextHelper.GetWords(parameterName, delimiter);
 
                 // if there  are one or more words
                 if (ListHelper.HasOneOrMoreItems(words))

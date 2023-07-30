@@ -2347,7 +2347,7 @@ namespace DataTierClient.Controls
                     string text = File.ReadAllText(dataObject);
 
                     // get the textLines
-                    List<TextLine> textLines = WordParser.GetTextLines(text);
+                    List<TextLine> textLines = TextHelper.GetTextLines(text);
 
                     // create the codeLines
                     List<CodeLine> codeLines = CodeLineHelper.CreateCodeLines(textLines);

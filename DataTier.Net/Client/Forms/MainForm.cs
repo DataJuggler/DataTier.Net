@@ -1658,7 +1658,7 @@ namespace DataTierClient.Forms
                                 string text = textWriter.TextWriter.ToString();
 
                                 // get the text
-                                textLines = WordParser.GetTextLines(text);
+                                textLines = TextHelper.GetTextLines(text);
                             }
                         }
 

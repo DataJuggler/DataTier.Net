@@ -54,7 +54,7 @@ namespace DataTierClient.ClientUtil
                     if (TextHelper.Exists(fileText))
                     {
                         // Parse the lines
-                        List<TextLine> lines = WordParser.GetTextLines(fileText);
+                        List<TextLine> lines = TextHelper.GetTextLines(fileText);
 
                         // If the lines collection exists and has one or more items
                         if (ListHelper.HasOneOrMoreItems(lines))
@@ -82,7 +82,7 @@ namespace DataTierClient.ClientUtil
                                     if (codeLine.HasTextLine) 
                                     {
                                         // Get the words for this line
-                                        codeLine.TextLine.Words = WordParser.GetWords(line.Text);
+                                        codeLine.TextLine.Words = TextHelper.GetWords(line.Text);
                                     }
 
                                     // if the value for methodRegionOn is true
