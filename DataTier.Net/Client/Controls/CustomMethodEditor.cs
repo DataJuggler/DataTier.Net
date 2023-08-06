@@ -1030,25 +1030,28 @@ namespace DataTierClient.Controls
                     orderByTypeIndex = OrderByTypeControl.FindItemIndexByValue(this.SelectedMethod.OrderByType.ToString().Replace("_", " "));
 
                     // set the methodName
-                    methodName = this.SelectedMethod.Name;
+                    methodName = SelectedMethod.Name;
 
                     // set the procedureName
-                    procedureName = this.SelectedMethod.ProcedureName;
+                    procedureName = SelectedMethod.ProcedureName;
 
                     // set the parameters
-                    parameters = this.SelectedMethod.Parameters;
+                    parameters = SelectedMethod.Parameters;
 
                     // set the propertyName
-                    propertyName = this.SelectedMethod.PropertyName;
+                    propertyName = SelectedMethod.PropertyName;
 
                     // set the value for topRows
                     topRows = SelectedMethod.TopRows;
 
                     // set the value for updateOnBuild
-                    updateOnBuild = this.SelectedMethod.UpdateProcedureOnBuild;
+                    updateOnBuild = SelectedMethod.UpdateProcedureOnBuild;
 
                     // set the value for useCustomReader
-                    useCustomReader = this.SelectedMethod.UseCustomReader;
+                    useCustomReader = SelectedMethod.UseCustomReader;
+
+                    // Set the value for UpdateProcedureOnBuild
+                    updateOnBuild = SelectedMethod.UpdateProcedureOnBuild;
 
                     // if useCustomReader is true
                     if ((useCustomReader) && (this.SelectedMethod.CustomReaderId > 0))
@@ -1069,21 +1072,22 @@ namespace DataTierClient.Controls
                 }
 
                 // Display the values
-                this.MethodTypeControl.SelectedIndex = methodTypeIndex;
-                this.ParameterTypeControl.SelectedIndex = parameterTypeIndex;
-                this.ParameterFieldControl.SelectedIndex = parameterFieldIndex;
-                this.ParameterFieldSetControl.SelectedIndex = parameterFieldSetIndex;
-                this.MethodNameControl.Text = methodName;
-                this.ProcedureNameControl.Text = procedureName;
-                this.ParametersControl.Text = parameters;
-                this.PropertyNameControl.Text = propertyName;
-                this.UseCustomReaderCheckBox.Checked = useCustomReader;
-                this.OrderByTypeControl.SelectedIndex = orderByTypeIndex;
-                this.OrderByFieldControl.SelectedIndex = orderByFieldIndex;
-                this.DescendingCheckBox.Checked = descending;
-                this.OrderByFieldSetControl.SelectedIndex = orderByFieldSetIndex;
-                this.TopRowsControl.Text = topRows.ToString();
-                this.CustomWhereCheckBox.Checked = customWhere;
+                MethodTypeControl.SelectedIndex = methodTypeIndex;
+                ParameterTypeControl.SelectedIndex = parameterTypeIndex;
+                ParameterFieldControl.SelectedIndex = parameterFieldIndex;
+                ParameterFieldSetControl.SelectedIndex = parameterFieldSetIndex;
+                MethodNameControl.Text = methodName;
+                ProcedureNameControl.Text = procedureName;
+                ParametersControl.Text = parameters;
+                PropertyNameControl.Text = propertyName;
+                UseCustomReaderCheckBox.Checked = useCustomReader;
+                OrderByTypeControl.SelectedIndex = orderByTypeIndex;
+                OrderByFieldControl.SelectedIndex = orderByFieldIndex;
+                DescendingCheckBox.Checked = descending;
+                OrderByFieldSetControl.SelectedIndex = orderByFieldSetIndex;
+                TopRowsControl.Text = topRows.ToString();
+                CustomWhereCheckBox.Checked = customWhere;
+                UpdateOnBuildCheckbox.Checked = updateOnBuild;
                 
                 // if the value for useCustomReader is true
                 if (useCustomReader)

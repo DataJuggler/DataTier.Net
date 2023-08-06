@@ -58,9 +58,6 @@ namespace ApplicationLogicComponent.Connection
                 string methodName = "ConnectToDatabase";
                 string objectName = "AuthenticationManager";
 
-                // Create variable for a possible CustomException
-                CustomException exception = null;
-                
                 try
                 {   
                     // If connection is not set 
