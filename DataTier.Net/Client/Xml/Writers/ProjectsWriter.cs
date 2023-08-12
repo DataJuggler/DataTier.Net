@@ -106,12 +106,6 @@ namespace DataTierClient.Xml.Writers
 
                     // Write out each property
 
-                    
-                    // Write out the value for BindingCallbackOption
-
-                    sb.Append(indentString2);
-                    sb.Append("<BindingCallbackOption>" + project.BindingCallbackOption + "</BindingCallbackOption>" + Environment.NewLine);
-
                     // Write out the value for ControllerFolder
 
                     sb.Append(indentString2);
@@ -307,11 +301,6 @@ namespace DataTierClient.Xml.Writers
 
                     sb.Append(indentString2);
                     sb.Append("<StoredProcsFolder>" + project.StoredProcsFolder + "</StoredProcsFolder>" + Environment.NewLine);
-
-                    // Write out the value for UIFolderPath
-
-                    sb.Append(indentString2);
-                    sb.Append("<UIFolderPath>" + project.UIFolderPath + "</UIFolderPath>" + Environment.NewLine);
 
                     // Write out the value for WriterReferencesSet
 

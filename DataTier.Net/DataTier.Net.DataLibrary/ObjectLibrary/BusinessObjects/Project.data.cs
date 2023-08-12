@@ -17,7 +17,6 @@ namespace ObjectLibrary.BusinessObjects
     {
 
         #region Private Variables
-        private BindingCallbackOptionEnum bindingCallbackOption;
         private string controllerFolder;
         private string controllerNamespace;
         private int controllerReferencesSetId;
@@ -47,7 +46,6 @@ namespace ObjectLibrary.BusinessObjects
         private int storedProcedureReferencesSetId;
         private string storedProcsFolder;
         private TargetFrameworkEnum targetFramework;
-        private string uIFolderPath;
         #endregion
 
         #region Methods
@@ -67,20 +65,6 @@ namespace ObjectLibrary.BusinessObjects
         #endregion
 
         #region Properties
-
-            #region BindingCallbackOptionEnum BindingCallbackOption
-            public BindingCallbackOptionEnum BindingCallbackOption
-            {
-                get
-                {
-                    return bindingCallbackOption;
-                }
-                set
-                {
-                    bindingCallbackOption = value;
-                }
-            }
-            #endregion
 
             #region string ControllerFolder
             public string ControllerFolder
@@ -480,20 +464,6 @@ namespace ObjectLibrary.BusinessObjects
                 set
                 {
                     targetFramework = value;
-                }
-            }
-            #endregion
-
-            #region string UIFolderPath
-            public string UIFolderPath
-            {
-                get
-                {
-                    return uIFolderPath;
-                }
-                set
-                {
-                    uIFolderPath = value;
                 }
             }
             #endregion

@@ -107,24 +107,6 @@ namespace DataTierClient.Controls
             }
             #endregion
 
-            #region BrowseUIPathButton_Click(object sender, EventArgs e)
-            /// <summary>
-            /// event is fired when the 'BrowseUIPathButton' is clicked.
-            /// </summary>
-            private void BrowseUIPathButton_Click(object sender, EventArgs e)
-            {
-                // if the value for HasSelectedProject is true
-                if (HasSelectedProject)
-                {
-                    // set the value
-                    SelectedProject.UIFolderPath = this.UIFolderTextBox.Text;
-                }
-
-                // Enable or disable controls
-                UIEnable();
-            }
-            #endregion
-            
             #region Button_Enter(object sender, EventArgs e)
             /// <summary>
             /// event is fired when Button _ Enter
@@ -271,7 +253,7 @@ namespace DataTierClient.Controls
                                     Application.DoEvents();
 
                                     // has 15 secondes elapsed
-                                    if (currentTime.Subtract(startTime).TotalSeconds >= 30)
+                                    if (currentTime.Subtract(startTime).TotalSeconds >= 15)
                                     {
                                         // give up after 15 seconds
                                         break;
@@ -304,7 +286,7 @@ namespace DataTierClient.Controls
                                 else
                                 {
                                     // show the user a message
-                                    MessageBoxHelper.ShowMessage("Oops. Something went wrong", "Data Tier Not Created");
+                                    MessageBoxHelper.ShowMessage("Oops. Something went wrong. It is recommended you try again, as it usually works the second time.", "Data Tier Not Created");
                                 }
                             }
                         }
@@ -384,12 +366,7 @@ namespace DataTierClient.Controls
                 // if the value for HasSelectedProject is true
                 if (HasSelectedProject)
                 {
-                    if (TextHelper.IsEqual(control.Name, BindingCallbackOptionControl.Name))
-                    {
-                        // Set the BindingCallbackOption
-                        SelectedProject.BindingCallbackOption = (BindingCallbackOptionEnum) selectedIndex;                   
-                    }
-                    else if (TextHelper.IsEqual(control.Name, ProjectTypeControl.Name))
+                    if (TextHelper.IsEqual(control.Name, ProjectTypeControl.Name))
                     {
                         // Set the ProjectType
                         SelectedProject.TargetFramework = (TargetFrameworkEnum) (selectedIndex + 4);
@@ -471,27 +448,6 @@ namespace DataTierClient.Controls
             }
             #endregion
             
-            #region UIFolderTextBox_TextChanged(object sender, EventArgs e)
-            /// <summary>
-            /// event is fired when UI Folder Text Box _ Text Changed
-            /// </summary>
-            private void UIFolderTextBox_TextChanged(object sender, EventArgs e)
-            {
-                 // if the SelectedProject exists
-                if (this.HasSelectedProject)
-                {
-                    // Set the ProjectFolder
-                    this.SelectedProject.UIFolderPath = this.UIFolderTextBox.Text;
-                    
-                    // get a reference to the ProjectFolder 
-                    string projectFolder = this.SelectedProject.ProjectFolder;
-                 
-                    // Enable Controls
-                    UIEnable();
-                }
-            }
-            #endregion
-            
         #endregion
         
         #region Methods
@@ -505,10 +461,8 @@ namespace DataTierClient.Controls
                 // locals
                 string projectName = "";
                 string projectFolder = "";
-                bool enableBlazorFeatures = false;
-                int bindingIndex = -1;
+                bool enableBlazorFeatures = false;                
                 int projectTypeIndex = ProjectTypeControl.FindItemIndexByValue("Net6");
-                string uiFolderPath = "";
                 
                 // if the SelectedProject Exists
                 if(this.SelectedProject != null)
@@ -516,10 +470,8 @@ namespace DataTierClient.Controls
                     // set values
                     projectName = this.SelectedProject.ProjectName;
                     projectFolder = this.SelectedProject.ProjectFolder;                    
-                    enableBlazorFeatures = SelectedProject.EnableBlazorFeatures;
-                    bindingIndex = FindBindingIndex(SelectedProject.BindingCallbackOption);
-                    projectTypeIndex = ProjectTypeControl.FindItemIndexByValue(SelectedProject.TargetFramework.ToString());
-                    uiFolderPath = SelectedProject.UIFolderPath;
+                    enableBlazorFeatures = SelectedProject.EnableBlazorFeatures;                    
+                    projectTypeIndex = ProjectTypeControl.FindItemIndexByValue(SelectedProject.TargetFramework.ToString());                    
                 }
                 
                 // dislay values now
@@ -527,8 +479,6 @@ namespace DataTierClient.Controls
                 ProjectFolderTextBox.Text = projectFolder;
                 ProjectTypeControl.SelectedIndex = projectTypeIndex;
                 BlazorServicesCheckBox.Checked = enableBlazorFeatures;
-                BindingCallbackOptionControl.SelectedIndex = bindingIndex;
-                UIFolderTextBox.Text = uiFolderPath;
                                 
                 // Enable controls
                 UIEnable();
@@ -583,9 +533,6 @@ namespace DataTierClient.Controls
             /// </summary>
             public void Init()
             {
-                // Setup the listener
-                this.BindingCallbackOptionControl.SelectedIndexListener = this;
-
                 // Set Dock To Fill
                 this.Dock = DockStyle.Fill;
 
@@ -594,9 +541,6 @@ namespace DataTierClient.Controls
 
                 // Set the next control
                 this.NextControl = ActiveControlEnum.DatabasesTab;
-
-                // Load the binding choices
-                BindingCallbackOptionControl.LoadItems(typeof(BindingCallbackOptionEnum));
 
                 // Load the ProjectTypes combo box
                 ProjectTypeControl.LoadItems(typeof(TargetFrameworkEnum));
@@ -660,8 +604,8 @@ namespace DataTierClient.Controls
                  }
                  catch (Exception error)
                  {
-                    // If it failed on the first attempt, try again
-                    if (Attempts < 2)
+                    // If it failed on the first few attempts, try again
+                    if (Attempts < 3)
                     {
                         // Try again
                         InstallDataTierNetTemplates();
@@ -746,9 +690,6 @@ namespace DataTierClient.Controls
                     // Show Enable BlazorServices for DotNet5 or DotNet6 projects only
                     this.BlazorServicesCheckBox.Visible = SelectedProject.IsDotNetCore;
 
-                    // Enable Blazor Features to true
-                    this.BindingCallbackOptionControl.Visible = SelectedProject.EnableBlazorFeatures;
-
                     // Show the CreateDotNet5Project control if DotNet5
                     this.CreateDotNetProject.Visible = SelectedProject.IsDotNetCore;
                 }
@@ -756,8 +697,7 @@ namespace DataTierClient.Controls
                 {
                     // Do not show for .Net Framework projects
                     this.BlazorServicesCheckBox.Visible = false;
-                    this.CreateDotNetProject.Visible = false;
-                    this.BindingCallbackOptionControl.Visible = false;
+                    this.CreateDotNetProject.Visible = false;                    
                 }
 
                 // if the value for ShowAutoFillHelp is true

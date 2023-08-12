@@ -17,6 +17,8 @@ namespace ObjectLibrary.BusinessObjects
     {
 
         #region Private Variables
+        private DataTypeEnum dataType;
+        private bool exclude;
         private string fieldName;
         private int isNullable;
         private int projectId;
@@ -30,6 +32,34 @@ namespace ObjectLibrary.BusinessObjects
         #endregion
 
         #region Properties
+
+            #region DataTypeEnum DataType
+            public DataTypeEnum DataType
+            {
+                get
+                {
+                    return dataType;
+                }
+                set
+                {
+                    dataType = value;
+                }
+            }
+            #endregion
+
+            #region bool Exclude
+            public bool Exclude
+            {
+                get
+                {
+                    return exclude;
+                }
+                set
+                {
+                    exclude = value;
+                }
+            }
+            #endregion
 
             #region string FieldName
             public string FieldName

@@ -37,42 +37,39 @@ namespace DataAccessComponent.DataManager.Readers
                 Project project = new Project();
 
                 // Create field Integers
-                int bindingCallbackOptionfield = 0;
-                int controllerFolderfield = 1;
-                int controllerNamespacefield = 2;
-                int controllerReferencesSetIdfield = 3;
-                int dataManagerFolderfield = 4;
-                int dataManagerNamespacefield = 5;
-                int dataManagerReferencesSetIdfield = 6;
-                int dataOperationsFolderfield = 7;
-                int dataOperationsNamespacefield = 8;
-                int dataOperationsReferencesSetIdfield = 9;
-                int dataWriterFolderfield = 10;
-                int dataWriterNamespacefield = 11;
-                int dataWriterReferencesSetIdfield = 12;
-                int dateModifiedfield = 13;
-                int enableBlazorFeaturesfield = 14;
-                int objectFolderfield = 15;
-                int objectNamespacefield = 16;
-                int objectReferencesSetIdfield = 17;
-                int projectFolderfield = 18;
-                int projectIdfield = 19;
-                int projectNamefield = 20;
-                int readerFolderfield = 21;
-                int readerNamespacefield = 22;
-                int readerReferencesSetIdfield = 23;
-                int servicesFolderfield = 24;
-                int storedProcedureObjectFolderfield = 25;
-                int storedProcedureObjectNamespacefield = 26;
-                int storedProcedureReferencesSetIdfield = 27;
-                int storedProcsFolderfield = 28;
-                int targetFrameworkfield = 29;
-                int uIFolderPathfield = 30;
+                int controllerFolderfield = 0;
+                int controllerNamespacefield = 1;
+                int controllerReferencesSetIdfield = 2;
+                int dataManagerFolderfield = 3;
+                int dataManagerNamespacefield = 4;
+                int dataManagerReferencesSetIdfield = 5;
+                int dataOperationsFolderfield = 6;
+                int dataOperationsNamespacefield = 7;
+                int dataOperationsReferencesSetIdfield = 8;
+                int dataWriterFolderfield = 9;
+                int dataWriterNamespacefield = 10;
+                int dataWriterReferencesSetIdfield = 11;
+                int dateModifiedfield = 12;
+                int enableBlazorFeaturesfield = 13;
+                int objectFolderfield = 14;
+                int objectNamespacefield = 15;
+                int objectReferencesSetIdfield = 16;
+                int projectFolderfield = 17;
+                int projectIdfield = 18;
+                int projectNamefield = 19;
+                int readerFolderfield = 20;
+                int readerNamespacefield = 21;
+                int readerReferencesSetIdfield = 22;
+                int servicesFolderfield = 23;
+                int storedProcedureObjectFolderfield = 24;
+                int storedProcedureObjectNamespacefield = 25;
+                int storedProcedureReferencesSetIdfield = 26;
+                int storedProcsFolderfield = 27;
+                int targetFrameworkfield = 28;
 
                 try
                 {
                     // Load Each field
-                    project.BindingCallbackOption = (BindingCallbackOptionEnum) DataHelper.ParseInteger(dataRow.ItemArray[bindingCallbackOptionfield], 0);
                     project.ControllerFolder = DataHelper.ParseString(dataRow.ItemArray[controllerFolderfield]);
                     project.ControllerNamespace = DataHelper.ParseString(dataRow.ItemArray[controllerNamespacefield]);
                     project.ControllerReferencesSetId = DataHelper.ParseInteger(dataRow.ItemArray[controllerReferencesSetIdfield], 0);
@@ -102,7 +99,6 @@ namespace DataAccessComponent.DataManager.Readers
                     project.StoredProcedureReferencesSetId = DataHelper.ParseInteger(dataRow.ItemArray[storedProcedureReferencesSetIdfield], 0);
                     project.StoredProcsFolder = DataHelper.ParseString(dataRow.ItemArray[storedProcsFolderfield]);
                     project.TargetFramework = (TargetFrameworkEnum) DataHelper.ParseInteger(dataRow.ItemArray[targetFrameworkfield], 0);
-                    project.UIFolderPath = DataHelper.ParseString(dataRow.ItemArray[uIFolderPathfield]);
                 }
                 catch
                 {

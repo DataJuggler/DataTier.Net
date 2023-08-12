@@ -29,7 +29,7 @@ namespace DataTierClient.Controls
     /// This control is used to manage tables, fields and code files, including 
     /// Methods, Custom Readers and Field Sets for the selected table.
     /// </summary>
-    public partial class DataEditorControl : UserControl, ISaveCancelControl, ICheckChangedListener
+    public partial class DataEditorControl : UserControl, ISaveCancelControl
     {
         
         #region Private Variables
@@ -259,49 +259,6 @@ namespace DataTierClient.Controls
                 {
                     // unselect this item
                     TablesListBox.SetItemChecked(i, false);
-                }
-            }
-            #endregion
-            
-            #region OnCheckChanged(LabelCheckBoxControl sender, bool isChecked)
-            /// <summary>
-            /// event is fired when On Check Changed
-            /// </summary>
-            public void OnCheckChanged(LabelCheckBoxControl sender, bool isChecked)
-            {
-                // 1.9.2020: Added check for Loading if the value for HasSelectedTable is true
-                if ((!Loading) && (HasSelectedTable) && (HasProject) && (Project.EnableBlazorFeatures) && (Project.BindingCallbackOption == BindingCallbackOptionEnum.Allow_Binding))
-                {  
-                    // set the value
-                    if (SelectedTable.CreateBindingCallback != isChecked)
-                    {
-                        // Set the value
-                        SelectedTable.CreateBindingCallback = isChecked;
-
-                        // Create a new instance of a 'Gateway' object.
-                        Gateway gateway = new Gateway();
-
-                        // save the selection
-                        bool saved = gateway.SaveDTNTable(ref selectedTable);
-
-                        // if the save was good
-                        if (saved)
-                        {
-                            // Find the index of the selected table
-                            int index = FindTableIndex(SelectedTable.TableId);
-
-                            // if the index was found
-                            if (index >= 0)
-                            {
-                                // Set the value at this index - fixes a bug where changing indexes doesn't
-                                // display the correct value as the database.
-                                Tables[index].CreateBindingCallback = SelectedTable.CreateBindingCallback;
-                            }
-                        }
-                    }
-
-                    // Enable or disable controls
-                    UIEnable();
                 }
             }
             #endregion
@@ -774,9 +731,6 @@ namespace DataTierClient.Controls
             /// </summary>
             public void Init()
             {
-                // Setup the listener
-                this.CreateBindingCallbackControl.CheckChangedListener = this;
-
                 // default to true
                 this.UserCancelled = true;
                 
@@ -868,7 +822,7 @@ namespace DataTierClient.Controls
             {
                 // local
                 bool showBlazorFeatures = ((HasProject) && (Project.EnableBlazorFeatures) && (Project.TargetFramework != TargetFrameworkEnum.NetFramework));
-                bool showCreateBindingCallbackControl = ((HasProject) && (Project.EnableBlazorFeatures) && (Project.BindingCallbackOption == BindingCallbackOptionEnum.Allow_Binding) && (Project.TargetFramework != TargetFrameworkEnum.NetFramework));
+                bool showCreateBindingCallbackControl = false;
 
                 // if there is a SelectedTable
                 if ((this.HasSelectedTable) && (!this.SelectedTable.Exclude))

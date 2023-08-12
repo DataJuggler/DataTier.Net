@@ -37,15 +37,19 @@ namespace DataAccessComponent.DataManager.Readers
                 FieldView fieldView = new FieldView();
 
                 // Create field Integers
-                int fieldNamefield = 0;
-                int isNullablefield = 1;
-                int projectIdfield = 2;
-                int tableIdfield = 3;
-                int tableNamefield = 4;
+                int dataTypefield = 0;
+                int excludefield = 1;
+                int fieldNamefield = 2;
+                int isNullablefield = 3;
+                int projectIdfield = 4;
+                int tableIdfield = 5;
+                int tableNamefield = 6;
 
                 try
                 {
                     // Load Each field
+                    fieldView.DataType = (DataTypeEnum) DataHelper.ParseInteger(dataRow.ItemArray[dataTypefield], 0);
+                    fieldView.Exclude = DataHelper.ParseBoolean(dataRow.ItemArray[excludefield], false);
                     fieldView.FieldName = DataHelper.ParseString(dataRow.ItemArray[fieldNamefield]);
                     fieldView.IsNullable = DataHelper.ParseInteger(dataRow.ItemArray[isNullablefield], 0);
                     fieldView.ProjectId = DataHelper.ParseInteger(dataRow.ItemArray[projectIdfield], 0);

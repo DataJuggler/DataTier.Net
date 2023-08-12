@@ -327,12 +327,8 @@ namespace DataTierClient.Builders
                     // iterate the collection of tables                    
                     foreach (DataTable table in database.Tables)
                     {
-                        // if a DotNet5 project and EnableBlazorFeatures is true and BindingCallBack option is set to CreateBinding
-                        if ((currentProject.TargetFramework != TargetFrameworkEnum.NetFramework) && (currentProject.EnableBlazorFeatures) && (currentProject.BindingCallbackOption == BindingCallbackOptionEnum.Create_Binding))
-                        {
-                            // Create the BindingCall back needs to be set to true to code generate the Callback.
-                            table.CreateBindingCallback = true;
-                        }
+                        // disable this for now
+                        table.CreateBindingCallback = false;
 
                         // if there are one or more fields
                         if (ListHelper.HasOneOrMoreItems(table.Fields, enumerations))

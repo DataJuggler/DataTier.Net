@@ -318,18 +318,7 @@ namespace DataTierClient.ClientUtil
                     // Convert the Fields 
                     table.Fields = ConvertDataFields(sourceTable.Fields);
                     table.Serializable = sourceTable.Serializable;
-                    table.Name = sourceTable.TableName;
-
-                    // New field used with Blazor
-                    if ((NullHelper.Exists(project)) && (project.EnableBlazorFeatures) && (project.BindingCallbackOption != BindingCallbackOptionEnum.No_Binding))
-                    {
-                        // if the Project has Create Binding, this implies all tables or if the sourceTable has CreatingBindingCallback set to true
-                        if ((project.BindingCallbackOption == BindingCallbackOptionEnum.Create_Binding) || (sourceTable.CreateBindingCallback))
-                        {
-                            // set the value for CreateBindingCallback to true
-                            table.CreateBindingCallback = true;    
-                        }
-                    }
+                    table.Name = sourceTable.TableName;                    
                 }
                 
                 // return value

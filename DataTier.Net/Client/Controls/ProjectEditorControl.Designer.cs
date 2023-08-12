@@ -26,7 +26,6 @@ namespace DataTierClient.Controls
         private TabButton BrowseProjectFolderButton;
         private System.Windows.Forms.Button HelpButton;
         private System.Windows.Forms.CheckBox BlazorServicesCheckBox;
-        private DataJuggler.Win.Controls.LabelComboBoxControl BindingCallbackOptionControl;
         private System.Windows.Forms.Label CreateDotNetProject;
         #endregion
         
@@ -61,14 +60,10 @@ namespace DataTierClient.Controls
             this.ProjectNameLabel = new System.Windows.Forms.Label();
             this.AutoFillChildFoldersCheckBox = new System.Windows.Forms.CheckBox();
             this.BlazorServicesCheckBox = new System.Windows.Forms.CheckBox();
-            this.BindingCallbackOptionControl = new DataJuggler.Win.Controls.LabelComboBoxControl();
             this.CreateDotNetProject = new System.Windows.Forms.Label();
             this.Graph = new System.Windows.Forms.Label();
-            this.UIFolderTextBox = new System.Windows.Forms.TextBox();
-            this.UIPathLabel = new System.Windows.Forms.Label();
             this.AutoFillChildFolderInfo = new System.Windows.Forms.PictureBox();
             this.ShowAutoFillHelpButton = new System.Windows.Forms.Button();
-            this.BrowseUIPathButton = new DataTierClient.Controls.TabButton();
             this.HelpButton = new System.Windows.Forms.Button();
             this.BrowseProjectFolderButton = new DataTierClient.Controls.TabButton();
             this.EnumerationsButton = new DataTierClient.Controls.TabButton();
@@ -96,7 +91,7 @@ namespace DataTierClient.Controls
             // 
             // ProjectFolderLabel
             // 
-            this.ProjectFolderLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProjectFolderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProjectFolderLabel.Location = new System.Drawing.Point(32, 63);
             this.ProjectFolderLabel.Name = "ProjectFolderLabel";
             this.ProjectFolderLabel.Size = new System.Drawing.Size(180, 20);
@@ -106,7 +101,7 @@ namespace DataTierClient.Controls
             // 
             // ProjectNameLabel
             // 
-            this.ProjectNameLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProjectNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProjectNameLabel.Location = new System.Drawing.Point(32, 24);
             this.ProjectNameLabel.Name = "ProjectNameLabel";
             this.ProjectNameLabel.Size = new System.Drawing.Size(180, 20);
@@ -119,10 +114,10 @@ namespace DataTierClient.Controls
             this.AutoFillChildFoldersCheckBox.AutoSize = true;
             this.AutoFillChildFoldersCheckBox.Checked = true;
             this.AutoFillChildFoldersCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.AutoFillChildFoldersCheckBox.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AutoFillChildFoldersCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AutoFillChildFoldersCheckBox.Location = new System.Drawing.Point(90, 137);
             this.AutoFillChildFoldersCheckBox.Name = "AutoFillChildFoldersCheckBox";
-            this.AutoFillChildFoldersCheckBox.Size = new System.Drawing.Size(199, 22);
+            this.AutoFillChildFoldersCheckBox.Size = new System.Drawing.Size(181, 24);
             this.AutoFillChildFoldersCheckBox.TabIndex = 77;
             this.AutoFillChildFoldersCheckBox.Text = "Auto Fill Child Folders";
             this.AutoFillChildFoldersCheckBox.UseVisualStyleBackColor = true;
@@ -130,49 +125,23 @@ namespace DataTierClient.Controls
             // BlazorServicesCheckBox
             // 
             this.BlazorServicesCheckBox.AutoSize = true;
-            this.BlazorServicesCheckBox.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BlazorServicesCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BlazorServicesCheckBox.Location = new System.Drawing.Point(90, 233);
             this.BlazorServicesCheckBox.Name = "BlazorServicesCheckBox";
-            this.BlazorServicesCheckBox.Size = new System.Drawing.Size(213, 22);
+            this.BlazorServicesCheckBox.Size = new System.Drawing.Size(195, 24);
             this.BlazorServicesCheckBox.TabIndex = 83;
             this.BlazorServicesCheckBox.Text = "Enable Blazor Features";
             this.BlazorServicesCheckBox.UseVisualStyleBackColor = true;
             this.BlazorServicesCheckBox.Visible = false;
             this.BlazorServicesCheckBox.CheckedChanged += new System.EventHandler(this.BlazorServicesCheckBox_CheckedChanged);
             // 
-            // BindingCallbackOptionControl
-            // 
-            this.BindingCallbackOptionControl.BackColor = System.Drawing.Color.Transparent;
-            this.BindingCallbackOptionControl.ComboBoxLeftMargin = 1;
-            this.BindingCallbackOptionControl.ComboBoxText = "";
-            this.BindingCallbackOptionControl.ComoboBoxFont = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BindingCallbackOptionControl.Editable = true;
-            this.BindingCallbackOptionControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BindingCallbackOptionControl.HideLabel = false;
-            this.BindingCallbackOptionControl.LabelBottomMargin = 0;
-            this.BindingCallbackOptionControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.BindingCallbackOptionControl.LabelFont = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BindingCallbackOptionControl.LabelText = "Bindings:";
-            this.BindingCallbackOptionControl.LabelTopMargin = 0;
-            this.BindingCallbackOptionControl.LabelWidth = 96;
-            this.BindingCallbackOptionControl.List = null;
-            this.BindingCallbackOptionControl.Location = new System.Drawing.Point(293, 230);
-            this.BindingCallbackOptionControl.Name = "BindingCallbackOptionControl";
-            this.BindingCallbackOptionControl.SelectedIndex = -1;
-            this.BindingCallbackOptionControl.SelectedIndexListener = null;
-            this.BindingCallbackOptionControl.Size = new System.Drawing.Size(329, 28);
-            this.BindingCallbackOptionControl.Sorted = false;
-            this.BindingCallbackOptionControl.Source = null;
-            this.BindingCallbackOptionControl.TabIndex = 84;
-            this.BindingCallbackOptionControl.Visible = false;
-            // 
             // CreateDotNetProject
             // 
             this.CreateDotNetProject.AutoSize = true;
-            this.CreateDotNetProject.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CreateDotNetProject.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CreateDotNetProject.Location = new System.Drawing.Point(347, 139);
             this.CreateDotNetProject.Name = "CreateDotNetProject";
-            this.CreateDotNetProject.Size = new System.Drawing.Size(271, 18);
+            this.CreateDotNetProject.Size = new System.Drawing.Size(240, 20);
             this.CreateDotNetProject.TabIndex = 85;
             this.CreateDotNetProject.Text = "Create DataTier in Project Folder";
             this.CreateDotNetProject.Visible = false;
@@ -188,27 +157,6 @@ namespace DataTierClient.Controls
             this.Graph.Size = new System.Drawing.Size(268, 13);
             this.Graph.TabIndex = 86;
             this.Graph.Visible = false;
-            // 
-            // UIFolderTextBox
-            // 
-            this.UIFolderTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UIFolderTextBox.Location = new System.Drawing.Point(210, 99);
-            this.UIFolderTextBox.Name = "UIFolderTextBox";
-            this.UIFolderTextBox.Size = new System.Drawing.Size(373, 27);
-            this.UIFolderTextBox.TabIndex = 88;
-            this.UIFolderTextBox.Visible = false;
-            this.UIFolderTextBox.TextChanged += new System.EventHandler(this.UIFolderTextBox_TextChanged);
-            // 
-            // UIPathLabel
-            // 
-            this.UIPathLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UIPathLabel.Location = new System.Drawing.Point(32, 102);
-            this.UIPathLabel.Name = "UIPathLabel";
-            this.UIPathLabel.Size = new System.Drawing.Size(180, 20);
-            this.UIPathLabel.TabIndex = 87;
-            this.UIPathLabel.Text = "UI Folder:";
-            this.UIPathLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.UIPathLabel.Visible = false;
             // 
             // AutoFillChildFolderInfo
             // 
@@ -240,27 +188,6 @@ namespace DataTierClient.Controls
             this.ShowAutoFillHelpButton.MouseEnter += new System.EventHandler(this.Button_Enter);
             this.ShowAutoFillHelpButton.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
-            // BrowseUIPathButton
-            // 
-            this.BrowseUIPathButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BrowseUIPathButton.BackgroundImage")));
-            this.BrowseUIPathButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BrowseUIPathButton.ButtonNumber = 0;
-            this.BrowseUIPathButton.ButtonText = "...";
-            this.BrowseUIPathButton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BrowseUIPathButton.Location = new System.Drawing.Point(582, 98);
-            this.BrowseUIPathButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.BrowseUIPathButton.Name = "BrowseUIPathButton";
-            this.BrowseUIPathButton.NotSelectedImage = null;
-            this.BrowseUIPathButton.Selected = false;
-            this.BrowseUIPathButton.SelectedImage = null;
-            this.BrowseUIPathButton.ShowNotSelectedImageWhenDisabled = true;
-            this.BrowseUIPathButton.Size = new System.Drawing.Size(40, 28);
-            this.BrowseUIPathButton.TabIndex = 89;
-            this.BrowseUIPathButton.Visible = false;
-            this.BrowseUIPathButton.Click += new System.EventHandler(this.BrowseUIPathButton_Click);
-            this.BrowseUIPathButton.MouseEnter += new System.EventHandler(this.Button_Enter);
-            this.BrowseUIPathButton.MouseLeave += new System.EventHandler(this.Button_Leave);
-            // 
             // HelpButton
             // 
             this.HelpButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("HelpButton.BackgroundImage")));
@@ -282,7 +209,7 @@ namespace DataTierClient.Controls
             this.BrowseProjectFolderButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BrowseProjectFolderButton.ButtonNumber = 0;
             this.BrowseProjectFolderButton.ButtonText = "...";
-            this.BrowseProjectFolderButton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BrowseProjectFolderButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BrowseProjectFolderButton.Location = new System.Drawing.Point(582, 59);
             this.BrowseProjectFolderButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.BrowseProjectFolderButton.Name = "BrowseProjectFolderButton";
@@ -299,7 +226,7 @@ namespace DataTierClient.Controls
             this.EnumerationsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.EnumerationsButton.ButtonNumber = 0;
             this.EnumerationsButton.ButtonText = "Enumerations";
-            this.EnumerationsButton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EnumerationsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EnumerationsButton.Location = new System.Drawing.Point(430, 19);
             this.EnumerationsButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.EnumerationsButton.Name = "EnumerationsButton";
@@ -317,11 +244,11 @@ namespace DataTierClient.Controls
             this.ProjectTypeControl.ComboBoxText = "";
             this.ProjectTypeControl.ComoboBoxFont = null;
             this.ProjectTypeControl.Editable = true;
-            this.ProjectTypeControl.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProjectTypeControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProjectTypeControl.HideLabel = false;
             this.ProjectTypeControl.LabelBottomMargin = 0;
             this.ProjectTypeControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.ProjectTypeControl.LabelFont = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProjectTypeControl.LabelFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProjectTypeControl.LabelText = "Project Type:";
             this.ProjectTypeControl.LabelTopMargin = 0;
             this.ProjectTypeControl.LabelWidth = 120;
@@ -342,12 +269,8 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.ProjectTypeControl);
             this.Controls.Add(this.AutoFillChildFolderInfo);
             this.Controls.Add(this.ShowAutoFillHelpButton);
-            this.Controls.Add(this.BrowseUIPathButton);
-            this.Controls.Add(this.UIFolderTextBox);
-            this.Controls.Add(this.UIPathLabel);
             this.Controls.Add(this.Graph);
             this.Controls.Add(this.CreateDotNetProject);
-            this.Controls.Add(this.BindingCallbackOptionControl);
             this.Controls.Add(this.BlazorServicesCheckBox);
             this.Controls.Add(this.HelpButton);
             this.Controls.Add(this.BrowseProjectFolderButton);
@@ -357,7 +280,7 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.ProjectNameTextBox);
             this.Controls.Add(this.ProjectFolderLabel);
             this.Controls.Add(this.ProjectNameLabel);
-            this.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "ProjectEditorControl";
             this.Size = new System.Drawing.Size(680, 308);
             ((System.ComponentModel.ISupportInitialize)(this.AutoFillChildFolderInfo)).EndInit();
@@ -370,9 +293,6 @@ namespace DataTierClient.Controls
         #endregion
 
         private System.Windows.Forms.Label Graph;
-        private TabButton BrowseUIPathButton;
-        private System.Windows.Forms.TextBox UIFolderTextBox;
-        private System.Windows.Forms.Label UIPathLabel;
         private System.Windows.Forms.Button ShowAutoFillHelpButton;
         private System.Windows.Forms.PictureBox AutoFillChildFolderInfo;
         private DataJuggler.Win.Controls.LabelComboBoxControl ProjectTypeControl;
