@@ -65,7 +65,7 @@ namespace DataTierClient.Builders
                 // verify DataTable exist
                 if (dataTable != null)
                 {   
-                    // Get DataWatcherFileName
+                    // Get the fileName for the Controller class
                     fileName = CreateFileName(dataTable);
                     
                     // Update Version 1.2.5 The Controllers Are Only

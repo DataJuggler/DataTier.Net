@@ -255,7 +255,7 @@ namespace DataTierClient.Builders
                 // verify DataTable exist
                 if (dataTable != null)
                 {
-                    // Get DataWatcherFileName
+                    // Get the reader fileName
                     string fileName = CreateFileName(dataTable, customReader);
                     
                     // Create Writer

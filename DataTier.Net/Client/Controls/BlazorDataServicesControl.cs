@@ -33,7 +33,7 @@ namespace DataTierClient.Controls
     #region class BlazorDataServicesControl
     /// <summary>
     /// This control is used to install the Blazor Item Templates and to create 
-    /// DataWatchers and Services for a DTNTable.
+    /// a Data Service for a DTNTable.
     /// Also, the Services Folder is set on this control so the next time you 
     /// run this the ServicesFolder will be already set.
     /// </summary>
@@ -45,12 +45,11 @@ namespace DataTierClient.Controls
         private const string ItemTemplateUninstall5 = "dotnet new -uninstall DataJuggler.DataTier.Net5.ItemTemplates.BlazorDataServices";        
         private const string ItemTemplateInstall6 = "dotnet new --install DataJuggler.DataTier.Net6.ItemTemplates.BlazorDataServices::3.0.0";
         private const string ItemTemplateUninstall6 = "dotnet new -uninstall DataJuggler.DataTier.Net6.ItemTemplates.BlazorDataServices";
-        private const string ItemTemplateInstall7 = "dotnet new --install DataJuggler.DataTier.Net7.ItemTemplates.BlazorDataServices::7.0.0";
+        private const string ItemTemplateInstall7 = "dotnet new install DataJuggler.DataTier.Net7.ItemTemplates.BlazorDataServices::7.0.1";
         private const string ItemTemplateUninstall7 = "dotnet new -uninstall DataJuggler.DataTier.Net7.ItemTemplates.BlazorDataServices";                
         private const string CreateServices5 = "dotnet new DataTier.Net5.ItemTemplates.BlazorDataServices";
         private const string CreateServices6 = "dotnet new DataTier.Net6.ItemTemplates.BlazorDataServices";
-        private const string CreateServices7 = "dotnet new DataTier.Net7.ItemTemplates.BlazorDataServices";
-        private const string DataWatcherFileName = "DataWatcher.cs";
+        private const string CreateServices7 = "dotnet new DataTier.Net7.ItemTemplates.BlazorDataServices";        
         private const string ServiceFileName = "Service.cs";
         private string initialProject;
         private Project project;
@@ -103,9 +102,8 @@ namespace DataTierClient.Controls
             {
                 // locals
                 int attempts = 0;
-                string path = "";
-                string path2 = "";
-                bool filesCreated = false;
+                string path = "";                
+                bool fileCreated = false;
                 string message = "";
 
                 try
@@ -156,7 +154,7 @@ namespace DataTierClient.Controls
                         // the wait.
 
                         // Update 1.18.2023: Moving this to outside the loop
-                        path = Path.Combine(Project.ServicesFolder, DataWatcherFileName);
+                        path = Path.Combine(Project.ServicesFolder, ServiceFileName);
 
                         do
                         {
@@ -176,7 +174,7 @@ namespace DataTierClient.Controls
                             if (File.Exists(path))
                             {
                                 // The files were created
-                                filesCreated = true;
+                                fileCreated = true;
 
                                 // break out of the loop
                                 break;
@@ -188,10 +186,10 @@ namespace DataTierClient.Controls
                         System.Threading.Thread.Sleep(500);
 
                         // if the files were created
-                        if (filesCreated)
+                        if (fileCreated)
                         {
                             // ***************************************
-                            // ************** DataWatcher.cs Class *************
+                            // ************** Service.cs Class *************
                             // ***************************************
 
                             // locals
@@ -204,83 +202,48 @@ namespace DataTierClient.Controls
                             string primaryKeyVariableName = "";
                             string primaryKeyPropertyName = "";
 
-                            // if this table is a view
-                            if (Table.IsView)
-                            {
-                                // views do not need a DataWatcher class
-                                File.Delete(path);
-                            }
-                            else
-                            {
-                                // Now the file must be read
-                                fileText = File.ReadAllText(path);
-
-                               
-
-                                // Update 6.9.2022: Fixing bug if the Table Name is plural, you end up with a Foreach Loop
-                                // with the same name CustomerSales customerSales in customerSales
-                                if (TextHelper.IsEqual(variableName, pluralVariableName))
-                                {
-                                    // if ends with s
-                                    if (variableName.EndsWith("s"))
-                                    {
-                                        // Remove the last s
-                                        variableName = variableName.Substring(0, variableName.Length -1);
-                                    }
-                                    else
-                                    {
-                                        // safeguard ijn case it happens some other way (I don't think this will ever get hit)
-                                        pluralVariableName = pluralVariableName + "list";
-                                    }
-                                }
-                            
-                                // Update 12.12.2020: The DataService (for Blazor) requires the PrimaryKey
-                                // cataType and field name.
-                                DTNField field = FindPrimaryKey(table);
-
-                                // if the field was found
-                                if (NullHelper.Exists(field))
-                                {
-                                    // get the dataType
-                                    primaryKeyDataType = field.DataType.ToString().ToLower();
-                                    primaryKeyVariableName = CSharpClassWriter.CapitalizeFirstCharEx(field.FieldName, true);
-                                    primaryKeyPropertyName = CSharpClassWriter.CapitalizeFirstCharEx(field.FieldName, false);
-
-                                    // if an autonumber identity field (which most will be)
-                                    if (primaryKeyDataType == "autonumber")
-                                    {
-                                        // switch to int
-                                        primaryKeyDataType = "int";
-                                    }
-                                }
-
-                                // string parameterDataType = FindPrimaryKey
-                        
-                                // Replace out the fileText replacement parameters
-                                fileText = fileText.Replace("[TableName]", tableName);
-                                fileText = fileText.Replace("[VariableName]", variableName);
-                                fileText = fileText.Replace("[PluralVariableName]", pluralVariableName);
-                           
-                                // Delete the current file at path 
-                                File.Delete(path);
-
-                                // rename the file
-                                path = path.Replace("DataWatcher.cs", Table.TableName + "DataWatcher.cs");
-
-                                // Write out the next text
-                                File.WriteAllText(path, fileText);
-                            }
-
-                            // ***************************************
-                            // ************** Service.cs Class *************
-                            // ***************************************
-
-                            // now change path to the Service class
-                            path2 = Path.Combine(Project.ServicesFolder, ServiceFileName);
-
                             // Now the file must be read
-                            fileText = File.ReadAllText(path2);
+                            fileText = File.ReadAllText(path);
 
+                            // Update 6.9.2022: Fixing bug if the Table Name is plural, you end up with a Foreach Loop
+                            // with the same name CustomerSales customerSales in customerSales
+                            if (TextHelper.IsEqual(variableName, pluralVariableName))
+                            {
+                                // if ends with s
+                                if (variableName.EndsWith("s"))
+                                {
+                                    // Remove the last s
+                                    variableName = variableName.Substring(0, variableName.Length -1);
+                                }
+                                else
+                                {
+                                    // safeguard ijn case it happens some other way (I don't think this will ever get hit)
+                                    pluralVariableName = pluralVariableName + "list";
+                                }
+                            }
+
+                            // Update 12.12.2020: The DataService (for Blazor) requires the PrimaryKey
+                            // cataType and field name.
+                            DTNField field = FindPrimaryKey(table);
+
+                            // if the field was found
+                            if (NullHelper.Exists(field))
+                            {
+                                // get the dataType
+                                primaryKeyDataType = field.DataType.ToString().ToLower();
+                                primaryKeyVariableName = CSharpClassWriter.CapitalizeFirstCharEx(field.FieldName, true);
+                                primaryKeyPropertyName = CSharpClassWriter.CapitalizeFirstCharEx(field.FieldName, false);
+
+                                // if an autonumber identity field (which most will be)
+                                if (primaryKeyDataType == "autonumber")
+                                {
+                                    // switch to int
+                                    primaryKeyDataType = "int";
+                                }
+                            }
+
+                            // string parameterDataType = FindPrimaryKey
+                        
                             // Replace out the fileText replacement parameters
                             fileText = fileText.Replace("[TableName]", tableName);
                             fileText = fileText.Replace("[VariableName]", variableName);
@@ -289,12 +252,12 @@ namespace DataTierClient.Controls
                             fileText = fileText.Replace("[ParameterDataType]", primaryKeyDataType);
                             fileText = fileText.Replace("[PrimaryKey]", primaryKeyVariableName);
                             fileText = fileText.Replace("[PrimaryKeyPropertyName]", primaryKeyPropertyName);
-
-                            // Delete the current file at path2
-                            File.Delete(path2);
-
-                            // rename the file
-                            path2 = path2.Replace("Service.cs", Table.TableName + "Service.cs");
+                           
+                            // Delete the current file at path 
+                            File.Delete(path);
+                                
+                            // Write out the next text
+                            File.WriteAllText(path, fileText);
 
                             // if this table is a view
                             if (Table.IsView)
@@ -322,24 +285,16 @@ namespace DataTierClient.Controls
                             }
 
                             // Write out the next text
-                            File.WriteAllText(path2, fileText);
-
-                            if (Table.IsView)
-                            {
-                                // set the message to exclude the DataWatcher
-                                message = "The following class was created:" + Environment.NewLine + path2;
-                            }
-                            else
-                            {
-                                // set the message to include the DataWatcher
-                                message = "The following classes were created:" + Environment.NewLine + path + Environment.NewLine + path2;
-                            }
-
+                            File.WriteAllText(path, fileText);
+                         
+                            // Show a message for this class that was installed.
+                            message = "The following class was created:" + Environment.NewLine + path;
+                         
                             // Hide the graph
                             Graph.Visible = false;
 
                             // Show the user a message
-                            MessageBoxHelper.ShowMessage(message, "Files Created");
+                            MessageBoxHelper.ShowMessage(message, "File Created");
                         }
                         else
                         {
@@ -347,7 +302,7 @@ namespace DataTierClient.Controls
                             message = "Oops, something went wrong. Step through the code in DataTier.Net.Client.Controls.BlazorDataServices.cs, event name CreateBlazorServicesButton_Click.";
 
                             // Show the user a message
-                            MessageBoxHelper.ShowMessage(message, "Files Could Not Be Created", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBoxHelper.ShowMessage(message, "File Could Not Be Created", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
                 }
@@ -386,8 +341,7 @@ namespace DataTierClient.Controls
                     else
                     {
                         startInfo.Arguments = "/C " + ItemTemplateInstall7;
-                    }
-                    
+                    }                    
                     
                     process.StartInfo = startInfo;
                     process.Start();

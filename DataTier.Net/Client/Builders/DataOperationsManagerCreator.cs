@@ -64,7 +64,7 @@ namespace DataTierClient.Builders
                 // verify DataTable exist
                 if (dataTables != null)
                 {
-                    // Get DataWatcherFileName
+                    // Get the DataOperationsManager fileName
                     fileName = CreateFileName();
                     
                     // Create Writer
