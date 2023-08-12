@@ -1,15 +1,5 @@
 Update 12.23.2021: I modified the Project table, so run the Update Target Framework.sql if you are upgrading from a previous version.
 
-Update 12.24.2020: I added 2 new tables and 1 new field to the database.
-
-New field UIFolder was added to the Projects table.
-
-Two new tables:
-UIField
-UserInterface
-
-I am working on a new user interface designer, so I hope to be able to create data editors for Window Forms and Blazor to save some of the work of creating new projects.
-
 If you are new to DataTier.Net, create a new SQL Server database and then execute the SQL Script DataTier.Net.Database.Schema.sql, located in the 
 Database\SQL Scripts folder of this project.
 

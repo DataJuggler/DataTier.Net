@@ -2697,9 +2697,6 @@ namespace DataTierClient.Forms
                                     // Update the value for Exclude to the current value from the project
                                     dataTable.Exclude = table.Exclude;
 
-                                    // Update the value for CreateBindingCallback
-                                    dataTable.CreateBindingCallback = table.CreateBindingCallback;
-
                                     // if this table should not be excluded
                                     if ((!dataTable.Exclude) && (dataTable.Fields != null) && (table.HasFields))
                                     {

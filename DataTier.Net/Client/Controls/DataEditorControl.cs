@@ -468,9 +468,6 @@ namespace DataTierClient.Controls
                     // Set Loading to true
                     Loading = true;
 
-                    // check the box if checked
-                    CreateBindingCallbackControl.Checked = table.CreateBindingCallback;
-
                     // if the tableId is set
                     if (table.TableId > 0)
                     {
@@ -822,18 +819,10 @@ namespace DataTierClient.Controls
             {
                 // local
                 bool showBlazorFeatures = ((HasProject) && (Project.EnableBlazorFeatures) && (Project.TargetFramework != TargetFrameworkEnum.NetFramework));
-                bool showCreateBindingCallbackControl = false;
-
+                
                 // if there is a SelectedTable
                 if ((this.HasSelectedTable) && (!this.SelectedTable.Exclude))
                 {
-                    // if this Table is a View
-                    if (SelectedTable.IsView)
-                    {
-                        // do not show the checkbox for views
-                        showCreateBindingCallbackControl = false;
-                    }
-
                     // Display the Name
                     this.SelectedTableTextBox.Text = this.SelectedTable.TableName;
                     
@@ -843,8 +832,7 @@ namespace DataTierClient.Controls
                     this.ManageReadersButton.Visible = true;
                     this.ManageFieldSetsButton.Visible = true;
                     this.ManageMethodButton.Visible = true;                    
-                    this.BlazorFeaturesButton.Visible = showBlazorFeatures;
-                    this.CreateBindingCallbackControl.Visible = showCreateBindingCallbackControl;
+                    this.BlazorFeaturesButton.Visible = showBlazorFeatures;                    
                 }
                 else
                 {
@@ -857,8 +845,7 @@ namespace DataTierClient.Controls
                     this.ManageReadersButton.Visible = false;
                     this.ManageFieldSetsButton.Visible = false;
                     this.ManageMethodButton.Visible = false;
-                    this.BlazorFeaturesButton.Visible = false;
-                    this.CreateBindingCallbackControl.Visible = false;
+                    this.BlazorFeaturesButton.Visible = false;                    
                 }
                 
                 // Not If Loading

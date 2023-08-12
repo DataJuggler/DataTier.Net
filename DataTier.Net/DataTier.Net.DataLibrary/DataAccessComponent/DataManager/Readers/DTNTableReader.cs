@@ -38,24 +38,22 @@ namespace DataAccessComponent.DataManager.Readers
 
                 // Create field Integers
                 int classFileNamefield = 0;
-                int classNamefield = 1;
-                int createBindingCallbackfield = 2;
-                int databaseIdfield = 3;
-                int excludefield = 4;
-                int excludedfield = 5;
-                int isViewfield = 6;
-                int projectIdfield = 7;
-                int scopefield = 8;
-                int serializablefield = 9;
-                int tableIdfield = 10;
-                int tableNamefield = 11;
+                int classNamefield = 1;                
+                int databaseIdfield = 2;
+                int excludefield = 3;
+                int excludedfield = 4;
+                int isViewfield = 5;
+                int projectIdfield = 6;
+                int scopefield = 7;
+                int serializablefield = 8;
+                int tableIdfield = 9;
+                int tableNamefield = 10;
 
                 try
                 {
                     // Load Each field
                     dTNTable.ClassFileName = DataHelper.ParseString(dataRow.ItemArray[classFileNamefield]);
-                    dTNTable.ClassName = DataHelper.ParseString(dataRow.ItemArray[classNamefield]);
-                    dTNTable.CreateBindingCallback = DataHelper.ParseBoolean(dataRow.ItemArray[createBindingCallbackfield], false);
+                    dTNTable.ClassName = DataHelper.ParseString(dataRow.ItemArray[classNamefield]);                    
                     dTNTable.DatabaseId = DataHelper.ParseInteger(dataRow.ItemArray[databaseIdfield], 0);
                     dTNTable.Exclude = DataHelper.ParseBoolean(dataRow.ItemArray[excludefield], false);
                     dTNTable.Excluded = DataHelper.ParseBoolean(dataRow.ItemArray[excludedfield], false);

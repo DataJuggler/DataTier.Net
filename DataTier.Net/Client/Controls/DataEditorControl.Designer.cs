@@ -31,6 +31,9 @@ namespace DataTierClient.Controls
         private System.Windows.Forms.Button ManageMethodButton;
         private System.Windows.Forms.Button ManageReadersButton;
         private System.Windows.Forms.Button ManageFieldSetsButton;
+        private System.Windows.Forms.Button BlazorFeaturesButton;        
+        private System.Windows.Forms.Label AllButton;
+        private System.Windows.Forms.Label NoneButton;
         #endregion
         
         #region Methods
@@ -71,8 +74,7 @@ namespace DataTierClient.Controls
             this.ManageMethodButton = new System.Windows.Forms.Button();
             this.ManageReadersButton = new System.Windows.Forms.Button();
             this.ManageFieldSetsButton = new System.Windows.Forms.Button();
-            this.BlazorFeaturesButton = new System.Windows.Forms.Button();
-            this.CreateBindingCallbackControl = new DataJuggler.Win.Controls.LabelCheckBoxControl();
+            this.BlazorFeaturesButton = new System.Windows.Forms.Button();            
             this.AllButton = new System.Windows.Forms.Label();
             this.NoneButton = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -286,25 +288,7 @@ namespace DataTierClient.Controls
             this.BlazorFeaturesButton.Visible = false;
             this.BlazorFeaturesButton.Click += new System.EventHandler(this.BlazorFeaturesButton_Click);
             this.BlazorFeaturesButton.MouseEnter += new System.EventHandler(this.Button_Enter);
-            this.BlazorFeaturesButton.MouseLeave += new System.EventHandler(this.Button_Leave);
-            // 
-            // CreateBindingCallbackControl
-            // 
-            this.CreateBindingCallbackControl.BackColor = System.Drawing.Color.Transparent;
-            this.CreateBindingCallbackControl.CheckBoxHorizontalOffSet = 0;
-            this.CreateBindingCallbackControl.CheckBoxVerticalOffSet = 3;
-            this.CreateBindingCallbackControl.CheckChangedListener = null;
-            this.CreateBindingCallbackControl.Checked = false;
-            this.CreateBindingCallbackControl.Editable = true;
-            this.CreateBindingCallbackControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CreateBindingCallbackControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.CreateBindingCallbackControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CreateBindingCallbackControl.LabelText = "Create Callback:";
-            this.CreateBindingCallbackControl.LabelWidth = 160;
-            this.CreateBindingCallbackControl.Location = new System.Drawing.Point(382, 364);
-            this.CreateBindingCallbackControl.Name = "CreateBindingCallbackControl";
-            this.CreateBindingCallbackControl.Size = new System.Drawing.Size(176, 28);
-            this.CreateBindingCallbackControl.TabIndex = 105;
+            this.BlazorFeaturesButton.MouseLeave += new System.EventHandler(this.Button_Leave);            
             // 
             // AllButton
             // 
@@ -337,8 +321,7 @@ namespace DataTierClient.Controls
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Linen;
             this.Controls.Add(this.NoneButton);
-            this.Controls.Add(this.AllButton);
-            this.Controls.Add(this.CreateBindingCallbackControl);
+            this.Controls.Add(this.AllButton);            
             this.Controls.Add(this.ManageFieldSetsButton);
             this.Controls.Add(this.ManageReadersButton);
             this.Controls.Add(this.ManageMethodButton);
@@ -365,10 +348,7 @@ namespace DataTierClient.Controls
 
         #endregion
 
-        private System.Windows.Forms.Button BlazorFeaturesButton;
-        private DataJuggler.Win.Controls.LabelCheckBoxControl CreateBindingCallbackControl;
-        private System.Windows.Forms.Label AllButton;
-        private System.Windows.Forms.Label NoneButton;
+        
     }
     #endregion
 

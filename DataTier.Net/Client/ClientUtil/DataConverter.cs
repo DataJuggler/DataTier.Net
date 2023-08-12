@@ -272,7 +272,6 @@ namespace DataTierClient.ClientUtil
                     table.ClassFileName = sourceTable.ClassFileName;
                     table.ClassName = sourceTable.ClassName;
                     table.Exclude = sourceTable.Exclude;
-                    table.CreateBindingCallback = sourceTable.CreateBindingCallback;
                     
                     // Only 1 Database is officially supported now
                     table.DatabaseId = project.Databases[0].DatabaseId;

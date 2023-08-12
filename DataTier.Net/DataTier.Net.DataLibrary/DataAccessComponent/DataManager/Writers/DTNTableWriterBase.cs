@@ -135,59 +135,53 @@ namespace DataAccessComponent.DataManager.Writers
                     // set parameters[1]
                     parameters[1] = param;
 
-                    // Create [CreateBindingCallback] parameter
-                    param = new SqlParameter("@CreateBindingCallback", dTNTable.CreateBindingCallback);
-
-                    // set parameters[2]
-                    parameters[2] = param;
-
                     // Create [DatabaseId] parameter
                     param = new SqlParameter("@DatabaseId", dTNTable.DatabaseId);
 
                     // set parameters[3]
-                    parameters[3] = param;
+                    parameters[2] = param;
 
                     // Create [Exclude] parameter
                     param = new SqlParameter("@Exclude", dTNTable.Exclude);
 
                     // set parameters[4]
-                    parameters[4] = param;
+                    parameters[3] = param;
 
                     // Create [Excluded] parameter
                     param = new SqlParameter("@Excluded", dTNTable.Excluded);
 
                     // set parameters[5]
-                    parameters[5] = param;
+                    parameters[4] = param;
 
                     // Create [IsView] parameter
                     param = new SqlParameter("@IsView", dTNTable.IsView);
 
                     // set parameters[6]
-                    parameters[6] = param;
+                    parameters[5] = param;
 
                     // Create [ProjectId] parameter
                     param = new SqlParameter("@ProjectId", dTNTable.ProjectId);
 
                     // set parameters[7]
-                    parameters[7] = param;
+                    parameters[6] = param;
 
                     // Create [Scope] parameter
                     param = new SqlParameter("@Scope", dTNTable.Scope);
 
                     // set parameters[8]
-                    parameters[8] = param;
+                    parameters[7] = param;
 
                     // Create [Serializable] parameter
                     param = new SqlParameter("@Serializable", dTNTable.Serializable);
 
                     // set parameters[9]
-                    parameters[9] = param;
+                    parameters[8] = param;
 
                     // Create [TableName] parameter
                     param = new SqlParameter("@TableName", dTNTable.TableName);
 
                     // set parameters[10]
-                    parameters[10] = param;
+                    parameters[9] = param;
                 }
 
                 // return value
@@ -243,72 +237,68 @@ namespace DataAccessComponent.DataManager.Writers
                     // Create parameter for [ClassFileName]
                     param = new SqlParameter("@ClassFileName", dTNTable.ClassFileName);
 
-                    // set parameters[0]
+                    // set parameter[0]
                     parameters[0] = param;
 
                     // Create parameter for [ClassName]
                     param = new SqlParameter("@ClassName", dTNTable.ClassName);
 
-                    // set parameters[1]
+                    // set parameter[1]
                     parameters[1] = param;
-
-                    // Create parameter for [CreateBindingCallback]
-                    param = new SqlParameter("@CreateBindingCallback", dTNTable.CreateBindingCallback);
-
-                    // set parameters[2]
-                    parameters[2] = param;
 
                     // Create parameter for [DatabaseId]
                     param = new SqlParameter("@DatabaseId", dTNTable.DatabaseId);
 
-                    // set parameters[3]
-                    parameters[3] = param;
+                    // set parameter[2]
+                    parameters[2] = param;
 
                     // Create parameter for [Exclude]
                     param = new SqlParameter("@Exclude", dTNTable.Exclude);
 
-                    // set parameters[4]
-                    parameters[4] = param;
+                    // set parameter[3]
+                    parameters[3] = param;
 
                     // Create parameter for [Excluded]
                     param = new SqlParameter("@Excluded", dTNTable.Excluded);
 
-                    // set parameters[5]
-                    parameters[5] = param;
+                    // set parameter[4]
+                    parameters[4] = param;
 
                     // Create parameter for [IsView]
                     param = new SqlParameter("@IsView", dTNTable.IsView);
 
-                    // set parameters[6]
-                    parameters[6] = param;
+                    // set parameter[5]
+                    parameters[5] = param;
 
                     // Create parameter for [ProjectId]
                     param = new SqlParameter("@ProjectId", dTNTable.ProjectId);
 
-                    // set parameters[7]
-                    parameters[7] = param;
+                    // set parameter[6]
+                    parameters[6] = param;
 
                     // Create parameter for [Scope]
                     param = new SqlParameter("@Scope", dTNTable.Scope);
 
-                    // set parameters[8]
-                    parameters[8] = param;
+                    // set parameter[7]
+                    parameters[7] = param;
 
                     // Create parameter for [Serializable]
                     param = new SqlParameter("@Serializable", dTNTable.Serializable);
 
-                    // set parameters[9]
-                    parameters[9] = param;
+                    // set parameter[8]
+                    parameters[8] = param;
 
                     // Create parameter for [TableName]
                     param = new SqlParameter("@TableName", dTNTable.TableName);
 
-                    // set parameters[10]
-                    parameters[10] = param;
+                    // set parameter[9]
+                    parameters[9] = param;
 
                     // Create parameter for [TableId]
                     param = new SqlParameter("@TableId", dTNTable.TableId);
-                    parameters[11] = param;
+
+                    // set parameter[10]
+                    parameters[10] = param;
                 }
 
                 // return value

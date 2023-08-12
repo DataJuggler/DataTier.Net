@@ -77,20 +77,6 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
 
-            #region bool CreateBindingCallback
-            public bool CreateBindingCallback
-            {
-                get
-                {
-                    return createBindingCallback;
-                }
-                set
-                {
-                    createBindingCallback = value;
-                }
-            }
-            #endregion
-
             #region int DatabaseId
             public int DatabaseId
             {

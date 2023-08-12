@@ -133,8 +133,7 @@ namespace DataTierClient.Builders
 
                                         // Set the value for Exclude in the dataTable
                                         dataTable.Exclude = table.Exclude;
-                                        dataTable.CreateBindingCallback = table.CreateBindingCallback;
-
+                                        
                                         // if this table has one or more fields
                                         if (ListHelper.HasOneOrMoreItems(table.Fields))
                                         {
@@ -196,8 +195,7 @@ namespace DataTierClient.Builders
                                         if (NullHelper.Exists(existingTable))
                                         {
                                             // Update the value for exclude
-                                            dtnTable.Exclude = existingTable.Exclude;
-                                            dtnTable.CreateBindingCallback = existingTable.CreateBindingCallback;
+                                            dtnTable.Exclude = existingTable.Exclude;                                            
                                         }
                                             
                                         // Add this table
@@ -327,9 +325,6 @@ namespace DataTierClient.Builders
                     // iterate the collection of tables                    
                     foreach (DataTable table in database.Tables)
                     {
-                        // disable this for now
-                        table.CreateBindingCallback = false;
-
                         // if there are one or more fields
                         if (ListHelper.HasOneOrMoreItems(table.Fields, enumerations))
                         {
