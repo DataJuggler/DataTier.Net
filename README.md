@@ -1,3 +1,8 @@
+8.14.2023 New Video
+
+Create a Stock Predictor With C# and ML.NET Part I
+https://youtu.be/hF8LkvwOXQY
+
 Update 4.7.2023: New video showing how to install DataTier.Net and build your first project: https://youtu.be/mQRN6SYxL-s
 
 New sample project that goes with the above video: https://github.com/DataJuggler/IdeaBank
