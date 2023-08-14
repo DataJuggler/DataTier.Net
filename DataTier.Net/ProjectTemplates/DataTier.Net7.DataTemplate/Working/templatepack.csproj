@@ -3,25 +3,27 @@
   <PropertyGroup>
     
     <PackageType>Template</PackageType>
-    <PackageVersion>7.0.8</PackageVersion>
+    <PackageVersion>7.1.0</PackageVersion>
     <PackageId>DataJuggler.DataTier.Net7.ProjectTemplates</PackageId>
     <Title>DataJuggler.DataTier.Net7.ProjectTemplates</Title>
     <Authors>Data Juggler</Authors>
     <Description>This is a new set of templates to use when creating a project for DataTier.Net targeting .Net 7
 	</Description>
-    <PackageTags>DataTier.Net;DataTier.Net6;C#;SQL;SQLServer;EntityFrameworkAlternative;</PackageTags>
-    <TargetFramework>net6.0</TargetFramework>
+    <PackageTags>DataTier.Net;DataTier.Net7;C#;SQL;SQLServer;Entity Framework Alternative;Database</PackageTags>
+    <TargetFramework>net7.0</TargetFramework>
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <ContentTargetFolders>content</ContentTargetFolders>
-    <Version>7.0.8</Version>
-    <Product>DataJuggler.DataTier.Net6.ProjectTemplate</Product>
+    <Version>7.1.0</Version>
+    <Product>DataJuggler.DataTier.Net7.ProjectTemplate</Product>
     <ApplicationIcon></ApplicationIcon>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/DataJuggler/DataTier.Net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/DataJuggler/DataTier.Net.git</RepositoryUrl>
     <RepositoryType>Git/GitHub</RepositoryType>
 	<PackageReleaseNotes>
+		Update 8.14.2023: I changed the icon to the DataTier.NET Icon for this template.
+		
 		Update 8.13.2023: DataJuggler..NET7 was updated because DataJuggler.UltimateHelper was updated.
 
 		Update 8.6.2023: I removed an used variabled called exception in the AuthenticationManager.ConnectToDatabase method.
@@ -37,6 +39,7 @@
     <Nullable>disable</Nullable>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
 	<PackageReadmeFile>templates\README.md</PackageReadmeFile>
+	<PackageIcon>templates\Icon.png</PackageIcon>
 
   </PropertyGroup>
   
@@ -50,6 +53,17 @@
   </ItemGroup>
   
   <ItemGroup>
+    <None Include="Icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+	  <None Update="templates\Icon.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
 	  <None Update="templates\README.md">
 		  <Pack>True</Pack>
 		  <PackagePath>\</PackagePath>

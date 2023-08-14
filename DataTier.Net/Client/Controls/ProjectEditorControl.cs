@@ -36,11 +36,11 @@ namespace DataTierClient.Controls
         private bool showAutoFillHelp;
         private int attempts;
         private const string CreateDataTierNet5 = "dotnet new DataTier.Net5.ProjectTemplates";
-        private const string InstallDataTierNet5 = "dotnet new install DataJuggler.DataTier.Net5.ProjectTemplates";
+        private const string InstallDataTierNet5 = "dotnet new install DataJuggler.DataTier.Net5.ProjectTemplates::2.5.6 --force";
         private const string CreateDataTierNet6 = "dotnet new DataTier.Net6.ProjectTemplates";
-        private const string InstallDataTierNet6 = "dotnet new install DataJuggler.DataTier.Net6.ProjectTemplates";
+        private const string InstallDataTierNet6 = "dotnet new install DataJuggler.DataTier.Net6.ProjectTemplates::6.0.2 --force";
         private const string CreateDataTierNet7 = "dotnet new DataTier.Net7.ProjectTemplates";
-        private const string InstallDataTierNet7 = "dotnet new install DataJuggler.DataTier.Net7.ProjectTemplates::7.0.8";
+        private const string InstallDataTierNet7 = "dotnet new install DataJuggler.DataTier.Net7.ProjectTemplates::7.1.0 --force";
 
         // Used to install the Project Templates on the ProjectEditorControl.cs
         private const int GraphWidth = 268;
