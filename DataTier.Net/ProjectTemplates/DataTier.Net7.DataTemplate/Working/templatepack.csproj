@@ -3,7 +3,7 @@
   <PropertyGroup>
     
     <PackageType>Template</PackageType>
-    <PackageVersion>7.1.0</PackageVersion>
+    <PackageVersion>7.1.1</PackageVersion>
     <PackageId>DataJuggler.DataTier.Net7.ProjectTemplates</PackageId>
     <Title>DataJuggler.DataTier.Net7.ProjectTemplates</Title>
     <Authors>Data Juggler</Authors>
@@ -14,7 +14,7 @@
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <ContentTargetFolders>content</ContentTargetFolders>
-    <Version>7.1.0</Version>
+    <Version>7.1.1</Version>
     <Product>DataJuggler.DataTier.Net7.ProjectTemplate</Product>
     <ApplicationIcon></ApplicationIcon>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -22,6 +22,9 @@
     <RepositoryUrl>https://github.com/DataJuggler/DataTier.Net.git</RepositoryUrl>
     <RepositoryType>Git/GitHub</RepositoryType>
 	<PackageReleaseNotes>
+		Update 8.20.2023: I added some compiler warnings to ignore to the templates, and added the word static
+		to a method the ControllerCreator creates Create (Object Name) Parameter)
+		
 		Update 8.14.2023: I changed the icon to the DataTier.NET Icon for this template.
 		
 		Update 8.13.2023: DataJuggler..NET7 was updated because DataJuggler.UltimateHelper was updated.

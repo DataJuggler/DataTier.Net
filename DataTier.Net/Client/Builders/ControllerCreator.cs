@@ -389,7 +389,7 @@ namespace DataTierClient.Builders
                 WriteLine("/// <returns>A List<PolymorphicObject> collection.</returns>");
                 
                 // get method line
-                string methodLine = "private List<PolymorphicObject> Create" + dataTable.ClassName + "Parameter(" + dataTable.ClassName + " " + this.CapitalizeFirstChar(dataTable.ClassName, true) + ")";
+                string methodLine = "private static List<PolymorphicObject> Create" + dataTable.ClassName + "Parameter(" + dataTable.ClassName + " " + this.CapitalizeFirstChar(dataTable.ClassName, true) + ")";
                 
                 // Write method line
                 WriteLine(methodLine);
