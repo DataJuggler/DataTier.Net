@@ -53,18 +53,7 @@ Execute the SQL script to install DataTier.Net tables and stored procedures.<br/
 
 <b>Geeky Note:</b> DataTier.Net was built using DataTier.Net.
 
-<b> Step 2: Install DataTier.Net Project Templates Installer VSIX
-
-<b>.Net Framework Only. the Dot Net Core templates are installed via a link on the Setup Scren</b>
-You can install the project Template into Visual Studio 2017 and / or 2019 (recommended).<br/>
-
-<img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Install%20Data%20Tier.Net%20Templates.png><br/>
-
-Dot Net Core instructions
-
-Open a command prompt or PowerShell window and execute:
-
-dotnet new -i DataJuggler.DataTier.Net.Core.ProjectTemplates
+<b> Step 2: Step 2 can now be skipped. Project Templates are installed via NuGet when you create a project.
 
 <b>Step 3: Build Your Connection String and Setup App.config<br/>
   
@@ -104,6 +93,12 @@ For more information read the DataTier.Net User's Guide located in the Class Roo
 https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/DataTier.Net%20Users%20Guide.pdf
 
 --
+Update 12.25.2022: DataTier.Net now supports .NET 7.
+
+Update 11.15.2021: DataTier.Net now supports .NET 6;
+
+Update 12.3.2020: DataTier.Net now supports .NET 5;
+
 Update 10.20.2019: I add a new feature that allows you to create a Custom Where Clause https://youtu.be/59CyqxS9JVI 
 
 -- 
