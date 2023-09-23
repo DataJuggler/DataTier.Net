@@ -255,6 +255,9 @@ namespace DataTierClient.Controls
                            
                             // Delete the current file at path 
                             File.Delete(path);
+
+                            // Update 9.22.2023: Fixed Path was not being replaced when I removed path2                            
+                            path = path.Replace("Service.cs", Table.TableName + "Service.cs");
                                 
                             // Write out the next text
                             File.WriteAllText(path, fileText);
@@ -262,7 +265,7 @@ namespace DataTierClient.Controls
                             // if this table is a view
                             if (Table.IsView)
                             {
-                                // Views do not have Find, Remove and Save methods, so they must be removed them from the template
+                                // Views do not have Find, Remove and Save methods, so they must be removed from the template
 
                                 // Get the textLines
                                 List<TextLine> textLines = TextHelper.GetTextLines(fileText);
