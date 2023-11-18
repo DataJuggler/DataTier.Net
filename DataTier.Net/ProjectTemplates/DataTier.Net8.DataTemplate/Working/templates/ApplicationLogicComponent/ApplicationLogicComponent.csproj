@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+	<TargetFramework>net8.0</TargetFramework>
+    <Version>8.0.0</Version>
+    <PackageId>DataJuggler.DataTier.Net.ApplicationLogicComponent</PackageId>
+    <Authors>DataJuggler</Authors>
+    <Product>DataJuggler.DataTier.Net.ApplicationLogicComponent</Product>
+    <Description>This is one of the four projects that make up a DataTier.Net project template.</Description>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;IDE0017;IDE0059;IDE0074;IDE0090;</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>1701;1702;IDE0017;IDE0059;IDE0074;IDE0090;</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DataJuggler.UltimateHelper" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccessComponent\DataAccessComponent.csproj" />
+    <ProjectReference Include="..\ObjectLibrary\ObjectLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="DataOperations\" />
+  </ItemGroup>
+
+</Project>
+
+
+

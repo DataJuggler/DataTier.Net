@@ -41,6 +41,8 @@ namespace DataTierClient.Controls
         private const string InstallDataTierNet6 = "dotnet new install DataJuggler.DataTier.Net6.ProjectTemplates::6.0.2 --force";
         private const string CreateDataTierNet7 = "dotnet new DataTier.Net7.ProjectTemplates";
         private const string InstallDataTierNet7 = "dotnet new install DataJuggler.DataTier.Net7.ProjectTemplates::7.1.1 --force";
+        private const string CreateDataTierNet8 = "dotnet new DataTier.NET8.ProjectTemplates";
+        private const string InstallDataTierNet8 = "dotnet new install DataJuggler.DataTier.NET8.ProjectTemplates::8.0.0 --force";
 
         // Used to install the Project Templates on the ProjectEditorControl.cs
         private const int GraphWidth = 268;
@@ -185,26 +187,37 @@ namespace DataTierClient.Controls
 
                                 if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net5)
                                 {
-                                    // if Net5
+                                    // Create .NET5
                                     startInfo.Arguments = "/C " + CreateDataTierNet5;
                                 }
                                 else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net6)
                                 {
-                                    // if Net5
+                                    // Create .NET6
                                     startInfo.Arguments = "/C " + CreateDataTierNet6;
+                                }
+                                else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net7)
+                                {
+                                    // Create .NET7
+                                    startInfo.Arguments = "/C " + CreateDataTierNet7;
                                 }
                                 else
                                 {
-                                    // if Net6
-                                    startInfo.Arguments = "/C " + CreateDataTierNet7;
+                                    // Create .NET8
+                                    startInfo.Arguments = "/C " + CreateDataTierNet8;
                                 }
 
                                 process.StartInfo = startInfo;
                                 process.Start();
 
                                 // get the solution path - default to DotNet6
-                                string solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net7.ClassLibrary.sln");
+                                string solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net8.ClassLibrary.sln");
 
+                                // if .NET7
+                                if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net7)
+                                {
+                                    // switch for Net6
+                                    solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net7.ClassLibrary.sln");
+                                }
                                 // if .NET 6
                                 if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net6)
                                 {
@@ -587,10 +600,15 @@ namespace DataTierClient.Controls
                         // Use Net6
                         startInfo.Arguments = "/C " + InstallDataTierNet6;
                     }
+                    else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net7)
+                    {
+                        // Use Net6
+                        startInfo.Arguments = "/C " + InstallDataTierNet7;
+                    }                                        
                     else
                     {
-                        // Default to .NET 7                        
-                        startInfo.Arguments = "/C " + InstallDataTierNet7;
+                        // Default to .NET 8
+                        startInfo.Arguments = "/C " + InstallDataTierNet8;
                     }
 
                     // Set the StartInfo
