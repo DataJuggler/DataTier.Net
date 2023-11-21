@@ -916,20 +916,20 @@ namespace DataTierClient.Builders
                     {
                         // add each field
                         foreach (DataField field in fields)
-                        {
-                            // do not write the primary key
-                            if ((!field.PrimaryKey) || (dataTable.IsView))
+                        {  
+                            // I changed this so only AutoNumber (Identity) Primary Keys call UpdateIdentity.
+                            if (field.PrimaryKey && field.DataType == DataManager.DataTypeEnum.Autonumber)
+                            {
+                                // Now Write Update Identity Method
+                                WriteUpdateIdentity(dataTable, objectName);
+                            }
+                            else
                             {
                                 // load this field
                                 loadField = CreateLoadFieldLine(field, objectName);
 
                                 // Write Line To LoadF This field
                                 WriteLine(loadField);
-                            }
-                            else
-                            {
-                                // Now Write Update Identity Method
-                                WriteUpdateIdentity(dataTable, objectName);
                             }
                         }
                     }
