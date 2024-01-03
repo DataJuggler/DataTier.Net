@@ -53,12 +53,13 @@ namespace DataTierClient.Controls
             // 
             // ValidationListBox
             // 
-            this.ValidationListBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ValidationListBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ValidationListBox.ForeColor = System.Drawing.Color.Red;
             this.ValidationListBox.FormattingEnabled = true;
+            this.ValidationListBox.ItemHeight = 18;
             this.ValidationListBox.Location = new System.Drawing.Point(20, 34);
             this.ValidationListBox.Name = "ValidationListBox";
-            this.ValidationListBox.Size = new System.Drawing.Size(800, 121);
+            this.ValidationListBox.Size = new System.Drawing.Size(800, 112);
             this.ValidationListBox.TabIndex = 0;
             // 
             // InvalidMessageLabel
@@ -80,7 +81,7 @@ namespace DataTierClient.Controls
             this.OKButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.OKButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.OKButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.OKButton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OKButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OKButton.ForeColor = System.Drawing.Color.LemonChiffon;
             this.OKButton.Location = new System.Drawing.Point(378, 180);
             this.OKButton.Name = "OKButton";

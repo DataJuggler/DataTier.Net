@@ -18,7 +18,7 @@ namespace ObjectLibrary.BusinessObjects
 
         #region Private Variables
         private string classFileName;
-        private string className;        
+        private string className;
         private int databaseId;
         private bool exclude;
         private bool excluded;

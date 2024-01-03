@@ -293,6 +293,8 @@ namespace DataTierClient.Controls
                     string businessObjectFileName = Path.Combine(Project.ProjectFolder, @"ObjectLibrary\BusinessObjects", this.SelectedTable.TableName + ".business.cs");
                     string dataObjectFileName = Path.Combine(Project.ProjectFolder, @"ObjectLibrary\BusinessObjects", this.SelectedTable.TableName + ".data.cs");
                     string gatewayFileName = Path.Combine(Project.ProjectFolder, @"DataGateway", "Gateway.cs");
+
+                    
                     
                     // Create each ProjectFile
                     ProjectFile readerFile = new ProjectFile(readerFileName, DataManager.ProjectTypeEnum.DAC);
@@ -309,6 +311,18 @@ namespace DataTierClient.Controls
                     ProjectFile businessObjectFile = new ProjectFile(businessObjectFileName, DataManager.ProjectTypeEnum.ObjectLibrary);
                     ProjectFile dataObjectFile = new ProjectFile(dataObjectFileName, DataManager.ProjectTypeEnum.ObjectLibrary);
                     ProjectFile gatewayFile = new ProjectFile(gatewayFileName, DataManager.ProjectTypeEnum.Gateway);
+
+                    // only for .NET8 and V2 Templates
+                    if (Project.TemplateVersion == 2)
+                    {
+                        // replace out 
+                        writerFileName = writerFileName.Replace(@"DataManager\Writers", @"Data\Writers");
+                        writerBaseFileName = writerBaseFileName.Replace(@"DataManager\Writers", @"Data\Writers");
+                        dataManagerFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\Data", SelectedTable.TableName + "Manager.cs");
+                        controllerFile.ProjectType = DataManager.ProjectTypeEnum.DAC;
+                        methodsFile.ProjectType = DataManager.ProjectTypeEnum.DAC;
+                        gatewayFile.ProjectType = DataManager.ProjectTypeEnum.DAC;
+                    }
                     
                     // Now add each file to the ProjectFileManager
                     projectFileManager.Files.Add(readerFile);

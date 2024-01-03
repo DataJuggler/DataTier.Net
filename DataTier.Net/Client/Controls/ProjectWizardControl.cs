@@ -521,7 +521,7 @@ namespace DataTierClient.Controls
                     RequiredField controllerNamespaceField = new RequiredField("ControllerNamespace", RequiredField.CreateMissingRequiredFieldMessage("Controller Namespace", this.SelectedProject.ControllerNamespace, false), this.SelectedProject, false);
 
                     // Create Reader Required Fields
-                    RequiredField readerFolderField = new RequiredField("ReaderFolder", RequiredField.CreateMissingRequiredFieldMessage("Reader Folder", this.SelectedProject.ReaderFolder, true), this.SelectedProject, true);
+                    RequiredField readerFolderField = new RequiredField("ReaderFolder", RequiredField.CreateMissingRequiredFieldMessage("Reader Folder", this.SelectedProject.ReaderFolder, true), SelectedProject, true);
                     RequiredField readerNamespaceField = new RequiredField("ReaderNamespace", RequiredField.CreateMissingRequiredFieldMessage("Reader Namespace", this.SelectedProject.ReaderNamespace, false), this.SelectedProject, false);
 
                     // Create Writer Required Fields
@@ -531,6 +531,12 @@ namespace DataTierClient.Controls
                     // Create StoredProcedure Required Fields
                     RequiredField storedProcFolderField = new RequiredField("StoredProcedureObjectFolder", RequiredField.CreateMissingRequiredFieldMessage("Stored Procedure Object Folder", this.SelectedProject.StoredProcedureObjectFolder, true), this.SelectedProject, true);
                     RequiredField storedProcNamespaceField = new RequiredField("StoredProcedureObjectNamespace", RequiredField.CreateMissingRequiredFieldMessage("Stored Procedure Object Namespace", this.SelectedProject.StoredProcedureObjectNamespace, false), this.SelectedProject, false);
+
+                    // if V2 of Templates
+                    if (SelectedProject.TemplateVersion == 2)
+                    {
+                        string temp = SelectedProject.DataManagerFolder;
+                    }
                     
                     // Add Required Fields
                     

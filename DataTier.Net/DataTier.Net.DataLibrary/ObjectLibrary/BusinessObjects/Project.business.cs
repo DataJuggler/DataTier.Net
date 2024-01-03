@@ -88,28 +88,53 @@ namespace ObjectLibrary.BusinessObjects
                     // Set the values now
                     
                     // Set the ObjectFolder (Also known as the Data Object Folder).
-                    this.ObjectFolder = this.AppendToProjectFolder(@"ObjectLibrary\BusinessObjects");
+                    ObjectFolder = this.AppendToProjectFolder(@"ObjectLibrary\BusinessObjects");
                     
-                    // Set the Data Manager Folder.
-                    this.DataManagerFolder = this.AppendToProjectFolder(@"DataAccessComponent\DataManager");
                     
-                    // Set the Data Operations Folder
-                    this.DataOperationsFolder = this.AppendToProjectFolder(@"ApplicationLogicComponent\DataOperations");
-                    
-                    // Set the Controllers Folder
-                    this.ControllerFolder = this.AppendToProjectFolder(@"ApplicationLogicComponent\Controllers");
-                    
-                    // Set the Reader Folder
-                    this.ReaderFolder = this.AppendToProjectFolder(@"DataAccessComponent\DataManager\Readers");
-                    
-                    // Set the Writers Folder
-                    this.DataWriterFolder = this.AppendToProjectFolder(@"DataAccessComponent\DataManager\Writers");
+
+                    // if the original 4 project template
+                    if (TemplateVersion == 1)
+                    {
+                        // Set the Data Operations Folder
+                        DataOperationsFolder = this.AppendToProjectFolder(@"ApplicationLogicComponent\DataOperations");
+
+                        // Set the Data Manager Folder.
+                        DataManagerFolder = this.AppendToProjectFolder(@"DataAccessComponent\DataManager");    
+
+                        // Set the Controllers Folder
+                        ControllerFolder = this.AppendToProjectFolder(@"ApplicationLogicComponent\Controllers");
+
+                        // Set the Reader Folder
+                        ReaderFolder = this.AppendToProjectFolder(@"DataAccessComponent\DataManager\Readers");
+
+                        // Set the Writers Folder
+                        DataWriterFolder = this.AppendToProjectFolder(@"DataAccessComponent\DataManager\Writers");
+                    }
+                    else
+                    {
+                        // new V2 2 project template
+
+                        // Set the Data Operations Folder
+                        DataOperationsFolder = this.AppendToProjectFolder(@"DataAccessComponent\DataOperations");
+
+                        // Set the Data Manager Folder.
+                        DataManagerFolder = this.AppendToProjectFolder(@"DataAccessComponent\Data");
+
+                        // Set the Reader Folder
+                        ReaderFolder = this.AppendToProjectFolder(@"DataAccessComponent\Data\Readers");
+
+                        // Set the Writers Folder
+                        DataWriterFolder = this.AppendToProjectFolder(@"DataAccessComponent\Data\Writers");
+
+                        // Set the Controllers Folder
+                        ControllerFolder = this.AppendToProjectFolder(@"DataAccessComponent\Controllers");
+                    }
                     
                     // Set the StoredProcedureFolder
-                    this.StoredProcedureObjectFolder = this.AppendToProjectFolder(@"DataAccessComponent\StoredProcedureManager");
+                    StoredProcedureObjectFolder = this.AppendToProjectFolder(@"DataAccessComponent\StoredProcedureManager");
 
-                    // Create the StoredProcsFolder (Only shown for SQL Server) 
-                    this.StoredProcsFolder = this.AppendToProjectFolder(@"DataAccessComponent\StoredProcedureManager\StoredProcedureSQL");
+                    // Create the StoredProcsFolder
+                    StoredProcsFolder = this.AppendToProjectFolder(@"DataAccessComponent\StoredProcedureManager\StoredProcedureSQL");
                 }
             } 
             #endregion
@@ -134,143 +159,197 @@ namespace ObjectLibrary.BusinessObjects
                 this.AllReferences.Add(this.ObjectReferencesSet);
 
                 // Set DataManagerNamespace
-                this.DataManagerNamespace = "DataAccessComponent.DataManager";
+                DataManagerNamespace = "DataAccessComponent.DataManager";
+
+                // if V2 Templates
+                if (TemplateVersion == 2)
+                {
+                    DataManagerNamespace = "DataAccessComponent.Data";
+                }
                 
                 // Create DataManagerReferencesSet
-                this.DataManagerReferencesSet = new ReferencesSet("DataManager");
+                DataManagerReferencesSet = new ReferencesSet("DataManager");
                 
                 // Create DataManager References
-                this.DataManagerReferencesSet.References.Add(new ProjectReference("System"));
-                this.DataManagerReferencesSet.References.Add(new ProjectReference("System.Collections.Generic"));
-                this.DataManagerReferencesSet.References.Add(new ProjectReference("System.Data"));
-                this.DataManagerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.DeleteProcedures"));
-                this.DataManagerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.FetchProcedures"));
-                this.DataManagerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.InsertProcedures"));
-                this.DataManagerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.UpdateProcedures"));
-                this.DataManagerReferencesSet.References.Add(new ProjectReference("ObjectLibrary.BusinessObjects"));
-                this.DataManagerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.DataManager.Readers"));
-                this.AllReferences.Add(this.DataManagerReferencesSet);
+                DataManagerReferencesSet.References.Add(new ProjectReference("System"));
+                DataManagerReferencesSet.References.Add(new ProjectReference("System.Collections.Generic"));
+                DataManagerReferencesSet.References.Add(new ProjectReference("System.Data"));
+                DataManagerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.DeleteProcedures"));
+                DataManagerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.FetchProcedures"));
+                DataManagerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.InsertProcedures"));
+                DataManagerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.UpdateProcedures"));
+                DataManagerReferencesSet.References.Add(new ProjectReference("ObjectLibrary.BusinessObjects"));
 
-                // Set DataOperationNamespace
-                this.DataOperationsNamespace = "ApplicationLogicComponent.DataOperations";
+                // if 4 Project Version
+                if (TemplateVersion == 1)
+                {
+                    // Use DataManager
+                    DataManagerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.DataManager.Readers"));
+                }
+                else
+                {
+                    // Use Data
+                    DataManagerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.Data.Readers"));
+                }
+
+                AllReferences.Add(DataManagerReferencesSet);
                 
                 // Create DataOperationsReferencesSet
-                this.DataOperationsReferencesSet = new ReferencesSet("DataOperations");
+                DataOperationsReferencesSet = new ReferencesSet("DataOperations");
                 
                 // Create DataOperation References
-                this.DataOperationsReferencesSet.References.Add(new ProjectReference("System"));
-                this.DataOperationsReferencesSet.References.Add(new ProjectReference("System.Collections.Generic"));
-                this.DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.DeleteProcedures"));
-                this.DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.FetchProcedures"));
-                this.DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.InsertProcedures"));
-                this.DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.UpdateProcedures"));
-                this.DataOperationsReferencesSet.References.Add(new ProjectReference("ObjectLibrary.BusinessObjects"));
-                this.DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.DataManager.Writers"));
-                this.DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.DataManager"));
-                this.DataOperationsReferencesSet.References.Add(new ProjectReference("ApplicationLogicComponent.DataBridge"));
-                this.AllReferences.Add(this.DataOperationsReferencesSet);
+                DataOperationsReferencesSet.References.Add(new ProjectReference("System"));
+                DataOperationsReferencesSet.References.Add(new ProjectReference("System.Collections.Generic"));
+                DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.DeleteProcedures"));
+                DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.FetchProcedures"));
+                DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.InsertProcedures"));
+                DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.UpdateProcedures"));
+                DataOperationsReferencesSet.References.Add(new ProjectReference("ObjectLibrary.BusinessObjects"));
 
-                // Set Controller Namespace
-                this.ControllerNamespace = "ApplicationLogicComponent.Controllers";
-                
+                // if 4 Project version
+                if (TemplateVersion == 1)
+                {
+                    DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.DataManager.Writers"));
+                    DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.DataManager"));
+                }
+                else
+                {
+                    DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.Data.Writers"));
+                    DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.Data"));
+                }
+
                 // Create ControllerReferencesSet
-                this.ControllerReferencesSet = new ReferencesSet("Controllers");
-                
+                ControllerReferencesSet = new ReferencesSet("Controllers");
+
+                if (TemplateVersion == 1)
+                {
+                    // Set DataOperationNamespace
+                    DataOperationsNamespace = "ApplicationLogicComponent.DataOperations";
+                    DataOperationsReferencesSet.References.Add(new ProjectReference("ApplicationLogicComponent.DataBridge"));                    
+                    ControllerNamespace = "ApplicationLogicComponent.Controllers";
+                    ControllerReferencesSet.References.Add(new ProjectReference("ApplicationLogicComponent.Logging"));
+                    ControllerReferencesSet.References.Add(new ProjectReference("ApplicationLogicComponent.DataOperations"));
+                    ControllerReferencesSet.References.Add(new ProjectReference("ApplicationLogicComponent.DataBridge"));
+                }
+                else
+                {
+                    // Set DataOperationNamespace
+                    DataOperationsNamespace = "DataAccessComponent.DataOperations";
+                    DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.DataBridge"));
+                    ControllerNamespace = "DataAccessComponent.Controllers";
+                    ControllerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.Logging"));
+                    ControllerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.DataOperations"));
+                    ControllerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.DataBridge"));
+                }
+
+                AllReferences.Add(DataOperationsReferencesSet);
+
                 // Create Controller References
-                this.ControllerReferencesSet.References.Add(new ProjectReference("System"));
-                this.ControllerReferencesSet.References.Add(new ProjectReference("System.Collections.Generic"));
-                this.ControllerReferencesSet.References.Add(new ProjectReference("ApplicationLogicComponent.Logging"));
-                this.ControllerReferencesSet.References.Add(new ProjectReference("ObjectLibrary.BusinessObjects"));
-                this.ControllerReferencesSet.References.Add(new ProjectReference("ApplicationLogicComponent.DataOperations"));
-                this.ControllerReferencesSet.References.Add(new ProjectReference("ApplicationLogicComponent.DataBridge"));
-                this.AllReferences.Add(this.ControllerReferencesSet);
+                ControllerReferencesSet.References.Add(new ProjectReference("System"));
+                ControllerReferencesSet.References.Add(new ProjectReference("System.Collections.Generic"));
+                ControllerReferencesSet.References.Add(new ProjectReference("ObjectLibrary.BusinessObjects"));                
+                AllReferences.Add(ControllerReferencesSet);
 
                 // Set ReaderNamespace
-                this.ReaderNamespace = "DataAccessComponent.DataManager.Readers";
+                ReaderNamespace = "DataAccessComponent.DataManager.Readers";
+
+                // If V2 Templates
+                if (TemplateVersion == 2)
+                {
+                    // use DataAccessComponent.Data
+                    ReaderNamespace = "DataAccessComponent.Data.Readers";
+                }
                 
                 // Add Reader References
-                this.ReaderReferencesSet = new ReferencesSet("Readers");
+                ReaderReferencesSet = new ReferencesSet("Readers");
                 
                 // Set Reader References
-                this.ReaderReferencesSet.References.Add(new ProjectReference("System"));
-                this.ReaderReferencesSet.References.Add(new ProjectReference("System.Collections.Generic"));
-                this.ReaderReferencesSet.References.Add(new ProjectReference("System.Data"));
-                this.ReaderReferencesSet.References.Add(new ProjectReference("ObjectLibrary.BusinessObjects"));
-                this.ReaderReferencesSet.References.Add(new ProjectReference("ObjectLibrary.Enumerations"));
-                this.AllReferences.Add(this.ReaderReferencesSet);
+                ReaderReferencesSet.References.Add(new ProjectReference("System"));
+                ReaderReferencesSet.References.Add(new ProjectReference("System.Collections.Generic"));
+                ReaderReferencesSet.References.Add(new ProjectReference("System.Data"));
+                ReaderReferencesSet.References.Add(new ProjectReference("ObjectLibrary.BusinessObjects"));
+                ReaderReferencesSet.References.Add(new ProjectReference("ObjectLibrary.Enumerations"));
+                AllReferences.Add(ReaderReferencesSet);
 
                 // Set Writer Namespace
-                this.DataWriterNamespace = "DataAccessComponent.DataManager.Writers";
+                DataWriterNamespace = "DataAccessComponent.DataManager.Writers";
+
+                // If V2 Templates
+                if (TemplateVersion == 2)
+                {
+                    // use DataAccessComponent.Data
+                    DataWriterNamespace = "DataAccessComponent.Data.Writers";
+                }
                 
                 // Add Writer References
-                this.WriterReferencesSet = new ReferencesSet("Writers");
+                WriterReferencesSet = new ReferencesSet("Writers");
                 
                 // Set Writer References
-                this.WriterReferencesSet.References.Add(new ProjectReference("System"));
-                this.WriterReferencesSet.References.Add(new ProjectReference("ObjectLibrary.BusinessObjects"));
-                this.WriterReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.DeleteProcedures"));
-                this.WriterReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.FetchProcedures"));
-                this.WriterReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.InsertProcedures"));
-                this.WriterReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.UpdateProcedures"));
-                this.WriterReferencesSet.References.Add(new ProjectReference("System.Data"));
+                WriterReferencesSet.References.Add(new ProjectReference("System"));
+                WriterReferencesSet.References.Add(new ProjectReference("ObjectLibrary.BusinessObjects"));
+                WriterReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.DeleteProcedures"));
+                WriterReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.FetchProcedures"));
+                WriterReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.InsertProcedures"));
+                WriterReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.UpdateProcedures"));
+                WriterReferencesSet.References.Add(new ProjectReference("System.Data"));
                 
                 // if .NET6 or .NET7 or .NET8
                 if ((TargetFramework == TargetFrameworkEnum.Net6) || (TargetFramework == TargetFrameworkEnum.Net7) || (TargetFramework == TargetFrameworkEnum.Net8))
                 {
                     // Switch to Microsoft
-                    this.WriterReferencesSet.References.Add(new ProjectReference("Microsoft.Data.SqlClient"));
+                    WriterReferencesSet.References.Add(new ProjectReference("Microsoft.Data.SqlClient"));
                 }
                 else
                 {
-                    // I think .NET5 and .NETFramework both need this. Will answer this question soon.
-                    this.WriterReferencesSet.References.Add(new ProjectReference("System.Data.SqlClient"));  
+                    // I think .NET5 and .NETFramework both need  Will answer this question soon.
+                    WriterReferencesSet.References.Add(new ProjectReference("System.Data.SqlClient"));  
                 }
                 
                 // Add this references set
-                this.AllReferences.Add(this.WriterReferencesSet);
+                AllReferences.Add(WriterReferencesSet);
 
                  // Set StoredProcedure Namespace
-                this.StoredProcedureObjectNamespace = "DataAccessComponent.StoredProcedureManager";
+                StoredProcedureObjectNamespace = "DataAccessComponent.StoredProcedureManager";
                 
                 // Stored Procedure References
-                this.StoredProcedureReferencesSet = new ReferencesSet("StoredProcedures");
+                StoredProcedureReferencesSet = new ReferencesSet("StoredProcedures");
                 
                 // Set Stored Procedure References
-                this.StoredProcedureReferencesSet.References.Add(new ProjectReference("System"));
+                StoredProcedureReferencesSet.References.Add(new ProjectReference("System"));
                 
                   // If .NET8
                 if (TargetFramework == TargetFrameworkEnum.Net8)
                 {
                     // .NET7
-                    this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataJuggler.Net8"));
+                    StoredProcedureReferencesSet.References.Add(new ProjectReference("DataJuggler.Net8"));
                 }
                 // If .NET7
                 else if (TargetFramework == TargetFrameworkEnum.Net7)
                 {
                     // .NET7
-                    this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataJuggler.Net7"));
+                    StoredProcedureReferencesSet.References.Add(new ProjectReference("DataJuggler.Net7"));
                 }
                 else if (TargetFramework == TargetFrameworkEnum.Net6)
                 {
                     // .NET6
-                    this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataJuggler.Net6"));
+                    StoredProcedureReferencesSet.References.Add(new ProjectReference("DataJuggler.Net6"));
                 }
                 else if (TargetFramework == TargetFrameworkEnum.Net5)
                 {  
                     // .NET5
-                    this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataJuggler.Net5"));
+                    StoredProcedureReferencesSet.References.Add(new ProjectReference("DataJuggler.Net5"));
                 }
                 else
                 {
                     // .NETFramework
-                    this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataJuggler.Net"));
+                    StoredProcedureReferencesSet.References.Add(new ProjectReference("DataJuggler.Net"));
                 }
 
-                this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.DeleteProcedures"));
-                this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.FetchProcedures"));
-                this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.InsertProcedures"));
-                this.StoredProcedureReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.UpdateProcedures"));
-                this.AllReferences.Add(this.StoredProcedureReferencesSet);
+                StoredProcedureReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.DeleteProcedures"));
+                StoredProcedureReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.FetchProcedures"));
+                StoredProcedureReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.InsertProcedures"));
+                StoredProcedureReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.UpdateProcedures"));
+                AllReferences.Add(StoredProcedureReferencesSet);
             }
             #endregion
 

@@ -66,6 +66,7 @@ namespace DataAccessComponent.DataManager.Readers
                 int storedProcedureReferencesSetIdfield = 26;
                 int storedProcsFolderfield = 27;
                 int targetFrameworkfield = 28;
+                int templateVersionfield = 29;
 
                 try
                 {
@@ -99,6 +100,7 @@ namespace DataAccessComponent.DataManager.Readers
                     project.StoredProcedureReferencesSetId = DataHelper.ParseInteger(dataRow.ItemArray[storedProcedureReferencesSetIdfield], 0);
                     project.StoredProcsFolder = DataHelper.ParseString(dataRow.ItemArray[storedProcsFolderfield]);
                     project.TargetFramework = (TargetFrameworkEnum) DataHelper.ParseInteger(dataRow.ItemArray[targetFrameworkfield], 0);
+                    project.TemplateVersion = DataHelper.ParseInteger(dataRow.ItemArray[templateVersionfield], 0);
                 }
                 catch
                 {

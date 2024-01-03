@@ -68,6 +68,7 @@ namespace DataTierClient.Controls
             this.BrowseProjectFolderButton = new DataTierClient.Controls.TabButton();
             this.EnumerationsButton = new DataTierClient.Controls.TabButton();
             this.ProjectTypeControl = new DataJuggler.Win.Controls.LabelComboBoxControl();
+            this.Version2CheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.AutoFillChildFolderInfo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -262,10 +263,25 @@ namespace DataTierClient.Controls
             this.ProjectTypeControl.Source = null;
             this.ProjectTypeControl.TabIndex = 92;
             // 
+            // Version2CheckBox
+            // 
+            this.Version2CheckBox.AutoSize = true;
+            this.Version2CheckBox.Checked = true;
+            this.Version2CheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.Version2CheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Version2CheckBox.Location = new System.Drawing.Point(90, 107);
+            this.Version2CheckBox.Name = "Version2CheckBox";
+            this.Version2CheckBox.Size = new System.Drawing.Size(226, 24);
+            this.Version2CheckBox.TabIndex = 93;
+            this.Version2CheckBox.Text = "Project Templates Version 2";
+            this.Version2CheckBox.UseVisualStyleBackColor = true;
+            this.Version2CheckBox.CheckedChanged += new System.EventHandler(this.Version2CheckBox_CheckedChanged);
+            // 
             // ProjectEditorControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.Version2CheckBox);
             this.Controls.Add(this.ProjectTypeControl);
             this.Controls.Add(this.AutoFillChildFolderInfo);
             this.Controls.Add(this.ShowAutoFillHelpButton);
@@ -296,6 +312,7 @@ namespace DataTierClient.Controls
         private System.Windows.Forms.Button ShowAutoFillHelpButton;
         private System.Windows.Forms.PictureBox AutoFillChildFolderInfo;
         private DataJuggler.Win.Controls.LabelComboBoxControl ProjectTypeControl;
+        private System.Windows.Forms.CheckBox Version2CheckBox;
     }
     #endregion
 

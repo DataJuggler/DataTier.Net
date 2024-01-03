@@ -59,10 +59,10 @@ namespace DataTierClient.Builders
             internal void CreateGatewayMethods()
             {
                 // if the GatewayPath exists
-                if ((this.HasGatewayPath) && (File.Exists(this.GatewayPath)) && (this.DataTables != null))
+                if ((this.HasGatewayPath) && (File.Exists(GatewayPath)) && (DataTables != null))
                 {
                     // set the text of the existing Gateway
-                    string gatewayText = File.ReadAllText(this.GatewayPath);
+                    string gatewayText = File.ReadAllText(GatewayPath);
                     
                     // get the lines from the existing gateway
                     List<TextLine> lines = TextHelper.GetTextLines(gatewayText);
@@ -71,10 +71,10 @@ namespace DataTierClient.Builders
                     if (ListHelper.HasOneOrMoreItems(lines))
                     {
                         // Write the backup of the orginal file
-                        WriteBackupFile(this.GatewayPath);
+                        WriteBackupFile(GatewayPath);
 
                         // iterate the DataTables
-                        foreach (DataTable dataTable in this.DataTables)
+                        foreach (DataTable dataTable in DataTables)
                         {
                             // Update 12.19.2012: if there is a primary key & not a view 
                             if ((dataTable.HasPrimaryKey) && (!dataTable.IsView))

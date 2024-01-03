@@ -117,7 +117,7 @@ namespace DataAccessComponent.DataManager.Writers
             internal static SqlParameter[] CreateInsertParameters(Project project)
             {
                 // Initial Values
-                SqlParameter[] parameters = new SqlParameter[28];
+                SqlParameter[] parameters = new SqlParameter[29];
                 SqlParameter param = null;
 
                 // verify projectexists
@@ -301,6 +301,12 @@ namespace DataAccessComponent.DataManager.Writers
 
                     // set parameters[27]
                     parameters[27] = param;
+
+                    // Create [TemplateVersion] parameter
+                    param = new SqlParameter("@TemplateVersion", project.TemplateVersion);
+
+                    // set parameters[28]
+                    parameters[28] = param;
                 }
 
                 // return value
@@ -347,7 +353,7 @@ namespace DataAccessComponent.DataManager.Writers
             internal static SqlParameter[] CreateUpdateParameters(Project project)
             {
                 // Initial Values
-                SqlParameter[] parameters = new SqlParameter[29];
+                SqlParameter[] parameters = new SqlParameter[30];
                 SqlParameter param = null;
 
                 // verify projectexists
@@ -534,9 +540,15 @@ namespace DataAccessComponent.DataManager.Writers
                     // set parameters[27]
                     parameters[27] = param;
 
+                    // Create parameter for [TemplateVersion]
+                    param = new SqlParameter("@TemplateVersion", project.TemplateVersion);
+
+                    // set parameters[28]
+                    parameters[28] = param;
+
                     // Create parameter for [ProjectId]
                     param = new SqlParameter("@ProjectId", project.ProjectId);
-                    parameters[28] = param;
+                    parameters[29] = param;
                 }
 
                 // return value

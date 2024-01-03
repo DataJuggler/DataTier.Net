@@ -38,7 +38,7 @@ namespace DataAccessComponent.DataManager.Readers
 
                 // Create field Integers
                 int classFileNamefield = 0;
-                int classNamefield = 1;                
+                int classNamefield = 1;
                 int databaseIdfield = 2;
                 int excludefield = 3;
                 int excludedfield = 4;
@@ -53,7 +53,7 @@ namespace DataAccessComponent.DataManager.Readers
                 {
                     // Load Each field
                     dTNTable.ClassFileName = DataHelper.ParseString(dataRow.ItemArray[classFileNamefield]);
-                    dTNTable.ClassName = DataHelper.ParseString(dataRow.ItemArray[classNamefield]);                    
+                    dTNTable.ClassName = DataHelper.ParseString(dataRow.ItemArray[classNamefield]);
                     dTNTable.DatabaseId = DataHelper.ParseInteger(dataRow.ItemArray[databaseIdfield], 0);
                     dTNTable.Exclude = DataHelper.ParseBoolean(dataRow.ItemArray[excludefield], false);
                     dTNTable.Excluded = DataHelper.ParseBoolean(dataRow.ItemArray[excludedfield], false);

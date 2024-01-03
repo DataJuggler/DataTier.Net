@@ -49,7 +49,7 @@ namespace ObjectLibrary.BusinessObjects
                 }
                 set
                 {
-                    referenceName = value;
+                    referenceName = value;                    
                 }
             }
             #endregion

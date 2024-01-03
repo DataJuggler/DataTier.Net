@@ -46,6 +46,7 @@ namespace ObjectLibrary.BusinessObjects
         private int storedProcedureReferencesSetId;
         private string storedProcsFolder;
         private TargetFrameworkEnum targetFramework;
+        private int templateVersion;
         #endregion
 
         #region Methods
@@ -464,6 +465,20 @@ namespace ObjectLibrary.BusinessObjects
                 set
                 {
                     targetFramework = value;
+                }
+            }
+            #endregion
+
+            #region int TemplateVersion
+            public int TemplateVersion
+            {
+                get
+                {
+                    return templateVersion;
+                }
+                set
+                {
+                    templateVersion = value;
                 }
             }
             #endregion

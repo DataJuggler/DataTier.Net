@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using ObjectLibrary.BusinessObjects;
 
 #endregion
 
@@ -27,21 +28,23 @@ namespace DataTierClient.Builders
         private string projectName;
         private string rootControllerPath;
         private string nameSpaceName;
-        private ReferencesSet objectReferences;
+        private DataJuggler.Net.ReferencesSet objectReferences;
+        private Project selectedProject;
         #endregion
 
 		#region Constructor
 		/// <summary>
         /// Create a new instance of ControllerManagerCreator
         /// </summary>
-        public ControllerCreator(List<DataTable> dataTablesArg, ReferencesSet objectReferencesArg, string rootControllerPathArg, string projectNameArg, string nameSpaceNameArg, ProjectFileManager fileManager, TargetFrameworkEnum targetFramework) : base(fileManager, false, false, targetFramework)
+        public ControllerCreator(List<DataTable> dataTablesArg, DataJuggler.Net.ReferencesSet objectReferencesArg, string rootControllerPathArg, string projectNameArg, string nameSpaceNameArg, ProjectFileManager fileManager, TargetFrameworkEnum targetFramework, Project selectedProject) : base(fileManager, false, false, targetFramework)
 		{   
-		    // Set Properties
-		    this.DataTables = dataTablesArg;
-		    this.ProjectName = projectNameArg;
-		    this.NameSpaceName = nameSpaceNameArg;
-		    this.RootControllerPath = rootControllerPathArg;
-		    this.ObjectReferences = objectReferencesArg;
+		    // Store args
+		    DataTables = dataTablesArg;
+		    ProjectName = projectNameArg;
+		    NameSpaceName = nameSpaceNameArg;
+		    RootControllerPath = rootControllerPathArg;
+		    ObjectReferences = objectReferencesArg;
+            SelectedProject = selectedProject;
 		}
 		#endregion
 
@@ -78,7 +81,7 @@ namespace DataTierClient.Builders
 						CreateFile(fileName, DataManager.ProjectTypeEnum.ALC);
 					
 						// Write References
-						WriteReferences(this.ObjectReferences);
+						WriteReferences(ObjectReferences);
 
 						// Write Blank Line
 						WriteLine();
@@ -183,38 +186,6 @@ namespace DataTierClient.Builders
             }
             #endregion
             
-            #region CreateControllerVariable(DataTable dataTable)
-            /// <summary>
-            /// This method creates the private variable for 
-            /// a controller for a DataTable.
-            /// </summary>
-            /// <param name="dataTable"></param>
-            /// <returns></returns>
-            private string CreateControllerVariable(DataTable dataTable)
-            {
-                // Create String Builder
-                StringBuilder sb = new StringBuilder("private ");
-
-                // Get DataType
-                string dataType = CreateDataType(dataTable, true);
-               
-                // Append DataType
-                sb.Append(dataType);
-                
-                // Append Space Between DataType and variable name
-                sb.Append(" ");
-                
-                // Append ClassName
-                sb.Append(dataTable.ClassName.ToLower());
-
-                // Append Controller
-                sb.Append("Controller;");
-
-                // return value
-                return sb.ToString();
-            }
-            #endregion
-
             #region CreateFileName(DataTable dataTable)
             /// <summary>
             /// Create the file name for this reader.
@@ -242,33 +213,6 @@ namespace DataTierClient.Builders
                 // return value
                 return sb.ToString();
             }
-            #endregion
-
-            #region CreateDataType(DataTable dataTable)
-            /// <summary>
-            /// This method creates the data type for each controller.
-            /// UserController, ContactController, etc.
-            /// </summary>
-            /// <param name="dataTable"></param>
-            /// <returns></returns>
-            private string CreateDataType(DataTable dataTable, bool appendController)
-            {
-                // Create StringBuilder
-                StringBuilder sb = new StringBuilder(this.ProjectName);
-                
-                // add dataTable.ClassName
-                sb.Append(dataTable.ClassName);
-
-                // if Append Controller
-                if(appendController)
-                {
-                    // Append Controller
-                    sb.Append("Controller");
-                }
-                
-                // return value
-                return sb.ToString();
-            }  
             #endregion
 
             #region GetStringVariableLine(string variableName, string variableValue)
@@ -1587,7 +1531,7 @@ namespace DataTierClient.Builders
 
                 // Write Blank Line After Properties Region
                 WriteLine();
-            } 
+            }
             #endregion
 
             #region WriteSaveMethod(DataTable dataTable)
@@ -2013,7 +1957,7 @@ namespace DataTierClient.Builders
             /// <summary>
             /// The references set to use for this class
             /// </summary>
-            public ReferencesSet ObjectReferences
+            public DataJuggler.Net.ReferencesSet ObjectReferences
             {
                 get { return objectReferences; }
                 set { objectReferences = value; }
@@ -2030,6 +1974,17 @@ namespace DataTierClient.Builders
             {
                 get { return projectName; }
                 set { projectName = value; }
+            }
+            #endregion
+
+            #region SelectedProject
+            /// <summary>
+            /// This property gets or sets the value for 'SelectedProject'.
+            /// </summary>
+            public Project SelectedProject
+            {
+                get { return selectedProject; }
+                set { selectedProject = value; }
             }
             #endregion
 

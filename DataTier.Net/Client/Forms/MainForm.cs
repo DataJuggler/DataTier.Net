@@ -56,7 +56,6 @@ namespace DataTierClient.Forms
         private ButtonManager buttonManager;
         private string storedProceduresSQLPath;
         private Admin admin;
-        private const string UpdateCheckXml = @"https://datajuggler.com/Updates/DataTier.Net.Update.xml";
         internal const string DataTierNetConnectionName = "DataTierNetConnection";
         #endregion
         
@@ -755,7 +754,7 @@ namespace DataTierClient.Forms
                     TargetFrameworkEnum targetFramework = (TargetFrameworkEnum) OpenProject.TargetFramework;
 
                     // Create ControllerManagerCreator
-                    ControllerCreator creator = new ControllerCreator(DataTables, convertedReferences, rootControllerPath, projectName, nameSpaceName, this.FileManager, targetFramework);
+                    ControllerCreator creator = new ControllerCreator(DataTables, convertedReferences, rootControllerPath, projectName, nameSpaceName, this.FileManager, targetFramework, OpenProject);
 
                     // local for created
                     creator.CreateControllers(this.DataTables);
@@ -1002,9 +1001,9 @@ namespace DataTierClient.Forms
                         DataJuggler.Net.ReferencesSet convertedReferences = classBuilder.ConvertReferences(references, "Writers");
 
                         // Get namespace and project namew
-                        string nameSpace = this.OpenProject.DataWriterNamespace;
-                        string projectName = this.OpenProject.ProjectName;
-                        string gatewayPath = FindGatewayPath(this.OpenProject.ProjectFolder);
+                        string nameSpace = OpenProject.DataWriterNamespace;
+                        string projectName = OpenProject.ProjectName;
+                        string gatewayPath = FindGatewayPath(OpenProject.ProjectFolder);
 
                         // 12.19.2021
                         TargetFrameworkEnum targetFramework = (TargetFrameworkEnum) OpenProject.TargetFramework;
@@ -1725,28 +1724,6 @@ namespace DataTierClient.Forms
             }
             #endregion
 
-            #region DisplayReferences(List<ProjectReference> projectReferencess)
-            /// <summary>
-            /// This method displays the 
-            /// </summary>
-            /// <param name="projectReferencesCollection"></param>
-            private void DisplayReferences(List<ProjectReference> projectReferencess)
-            {
-                // loop through each reference
-                foreach (ProjectReference projectReference in projectReferencess)
-                {
-                    // local
-                    string reference = "    ";
-
-                    // get the reference name
-                    reference += projectReference.ReferenceName;
-                    
-                    // Add this item to the list box
-                    this.StatusListBox.Items.Add(reference);
-                }
-            } 
-            #endregion
-
             #region EditProject()
             /// <summary>
             /// This method edits the selected project.
@@ -1804,7 +1781,7 @@ namespace DataTierClient.Forms
                         foreach (string directory in Directory.GetDirectories(projectFolder))
                         {
                             // iterate the files
-                            foreach (string file in Directory.GetFiles(directory, "*.cs", SearchOption.TopDirectoryOnly))
+                            foreach (string file in Directory.GetFiles(directory, "*.cs", SearchOption.AllDirectories))
                             {
                                 // create a fileInfo
                                 FileInfo fileInfo = new FileInfo(file);

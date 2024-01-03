@@ -450,6 +450,16 @@ namespace DataTierClient.Controls
             {
                 // set the current project
                 this.CurrentProject = currentProject;
+
+                if (CurrentProject != null)
+                {
+                    if (CurrentProject.TemplateVersion == 2)
+                    {
+                        ALCBrowseButton.Visible = false;
+                        ALCTextBox.Visible = false;
+                        ALCLabel.Visible = false;
+                    }
+                }
                 
                 // set the files
                 this.Files = files;
@@ -515,6 +525,12 @@ namespace DataTierClient.Controls
                     
                     // if all the projects exist 
                     valid = ((hasALCProjectName) && (hasDACProjectName) && (hasObjectLibraryProjectName) && (hasFiles));
+
+                    // if V2 templates
+                    if (CurrentProject.TemplateVersion == 2)
+                    {
+                        valid = ((hasDACProjectName) && (hasObjectLibraryProjectName) && (hasFiles));
+                    }
                 }
                 
                 // return value

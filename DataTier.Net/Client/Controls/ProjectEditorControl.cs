@@ -43,6 +43,8 @@ namespace DataTierClient.Controls
         private const string InstallDataTierNet7 = "dotnet new install DataJuggler.DataTier.Net7.ProjectTemplates::7.1.1 --force";
         private const string CreateDataTierNet8 = "dotnet new DataTier.NET8.ProjectTemplates";
         private const string InstallDataTierNet8 = "dotnet new install DataJuggler.DataTier.NET8.ProjectTemplates::8.0.0 --force";
+        private const string CreateDataTierNet8V2 = "dotnet new DataTier.NET8.ProjectTemplatesV2";
+        private const string InstallDataTierNet8V2 = "dotnet new install DataJuggler.DataTier.NET8.ProjectTemplatesV2::8.0.0 --force";
 
         // Used to install the Project Templates on the ProjectEditorControl.cs
         private const int GraphWidth = 268;
@@ -202,14 +204,22 @@ namespace DataTierClient.Controls
                                 }
                                 else
                                 {
-                                    // Create .NET8
-                                    startInfo.Arguments = "/C " + CreateDataTierNet8;
+                                    if (SelectedProject.TemplateVersion == 1)
+                                    {
+                                        // Create .NET8
+                                        startInfo.Arguments = "/C " + CreateDataTierNet8;
+                                    }
+                                    else
+                                    {
+                                        // Create .NET8 Template Version 2
+                                        startInfo.Arguments = "/C " + CreateDataTierNet8V2;
+                                    }
                                 }
 
                                 process.StartInfo = startInfo;
                                 process.Start();
 
-                                // get the solution path - default to DotNet6
+                                // get the solution path - default to DotNet8
                                 string solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net8.ClassLibrary.sln");
 
                                 // if .NET7
@@ -229,6 +239,13 @@ namespace DataTierClient.Controls
                                 {
                                     // switch for Net6
                                     solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net5.ClassLibrary.sln");
+                                }
+
+                                // if version 2
+                                if (SelectedProject.TemplateVersion == 2)
+                                {
+                                    // Change for V2 templates
+                                    solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net8.ClassLibraryV2.sln");
                                 }
 
                                 // Set the startTime
@@ -446,6 +463,34 @@ namespace DataTierClient.Controls
                 }
             }
             #endregion
+
+            #region Version2CheckBox_CheckedChanged(object sender, EventArgs e)
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
+            private void Version2CheckBox_CheckedChanged(object sender, EventArgs e)
+            {
+                // default for now
+                int templateVersion = 1;
+
+                if (Version2CheckBox.Checked)
+                {
+                    templateVersion = 2;
+                }
+
+                // if the SelectedProject exists
+                if (HasSelectedProject)
+                {
+                    // Set the TemplateVersion
+                    SelectedProject.TemplateVersion = templateVersion;
+
+                    // As this changes, the default references need to be recreated.
+                    SelectedProject.CreateDefaultReferences();
+                }
+            }
+            #endregion
         
             #region ShowAutoFillHelpButton_Click(object sender, EventArgs e)
             /// <summary>
@@ -474,8 +519,9 @@ namespace DataTierClient.Controls
                 // locals
                 string projectName = "";
                 string projectFolder = "";
-                bool enableBlazorFeatures = false;                
-                int projectTypeIndex = ProjectTypeControl.FindItemIndexByValue("Net6");
+                bool enableBlazorFeatures = false;
+                bool projectTemplatesVersion2 = false;
+                int projectTypeIndex = ProjectTypeControl.FindItemIndexByValue("Net8");
                 
                 // if the SelectedProject Exists
                 if(this.SelectedProject != null)
@@ -483,11 +529,21 @@ namespace DataTierClient.Controls
                     // set values
                     projectName = this.SelectedProject.ProjectName;
                     projectFolder = this.SelectedProject.ProjectFolder;                    
-                    enableBlazorFeatures = SelectedProject.EnableBlazorFeatures;                    
+                    enableBlazorFeatures = SelectedProject.EnableBlazorFeatures;
+                    projectTemplatesVersion2 = (SelectedProject.TemplateVersion == 2);
                     projectTypeIndex = ProjectTypeControl.FindItemIndexByValue(SelectedProject.TargetFramework.ToString());                    
+
+                    // if a new project
+                    if (SelectedProject.IsNew)
+                    {
+                        // New projects should be version 2
+                        SelectedProject.TemplateVersion = 2;
+                        projectTemplatesVersion2 = true;
+                    }
                 }
                 
                 // dislay values now
+                Version2CheckBox.Checked = projectTemplatesVersion2;
                 ProjectNameTextBox.Text = projectName;
                 ProjectFolderTextBox.Text = projectFolder;
                 ProjectTypeControl.SelectedIndex = projectTypeIndex;
@@ -607,8 +663,16 @@ namespace DataTierClient.Controls
                     }                                        
                     else
                     {
-                        // Default to .NET 8
-                        startInfo.Arguments = "/C " + InstallDataTierNet8;
+                        if (SelectedProject.TemplateVersion == 1)
+                        {
+                            // .NET 8 Template Version 1
+                            startInfo.Arguments = "/C " + InstallDataTierNet8;
+                        }
+                        else
+                        {
+                            // Template Version 2
+                            startInfo.Arguments = "/C " + InstallDataTierNet8V2;
+                        }
                     }
 
                     // Set the StartInfo
@@ -938,7 +1002,6 @@ namespace DataTierClient.Controls
         #endregion
 
         #endregion
-
     }
     #endregion
     
