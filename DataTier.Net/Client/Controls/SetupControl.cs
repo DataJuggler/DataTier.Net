@@ -38,6 +38,9 @@ namespace DataTierClient.Controls
         public const string UninstallDotNet5ProjectTemplates = "dotnet new -uninstall DataJuggler.DataTier.Net5.ProjectTemplates";
         public const string DotNet6ProjectTemplates = "dotnet new -install DataJuggler.DataTier.Net6.ProjectTemplates";
         public const string UninstallDotNet6ProjectTemplates = "dotnet new -uninstall DataJuggler.DataTier.Net6.ProjectTemplates";
+        public const string UninstallDotNet7ProjectTemplates = "dotnet new -uninstall DataJuggler.DataTier.Net7.ProjectTemplates";
+        public const string UninstallDotNet8ProjectTemplates = "dotnet new -uninstall DataJuggler.DataTier.NET8.ProjectTemplates";
+        public const string UninstallDotNet8ProjectTemplates2 = "dotnet new -uninstall DataJuggler.DataTier.NET8V2.ProjectTemplates";
         #endregion
         
         #region Constructor
@@ -419,7 +422,7 @@ namespace DataTierClient.Controls
                     ProcessStartInfo startInfo = new ProcessStartInfo();
                     startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                     startInfo.FileName = "cmd.exe";
-                    startInfo.Arguments = "/C " + UninstallDotNet6ProjectTemplates;
+                    startInfo.Arguments = "/C " + UninstallDotNet7ProjectTemplates;
                     process.StartInfo = startInfo;
                     process.Start();
 
@@ -433,6 +436,68 @@ namespace DataTierClient.Controls
 
                     // show the user a message
                     MessageBoxHelper.ShowMessage("The DataTier.Net7.ProjectTemplates could not be uninstalled.", "Uninsteall Templates Failed");
+                 }
+            }
+            #endregion
+            
+            #region UninstallDotNet8Label_Click(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when the 'UninstallDotNet8Label' is clicked.
+            /// </summary>
+            private void UninstallDotNet8Label_Click(object sender, EventArgs e)
+            {
+                try               
+                 {
+                     // Create a Process to launch a command window (hidden) to create the item templates
+                    Process process = new Process();
+                    ProcessStartInfo startInfo = new ProcessStartInfo();
+                    startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    startInfo.FileName = "cmd.exe";
+                    startInfo.Arguments = "/C " + UninstallDotNet8ProjectTemplates;
+                    process.StartInfo = startInfo;
+                    process.Start();
+
+                    // Show the user a message
+                    MessageBoxHelper.ShowMessage("DataJuggler.DataTier.NET8.ProjectTemplates were uninstalled from your computer.", "Uninstall Complete");
+                 }
+                 catch (Exception error)
+                 {
+                     // Set the error
+                    DebugHelper.WriteDebugError("UninstallDotNet6_Click", this.Name, error);
+
+                    // show the user a message
+                    MessageBoxHelper.ShowMessage("The DataTier.NET8.ProjectTemplates could not be uninstalled.", "Uninsteall Templates Failed");
+                 }
+            }
+            #endregion
+            
+            #region UninstallDotNet8V2Label_Click(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when the 'UninstallDotNet8V2Label' is clicked.
+            /// </summary>
+            private void UninstallDotNet8V2Label_Click(object sender, EventArgs e)
+            {
+                try               
+                 {
+                     // Create a Process to launch a command window (hidden) to create the item templates
+                    Process process = new Process();
+                    ProcessStartInfo startInfo = new ProcessStartInfo();
+                    startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    startInfo.FileName = "cmd.exe";
+                    startInfo.Arguments = "/C " + UninstallDotNet8ProjectTemplates2;
+                    process.StartInfo = startInfo;
+                    process.Start();
+
+                    // Show the user a message
+                    MessageBoxHelper.ShowMessage("DataJuggler.DataTier.NET8V2.ProjectTemplates were uninstalled from your computer.", "Uninstall Complete");
+                 }
+                 catch (Exception error)
+                 {
+                     // Set the error
+                    DebugHelper.WriteDebugError("UninstallDotNet6_Click", this.Name, error);
+
+                    // show the user a message
+                    MessageBoxHelper.ShowMessage("The DataTier.NET8V2.ProjectTemplates could not be uninstalled.", "Uninsteall Templates Failed");
                  }
             }
             #endregion
