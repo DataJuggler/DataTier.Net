@@ -374,6 +374,14 @@ namespace DataTierClient.Controls
                     // Show the helpForm
                     helpForm.ShowDialog();
                 }
+                else if (SelectedProject.TemplateVersion == 2)
+                {
+                    // Create the helpForm
+                    HelpForm3 helpForm3 = new HelpForm3();
+
+                    // Show the helpForm2
+                    helpForm3.ShowDialog();
+                }
                 else
                 {
                     // Create the helpForm

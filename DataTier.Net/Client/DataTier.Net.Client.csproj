@@ -441,6 +441,12 @@
     <Compile Include="Forms\HelpForm2.Designer.cs">
       <DependentUpon>HelpForm2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\HelpForm3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HelpForm3.Designer.cs">
+      <DependentUpon>HelpForm3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\NewStoredProcedureEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -722,6 +728,9 @@
     <EmbeddedResource Include="Forms\HelpForm2.resx">
       <DependentUpon>HelpForm2.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HelpForm3.resx">
+      <DependentUpon>HelpForm3.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\NewStoredProcedureEditorForm.resx">
       <DependentUpon>NewStoredProcedureEditorForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -826,6 +835,7 @@
     <None Include="Resources\Setup1.png" />
     <None Include="Resources\Setup3.png" />
     <None Include="Resources\Project Folder .NET5 or .NET6.png" />
+    <None Include="Resources\HelpImages3.png" />
     <Content Include="Xml\Files\DataTier.Net.Update.xml" />
     <Content Include="Xml\Files\DeserializedFieldSet.xml" />
     <Content Include="Xml\Files\SelectedFieldSet.xml" />
