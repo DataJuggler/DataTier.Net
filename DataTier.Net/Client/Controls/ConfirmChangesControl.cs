@@ -2047,6 +2047,13 @@ namespace DataTierClient.Controls
                     // get the filePath
                     string filePath = @"ObjectLibrary\BusinessObjects\" + MethodInfo.SelectedTable.ClassName + ".business.cs";
                     string writerFile = @"DataAccessComponent\DataManager\Writers\" + MethodInfo.SelectedTable.ClassName + "Writer.cs";
+
+                    // if Version 2
+                    if (Project.TemplateVersion == 2)
+                    {
+                        // Use the Data folder
+                        writerFile = @"DataAccessComponent\Data\Writers\" + MethodInfo.SelectedTable.ClassName + "Writer.cs";
+                    }
                     
                     switch (MethodInfo.MethodType)
                     {
