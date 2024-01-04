@@ -2037,6 +2037,13 @@ namespace DataTierClient.Controls
                     // get the dataObjectsFolder
                     string gatewayPath = @"DataGateway\Gateway.cs";
 
+                    // if the Template Version is 2
+                    if (Project.TemplateVersion == 2)
+                    {
+                        // V2 inside DataAccessComponent
+                        gatewayPath = @"DataAccessComponent\DataGateway\Gateway.cs";
+                    }
+
                     // get the filePath
                     string filePath = @"ObjectLibrary\BusinessObjects\" + MethodInfo.SelectedTable.ClassName + ".business.cs";
                     string writerFile = @"DataAccessComponent\DataManager\Writers\" + MethodInfo.SelectedTable.ClassName + "Writer.cs";
@@ -2390,6 +2397,13 @@ namespace DataTierClient.Controls
 
                 // get the gatewayFile
                 string gatewayFile = Path.Combine(ProjectFolder,  @"DataGateway\Gateway.cs");
+
+                // if version 2
+                if (Project.TemplateVersion == 2)
+                {
+                    // use the Data folder
+                    gatewayFile = Path.Combine(ProjectFolder,  @"DataAccessComponent\DataGateway\Gateway.cs");
+                }
 
                 // local
                 CodeLine codeLine = null;
@@ -2943,12 +2957,20 @@ namespace DataTierClient.Controls
 
                     // set the variable name used in the method
                     MethodInfo.StoredProcedureVariableName = CSharpClassWriter.LowerCaseFirstCharEx(baseMethodName.Replace("Load", "FetchAll")) + "StoredProcedure";
-                    
+
                     // set the writerFile path
                     string writerFile = Path.Combine(ProjectFolder,  @"DataAccessComponent\DataManager\Writers\", MethodInfo.SelectedTable.ClassName + "Writer.cs");
 
                     // set the baseWriterFile path
                     string baseWriterFile = Path.Combine(ProjectFolder,  @"DataAccessComponent\DataManager\Writers\", MethodInfo.SelectedTable.ClassName + "WriterBase.cs");
+
+                    // if the new structure
+                    if (Project.TemplateVersion == 2)
+                    {
+                        // Change to Data folder
+                        writerFile = Path.Combine(ProjectFolder,  @"DataAccessComponent\Data\Writers\", MethodInfo.SelectedTable.ClassName + "Writer.cs");
+                        baseWriterFile = Path.Combine(ProjectFolder,  @"DataAccessComponent\Data\Writers\", MethodInfo.SelectedTable.ClassName + "WriterBase.cs");
+                    }
 
                     // if the file exists
                     if (File.Exists(writerFile))
