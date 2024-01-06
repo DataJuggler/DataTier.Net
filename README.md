@@ -1,3 +1,6 @@
+1.5.2024: New Video - How To Install DataTier .Net
+https://youtu.be/wYTEPEcyBFY
+
 8.14.2023 New Video
 
 Create a Stock Predictor With C# and ML.NET Part I
