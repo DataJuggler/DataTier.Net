@@ -1,3 +1,5 @@
+1.14.2024: New Video - Creating a Cities Database using DataTier .Net and Excelerate - https://youtu.be/6LsFP0puuyA
+
 1.5.2024: New Video - How To Install DataTier .Net
 https://youtu.be/wYTEPEcyBFY
 
