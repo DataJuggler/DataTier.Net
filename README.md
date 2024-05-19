@@ -1,7 +1,7 @@
 5.18.2024: New Video
 
 First Ever Opensource Saturday - Sunday Edition
-https://youtu.be/kohGlLIBMR0
+https://youtu.be/uxa1xR6xpzk
 
 1.14.2024: New Video - Creating a Cities Database using DataTier .Net and Excelerate - https://youtu.be/6LsFP0puuyA
 
