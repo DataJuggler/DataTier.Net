@@ -796,6 +796,7 @@
     <Content Include="Images\Parameter Mode.png" />
     <None Include="Images\V.png" />
     <None Include="Images\ReaderMode.png" />
+    <None Include="lib\README.md" />
     <None Include="packages.config" />
     <None Include="Resources\GreenRoomZoom.png" />
     <None Include="Resources\GrayAsAStray.png" />
@@ -812,7 +813,6 @@
     <None Include="Resources\arrow-down.png" />
     <None Include="Resources\arrow-up-gray.png" />
     <None Include="Resources\arrow-down-gray.png" />
-    <Content Include="lib\ReadMe.txt" />
     <Content Include="Resources\BlackButton.png" />
     <None Include="Resources\OrangeBackground.jpg" />
     <None Include="Resources\Success.png" />
