@@ -1,3 +1,13 @@
+5.18.2024: New Video
+
+First Ever Opensource Saturday - Sunday Edition
+https://youtu.be/kohGlLIBMR0
+
+1.14.2024: New Video - Creating a Cities Database using DataTier .Net and Excelerate - https://youtu.be/6LsFP0puuyA
+
+1.5.2024: New Video - How To Install DataTier .Net
+https://youtu.be/wYTEPEcyBFY
+
 8.14.2023 New Video
 
 Create a Stock Predictor With C# and ML.NET Part I
