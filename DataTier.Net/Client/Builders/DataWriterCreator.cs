@@ -663,8 +663,7 @@ namespace DataTierClient.Builders
                 string dataType = dataTable.ClassName;
                 string dataObject = this.CapitalizeFirstChar(dataType, true);
                 string procDataType = "Insert" + dataTable.ClassName + "StoredProcedure";
-                string procInstance = this.CapitalizeFirstChar(procDataType, true);
-                string parameterName = "@" + dataTable.PrimaryKey.FieldName;
+                string procInstance = this.CapitalizeFirstChar(procDataType, true);                
                 bool writePrimaryKey = false;
                 bool skipfield = false;
                 int count = 0;
@@ -820,7 +819,6 @@ namespace DataTierClient.Builders
                 string dataType = dataTable.ClassName;
                 string dataObject = this.CapitalizeFirstChar(dataType, true);
                 string className = dataTable.ClassName;
-                string parameterName = "@" + dataTable.PrimaryKey.FieldName + ";";
                 string procDataType = "Insert" + className + "StoredProcedure";
                 string procInstance = this.CapitalizeFirstChar(procDataType, true);
 

@@ -595,7 +595,7 @@ namespace DataTierClient.Controls
                 get { return selectedRefSet; }
                 set 
                 { 
-                    if ((value != null) && (value.ReferencesSetId > 0))
+                    if (value != null)
                     {
                         selectedRefSet = value;
                     }
