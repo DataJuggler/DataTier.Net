@@ -45,7 +45,7 @@ namespace DataTierClient.Controls
         private const string InstallDataTierNet8 = "dotnet new install DataJuggler.DataTier.NET8.ProjectTemplates::8.0.0 --force";
         private const string CreateDataTierNet8V2 = "dotnet new DataTier.NET8.ProjectTemplatesV2";
         private const string InstallDataTierNet8V2 = "dotnet new install DataJuggler.DataTier.NET8.ProjectTemplatesV2::8.0.0 --force";
-
+        
         // Used to install the Project Templates on the ProjectEditorControl.cs
         private const int GraphWidth = 268;
         #endregion 
@@ -604,6 +604,52 @@ namespace DataTierClient.Controls
             }
             #endregion
             
+            #region GetPackageName()
+            /// <summary>
+            /// returns the Package Name
+            /// </summary>
+            public string GetPackageName()
+            {
+                // initial value
+                string packageName = "";
+
+                if (HasSelectedProject)
+                {
+                    if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net5)
+                    {
+                        // Set the return value
+                        packageName = "DataJuggler.DataTier.Net5.ProjectTemplates";
+                    }
+                    else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net6)
+                    {
+                        // Set the return value
+                        packageName = "DataJuggler.DataTier.Net6.ProjectTemplates";
+                    }
+                    else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net7)
+                    {
+                        // Set the return value
+                        packageName = "DataJuggler.DataTier.Net7.ProjectTemplates";
+                    }
+                    else
+                    {
+                        if (SelectedProject.TemplateVersion == 1)
+                        {
+                            // Set the return value
+                            packageName = "DataJuggler.DataTier.Net8.ProjectTemplates";
+                        }
+                        else
+                        {
+                            // Set the return value
+                            packageName = "DataJuggler.DataTier.Net8.ProjectTemplatesV2";
+                        }
+                    }
+                }
+                
+                // return value
+                return packageName;
+            }
+            #endregion
+            
             #region Init()
             /// <summary>
             /// Perform Initializations For This Object.
@@ -647,12 +693,17 @@ namespace DataTierClient.Controls
 
                 try               
                  {
+                    // Check if installed
+                    string packageName = GetPackageName();
+
                     // Create a Process to launch a command window (hidden) to create the item templates
                     Process process = new Process();
                     ProcessStartInfo startInfo = new ProcessStartInfo();
                     startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                     startInfo.FileName = "cmd.exe";
                     startInfo.WorkingDirectory = SelectedProject.ProjectFolder;
+
+                    // Note: The /C parameter tells the command window to terminate after completion.
 
                     if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net5)
                     {

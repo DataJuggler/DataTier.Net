@@ -117,6 +117,13 @@ namespace DataTierClient.Controls
                 // Get the selected reference
                 if(this.SelectedReference != null)
                 {
+                    // if not set
+                    if (SelectedReferencesSet.IsNew)
+                    {
+                        // Set the ProjectId
+                        SelectedReferencesSet.ProjectId = SelectedProject.ProjectId;
+                    }
+
                     // Create 
                     ReferenceEditorForm editorForm = new ReferenceEditorForm();
 

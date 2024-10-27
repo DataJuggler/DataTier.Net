@@ -152,6 +152,12 @@ namespace DataTierClient.Forms
                         // Set the SelectedProject
                         this.SelectedProject = project;
 
+                        // Create a new instance of a 'Gateway' object.
+                        Gateway gateway = new Gateway();
+
+                        // Load the AllReferences
+                        // gateway.LoadProjectReferencesForProject(ref project);
+
                         // User did not cancel
                         this.UserCancelled = false;
 

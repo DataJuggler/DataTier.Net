@@ -746,7 +746,13 @@ namespace ObjectLibrary.BusinessObjects
             public List<ReferencesSet> AllReferences
             {
                 get { return allReferences; }
-                set { allReferences = value; }
+                set 
+                {
+                    if (value != null)
+                    {
+                        allReferences = value;
+                    }
+                }
             }
             #endregion
 

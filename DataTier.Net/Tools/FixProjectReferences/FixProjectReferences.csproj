@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>disable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\**" />
+    <EmbeddedResource Remove="Data\**" />
+    <None Remove="Data\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DataJuggler.Win.Controls" Version="8.1.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="Data\DataAccessComponent\DataAccessComponent.csproj" />
+    <ProjectReference Include="Data\ObjectLibrary\ObjectLibrary.csproj" />
+  </ItemGroup>
+
+</Project>

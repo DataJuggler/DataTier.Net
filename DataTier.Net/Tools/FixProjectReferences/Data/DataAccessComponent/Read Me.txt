@@ -1,0 +1,54 @@
+Update 11.14.2022: Working on .NET 7 version. It is still being tested.
+
+--
+
+Update 12.21.2021: First working version for targeting .NET 6, or .NET 5 or .NET Framework.
+
+--
+
+Update 12.9.2020: First working version targeting .NET 5 or .NET Framework.
+
+--
+
+Update 7.14.2019: I now have a VSIX installer that makes it easier to install the templates.
+
+DataTier.Net\VSIX\DataTier.Net.ProjectTemplates.Installer.vsix
+
+--
+
+Update 5.27.2019: There was a problem with the NuGet paths if I include the reference in the templates, so after opening right click your solution > Manager NuGet Packages for Solution.
+
+Search DataJuggler.Net, and this will resolve the issue. I am too tired to keep working on this now as I have to work in the morning.
+
+
+To install into Visual Studio 2017 or 2019, Copy the file DataTier.Net.ClassLibrary.zip to the following directory.
+
+
+VS 2017
+C:\Users\[Your User Name]\Documents\Visual Studio 2017\Templates\ProjectTemplates\Visual C#
+
+And / Or
+
+VS 2019
+C:\Users\[Your User Name]\Documents\Visual Studio 2019\Templates\ProjectTemplates\Visual C#
+
+
+Note: You can install these templates into older version of Visual Studio by selecting the path for that version.
+
+Be warned the new templates have only been tested on Visual Studio 2019, as I no longer have VS 2017.
+
+
+The product DataTier.Net was based RAD Studio Code Generation Toolkit worked as far back as 2008, and the product RAD Studio
+was based on DataClassBuilder.Net worked as far back as 2005. 
+
+The templates use DOT NET Framework 4.61. If you need a different version you can change that by selecting the Project in 
+Solution Explorer and clicking Properties and select the version that suits your needs.
+
+Version 4.61 is the only tested version of the current release, but the marjoirty of this code has worked for over a decade and is 
+fairly well tested since the majority of my day jobs have all used this product in Test and Production.
+
+There are no guaruntees that it will be bug free, or that it will work for you. It works for the databases I create and / or have to 
+support for my personal projects and my clients projects.
+
+The folder DataTier.Net.DataTemplate is the uncompressed zip file. I use this to edit and create the project templates and zip files.
+

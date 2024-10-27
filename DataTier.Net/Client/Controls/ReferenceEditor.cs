@@ -151,11 +151,28 @@ namespace DataTierClient.Controls
                 // Create a new instance of a 'Gateway' object.
                 Gateway gateway = new Gateway();
 
+                // local
+                bool saved = false;
+
                 // if the parent references set exists
-                if (this.HasSelectedReference) 
+                if ((this.HasSelectedReference) && (HasParentReferenceSet))
                 {
                     // set reference name
                     this.SelectedReference.ReferenceName = this.ReferenceTextBox.Text.ToString();
+
+                    // If this is new
+                    if (ParentReferenceSet.IsNew)
+                    {
+                        
+
+                        // Update 10.25.2024: If the ParentReferencesSet.ReferenecesSetId is not set, this needs to be saved
+                        saved = gateway.SaveReferencesSet(ref parentReferenceSet);
+
+                        if (!saved)
+                        {
+                            string error = gateway.GetLastException().ToString();
+                        }
+                    }
                     
                     // set parent references set
                     this.SelectedReference.ReferencesSetId = this.ParentReferenceSet.ReferencesSetId;
@@ -164,7 +181,7 @@ namespace DataTierClient.Controls
                     ProjectReference reference = this.SelectedReference;
                     
                     // Saved
-                    bool saved = gateway.SaveProjectReference(ref reference);
+                    saved = gateway.SaveProjectReference(ref reference);
                     
                     // if saved
                     if(saved)
@@ -270,6 +287,23 @@ namespace DataTierClient.Controls
             }
             #endregion
             
+            #region HasParentReferenceSet
+            /// <summary>
+            /// This property returns true if this object has a 'ParentReferenceSet'.
+            /// </summary>
+            public bool HasParentReferenceSet
+            {
+                get
+                {
+                    // initial value
+                    bool hasParentReferenceSet = (this.ParentReferenceSet != null);
+                    
+                    // return value
+                    return hasParentReferenceSet;
+                }
+            }
+            #endregion
+            
             #region HasSelectedReference
             /// <summary>
             /// This property returns true if this object has a 'SelectedReference'.
@@ -313,7 +347,7 @@ namespace DataTierClient.Controls
                 get { return parentReferenceSet; }
                 set 
                 {
-                    if ((value != null) && (value.ReferencesSetId > 0))
+                    if (value != null)
                     {
                         parentReferenceSet = value;
                     }
