@@ -146,32 +146,6 @@ namespace DataTierClient.Controls
             }
             #endregion
 
-            #region NewDataManagerReferencesSetButton_Click(object sender, EventArgs e)
-            /// <summary>
-            /// Create a new ReferencesSet for the DataManager referencesSet.
-            /// </summary>
-            /// <param name="sender"></param>
-            /// <param name="e"></param>
-            private void NewDataManagerReferencesSetButton_Click(object sender, EventArgs e)
-            {
-                // create references set
-                ReferencesSet refSet = ReferencesSetManager.CreateNewReferencesSet(this.SelectedProject);
-
-                // if the refSet exists
-                if(refSet != null)
-                {
-                    // add this refernce to all references
-                    this.SelectedProject.AllReferences.Add(refSet);
-                    
-                    // set the references set
-                    this.SelectedProject.DataManagerReferencesSet = refSet;
-                }
-                
-                // Display selected references
-                DisplaySelectedReferences(refSet);
-            }
-            #endregion
-
         #endregion
 
         #region Methods
@@ -260,14 +234,6 @@ namespace DataTierClient.Controls
 
                         // call the BrowseObjectFolderButton_Click event
                         BrowseDataManagerFolderButton_Click(this, null);
-
-                        // required
-                        break;
-
-                    case "New":
-
-                        // Call the NewObjectReferencesSetButton_Click event
-                        NewDataManagerReferencesSetButton_Click(this, null);
 
                         // required
                         break;

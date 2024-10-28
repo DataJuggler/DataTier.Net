@@ -147,32 +147,6 @@ namespace DataTierClient.Controls
             }
             #endregion
 
-            #region NewControllerReferencesSetButton_Click(object sender, EventArgs e)
-            /// <summary>
-            /// Create a new controller refernces set.
-            /// </summary>
-            /// <param name="sender"></param>
-            /// <param name="e"></param>
-            private void NewControllerReferencesSetButton_Click(object sender, EventArgs e)
-            {
-                // create references set
-                ReferencesSet refSet = ReferencesSetManager.CreateNewReferencesSet(this.SelectedProject);
-
-                // if the refSet exists
-                if (refSet != null)
-                {
-                    // add this refernce to all references
-                    this.SelectedProject.AllReferences.Add(refSet);
-
-                    // set the references set
-                    this.SelectedProject.ControllerReferencesSet = refSet;
-                }
-
-                // Display selected references
-                DisplaySelectedReferences(refSet); 
-            }
-            #endregion
-        
         #endregion
 
         #region Methods
@@ -268,14 +242,6 @@ namespace DataTierClient.Controls
 
                         // call the BrowseObjectFolderButton_Click event
                         BrowseControllerFolderButton_Click(this, null);
-
-                        // required
-                        break;
-
-                    case "New":
-
-                        // Call the NewObjectReferencesSetButton_Click event
-                        NewControllerReferencesSetButton_Click(this, null);
 
                         // required
                         break;

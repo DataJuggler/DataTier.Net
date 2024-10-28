@@ -143,11 +143,8 @@ namespace DataTierClient.Forms
                 }
                 else
                 {
-                    // Cast the SelectedItem as a Project
-                    Project project = this.ProjectsListBox.SelectedItem as Project;
-
-                    // if the project exists
-                    if (project != null)
+                    // if the SelectedItem is a project
+                    if (ProjectsListBox.SelectedItem is Project project)
                     {
                         // Set the SelectedProject
                         this.SelectedProject = project;
@@ -156,7 +153,7 @@ namespace DataTierClient.Forms
                         Gateway gateway = new Gateway();
 
                         // Load the AllReferences
-                        // gateway.LoadProjectReferencesForProject(ref project);
+                        gateway.LoadProjectReferencesForProject(ref project);
 
                         // User did not cancel
                         this.UserCancelled = false;
@@ -179,12 +176,8 @@ namespace DataTierClient.Forms
 				// if the Delete key was exists
 				if ((e.KeyCode == Keys.Delete) && (!this.VisualStudioMode))
 				{
-					// Get the selectedProject
-					Project selectedProject = this.ProjectsListBox.SelectedItem as Project;
-				
-					// if the selected project exists
-					if(selectedProject != null)
-					{
+                    if (ProjectsListBox.SelectedItem is Project selectedProject)
+                    {
 						// get the user's ocnfirmation to delete
 						string message = "Are you wish to delete the project '" + selectedProject.ProjectName + "'? This action can not be undone.";
 						string title = "Confirm Delete";

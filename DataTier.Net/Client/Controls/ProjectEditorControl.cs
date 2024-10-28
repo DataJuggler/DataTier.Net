@@ -480,16 +480,18 @@ namespace DataTierClient.Controls
             /// <param name="e"></param>
             private void Version2CheckBox_CheckedChanged(object sender, EventArgs e)
             {
-                // default for now
-                int templateVersion = 1;
+                // All new projects default to V2 Templates
+                int templateVersion = 2;
 
-                if (Version2CheckBox.Checked)
+                // if not checked
+                if (!Version2CheckBox.Checked)
                 {
-                    templateVersion = 2;
+                    // Reset to 1
+                    templateVersion = 1;
                 }
 
-                // if the SelectedProject exists
-                if (HasSelectedProject)
+                // if the SelectedProject exists and is new, this must be changed
+                if ((HasSelectedProject) && (SelectedProject.IsNew) && (SelectedProject.TemplateVersion != templateVersion))
                 {
                     // Set the TemplateVersion
                     SelectedProject.TemplateVersion = templateVersion;
@@ -693,9 +695,6 @@ namespace DataTierClient.Controls
 
                 try               
                  {
-                    // Check if installed
-                    string packageName = GetPackageName();
-
                     // Create a Process to launch a command window (hidden) to create the item templates
                     Process process = new Process();
                     ProcessStartInfo startInfo = new ProcessStartInfo();
@@ -828,32 +827,36 @@ namespace DataTierClient.Controls
                 // if the value for HasSelectedProject is true
                 if (HasSelectedProject)
                 {
+                    // Once a project has been saved, this can't be changed.
+                    Version2CheckBox.Enabled = (SelectedProject.IsNew);
+
                     // Show Enable BlazorServices for DotNet5 or DotNet6 projects only
-                    this.BlazorServicesCheckBox.Visible = SelectedProject.IsDotNetCore;
+                    BlazorServicesCheckBox.Visible = SelectedProject.IsDotNetCore;
 
                     // Show the CreateDotNet5Project control if DotNet5
-                    this.CreateDotNetProject.Visible = SelectedProject.IsDotNetCore;
+                    CreateDotNetProject.Visible = SelectedProject.IsDotNetCore;
                 }
                 else
                 {
                     // Do not show for .Net Framework projects
-                    this.BlazorServicesCheckBox.Visible = false;
-                    this.CreateDotNetProject.Visible = false;                    
+                    BlazorServicesCheckBox.Visible = false;
+                    CreateDotNetProject.Visible = false;                    
+                    Version2CheckBox.Enabled = true;
                 }
 
                 // if the value for ShowAutoFillHelp is true
                 if (ShowAutoFillHelp)
                 {
                     // position the control
-                    this.AutoFillChildFolderInfo.Left = (this.Width - this.AutoFillChildFolderInfo.Width) / 2;
-                    this.AutoFillChildFolderInfo.Top = (this.Height - this.AutoFillChildFolderInfo.Height) / 2;
+                    AutoFillChildFolderInfo.Left = (this.Width - this.AutoFillChildFolderInfo.Width) / 2;
+                    AutoFillChildFolderInfo.Top = (this.Height - this.AutoFillChildFolderInfo.Height) / 2;
                 }
                 
                 // Show or hide the AutoFill Help
-                this.AutoFillChildFolderInfo.Visible = this.ShowAutoFillHelp;
+                AutoFillChildFolderInfo.Visible = this.ShowAutoFillHelp;
 
                 // refresh controls
-                this.Refresh();
+                Refresh();
             }
             #endregion
 
@@ -1061,6 +1064,7 @@ namespace DataTierClient.Controls
         #endregion
 
         #endregion
+
     }
     #endregion
     

@@ -938,14 +938,15 @@ namespace DataTierClient.Forms
                         ClassBuilder classBuilder = new ClassBuilder(false);
 
                         // 12.19.2021
-                        TargetFrameworkEnum targetFramework = (TargetFrameworkEnum) OpenProject.TargetFramework;
+                        TargetFrameworkEnum targetFramework = OpenProject.TargetFramework;
 
+                        // 10.28.2021: Testing if this is needed.
                         // if not .NET8, this needs to be reloaded
-                        if (targetFramework != TargetFrameworkEnum.Net8)
-                        {
-                            // reload
-                            OpenProject.CreateDefaultReferences();
-                        }
+                        //if (targetFramework != TargetFrameworkEnum.Net8)
+                        //{
+                        //    // reload
+                        //    OpenProject.CreateDefaultReferences();
+                        //}
 
                         // load references
                         List<ProjectReference> references = this.OpenProject.WriterReferencesSet.References;
@@ -1582,6 +1583,11 @@ namespace DataTierClient.Forms
 
                 // set wizardForm
                 Project newProject = new Project();
+
+                newProject.TargetFramework = TargetFrameworkEnum.Net8; // default to latest project
+
+                // New projects must create default references
+                newProject.CreateDefaultReferences();
 
                 // Setup Wizartd Form
                 wizardForm.ProjectWizardControl.Setup(newProject, ActiveControlEnum.ProjectsTab, this);

@@ -487,9 +487,6 @@ namespace ObjectLibrary.BusinessObjects
 
                 // New projects now default to .NET 8
                 TargetFramework = TargetFrameworkEnum.Net8;
-                
-                // Create Default References
-                this.CreateDefaultReferences();
             }
             #endregion
 

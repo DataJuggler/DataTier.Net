@@ -73,35 +73,6 @@ namespace DataTierClient.Controls
             }
             #endregion
 
-            #region NewReaderReferencesSetButton_Click(object sender, EventArgs e)
-            /// <summary>
-            /// Create a new readers references set.
-            /// </summary>
-            /// <param name="sender"></param>
-            /// <param name="e"></param>
-            private void NewReaderReferencesSetButton_Click(object sender, EventArgs e)
-            {
-                // create references set
-                ReferencesSet refSet = ReferencesSetManager.CreateNewReferencesSet(this.SelectedProject);
-
-                // if the refSet exists
-                if (refSet != null)
-                {
-                    // set selected references set
-                    this.SelectedReferencesSet = refSet;
-                    
-                    // add this refernce to all references
-                    this.SelectedProject.AllReferences.Add(refSet);
-
-                    // set the references set
-                    this.SelectedProject.ReaderReferencesSet = refSet;
-                }
-
-                // Display selected references
-                DisplaySelectedReferences(refSet);
-            }
-            #endregion
-
             #region ReaderFolderTextBox_TextChanged(object sender, EventArgs e)
             /// <summary>
             /// The ReaderFolder has changed.
@@ -265,15 +236,7 @@ namespace DataTierClient.Controls
                         BrowseReaderFolderButton_Click(this, null);
 
                         // required
-                        break;
-
-                    case "New":
-
-                        // Call the NewReaderReferencesSetButton_Click event
-                        NewReaderReferencesSetButton_Click(this, null);
-
-                        // required
-                        break;
+                        break;                    
 
                     case "Edit":
 

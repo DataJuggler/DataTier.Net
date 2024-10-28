@@ -110,20 +110,16 @@ namespace DataTierClient.Controls
                 // if the SelectedProject exists
                 if (this.SelectedProject != null)
                 {
-                    // Create the references set
-                    ReferencesSet refSet = this.DataOperationsReferencesSetCombobox.SelectedItem as ReferencesSet;
-                    
-                    // if the references set exists
-                    if(refSet != null)
-                    {
+                    if (DataOperationsReferencesSetCombobox.SelectedItem is ReferencesSet refSet)
+                    { 
                         // set refernces set
-                        this.SelectedReferencesSet = refSet;
+                        SelectedReferencesSet = refSet;
                     
                         // Set references set
-                        this.SelectedProject.DataOperationsReferencesSet = refSet;
+                        SelectedProject.DataOperationsReferencesSet = refSet;
                     
                         // Set the DataOperationsReferencesSetID
-                        this.SelectedProject.DataOperationsReferencesSetId = refSet.ReferencesSetId;
+                        SelectedProject.DataOperationsReferencesSetId = refSet.ReferencesSetId;
                     }
 
                     // Enable Controls
@@ -148,32 +144,6 @@ namespace DataTierClient.Controls
             } 
             #endregion
 
-            #region NewDataOperationsReferencesSetButton_Click(object sender, EventArgs e)
-            /// <summary>
-            /// Create a new ReferencesSet.
-            /// </summary>
-            /// <param name="sender"></param>
-            /// <param name="e"></param>
-            private void NewDataOperationsReferencesSetButton_Click(object sender, EventArgs e)
-            {
-                // create references set
-                ReferencesSet refSet = ReferencesSetManager.CreateNewReferencesSet(this.SelectedProject);
-
-                // if the refSet exists
-                if (refSet != null)
-                {
-                    // add this refernce to all references
-                    this.SelectedProject.AllReferences.Add(refSet);
-
-                    // set the references set
-                    this.SelectedProject.DataOperationsReferencesSet = refSet;
-                }
-
-                // Display selected references
-                DisplaySelectedReferences(refSet);
-            }
-            #endregion
-        
         #endregion
 
         #region Methods
@@ -269,14 +239,6 @@ namespace DataTierClient.Controls
 
                         // call the BrowseObjectFolderButton_Click event
                         BrowseDataOperationsFolderButton_Click(this, null);
-
-                        // required
-                        break;
-
-                    case "New":
-
-                        // Call the NewObjectReferencesSetButton_Click event
-                        NewDataOperationsReferencesSetButton_Click(this, null);
 
                         // required
                         break;
@@ -428,11 +390,7 @@ namespace DataTierClient.Controls
                     // Initial Value
                     ProjectWizardControl projectWizardControl = null;
 
-                    // get a reference to this objects parent (Cast as a Panel).
-                    Panel mainPanel = this.Parent as Panel;
-
-                    // if mainPanel exists
-                    if (mainPanel != null)
+                    if (this.Parent is Panel mainPanel)
                     {
                         // set projectWizardControl
                         projectWizardControl = mainPanel.Parent as ProjectWizardControl;

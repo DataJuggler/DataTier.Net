@@ -143,6 +143,17 @@ namespace DataTierClient.Controls
             }
             #endregion
 
+            #region ReferencesListBox_DoubleClick(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when References List Box _ Double Click
+            /// </summary>
+            private void ReferencesListBox_DoubleClick(object sender, EventArgs e)
+            {
+                // Simulate the tab button clicking
+                OnTabButtonClicked(EditButton);
+            }
+            #endregion
+            
             #region ReferencesListBox_SelectedIndexChanged(object sender, EventArgs e)
             /// <summary>
             /// An item was selected in the References list box.
@@ -619,10 +630,9 @@ namespace DataTierClient.Controls
                 get { return userCancelled; }
                 set { userCancelled = value; }
             }
-            #endregion
-            
         #endregion
 
+        #endregion
     }
     #endregion
     

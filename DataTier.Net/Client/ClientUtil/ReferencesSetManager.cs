@@ -50,45 +50,6 @@ namespace DataTierClient.ClientUtil
             }    
             #endregion
 
-            #region CreateNewReferencesSet(Project selectedProject)
-            /// <summary>
-            /// Create a new references set.
-            /// </summary>
-            /// <returns></returns>
-            public static ReferencesSet CreateNewReferencesSet(Project selectedProject)
-            {
-                // initial value
-                ReferencesSet refSet = new ReferencesSet();
-                
-                // Create references Set form 
-                ReferencesSetEditorForm referencesForm = new ReferencesSetEditorForm();
-                
-                // Set the selected project
-                referencesForm.ReferencesSetEditor.SelectedProject = selectedProject;
-                
-                // prepare control
-                referencesForm.ReferencesSetEditor.Setup(refSet);
-                
-                // references set editor
-                referencesForm.ShowDialog();
-                
-                // if the user did not cancel
-                if(!referencesForm.UserCancelled)
-                {
-                    // set refSet
-                    refSet = referencesForm.ReferencesSetEditor.SelectedReferencesSet;
-                }
-                else
-                {
-                    // set to null
-                    refSet = null;
-                }
-                
-                // return value
-                return refSet;
-            }
-            #endregion
-
             #region EditReferencesSet(ProjectReferences selectedReference, Project selectedProject)
             /// <summary>
             /// Edit an existing ReferencesSet.

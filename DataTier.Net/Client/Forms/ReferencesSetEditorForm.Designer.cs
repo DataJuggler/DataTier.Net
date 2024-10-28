@@ -56,10 +56,10 @@ namespace DataTierClient.Forms
             this.ReferencesSetEditor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ReferencesSetEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ReferencesSetEditor.Location = new System.Drawing.Point(0, 0);
-            this.ReferencesSetEditor.Name = "ReferencesSetEditor";            
+            this.ReferencesSetEditor.Name = "ReferencesSetEditor";
             this.ReferencesSetEditor.Size = new System.Drawing.Size(632, 348);
             this.ReferencesSetEditor.TabIndex = 0;
-            this.ReferencesSetEditor.UserCancelled = true;
+            this.ReferencesSetEditor.UserCancelled = true;            
             // 
             // ReferencesSetEditorForm
             // 

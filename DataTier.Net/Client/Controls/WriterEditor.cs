@@ -74,35 +74,6 @@ namespace DataTierClient.Controls
             }
             #endregion
 
-            #region NewWriterReferencesSetButton_Click(object sender, EventArgs e)
-            /// <summary>
-            /// Create a new references set for the WriterReferencsSet.
-            /// </summary>
-            /// <param name="sender"></param>
-            /// <param name="e"></param>
-            private void NewWriterReferencesSetButton_Click(object sender, EventArgs e)
-            {
-                // create references set
-                ReferencesSet refSet = ReferencesSetManager.CreateNewReferencesSet(this.SelectedProject);
-
-                // if the refSet exists
-                if (refSet != null)
-                {
-                    // set selected references set
-                    this.SelectedReferencesSet = refSet;
-                
-                    // add this refernce to all references
-                    this.SelectedProject.AllReferences.Add(refSet);
-
-                    // set the references set
-                    this.SelectedProject.WriterReferencesSet = refSet;
-                }
-
-                // Display selected references
-                DisplaySelectedReferences(refSet);
-            }
-            #endregion
-
             #region WriterFolderTextBox_TextChanged(object sender, EventArgs e)
             /// <summary>
             /// The WriterFolder has changed.
@@ -264,14 +235,6 @@ namespace DataTierClient.Controls
 
                         // call the BrowseWriterFolderButton_Click event
                         BrowseWriterFolderButton_Click(this, null);
-
-                        // required
-                        break;
-
-                    case "New":
-
-                        // Call the NewWriterReferencesSetButton_Click event
-                        NewWriterReferencesSetButton_Click(this, null);
 
                         // required
                         break;

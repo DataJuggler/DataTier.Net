@@ -416,11 +416,7 @@ namespace DataTierClient.Controls
                 // loop through each control
                 foreach(Control control in this.Controls)
                 {
-                    // get the current control cast as a TabControl
-                    TabButton tabControl = control as TabButton;
-                    
-                    // if this is a tabControl
-                    if(tabControl != null)
+                    if (control is TabButton tabControl)
                     {
                         // if this is the selected control
                         tabControl.Selected = (tabControl.ButtonText == tabButton.ButtonText);

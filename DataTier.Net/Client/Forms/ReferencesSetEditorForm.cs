@@ -9,11 +9,10 @@ using DataTierClient.Controls.Interfaces;
 
 #endregion
 
-
 namespace DataTierClient.Forms
 {
 
-    #region class ReferencesSetEditorForm : Form
+    #region class ReferencesSetEditorForm
     /// <summary>
     /// This form is used to host the ReferencesSetEditorControl.
     /// </summary>
@@ -22,8 +21,8 @@ namespace DataTierClient.Forms
         
         #region Private Variables
         #endregion
-
-        #region Constructor()
+        
+        #region Constructor
         /// <summary>
         /// This class is the ReferencesSetEditorForm.
         /// </summary>
@@ -38,7 +37,7 @@ namespace DataTierClient.Forms
         #endregion
         
         #region Methods
-        
+            
             #region Init()
             /// <summary>
             /// Perform Any Initializations for this object
@@ -48,31 +47,31 @@ namespace DataTierClient.Forms
                 
             }
             #endregion
-        
+            
         #endregion
         
         #region Properties
-
+            
             #region UserCancelled
             /// <summary>
             /// Did the user cancel this save or edit.
             /// </summary>
             public bool UserCancelled
             {
-                get 
-                { 
+                get
+                {
                     // initial value
                     bool userCancelled = this.ReferencesSetEditor.UserCancelled;
                     
                     // return value
-                    return userCancelled; 
+                    return userCancelled;
                 }
             }
             #endregion
-        
+            
         #endregion
         
     }
     #endregion
-    
+
 }

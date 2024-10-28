@@ -163,8 +163,6 @@ namespace DataTierClient.Controls
                     // If this is new
                     if (ParentReferenceSet.IsNew)
                     {
-                        
-
                         // Update 10.25.2024: If the ParentReferencesSet.ReferenecesSetId is not set, this needs to be saved
                         saved = gateway.SaveReferencesSet(ref parentReferenceSet);
 
