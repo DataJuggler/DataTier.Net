@@ -1338,7 +1338,7 @@ namespace DataTierClient.Controls
                 else
                 {
                     // inform the user that in ParameterMode, manual selectections are required
-                    MessageBoxHelper.ShowMessage("In ParameterMode, you must manually select up to four fields.", "Invalid Selection");
+                    MessageHelper.DisplayMessage("In ParameterMode, you must manually select up to four fields.", "Invalid Selection");
                 }
             }
             #endregion

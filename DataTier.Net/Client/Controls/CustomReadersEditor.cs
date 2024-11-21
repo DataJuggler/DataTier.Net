@@ -21,6 +21,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DataTierClient.ClientUtil;
 
 #endregion
 
@@ -176,7 +177,7 @@ namespace DataTierClient.Controls
                             Exception exception = gateway.GetLastException();
 
                             // Show the user a warning the save failed
-                            MessageBoxHelper.ShowMessage("An error occurred saving your Custom Reader. Debug the issue in the OnSave event.", "Save Failed");
+                            MessageHelper.DisplayMessage("An error occurred saving your Custom Reader. Debug the issue in the OnSave event.", "Save Failed");
                         }
                     }
                 }

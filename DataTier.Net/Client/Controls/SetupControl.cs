@@ -16,6 +16,7 @@ using System.Windows.Forms;
 using DataJuggler.Core.UltimateHelper;
 using DataJuggler.Win.Controls;
 using DataJuggler.Win.Controls.Interfaces;
+using DataTierClient.ClientUtil;
 
 #endregion
 
@@ -152,7 +153,7 @@ namespace DataTierClient.Controls
                     process.Start();
 
                     // Show the user a message
-                    MessageBoxHelper.ShowMessage("DataJuggler.DataTier.Net5.ProjectTemplates were installed onto your computer.", "Install Complete");
+                    MessageHelper.DisplayMessage("DataJuggler.DataTier.Net5.ProjectTemplates were installed onto your computer.", "Install Complete");
                  }
                  catch (Exception error)
                  {
@@ -160,7 +161,7 @@ namespace DataTierClient.Controls
                     DebugHelper.WriteDebugError("DotNet5Label_Click", this.Name, error);
 
                     // show the user a message
-                    MessageBoxHelper.ShowMessage("The DataTier.Net5.Project Templates could not be installed. Ensure you are connected to the internet and try again.", "Insteall Templates Failed");
+                    MessageHelper.DisplayMessage("The DataTier.Net5.Project Templates could not be installed. Ensure you are connected to the internet and try again.", "Insteall Templates Failed");
                  }
             }
             #endregion
@@ -266,7 +267,7 @@ namespace DataTierClient.Controls
                     process.Start();
 
                     // Show the user a message
-                    MessageBoxHelper.ShowMessage("DataJuggler.DataTier.Net6.ProjectTemplates were installed onto your computer.", "Install Complete");
+                    MessageHelper.DisplayMessage("DataJuggler.DataTier.Net6.ProjectTemplates were installed onto your computer.", "Install Complete");
                  }
                  catch (Exception error)
                  {
@@ -274,7 +275,7 @@ namespace DataTierClient.Controls
                     DebugHelper.WriteDebugError("DotNet6Label_Click", this.Name, error);
 
                     // show the user a message
-                    MessageBoxHelper.ShowMessage("The DataTier.Net6.Project Templates could not be installed. Ensure you are connected to the internet and try again.", "Insteall Templates Failed");
+                    MessageHelper.DisplayMessage("The DataTier.Net6.Project Templates could not be installed. Ensure you are connected to the internet and try again.", "Insteall Templates Failed");
                  }
             }
             #endregion
@@ -365,7 +366,7 @@ namespace DataTierClient.Controls
                     process.Start();
                     
                     // Show the user a message
-                    MessageBoxHelper.ShowMessage("DataJuggler.DataTier.Net5.ProjectTemplates were uninstalled from your computer.", "Uninstall Complete");
+                    MessageHelper.DisplayMessage("DataJuggler.DataTier.Net5.ProjectTemplates were uninstalled from your computer.", "Uninstall Complete");
                  }
                  catch (Exception error)
                  {
@@ -373,7 +374,7 @@ namespace DataTierClient.Controls
                     DebugHelper.WriteDebugError("UninstallDotNet5_Click", this.Name, error);
 
                     // show the user a message
-                    MessageBoxHelper.ShowMessage("The DataTier.Net5.Project Templates could not be uninstalled.", "Uninsteall Templates Failed");
+                    MessageHelper.DisplayMessage("The DataTier.Net5.Project Templates could not be uninstalled.", "Uninsteall Templates Failed");
                  }
             }
             #endregion
@@ -396,7 +397,7 @@ namespace DataTierClient.Controls
                     process.Start();
 
                     // Show the user a message
-                    MessageBoxHelper.ShowMessage("DataJuggler.DataTier.Net6.ProjectTemplates were uninstalled from your computer.", "Uninstall Complete");
+                    MessageHelper.DisplayMessage("DataJuggler.DataTier.Net6.ProjectTemplates were uninstalled from your computer.", "Uninstall Complete");
                  }
                  catch (Exception error)
                  {
@@ -404,7 +405,7 @@ namespace DataTierClient.Controls
                     DebugHelper.WriteDebugError("UninstallDotNet6_Click", this.Name, error);
 
                     // show the user a message
-                    MessageBoxHelper.ShowMessage("The DataTier.Net6.ProjectTemplates could not be uninstalled.", "Uninsteall Templates Failed");
+                    MessageHelper.DisplayMessage("The DataTier.Net6.ProjectTemplates could not be uninstalled.", "Uninsteall Templates Failed");
                  }
             }
             #endregion
@@ -427,7 +428,7 @@ namespace DataTierClient.Controls
                     process.Start();
 
                     // Show the user a message
-                    MessageBoxHelper.ShowMessage("DataJuggler.DataTier.Net7.ProjectTemplates were uninstalled from your computer.", "Uninstall Complete");
+                    MessageHelper.DisplayMessage("DataJuggler.DataTier.Net7.ProjectTemplates were uninstalled from your computer.", "Uninstall Complete");
                  }
                  catch (Exception error)
                  {
@@ -435,7 +436,7 @@ namespace DataTierClient.Controls
                     DebugHelper.WriteDebugError("UninstallDotNet6_Click", this.Name, error);
 
                     // show the user a message
-                    MessageBoxHelper.ShowMessage("The DataTier.Net7.ProjectTemplates could not be uninstalled.", "Uninsteall Templates Failed");
+                    MessageHelper.DisplayMessage("The DataTier.Net7.ProjectTemplates could not be uninstalled.", "Uninsteall Templates Failed");
                  }
             }
             #endregion
@@ -458,7 +459,7 @@ namespace DataTierClient.Controls
                     process.Start();
 
                     // Show the user a message
-                    MessageBoxHelper.ShowMessage("DataJuggler.DataTier.NET8.ProjectTemplates were uninstalled from your computer.", "Uninstall Complete");
+                    MessageHelper.DisplayMessage("DataJuggler.DataTier.NET8.ProjectTemplates were uninstalled from your computer.", "Uninstall Complete");
                  }
                  catch (Exception error)
                  {
@@ -466,7 +467,7 @@ namespace DataTierClient.Controls
                     DebugHelper.WriteDebugError("UninstallDotNet6_Click", this.Name, error);
 
                     // show the user a message
-                    MessageBoxHelper.ShowMessage("The DataTier.NET8.ProjectTemplates could not be uninstalled.", "Uninsteall Templates Failed");
+                    MessageHelper.DisplayMessage("The DataTier.NET8.ProjectTemplates could not be uninstalled.", "Uninsteall Templates Failed");
                  }
             }
             #endregion
@@ -489,7 +490,7 @@ namespace DataTierClient.Controls
                     process.Start();
 
                     // Show the user a message
-                    MessageBoxHelper.ShowMessage("DataJuggler.DataTier.NET8V2.ProjectTemplates were uninstalled from your computer.", "Uninstall Complete");
+                    MessageHelper.DisplayMessage("DataJuggler.DataTier.NET8V2.ProjectTemplates were uninstalled from your computer.", "Uninstall Complete");
                  }
                  catch (Exception error)
                  {
@@ -497,7 +498,7 @@ namespace DataTierClient.Controls
                     DebugHelper.WriteDebugError("UninstallDotNet6_Click", this.Name, error);
 
                     // show the user a message
-                    MessageBoxHelper.ShowMessage("The DataTier.NET8V2.ProjectTemplates could not be uninstalled.", "Uninsteall Templates Failed");
+                    MessageHelper.DisplayMessage("The DataTier.NET8V2.ProjectTemplates could not be uninstalled.", "Uninsteall Templates Failed");
                  }
             }
             #endregion

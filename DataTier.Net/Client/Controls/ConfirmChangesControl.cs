@@ -383,7 +383,7 @@ namespace DataTierClient.Controls
                                 }
 
                                 // show the user an error
-                                MessageBoxHelper.ShowMessage("An unexpected error occurred saving this method.", "Database Save Failed");
+                                MessageHelper.DisplayMessage("An unexpected error occurred saving this method.", "Database Save Failed");
                             }
                         }
                     }
@@ -394,7 +394,7 @@ namespace DataTierClient.Controls
                     string err = error.ToString();
 
                     // Show the user a message
-                    MessageBoxHelper.ShowMessage("An error occurred updating your projects. Debug the error in the event ConfirmUpdate_Click", "Update Failed");
+                    MessageHelper.DisplayMessage("An error occurred updating your projects. Debug the error in the event ConfirmUpdate_Click", "Update Failed");
                 }
             }
             #endregion
@@ -639,7 +639,7 @@ namespace DataTierClient.Controls
                         abort = true;
 
                         // Invalid number of parameters
-                        MessageBoxHelper.ShowMessage("The selected field set has an invalid number of parameters. 1 - 4 parameters are expected.", "Invalid Parameter Field Set");
+                        MessageHelper.DisplayMessage("The selected field set has an invalid number of parameters. 1 - 4 parameters are expected.", "Invalid Parameter Field Set");
 
                         // required
                         break;

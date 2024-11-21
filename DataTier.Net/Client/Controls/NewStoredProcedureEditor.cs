@@ -192,7 +192,7 @@ namespace DataTierClient.Controls
                                 connection.Close();
 
                                 // Show the message
-                                MessageBoxHelper.ShowMessage("The stored procedure has been installed to your SQL Server.", "Procedure Installed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageHelper.DisplayMessage("The stored procedure has been installed to your SQL Server.", "Procedure Installed");
                             }                    
                         }
                     }
@@ -202,7 +202,7 @@ namespace DataTierClient.Controls
                         Clipboard.SetText(ProcedureTextBox.Text);
 
                         // Show the message
-                        MessageBoxHelper.ShowMessage("The stored procedure text has been copied to the clipboard.", "Procedure Copied");
+                        MessageHelper.DisplayMessage("The stored procedure text has been copied to the clipboard.", "Procedure Copied");
                     }
                 }
                 catch (Exception error)
@@ -211,7 +211,7 @@ namespace DataTierClient.Controls
                     DebugHelper.WriteDebugError("ProcedureButton_Click", "NewStoredProcedureEditor", error);
 
                     // Show a message
-                    MessageBoxHelper.ShowMessage("An error occurred installing your stored procedure", "Install Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageHelper.DisplayMessage("An error occurred installing your stored procedure", "Install Error");
                 }
             }
             #endregion

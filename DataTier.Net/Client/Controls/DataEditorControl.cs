@@ -404,7 +404,7 @@ namespace DataTierClient.Controls
                             string message = "Files have been removed and your project has been updated." + Environment.NewLine + Environment.NewLine + "Next You must uncheck the table or view to remove it, then click 'Save' and rebuild your project to complete the removal.";
 
                             // Show the Message
-                            MessageBoxHelper.ShowMessage(message, "Table Code Removal Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageHelper.DisplayMessage(message, "Table Code Removal Complete");
                         }
                     }
                 }

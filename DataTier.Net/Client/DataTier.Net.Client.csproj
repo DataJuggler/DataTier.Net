@@ -180,6 +180,7 @@
     <Compile Include="ClientUtil\GatewayHelper.cs" />
     <Compile Include="ClientUtil\MessageFilter.cs" />
     <Compile Include="ClientUtil\DotNetCLIHelper.cs" />
+    <Compile Include="ClientUtil\MessageHelper.cs" />
     <Compile Include="ClientUtil\ReferencesSetManager.cs" />
     <Compile Include="ClientUtil\SerializationManager.cs" />
     <Compile Include="ClientUtil\SQLSMOHelper.cs" />

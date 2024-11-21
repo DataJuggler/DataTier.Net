@@ -135,7 +135,7 @@ namespace DataTierClient.Controls
                         if (ListHelper.HasOneOrMoreItems(files))
                         {
                             // show the user a message
-                            MessageBoxHelper.ShowMessage("The Project Folder is not empty. You must select an empty folder for a Dot Net Core data-tier.", "Project Folder Is Not Empty");
+                            MessageHelper.DisplayMessage("The Project Folder is not empty. You must select an empty folder for a Dot Net Core data-tier.", "Project Folder Is Not Empty");
                         }
                         else
                         {
@@ -310,31 +310,21 @@ namespace DataTierClient.Controls
                                 // if the solutionPath exists
                                 if (File.Exists(solutionPath))
                                 {
-                                    // show the user a message
-                                    // MessageBoxHelper.ShowMessage("Your DataTier has been created.", "DataTier Created");
-                                    displayMessageForm.SetMessageText("Your DataTier has been created");
-
-                                    // Set the Text
-                                    displayMessageForm.Text = "Success";
+                                    // Display a Message
+                                    MessageHelper.DisplayMessage("Your DataTier has been created.", "Your DataTier Has Been Created");
                                 }
                                 else
                                 {
-                                    // show the user a message
-                                    displayMessageForm.SetMessageText("Oops. Something went wrong. It is recommended you try again, as it usually works the second time.");
-
-                                    // Set the Text of the form
-                                    displayMessageForm.Text = "Data Tier Not Created";
-                                }
-
-                                // Show the form
-                                displayMessageForm.ShowDialog();
+                                    // Display a Message
+                                    MessageHelper.DisplayMessage("Oops. Something went wrong. It is recommended you try again, as it usually works the second time.", "Your DataTier Could Nots Be Created");                                    
+                                }                                
                             }
                         }
                     }
                     else
                     {
                         // show the user a message
-                        MessageBoxHelper.ShowMessage("The Project Folder is required.", "DataTier Creation Failed");
+                        MessageHelper.DisplayMessage("The Project Folder is required.", "DataTier Creation Failed");
                     }
                 }
                 catch (Exception error)
@@ -343,7 +333,7 @@ namespace DataTierClient.Controls
                     DebugHelper.WriteDebugError("CreateDotNetProject_Clicked", this.Name, error);
 
                     // show the user a message
-                    MessageBoxHelper.ShowMessage("The datatier could not be created in the Project Folder. Ensure you are connected to the internet and that you have permission to write to the Project Folder.", "Create DataTier Failed");
+                    MessageHelper.DisplayMessage("The datatier could not be created in the Project Folder. Ensure you are connected to the internet and that you have permission to write to the Project Folder.", "Create DataTier Failed");
                 }
             }
             #endregion
@@ -866,7 +856,7 @@ namespace DataTierClient.Controls
                         DebugHelper.WriteDebugError("InstallDataTierNetTemplates", this.Name, error);
 
                         // show the user a message
-                        MessageBoxHelper.ShowMessage("The DataTier.Net.Project Templates could not be installed. Ensure you are connected to the internet and try again.", "Install Templates Failed");
+                        MessageHelper.DisplayMessage("The DataTier.Net.Project Templates could not be installed. Ensure you are connected to the internet and try again.", "Install Templates Failed");
                     }
                  }
 

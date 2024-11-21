@@ -1859,7 +1859,7 @@ namespace DataTierClient.Forms
                     else
                     {
                         // Show the user a message
-                        MessageBoxHelper.ShowMessage("You must paste in a connection string to continue.", "Connectionstring Required");
+                        MessageHelper.DisplayMessage("You must paste in a connection string to continue.", "Connectionstring Required");
                     }
                 }
                 catch (Exception error)
