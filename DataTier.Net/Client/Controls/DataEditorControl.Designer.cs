@@ -31,7 +31,6 @@ namespace DataTierClient.Controls
         private System.Windows.Forms.Button ManageMethodButton;
         private System.Windows.Forms.Button ManageReadersButton;
         private System.Windows.Forms.Button ManageFieldSetsButton;
-        private System.Windows.Forms.Button BlazorFeaturesButton;        
         private System.Windows.Forms.Label AllButton;
         private System.Windows.Forms.Label NoneButton;
         #endregion
@@ -73,8 +72,7 @@ namespace DataTierClient.Controls
             this.CreateMethodButton = new System.Windows.Forms.Button();
             this.ManageMethodButton = new System.Windows.Forms.Button();
             this.ManageReadersButton = new System.Windows.Forms.Button();
-            this.ManageFieldSetsButton = new System.Windows.Forms.Button();
-            this.BlazorFeaturesButton = new System.Windows.Forms.Button();            
+            this.ManageFieldSetsButton = new System.Windows.Forms.Button();            
             this.AllButton = new System.Windows.Forms.Label();
             this.NoneButton = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -269,27 +267,6 @@ namespace DataTierClient.Controls
             this.ManageFieldSetsButton.MouseEnter += new System.EventHandler(this.Button_Enter);
             this.ManageFieldSetsButton.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
-            // BlazorFeaturesButton
-            // 
-            this.BlazorFeaturesButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
-            this.BlazorFeaturesButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BlazorFeaturesButton.FlatAppearance.BorderSize = 0;
-            this.BlazorFeaturesButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.BlazorFeaturesButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.BlazorFeaturesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BlazorFeaturesButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BlazorFeaturesButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.BlazorFeaturesButton.Location = new System.Drawing.Point(360, 314);
-            this.BlazorFeaturesButton.Name = "BlazorFeaturesButton";
-            this.BlazorFeaturesButton.Size = new System.Drawing.Size(232, 40);
-            this.BlazorFeaturesButton.TabIndex = 104;
-            this.BlazorFeaturesButton.Text = "Blazor Data Services";
-            this.BlazorFeaturesButton.UseVisualStyleBackColor = true;
-            this.BlazorFeaturesButton.Visible = false;
-            this.BlazorFeaturesButton.Click += new System.EventHandler(this.BlazorFeaturesButton_Click);
-            this.BlazorFeaturesButton.MouseEnter += new System.EventHandler(this.Button_Enter);
-            this.BlazorFeaturesButton.MouseLeave += new System.EventHandler(this.Button_Leave);            
-            // 
             // AllButton
             // 
             this.AllButton.AutoSize = true;
@@ -335,8 +312,7 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.FieldsListBox);
             this.Controls.Add(this.ExcludeTableLabel);
             this.Controls.Add(this.SaveCancelControl);
-            this.Controls.Add(this.TablesListBox);
-            this.Controls.Add(this.BlazorFeaturesButton);
+            this.Controls.Add(this.TablesListBox);            
             this.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "DataEditorControl";
             this.Size = new System.Drawing.Size(964, 496);

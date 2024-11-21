@@ -2637,7 +2637,7 @@ namespace DataTierClient.Controls
                         insertIndex = CodeLineHelper.InsertCodeLine(ref codeLines, indent2, insertIndex);
 
                         // attemp to find the PrimaryKey
-                        DTNField primaryKey = BlazorDataServicesControl.FindPrimaryKey(MethodInfo.SelectedTable);
+                        DTNField primaryKey = Gateway.FindPrimaryKey(methodInfo.SelectedTable);
 
                         // set the createTempObjectComment
                         string createTempObjectComment = indent2 + "// Create a temp " + MethodInfo.SelectedTable.ClassName + " object";

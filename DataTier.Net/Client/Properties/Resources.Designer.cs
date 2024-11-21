@@ -173,16 +173,6 @@ namespace DataTierClient.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap DataTier_Net_Blazor {
-            get {
-                object obj = ResourceManager.GetObject("DataTier.Net.Blazor", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Deep_Black {
             get {
                 object obj = ResourceManager.GetObject("Deep Black", resourceCulture);

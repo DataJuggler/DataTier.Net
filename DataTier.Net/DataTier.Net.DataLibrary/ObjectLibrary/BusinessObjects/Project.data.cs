@@ -30,7 +30,6 @@ namespace ObjectLibrary.BusinessObjects
         private string dataWriterNamespace;
         private int dataWriterReferencesSetId;
         private DateTime dateModified;
-        private bool enableBlazorFeatures;
         private string objectFolder;
         private string objectNamespace;
         private int objectReferencesSetId;
@@ -39,8 +38,7 @@ namespace ObjectLibrary.BusinessObjects
         private string projectName;
         private string readerFolder;
         private string readerNamespace;
-        private int readerReferencesSetId;
-        private string servicesFolder;
+        private int readerReferencesSetId;        
         private string storedProcedureObjectFolder;
         private string storedProcedureObjectNamespace;
         private int storedProcedureReferencesSetId;
@@ -249,20 +247,6 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
 
-            #region bool EnableBlazorFeatures
-            public bool EnableBlazorFeatures
-            {
-                get
-                {
-                    return enableBlazorFeatures;
-                }
-                set
-                {
-                    enableBlazorFeatures = value;
-                }
-            }
-            #endregion
-
             #region string ObjectFolder
             public string ObjectFolder
             {
@@ -381,20 +365,6 @@ namespace ObjectLibrary.BusinessObjects
                 set
                 {
                     readerReferencesSetId = value;
-                }
-            }
-            #endregion
-
-            #region string ServicesFolder
-            public string ServicesFolder
-            {
-                get
-                {
-                    return servicesFolder;
-                }
-                set
-                {
-                    servicesFolder = value;
                 }
             }
             #endregion

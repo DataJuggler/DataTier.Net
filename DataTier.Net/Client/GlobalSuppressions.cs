@@ -5,8 +5,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Style", "IDE0059:Unnecessary assignment of a value", Justification = "<Pending>", Scope = "member", Target = "~M:DataTierClient.Controls.BlazorDataServicesControl.CreateBlazorServicesButton_LinkClicked(System.Object,System.Windows.Forms.LinkLabelLinkClickedEventArgs)")]
-[assembly: SuppressMessage("Style", "IDE0017:Simplify object initialization", Justification = "<Pending>", Scope = "member", Target = "~M:DataTierClient.Controls.BlazorDataServicesControl.CreateBlazorServicesButton_LinkClicked(System.Object,System.Windows.Forms.LinkLabelLinkClickedEventArgs)")]
 [assembly: SuppressMessage("Style", "IDE0019:Use pattern matching", Justification = "<Pending>", Scope = "member", Target = "~P:DataTierClient.Controls.ProjectEditorControl.ParentProjectWizard")]
 [assembly: SuppressMessage("Style", "IDE0019:Use pattern matching", Justification = "<Pending>", Scope = "member", Target = "~M:DataTierClient.Controls.ProjectWizardControl.Init")]
 [assembly: SuppressMessage("Style", "IDE0059:Unnecessary assignment of a value", Justification = "<Pending>", Scope = "member", Target = "~M:DataTierClient.Builders.StoredProcedureObjectCreator.WriteInitMethod(DataJuggler.Net.DataTable,DataJuggler.Net.Enumerations.StoredProcedureTypes)")]

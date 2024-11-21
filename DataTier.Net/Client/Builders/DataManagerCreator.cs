@@ -449,7 +449,7 @@ namespace DataTierClient.Builders
                 // Write ErrorProcessor and ParentController
                 WriteLine("private DataConnector dataConnector;");
 
-                // Update 8.22.2019 - Version 1.3.0: Dot Net Core / Blazor compatibility
+                // Update 8.22.2019 - Version 1.3.0: Dot Net Core
                 WriteLine("private string connectionName;");
                 
                 // Write DataTable Private Variables
@@ -543,7 +543,7 @@ namespace DataTierClient.Builders
                 // Write Property For DataConnector
                 WriteProperty("DataConnector", "dataConnector", "DataConnector");
 
-                // Update 8.22.2019 - Version 1.3.0: Dot Net Core / Blazor compatibility
+                // Update 8.22.2019 - Version 1.3.0: Dot Net Core
                 // Write Property For ConnectionName
                 WriteProperty("ConnectionName", "connectionName", "string");
                 

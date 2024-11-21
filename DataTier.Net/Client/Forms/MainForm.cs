@@ -218,7 +218,7 @@ namespace DataTierClient.Forms
                 // if the user did not cancel
                 if (!dataEditor.UserCancelled)
                 {
-                    // reload the project in case the ServicesFolder changed in the BlazorDataEditorControl
+                    // reload the project
                     this.OpenProject = gateway.FindProject(OpenProject.ProjectId);
 
                     // Get the tables from the dataEditor control
@@ -1583,8 +1583,6 @@ namespace DataTierClient.Forms
 
                 // set wizardForm
                 Project newProject = new Project();
-
-                newProject.TargetFramework = TargetFrameworkEnum.Net8; // default to latest project
 
                 // New projects must create default references
                 newProject.CreateDefaultReferences();

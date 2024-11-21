@@ -77,29 +77,6 @@ namespace DataTierClient.Controls
             }
             #endregion
             
-            #region BlazorFeaturesButton_Click(object sender, EventArgs e)
-            /// <summary>
-            /// event is fired when the 'BlazorFeaturesButton' is clicked.
-            /// </summary>
-            private void BlazorFeaturesButton_Click(object sender, EventArgs e)
-            {
-                // Create a new instance of a 'BlazorServicesForm' object.
-                BlazorServicesForm form = new BlazorServicesForm();
-
-                // Setup the form
-                form.Setup(this.Project, this.SelectedTable);
-
-                // Show the form
-                form.ShowDialog();
-
-                // Create a new instance of a 'Gateway' object.
-                Gateway gateway = new Gateway();
-
-                // reload the project in case it changed
-                this.Project = gateway.FindProject(Project.ProjectId);
-            }
-            #endregion
-            
             #region Button_Enter(object sender, EventArgs e)
             /// <summary>
             /// event is fired when Button _ Enter
@@ -801,7 +778,7 @@ namespace DataTierClient.Controls
             public void Setup(Project project)
             {
                 // store the args
-                this.Project = project;
+                Project = project;
                 
                 // Store original values
                 if ((HasProject) && (ListHelper.HasOneOrMoreItems(Project.Tables)))
@@ -830,57 +807,51 @@ namespace DataTierClient.Controls
             /// This method handles which controls are enabled or visible and which are not.
             /// </summary>
             public void UIEnable()
-            {
-                // local
-                bool showBlazorFeatures = ((HasProject) && (Project.EnableBlazorFeatures) && (Project.TargetFramework != TargetFrameworkEnum.NetFramework));
-                
+            {  
                 // if there is a SelectedTable
-                if ((this.HasSelectedTable) && (!this.SelectedTable.Exclude))
+                if ((HasSelectedTable) && (!SelectedTable.Exclude))
                 {
                     // Display the Name
-                    this.SelectedTableTextBox.Text = this.SelectedTable.TableName;
+                    SelectedTableTextBox.Text = SelectedTable.TableName;
                     
                     // Show the buttons
-                    this.RemoveTableButton.Visible = true;
-                    this.CreateMethodButton.Visible = true;
-                    this.ManageReadersButton.Visible = true;
-                    this.ManageFieldSetsButton.Visible = true;
-                    this.ManageMethodButton.Visible = true;                    
-                    this.BlazorFeaturesButton.Visible = showBlazorFeatures;                    
+                    RemoveTableButton.Visible = true;
+                    CreateMethodButton.Visible = true;
+                    ManageReadersButton.Visible = true;
+                    ManageFieldSetsButton.Visible = true;
+                    ManageMethodButton.Visible = true;
                 }
                 else
                 {
                     // Erase the Name
-                    this.SelectedTableTextBox.Text = String.Empty;
+                    SelectedTableTextBox.Text = String.Empty;
                     
                     // Hide this buttons                    
-                    this.RemoveTableButton.Visible = false;
-                    this.CreateMethodButton.Visible = false;
-                    this.ManageReadersButton.Visible = false;
-                    this.ManageFieldSetsButton.Visible = false;
-                    this.ManageMethodButton.Visible = false;
-                    this.BlazorFeaturesButton.Visible = false;                    
+                    RemoveTableButton.Visible = false;
+                    CreateMethodButton.Visible = false;
+                    ManageReadersButton.Visible = false;
+                    ManageFieldSetsButton.Visible = false;
+                    ManageMethodButton.Visible = false;                    
                 }
                 
                 // Not If Loading
-                if (!this.Loading)
+                if (!Loading)
                 {
                     // Get the currentValues
-                    List<ExcludeInfo> currentValues = ChangeManager.GetObjectValues(this.Tables);
+                    List<ExcludeInfo> currentValues = ChangeManager.GetObjectValues(Tables);
                 
                     // has this object changed
-                    bool hasObjectChanged = ChangeManager.HasObjectChanged(this.OriginalValues, currentValues);
+                    bool hasObjectChanged = ChangeManager.HasObjectChanged(OriginalValues, currentValues);
 
                     // if the SaveCancelControl exists
-                    if (this.SaveCancelControl != null)
+                    if (SaveCancelControl != null)
                     {
                         // Enable the Save button if the object has changed
-                        this.SaveCancelControl.EnableSaveButton(hasObjectChanged);
+                        SaveCancelControl.EnableSaveButton(hasObjectChanged);
                     }
                 }
             }
-
-        #endregion
+            #endregion
 
         #endregion
 

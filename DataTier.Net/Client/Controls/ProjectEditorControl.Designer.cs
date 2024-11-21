@@ -25,7 +25,6 @@ namespace DataTierClient.Controls
         private TabButton EnumerationsButton;
         private TabButton BrowseProjectFolderButton;
         private System.Windows.Forms.Button HelpButton;
-        private System.Windows.Forms.CheckBox BlazorServicesCheckBox;
         private System.Windows.Forms.Label CreateDotNetProject;
         #endregion
         
@@ -59,7 +58,6 @@ namespace DataTierClient.Controls
             this.ProjectFolderLabel = new System.Windows.Forms.Label();
             this.ProjectNameLabel = new System.Windows.Forms.Label();
             this.AutoFillChildFoldersCheckBox = new System.Windows.Forms.CheckBox();
-            this.BlazorServicesCheckBox = new System.Windows.Forms.CheckBox();
             this.CreateDotNetProject = new System.Windows.Forms.Label();
             this.Graph = new System.Windows.Forms.Label();
             this.AutoFillChildFolderInfo = new System.Windows.Forms.PictureBox();
@@ -122,19 +120,6 @@ namespace DataTierClient.Controls
             this.AutoFillChildFoldersCheckBox.TabIndex = 77;
             this.AutoFillChildFoldersCheckBox.Text = "Auto Fill Child Folders";
             this.AutoFillChildFoldersCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // BlazorServicesCheckBox
-            // 
-            this.BlazorServicesCheckBox.AutoSize = true;
-            this.BlazorServicesCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BlazorServicesCheckBox.Location = new System.Drawing.Point(90, 233);
-            this.BlazorServicesCheckBox.Name = "BlazorServicesCheckBox";
-            this.BlazorServicesCheckBox.Size = new System.Drawing.Size(195, 24);
-            this.BlazorServicesCheckBox.TabIndex = 83;
-            this.BlazorServicesCheckBox.Text = "Enable Blazor Features";
-            this.BlazorServicesCheckBox.UseVisualStyleBackColor = true;
-            this.BlazorServicesCheckBox.Visible = false;
-            this.BlazorServicesCheckBox.CheckedChanged += new System.EventHandler(this.BlazorServicesCheckBox_CheckedChanged);
             // 
             // CreateDotNetProject
             // 
@@ -287,7 +272,6 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.ShowAutoFillHelpButton);
             this.Controls.Add(this.Graph);
             this.Controls.Add(this.CreateDotNetProject);
-            this.Controls.Add(this.BlazorServicesCheckBox);
             this.Controls.Add(this.HelpButton);
             this.Controls.Add(this.BrowseProjectFolderButton);
             this.Controls.Add(this.EnumerationsButton);

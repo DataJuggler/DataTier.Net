@@ -50,23 +50,21 @@ namespace DataAccessComponent.DataManager.Readers
                 int dataWriterNamespacefield = 10;
                 int dataWriterReferencesSetIdfield = 11;
                 int dateModifiedfield = 12;
-                int enableBlazorFeaturesfield = 13;
-                int objectFolderfield = 14;
-                int objectNamespacefield = 15;
-                int objectReferencesSetIdfield = 16;
-                int projectFolderfield = 17;
-                int projectIdfield = 18;
-                int projectNamefield = 19;
-                int readerFolderfield = 20;
-                int readerNamespacefield = 21;
-                int readerReferencesSetIdfield = 22;
-                int servicesFolderfield = 23;
-                int storedProcedureObjectFolderfield = 24;
-                int storedProcedureObjectNamespacefield = 25;
-                int storedProcedureReferencesSetIdfield = 26;
-                int storedProcsFolderfield = 27;
-                int targetFrameworkfield = 28;
-                int templateVersionfield = 29;
+                int objectFolderfield = 13;
+                int objectNamespacefield = 14;
+                int objectReferencesSetIdfield = 15;
+                int projectFolderfield = 16;
+                int projectIdfield = 17;
+                int projectNamefield = 18;
+                int readerFolderfield = 19;
+                int readerNamespacefield = 20;
+                int readerReferencesSetIdfield = 21;                
+                int storedProcedureObjectFolderfield = 22;
+                int storedProcedureObjectNamespacefield = 23;
+                int storedProcedureReferencesSetIdfield = 24;
+                int storedProcsFolderfield = 25;
+                int targetFrameworkfield = 26;
+                int templateVersionfield = 27;
 
                 try
                 {
@@ -84,7 +82,6 @@ namespace DataAccessComponent.DataManager.Readers
                     project.DataWriterNamespace = DataHelper.ParseString(dataRow.ItemArray[dataWriterNamespacefield]);
                     project.DataWriterReferencesSetId = DataHelper.ParseInteger(dataRow.ItemArray[dataWriterReferencesSetIdfield], 0);
                     project.DateModified = DataHelper.ParseDate(dataRow.ItemArray[dateModifiedfield]);
-                    project.EnableBlazorFeatures = DataHelper.ParseBoolean(dataRow.ItemArray[enableBlazorFeaturesfield], false);
                     project.ObjectFolder = DataHelper.ParseString(dataRow.ItemArray[objectFolderfield]);
                     project.ObjectNamespace = DataHelper.ParseString(dataRow.ItemArray[objectNamespacefield]);
                     project.ObjectReferencesSetId = DataHelper.ParseInteger(dataRow.ItemArray[objectReferencesSetIdfield], 0);
@@ -93,8 +90,7 @@ namespace DataAccessComponent.DataManager.Readers
                     project.ProjectName = DataHelper.ParseString(dataRow.ItemArray[projectNamefield]);
                     project.ReaderFolder = DataHelper.ParseString(dataRow.ItemArray[readerFolderfield]);
                     project.ReaderNamespace = DataHelper.ParseString(dataRow.ItemArray[readerNamespacefield]);
-                    project.ReaderReferencesSetId = DataHelper.ParseInteger(dataRow.ItemArray[readerReferencesSetIdfield], 0);
-                    project.ServicesFolder = DataHelper.ParseString(dataRow.ItemArray[servicesFolderfield]);
+                    project.ReaderReferencesSetId = DataHelper.ParseInteger(dataRow.ItemArray[readerReferencesSetIdfield], 0);                    
                     project.StoredProcedureObjectFolder = DataHelper.ParseString(dataRow.ItemArray[storedProcedureObjectFolderfield]);
                     project.StoredProcedureObjectNamespace = DataHelper.ParseString(dataRow.ItemArray[storedProcedureObjectNamespacefield]);
                     project.StoredProcedureReferencesSetId = DataHelper.ParseInteger(dataRow.ItemArray[storedProcedureReferencesSetIdfield], 0);

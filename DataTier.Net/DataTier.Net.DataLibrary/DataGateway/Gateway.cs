@@ -1073,6 +1073,41 @@ namespace DataGateway
                 return method;
             }
             #endregion
+
+            #region FindPrimaryKey(DTNTable table)
+            /// <summary>
+            /// This method returns the Primary Key for a table.
+            /// This method is for single field Primary Keys, not 
+            /// Composite primary keys consisting of multiple fields.
+            /// You can manually add a second jparameter if needed for now.
+            /// </summary>
+            public static DTNField FindPrimaryKey(DTNTable table)
+            {
+                // initial value
+                DTNField primaryKey = null;
+
+                // if the table has fields
+                if ((NullHelper.Exists(table)) && (table.HasFields))
+                {
+                    // iterate the fields
+                    foreach (DTNField field in table.Fields)    
+                    {
+                        // the field is a PrimaryKey
+                        if (field.PrimaryKey)
+                        {
+                            // set the reeturn value
+                            primaryKey = field;
+
+                            // no reason to stick around until multiple primary key fields is handled.
+                            break;
+                        }
+                    }
+                }
+    
+                // return value
+                return primaryKey;
+            }
+            #endregion
             
             #region FindProject(int projectId, Project tempProject = null)
             /// <summary>

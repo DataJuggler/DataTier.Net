@@ -191,12 +191,6 @@ namespace DataTierClient.Xml.Writers
                     sb.Append(indentString2);
                     sb.Append("<TargetFramework>" + project.TargetFramework + "</TargetFramework>" + Environment.NewLine);
 
-                    // Write out the value for EnableBlazorFeatures
-
-                    sb.Append(indentString2);
-                    sb.Append("<EnableBlazorFeatures>" + project.EnableBlazorFeatures + "</EnableBlazorFeatures>" + Environment.NewLine);
-
-
                     // Write out the value for HasAllReferences
 
                     sb.Append(indentString2);
@@ -271,11 +265,6 @@ namespace DataTierClient.Xml.Writers
 
                     sb.Append(indentString2);
                     sb.Append("<ReaderReferencesSetId>" + project.ReaderReferencesSetId + "</ReaderReferencesSetId>" + Environment.NewLine);
-
-                    // Write out the value for ServicesFolder
-
-                    sb.Append(indentString2);
-                    sb.Append("<ServicesFolder>" + project.ServicesFolder + "</ServicesFolder>" + Environment.NewLine);
 
                     // Write out the value for StoredProcedureObjectFolder
 

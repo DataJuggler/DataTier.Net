@@ -12,11 +12,8 @@ Update 4.3.2023: I fixed the Project Templates for .NET7. I am Working on a new 
 
 Update 3.12.2023: I fixed the install version path not opening the SQL Scripts required to install DataTier.Net.
 
-Update 1.18.2023: DataTier.Net now allows you to target .NET Framework, .NET5, .NET6 or .NET7 (Default).
+Update 1.18.2023: DataTier.Net now allows you to target .NET Framework, .NET5, .NET6 or .NET7  (Default).
 There is also a release version now in case you do not want to installed Visual Studio 2019, which is required to use the source code version.
-
-Update 3.30.2022: DataJuggler.Net 6.0.4 fixes bugs related to Creating Blazor Data Services for .NEt6. The Blazor Data Services Control was only showing .NET5.
-Also, DataJuggler.Net was updated because the writing of references was writing for .NET5.
 
 Update 12.30.2021: DataTier.Net 3.0 was just released. The new version allows you to target .NET Framework, .NET5 or .NET6.
 
@@ -93,6 +90,8 @@ For more information read the DataTier.Net User's Guide located in the Class Roo
 https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/DataTier.Net%20Users%20Guide.pdf
 
 --
+Edit: Latest Version is .NET 9
+
 Update 12.25.2022: DataTier.Net now supports .NET 7.
 
 Update 11.15.2021: DataTier.Net now supports .NET 6;

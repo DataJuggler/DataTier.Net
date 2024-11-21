@@ -3,9 +3,10 @@
 
 using System;
 using System.Collections.Generic;
+using DataJuggler.Net.Enumerations;
 using ObjectLibrary.Enumerations;
 using System.Text;
-using DataJuggler.Net.Enumerations;
+
 
 #endregion
 
@@ -158,15 +159,9 @@ namespace ObjectLibrary.BusinessObjects
                 // Add this references set to All Refrences
                 this.AllReferences.Add(this.ObjectReferencesSet);
 
-                // Set DataManagerNamespace
-                DataManagerNamespace = "DataAccessComponent.DataManager";
+                // Set DataManagerNamespace - Going Forward defaults to Data
+                DataManagerNamespace = "DataAccessComponent.Data";
 
-                // if V2 Templates
-                if (TemplateVersion == 2)
-                {
-                    DataManagerNamespace = "DataAccessComponent.Data";
-                }
-                
                 // Create DataManagerReferencesSet
                 DataManagerReferencesSet = new ReferencesSet("DataManager");
                 
@@ -180,18 +175,10 @@ namespace ObjectLibrary.BusinessObjects
                 DataManagerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.UpdateProcedures"));
                 DataManagerReferencesSet.References.Add(new ProjectReference("ObjectLibrary.BusinessObjects"));
 
-                // if 4 Project Version
-                if (TemplateVersion == 1)
-                {
-                    // Use DataManager
-                    DataManagerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.DataManager.Readers"));
-                }
-                else
-                {
-                    // Use Data
-                    DataManagerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.Data.Readers"));
-                }
+                // Use Data
+                DataManagerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.Data.Readers"));
 
+                // Add to AllReferences
                 AllReferences.Add(DataManagerReferencesSet);
                 
                 // Create DataOperationsReferencesSet
@@ -205,19 +192,9 @@ namespace ObjectLibrary.BusinessObjects
                 DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.InsertProcedures"));
                 DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.UpdateProcedures"));
                 DataOperationsReferencesSet.References.Add(new ProjectReference("ObjectLibrary.BusinessObjects"));
-
-                // if 4 Project version
-                if (TemplateVersion == 1)
-                {
-                    DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.DataManager.Writers"));
-                    DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.DataManager"));
-                }
-                else
-                {
-                    DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.Data.Writers"));
-                    DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.Data"));
-                }
-
+                DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.Data.Writers"));
+                DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.Data"));
+                
                 // Create ControllerReferencesSet
                 ControllerReferencesSet = new ReferencesSet("Controllers");
 
@@ -251,15 +228,8 @@ namespace ObjectLibrary.BusinessObjects
                 AllReferences.Add(ControllerReferencesSet);
 
                 // Set ReaderNamespace
-                ReaderNamespace = "DataAccessComponent.DataManager.Readers";
+                ReaderNamespace = "DataAccessComponent.Data.Readers";
 
-                // If V2 Templates
-                if (TemplateVersion == 2)
-                {
-                    // use DataAccessComponent.Data
-                    ReaderNamespace = "DataAccessComponent.Data.Readers";
-                }
-                
                 // Add Reader References
                 ReaderReferencesSet = new ReferencesSet("Readers");
                 
@@ -272,15 +242,8 @@ namespace ObjectLibrary.BusinessObjects
                 AllReferences.Add(ReaderReferencesSet);
 
                 // Set Writer Namespace
-                DataWriterNamespace = "DataAccessComponent.DataManager.Writers";
+                DataWriterNamespace = "DataAccessComponent.Data.Writers";
 
-                // If V2 Templates
-                if (TemplateVersion == 2)
-                {
-                    // use DataAccessComponent.Data
-                    DataWriterNamespace = "DataAccessComponent.Data.Writers";
-                }
-                
                 // Add Writer References
                 WriterReferencesSet = new ReferencesSet("Writers");
                 
@@ -293,8 +256,8 @@ namespace ObjectLibrary.BusinessObjects
                 WriterReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.UpdateProcedures"));
                 WriterReferencesSet.References.Add(new ProjectReference("System.Data"));
                 
-                // if .NET6 or .NET7 or .NET8
-                if ((TargetFramework == TargetFrameworkEnum.Net6) || (TargetFramework == TargetFrameworkEnum.Net7) || (TargetFramework == TargetFrameworkEnum.Net8))
+                // if .NET6 or .NET7 or .NET8 or .NET9
+                if ((int) TargetFramework > 5)
                 {
                     // Switch to Microsoft
                     WriterReferencesSet.References.Add(new ProjectReference("Microsoft.Data.SqlClient"));
@@ -317,10 +280,16 @@ namespace ObjectLibrary.BusinessObjects
                 // Set Stored Procedure References
                 StoredProcedureReferencesSet.References.Add(new ProjectReference("System"));
                 
-                  // If .NET8
-                if (TargetFramework == TargetFrameworkEnum.Net8)
+                // If .NET9
+                if (TargetFramework == TargetFrameworkEnum.Net9)
                 {
-                    // .NET7
+                    // .NET9
+                    StoredProcedureReferencesSet.References.Add(new ProjectReference("DataJuggler.NET9"));
+                }
+                // If .NET8
+                else if (TargetFramework == TargetFrameworkEnum.Net8)
+                {
+                    // .NET8
                     StoredProcedureReferencesSet.References.Add(new ProjectReference("DataJuggler.Net8"));
                 }
                 // If .NET7
@@ -485,8 +454,8 @@ namespace ObjectLibrary.BusinessObjects
                 // Create the Tables collection
                 this.Tables = new List<DTNTable>();
 
-                // New projects now default to .NET 8
-                TargetFramework = TargetFrameworkEnum.Net8;
+                // New projects now default to .NET 9
+                TargetFramework = TargetFrameworkEnum.Net9;
             }
             #endregion
 
@@ -551,24 +520,22 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
         
-            #region UpdateReferences()
+            #region UpdateReferences(TargetFrameworkEnum previousFramework)
             /// <summary>
-            /// Update Data Juggler Net Reference
+            /// This method updates the Stored Procedure References Set with the correct version of .NET Frameowork.
+            /// Also, if greater than .NET 5, you must use Microsoft.Data.SqlClient, not System.Data.SqlClient
             /// </summary>
-            public void UpdateReferences()
+            public void UpdateReferences(TargetFrameworkEnum previousFramework)
             {
                 // locals
                 int index = -1;
-                int index2 = -1;
-                int index3 = -1;
-                int index4 = -1;
-
+                
                 // *********************************************************************
                 // ***********   System.Data.SqlClient and Microsoft.Data.SqlClient    ************
                 // *********************************************************************
 
-                // if .NET 6 or .NET 7 or .NET8
-                if ((TargetFramework == TargetFrameworkEnum.Net6) || (TargetFramework == TargetFrameworkEnum.Net7) || (TargetFramework == TargetFrameworkEnum.Net8))
+                // if .NET 6 or .NET 7, .NET 8 or .NET9
+                if ((int) TargetFramework > 5)
                 {
                     // find the index of System.Data.SqlClient
                     index = FindReferenceIndex(WriterReferencesSet.References, "System.Data.SqlClient");
@@ -616,72 +583,46 @@ namespace ObjectLibrary.BusinessObjects
                 }
 
                 // *********************************************************************************
-                // ***  DataJuggler.Net, DataJuggler.Net5, DataJuggler.Net6, DataJuggler.Net7, DataJuggler.Net8     ***
+                // ***  DataJuggler.Net, DataJuggler.Net5, DataJuggler.Net6, DataJuggler.Net7
+                // ***  DataJuggler.Net8, DataJuggler.NET9      
                 // *********************************************************************************
 
                 // local
                 string dataJugglerNetReferenceName = "";
-                bool itemRemoved = false;
-
+                string prevReferenceName = "";
+                
                 // if .NETFramework
                 if (TargetFramework == TargetFrameworkEnum.NetFramework)
                 {
                     // Set the DataJuggler.Net Reference name
                     dataJugglerNetReferenceName = "DataJuggler.Net";
-
-                    // find the index of Microsoft.Data.SqlClient
-                    index = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net5");
-                    index2 = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net6");
-                    index3 = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net7");
-                    index4 = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net8");
-                }
-                else if (TargetFramework == TargetFrameworkEnum.Net5)
-                {
-                    // Set the DataJuggler.Net Reference name
-                    dataJugglerNetReferenceName = "DataJuggler.Net5";
-
-                    // find the index of Microsoft.Data.SqlClient
-                    index = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net");
-                    index2 = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net6");
-                    index3 = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net7");
-                    index4 = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net8");
-                }
-                else if (TargetFramework == TargetFrameworkEnum.Net6)
-                {
-                    // Set the DataJuggler.Net Reference name
-                    dataJugglerNetReferenceName = "DataJuggler.Net6";
-
-                    // find the index of DataJuggler.Net and DataJuggler.Net5
-                    index = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net");
-                    index2 = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net5");
-                    index3 = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net7");
-                    index4 = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net8");
-                }
-                else if (TargetFramework == TargetFrameworkEnum.Net7)
-                {
-                    // Set the DataJuggler.Net Reference name
-                    dataJugglerNetReferenceName = "DataJuggler.Net7";
-
-                    // find the index of DataJuggler.Net and DataJuggler.Net5
-                    index = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net");
-                    index2 = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net5");
-                    index3 = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net6");
-                    index4 = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net8");
                 }
                 else
                 {
-                    // .NET 8
-                    // Set the DataJuggler.Net Reference name
-                    dataJugglerNetReferenceName = "DataJuggler.Net8";
+                    // Get the TargetFramework Version
+                    int targetFrameworkVersion = (int) TargetFramework;
 
-                    // find the index of DataJuggler.Net and DataJuggler.Net5
-                    index = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net");
-                    index2 = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net5");
-                    index3 = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net6");
-                    index4 = FindReferenceIndex(StoredProcedureReferencesSet.References, "DataJuggler.Net7");
+                    // Set the dataJugglerNetReferenceName
+                    dataJugglerNetReferenceName = "DataJuggler.Net" + targetFrameworkVersion;
                 }
 
-                // only one of these can fire, so indexes do not get out of wack
+                // if .Net Framework
+                if (previousFramework == TargetFrameworkEnum.NetFramework)
+                {
+                    // Set the previous name
+                    prevReferenceName = "DataJuggler.Net";
+                }
+                else
+                {
+                    // Get the TargetFramework Version
+                    int previousFrameworkVersionNumber = (int) previousFramework;
+
+                    // Set the dataJugglerNetReferenceName
+                    prevReferenceName = "DataJuggler.Net" + previousFrameworkVersionNumber;
+                }
+
+                // Now we need to find the index of the old reference name
+                index = FindReferenceIndex(StoredProcedureReferencesSet.References, prevReferenceName);
 
                 // if the index was found
                 if (index >= 0)
@@ -689,33 +630,6 @@ namespace ObjectLibrary.BusinessObjects
                     // remove this item
                     StoredProcedureReferencesSet.References.RemoveAt(index);    
 
-                    // an item was removed
-                    itemRemoved = true;
-                }
-
-                // if the index2 was found
-                if (index2 >= 0)
-                {
-                    // remove this item
-                    StoredProcedureReferencesSet.References.RemoveAt(index2);
-
-                    // item was removed
-                    itemRemoved = true;
-                }
-
-                // if the index3 was found
-                if (index3 >= 0)
-                {
-                    // remove this item
-                    StoredProcedureReferencesSet.References.RemoveAt(index3);
-
-                    // item was removed
-                    itemRemoved = true;
-                }
-
-                // if the value for itemRemoved is true
-                if (itemRemoved)
-                {
                     // get the index of dataJugglerNetReferenceName
                     index = FindReferenceIndex(StoredProcedureReferencesSet.References, dataJugglerNetReferenceName);
 

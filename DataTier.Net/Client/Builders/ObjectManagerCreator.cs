@@ -210,7 +210,7 @@ namespace DataTierClient.Builders
                 WriteComment("Execute Non Query");
                 
                 // get line to execute delete
-                string deleteLine = "deleted = this.DataHelper.DeleteRecord(delete" + dataTable.ClassName + "Proc, databaseConnector);";
+                string deleteLine = "deleted = DataHelper.DeleteRecord(delete" + dataTable.ClassName + "Proc, databaseConnector);";
                 
                 // Write deleteLine
                 WriteLine(deleteLine);
@@ -319,7 +319,7 @@ namespace DataTierClient.Builders
 
                 // get line to get data set
                 string dataSetName = "all" + className + "DataSet";
-                string dataSetLine = "DataSet " + dataSetName + " = this.DataHelper.LoadDataSet(" + procName + ", databaseConnector);";
+                string dataSetLine = "DataSet " + dataSetName + " = DataHelper.LoadDataSet(" + procName + ", databaseConnector);";
                 
                 // Write set dataSetLine
                 WriteLine(dataSetLine);
@@ -341,7 +341,7 @@ namespace DataTierClient.Builders
                 WriteComment("Get DataTable From DataSet");
                 
                 // get line to get first table out of data set
-                string dataTableLine = "DataTable table = this.DataHelper.ReturnFirstTable(" + dataSetName + ");";
+                string dataTableLine = "DataTable table = DataHelper.ReturnFirstTable(" + dataSetName + ");";
                 WriteLine(dataTableLine);
                 
                 // Write Blank Line
@@ -466,7 +466,7 @@ namespace DataTierClient.Builders
 
                 // get line to get data set
                 string dataSetName = this.CapitalizeFirstChar(className, true) + "DataSet";
-                string dataSetLine = "DataSet " + dataSetName + " = this.DataHelper.LoadDataSet(" + procName + ", databaseConnector);";
+                string dataSetLine = "DataSet " + dataSetName + " = DataHelper.LoadDataSet(" + procName + ", databaseConnector);";
 
                 // Write set dataSetLine
                 WriteLine(dataSetLine);
@@ -488,7 +488,7 @@ namespace DataTierClient.Builders
                 WriteComment("Get DataTable From DataSet");
 
                 // get line to get first table out of data set
-                string dataRowLine = "DataRow row = this.DataHelper.ReturnFirstRow(" + dataSetName + ");";
+                string dataRowLine = "DataRow row = DataHelper.ReturnFirstRow(" + dataSetName + ");";
                 WriteLine(dataRowLine);
 
                 // Write Blank Line
@@ -629,7 +629,7 @@ namespace DataTierClient.Builders
                 WriteComment("Execute Non Query");
 
                 // get line to execute delete
-                string insertLine = "newIdentity = this.DataHelper.InsertRecord(insert" + dataTable.ClassName + "Proc, databaseConnector);";
+                string insertLine = "newIdentity = DataHelper.InsertRecord(insert" + dataTable.ClassName + "Proc, databaseConnector);";
                 
                 // Write line to insert
                 WriteLine(insertLine);
@@ -714,7 +714,7 @@ namespace DataTierClient.Builders
                 WriteComment("Execute Update.");
 
                 // get line to execute delete
-                string updateLine = "saved = this.DataHelper.UpdateRecord(update" + dataTable.ClassName + "Proc, databaseConnector);";
+                string updateLine = "saved = DataHelper.UpdateRecord(update" + dataTable.ClassName + "Proc, databaseConnector);";
 
                 // Write updateLine
                 WriteLine(updateLine);

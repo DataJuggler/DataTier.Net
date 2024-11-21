@@ -45,6 +45,8 @@ namespace DataTierClient.Controls
         private const string InstallDataTierNet8 = "dotnet new install DataJuggler.DataTier.NET8.ProjectTemplates::8.0.0 --force";
         private const string CreateDataTierNet8V2 = "dotnet new DataTier.NET8.ProjectTemplatesV2";
         private const string InstallDataTierNet8V2 = "dotnet new install DataJuggler.DataTier.NET8.ProjectTemplatesV2::8.0.0 --force";
+        private const string CreateDataTierNet9V2 = "dotnet new DataTier.Net9.ProjectTemplatesV2";
+        private const string InstallDataTierNet9V2 = "dotnet new install DataJuggler.DataTier.Net9.ProjectTemplatesV2::9.0.6 --force";
         
         // Used to install the Project Templates on the ProjectEditorControl.cs
         private const int GraphWidth = 268;
@@ -76,24 +78,6 @@ namespace DataTierClient.Controls
                 this.ShowAutoFillHelp = false;
 
                 // Hide this control
-                UIEnable();
-            }
-            #endregion
-            
-            #region BlazorServicesCheckBox_CheckedChanged(object sender, EventArgs e)
-            /// <summary>
-            /// event is fired when Blazor Services Check Box _ Checked Changed
-            /// </summary>
-            private void BlazorServicesCheckBox_CheckedChanged(object sender, EventArgs e)
-            {
-                // if the value for HasSelectedProject is true
-                if (HasSelectedProject)
-                {
-                    // set the value
-                    SelectedProject.EnableBlazorFeatures = BlazorServicesCheckBox.Checked;
-                }
-
-                // Enable or disable controls
                 UIEnable();
             }
             #endregion
@@ -202,7 +186,7 @@ namespace DataTierClient.Controls
                                     // Create .NET7
                                     startInfo.Arguments = "/C " + CreateDataTierNet7;
                                 }
-                                else
+                                else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net8)
                                 {
                                     if (SelectedProject.TemplateVersion == 1)
                                     {
@@ -215,13 +199,31 @@ namespace DataTierClient.Controls
                                         startInfo.Arguments = "/C " + CreateDataTierNet8V2;
                                     }
                                 }
+                                else 
+                                {
+                                    // .NET 9 Only Uses V2 Templates
+                                    startInfo.Arguments = "/C " + CreateDataTierNet9V2;                                    
+                                }
 
                                 process.StartInfo = startInfo;
                                 process.Start();
 
                                 // get the solution path - default to DotNet8
-                                string solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net8.ClassLibrary.sln");
+                                string solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net9.ClassLibraryV2.sln");
 
+                                // if .NET8
+                                if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net8)
+                                {
+                                    // switch for Net6
+                                    solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net8.ClassLibrary.sln");
+
+                                    // if version 2
+                                    if (SelectedProject.TemplateVersion == 2)
+                                    {
+                                        // Change for V2 templates
+                                        solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net8.ClassLibraryV2.sln");
+                                    }
+                                }
                                 // if .NET7
                                 if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net7)
                                 {
@@ -241,12 +243,7 @@ namespace DataTierClient.Controls
                                     solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net5.ClassLibrary.sln");
                                 }
 
-                                // if version 2
-                                if (SelectedProject.TemplateVersion == 2)
-                                {
-                                    // Change for V2 templates
-                                    solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net8.ClassLibraryV2.sln");
-                                }
+                                
 
                                 // Set the startTime
                                 DateTime startTime = DateTime.Now;
@@ -307,17 +304,30 @@ namespace DataTierClient.Controls
                                 Refresh();
                                 Application.DoEvents();
 
+                                // Create a new instance of a 'DisplayMessageForm' object.
+                                DisplayMessageForm displayMessageForm = new DisplayMessageForm();
+
                                 // if the solutionPath exists
                                 if (File.Exists(solutionPath))
                                 {
                                     // show the user a message
-                                    MessageBoxHelper.ShowMessage("Your DataTier has been created.", "DataTier Created");
+                                    // MessageBoxHelper.ShowMessage("Your DataTier has been created.", "DataTier Created");
+                                    displayMessageForm.SetMessageText("Your DataTier has been created");
+
+                                    // Set the Text
+                                    displayMessageForm.Text = "Success";
                                 }
                                 else
                                 {
                                     // show the user a message
-                                    MessageBoxHelper.ShowMessage("Oops. Something went wrong. It is recommended you try again, as it usually works the second time.", "Data Tier Not Created");
+                                    displayMessageForm.SetMessageText("Oops. Something went wrong. It is recommended you try again, as it usually works the second time.");
+
+                                    // Set the Text of the form
+                                    displayMessageForm.Text = "Data Tier Not Created";
                                 }
+
+                                // Show the form
+                                displayMessageForm.ShowDialog();
                             }
                         }
                     }
@@ -404,15 +414,19 @@ namespace DataTierClient.Controls
                 // if the value for HasSelectedProject is true
                 if (HasSelectedProject)
                 {
+                    // if this is the ProjectTypeControl
                     if (TextHelper.IsEqual(control.Name, ProjectTypeControl.Name))
                     {
+                        // Get the previousValue
+                        TargetFrameworkEnum previousTargetFramework = SelectedProject.TargetFramework;
+
                         // Set the ProjectType
                         SelectedProject.TargetFramework = (TargetFrameworkEnum) (selectedIndex + 4);
 
                         // The DataJuggler.Net Reference Must Be Changed, based on the target framework
 
                         // DataJuggler.Net Reference has to change if this changes
-                        SelectedProject.UpdateReferences();
+                        SelectedProject.UpdateReferences(previousTargetFramework);
                     }
                 }
 
@@ -520,6 +534,27 @@ namespace DataTierClient.Controls
         
         #region Methods
 
+            #region CheckIfTemplatesInstalled()
+            /// <summary>
+            /// returns the If Templates Installed
+            /// </summary>
+            public bool CheckIfTemplatesInstalled()
+            {
+                // initial value
+                bool isTemplatesInstalled = false;
+
+                // locals                
+                string packageName = GetPackageName();
+                // string version = GetPackageVersion();
+
+                // Is this package installed
+                isTemplatesInstalled = DotNetCLIHelper.IsTemplatePackageInstalled(packageName);
+                
+                // return value
+                return isTemplatesInstalled;
+            }
+            #endregion
+            
             #region DisplaySelectedProject()
             /// <summary>
             /// Display the selected project.
@@ -529,9 +564,8 @@ namespace DataTierClient.Controls
                 // locals
                 string projectName = "";
                 string projectFolder = "";
-                bool enableBlazorFeatures = false;
                 bool projectTemplatesVersion2 = false;
-                int projectTypeIndex = ProjectTypeControl.FindItemIndexByValue("Net8");
+                int projectTypeIndex = ProjectTypeControl.FindItemIndexByValue("Net9");
                 
                 // if the SelectedProject Exists
                 if(this.SelectedProject != null)
@@ -539,7 +573,6 @@ namespace DataTierClient.Controls
                     // set values
                     projectName = this.SelectedProject.ProjectName;
                     projectFolder = this.SelectedProject.ProjectFolder;                    
-                    enableBlazorFeatures = SelectedProject.EnableBlazorFeatures;
                     projectTemplatesVersion2 = (SelectedProject.TemplateVersion == 2);
                     projectTypeIndex = ProjectTypeControl.FindItemIndexByValue(SelectedProject.TargetFramework.ToString());                    
 
@@ -557,7 +590,6 @@ namespace DataTierClient.Controls
                 ProjectNameTextBox.Text = projectName;
                 ProjectFolderTextBox.Text = projectFolder;
                 ProjectTypeControl.SelectedIndex = projectTypeIndex;
-                BlazorServicesCheckBox.Checked = enableBlazorFeatures;
                                 
                 // Enable controls
                 UIEnable();
@@ -605,7 +637,7 @@ namespace DataTierClient.Controls
                 return index;
             }
             #endregion
-            
+
             #region GetPackageName()
             /// <summary>
             /// returns the Package Name
@@ -632,7 +664,7 @@ namespace DataTierClient.Controls
                         // Set the return value
                         packageName = "DataJuggler.DataTier.Net7.ProjectTemplates";
                     }
-                    else
+                    else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net8)
                     {
                         if (SelectedProject.TemplateVersion == 1)
                         {
@@ -645,10 +677,69 @@ namespace DataTierClient.Controls
                             packageName = "DataJuggler.DataTier.Net8.ProjectTemplatesV2";
                         }
                     }
+                    else
+                    {
+                        // .Net 9
+                        
+                        // Set the return value
+                        packageName = "DataJuggler.DataTier.Net9.ProjectTemplatesV2";                        
+                    }
                 }
                 
                 // return value
                 return packageName;
+            }
+            #endregion
+            
+            #region GetPackageVersion()
+            /// <summary>
+            /// returns the Package Version
+            /// </summary>
+            public string GetPackageVersion()
+            {
+                // initial value
+                string version = "";
+
+                if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net5)
+                {
+                    // Use Net5
+                    
+                    version = "2.5.6";
+                }
+                else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net6)
+                {  
+                    version = "6.0.2";
+                }
+                else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net7)
+                {
+                    // Use Net6                    
+                    version = "7.1.1";
+                }                                        
+                else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net8)
+                {
+                    // Dot Net 8 can be TemplateVersion 1 or 2
+
+                    if (SelectedProject.TemplateVersion == 1)
+                    {
+                        // .NET 8 Template Version 1                        
+                        version = "8.0.0";
+                    }
+                    else
+                    {
+                        // Template Version 2                        
+                        version = "8.0.0";
+                    }
+                }
+                else
+                {
+                    // .NET 9 can only be TemplateVersion 2
+
+                    // Template Version 2                    
+                    version = "9.0.1";
+                }
+
+                // return value
+                return version;
             }
             #endregion
             
@@ -695,52 +786,68 @@ namespace DataTierClient.Controls
 
                 try               
                  {
-                    // Create a Process to launch a command window (hidden) to create the item templates
-                    Process process = new Process();
-                    ProcessStartInfo startInfo = new ProcessStartInfo();
-                    startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                    startInfo.FileName = "cmd.exe";
-                    startInfo.WorkingDirectory = SelectedProject.ProjectFolder;
+                    // Update 11.20.2024: Trying some new code to detect if a Package is installed.
+                    installed = CheckIfTemplatesInstalled();
 
-                    // Note: The /C parameter tells the command window to terminate after completion.
+                    // if not installed
+                    if (!installed)
+                    {
+                        // Create a Process to launch a command window (hidden) to create the item templates
+                        Process process = new Process();
+                        ProcessStartInfo startInfo = new ProcessStartInfo();
+                        startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                        startInfo.FileName = "cmd.exe";
+                        startInfo.WorkingDirectory = SelectedProject.ProjectFolder;
 
-                    if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net5)
-                    {
-                        // Use Net5
-                        startInfo.Arguments = "/C " + InstallDataTierNet5;
-                    }
-                    else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net6)
-                    {
-                        // Use Net6
-                        startInfo.Arguments = "/C " + InstallDataTierNet6;
-                    }
-                    else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net7)
-                    {
-                        // Use Net6
-                        startInfo.Arguments = "/C " + InstallDataTierNet7;
-                    }                                        
-                    else
-                    {
-                        if (SelectedProject.TemplateVersion == 1)
+                        // Note: The /C parameter tells the command window to terminate after completion.
+
+                        if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net5)
                         {
-                            // .NET 8 Template Version 1
-                            startInfo.Arguments = "/C " + InstallDataTierNet8;
+                            // Use Net5
+                            startInfo.Arguments = "/C " + InstallDataTierNet5;
+                        }
+                        else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net6)
+                        {
+                            // Use Net6
+                            startInfo.Arguments = "/C " + InstallDataTierNet6;
+                        }
+                        else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net7)
+                        {
+                            // Use Net6
+                            startInfo.Arguments = "/C " + InstallDataTierNet7;
+                        }                                        
+                        else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net8)
+                        {
+                            // Dot Net 8 can be TemplateVersion 1 or 2
+
+                            if (SelectedProject.TemplateVersion == 1)
+                            {
+                                // .NET 8 Template Version 1
+                                startInfo.Arguments = "/C " + InstallDataTierNet8;
+                            }
+                            else
+                            {
+                                // Template Version 2
+                                startInfo.Arguments = "/C " + InstallDataTierNet8V2;
+                            }
                         }
                         else
                         {
+                            // .NET 9 can only be TemplateVersion 2
+
                             // Template Version 2
-                            startInfo.Arguments = "/C " + InstallDataTierNet8V2;
+                            startInfo.Arguments = "/C " + InstallDataTierNet9V2;
                         }
+
+                        // Set the StartInfo
+                        process.StartInfo = startInfo;
+
+                        // Start
+                        process.Start();
+
+                        // Set to true
+                        installed = true;
                     }
-
-                    // Set the StartInfo
-                    process.StartInfo = startInfo;
-
-                    // Start
-                    process.Start();
-
-                    // Set to true
-                    installed = true;
                  }
                  catch (Exception error)
                  {
@@ -830,16 +937,12 @@ namespace DataTierClient.Controls
                     // Once a project has been saved, this can't be changed.
                     Version2CheckBox.Enabled = (SelectedProject.IsNew);
 
-                    // Show Enable BlazorServices for DotNet5 or DotNet6 projects only
-                    BlazorServicesCheckBox.Visible = SelectedProject.IsDotNetCore;
-
                     // Show the CreateDotNet5Project control if DotNet5
                     CreateDotNetProject.Visible = SelectedProject.IsDotNetCore;
                 }
                 else
                 {
                     // Do not show for .Net Framework projects
-                    BlazorServicesCheckBox.Visible = false;
                     CreateDotNetProject.Visible = false;                    
                     Version2CheckBox.Enabled = true;
                 }
