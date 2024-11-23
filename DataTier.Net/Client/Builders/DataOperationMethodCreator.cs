@@ -464,7 +464,7 @@ namespace DataTierClient.Builders
                 WriteComment("Execute Delete Stored Procedure");
                 
                 // get line to execute proc
-                string executeProc = "bool deleted = this.DataManager." + className + "Manager.Delete" + className + "(" + procName + ", dataConnector);";
+                string executeProc = "bool deleted = " + className + "Manager.Delete" + className + "(" + procName + ", dataConnector);";
                 
                 // Write line to execute proc
                 WriteLine(executeProc);
@@ -715,7 +715,7 @@ namespace DataTierClient.Builders
                 WriteComment("Execute FetchAll Stored Procedure");
                 
                 // get line to execute proc
-                string executeProc = dataObjectCollection + " = this.DataManager." + dataTable.ClassName + "Manager.FetchAll" + className + "(" + procName + ", dataConnector);";
+                string executeProc = dataObjectCollection + " = " + dataTable.ClassName + "Manager.FetchAll" + className + "(" + procName + ", dataConnector);";
                 
                 // Write line to execute proc
                 WriteLine(executeProc);
@@ -931,7 +931,7 @@ namespace DataTierClient.Builders
                 WriteComment("Execute Find Stored Procedure");
 
                 // get line to create return object
-                string createReturnObject = dataObject + " = this.DataManager." + dataTable.ClassName + "Manager.Find" + className + "(" + procName + ", dataConnector);";
+                string createReturnObject = dataObject + " = " + dataTable.ClassName + "Manager.Find" + className + "(" + procName + ", dataConnector);";
 
                 // Write createReturnObject
                 WriteLine(createReturnObject);
@@ -1152,7 +1152,7 @@ namespace DataTierClient.Builders
                 WriteComment("Execute Insert Stored Procedure");
 
                 // get line to execute proc
-                string executeProc = "returnObject.IntegerValue = this.DataManager." + className + "Manager.Insert" + className + "(" + procName + ", dataConnector);";
+                string executeProc = "returnObject.IntegerValue = " + className + "Manager.Insert" + className + "(" + procName + ", dataConnector);";
 
                 // Write line to execute proc
                 WriteLine(executeProc);
@@ -1507,7 +1507,7 @@ namespace DataTierClient.Builders
                 WriteComment("Execute Update Stored Procedure");
 
                 // get line to execute proc
-                string executeProc = "bool saved = this.DataManager." + className + "Manager.Update" + className + "(" + procName + ", dataConnector);";
+                string executeProc = "bool saved = " + className + "Manager.Update" + className + "(" + procName + ", dataConnector);";
 
                 // Write line to execute proc
                 WriteLine(executeProc);

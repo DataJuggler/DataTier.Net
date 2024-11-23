@@ -38,7 +38,7 @@ namespace ObjectLibrary.BusinessObjects
         private string projectName;
         private string readerFolder;
         private string readerNamespace;
-        private int readerReferencesSetId;        
+        private int readerReferencesSetId;
         private string storedProcedureObjectFolder;
         private string storedProcedureObjectNamespace;
         private int storedProcedureReferencesSetId;

@@ -58,7 +58,7 @@ namespace DataAccessComponent.DataManager.Readers
                 int projectNamefield = 18;
                 int readerFolderfield = 19;
                 int readerNamespacefield = 20;
-                int readerReferencesSetIdfield = 21;                
+                int readerReferencesSetIdfield = 21;
                 int storedProcedureObjectFolderfield = 22;
                 int storedProcedureObjectNamespacefield = 23;
                 int storedProcedureReferencesSetIdfield = 24;
@@ -90,7 +90,7 @@ namespace DataAccessComponent.DataManager.Readers
                     project.ProjectName = DataHelper.ParseString(dataRow.ItemArray[projectNamefield]);
                     project.ReaderFolder = DataHelper.ParseString(dataRow.ItemArray[readerFolderfield]);
                     project.ReaderNamespace = DataHelper.ParseString(dataRow.ItemArray[readerNamespacefield]);
-                    project.ReaderReferencesSetId = DataHelper.ParseInteger(dataRow.ItemArray[readerReferencesSetIdfield], 0);                    
+                    project.ReaderReferencesSetId = DataHelper.ParseInteger(dataRow.ItemArray[readerReferencesSetIdfield], 0);
                     project.StoredProcedureObjectFolder = DataHelper.ParseString(dataRow.ItemArray[storedProcedureObjectFolderfield]);
                     project.StoredProcedureObjectNamespace = DataHelper.ParseString(dataRow.ItemArray[storedProcedureObjectNamespacefield]);
                     project.StoredProcedureReferencesSetId = DataHelper.ParseInteger(dataRow.ItemArray[storedProcedureReferencesSetIdfield], 0);

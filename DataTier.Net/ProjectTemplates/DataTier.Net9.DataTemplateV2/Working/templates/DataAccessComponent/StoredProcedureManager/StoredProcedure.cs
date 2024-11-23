@@ -36,22 +36,11 @@ namespace DataAccessComponent.StoredProcedureManager
         /// </summary>
         public StoredProcedure()
         {
-            // Init
-            Init();
+            
         }
         #endregion
 
         #region Methods
-
-        #region Init()
-        /// <summary>
-        /// Perform Initializations for this object.
-        /// </summary>
-        private void Init()
-        {
-
-        }
-        #endregion
 
         #region ToString()
         /// <summary>

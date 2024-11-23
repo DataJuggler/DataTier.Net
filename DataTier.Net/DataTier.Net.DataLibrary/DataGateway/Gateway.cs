@@ -1220,6 +1220,19 @@ namespace DataGateway
                         // Load References For This ReferencesSet
                         referencesSet.References = LoadProjectReferencesForReferencesSetId(referencesSet.ReferencesSetId);
                     }
+                    else
+                    {
+                        // For debugging oonly
+                        Exception error = GetLastException();
+
+                        // If the error object exists
+                        if (NullHelper.Exists(error))
+                        {
+                            // Debug the error
+                            string message = error.ToString();
+                        }
+                    }
+
                 }
 
                 // return value
@@ -1865,6 +1878,13 @@ namespace DataGateway
                     project.StoredProcedureReferencesSet = FindReferencesSet(project.StoredProcedureReferencesSetId);
                     project.WriterReferencesSet = FindReferencesSet(project.DataWriterReferencesSetId);
 
+                    // if not valid
+                    if (!project.ValidReferences)
+                    {
+                        // Create the default references
+                        project.CreateDefaultReferences();
+                    }
+
                     // Instanciate AllReferences
                     project.AllReferences = new List<ReferencesSet>();
                         
@@ -2370,38 +2390,52 @@ namespace DataGateway
                 bool writerReferencesSetSaved = false;
                     
                 // if project exists
-                if(project != null)
-                {
-                    // if project.ControllerReferencesSet exists
-                    if(project.ControllerReferencesSet != null)
-                    {
-                        // Create AppController
-                        ApplicationController appController = new ApplicationController();
+                if ((project != null) && (project.ValidReferences))
+                {  
+                    // Create AppController
+                    ApplicationController appController = new ApplicationController();
 
-                        // save child references set
-                        controllerReferencesSetSaved = Save(ref project.controllerReferencesSet, true);
-                        dataManagerReferencesSetSaved = Save(ref project.dataManagerReferencesSet, true);
-                        dataOperationsReferencesSetSaved = Save(ref project.dataOperationsReferencesSet, true);
-                        objectReferencesSetSaved = Save(ref project.objectReferencesSet, true);
-                        readerReferencesSetSaved = Save(ref project.readerReferencesSet, true);
-                        storedProcedureReferencesSetSaved = Save(ref project.storedProcedureReferencesSet, true);
-                        writerReferencesSetSaved = Save(ref project.writerReferencesSet, true);
-                            
-                        // if all saves succeeded
-                        if ((controllerReferencesSetSaved) && (dataManagerReferencesSetSaved) && (dataOperationsReferencesSetSaved) && (objectReferencesSetSaved) && (readerReferencesSetSaved) && (storedProcedureReferencesSetSaved) && (writerReferencesSetSaved))
-                        {
-                            // Update ID's for Project object
-                            project.ControllerReferencesSetId = project.ControllerReferencesSet.ReferencesSetId;
-                            project.DataManagerReferencesSetId = project.DataManagerReferencesSet.ReferencesSetId;
-                            project.DataOperationsReferencesSetId = project.DataOperationsReferencesSet.ReferencesSetId;
-                            project.ObjectReferencesSetId = project.ObjectReferencesSet.ReferencesSetId;
-                            project.ReaderReferencesSetId = project.ReaderReferencesSet.ReferencesSetId;
-                            project.StoredProcedureReferencesSetId = project.StoredProcedureReferencesSet.ReferencesSetId;
-                            project.DataWriterReferencesSetId = project.WriterReferencesSet.ReferencesSetId;
+                    // set each  references set
+                    ReferencesSet controllerReferencesSet = project.ControllerReferencesSet;
+                    ReferencesSet dataManagerReferencesSet = project.DataManagerReferencesSet;
+                    ReferencesSet objectReferencesSet = project.ObjectReferencesSet;
+                    ReferencesSet dataOperationsReferencesSet = project.DataOperationsReferencesSet;
+                    ReferencesSet readerReferencesSet = project.ReaderReferencesSet;                    
+                    ReferencesSet storedProcedureReferencesSet = project.StoredProcedureReferencesSet;
+                    ReferencesSet writerReferencesSet = project.WriterReferencesSet;
+
+                    // Save each ReferencesSet
+                    controllerReferencesSetSaved = Save(ref controllerReferencesSet, true);
+                    dataManagerReferencesSetSaved = Save(ref dataManagerReferencesSet, true);
+                    dataOperationsReferencesSetSaved = Save(ref dataOperationsReferencesSet, true);
+                    objectReferencesSetSaved = Save(ref objectReferencesSet, true);
+                    readerReferencesSetSaved = Save(ref readerReferencesSet, true);
+                    storedProcedureReferencesSetSaved = Save(ref storedProcedureReferencesSet, true);
+                    writerReferencesSetSaved = Save(ref writerReferencesSet, true);
+        
+                    // if all saves succeeded
+                    if ((controllerReferencesSetSaved) && (dataManagerReferencesSetSaved) && (dataOperationsReferencesSetSaved) && (objectReferencesSetSaved) && (readerReferencesSetSaved) && (storedProcedureReferencesSetSaved) && (writerReferencesSetSaved))
+                    {
+                        // Now update each object
+                        project.ControllerReferencesSet = controllerReferencesSet;
+                        project.DataManagerReferencesSet = dataManagerReferencesSet;
+                        project.ObjectReferencesSet = objectReferencesSet;
+                        project.DataOperationsReferencesSet = dataOperationsReferencesSet;
+                        project.ReaderReferencesSet = readerReferencesSet;
+                        project.StoredProcedureReferencesSet = storedProcedureReferencesSet;
+                        project.WriterReferencesSet = writerReferencesSet;
+
+                        // Update ID's for Project object
+                        project.ControllerReferencesSetId = project.ControllerReferencesSet.ReferencesSetId;
+                        project.DataManagerReferencesSetId = project.DataManagerReferencesSet.ReferencesSetId;
+                        project.DataOperationsReferencesSetId = project.DataOperationsReferencesSet.ReferencesSetId;
+                        project.ObjectReferencesSetId = project.ObjectReferencesSet.ReferencesSetId;
+                        project.ReaderReferencesSetId = project.ReaderReferencesSet.ReferencesSetId;
+                        project.StoredProcedureReferencesSetId = project.StoredProcedureReferencesSet.ReferencesSetId;
+                        project.DataWriterReferencesSetId = project.WriterReferencesSet.ReferencesSetId;
                                 
-                            // Save the project again (without the child objects).
-                            saved = SaveProject(ref project);
-                        }
+                        // Save the project again (without the child objects).
+                        saved = SaveProject(ref project);
                     }
                 }
                     

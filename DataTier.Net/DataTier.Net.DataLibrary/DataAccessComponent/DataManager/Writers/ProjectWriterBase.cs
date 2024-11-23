@@ -117,7 +117,7 @@ namespace DataAccessComponent.DataManager.Writers
             internal static SqlParameter[] CreateInsertParameters(Project project)
             {
                 // Initial Values
-                SqlParameter[] parameters = new SqlParameter[28];
+                SqlParameter[] parameters = new SqlParameter[27];
                 SqlParameter param = null;
 
                 // verify projectexists
@@ -341,7 +341,7 @@ namespace DataAccessComponent.DataManager.Writers
             internal static SqlParameter[] CreateUpdateParameters(Project project)
             {
                 // Initial Values
-                SqlParameter[] parameters = new SqlParameter[29];
+                SqlParameter[] parameters = new SqlParameter[28];
                 SqlParameter param = null;
 
                 // verify projectexists
@@ -489,7 +489,7 @@ namespace DataAccessComponent.DataManager.Writers
                     // Create parameter for [StoredProcedureObjectFolder]
                     param = new SqlParameter("@StoredProcedureObjectFolder", project.StoredProcedureObjectFolder);
 
-                    // set parameters[1]
+                    // set parameters[21]
                     parameters[21] = param;
 
                     // Create parameter for [StoredProcedureObjectNamespace]

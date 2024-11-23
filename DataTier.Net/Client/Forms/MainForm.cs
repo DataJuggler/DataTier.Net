@@ -3146,14 +3146,25 @@ namespace DataTierClient.Forms
                     // set value
                     openProject = value; 
 
-                    // Load the child objects
-                    Gateway.LoadChildObjects(openProject);
+                    // if the OpenProject exists
+                    if (openProject != null)
+                    {
+                        // Load the child objects
+                        Gateway.LoadChildObjects(openProject);
                     
-                    // Display Open Project
-                    this.DisplaySelectedProject(this.OpenProject);
-                    
-                    // enable controls
-                    UIEnable();
+                        // Display Open Project
+                        this.DisplaySelectedProject(this.OpenProject);
+
+                        // enable controls
+                        UIEnable();
+
+                        // if the references had to be recreated
+                        if (openProject.ReferencesRecreated)
+                        {
+                            // Show a message to the user
+                            MessageHelper.DisplayMessage("Your references had to be recreated. Any customizations made to your references have been lost. You must select Edit Project and Save your project before building.", "References Recreated");
+                        }
+                    }
                 }
             }
             #endregion

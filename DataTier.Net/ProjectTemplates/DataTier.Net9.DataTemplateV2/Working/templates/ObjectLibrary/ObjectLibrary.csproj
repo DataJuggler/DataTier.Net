@@ -5,7 +5,7 @@
 	<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
     <TargetFramework>net9.0</TargetFramework>
     <PackageId>DataJuggler.DataTier.Net9.ObjectLibrary</PackageId>
-    <Version>9.0.6</Version>
+    <Version>9.0.7</Version>
     <Authors>DataJuggler</Authors>
     <Company>DataJuggler</Company>
     <Description>This is one of four projects that make up a DataTier.Net9 DataTier</Description>
