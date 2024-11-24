@@ -350,7 +350,7 @@ namespace DataTierClient.Controls
                         }
 
                         // Inform user of error
-                        MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageHelper.DisplayMessage(message, title);
                     }
 
                     // Close this form
@@ -366,7 +366,7 @@ namespace DataTierClient.Controls
                     string message = "The project could not be saved." + Environment.NewLine + error2.ToString();
                 
                     // show error
-                    MessageBox.Show(message, title);
+                    MessageHelper.DisplayMessage(message, title);
                 }
                 finally
                 {

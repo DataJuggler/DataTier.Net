@@ -220,7 +220,7 @@ namespace DataTierClient.Controls
                             else
                             {
                                 // Show the user a message
-                                MessageBox.Show("SQL Script could not be located. Find and execute the script DataTier.Net.Database.Schema.sql", "File Not Found");
+                                MessageHelper.DisplayMessage("SQL Script could not be located. Find and execute the script DataTier.Net.Database.Schema.sql", "File Not Found");
                             }
                         }
                     }
@@ -230,13 +230,13 @@ namespace DataTierClient.Controls
                         DebugHelper.WriteDebugError("InstallDatabaseSchemaButton_Click", this.Name, error);  
 
                         // Show a message
-                        MessageBox.Show("An error occurred launching SQL Server Management Studio", "Error Launching SSMS");
+                        MessageHelper.DisplayMessage("An error occurred launching SQL Server Management Studio", "Error Launching SSMS");
                     }
                 }
                 else
                 {
-                    // Set the message box
-                    MessageBox.Show("Could not located the SQL Scripts path. Look for the file 'DataTier.Net.Database.Schema.sql in the install directory for DataTier.Net", "File Not Found");
+                    // Show a message
+                    MessageHelper.DisplayMessage("Could not located the SQL Scripts path. Look for the file 'DataTier.Net.Database.Schema.sql in the install directory for DataTier.Net", "File Not Found");
                 }
 
                 // if started is true
@@ -527,7 +527,7 @@ namespace DataTierClient.Controls
                 else
                 {
                     // Show a message to the user
-                    MessageBox.Show("Sorry we could not find the installed documentation.", "File Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageHelper.DisplayMessage("Sorry we could not find the installed documentation.", "File Not Found");
                 }
             }
             #endregion
@@ -557,7 +557,7 @@ namespace DataTierClient.Controls
                 else
                 {
                     // Show a message to the user
-                    MessageBox.Show("Sorry we could not find the installed documentation.", "File Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageHelper.DisplayMessage("Sorry we could not find the installed documentation.", "File Not Found");
                 }
             }
             #endregion

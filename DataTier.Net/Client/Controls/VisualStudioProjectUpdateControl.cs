@@ -176,7 +176,7 @@ namespace DataTierClient.Controls
                     // create a message to show to the user
                     string message = "There was an error reading your solution. The error thrown was:" + Environment.NewLine + error.ToString();
                     string title = "Visual Studio Update Failure";
-                    MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageHelper.DisplayMessage(message, title);
                 }
             }
             #endregion
@@ -192,9 +192,7 @@ namespace DataTierClient.Controls
             {
                 // locals
                 string title = "Update Complete";
-                string message = "Your Visual Studio project has been updated.";
-                MessageBoxButtons button = MessageBoxButtons.OK;
-                MessageBoxIcon icon = MessageBoxIcon.Information;
+                string message = "Your Visual Studio project has been updated.";                
                 bool updated = false;
                 
                 try
@@ -237,25 +235,23 @@ namespace DataTierClient.Controls
                         // set the title and message with the failure
                         title = "Update Failure";
                         message = "There was a failure while attempting to update your projecst. You must update your projects manually.";
-                        icon = MessageBoxIcon.Warning;
-
+                        
                         // Show a message to the user
-                        MessageBox.Show(message, title, button, icon);
+                        MessageHelper.DisplayMessage(message, title);
                     }
                     else if ((!updated) && (RemovalMode))
                     {
                         // set the title and message with the failure
                         title = "Removal Failure";
-                        message = "There was a failure while attempting to remove files from your projects. You must update your projectsm manually.";
-                        icon = MessageBoxIcon.Warning;
+                        message = "There was a failure while attempting to remove files from your projects. You must update your projectsm manually.";                        
 
                         // Show a message to the user
-                        MessageBox.Show(message, title, button, icon);
+                        MessageHelper.DisplayMessage(message, title);
                     }
                     else
                     {
                         // Show a message to the user
-                        MessageBox.Show(message, title, button, icon);
+                        MessageHelper.DisplayMessage(message, title);
 
                         // if the parent form exists
                         if (this.HasParentUpdateForm)
@@ -281,11 +277,8 @@ namespace DataTierClient.Controls
                     title = "Update Failure";
                     message = "There was a failure while attempting to update your project. You must update your projects manually." + Environment.NewLine + error.ToString();
 
-                    // create an icon
-                    icon = MessageBoxIcon.Warning;
-
                     // Show a message to the user
-                    MessageBox.Show(message, title, button, icon);
+                    MessageHelper.DisplayMessage(message, title);
                 }
                 finally
                 {

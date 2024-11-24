@@ -19,6 +19,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Windows.Forms;
 using DataTierClient.Enumerations;
+using DataTierClient.ClientUtil;
 
 #endregion
 
@@ -281,7 +282,7 @@ namespace DataTierClient.Forms
                     DebugHelper.WriteDebugError("InstallConnectionString_Click", "ConnectionStringBuilderForm", error);
 
                     // Show user a message
-                    MessageBox.Show("An error occurred updating your configuration: " + error.ToString(), "Update Config Error");
+                    MessageHelper.DisplayMessage("An error occurred updating your configuration: " + error.ToString(), "Update Config Error");
                 }
             }
             #endregion
@@ -467,7 +468,7 @@ namespace DataTierClient.Forms
                     else
                     {
                         // Show a warning message
-                        MessageBox.Show("You must build or enter a connection string.", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageHelper.DisplayMessage("You must build or enter a connection string.", "Missing Information");
                     }
                 }
                 catch (Exception error)
@@ -476,7 +477,7 @@ namespace DataTierClient.Forms
                     string err = error.ToString();
                     
                     // Show a success message
-                    MessageBox.Show("A connection to the database count not be estalished.", "Connection Test Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageHelper.DisplayMessage("A connection to the database count not be estalished.", "Connection Test Failed");
                 }
             }
             #endregion
@@ -597,7 +598,7 @@ namespace DataTierClient.Forms
                     else
                     {
                         // Show a message to user
-                        MessageBox.Show("Error: 002: Error reading connection string: " + appConfig, "Invalid Configuration");
+                        MessageHelper.DisplayMessage("Error: 002: Error reading connection string: " + appConfig, "Invalid Configuration");
                     }
                 }
                 
@@ -732,7 +733,7 @@ namespace DataTierClient.Forms
                     else
                     {
                         // Show a message here
-                        MessageBox.Show("The environment variable could not be set. Create a User Level Environment Variable named DataTierNetConnection and set the value to your connection string.", "Install Connection String Failed");
+                        MessageHelper.DisplayMessage("The environment variable could not be set. Create a User Level Environment Variable named DataTierNetConnection and set the value to your connection string.", "Install Connection String Failed");
                     }
                 }
                 

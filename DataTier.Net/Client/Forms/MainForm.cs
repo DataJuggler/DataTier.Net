@@ -369,7 +369,7 @@ namespace DataTierClient.Forms
                         }
                         
                         // Inform user of error
-                        MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageHelper.DisplayMessage(errorMessage, "Error");
                     }
                 }
             } 
@@ -437,7 +437,7 @@ namespace DataTierClient.Forms
                 else
                 {
                     // Show a message to the user
-                    MessageBox.Show("Sorry we could not find the installed documentation.", "File Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageHelper.DisplayMessage("Sorry we could not find the installed documentation.", "File Not Found");
                 }
             }
             #endregion
@@ -467,7 +467,7 @@ namespace DataTierClient.Forms
                 else
                 {
                     // Show a message to the user
-                    MessageBox.Show("Sorry we could not find the installed documentation.", "File Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageHelper.DisplayMessage("Sorry we could not find the installed documentation.", "File Not Found");
                 }
             }
             #endregion
@@ -497,7 +497,7 @@ namespace DataTierClient.Forms
                 else
                 {
                     // Show a message to the user
-                    MessageBox.Show("Sorry we could not find the installed documentation.", "File Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageHelper.DisplayMessage("Sorry we could not find the installed documentation.", "File Not Found");
                 }
             }
             #endregion
@@ -527,7 +527,7 @@ namespace DataTierClient.Forms
                 else
                 {
                     // Show a message to the user
-                    MessageBox.Show("Sorry we could not find the installed documentation.", "File Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageHelper.DisplayMessage("Sorry we could not find the installed documentation.", "File Not Found");
                 }
             }
             #endregion
@@ -581,7 +581,7 @@ namespace DataTierClient.Forms
 						string title = "Corrupt File";
 
 						// Inform user corrupt database
-						MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+						MessageHelper.DisplayMessage(message, title);
 
 						// exit
 						return;
@@ -667,7 +667,7 @@ namespace DataTierClient.Forms
 				{
 					string message = "An error occurred building your project.";
 					string title = "Build Error";
-					MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+					MessageHelper.DisplayMessage(message, title);
 				}
 				finally
 				{
@@ -1982,7 +1982,7 @@ namespace DataTierClient.Forms
                         string title = "Connection Failed.";
                     
                         // Inform user of connection
-                        MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Information);    
+                        MessageHelper.DisplayMessage(message, title);
                     
                         // Close this form
                         this.Close();
@@ -2040,7 +2040,7 @@ namespace DataTierClient.Forms
 						string title = "Databases Required";
 
 						// Inform user corrupt database
-						MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+						MessageHelper.DisplayMessage(message, title);
 
 						// exit
 						return;
@@ -2095,7 +2095,7 @@ namespace DataTierClient.Forms
 
 					string message = "An error occurred loading your database schema and saving your project.";
 					string title = "Load And Save Database Schema Error";
-					MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+					MessageHelper.DisplayMessage(message, title);
 				}
 				finally
 				{
@@ -2184,7 +2184,7 @@ namespace DataTierClient.Forms
                     userCancelled = false;
 
                     // DataTier.Net has to be restarted.
-                    MessageBox.Show("DataTier.Net has to be restarted to register your changes." + Environment.NewLine + "This program will now end.", "Restart Required");
+                    MessageHelper.DisplayMessage("DataTier.Net has to be restarted to register your changes." + Environment.NewLine + "This program will now end.", "Restart Required");
 
                     // close this form
                     this.Close();
@@ -2755,7 +2755,7 @@ namespace DataTierClient.Forms
                     string title = "Setup Cancelled";
                     
                     // Inform user of connection
-                    MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Information);    
+                    MessageHelper.DisplayMessage(message, title);
                     
                     // Close this form
                     this.Close();
@@ -2772,7 +2772,7 @@ namespace DataTierClient.Forms
                     string title = "Setup Was Not Successful";
                     
                     // Inform user of connection
-                    MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Information);    
+                    MessageHelper.DisplayMessage(message, title);
                     
                     // Close this form
                     this.Close();
@@ -3159,7 +3159,7 @@ namespace DataTierClient.Forms
                         UIEnable();
 
                         // if the references had to be recreated
-                        if (openProject.ReferencesRecreated)
+                        if ((openProject.ReferencesRecreated) && (!OpenProject.IsNew))
                         {
                             // Show a message to the user
                             MessageHelper.DisplayMessage("Your references had to be recreated. Any customizations made to your references have been lost. You must select Edit Project and Save your project before building.", "References Recreated");

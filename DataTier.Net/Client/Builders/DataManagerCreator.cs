@@ -172,38 +172,6 @@ namespace DataTierClient.Builders
             }
             #endregion
 
-            #region CreateMethodVariable(DataTable dataTable)
-            /// <summary>
-            /// This method creates the private variable for 
-            /// a variable for this data operation method for a DataTable.
-            /// </summary>
-            /// <param name="dataTable"></param>
-            /// <returns></returns>
-            private string CreateMethodVariable(DataTable dataTable)
-            {
-                // Create String Builder
-                StringBuilder sb = new StringBuilder("private ");
-
-                // Get DataType
-                string dataType = CreateDataType(dataTable);
-               
-                // Append DataType
-                sb.Append(dataType);
-                
-                // Append Space Between DataType and variable name
-                sb.Append(" ");
-                
-                // Append ClassName
-                sb.Append(dataTable.ClassName.ToLower());
-
-                // Append Methods
-                sb.Append("Manager;");
-
-                // return value
-                return sb.ToString();
-            }
-            #endregion
-
             #region CreateFileName(DataTable dataTable)
             /// <summary>
             /// Create the file name for this reader.
@@ -373,29 +341,6 @@ namespace DataTierClient.Builders
                 // Instanciate DataConnector
                 WriteLine("this.DataConnector = new DataConnector();");
                 
-                // Write Blank Line
-                WriteLine();
-                
-                // Write Comment Create Child Object Managers
-                WriteComment("Create Child Object Managers");
-                
-                // now instanciate each controller
-                if(this.DataTables != null)
-                {
-                    // loop through each data table
-                    foreach(DataTable dataTable in this.DataTables)
-                    {
-                        // Get the line to instanciate this object
-                        string instanciateMethod = null;
-                        
-                        // Get the line to instanciate this object
-                        instanciateMethod = InstanciateMethod(dataTable);
-
-                        // Write the line to instanciate this object
-                        WriteLine(instanciateMethod);
-                    }
-                }
-                
                 // Write Close Bracket }
                 WriteCloseBracket(true);
                 
@@ -451,24 +396,7 @@ namespace DataTierClient.Builders
 
                 // Update 8.22.2019 - Version 1.3.0: Dot Net Core
                 WriteLine("private string connectionName;");
-                
-                // Write DataTable Private Variables
-                if(this.DataTables != null)
-                {
-                    // Get methodVariable Private Variable For This DataTable
-                    string methodVariable = null;
-                    
-                    // loop through each DataTable
-                    foreach(DataTable dataTable in this.DataTables)
-                    {
-                        // Get methodVariable Private Variable For This DataTable
-                        methodVariable = CreateMethodVariable(dataTable);
-
-                        // Write methodVariable
-                        WriteLine(methodVariable);
-                    }
-                }
-
+               
                 // Write line
                 EndRegion();;
                 
@@ -546,22 +474,6 @@ namespace DataTierClient.Builders
                 // Update 8.22.2019 - Version 1.3.0: Dot Net Core
                 // Write Property For ConnectionName
                 WriteProperty("ConnectionName", "connectionName", "string");
-                
-                // Now Create A Property For Each Controller
-                if(this.DataTables != null)
-                {
-                    // loop through each table and create a controller for each table
-                    foreach(DataTable dataTable in this.DataTables)
-                    {   
-                        // get variables for each type
-                        string propertyName = dataTable.ClassName + "Manager";
-                        string variableName = dataTable.ClassName.ToLower() + "Manager";
-                        string dataType = CreateDataType(dataTable);
-                    
-                        // Now Creaete Property For This Data
-                        WriteProperty(propertyName, variableName, dataType);
-                    }
-                }
                 
                 // Write Blank Line After last Property
                 WriteLine();

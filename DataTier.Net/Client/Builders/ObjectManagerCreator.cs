@@ -176,7 +176,7 @@ namespace DataTierClient.Builders
                 WriteLine("/// </summary>");
                 
                 // get class declaration line
-                string classLine = "public bool Delete#Object#(Delete#Object#StoredProcedure delete#Object#Proc, DataConnector databaseConnector)";
+                string classLine = "public static bool Delete#Object#(Delete#Object#StoredProcedure delete#Object#Proc, DataConnector databaseConnector)";
                 classLine = classLine.Replace("#Object#", dataTable.ClassName);
                 
                 // Write class line
@@ -284,7 +284,7 @@ namespace DataTierClient.Builders
                 WriteLine("/// </summary>");
 
                 // get class declaration line
-                string classLine = "public " + dataType + " FetchAll" + className + "(" + procType + " " + procName + ", DataConnector databaseConnector)";
+                string classLine = "public static " + dataType + " FetchAll" + className + "(" + procType + " " + procName + ", DataConnector databaseConnector)";
                 
                 // Write class line
                 WriteLine(classLine);
@@ -431,7 +431,7 @@ namespace DataTierClient.Builders
                 WriteLine("/// </summary>");
 
                 // get class declaration line
-                string classLine = "public " + dataType + " Find" + className + "(" + procType +" " +  procName + ", DataConnector databaseConnector)";
+                string classLine = "public static " + dataType + " Find" + className + "(" + procType +" " +  procName + ", DataConnector databaseConnector)";
 
                 // Write class line
                 WriteLine(classLine);
@@ -595,7 +595,7 @@ namespace DataTierClient.Builders
                 WriteLine("/// </summary>");
 
                 // get class declaration line
-                string classLine = "public int Insert#Object#(Insert#Object#StoredProcedure insert#Object#Proc, DataConnector databaseConnector)";
+                string classLine = "public static int Insert#Object#(Insert#Object#StoredProcedure insert#Object#Proc, DataConnector databaseConnector)";
                 classLine = classLine.Replace("#Object#", dataTable.ClassName);
 
                 // Write class line
@@ -680,7 +680,7 @@ namespace DataTierClient.Builders
                 WriteLine("/// </summary>");
 
                 // get class declaration line
-                string classLine = "public bool Update#Object#(Update#Object#StoredProcedure update#Object#Proc, DataConnector databaseConnector)";
+                string classLine = "public static bool Update#Object#(Update#Object#StoredProcedure update#Object#Proc, DataConnector databaseConnector)";
                 classLine = classLine.Replace("#Object#", dataTable.ClassName);
 
                 // Write class line
