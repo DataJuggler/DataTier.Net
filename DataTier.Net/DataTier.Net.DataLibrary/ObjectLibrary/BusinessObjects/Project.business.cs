@@ -150,6 +150,9 @@ namespace ObjectLibrary.BusinessObjects
             /// </summary>
             public void CreateDefaultReferences()
             {
+                // local
+                bool hasExistingReferences = (HasObjectReferencesSet && !ObjectReferencesSet.IsNew);
+
                 // Set ObjectNamespace
                 this.ObjectNamespace = "ObjectLibrary.BusinessObjects";
                 
@@ -324,9 +327,13 @@ namespace ObjectLibrary.BusinessObjects
                 StoredProcedureReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.UpdateProcedures"));
                 AllReferences.Add(StoredProcedureReferencesSet);
 
-                // Edit 11.23.2024: If an existing project was opened and this had to be called, this will show a message
-                // to the user that the references had to be recreated
-                ReferencesRecreated = true;
+                // if the existing References exist
+                if (hasExistingReferences)
+                {
+                    // Edit 11.23.2024: If an existing project was opened and this had to be called, this will show a message
+                    // to the user that the references had to be recreated
+                    ReferencesRecreated = true;
+                }
             }
             #endregion
             

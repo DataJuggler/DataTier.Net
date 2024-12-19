@@ -2,12 +2,9 @@
 
 #region using statements
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DataTierClient.Forms;
+using System.Media;
+using DataJuggler.Core.UltimateHelper;
 
 #endregion
 
@@ -32,6 +29,17 @@ namespace DataTierClient.ClientUtil
             /// </summary>
             public static void DisplayMessage(string messageText, string title)
             {
+                string playSoundSetting = ConfigurationHelper.ReadAppSetting("PlaySound");
+                bool playSound = BooleanHelper.ParseBoolean(playSoundSetting, false, false);
+
+                // if the value for playSound is true
+                if (playSound)
+                {
+                    // Create a new instance of a 'SoundPlayer' object.
+                    SoundPlayer soundPlayer = new SoundPlayer("Sounds/alert.wav");
+                    soundPlayer.Play();
+                }
+
                 // Create a new instance of a 'DisplayMessageForm' object.
                 DisplayMessageForm form = new DisplayMessageForm();
                 

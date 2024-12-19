@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Data Juggler")]
 [assembly: AssemblyProduct("DataTier.Net - Shared free and open source with the 'Do Whatever You Want' license.")]
-[assembly: AssemblyCopyright("Copyright © Data Juggler 2018 - 2024 Shared open source at github.com/DataJuggler/DataTier.Net")]
+[assembly: AssemblyCopyright("Copyright © Data Juggler 2018 - 2025 Shared open source at github.com/DataJuggler/DataTier.Net")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -29,5 +29,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("5.0.2.0")]
-[assembly: AssemblyFileVersion("5.0.2.0")]
+[assembly: AssemblyVersion("5.0.3.0")]
+[assembly: AssemblyFileVersion("5.0.3.0")]

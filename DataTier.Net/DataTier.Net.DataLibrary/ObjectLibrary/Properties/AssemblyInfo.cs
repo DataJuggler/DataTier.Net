@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("DataJuggler")]
 [assembly: AssemblyProduct("ObjectLibrary")]
-[assembly: AssemblyCopyright("Copyright © DataJuggler 2024 - Free To Use - Do Whatever You Want")]
+[assembly: AssemblyCopyright("Copyright © DataJuggler 2025 - Free To Use - Do Whatever You Want")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -31,5 +31,5 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("5.0.2.0")]
-[assembly: AssemblyFileVersion("5.0.2.0")]
+[assembly: AssemblyVersion("5.0.3.0")]
+[assembly: AssemblyFileVersion("5.0.3.0")]

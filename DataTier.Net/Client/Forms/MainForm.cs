@@ -152,26 +152,25 @@ namespace DataTierClient.Forms
             /// event is fired when the 'CloseProjectButton' is clicked.
             /// </summary>
             private void CloseProjectButton_Click(object sender, EventArgs e)
-            {
-                 // if the CloseProjectButton is enabled
-                if (ButtonManager.IsButtonEnabled(CloseProjectButton))
+            {   
+                // If the OpenProject exists
+                if (HasOpenProject)
                 {
-                     // If this object has a ParentMainForm.
-                    if (this.HasOpenProject)
-                    {
-                          // remove the focus 
-                        HiddenButton.Focus();
+                    // remove the focus 
+                    HiddenButton.Focus();
 
-                        // Set the open project to null
-                        this.OpenProject = null;
+                    // Set the open project to null
+                    OpenProject = null;
 
-                        // set build complete to false
-                        this.BuildComplete = false;
-                    }
-
-                    // Display Selected Project
-                    this.DisplaySelectedProject(this.OpenProject);
+                    // set build complete to false
+                    BuildComplete = false;
                 }
+
+                // Clear results
+                StatusListBox.Items.Clear();
+
+                // Display Selected Project
+                DisplaySelectedProject(OpenProject);
             }
             #endregion
            
@@ -1725,6 +1724,9 @@ namespace DataTierClient.Forms
 
                 // display value on control
                 this.CurrentProjectLabel.Text = projectName;
+
+                // Enable or disable controls
+                UIEnable();
             }
             #endregion
 

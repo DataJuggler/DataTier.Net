@@ -2405,7 +2405,7 @@ namespace DataTierClient.Controls
                 // get the gatewayFile
                 string gatewayFile = Path.Combine(ProjectFolder,  @"DataGateway\Gateway.cs");
 
-                // if version 2
+                 // if version 2
                 if (Project.TemplateVersion == 2)
                 {
                     // use the Data folder
@@ -2528,7 +2528,7 @@ namespace DataTierClient.Controls
                         codeLine = codeLines[insertIndex];
 
                         // set the spaces
-                        spaces = TextHelper.GetSpacesCount(codeLine.Text) + 4;
+                        spaces = TextHelper.GetSpacesCount(codeLine.Text);
 
                         // set the indent
                         indent = TextHelper.Indent(spaces);
@@ -2851,7 +2851,7 @@ namespace DataTierClient.Controls
                         // Insert a blank codeLine
                         insertIndex = CodeLineHelper.InsertCodeLine(ref codeLines, indent, insertIndex);
 
-                            // Write out the codeLines
+                        // Write out the codeLines
                         CodeLineHelper.WriteFileText(codeLines, gatewayFile, true);
 
                         // the gateway file was updated

@@ -864,6 +864,9 @@
     <None Include="Resources\Setup3.png" />
     <None Include="Resources\Project Folder .NET5 or .NET6.png" />
     <None Include="Resources\HelpImages3.png" />
+    <Content Include="Sounds\Alert.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Xml\Files\DataTier.Net.Update.xml" />
     <Content Include="Xml\Files\DeserializedFieldSet.xml" />
     <Content Include="Xml\Files\SelectedFieldSet.xml" />
