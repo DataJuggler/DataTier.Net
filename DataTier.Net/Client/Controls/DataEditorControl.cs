@@ -246,8 +246,10 @@ namespace DataTierClient.Controls
             /// </summary>
             private void RemoveTableButton_Click(object sender, EventArgs e)
             {
-                // local
+                // locals
                 bool deleteFiles = false;
+                bool fileNotFoundError = false;
+                string message = "";
                 
                 // Get the list of files to remove
                 if ((this.HasProject) && (this.HasSelectedTable))
@@ -256,49 +258,58 @@ namespace DataTierClient.Controls
                     ProjectFileManager projectFileManager = new ProjectFileManager();
                     
                     // Create each file name
-                    string readerFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\DataManager\Readers", this.SelectedTable.TableName + "Reader.cs");
-                    string writerFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\DataManager\Writers", this.SelectedTable.TableName + "Writer.cs");
-                    string writerBaseFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\DataManager\Writers", this.SelectedTable.TableName + "WriterBase.cs");
-                    string dataManagerFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\DataManager", SelectedTable.TableName + "Manager.cs");
+                    string businessObjectFileName = Path.Combine(Project.ProjectFolder, @"ObjectLibrary\BusinessObjects", this.SelectedTable.TableName + ".business.cs");
+                    string controllerFileName = Path.Combine(Project.ProjectFolder, @"ApplicationLogicComponent\Controllers", this.SelectedTable.TableName + "Controller.cs");
+                    string dataManagerFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\Data", SelectedTable.TableName + "Manager.cs");
+                    string dataObjectFileName = Path.Combine(Project.ProjectFolder, @"ObjectLibrary\BusinessObjects", this.SelectedTable.TableName + ".data.cs");
                     string deleteProcFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\StoredProcedureManager\DeleteProcedures", "Delete" + this.SelectedTable.TableName + "StoredProcedure.cs");
                     string fetchAllProcFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\StoredProcedureManager\FetchProcedures", "FetchAll" + PluralWordHelper.GetPluralName(this.SelectedTable.TableName, false) + "StoredProcedure.cs");
                     string findProcFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\StoredProcedureManager\FetchProcedures", "Find" + this.SelectedTable.TableName + "StoredProcedure.cs");
-                    string insertProcFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\StoredProcedureManager\InsertProcedures", "Insert" + this.SelectedTable.TableName + "StoredProcedure.cs");
-                    string updateProcFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\StoredProcedureManager\UpdateProcedures", "Update" + this.SelectedTable.TableName + "StoredProcedure.cs");
-                    string controllerFileName = Path.Combine(Project.ProjectFolder, @"ApplicationLogicComponent\Controllers", this.SelectedTable.TableName + "Controller.cs");
-                    string methodsFileName = Path.Combine(Project.ProjectFolder, @"ApplicationLogicComponent\DataOperations", this.SelectedTable.TableName + "Methods.cs");
-                    string businessObjectFileName = Path.Combine(Project.ProjectFolder, @"ObjectLibrary\BusinessObjects", this.SelectedTable.TableName + ".business.cs");
-                    string dataObjectFileName = Path.Combine(Project.ProjectFolder, @"ObjectLibrary\BusinessObjects", this.SelectedTable.TableName + ".data.cs");
                     string gatewayFileName = Path.Combine(Project.ProjectFolder, @"DataGateway", "Gateway.cs");
-
-                    
-                    
+                    string insertProcFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\StoredProcedureManager\InsertProcedures", "Insert" + this.SelectedTable.TableName + "StoredProcedure.cs");
+                    string methodsFileName = Path.Combine(Project.ProjectFolder, @"ApplicationLogicComponent\DataOperations", this.SelectedTable.TableName + "Methods.cs");
+                    string readerFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\Data\Readers", this.SelectedTable.TableName + "Reader.cs");
+                    string updateProcFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\StoredProcedureManager\UpdateProcedures", "Update" + this.SelectedTable.TableName + "StoredProcedure.cs");
+                    string writerBaseFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\Data\Writers", this.SelectedTable.TableName + "WriterBase.cs");
+                    string writerFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\Data\Writers", this.SelectedTable.TableName + "Writer.cs");
+                                        
                     // Create each ProjectFile
-                    ProjectFile readerFile = new ProjectFile(readerFileName, DataManager.ProjectTypeEnum.DAC);
-                    ProjectFile writerFile = new ProjectFile(writerFileName, DataManager.ProjectTypeEnum.DAC);
-                    ProjectFile writerFileBase = new ProjectFile(writerBaseFileName, DataManager.ProjectTypeEnum.DAC);
+                    ProjectFile businessObjectFile = new ProjectFile(businessObjectFileName, DataManager.ProjectTypeEnum.ObjectLibrary);
+                    ProjectFile controllerFile = new ProjectFile(controllerFileName, DataManager.ProjectTypeEnum.ALC);
                     ProjectFile dataManagerFile = new ProjectFile(dataManagerFileName, DataManager.ProjectTypeEnum.DAC);
+                    ProjectFile dataObjectFile = new ProjectFile(dataObjectFileName, DataManager.ProjectTypeEnum.ObjectLibrary);
                     ProjectFile deleteProcFile = new ProjectFile(deleteProcFileName, DataManager.ProjectTypeEnum.DAC);
                     ProjectFile fetchAllProcFile = new ProjectFile(fetchAllProcFileName, DataManager.ProjectTypeEnum.DAC);
                     ProjectFile findProcFile = new ProjectFile(findProcFileName, DataManager.ProjectTypeEnum.DAC);
+                    ProjectFile gatewayFile = new ProjectFile(gatewayFileName, DataManager.ProjectTypeEnum.Gateway);                    
                     ProjectFile insertProcFile = new ProjectFile(insertProcFileName, DataManager.ProjectTypeEnum.DAC);
+                    ProjectFile methodsFile = new ProjectFile(methodsFileName, DataManager.ProjectTypeEnum.ALC);                    
+                    ProjectFile readerFile = new ProjectFile(readerFileName, DataManager.ProjectTypeEnum.DAC);
                     ProjectFile updateProcFile = new ProjectFile(updateProcFileName, DataManager.ProjectTypeEnum.DAC);
-                    ProjectFile controllerFile = new ProjectFile(controllerFileName, DataManager.ProjectTypeEnum.ALC);
-                    ProjectFile methodsFile = new ProjectFile(methodsFileName, DataManager.ProjectTypeEnum.ALC);
-                    ProjectFile businessObjectFile = new ProjectFile(businessObjectFileName, DataManager.ProjectTypeEnum.ObjectLibrary);
-                    ProjectFile dataObjectFile = new ProjectFile(dataObjectFileName, DataManager.ProjectTypeEnum.ObjectLibrary);
-                    ProjectFile gatewayFile = new ProjectFile(gatewayFileName, DataManager.ProjectTypeEnum.Gateway);
+                    ProjectFile writerFile = new ProjectFile(writerFileName, DataManager.ProjectTypeEnum.DAC);
+                    ProjectFile writerFileBase = new ProjectFile(writerBaseFileName, DataManager.ProjectTypeEnum.DAC);
 
                     // only for .NET8 and V2 Templates
                     if (Project.TemplateVersion == 2)
                     {
                         // replace out 
-                        writerFileName = writerFileName.Replace(@"DataManager\Writers", @"Data\Writers");
-                        writerBaseFileName = writerBaseFileName.Replace(@"DataManager\Writers", @"Data\Writers");
+                        controllerFile.ProjectType = DataManager.ProjectTypeEnum.DAC;                        
+                        controllerFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\Controllers", this.SelectedTable.TableName + "Controller.cs");
+                        controllerFile.FileName = controllerFileName;
+                        controllerFile.FullFilePath = controllerFile.FileName;
                         dataManagerFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\Data", SelectedTable.TableName + "Manager.cs");
-                        controllerFile.ProjectType = DataManager.ProjectTypeEnum.DAC;
-                        methodsFile.ProjectType = DataManager.ProjectTypeEnum.DAC;
                         gatewayFile.ProjectType = DataManager.ProjectTypeEnum.DAC;
+                        gatewayFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\DataGateway", "Gateway.cs");
+                        gatewayFile.FileName = gatewayFileName;
+                        gatewayFile.FullFilePath = gatewayFileName;
+                        methodsFile.ProjectType = DataManager.ProjectTypeEnum.DAC;
+                        methodsFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\DataOperations", this.SelectedTable.TableName + "Methods.cs");
+                        methodsFile.FileName = methodsFileName;
+                        methodsFile.FullFilePath = methodsFileName;
+                        writerBaseFileName = writerBaseFileName.Replace(@"DataManager\Writers", @"Data\Writers");
+                        writerFileName = writerFileName.Replace(@"DataManager\Writers", @"Data\Writers");
+                        writerFile.FileName = writerFileName;
+                        writerFileBase.FileName = writerBaseFileName;
                     }
                     
                     // Now add each file to the ProjectFileManager
@@ -339,6 +350,9 @@ namespace DataTierClient.Controls
                     
                     // Create a new instance of a 'ConfirmRemovalForm' object.
                     ConfirmRemovalForm confirmRemovalForm = new ConfirmRemovalForm();
+
+                    // test only
+                    IList<ProjectFile> tempFiles = projectFileManager.ActiveFiles;
                     
                     // Setup the Control
                     confirmRemovalForm.Setup(projectFileManager, this.Project.ProjectFolder);
@@ -387,6 +401,9 @@ namespace DataTierClient.Controls
                                         }
                                         else
                                         {
+                                            // Set to true
+                                            fileNotFoundError = true;
+
                                             // find out why this file doesn't exist (for debugging only)
                                             string filePath = projectFile.FullFilePath;
                                             
@@ -400,8 +417,17 @@ namespace DataTierClient.Controls
                             // Remove the methods from the gateway
                             GatewayHelper.RemoveMethods(gatewayFile.FullFilePath, projectFileManager.GatewayMethodNames);
                            
-                            // create a message
-                            string message = "Files have been removed and your project has been updated." + Environment.NewLine + Environment.NewLine + "Next You must uncheck the table or view to remove it, then click 'Save' and rebuild your project to complete the removal.";
+                            // if the value for fileNotFoundError is true
+                            if (fileNotFoundError)
+                            {
+                                // create a message
+                                message = "Files have been removed and your project has been updated with errors." + Environment.NewLine + Environment.NewLine + "Next You must uncheck the table or view to remove it, then click 'Save' and rebuild your project to complete the removal.";
+                            }
+                            else
+                            {
+                                // create a message
+                                message = "Files have been removed and your project has been updated." + Environment.NewLine + Environment.NewLine + "Next You must uncheck the table or view to remove it, then click 'Save' and rebuild your project to complete the removal.";
+                            }
 
                             // Show the Message
                             MessageHelper.DisplayMessage(message, "Table Code Removal Complete");

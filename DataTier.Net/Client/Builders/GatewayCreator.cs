@@ -59,7 +59,7 @@ namespace DataTierClient.Builders
             internal void CreateGatewayMethods()
             {
                 // if the GatewayPath exists
-                if ((this.HasGatewayPath) && (File.Exists(GatewayPath)) && (DataTables != null))
+                if ((this.HasGatewayPath) && (File.Exists(GatewayPath)) && (DataTables != null) && (DataTables.Count > 0))
                 {
                     // set the text of the existing Gateway
                     string gatewayText = File.ReadAllText(GatewayPath);
