@@ -114,7 +114,7 @@ namespace DataAccessComponent.Data
 
         #region Close()
         /// <summary>
-        /// This method closes the open database connection.
+        /// This method closes the open database connection
         /// </summary>
         public void Close()
         {
@@ -129,7 +129,7 @@ namespace DataAccessComponent.Data
 
         #region Open()
         /// <summary>
-        /// This method closes the open database connection.
+        /// This method closes the open database connection
         /// </summary>
         public void Open()
         {
@@ -183,7 +183,7 @@ namespace DataAccessComponent.Data
 
         #region ConnectionString
         /// <summary>
-        /// The ConnectionString from the active connection.
+        /// The ConnectionString from the active connection
         /// </summary>
         public string ConnectionString
         {

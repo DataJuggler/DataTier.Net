@@ -3,7 +3,7 @@
   <PropertyGroup>
     
     <PackageType>Template</PackageType>
-    <PackageVersion>9.0.7</PackageVersion>
+    <PackageVersion>9.10.0</PackageVersion>
     <PackageId>DataJuggler.DataTier.Net9.ProjectTemplatesV2</PackageId>
     <Title>DataJuggler.DataTier.Net9.ProjectTemplatesV2</Title>
     <Authors>Data Juggler</Authors>
@@ -16,14 +16,16 @@ and the Data Gateway were both moved to the Data Access Component.
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <ContentTargetFolders>content</ContentTargetFolders>
-    <Version>9.0.2</Version>
+    <Version>9.0.3</Version>
     <Product>DataJuggler.DataTier.Net9.ProjectTemplateV2</Product>
     <ApplicationIcon></ApplicationIcon>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/DataJuggler/DataTier.Net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/DataJuggler/DataTier.Net.git</RepositoryUrl>
     <RepositoryType>Git/GitHub</RepositoryType>
-	<PackageReleaseNotes>Update 11.18.2023: This template is for .Net9.
+	<PackageReleaseNotes>Update 1.13.2025: The ControllerManager is being phased out.
+
+Update 11.18.2024: This template is for .Net9.
 
 		Update 8.20.2023: I added some compiler warnings to ignore to the templates, and added the word static
 		to a method the ControllerCreator creates Create (Object Name) Parameter)

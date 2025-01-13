@@ -34,7 +34,7 @@ namespace DataTierClient.Builders
 
 		#region Constructor
 		/// <summary>
-        /// Create a new instance of ControllerManagerCreator
+        /// Create a new instance of a ControllerCreator object
         /// </summary>
         public ControllerCreator(List<DataTable> dataTablesArg, DataJuggler.Net.ReferencesSet objectReferencesArg, string rootControllerPathArg, string projectNameArg, string nameSpaceNameArg, ProjectFileManager fileManager, TargetFrameworkEnum targetFramework, Project selectedProject) : base(fileManager, false, false, targetFramework)
 		{   
@@ -75,10 +75,10 @@ namespace DataTierClient.Builders
                     // Created if they do not already exist. This
                     // Allows For Customizations at the Root of the
                     // Data Tier.
-                    if(!File.Exists(fileName))
+                    if (!File.Exists(fileName))
                     {
 						// Create Writer
-						CreateFile(fileName, DataManager.ProjectTypeEnum.ALC);
+						CreateFile(fileName, DataManager.ProjectTypeEnum.DAC);
 					
 						// Write References
 						WriteReferences(ObjectReferences);
@@ -87,7 +87,7 @@ namespace DataTierClient.Builders
 						WriteLine();
 	                    
 						// Write NameSpace
-						string nameSpace = "namespace " + this.NameSpaceName;
+						string nameSpace = "namespace " + NameSpaceName;
 						WriteLine(nameSpace);
 	                    
 						// Write Open Brack
@@ -117,17 +117,8 @@ namespace DataTierClient.Builders
 						// Write Blank Line
 						WriteLine();
 	                    
-						// Write The Private Variables Region
-						WritePrivateVariables();
-
-						// Write Constructor
-						WriteConstructor(dataTable);
-	                    
 						// Write Methods
 						WriteMethods(dataTable);
-	                    
-						// Write Properties
-						WriteProperties();
 	                    
 						// Write Close Bracket
 						WriteCloseBracket(true);
@@ -142,13 +133,13 @@ namespace DataTierClient.Builders
 						WriteCloseBracket(true);
 	                    
 						// Close This File
-						this.Writer.Close();
+						Writer.Close();
 						
 						// if file name is not null 
-						if(!String.IsNullOrEmpty(fileName))
+						if (!String.IsNullOrEmpty(fileName))
 						{
 							// if file exists on hard drive
-							if(File.Exists(fileName))
+							if (File.Exists(fileName))
 							{
 								// set created to true
 								created = true;
@@ -177,7 +168,7 @@ namespace DataTierClient.Builders
                 if (dataTables != null)
                 {
                     // loop through data tables collection
-                    foreach (DataTable dataTable in this.DataTables)
+                    foreach (DataTable dataTable in dataTables)
                     {
                         // Create Controller
                         CreateController(dataTable);
@@ -195,10 +186,10 @@ namespace DataTierClient.Builders
             private string CreateFileName(DataTable dataTable)
             {
                 // Create StringBuilder
-                StringBuilder sb = new StringBuilder(this.RootControllerPath);
+                StringBuilder sb = new StringBuilder(RootControllerPath);
 
                 // Append Backslash if need
-                if(!this.RootControllerPath.EndsWith(@"\"))
+                if (!RootControllerPath.EndsWith(@"\"))
                 {
                     // Append Backslash
                     sb.Append(@"\");
@@ -267,50 +258,6 @@ namespace DataTierClient.Builders
             }
             #endregion
 
-            #region WriteConstructor(DataTable dataTable)
-            /// <summary>
-            /// This method writes the constructor for this object.
-            /// </summary>
-            /// <param name="dataTable"></param>
-            private void WriteConstructor(DataTable dataTable)
-            {
-                // Begin Region Static Methods
-                BeginRegion("Constructor");
-                
-                // Write Constructor Summary
-                WriteLine("/// <summary>");
-                WriteLine("/// Creates a new '" + dataTable.ClassName + "Controller' object.");
-                WriteLine("/// </summary>");
-                
-                // Get Constructor Line
-                string constructorLine = "public " + dataTable.ClassName + "Controller(ErrorHandler errorProcessorArg, ApplicationController appControllerArg)";
-                
-                // Write constructorLine Line
-                WriteLine(constructorLine);
-
-                // Write Open Bracket
-                WriteOpenBracket(true);
-                
-                // Write Comment SaveArguments
-                WriteComment("Save Arguments");
-
-                // Save Argument For ErrorProcessor
-                WriteLine("this.ErrorProcessor = errorProcessorArg;");
-                
-                // Save Argument For DataManager
-                WriteLine("this.AppController = appControllerArg;");
-                
-                // Write Close Bracket
-                WriteCloseBracket(true);
-                
-                // Write endregion
-                EndRegion();;
-                
-                // Write Blank Line
-                WriteLine();
-            }
-            #endregion
-
             #region WriteCreateObjectParameter(DataTable dataTable)
             /// <summary>
             /// This method writes the Create<ClassName>Method
@@ -333,7 +280,7 @@ namespace DataTierClient.Builders
                 WriteLine("/// <returns>A List<PolymorphicObject> collection.</returns>");
                 
                 // get method line
-                string methodLine = "private static List<PolymorphicObject> Create" + dataTable.ClassName + "Parameter(" + dataTable.ClassName + " " + this.CapitalizeFirstChar(dataTable.ClassName, true) + ")";
+                string methodLine = "private static List<PolymorphicObject> Create" + dataTable.ClassName + "Parameter(" + dataTable.ClassName + " " + CapitalizeFirstChar(dataTable.ClassName, true) + ")";
                 
                 // Write method line
                 WriteLine(methodLine);
@@ -366,7 +313,7 @@ namespace DataTierClient.Builders
                 WriteComment("Set parameter.ObjectValue");
                 
                 // Write parameter.ObjectValue = <ClassName>;
-                string parameterValue = "parameter.ObjectValue = " + this.CapitalizeFirstChar(dataTable.ClassName, true) + ";";
+                string parameterValue = "parameter.ObjectValue = " + CapitalizeFirstChar(dataTable.ClassName, true) + ";";
                 
                 // Write parameterValue
                 WriteLine(parameterValue);
@@ -414,12 +361,12 @@ namespace DataTierClient.Builders
                 string parameterName = "temp" + dataType;
 
                 // BeginRegion  #region Delete(<DataType> dataType>
-                BeginRegion("Delete(" + dataType + " " + parameterName + ")");
+                BeginRegion("Delete(" + dataType + " " + parameterName + ", DataManager dataManager = null)");
 
                 // Write Summary
                 WriteLine("/// <summary>");
                 WriteLine("/// Deletes a '" + dataTable.ClassName + "' from the database");
-                WriteLine("/// This method calls the DataBridgeManager to execute the delete using the");
+                WriteLine("/// This method calls the DataBridgeManager to execute the delete");
 
                 // set the query
                 string query = "procedure";
@@ -433,7 +380,7 @@ namespace DataTierClient.Builders
                 WriteLine("/// <returns>True if the delete is successful or false if not.</returns>");
                 
                 // Get classDeclaration
-                string classDeclaration = "public bool Delete(" + dataType + " " + parameterName + ")";
+                string classDeclaration = "public static bool Delete(" + dataType + " " + parameterName + ", DataManager dataManager = null)";
 
                 // Write classDeclaration
                 WriteLine(classDeclaration);
@@ -475,10 +422,10 @@ namespace DataTierClient.Builders
                 WriteOpenBracket(true);
                 
                 // Write Comment verify object exists before attemptintg to delete 
-                WriteComment("verify temp" + this.CapitalizeFirstChar(dataType, true) + " exists before attemptintg to delete");
+                WriteComment("verify temp" + CapitalizeFirstChar(dataType, true) + " exists before attemptintg to delete");
 
                 // Write Line if parameterName != null)
-                WriteLine("if(" + parameterName + " != null)");
+                WriteLine("if (" + parameterName + " != null)");
 
                 // Write Open Bracket
                 WriteOpenBracket(true);
@@ -487,7 +434,7 @@ namespace DataTierClient.Builders
                 WriteComment("Create Delegate For DataOperation");
 
                 // get line for delegate
-                string delegateLine = "ApplicationController.DataOperationMethod " + methodName + " = this.AppController.DataBridge.DataOperations." + dataTable.ClassName + "Methods.Delete" + dataTable.ClassName + ";";
+                string delegateLine = "ApplicationController.DataOperationMethod " + methodName + " = " + dataTable.ClassName + "Methods.Delete" + dataTable.ClassName + ";";
 
                 // Write delegateLine
                 WriteLine(delegateLine);
@@ -511,7 +458,7 @@ namespace DataTierClient.Builders
                 WriteComment("Perform DataOperation");
 
                 // get performDataOperationLine
-                string performDataOperationLine = "PolymorphicObject returnObject = this.AppController.DataBridge.PerformDataOperation(methodName, objectName, " + methodName + ", parameters);";
+                string performDataOperationLine = "PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, " + methodName + ", parameters, dataManager);";
 
                 // Write performDataOperationLine
                 WriteLine(performDataOperationLine);
@@ -558,26 +505,14 @@ namespace DataTierClient.Builders
                 // Write catch (Exception error)
                 WriteLine("catch (Exception error)");
 
-                // Write Open Bracket
+                 // Write Open Bracket
                 WriteOpenBracket(true);
 
-                // Write Comment  If ErrorProcessor exists
-                WriteComment("If ErrorProcessor exists");
+                // Write Line To Log The Error
+                WriteComment("Log the error");
 
-                // Write line to verify error processor exists
-                WriteLine("if (this.ErrorProcessor != null)");
-
-                // Write Open Bracket
-                WriteOpenBracket(true);
-
-                // Write Line To Log The Current Error
-                WriteComment("Log the current error");
-
-                // Write Line this.ErrorProcessor.LogError(methodName, objectName, error);
-                WriteLine("this.ErrorProcessor.LogError(methodName, objectName, error);");
-                
-                // Write Close Bracket
-                WriteCloseBracket(true);
+                // Write Line tErrorHandler.LogError(methodName, objectName, error);
+                WriteLine("ErrorHandler.LogError(methodName, objectName, error);");
 
                 // Write Close Bracket
                 WriteCloseBracket(true);
@@ -614,7 +549,7 @@ namespace DataTierClient.Builders
                 {
                     // Business Objects
                     string dataType = dataTable.ClassName;
-                    string objectName = this.CapitalizeFirstChar(dataType, true);
+                    string objectName = CapitalizeFirstChar(dataType, true);
                     string collectionDataType = "List<" + dataType + ">";
                     string variableName = dataType + "List";
                     string collectionObjectName = CapitalizeFirstChar(variableName, true);
@@ -624,7 +559,7 @@ namespace DataTierClient.Builders
                     string delegateMethodName = "fetchAllMethod";
                 
                     // BeginRegion  FetchAll
-                    BeginRegion("FetchAll(" + dataType + " " + parameterName + ")");
+                    BeginRegion("FetchAll(" + dataType + " " + parameterName + ", DataManager dataManager = null)");
                 
                     // set to procedure
                     string query = "procedure";
@@ -640,7 +575,7 @@ namespace DataTierClient.Builders
                     WriteLine("/// <returns>A collection of '" + dataType + "' objects.</returns>");
                 
                     // Get classDeclaration
-                    string classDeclaration = "public " + collectionDataType + " FetchAll(" + dataType + " " + parameterName + ")";
+                    string classDeclaration = "public static " + collectionDataType + " FetchAll(" + dataType + " " + parameterName + ", DataManager dataManager = null)";
 
                     // Write classDeclaration
                     WriteLine(classDeclaration);
@@ -688,7 +623,7 @@ namespace DataTierClient.Builders
                     WriteComment("Create DataOperation Method");
                 
                     // get line for delegate
-                    string delegateLine = "ApplicationController.DataOperationMethod " + delegateMethodName + " = this.AppController.DataBridge.DataOperations." + dataTable.ClassName + "Methods.FetchAll;";
+                    string delegateLine = "ApplicationController.DataOperationMethod " + delegateMethodName + " = " + dataTable.ClassName + "Methods.FetchAll;";
 
                     // Write delegateLine
                     WriteLine(delegateLine);
@@ -712,7 +647,7 @@ namespace DataTierClient.Builders
                     WriteComment("Perform DataOperation");
 
                     // get performDataOperationLine
-                    string performDataOperationLine = "PolymorphicObject returnObject = this.AppController.DataBridge.PerformDataOperation(methodName, objectName, fetchAllMethod , parameters);";
+                    string performDataOperationLine = "PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, fetchAllMethod , parameters, dataManager);";
 
                     // Write performDataOperationLine
                     WriteLine(performDataOperationLine);
@@ -747,23 +682,11 @@ namespace DataTierClient.Builders
                     // Write Open Bracket
                     WriteOpenBracket(true);
 
-                    // Write Comment  If ErrorProcessor exists
-                    WriteComment("If ErrorProcessor exists");
+                    // Write Line To Log The Error
+                    WriteComment("Log the error");
 
-                    // Write line to verify error processor exists
-                    WriteLine("if (this.ErrorProcessor != null)");
-
-                    // Write Open Bracket
-                    WriteOpenBracket(true);
-
-                    // Write Line To Log The Current Error
-                    WriteComment("Log the current error");
-
-                    // Write Line this.ErrorProcessor.LogError(methodName, objectName, error);
-                    WriteLine("this.ErrorProcessor.LogError(methodName, objectName, error);");
-
-                    // Write Close Bracket
-                    WriteCloseBracket(true);
+                    // Write Line ErrorHandler.LogError(methodName, objectName, error);
+                    WriteLine("ErrorHandler.LogError(methodName, objectName, error);");
 
                     // Write Close Bracket
                     WriteCloseBracket(true);
@@ -798,12 +721,12 @@ namespace DataTierClient.Builders
             {
                 // locals
                 string dataType = dataTable.ClassName;
-                string returnObjectName = this.CapitalizeFirstChar(dataType, true);
+                string returnObjectName = CapitalizeFirstChar(dataType, true);
                 string parameterName = "temp" + dataType;
                 string delegateMethodName = "findMethod";
                 
                 // BeginRegion  #region Find(
-                BeginRegion("Find(" + dataType + " temp" + dataType + ")");
+                BeginRegion("Find(" + dataType + " temp" + dataType + ", DataManager dataManager = null)");
 
                 // Write Summary
                 WriteLine("/// <summary>");
@@ -819,7 +742,7 @@ namespace DataTierClient.Builders
                 WriteLine("/// <returns>A '" + dataType + "' object if found else a null '" + dataType + "'.</returns>");
 
                 // Get classDeclaration
-                string classDeclaration = "public " + dataType + " Find(" + dataType + " " + parameterName + ")";
+                string classDeclaration = "public static " + dataType + " Find(" + dataType + " " + parameterName + ", DataManager dataManager = null)";
 
                 // Write classDeclaration
                 WriteLine(classDeclaration);
@@ -867,7 +790,7 @@ namespace DataTierClient.Builders
                 WriteComment("If object exists");
 
                 // Write Line if paramObject != null)
-                WriteLine("if(" + parameterName + " != null)");
+                WriteLine("if (" + parameterName + " != null)");
 
                 // Write Open Bracket
                 WriteOpenBracket(true);
@@ -876,7 +799,7 @@ namespace DataTierClient.Builders
                 WriteComment("Create DataOperation");
                 
                 // get line for delegate
-                string delegateLine = "ApplicationController.DataOperationMethod " + delegateMethodName + " = this.AppController.DataBridge.DataOperations." + dataTable.ClassName + "Methods.Find" + dataTable.ClassName + ";";
+                string delegateLine = "ApplicationController.DataOperationMethod " + delegateMethodName + " = " + dataTable.ClassName + "Methods.Find" + dataTable.ClassName + ";";
 
                 // Write delegateLine
                 WriteLine(delegateLine);
@@ -900,7 +823,7 @@ namespace DataTierClient.Builders
                 WriteComment("Perform DataOperation");
 
                 // get performDataOperationLine
-                string performDataOperationLine = "PolymorphicObject returnObject = this.AppController.DataBridge.PerformDataOperation(methodName, objectName, findMethod , parameters);";
+                string performDataOperationLine = "PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, findMethod , parameters, dataManager);";
 
                 // Write performDataOperationLine
                 WriteLine(performDataOperationLine);
@@ -940,24 +863,12 @@ namespace DataTierClient.Builders
 
                 // Write Open Bracket
                 WriteOpenBracket(true);
+ 
+                // Write Line To Log The Error
+                WriteComment("Log the error");
 
-                // Write Comment  If ErrorProcessor exists
-                WriteComment("If ErrorProcessor exists");
-
-                // Write line to verify error processor exists
-                WriteLine("if (this.ErrorProcessor != null)");
-
-                // Write Open Bracket
-                WriteOpenBracket(true);
-
-                // Write Line To Log The Current Error
-                WriteComment("Log the current error");
-
-                // Write Line this.ErrorProcessor.LogError(methodName, objectName, error);
-                WriteLine("this.ErrorProcessor.LogError(methodName, objectName, error);");
-
-                // Write Close Bracket
-                WriteCloseBracket(true);
+                // Write Line ErrorHandler.LogError(methodName, objectName, error);
+                WriteLine("ErrorHandler.LogError(methodName, objectName, error);");
 
                 // Write Close Bracket
                 WriteCloseBracket(true);
@@ -993,10 +904,10 @@ namespace DataTierClient.Builders
                 string dataType = dataTable.ClassName;
                 string returnObjectName = "newIdentity";
                 string delegateMethodName = "insertMethod";
-                string parameterName = this.CapitalizeFirstChar(dataType, true);
+                string parameterName = CapitalizeFirstChar(dataType, true);
 
                 // BeginRegion  #region Find(
-                BeginRegion("Insert(" + dataType + " " + parameterName + ")");
+                BeginRegion("Insert(" + dataType + " " + parameterName + ", DataManager dataManager = null)");
 
                 // Write Summary
                 WriteLine("/// <summary>");
@@ -1015,7 +926,7 @@ namespace DataTierClient.Builders
                 WriteLine("/// <returns>The id (int) of the new  '" + dataType + "' object that was inserted.</returns>");
 
                 // Get classDeclaration
-                string classDeclaration = "public int Insert(" + dataType + " " + parameterName + ")";
+                string classDeclaration = "public static int Insert(" + dataType + " " + parameterName + ", DataManager dataManager = null)";
 
                 // Write classDeclaration
                 WriteLine(classDeclaration);
@@ -1063,13 +974,13 @@ namespace DataTierClient.Builders
                 WriteComment("If " + dataType + "exists");
 
                 // Write Line if Object != null)
-                WriteLine("if(" + this.CapitalizeFirstChar(dataType, true) + " != null)");
+                WriteLine("if (" + CapitalizeFirstChar(dataType, true) + " != null)");
 
                 // Write Open Bracket
                 WriteOpenBracket(true);
                 
                 // get line for delegate
-                string delegateLine = "ApplicationController.DataOperationMethod " + delegateMethodName + " = this.AppController.DataBridge.DataOperations." + dataTable.ClassName + "Methods.Insert" + dataTable.ClassName + ";";
+                string delegateLine = "ApplicationController.DataOperationMethod " + delegateMethodName + " = " + dataTable.ClassName + "Methods.Insert" + dataTable.ClassName + ";";
 
                 // Write delegateLine
                 WriteLine(delegateLine);
@@ -1081,7 +992,7 @@ namespace DataTierClient.Builders
                 WriteComment("Create parameters for this method");
 
                 // get line to create parameters
-                string createParameterLine = "List<PolymorphicObject> parameters = Create" + dataTable.ClassName + "Parameter(" + this.CapitalizeFirstChar(dataType, true) + ");";
+                string createParameterLine = "List<PolymorphicObject> parameters = Create" + dataTable.ClassName + "Parameter(" + CapitalizeFirstChar(dataType, true) + ");";
 
                 // Write createParameterLine
                 WriteLine(createParameterLine);
@@ -1093,7 +1004,7 @@ namespace DataTierClient.Builders
                 WriteComment("Perform DataOperation");
 
                 // get performDataOperationLine
-                string performDataOperationLine = "PolymorphicObject returnObject = this.AppController.DataBridge.PerformDataOperation(methodName, objectName, insertMethod , parameters);";
+                string performDataOperationLine = "PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, insertMethod , parameters, dataManager);";
 
                 // Write performDataOperationLine
                 WriteLine(performDataOperationLine);
@@ -1134,23 +1045,11 @@ namespace DataTierClient.Builders
                 // Write Open Bracket
                 WriteOpenBracket(true);
 
-                // Write Comment  If ErrorProcessor exists
-                WriteComment("If ErrorProcessor exists");
+                // Write Line To Log The Error
+                WriteComment("Log the error");
 
-                // Write line to verify error processor exists
-                WriteLine("if (this.ErrorProcessor != null)");
-
-                // Write Open Bracket
-                WriteOpenBracket(true);
-
-                // Write Line To Log The Current Error
-                WriteComment("Log the current error");
-
-                // Write Line this.ErrorProcessor.LogError(methodName, objectName, error);
-                WriteLine("this.ErrorProcessor.LogError(methodName, objectName, error);");
-
-                // Write Close Bracket
-                WriteCloseBracket(true);
+                // Write Line ErrorHandler.LogError(methodName, objectName, error);
+                WriteLine("ErrorHandler.LogError(methodName, objectName, error);");
 
                 // Write Close Bracket
                 WriteCloseBracket(true);
@@ -1186,7 +1085,7 @@ namespace DataTierClient.Builders
                 string dataType = dataTable.ClassName;
                 string returnObjectName = "inserted";
                 string delegateMethodName = "insertMethod";
-                string parameterName = this.CapitalizeFirstChar(dataType, true);
+                string parameterName = CapitalizeFirstChar(dataType, true);
 
                 // BeginRegion  #region Find(
                 BeginRegion("Insert(" + dataType + " " + parameterName + ")");
@@ -1256,13 +1155,13 @@ namespace DataTierClient.Builders
                 WriteComment("If " + dataType + "exists");
 
                 // Write Line if Object != null)
-                WriteLine("if(" + this.CapitalizeFirstChar(dataType, true) + " != null)");
+                WriteLine("if (" + CapitalizeFirstChar(dataType, true) + " != null)");
 
                 // Write Open Bracket
                 WriteOpenBracket(true);
                 
                 // get line for delegate
-                string delegateLine = "ApplicationController.DataOperationMethod " + delegateMethodName + " = this.AppController.DataBridge.DataOperations." + dataTable.ClassName + "Methods.Insert" + dataTable.ClassName + ";";
+                string delegateLine = "ApplicationController.DataOperationMethod " + delegateMethodName + " = " + dataTable.ClassName + "Methods.Insert" + dataTable.ClassName + ";";
 
                 // Write delegateLine
                 WriteLine(delegateLine);
@@ -1274,7 +1173,7 @@ namespace DataTierClient.Builders
                 WriteComment("Create parameters for this method");
 
                 // get line to create parameters
-                string createParameterLine = "List<PolymorphicObject> parameters = Create" + dataTable.ClassName + "Parameter(" + this.CapitalizeFirstChar(dataType, true) + ");";
+                string createParameterLine = "List<PolymorphicObject> parameters = Create" + dataTable.ClassName + "Parameter(" + CapitalizeFirstChar(dataType, true) + ");";
 
                 // Write createParameterLine
                 WriteLine(createParameterLine);
@@ -1286,7 +1185,7 @@ namespace DataTierClient.Builders
                 WriteComment("Perform DataOperation");
 
                 // get performDataOperationLine
-                string performDataOperationLine = "PolymorphicObject returnObject = this.AppController.DataBridge.PerformDataOperation(methodName, objectName, insertMethod , parameters);";
+                string performDataOperationLine = "PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, insertMethod , parameters);";
 
                 // Write performDataOperationLine
                 WriteLine(performDataOperationLine);
@@ -1312,29 +1211,20 @@ namespace DataTierClient.Builders
                 // Write Open Bracket
                 WriteOpenBracket(true);
 
-                // Write Comment  If ErrorProcessor exists
-                WriteComment("If ErrorProcessor exists");
-
-                // Write line to verify error processor exists
-                WriteLine("if (this.ErrorProcessor != null)");
-
-                // Write Open Bracket
-                WriteOpenBracket(true);
-
                 // Set to false
                 WriteComment("Set inserted to false");
 
                 // Write the returnObjectName
                 WriteLine(returnObjectName + " = false;");
 
+                // Write blank line
+                WriteLine();
+
                 // Write Line To Log The Current Error
                 WriteComment("Log the current error");
 
-                // Write Line this.ErrorProcessor.LogError(methodName, objectName, error);
-                WriteLine("this.ErrorProcessor.LogError(methodName, objectName, error);");
-
-                // Write Close Bracket
-                WriteCloseBracket(true);
+                // Write Line ErrorHandler.LogError(methodName, objectName, error);
+                WriteLine("ErrorHandler.LogError(methodName, objectName, error);");
 
                 // Write Close Bracket
                 WriteCloseBracket(true);
@@ -1366,7 +1256,7 @@ namespace DataTierClient.Builders
             private void WriteMethods(DataTable dataTable)
             {
                 // If datatable exists
-                if(dataTable != null)
+                if (dataTable != null)
                 {
                     // Begin Region For Methods
                     BeginRegion("Methods");
@@ -1435,105 +1325,6 @@ namespace DataTierClient.Builders
             }
             #endregion
 
-            #region WritePrivateVariables()
-            /// <summary>
-            /// This method writes the private variables for a 
-            /// ControllerManager.
-            /// </summary>
-            private void WritePrivateVariables()
-            {
-                // Begin Region Static Methods
-                BeginRegion("Private Variables");
-
-                // Write ErrorProcessor and ParentController
-                WriteLine("private ErrorHandler errorProcessor;");
-                WriteLine("private ApplicationController appController;");
-                
-                // Write line
-                EndRegion();;
-                
-                // Write Blank Line
-                WriteLine();
-            }
-            #endregion
-
-            #region WriteProperty()
-            /// <summary>
-            /// This method writes a property for the
-            /// property name, variable name, and datatype 
-            /// given.
-            /// </summary>
-            private void WriteProperty(string propertyName, string variableName, string dataType)
-            {
-                // Write Blank Line
-                WriteLine();
-                
-                // Begin Region
-                BeginRegion(propertyName);
-                
-                // get property line
-                string propertyLine = "public " + dataType + " " + propertyName;
-                
-                // Write Property Line
-                WriteLine(propertyLine);
-                
-                // Write Open Bracket
-                WriteOpenBracket(true);
-                
-                // creaete the get for the property
-                string getProperty = "get { return " + variableName + "; }";
-                
-                // Write getProperty
-                WriteLine(getProperty);
-                
-                // Create the setter for this property
-                string setProperty = "set { " + variableName + " = value; }";
-                
-                // Write setProperty
-                WriteLine(setProperty);
-                
-                // Write Close Bracket
-                WriteCloseBracket(true);
-                
-                // Write end region
-                EndRegion();
-            }
-            #endregion
-
-            #region WriteProperties()
-            /// <summary>
-            /// This method writes the properties for each
-            /// DataController and the ErrorProcessor and
-            /// DataManager objects.
-            /// </summary>
-            private void WriteProperties()
-            {
-                // Write Region For Properties
-                BeginRegion("Properties");
-                
-                // Increase Indent
-                Indent++;
-                
-                // Write Property For AppController
-                WriteProperty("AppController", "appController", "ApplicationController");
-                
-                // Write Property For ErrorProcessor
-                WriteProperty("ErrorProcessor", "errorProcessor", "ErrorHandler");
-                
-                // Write Blank Line After last Property
-                WriteLine();
-                
-                // Decrease Indent
-                Indent--;
-                
-                // End Properties Region
-                EndRegion();
-
-                // Write Blank Line After Properties Region
-                WriteLine();
-            }
-            #endregion
-
             #region WriteSaveMethod(DataTable dataTable)
             /// <summary>
             /// This method writes the Save Method
@@ -1544,10 +1335,10 @@ namespace DataTierClient.Builders
                 // locals
                 string dataType = dataTable.ClassName;
                 string returnObjectName = "saved";
-                string parameterName = this.CapitalizeFirstChar(dataType, true);
+                string parameterName = CapitalizeFirstChar(dataType, true);
 
                 // BeginRegion  #region Find(
-                BeginRegion("Save(ref " + dataType + " " + parameterName + ")");
+                BeginRegion("Save(ref " + dataType + " " + parameterName + ", DataManager dataManager = null)");
 
                 // Write Summary
                 WriteLine("/// <summary>");
@@ -1559,7 +1350,7 @@ namespace DataTierClient.Builders
                 WriteLine("/// <returns>True if successful or false if not.</returns>");
                 
                 // Get classDeclaration
-                string classDeclaration = "public bool Save(ref " + dataType + " " + parameterName + ")";
+                string classDeclaration = "public static bool Save(ref " + dataType + " " + parameterName + ", DataManager dataManager = null)";
 
                 // Write classDeclaration
                 WriteLine(classDeclaration);
@@ -1583,7 +1374,7 @@ namespace DataTierClient.Builders
                 WriteComment("If the " + parameterName + " exists.");
 
                 // Write Line if exists
-                WriteLine("if(" + parameterName + " != null)");
+                WriteLine("if (" + parameterName + " != null)");
 
                 // Write Open Bracket
                 WriteOpenBracket(true);
@@ -1595,7 +1386,7 @@ namespace DataTierClient.Builders
                     WriteComment("Is this a new " + dataType);
 
                     // Write Line
-                    WriteLine("if(" + parameterName + ".IsNew)");
+                    WriteLine("if (" + parameterName + ".IsNew)");
 
                     // Write Open Bracket
                     WriteOpenBracket(true);
@@ -1604,7 +1395,7 @@ namespace DataTierClient.Builders
                     WriteComment("Insert new " + dataType);
 
                     // Write line to insert new record
-                    WriteLine("int newIdentity = this.Insert(" + parameterName + ");");
+                    WriteLine("int newIdentity = Insert(" + parameterName + ", dataManager);");
 
                     // Write Blank Line
                     WriteLine();
@@ -1613,7 +1404,7 @@ namespace DataTierClient.Builders
                     WriteComment("if insert was successful");
                 
                     // Write line if newIdentiy > 0
-                    WriteLine("if(newIdentity > 0)");
+                    WriteLine("if (newIdentity > 0)");
                 
                     // Write Open Bracket {
                     WriteOpenBracket(true);
@@ -1649,7 +1440,7 @@ namespace DataTierClient.Builders
                     WriteComment("Update " + dataType);
 
                     // Write line to insert new record
-                    WriteLine(returnObjectName + " = this.Update(" + parameterName + ");");
+                    WriteLine(returnObjectName + " = Update(" + parameterName + ", dataManager);");
 
                     // Write }
                     WriteCloseBracket(true);
@@ -1669,7 +1460,7 @@ namespace DataTierClient.Builders
                     string tempObjectName = "temp" + dataTable.Name;
 
                     // Write the line to look up the temp object
-                    WriteLine(dataTable.Name + " " + tempObjectName + " = this.Find(" + parameterName + ");");
+                    WriteLine(dataTable.Name + " " + tempObjectName + " = Find(" + parameterName + ");");
 
                     // write a blank line
                     WriteLine();
@@ -1696,7 +1487,7 @@ namespace DataTierClient.Builders
                     WriteComment("Perform the insert");
 
                     // now perform the insert
-                    WriteLine("saved = this.Insert(" + parameterName + ");");
+                    WriteLine("saved = Insert(" + parameterName + ");");
 
                     // Write a close bracket
                     WriteCloseBracket(true);
@@ -1711,7 +1502,7 @@ namespace DataTierClient.Builders
                     WriteComment("Perform the update");
 
                     // now perform the insert
-                    WriteLine("saved = this.Update(" + parameterName + ");");
+                    WriteLine("saved = Update(" + parameterName + ");");
 
                     // Write a close bracket
                     WriteCloseBracket(true);
@@ -1754,10 +1545,10 @@ namespace DataTierClient.Builders
                 string dataType = dataTable.ClassName;
                 string returnObjectName = "saved";
                 string delegateMethodName = "updateMethod";
-                string parameterName = this.CapitalizeFirstChar(dataType, true);
+                string parameterName = CapitalizeFirstChar(dataType, true);
 
                 // BeginRegion  #region Find(
-                BeginRegion("Update(" + dataType + " " + parameterName + ")");
+                BeginRegion("Update(" + dataType + " " + parameterName + ", DataManager dataManager = null)");
 
                 // Write Summary
                 WriteLine("/// <summary>");
@@ -1776,7 +1567,7 @@ namespace DataTierClient.Builders
                 WriteLine("/// <returns>True if successful else false if not.</returns>");
 
                 // Get classDeclaration
-                string classDeclaration = "public bool Update(" + dataType + " " + this.CapitalizeFirstChar(dataType, true) + ")";
+                string classDeclaration = "public static bool Update(" + dataType + " " + CapitalizeFirstChar(dataType, true) + ", DataManager dataManager = null)";
 
                 // Write classDeclaration
                 WriteLine(classDeclaration);
@@ -1821,7 +1612,7 @@ namespace DataTierClient.Builders
                 WriteOpenBracket(true);
 
                 // Write Line if object != null)
-                WriteLine("if(" + parameterName + " != null)");
+                WriteLine("if (" + parameterName + " != null)");
 
                 // Write Open Bracket
                 WriteOpenBracket(true);
@@ -1830,7 +1621,7 @@ namespace DataTierClient.Builders
                 WriteComment("Create Delegate");
                 
                 // get line for delegate
-                string delegateLine = "ApplicationController.DataOperationMethod " + delegateMethodName + " = this.AppController.DataBridge.DataOperations." + dataTable.ClassName + "Methods.Update" + dataTable.ClassName + ";";
+                string delegateLine = "ApplicationController.DataOperationMethod " + delegateMethodName + " = " + dataTable.ClassName + "Methods.Update" + dataTable.ClassName + ";";
 
                 // Write delegateLine
                 WriteLine(delegateLine);
@@ -1842,7 +1633,7 @@ namespace DataTierClient.Builders
                 WriteComment("Create parameters for this method");
 
                 // get line to create parameters
-                string createParameterLine = "List<PolymorphicObject> parameters = Create" + dataTable.ClassName + "Parameter(" + this.CapitalizeFirstChar(dataType, true) + ");";
+                string createParameterLine = "List<PolymorphicObject> parameters = Create" + dataTable.ClassName + "Parameter(" + CapitalizeFirstChar(dataType, true) + ");";
 
                 // Write createParameterLine
                 WriteLine(createParameterLine);
@@ -1851,7 +1642,7 @@ namespace DataTierClient.Builders
                 WriteComment("Perform DataOperation");
 
                 // get performDataOperationLine
-                string performDataOperationLine = "PolymorphicObject returnObject = this.AppController.DataBridge.PerformDataOperation(methodName, objectName, updateMethod , parameters);";
+                string performDataOperationLine = "PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, updateMethod , parameters, dataManager);";
 
                 // Write performDataOperationLine
                 WriteLine(performDataOperationLine);
@@ -1886,26 +1677,14 @@ namespace DataTierClient.Builders
                 // Write catch (Exception error)
                 WriteLine("catch (Exception error)");
 
-                // Write Open Bracket
+                 // Write Open Bracket
                 WriteOpenBracket(true);
 
-                // Write Comment  If ErrorProcessor exists
-                WriteComment("If ErrorProcessor exists");
+                // Write Line To Log The Error
+                WriteComment("Log the error");
 
-                // Write line to verify error processor exists
-                WriteLine("if (this.ErrorProcessor != null)");
-
-                // Write Open Bracket
-                WriteOpenBracket(true);
-
-                // Write Line To Log The Current Error
-                WriteComment("Log the current error");
-
-                // Write Line this.ErrorProcessor.LogError(methodName, objectName, error);
-                WriteLine("this.ErrorProcessor.LogError(methodName, objectName, error);");
-
-                // Write Close Bracket
-                WriteCloseBracket(true);
+                // Write Line ErrorHandler.LogError(methodName, objectName, error);"
+                WriteLine("ErrorHandler.LogError(methodName, objectName, error);");
 
                 // Write Close Bracket
                 WriteCloseBracket(true);

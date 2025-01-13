@@ -6,9 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using DataAccessComponent.Controllers;
+using DataAccessComponent.Data;
 using DataAccessComponent.DataBridge;
 using DataAccessComponent.DataOperations;
-using DataAccessComponent.Logging;
 using DataAccessComponent.Exceptions;
 
 #endregion
@@ -26,30 +26,26 @@ namespace DataAccessComponent.Controllers
 
         #region Private Variables
         private DataBridgeManager dataBridge;
-        private ErrorHandler errorProcessor;
         #endregion
 
         #region Constructor
         /// <summary>
         /// Creates a new instance of a SystemController
         /// </summary>
-        public SystemController(DataBridgeManager dataBridgeArg, ErrorHandler errorProcessorArg)
+        public SystemController(DataBridgeManager dataBridgeArg)
         {
             // set DataBridgeManager
             this.DataBridge = dataBridgeArg;
-
-            // Set Error Handler
-            this.ErrorProcessor = errorProcessorArg;
         }
         #endregion
 
         #region Methods
 
-        #region TestDatabaseConnection()
+        #region TestDatabaseConnection(DataManager dataManager = null
         /// <summary>
         /// Tests the connection to the database
         /// </summary>
-        internal bool TestDatabaseConnection()
+        internal static bool TestDatabaseConnection(DataManager dataManager = null)
         {
             // initial value
             bool connected = false;
@@ -67,7 +63,7 @@ namespace DataAccessComponent.Controllers
                 List<PolymorphicObject> parameters = null;
 
                 // Perform DataOperation
-                PolymorphicObject connectedObject = this.DataBridge.PerformDataOperation(methodName, objectName, testDataConnection, parameters);
+                PolymorphicObject connectedObject = DataBridgeManager.PerformDataOperation(methodName, objectName, testDataConnection, parameters, dataManager);
 
                 // If method returned "true" value.
                 if (connectedObject.Boolean.Value == NullableBooleanEnum.True)
@@ -77,16 +73,7 @@ namespace DataAccessComponent.Controllers
                 }
             }
             catch (Exception error)
-            {
-                // If ErrorProcessor exists
-                if (this.ErrorProcessor != null)
-                {
-                    // Create Error
-                    DataConnectionFailedException dataConnectionError = new DataConnectionFailedException(methodName, objectName, error);
-
-                    // Log the current error
-                    this.ErrorProcessor.LogError(methodName, objectName, dataConnectionError);
-                }
+            {  
 
             }
 
@@ -109,18 +96,6 @@ namespace DataAccessComponent.Controllers
             set { dataBridge = value; }
         }
         #endregion
-
-        #region ErrorProcessor
-        /// <summary>
-        /// This property handles how errors will be "logged"
-        /// within this application.
-        /// </summary>
-        public ErrorHandler ErrorProcessor
-        {
-            get { return errorProcessor; }
-            set { errorProcessor = value; }
-        }
-        #endregion\
 
         #endregion
 

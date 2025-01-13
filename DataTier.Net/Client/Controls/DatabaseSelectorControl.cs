@@ -43,10 +43,6 @@ namespace DataTierClient.Controls
         }
         #endregion
         
-        #region Events
-
-        #endregion
-        
         #region Methods
 
             #region CaptureSelectedDatabase()
@@ -146,6 +142,17 @@ namespace DataTierClient.Controls
             }
             #endregion
 
+            #region SetFocusToServerNameTextBox()
+            /// <summary>
+            /// Set Focus To Server Name Text Box
+            /// </summary>
+            public void SetFocusToServerNameTextBox()
+            {
+                // Set Focus
+                SqlDatabaseEditor.SetFocusToServerNameTextBox();
+            }
+            #endregion
+            
             #region Setup(Project selectedProjectArg, DTNDatabase databaseArg)
             /// <summary>
             /// This method prepares this control to be launched.
@@ -160,10 +167,10 @@ namespace DataTierClient.Controls
                 this.SelectedDatabase = databaseArg;
                 
                 // If this is not a new database (this is an edit)
-                if(!this.SelectedDatabase.IsNew)
+                if (!this.SelectedDatabase.IsNew)
                 {   
                     // if the form exists
-                    if(this.HasParentDatabaseSelectorForm)
+                    if (this.HasParentDatabaseSelectorForm)
                     {
                         // Change the text
                         this.ParentDatabaseSelectorForm.Text = "Edit Database";
@@ -260,11 +267,10 @@ namespace DataTierClient.Controls
                 get { return userCancelled; }
                 set { userCancelled = value; }
             }
-            #endregion
-        
+
         #endregion
 
-
+        #endregion
     }
     #endregion
     

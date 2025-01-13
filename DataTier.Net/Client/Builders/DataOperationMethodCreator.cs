@@ -31,7 +31,7 @@ namespace DataTierClient.Builders
 
 		#region Constructor
 		/// <summary>
-        /// Create a new instance of ControllerManagerCreator
+        /// Create a new instance of DataOperationMethodCreator
         /// </summary>
         public DataOperationMethodCreator(List<DataTable> dataTablesArg, ReferencesSet objectReferencesArg, string rootDataOperationsPathArg, string nameSpaceNameArg, ProjectFileManager fileManager, TargetFrameworkEnum targetFramework) : base(fileManager, false, false, targetFramework)
 		{   
@@ -70,7 +70,7 @@ namespace DataTierClient.Builders
                     if (!File.Exists(fileName))
                     {
                         // Create Writer
-                        CreateFile(fileName, DataManager.ProjectTypeEnum.ALC);
+                        CreateFile(fileName, DataManager.ProjectTypeEnum.DAC);
                         
                         // Write References
                         WriteReferences(this.ObjectReferences);
@@ -94,11 +94,11 @@ namespace DataTierClient.Builders
                         // Write Region for this reader
                         BeginRegion("class " + className);
 
-                        // Write Object Reader Summary
+                        // Write Summary
                         WriteClassSummary(dataTable);
                         
                         // get class line
-                        string classLine = "public class " + className;
+                        string classLine = "public static class " + className;
                         
                         // Write ClassLine
                         WriteLine(classLine);
@@ -109,17 +109,8 @@ namespace DataTierClient.Builders
                         // Write Blank Line
                         WriteLine();
                         
-                        // Write The Private Variables Region
-                        WritePrivateVariables();
-
-                        // Write Constructor
-                        WriteConstructor(dataTable);
-                        
                         // Write Methods
                         WriteMethods(dataTable);
-                        
-                        // Write Properties
-                        WriteProperties();
                         
                         // Write Close Bracket
                         WriteCloseBracket(true);
@@ -349,7 +340,7 @@ namespace DataTierClient.Builders
                 WriteLine("/// <returns>A PolymorphicObject object with a Boolean value.");
                 
                 // Get classDeclaration
-                string classDeclaration = "internal PolymorphicObject Delete" + dataTable.ClassName + "(List<PolymorphicObject> parameters, DataConnector dataConnector)";
+                string classDeclaration = "internal static PolymorphicObject Delete" + dataTable.ClassName + "(List<PolymorphicObject> parameters, DataConnector dataConnector)";
 
                 // Write classDeclaration
                 WriteLine(classDeclaration);
@@ -589,7 +580,7 @@ namespace DataTierClient.Builders
                 WriteLine("/// <returns>A PolymorphicObject object with all  '" + className + "' objects.");
                 
                 // Get classDeclaration
-                string classDeclaration = "internal PolymorphicObject FetchAll(List<PolymorphicObject> parameters, DataConnector dataConnector)";
+                string classDeclaration = "internal static PolymorphicObject FetchAll(List<PolymorphicObject> parameters, DataConnector dataConnector)";
 
                 // Write classDeclaration
                 WriteLine(classDeclaration);
@@ -808,7 +799,7 @@ namespace DataTierClient.Builders
                 WriteLine("/// <returns>A PolymorphicObject object with a Boolean value.");
 
                 // Get classDeclaration
-                string classDeclaration = "internal PolymorphicObject Find" + dataTable.ClassName + "(List<PolymorphicObject> parameters, DataConnector dataConnector)";
+                string classDeclaration = "internal static PolymorphicObject Find" + dataTable.ClassName + "(List<PolymorphicObject> parameters, DataConnector dataConnector)";
 
                 // Write classDeclaration
                 WriteLine(classDeclaration);
@@ -1030,7 +1021,7 @@ namespace DataTierClient.Builders
                 WriteLine("/// <returns>A PolymorphicObject object with a Boolean value.");
 
                 // Get classDeclaration
-                string classDeclaration = "internal PolymorphicObject Insert" + dataTable.ClassName + "(List<PolymorphicObject> parameters, DataConnector dataConnector)";
+                string classDeclaration = "internal static PolymorphicObject Insert" + dataTable.ClassName + "(List<PolymorphicObject> parameters, DataConnector dataConnector)";
 
                 // Write classDeclaration
                 WriteLine(classDeclaration);
@@ -1268,8 +1259,7 @@ namespace DataTierClient.Builders
 
             #region WritePrivateVariables()
             /// <summary>
-            /// This method writes the private variables for a 
-            /// ControllerManager.
+            /// This method writes the private variables for a Controller
             /// </summary>
             private void WritePrivateVariables()
             {
@@ -1385,7 +1375,7 @@ namespace DataTierClient.Builders
                 WriteLine("/// <returns>A PolymorphicObject object with a value.");
 
                 // Get classDeclaration
-                string classDeclaration = "internal PolymorphicObject Update" + dataTable.ClassName + "(List<PolymorphicObject> parameters, DataConnector dataConnector)";
+                string classDeclaration = "internal static PolymorphicObject Update" + dataTable.ClassName + "(List<PolymorphicObject> parameters, DataConnector dataConnector)";
 
                 // Write classDeclaration
                 WriteLine(classDeclaration);

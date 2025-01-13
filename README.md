@@ -1,3 +1,6 @@
+1.11.2025: This project now Targets .NET 9. There have also been many improvements in terms of memory consumption.
+I am in the process of removing the Controllers and the ControllerManager class, as this does have to be instantiated.
+
 5.18.2024: New Video
 
 First Ever Opensource Saturday - Sunday Edition

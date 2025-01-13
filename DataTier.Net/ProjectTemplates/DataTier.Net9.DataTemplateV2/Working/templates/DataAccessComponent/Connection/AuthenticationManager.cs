@@ -24,42 +24,29 @@ namespace DataAccessComponent.Connection
     public class AuthenticationManager
     {
 
-        #region Private Variables
-        private ErrorHandler errorProcessor;
-        private ApplicationController parentController;
-        #endregion
-
-        #region Constructor
-        /// <summary>
-        /// Creates a new instance of a AuthenticationManager
-        /// </summary>
-        public AuthenticationManager(ErrorHandler errorProcessorArg, ApplicationController parentControllerArg)
-        {
-            // Set Properties
-            this.ErrorProcessor = errorProcessorArg;
-            this.ParentController = parentControllerArg;
-
-            // Perform Initializations
-            Init();
-        }
-        #endregion
-
         #region Methods
 
-            #region ConnectToDatabase(DataManager dataManager)
+            #region ConnectToDatabase(DataManager dataManager = null)
             /// <summary>
             /// This method reads the app.config file to 
             /// load the current configuration.
             /// </summary>
             /// <returns></returns>
-            public void ConnectToDatabase(DataManager dataManager)
+            public static DataManager ConnectToDatabase(DataManager dataManager = null)
             {
                 // locals
                 string methodName = "ConnectToDatabase";
                 string objectName = "AuthenticationManager";
 
                 try
-                {   
+                {
+                    // if doesn't exist
+                    if (dataManager == null)
+                    {
+                        // Create a new DataManager
+                        dataManager = new DataManager();
+                    }
+
                     // If connection is not set 
                     if(String.IsNullOrEmpty(dataManager.DataConnector.ConnectionString))
                     {
@@ -67,7 +54,7 @@ namespace DataAccessComponent.Connection
                         if (TextHelper.Exists(dataManager.ConnectionName))
                         {
                             // Set the ConnectionString (requires DataJuggler.UltimateHelper version 7.1 or higher)
-                            dataManager.DataConnector.ConnectionString = EnvironmentVariableHelper.GetEnvironmentVariableValue(dataManager.ConnectionName, EnvironmentVariableTarget.User);
+                            dataManager.DataConnector.ConnectionString = EnvironmentVariableHelper.GetEnvironmentVariableValue(dataManager.ConnectionName, EnvironmentVariableTarget.Machine);
                         }
                     }
                     
@@ -85,53 +72,14 @@ namespace DataAccessComponent.Connection
                 }
                 catch (Exception error)
                 {
-                    // If ErrorProcessor exists
-                    if (this.ErrorProcessor != null)
-                    {
-                        // Log this error
-                        this.ErrorProcessor.LogError(methodName, objectName, error);
-                    }
+                    // Log this error
+                    ErrorHandler.LogError(methodName, objectName, error);                    
                 }
+
+                // return value
+                return dataManager;
             }
             #endregion
-
-            #region Init()
-            /// <summary>
-            /// Perform Initializations
-            /// </summary>
-            private void Init()
-            {
-               
-            }
-            #endregion
-
-        #endregion
-
-        #region Properties
-
-        #region ErrorProcessor
-        /// <summary>
-        /// This property handles how errors will be "logged"
-        /// within this application.
-        /// </summary>
-        public ErrorHandler ErrorProcessor
-        {
-            get { return errorProcessor; }
-            set { errorProcessor = value; }
-        }
-        #endregion
-
-        #region ParentController
-        /// <summary>
-        /// This property is a reference to the parent that created this object.
-        /// The need for this object is to be able to call the 
-        /// </summary>
-        public ApplicationController ParentController
-        {
-            get { return parentController; }
-            set { parentController = value; }
-        }
-        #endregion
 
         #endregion
 

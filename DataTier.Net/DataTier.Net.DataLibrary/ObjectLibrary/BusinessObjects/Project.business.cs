@@ -224,6 +224,7 @@ namespace ObjectLibrary.BusinessObjects
                     ControllerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.Logging"));
                     ControllerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.DataOperations"));
                     ControllerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.DataBridge"));
+                    ControllerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.Data"));
                 }
                 
                 AllReferences.Add(DataOperationsReferencesSet);

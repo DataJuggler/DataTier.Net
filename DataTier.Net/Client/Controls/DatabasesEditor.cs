@@ -128,7 +128,7 @@ namespace DataTierClient.Controls
                     bool confirmed = this.ParentProjectWizard.ParentMainForm.ConfirmDelete("Database", this.SelectedDatabase.DatabaseName);
                     
                     // if confirmed
-                    if(confirmed)
+                    if (confirmed)
                     {
                         // Create instance of the gateway
                         Gateway gateway = new Gateway();
@@ -137,7 +137,7 @@ namespace DataTierClient.Controls
                         bool deleted = gateway.DeleteDTNDatabase(this.SelectedDatabase.DatabaseId);
                         
                         // If the delete was successful
-                        if(deleted)
+                        if (deleted)
                         {   
                             // Reload the databases after a delete
                             this.SelectedProject.Databases = gateway.LoadProjectDatabases(this.SelectedProject.ProjectId);

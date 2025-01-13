@@ -161,14 +161,12 @@
   <ItemGroup>
     <Compile Include="Builders\ClassBuilder.cs" />
     <Compile Include="Builders\ControllerCreator.cs" />
-    <Compile Include="Builders\ControllerManagerCreator.cs" />
     <Compile Include="Builders\DataManagerCreator.cs" />
     <Compile Include="Builders\GatewayCreator.cs" />
     <Compile Include="Builders\ObjectManagerCreator.cs" />
     <Compile Include="Builders\DataObjectReaderCreator.cs" />
     <Compile Include="Builders\DataWriterCreator.cs" />
     <Compile Include="Builders\DataOperationMethodCreator.cs" />
-    <Compile Include="Builders\DataOperationsManagerCreator.cs" />
     <Compile Include="Builders\StoredProcedureObjectCreator.cs" />
     <Compile Include="ClientUtil\ChangeManager.cs" />
     <Compile Include="ClientUtil\CodeLineHelper.cs" />

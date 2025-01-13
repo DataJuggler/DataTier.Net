@@ -616,14 +616,8 @@ namespace DataTierClient.Forms
 					// Creating Controllers
 					PerformBuildOperation(BuildControllers, "Creating Controllers...");
 
-					// Creating Controller Manager
-					PerformBuildOperation(BuildControllerManager, "Creating Controller Manager...");
-
 					// Creating Data Operations
 					PerformBuildOperation(BuildDataOperationMethods, "Creating Data Operation Methods...");
-
-					// Creating DataOperationsManager
-					PerformBuildOperation(BuildDataOperationsManager, "Creating Data Operation Manager...");
 
 					// Creating DataManager
 					PerformBuildOperation(BuildDataManager, "Creating Data Manager...");
@@ -674,56 +668,6 @@ namespace DataTierClient.Forms
                     this.Cursor = Cursors.Default;
                 }
             }
-            #endregion
-
-            #region BuildControllerManager(ref Exception error)
-            /// <summary>
-            /// This method builds the Controller Manager object.
-            /// </summary>
-            private bool BuildControllerManager(ref Exception error)
-            {
-                // initial value
-                bool success = false;
-                
-                try
-                {
-                    // if the DataTables & OpenProject exist.
-                    if ((this.DataTables != null) && (this.HasOpenProject))
-                    {
-                        // Create A ClassBuilder to build DataObjects
-                        ClassBuilder classBuilder = new ClassBuilder(false);
-                    
-                        // load references
-                        List<ProjectReference> references = this.OpenProject.ControllerReferencesSet.References;
-                        DataJuggler.Net.ReferencesSet convertedReferences = classBuilder.ConvertReferences(references, "ControllerReferences");
-                        
-                        // Get namespace and project namew
-                        string nameSpaceName = this.OpenProject.ControllerNamespace;
-                        string projectName = this.OpenProject.ProjectName;
-                        string rootControllerPath = this.OpenProject.ControllerFolder;
-
-                        // 12.19.2021
-                        TargetFrameworkEnum targetFramework = (TargetFrameworkEnum) OpenProject.TargetFramework;
-                        
-                        // Create ControllerManagerCreator
-                        ControllerManagerCreator creator = new ControllerManagerCreator(DataTables, convertedReferences, rootControllerPath, projectName, nameSpaceName, this.FileManager, targetFramework);
-                        
-                        // local for created
-                        success = creator.CreateControllerManager(this.DataTables);
-                    }
-                }
-                catch (Exception exception)
-                {
-                    // Set error
-                    error = exception;
-                
-                    // set success to false
-                    success = false;
-                }
-    
-                // return value
-                return success;
-            }  
             #endregion
 
             #region BuildControllers(ref Exception error)
@@ -823,52 +767,6 @@ namespace DataTierClient.Forms
                 // return value
                 return success;
             } 
-            #endregion
-
-            #region BuildDataOperationsManager(ref Exception error)
-            /// <summary>
-            /// Build the DataOperationsManager
-            /// </summary>
-            private bool BuildDataOperationsManager(ref Exception error)
-            {
-                // initial value
-                bool success = false;
-            
-                try
-                {
-                    // Create A ClassBuilder to build DataObjects
-                    ClassBuilder classBuilder = new ClassBuilder(false);
-
-                    // load references
-                    List<ProjectReference> references = this.OpenProject.DataOperationsReferencesSet.References;
-                    DataJuggler.Net.ReferencesSet convertedReferences = classBuilder.ConvertReferences(references, "DataOperationsManagerReferences");
-
-                    // Get namespace and project namew
-                    string nameSpaceName = this.OpenProject.DataOperationsNamespace;
-                    string projectName = this.OpenProject.ProjectName;
-                    string rootDataOperationsPath = this.OpenProject.DataOperationsFolder;
-
-                    // 12.19.2021
-                    TargetFrameworkEnum targetFramework = (TargetFrameworkEnum) OpenProject.TargetFramework;
-
-                    // Create DataOperationsManagerCreator
-                    DataOperationsManagerCreator creator = new DataOperationsManagerCreator(this.DataTables, convertedReferences, rootDataOperationsPath, projectName, nameSpaceName, this.FileManager, targetFramework);
-
-                    // local for created
-                    success = creator.CreateDataOperationsManager(this.DataTables);
-                }
-                catch (Exception exception)
-                {
-                    // Set error
-                    error = exception;
-                
-                    // set success to false
-                    success = false;
-                }
-                
-                // return value
-                return success;
-            }
             #endregion
 
             #region BuildDataOperationMethods(ref Exception error)

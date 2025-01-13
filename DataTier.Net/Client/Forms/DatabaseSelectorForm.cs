@@ -37,6 +37,21 @@ namespace DataTierClient.Forms
             Init();
         }
         #endregion
+
+        #region Events
+
+            #region DatabaseSelectorForm_Activated(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when Database Selector Form _ Activated
+            /// </summary>
+            private void DatabaseSelectorForm_Activated(object sender, EventArgs e)
+            {
+                // Set Focus
+                DatabaseSelectorControl.SetFocusToServerNameTextBox();
+            }
+            #endregion
+            
+        #endregion
         
         #region Methods
 
@@ -49,14 +64,13 @@ namespace DataTierClient.Forms
                 // No BorderStyle
                 this.DatabaseSelectorControl.BorderStyle = BorderStyle.None;
             }
-            #endregion
-        
         #endregion
-        
+
+        #endregion
+
         #region Properties
 
         #endregion
-        
     }
     #endregion
     

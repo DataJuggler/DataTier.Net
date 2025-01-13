@@ -103,10 +103,10 @@ namespace DataTierClient.Builders
                         database = ConvertSQLDatabase(db, enumerations);
                         
                         // if the database exists
-                        if(database != null)
+                        if (database != null)
                         {
                             // If the database has Serializable selected
-                            if(db.Serializable)
+                            if (db.Serializable)
                             {
                                 // Serialize each table
                                 foreach(DataTable table in database.Tables)
@@ -240,7 +240,7 @@ namespace DataTierClient.Builders
                 AddDatabases(ref currentProject);
 
                 // if write classes
-                if(writeClasses)
+                if (writeClasses)
                 {
                     // Write DataManager
                     success = classWriter.WriteDataClasses(DataManager);
@@ -425,7 +425,7 @@ namespace DataTierClient.Builders
                 this.CurrentProject = currentProjectArg;
                 
                 // if the current project exists
-                if(this.CurrentProject != null)
+                if (this.CurrentProject != null)
                 {
                     // Create DataManager
                     this.DataManager = new DataManager(this.CurrentProject.ObjectFolder, this.CurrentProject.ProjectName, DataManager.ClassOutputLanguage.CSharp);
@@ -490,7 +490,7 @@ namespace DataTierClient.Builders
                     string projectOutputFolder = "";
                     
                     // set project output folder
-                    if(this.CurrentProject != null)
+                    if (this.CurrentProject != null)
                     {
                         // set project folder
                         projectOutputFolder = this.CurrentProject.ProjectFolder;

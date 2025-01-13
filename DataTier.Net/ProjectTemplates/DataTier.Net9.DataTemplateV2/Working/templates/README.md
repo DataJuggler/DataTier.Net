@@ -7,6 +7,8 @@ can be processed. I am first combining down to two projects as this seems simple
 More info about DataTier.Net is available here:
 https://github.com/DataJuggler/DataTier.Net
 
+Update 1.13.2025: The Controller Manager is being phased out.
+
 Update 1.3.2024: Moved to a two project data tier template. I am now modifying DataTier .Net to handle both the 4 project version and the two.
 Once finished with this update, I may see if I can write a converter to convert the four project templates to a two project structure.
 

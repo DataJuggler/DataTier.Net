@@ -122,7 +122,7 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.TopMarginPanel);
             this.Controls.Add(this.SaveCancelControl);
             this.Name = "DatabaseSelectorControl";
-            this.Size = new System.Drawing.Size(592, 549);
+            this.Size = new System.Drawing.Size(592, 549);            
             this.ResumeLayout(false);
 
             }

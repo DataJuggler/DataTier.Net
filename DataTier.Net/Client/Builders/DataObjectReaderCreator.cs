@@ -132,7 +132,7 @@ namespace DataTierClient.Builders
                 sb.Append("]");
                 
                 // if there is a default value
-                if(!String.IsNullOrEmpty(defaultValue))
+                if (!String.IsNullOrEmpty(defaultValue))
                 {
                     // append a comma
                     sb.Append(", ");
@@ -172,7 +172,7 @@ namespace DataTierClient.Builders
                 sb.Append(this.RootDataObjectReaderPath);
                             
                 // If the root data object reader path does not end with a back slash
-                if(!this.RootDataObjectReaderPath.EndsWith(@"\"))
+                if (!this.RootDataObjectReaderPath.EndsWith(@"\"))
                 {
                     // Append Backslash
                     sb.Append(@"\");
@@ -458,7 +458,7 @@ namespace DataTierClient.Builders
                     sb.Append("]");
                 
                     // if there is a default value
-                    if(!String.IsNullOrEmpty(defaultValue))
+                    if (!String.IsNullOrEmpty(defaultValue))
                     {
                         // append a comma
                         sb.Append(", ");
@@ -604,7 +604,7 @@ namespace DataTierClient.Builders
             private void WriteFieldIntegerLine(DataField field, int ordinalPosition)
             {
                 // verify the DataField exists
-                if(field != null)
+                if (field != null)
                 {
                     // create this fieldLine
                     string fieldLine = "int " + this.CapitalizeFirstChar(field.FieldName, true) + "field = " + ordinalPosition.ToString() + ";";
@@ -642,7 +642,7 @@ namespace DataTierClient.Builders
                     fields = DataConverter.ConvertDataFields(customReader.FieldSet.Fields);
                 }
                 // if dataTable exists
-                else  if(dataTable != null)
+                else if (dataTable != null)
                 {
                     // only use the ActiveFields to ignore unwanted fields
                     fields = dataTable.ActiveFields;
@@ -1000,7 +1000,7 @@ namespace DataTierClient.Builders
             private void WriteUpdateIdentity(DataTable dataTable, string objectName)
             {   
                  // if this data table has a primary key
-                 if(dataTable.HasPrimaryKey)
+                 if (dataTable.HasPrimaryKey)
                  {
                     // local
                     int index = 0;

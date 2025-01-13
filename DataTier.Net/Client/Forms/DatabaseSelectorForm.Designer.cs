@@ -73,6 +73,7 @@ namespace DataTierClient.Forms
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Create Database";
+            this.Activated += new System.EventHandler(this.DatabaseSelectorForm_Activated);
             this.ResumeLayout(false);
 
             } 

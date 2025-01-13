@@ -42,7 +42,7 @@ namespace DataTierClient.Controls
         public const string UninstallDotNet7ProjectTemplates = "dotnet new uninstall DataJuggler.DataTier.Net7.ProjectTemplates";
         public const string UninstallDotNet8ProjectTemplates = "dotnet new uninstall DataJuggler.DataTier.NET8.ProjectTemplates";        
         public const string UninstallDotNet8ProjectTemplates2 = "dotnet new uninstall DataJuggler.DataTier.NET8V2.ProjectTemplates";
-        public const string UninstallDotNet9ProjectTemplates = "dotnet new uninstall DataJuggler.DataTier.NET9V2.ProjectTemplates";
+        public const string UninstallDotNet9ProjectTemplates = "dotnet new uninstall DataJuggler.DataTier.Net9.ProjectTemplatesV2";
         #endregion
         
         #region Constructor
@@ -434,7 +434,7 @@ namespace DataTierClient.Controls
                  catch (Exception error)
                  {
                      // Set the error
-                    DebugHelper.WriteDebugError("UninstallDotNet6_Click", this.Name, error);
+                    DebugHelper.WriteDebugError("UninstallDotNet7_Click", this.Name, error);
 
                     // show the user a message
                     MessageHelper.DisplayMessage("The DataTier.Net7.ProjectTemplates could not be uninstalled.", "Uninsteall Templates Failed");
@@ -465,7 +465,7 @@ namespace DataTierClient.Controls
                  catch (Exception error)
                  {
                      // Set the error
-                    DebugHelper.WriteDebugError("UninstallDotNet6_Click", this.Name, error);
+                    DebugHelper.WriteDebugError("UninstallDotNet8_Click", this.Name, error);
 
                     // show the user a message
                     MessageHelper.DisplayMessage("The DataTier.NET8.ProjectTemplates could not be uninstalled.", "Uninsteall Templates Failed");
@@ -496,7 +496,7 @@ namespace DataTierClient.Controls
                  catch (Exception error)
                  {
                      // Set the error
-                    DebugHelper.WriteDebugError("UninstallDotNet6_Click", this.Name, error);
+                    DebugHelper.WriteDebugError("UninstallDotNet8_Click", this.Name, error);
 
                     // show the user a message
                     MessageHelper.DisplayMessage("The DataTier.NET8V2.ProjectTemplates could not be uninstalled.", "Uninsteall Templates Failed");
@@ -517,20 +517,20 @@ namespace DataTierClient.Controls
                     ProcessStartInfo startInfo = new ProcessStartInfo();
                     startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                     startInfo.FileName = "cmd.exe";
-                    startInfo.Arguments = "/C " + UninstallDotNet8ProjectTemplates;
+                    startInfo.Arguments = "/C " + UninstallDotNet9ProjectTemplates;
                     process.StartInfo = startInfo;
                     process.Start();
 
                     // Show the user a message
-                    MessageHelper.DisplayMessage("DataJuggler.DataTier.NET8.ProjectTemplates were uninstalled from your computer.", "Uninstall Complete");
+                    MessageHelper.DisplayMessage("DataJuggler.DataTier.NET9.ProjectTemplates were uninstalled from your computer.", "Uninstall Complete");
                  }
                  catch (Exception error)
                  {
                      // Set the error
-                    DebugHelper.WriteDebugError("UninstallDotNet6_Click", this.Name, error);
+                    DebugHelper.WriteDebugError("UninstallDotNet9_Click", this.Name, error);
 
                     // show the user a message
-                    MessageHelper.DisplayMessage("The DataTier.NET8.ProjectTemplates could not be uninstalled.", "Uninsteall Templates Failed");
+                    MessageHelper.DisplayMessage("The DataTier.NET9.ProjectTemplates could not be uninstalled.", "Uninsteall Templates Failed");
                  }
             }
             #endregion

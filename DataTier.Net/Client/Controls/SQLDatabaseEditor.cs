@@ -153,6 +153,17 @@ namespace DataTierClient.Controls
             }
             #endregion
 
+            #region SQLDatabaseEditor_Load(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when SQL Database Editor _ Load
+            /// </summary>
+            public void SQLDatabaseEditor_Load(object sender, EventArgs e)
+            {
+                // Set Focus
+                SetFocusToServerNameTextBox();
+            }
+            #endregion
+            
             #region SQLRadioButton_CheckedChanged(object sender, EventArgs e)
             /// <summary>
             /// sql Server Authentication Is Selected.
@@ -559,6 +570,17 @@ namespace DataTierClient.Controls
             }
             #endregion
 
+            #region SetFocusToServerNameTextBox()
+            /// <summary>
+            /// Set Focus To Server Name Text Box
+            /// </summary>
+            public void SetFocusToServerNameTextBox()
+            {
+                // Set Focus
+                ServerTextBox.Focus();
+            }
+            #endregion
+            
             #region UIEnable()
             /// <summary>
             /// This method enables controls based on the context values
@@ -581,12 +603,12 @@ namespace DataTierClient.Controls
 
         #region Properties
 
-        #region AuthenticationType
-        /// <summary>
-        /// This property is used to set the type of Authentication 
-        /// used.
-        /// </summary>
-        public SQLAuthenticationTypeEnum AuthenticationType
+            #region AuthenticationType
+            /// <summary>
+            /// This property is used to set the type of Authentication 
+            /// used.
+            /// </summary>
+            public SQLAuthenticationTypeEnum AuthenticationType
             {
                 get { return authenticationType; }
                 set { authenticationType = value; }
@@ -701,9 +723,8 @@ namespace DataTierClient.Controls
                 }
             }
             #endregion
-            
+
         #endregion
-                
     }
     #endregion
     

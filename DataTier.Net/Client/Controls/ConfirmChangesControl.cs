@@ -1874,7 +1874,7 @@ namespace DataTierClient.Controls
                 if (useElseIf)
                 {
                     // use else if instead
-                    ifReaderName = ifReaderName.Replace("if (", "else if(");
+                    ifReaderName = ifReaderName.Replace("if (", "else if (");
                 }
 
                 // insert the ifReaderName line
@@ -2873,10 +2873,10 @@ namespace DataTierClient.Controls
             private void UpdateStatus(ListViewItem listItem, bool success)
             {
                 // if the listItem exists
-                if(listItem != null)
+                if (listItem != null)
                 {   
                     // if successfull
-                    if(success)
+                    if (success)
                     {
                         // use success
                         listItem.ImageIndex = 0;

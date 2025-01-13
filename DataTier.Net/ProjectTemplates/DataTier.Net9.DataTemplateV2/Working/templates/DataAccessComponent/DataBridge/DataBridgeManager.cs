@@ -1,18 +1,12 @@
 
 #region using statements
 
-using DataJuggler.UltimateHelper;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Data;
 using DataAccessComponent.Connection;
-using DataAccessComponent.Logging;
-using DataAccessComponent.Exceptions;
-using DataAccessComponent.DataOperations;
 using DataAccessComponent.Controllers;
 using DataAccessComponent.Data;
-using ObjectLibrary.BusinessObjects;
+using DataAccessComponent.DataOperations;
+using System;
+using System.Collections.Generic;
 
 #endregion
 
@@ -25,15 +19,14 @@ namespace DataAccessComponent.DataBridge
     /// In fact, the only place in the application where the data connection
     /// is opened is in the PerformDataOperation() method in this object.
     /// This object requires that a delagate (method pointer) be passed
-    /// in that will perform the data operation using the open connection.
+    /// in that will perform the data operation using the open connection
     /// </summary>
     public class DataBridgeManager
     {
 
         #region Private Variables
         private DataOperationsManager dataOperations;
-        private DataManager dataManager;
-        private ErrorHandler errorProcessor;
+        private DataManager dataManager;        
         private AuthenticationManager loginManager;
         private Exception exception;
         private string connectionName;
@@ -43,11 +36,10 @@ namespace DataAccessComponent.DataBridge
         /// <summary>
         /// Creates a new instance of a DataBridgeManager object.
         /// </summary>
-        public DataBridgeManager(AuthenticationManager loginManagerArg, ErrorHandler errorProcessorArg, string connectionName = "")
+        public DataBridgeManager(AuthenticationManager loginManagerArg, string connectionName = "")
         {
             // Set Properties
             this.LoginManager = loginManagerArg;
-            this.ErrorProcessor = errorProcessorArg;
             this.ConnectionName = connectionName;
 
             // Perform Initializations
@@ -93,78 +85,46 @@ namespace DataAccessComponent.DataBridge
             }
             #endregion
 
-            #region PerformDataOperation()
+            #region PerformDataOperation(string methodName, string objectName, ApplicationController.DataOperationMethod dataMethod, List<PolymorphicObject> parameters, DataManager dataManager = null)
             /// <summary>
             /// Performs an operation that required a connection to the database.
             /// This method uses a delegate to execute the method so that this is the 
             /// only place in the application a connection to the database is opened.
             /// </summary>
-            internal PolymorphicObject PerformDataOperation(string methodName, string objectName, ApplicationController.DataOperationMethod dataMethod, List<PolymorphicObject> parameters)
+            internal static PolymorphicObject PerformDataOperation(string methodName, string objectName, ApplicationController.DataOperationMethod dataMethod, List<PolymorphicObject> parameters, DataManager dataManager = null)
             {
                 // Initial Value
                 PolymorphicObject returnObject = null;
 
-                // local
-                bool dataConnectionNotAvailable = false;
-
                 try
                 {
-                    // set the last exception to null
-                    this.Exception = null;
-
                     // Connect To Database 
-                    this.LoginManager.ConnectToDatabase(this.DataManager);
-
-                    // Testing only
-                    string connectionString = this.DataManager.DataConnector.ConnectionString;
+                    dataManager = AuthenticationManager.ConnectToDatabase();
 
                     // if connected
-                    if (this.DataManager.DataConnector.Connected)
+                    if (dataManager.DataConnector.Connected)
                     {
                         // verify dataMethod exists 
                         if (dataMethod != null)
                         {
                             // Invoke Method
-                            returnObject = dataMethod(parameters, this.DataManager.DataConnector);
+                            returnObject = dataMethod(parameters, dataManager.DataConnector);
                         }
                     }
                     else
                     {
-                        // set dataConnectionNotAvailable to true
-                        dataConnectionNotAvailable = true;
-
                         // Raise Error Data Connection Not Available
                         throw new Exception("The database connection is not available.");
                     }
                 }
                 catch (Exception error)
                 {
-                    // Set exception
-                    this.Exception = error;
-
-                    // If ErrorProcessor exists
-                    if (this.ErrorProcessor != null)
-                    {
-                        // If this is a dataConnection not available error.
-                        if (dataConnectionNotAvailable)
-                        {
-                            // Create Error for data connection failed
-                            DataConnectionFailedException dataConnectionError = new DataConnectionFailedException(methodName, objectName, error);
-
-                            // Log the current dataConnectionError
-                            this.ErrorProcessor.LogError(methodName, objectName, dataConnectionError);
-                        }
-                        else
-                        {
-                            // Log the exception
-                            this.ErrorProcessor.LogError(methodName, objectName, error);
-                        }
-                    }
+                                  
                 }
                 finally
                 {
                     // Close Connection To Database
-                    this.DataManager.DataConnector.Close();
+                    dataManager.DataConnector.Close();
                 }
 
                 // return value
@@ -236,18 +196,6 @@ namespace DataAccessComponent.DataBridge
                 set { exception = value; }
             }
             #endregion
-
-            #region ErrorProcessor
-            /// <summary>
-            /// This property handles how errors will be "logged"
-            /// within this application.
-            /// </summary>
-            public ErrorHandler ErrorProcessor
-            {
-                get { return errorProcessor; }
-                set { errorProcessor = value; }
-            }
-            #endregion\
 
             #region HasConnectionName
             /// <summary>

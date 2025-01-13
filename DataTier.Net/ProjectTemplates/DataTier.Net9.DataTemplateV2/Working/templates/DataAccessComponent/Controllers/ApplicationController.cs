@@ -2,17 +2,13 @@
 
 #region using statements
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-using DataAccessComponent.Data;
-using DataAccessComponent.Logging;
 using DataAccessComponent.Connection;
-using DataAccessComponent.Exceptions;
+using DataAccessComponent.Data;
 using DataAccessComponent.DataBridge;
 using DataAccessComponent.DataOperations;
-using DataAccessComponent.Controllers;
-using ObjectLibrary.BusinessObjects;
+using System;
+using System.Collections.Generic;
+using DataAccessComponent.Logging;
 
 #endregion
 
@@ -30,10 +26,8 @@ namespace DataAccessComponent.Controllers
 
         #region Private Variables
         private string connectionString;
-        private bool connectionTested;
-        private ErrorHandler errorProcessor;
-        private AuthenticationManager loginManager;
-        private ControllerManager controllerManager;
+        private bool connectionTested;        
+        private AuthenticationManager loginManager;        
         private SystemController systemController;
         private DataBridgeManager dataBridge;
         private Exception exception;
@@ -91,11 +85,11 @@ namespace DataAccessComponent.Controllers
             }
             #endregion
 
-            #region bool TestDatabaseConnection(ref Exception error)
+            #region bool TestDatabaseConnection(ref Exception error, DataManager dataManager = null)
             /// <summary>
             /// Connect to the database
             /// </summary>
-            public bool TestDatabaseConnection(ref Exception error)
+            public bool TestDatabaseConnection(ref Exception error, DataManager dataManager = null)
             {
                 // Initial value
                 this.ConnectionTested = false;
@@ -103,12 +97,12 @@ namespace DataAccessComponent.Controllers
                 try
                 {
                     // Test Data Connection
-                    this.ConnectionTested = this.SystemController.TestDatabaseConnection();
+                    this.ConnectionTested = SystemController.TestDatabaseConnection(dataManager);
                 }
                 catch (Exception exception)
                 {
-                    // Set the error
-                    error = exception;
+                    // Log the error
+                    ErrorHandler.LogError("TestDatabaseConnection", "ApplicationController", exception);
                 }
 
                 // return value
@@ -122,20 +116,14 @@ namespace DataAccessComponent.Controllers
             /// </summary>
             private void Init()
             {
-                // Create Error Processor
-                this.ErrorProcessor = new ErrorHandler();
-
                 // Create AuthenticationManager
-                this.LoginManager = new AuthenticationManager(this.ErrorProcessor, this);
+                this.LoginManager = new AuthenticationManager();
 
                 // Create DataBridgeManager object (needed for child controllers).
-                this.DataBridge = new DataBridgeManager(this.LoginManager, this.ErrorProcessor, this.ConnectionName);
-
-                // Create ControllerManager
-                this.ControllerManager = new ControllerManager(this.ErrorProcessor, this);
+                this.DataBridge = new DataBridgeManager(this.LoginManager, this.ConnectionName);
 
                 // Create System Controller
-                this.SystemController = new SystemController(this.DataBridge, this.ErrorProcessor);
+                this.SystemController = new SystemController(this.DataBridge);
             }
             #endregion
 
@@ -191,18 +179,6 @@ namespace DataAccessComponent.Controllers
             }
             #endregion
 
-            #region ControllerManager
-            /// <summary>
-            /// This object manages all of the 
-            /// object controllers.
-            /// </summary>
-            public ControllerManager ControllerManager
-            {
-                get { return controllerManager; }
-                set { controllerManager = value; }
-            }
-            #endregion
-
             #region DataBridge
             /// <summary>
             /// This object is the gateway to the data.
@@ -243,18 +219,6 @@ namespace DataAccessComponent.Controllers
                 }
             }
             #endregion
-
-            #region ErrorProcessor
-            /// <summary>
-            /// This property handles how errors will be "logged"
-            /// within this application.
-            /// </summary>
-            public ErrorHandler ErrorProcessor
-            {
-                get { return errorProcessor; }
-                set { errorProcessor = value; }
-            }
-            #endregion\
 
             #region HasConnectionName
             /// <summary>

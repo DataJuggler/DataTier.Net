@@ -147,10 +147,10 @@ namespace DataTierClient.Builders
                 }
                 
                 // if file name is not null 
-                if(!String.IsNullOrEmpty(fileName))
+                if (!String.IsNullOrEmpty(fileName))
                 {
                     // if file exists on hard drive
-                    if(File.Exists(fileName))
+                    if (File.Exists(fileName))
                     {
                         // get the text
                         string text = File.ReadAllText(fileName);
@@ -184,7 +184,7 @@ namespace DataTierClient.Builders
                 StringBuilder sb = new StringBuilder(this.RootDataManagerPath);
 
                 // if the RootDataManager 
-                if(!this.RootDataManagerPath.EndsWith(@"\"))
+                if (!this.RootDataManagerPath.EndsWith(@"\"))
                 {
                     // Append 
                     sb.Append(@"\");
@@ -383,8 +383,7 @@ namespace DataTierClient.Builders
 
             #region WritePrivateVariables()
             /// <summary>
-            /// This method writes the private variables for a 
-            /// ControllerManager.
+            /// This method writes the private variables for a DataManager
             /// </summary>
             private void WritePrivateVariables()
             {

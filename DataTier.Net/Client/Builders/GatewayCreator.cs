@@ -375,7 +375,7 @@ namespace DataTierClient.Builders
                         TextLine setPrimaryKeyComment = new TextLine("                        // set the primary key");
                         TextLine setPrimaryKey = new TextLine("                        temp" + dataTable.ClassName + ".UpdateIdentity(" + variableName + ");");
                         TextLine performDeleteComment = new TextLine("                    // perform the delete");
-                        TextLine performDelete = new TextLine("                    deleted = this.AppController.ControllerManager." + dataTable.Name + "Controller.Delete(temp" + dataTable.ClassName + ");");
+                        TextLine performDelete = new TextLine("                    deleted = " + dataTable.Name + "Controller.Delete(temp" + dataTable.ClassName + ");");
 
                         // if this is an integer or an Identity column
                         if ((dataTable.PrimaryKey.DataType == DataManager.DataTypeEnum.Autonumber) || (dataTable.PrimaryKey.DataType == DataManager.DataTypeEnum.Integer))
@@ -678,7 +678,7 @@ namespace DataTierClient.Builders
                             TextLine setPrimaryKeyComment = new TextLine("                        // set the primary key");
                             TextLine setPrimaryKey = new TextLine("                        temp" + dataTable.ClassName + ".UpdateIdentity(" + variableName + ");");
                             TextLine performFindComment = new TextLine("                    // perform the find");
-                            TextLine performFind = new TextLine("                    " + objectName + " = this.AppController.ControllerManager." + dataTable.Name + "Controller.Find(temp" + dataTable.ClassName + ");");
+                            TextLine performFind = new TextLine("                    " + objectName + " = " + dataTable.Name + "Controller.Find(temp" + dataTable.ClassName + ");");
                             TextLine returnValueComment = new TextLine("                // return value");
                             TextLine returnValue = new TextLine("                return " + objectName + ";");
 
@@ -1071,7 +1071,7 @@ namespace DataTierClient.Builders
                         TextLine closeBracket2 = new TextLine("                }");
                         TextLine endRegion = new TextLine("            #endregion");
                         TextLine performLoadComment = new TextLine("                    // perform the load");
-                        TextLine performLoad = new TextLine("                    " + collectionName + " = this.AppController.ControllerManager." + dataTable.Name + "Controller.FetchAll(temp" + dataTable.ClassName + ");");
+                        TextLine performLoad = new TextLine("                    " + collectionName + " = " + dataTable.Name + "Controller.FetchAll(temp" + dataTable.ClassName + ");");
                         TextLine returnValueComment = new TextLine("                // return value");
                         TextLine returnValue = new TextLine("                return " + collectionName + ";");
                        
@@ -1257,7 +1257,7 @@ namespace DataTierClient.Builders
                             TextLine closeBracket3 = new TextLine("                    }");
                             TextLine endRegion = new TextLine("            #endregion");
                             TextLine performSaveComment = new TextLine("                    // perform the save");
-                            TextLine performSave = new TextLine("                    saved = this.AppController.ControllerManager." + dataTable.Name + "Controller.Save(ref " + objectName + ");");
+                            TextLine performSave = new TextLine("                    saved = " + dataTable.Name + "Controller.Save(ref " + objectName + ");");
                             TextLine returnValueComment = new TextLine("                // return value");
                             TextLine returnValue = new TextLine("                return saved;");
 
