@@ -361,7 +361,7 @@ namespace DataTierClient.Builders
                 string parameterName = "temp" + dataType;
 
                 // BeginRegion  #region Delete(<DataType> dataType>
-                BeginRegion("Delete(" + dataType + " " + parameterName + ", DataManager dataManager = null)");
+                BeginRegion("Delete(" + dataType + " " + parameterName + ", DataManager dataManager)");
 
                 // Write Summary
                 WriteLine("/// <summary>");
@@ -380,7 +380,7 @@ namespace DataTierClient.Builders
                 WriteLine("/// <returns>True if the delete is successful or false if not.</returns>");
                 
                 // Get classDeclaration
-                string classDeclaration = "public static bool Delete(" + dataType + " " + parameterName + ", DataManager dataManager = null)";
+                string classDeclaration = "public static bool Delete(" + dataType + " " + parameterName + ", DataManager dataManager)";
 
                 // Write classDeclaration
                 WriteLine(classDeclaration);
@@ -559,7 +559,7 @@ namespace DataTierClient.Builders
                     string delegateMethodName = "fetchAllMethod";
                 
                     // BeginRegion  FetchAll
-                    BeginRegion("FetchAll(" + dataType + " " + parameterName + ", DataManager dataManager = null)");
+                    BeginRegion("FetchAll(" + dataType + " " + parameterName + ", DataManager dataManager)");
                 
                     // set to procedure
                     string query = "procedure";
@@ -575,7 +575,7 @@ namespace DataTierClient.Builders
                     WriteLine("/// <returns>A collection of '" + dataType + "' objects.</returns>");
                 
                     // Get classDeclaration
-                    string classDeclaration = "public static " + collectionDataType + " FetchAll(" + dataType + " " + parameterName + ", DataManager dataManager = null)";
+                    string classDeclaration = "public static " + collectionDataType + " FetchAll(" + dataType + " " + parameterName + ", DataManager dataManager)";
 
                     // Write classDeclaration
                     WriteLine(classDeclaration);
@@ -726,7 +726,7 @@ namespace DataTierClient.Builders
                 string delegateMethodName = "findMethod";
                 
                 // BeginRegion  #region Find(
-                BeginRegion("Find(" + dataType + " temp" + dataType + ", DataManager dataManager = null)");
+                BeginRegion("Find(" + dataType + " temp" + dataType + ", DataManager dataManager)");
 
                 // Write Summary
                 WriteLine("/// <summary>");
@@ -742,7 +742,7 @@ namespace DataTierClient.Builders
                 WriteLine("/// <returns>A '" + dataType + "' object if found else a null '" + dataType + "'.</returns>");
 
                 // Get classDeclaration
-                string classDeclaration = "public static " + dataType + " Find(" + dataType + " " + parameterName + ", DataManager dataManager = null)";
+                string classDeclaration = "public static " + dataType + " Find(" + dataType + " " + parameterName + ", DataManager dataManager)";
 
                 // Write classDeclaration
                 WriteLine(classDeclaration);
@@ -907,7 +907,7 @@ namespace DataTierClient.Builders
                 string parameterName = CapitalizeFirstChar(dataType, true);
 
                 // BeginRegion  #region Find(
-                BeginRegion("Insert(" + dataType + " " + parameterName + ", DataManager dataManager = null)");
+                BeginRegion("Insert(" + dataType + " " + parameterName + ", DataManager dataManager)");
 
                 // Write Summary
                 WriteLine("/// <summary>");
@@ -926,7 +926,7 @@ namespace DataTierClient.Builders
                 WriteLine("/// <returns>The id (int) of the new  '" + dataType + "' object that was inserted.</returns>");
 
                 // Get classDeclaration
-                string classDeclaration = "public static int Insert(" + dataType + " " + parameterName + ", DataManager dataManager = null)";
+                string classDeclaration = "public static int Insert(" + dataType + " " + parameterName + ", DataManager dataManager)";
 
                 // Write classDeclaration
                 WriteLine(classDeclaration);
@@ -1338,7 +1338,7 @@ namespace DataTierClient.Builders
                 string parameterName = CapitalizeFirstChar(dataType, true);
 
                 // BeginRegion  #region Find(
-                BeginRegion("Save(ref " + dataType + " " + parameterName + ", DataManager dataManager = null)");
+                BeginRegion("Save(ref " + dataType + " " + parameterName + ", DataManager dataManager)");
 
                 // Write Summary
                 WriteLine("/// <summary>");
@@ -1350,7 +1350,7 @@ namespace DataTierClient.Builders
                 WriteLine("/// <returns>True if successful or false if not.</returns>");
                 
                 // Get classDeclaration
-                string classDeclaration = "public static bool Save(ref " + dataType + " " + parameterName + ", DataManager dataManager = null)";
+                string classDeclaration = "public static bool Save(ref " + dataType + " " + parameterName + ", DataManager dataManager)";
 
                 // Write classDeclaration
                 WriteLine(classDeclaration);
@@ -1548,7 +1548,7 @@ namespace DataTierClient.Builders
                 string parameterName = CapitalizeFirstChar(dataType, true);
 
                 // BeginRegion  #region Find(
-                BeginRegion("Update(" + dataType + " " + parameterName + ", DataManager dataManager = null)");
+                BeginRegion("Update(" + dataType + " " + parameterName + ", DataManager dataManager)");
 
                 // Write Summary
                 WriteLine("/// <summary>");
@@ -1567,7 +1567,7 @@ namespace DataTierClient.Builders
                 WriteLine("/// <returns>True if successful else false if not.</returns>");
 
                 // Get classDeclaration
-                string classDeclaration = "public static bool Update(" + dataType + " " + CapitalizeFirstChar(dataType, true) + ", DataManager dataManager = null)";
+                string classDeclaration = "public static bool Update(" + dataType + " " + CapitalizeFirstChar(dataType, true) + ", DataManager dataManager)";
 
                 // Write classDeclaration
                 WriteLine(classDeclaration);

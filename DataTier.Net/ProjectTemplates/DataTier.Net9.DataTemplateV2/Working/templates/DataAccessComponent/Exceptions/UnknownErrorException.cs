@@ -40,9 +40,9 @@ namespace DataAccessComponent.Exceptions
         public UnknownErrorException(string methodNameArg, string objectNameArg, Exception exceptionArg)
         {
             // Set Properties
-            this.MethodName = methodNameArg;
-            this.ObjectName = objectNameArg;
-            this.Exception = exceptionArg;
+            MethodName = methodNameArg;
+            ObjectName = objectNameArg;
+            Exception = exceptionArg;
 
             // Perform Initializations
             Init();
@@ -58,17 +58,17 @@ namespace DataAccessComponent.Exceptions
         private void Init()
         {
             // Create variables used to create an instance of an UnknownErrorException
-            this.DisplayText = "The cause of this error is not yet known.";
-            this.KnowledgeBaseArticleID = null;
-            this.KnownIssue = true;
-            this.Status = "You are seeing this message because an unknown error has occurred. We have logged and reported this bug.";
-            this.ShowToUser = true;
+            DisplayText = "The cause of this error is not yet known.";
+            KnowledgeBaseArticleID = null;
+            KnownIssue = true;
+            Status = "You are seeing this message because an unknown error has occurred. We have logged and reported this bug.";
+            ShowToUser = true;
 
             // If this errror happens before authentication, the userID will be 0.
             // To Do: Store Last UserID in the App.Config file after a successful
             // login. Also can easily grab machine name. Send an email to an
             // IT person, support person, me (Corby) if necessary
-            this.UserID = 0;
+            UserID = 0;
         }
         #endregion
 

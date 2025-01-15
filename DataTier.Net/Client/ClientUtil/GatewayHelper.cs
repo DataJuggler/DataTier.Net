@@ -26,6 +26,104 @@ namespace DataTierClient.ClientUtil
 
         #region Methods
 
+            #region ExportWords(List<Word> words)
+            /// <summary>
+            /// returns the Words
+            /// </summary>
+            public static string ExportWords(List<Word> words)
+            {
+                // initial value
+                string phrase = "";
+                
+                // If the words collection exists and has one or more items
+                if (ListHelper.HasOneOrMoreItems(words))
+                {
+                    // Iterate the collection of Word objects
+                    foreach (Word word in words)
+                    {
+                        // Add a space
+                        phrase += word.Text + " ";
+                    }
+
+                    // Trim the string
+                    phrase = phrase.Trim();
+                }
+
+                // return value
+                return phrase;
+            }
+            #endregion
+
+            #region GetStringFromCapitalLetters(string sourceText)
+            /// <summary>
+            /// returns a list of Words From Capital Letters
+            /// </summary>
+            public static string GetStringFromCapitalLetters(string sourceText)
+            {
+                // initial value
+                string phrase = "";
+
+                // Get the words
+                List<Word> words = GetWordsFromCapitalLetters(sourceText);
+
+                // local
+                phrase = ExportWords(words);
+
+                // return value
+                return phrase;
+            }
+            #endregion
+            
+            #region GetWordsFromCapitalLetters(string sourceText, bool formatForDescription = true)
+            /// <summary>
+            /// returns a list of Words From Capital Letters
+            /// </summary>
+            public static List<Word> GetWordsFromCapitalLetters(string sourceText, bool formatForDescription = true)
+            {
+                // initial value
+                List<Word> words = new List<Word>();
+
+                // locals
+                Word word = null;
+                
+                // If the sourceText string exists
+                if (TextHelper.Exists(sourceText))
+                {
+                    // Iterate the collection of char objects
+                    foreach(char c in sourceText)
+                    {
+                        // if UpperCase
+                        if (Char.IsUpper(c))
+                        {
+                            // Create a new instance of a 'Word' object.
+                            word = new Word();
+
+                            // Set the initial vaue
+                            word.Text = c.ToString();
+
+                            // if the firstWord
+                            if ((words.Count == 0) && (formatForDescription))
+                            {
+                                // Add an s and the. Turns GetPerson to Get The Person. Better than nothing
+                                word.Text += "s the ";
+                            }
+
+                            // Add this word
+                            words.Add(word);
+                        }
+                        else if (word != null)
+                        {
+                            // Add to the existing word
+                            word.Text += c;
+                        }
+                    }
+                }
+
+                // return value
+                return words;
+            }
+            #endregion
+
             #region GetGatewayInfo(string gatewayFilePath, List<string> methodNames)
             /// <summary>
             /// This method returns a GatewayInfo object

@@ -42,11 +42,11 @@ namespace DataTierClient.Builders
         public GatewayCreator(List<DataTable> dataTablesArg, ReferencesSet objectReferencesArg, string gatewayPathArg, string projectNameArg, string nameSpaceNameArg, ProjectFileManager fileManager, TargetFrameworkEnum targetFramework) : base(fileManager, false, false, targetFramework)
 		{   
 		    // Set Properties
-		    this.DataTables = dataTablesArg;
-		    this.ProjectName = projectNameArg;
-		    this.NameSpaceName = nameSpaceNameArg;
-		    this.GatewayPath = gatewayPathArg;
-		    this.ObjectReferences = objectReferencesArg;
+		    DataTables = dataTablesArg;
+		    ProjectName = projectNameArg;
+		    NameSpaceName = nameSpaceNameArg;
+		    GatewayPath = gatewayPathArg;
+		    ObjectReferences = objectReferencesArg;
 		}
 		#endregion
 
@@ -59,7 +59,7 @@ namespace DataTierClient.Builders
             internal void CreateGatewayMethods()
             {
                 // if the GatewayPath exists
-                if ((this.HasGatewayPath) && (File.Exists(GatewayPath)) && (DataTables != null) && (DataTables.Count > 0))
+                if ((HasGatewayPath) && (File.Exists(GatewayPath)) && (DataTables != null) && (DataTables.Count > 0))
                 {
                     // set the text of the existing Gateway
                     string gatewayText = File.ReadAllText(GatewayPath);
@@ -109,7 +109,7 @@ namespace DataTierClient.Builders
                 else
                 {
                     // if the DataTables do not exist
-                    if (this.DataTables == null)
+                    if (DataTables == null)
                     {
                         // raise an exception so the build fails
                         throw new Exception("The DataTables collection does not exist.");
@@ -117,7 +117,7 @@ namespace DataTierClient.Builders
                     else
                     {
                         // raise an exception so the build fails
-                        throw new Exception("The gateway file '" + this.GatewayPath + "' could not be found.");
+                        throw new Exception("The gateway file '" + GatewayPath + "' could not be found.");
                     }
                 }
             }
@@ -357,7 +357,7 @@ namespace DataTierClient.Builders
                         TextLine initialValue = new TextLine("                bool deleted = false;");
                         TextLine blankLine = new TextLine("        ");
                         TextLine validationTestComment = new TextLine("                // if the AppController exists");
-                        TextLine validationTest = new TextLine("                if (this.HasAppController)");
+                        TextLine validationTest = new TextLine("                if (HasAppController)");
                         TextLine openBracket2 = new TextLine("                {");
                         TextLine openBracket3 = new TextLine("                    {");
                         TextLine returnValueComment = new TextLine("                // return value");
@@ -375,7 +375,7 @@ namespace DataTierClient.Builders
                         TextLine setPrimaryKeyComment = new TextLine("                        // set the primary key");
                         TextLine setPrimaryKey = new TextLine("                        temp" + dataTable.ClassName + ".UpdateIdentity(" + variableName + ");");
                         TextLine performDeleteComment = new TextLine("                    // perform the delete");
-                        TextLine performDelete = new TextLine("                    deleted = " + dataTable.Name + "Controller.Delete(temp" + dataTable.ClassName + ");");
+                        TextLine performDelete = new TextLine("                    deleted = " + dataTable.Name + "Controller.Delete(temp" + dataTable.ClassName + ", DataManager);");
 
                         // if this is an integer or an Identity column
                         if ((dataTable.PrimaryKey.DataType == DataManager.DataTypeEnum.Autonumber) || (dataTable.PrimaryKey.DataType == DataManager.DataTypeEnum.Integer))
@@ -662,7 +662,7 @@ namespace DataTierClient.Builders
                             TextLine initialValue = new TextLine("                " + dataTable.ClassName + " " + objectName + " = null;");
                             TextLine blankLine = new TextLine();
                             TextLine validationTestComment = new TextLine("                // if the AppController exists");
-                            TextLine validationTest = new TextLine("                if (this.HasAppController)");
+                            TextLine validationTest = new TextLine("                if (HasAppController)");
                             TextLine openBracket2 = new TextLine("                {");
                             TextLine closeBracket = new TextLine("            }");
                             TextLine closeBracket2 = new TextLine("                }");
@@ -678,7 +678,7 @@ namespace DataTierClient.Builders
                             TextLine setPrimaryKeyComment = new TextLine("                        // set the primary key");
                             TextLine setPrimaryKey = new TextLine("                        temp" + dataTable.ClassName + ".UpdateIdentity(" + variableName + ");");
                             TextLine performFindComment = new TextLine("                    // perform the find");
-                            TextLine performFind = new TextLine("                    " + objectName + " = " + dataTable.Name + "Controller.Find(temp" + dataTable.ClassName + ");");
+                            TextLine performFind = new TextLine("                    " + objectName + " = " + dataTable.Name + "Controller.Find(temp" + dataTable.ClassName + ", DataManager);");
                             TextLine returnValueComment = new TextLine("                // return value");
                             TextLine returnValue = new TextLine("                return " + objectName + ";");
 
@@ -1027,7 +1027,7 @@ namespace DataTierClient.Builders
                     string documentText = sb.ToString();
 
                     // append all the text to the file
-                    File.AppendAllText(this.GatewayPath, documentText);
+                    File.AppendAllText(GatewayPath, documentText);
                 }
             }
             #endregion
@@ -1065,13 +1065,13 @@ namespace DataTierClient.Builders
                         TextLine initialValue = new TextLine("                List<" + dataTable.ClassName + "> " + collectionName + " = null;");
                         TextLine blankLine = new TextLine();
                         TextLine validationTestComment = new TextLine("                // if the AppController exists");
-                        TextLine validationTest = new TextLine("                if (this.HasAppController)");
+                        TextLine validationTest = new TextLine("                if (HasAppController)");
                         TextLine openBracket2 = new TextLine("                {");
                         TextLine closeBracket = new TextLine("            }");
                         TextLine closeBracket2 = new TextLine("                }");
                         TextLine endRegion = new TextLine("            #endregion");
                         TextLine performLoadComment = new TextLine("                    // perform the load");
-                        TextLine performLoad = new TextLine("                    " + collectionName + " = " + dataTable.Name + "Controller.FetchAll(temp" + dataTable.ClassName + ");");
+                        TextLine performLoad = new TextLine("                    " + collectionName + " = " + dataTable.Name + "Controller.FetchAll(temp" + dataTable.ClassName + ", DataManager);");
                         TextLine returnValueComment = new TextLine("                // return value");
                         TextLine returnValue = new TextLine("                return " + collectionName + ";");
                        
@@ -1249,7 +1249,7 @@ namespace DataTierClient.Builders
                             TextLine initialValue = new TextLine("                bool saved = false;");
                             TextLine blankLine = new TextLine();
                             TextLine validationTestComment = new TextLine("                // if the AppController exists");
-                            TextLine validationTest = new TextLine("                if (this.HasAppController)");
+                            TextLine validationTest = new TextLine("                if (HasAppController)");
                             TextLine openBracket2 = new TextLine("                {");
                             TextLine closeBracket = new TextLine("            }");
                             TextLine closeBracket2 = new TextLine("                }");
@@ -1257,7 +1257,7 @@ namespace DataTierClient.Builders
                             TextLine closeBracket3 = new TextLine("                    }");
                             TextLine endRegion = new TextLine("            #endregion");
                             TextLine performSaveComment = new TextLine("                    // perform the save");
-                            TextLine performSave = new TextLine("                    saved = " + dataTable.Name + "Controller.Save(ref " + objectName + ");");
+                            TextLine performSave = new TextLine("                    saved = " + dataTable.Name + "Controller.Save(ref " + objectName + ", DataManager);");
                             TextLine returnValueComment = new TextLine("                // return value");
                             TextLine returnValue = new TextLine("                return saved;");
 
@@ -1435,7 +1435,7 @@ namespace DataTierClient.Builders
                 get
                 {
                     // initial value
-                    bool hasGatewayPath = (!String.IsNullOrEmpty(this.GatewayPath));
+                    bool hasGatewayPath = (!String.IsNullOrEmpty(GatewayPath));
                     
                     // return value
                     return hasGatewayPath;

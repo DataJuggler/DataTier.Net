@@ -119,10 +119,10 @@ namespace DataAccessComponent.Data
         public void Close()
         {
             // if the SqlConnector exists
-            if (this.SqlConnector != null)
+            if (SqlConnector != null)
             {
                 // Close SqlConnector
-                this.SqlConnector.Close();
+                SqlConnector.Close();
             }
         }
         #endregion
@@ -134,10 +134,10 @@ namespace DataAccessComponent.Data
         public void Open()
         {
             // if the SqlConnector exists
-            if (this.SqlConnector != null)
+            if (SqlConnector != null)
             {
                 // Close SqlConnector
-                this.SqlConnector.Open();
+                SqlConnector.Open();
             }
         }
         #endregion
@@ -169,7 +169,7 @@ namespace DataAccessComponent.Data
                 bool connected = false;
 
                 // verify DatabaseConnection exists and the connection is open.
-                if ((this.SqlConnector != null) && (this.SqlConnector.State == System.Data.ConnectionState.Open))
+                if ((SqlConnector != null) && (SqlConnector.State == System.Data.ConnectionState.Open))
                 {
                     // set connected to true
                     connected = true;
@@ -193,10 +193,10 @@ namespace DataAccessComponent.Data
                 string connectionString = "";
 
                 // if the SqlConnector exists
-                if (this.SqlConnector != null)
+                if (SqlConnector != null)
                 {
                     // Set connectionString
-                    connectionString = this.SqlConnector.ConnectionString;
+                    connectionString = SqlConnector.ConnectionString;
                 }
 
                 // return value
@@ -205,14 +205,14 @@ namespace DataAccessComponent.Data
             set
             {
                 // if the SqlConnector does not exist
-                if (this.SqlConnector == null)
+                if (SqlConnector == null)
                 {
                     // Set connectionString
-                    this.SqlConnector = new SqlConnection();
+                    SqlConnector = new SqlConnection();
                 }
 
                 // Set connectionString
-                this.SqlConnector.ConnectionString = value;
+                SqlConnector.ConnectionString = value;
             }
         }
         #endregion
@@ -240,10 +240,10 @@ namespace DataAccessComponent.Data
                 ConnectionState state = ConnectionState.Closed;
 
                 // if the SqlConnector exists
-                if (this.SqlConnector != null)
+                if (SqlConnector != null)
                 {
                     // Set state
-                    state = this.SqlConnector.State;
+                    state = SqlConnector.State;
                 }
 
                 // return value

@@ -37,7 +37,7 @@ namespace DataAccessComponent.Data
         public DataManager(string connectionName = "")
         {
             // Store the ConnectionName arg
-            this.ConnectionName = connectionName;
+            ConnectionName = connectionName;
 
             // Perform Initializations For This Object.
             Init();
@@ -54,7 +54,7 @@ namespace DataAccessComponent.Data
             private void Init()
             {
                 // Create New DataConnector
-                this.DataConnector = new DataConnector();
+                DataConnector = new DataConnector();
             }
             #endregion
 

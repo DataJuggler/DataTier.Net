@@ -40,9 +40,9 @@ namespace DataAccessComponent.Exceptions
         public DataConnectionFailedException(string methodNameArg, string objectNameArg, Exception exceptionArg)
         {
             // Set Properties
-            this.MethodName = methodNameArg;
-            this.ObjectName = objectNameArg;
-            this.Exception = exceptionArg;
+            MethodName = methodNameArg;
+            ObjectName = objectNameArg;
+            Exception = exceptionArg;
 
             // Perform Initializations
             Init();
@@ -58,17 +58,17 @@ namespace DataAccessComponent.Exceptions
         private void Init()
         {
             // Create variables used to create an instance of an InvalidConfigurationException
-            this.DisplayText = "A connection to the database could not be established. The connection information is invalid.\r\nThis program will now end.";
-            this.KnowledgeBaseArticleID = null;
-            this.KnownIssue = true;
-            this.Status = "You are seeing this message because a connection to the database could not be established. The server could be down or your configuration information is missing or corrupt.";
-            this.ShowToUser = true;
+            DisplayText = "A connection to the database could not be established. The connection information is invalid.\r\nThis program will now end.";
+            KnowledgeBaseArticleID = null;
+            KnownIssue = true;
+            Status = "You are seeing this message because a connection to the database could not be established. The server could be down or your configuration information is missing or corrupt.";
+            ShowToUser = true;
 
             // If this errror happens before authentication, the userID will be 0.
             // To Do: Store Last UserID in the App.Config file after a successful
             // login. Also can easily grab machine name. Send an email to an
             // IT person, support person, me (Corby) if necessary
-            this.UserID = 0;
+            UserID = 0;
         }
         #endregion
 

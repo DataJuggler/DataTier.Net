@@ -49,7 +49,7 @@ namespace DataAccessComponent.StoredProcedureManager
         /// <returns></returns>
         public override string ToString()
         {
-            return this.ProcedureName;
+            return ProcedureName;
         }
         #endregion
 
@@ -76,11 +76,11 @@ namespace DataAccessComponent.StoredProcedureManager
         {
             get
             {
-                return this.parameters;
+                return parameters;
             }
             set
             {
-                this.parameters = value;
+                parameters = value;
             }
         }
         #endregion
@@ -93,11 +93,11 @@ namespace DataAccessComponent.StoredProcedureManager
         {
             get
             {
-                return this.procedureName;
+                return procedureName;
             }
             set
             {
-                this.procedureName = value;
+                procedureName = value;
             }
         }
         #endregion
@@ -111,11 +111,11 @@ namespace DataAccessComponent.StoredProcedureManager
         {
             get
             {
-                return this.storedProcedureType;
+                return storedProcedureType;
             }
             set
             {
-                this.storedProcedureType = value;
+                storedProcedureType = value;
             }
         }
         #endregion
@@ -129,11 +129,11 @@ namespace DataAccessComponent.StoredProcedureManager
         {
             get
             {
-                return this.tableName;
+                return tableName;
             }
             set
             {
-                this.tableName = value;
+                tableName = value;
             }
         }
         #endregion

@@ -36,11 +36,11 @@ namespace DataAccessComponent.DataBridge
         /// <summary>
         /// Creates a new instance of a DataBridgeManager object.
         /// </summary>
-        public DataBridgeManager(AuthenticationManager loginManagerArg, string connectionName = "")
+        public DataBridgeManager(AuthenticationManager loginManagerArg, string connectionName)
         {
             // Set Properties
-            this.LoginManager = loginManagerArg;
-            this.ConnectionName = connectionName;
+            LoginManager = loginManagerArg;
+            ConnectionName = connectionName;
 
             // Perform Initializations
             Init();
@@ -60,10 +60,10 @@ namespace DataAccessComponent.DataBridge
                 DataConnector dataConnector = null;
 
                 // if the DataManager exists
-                if (this.HasDataManager)
+                if (HasDataManager)
                 {
                     // return the DataConnector from the DataManager
-                    dataConnector = this.DataManager.DataConnector;
+                    dataConnector = DataManager.DataConnector;
                 }
 
                 // return value
@@ -78,20 +78,20 @@ namespace DataAccessComponent.DataBridge
             private void Init()
             {
                 // Create DataManager(s)
-                this.DataManager = new DataManager(ConnectionName);
+                DataManager = new DataManager(ConnectionName);
 
                 // Create DataOperations
-                this.DataOperations = new DataOperationsManager(this.DataManager);
+                DataOperations = new DataOperationsManager(DataManager);
             }
             #endregion
 
-            #region PerformDataOperation(string methodName, string objectName, ApplicationController.DataOperationMethod dataMethod, List<PolymorphicObject> parameters, DataManager dataManager = null)
+            #region PerformDataOperation(string methodName, string objectName, ApplicationController.DataOperationMethod dataMethod, List<PolymorphicObject> parameters, DataManager dataManaget)
             /// <summary>
             /// Performs an operation that required a connection to the database.
             /// This method uses a delegate to execute the method so that this is the 
             /// only place in the application a connection to the database is opened.
             /// </summary>
-            internal static PolymorphicObject PerformDataOperation(string methodName, string objectName, ApplicationController.DataOperationMethod dataMethod, List<PolymorphicObject> parameters, DataManager dataManager = null)
+            internal static PolymorphicObject PerformDataOperation(string methodName, string objectName, ApplicationController.DataOperationMethod dataMethod, List<PolymorphicObject> parameters, DataManager dataManager)
             {
                 // Initial Value
                 PolymorphicObject returnObject = null;
@@ -99,7 +99,7 @@ namespace DataAccessComponent.DataBridge
                 try
                 {
                     // Connect To Database 
-                    dataManager = AuthenticationManager.ConnectToDatabase();
+                    dataManager = AuthenticationManager.ConnectToDatabase(dataManager);
 
                     // if connected
                     if (dataManager.DataConnector.Connected)
@@ -206,7 +206,7 @@ namespace DataAccessComponent.DataBridge
                 get
                 {
                     // initial value
-                    bool hasConnectionName = (!String.IsNullOrEmpty(this.ConnectionName));
+                    bool hasConnectionName = (!String.IsNullOrEmpty(ConnectionName));
                     
                     // return value
                     return hasConnectionName;
@@ -223,7 +223,7 @@ namespace DataAccessComponent.DataBridge
                 get
                 {
                     // initial value
-                    bool hasDataManager = (this.DataManager != null);
+                    bool hasDataManager = (DataManager != null);
                     
                     // return value
                     return hasDataManager;

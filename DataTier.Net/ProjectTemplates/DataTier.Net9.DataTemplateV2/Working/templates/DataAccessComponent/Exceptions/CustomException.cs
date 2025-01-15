@@ -40,13 +40,13 @@ namespace DataAccessComponent.Exceptions
         public CustomException(string displayTextArg, string methodNameArg, string objectNameArg, string knowledgeBaseArticleIDArg, bool knownIssueArg, string statusArg, Exception exceptionArg)
         {
             // Set Properties
-            this.DisplayText = displayTextArg;
-            this.MethodName = methodNameArg;
-            this.ObjectName = objectNameArg;
-            this.KnowledgeBaseArticleID = knowledgeBaseArticleIDArg;
-            this.KnownIssue = knownIssueArg;
-            this.Status = statusArg;
-            this.Exception = exceptionArg;
+            DisplayText = displayTextArg;
+            MethodName = methodNameArg;
+            ObjectName = objectNameArg;
+            KnowledgeBaseArticleID = knowledgeBaseArticleIDArg;
+            KnownIssue = knownIssueArg;
+            Status = statusArg;
+            Exception = exceptionArg;
         }
         #endregion
 

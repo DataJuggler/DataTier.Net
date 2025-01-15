@@ -657,7 +657,7 @@ namespace DataTierClient.Controls
             public string GetMethodDescription(MethodInfo methodInfo, string indent)
             {
                 // initial value (in case something goes wrong
-                string methodDescription = "Enter Method Description Here";
+                string methodDescription = "/// [Enter Method Description Here]";
 
                 try
                 {
@@ -714,6 +714,14 @@ namespace DataTierClient.Controls
                                 // set the methodDescription
                                 methodDescription = indent + "/// This method is used to update '" + methodInfo.SelectedTable.ClassName + "' objects by the " + methodInfo.ParameterFieldSet.Name + " given.";                                
                             }
+                        }
+                        else
+                        {
+                            // Get the words
+                            List<Word> words = GatewayHelper.GetWordsFromCapitalLetters(methodInfo.MethodName);
+                            
+                            // Format
+                            methodDescription = indent + "/// " + GatewayHelper.GetStringFromCapitalLetters(methodInfo.MethodName);
                         }
                     }
                 }

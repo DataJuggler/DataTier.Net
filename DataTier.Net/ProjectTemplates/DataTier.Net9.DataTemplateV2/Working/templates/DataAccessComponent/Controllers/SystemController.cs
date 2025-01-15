@@ -35,17 +35,17 @@ namespace DataAccessComponent.Controllers
         public SystemController(DataBridgeManager dataBridgeArg)
         {
             // set DataBridgeManager
-            this.DataBridge = dataBridgeArg;
+            DataBridge = dataBridgeArg;
         }
         #endregion
 
         #region Methods
 
-        #region TestDatabaseConnection(DataManager dataManager = null
+        #region TestDatabaseConnection(DataManager dataManager)
         /// <summary>
         /// Tests the connection to the database
         /// </summary>
-        internal static bool TestDatabaseConnection(DataManager dataManager = null)
+        internal static bool TestDatabaseConnection(DataManager dataManager)
         {
             // initial value
             bool connected = false;

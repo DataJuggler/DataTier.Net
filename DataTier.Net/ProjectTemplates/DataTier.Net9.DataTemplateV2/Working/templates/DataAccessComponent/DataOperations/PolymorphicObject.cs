@@ -55,7 +55,7 @@ namespace DataAccessComponent.DataOperations
         public PolymorphicObject(object valueArg)
         {
             // store the arg
-            this.ObjectValue = valueArg;
+            ObjectValue = valueArg;
         }
         #endregion
 

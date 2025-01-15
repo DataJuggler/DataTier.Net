@@ -38,7 +38,7 @@ namespace DataAccessComponent.StoredProcedureManager
         public void Add(StoredProcedure storedProcedure)
         {
             // Add this object to this collection
-            this.List.Add(storedProcedure);
+            List.Add(storedProcedure);
         }
         #endregion
 

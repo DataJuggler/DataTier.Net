@@ -33,7 +33,7 @@ namespace DataAccessComponent.DataBridge
         public NullableBoolean()
         {
             // Set Value
-            this.Value = NullableBooleanEnum.Null;
+            Value = NullableBooleanEnum.Null;
         }
         #endregion
 
@@ -47,12 +47,12 @@ namespace DataAccessComponent.DataBridge
             if (objectValue == true)
             {
                 // Set value to true
-                this.Value = NullableBooleanEnum.True;
+                Value = NullableBooleanEnum.True;
             }
             else
             {
                 // Set value to false
-                this.Value = NullableBooleanEnum.False;
+                Value = NullableBooleanEnum.False;
             }
         }
         #endregion
@@ -67,8 +67,8 @@ namespace DataAccessComponent.DataBridge
         /// </summary>
         public NullableBooleanEnum Value
         {
-            get { return this.value; }
-            set { this.value = value; }
+            get { return value; }
+            set { value = value; }
         }
         #endregion
 

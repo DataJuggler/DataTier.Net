@@ -43,7 +43,7 @@ namespace DataAccessComponent.Controllers
             public ApplicationController(string connectionName = "")
             {
                 // store the arg
-                this.ConnectionName = connectionName;
+                ConnectionName = connectionName;
 
                 // Perform Initializations
                 Init();
@@ -74,10 +74,10 @@ namespace DataAccessComponent.Controllers
                 DataConnector dataConnector = null;
 
                 // if the DataBridge exists
-                if (this.HasDataBridge)
+                if (HasDataBridge)
                 {
                     // return the DataConnector from the DataBridge
-                    dataConnector = this.DataBridge.GetDataConnector();
+                    dataConnector = DataBridge.GetDataConnector();
                 }
 
                 // return value
@@ -85,19 +85,19 @@ namespace DataAccessComponent.Controllers
             }
             #endregion
 
-            #region bool TestDatabaseConnection(ref Exception error, DataManager dataManager = null)
+            #region bool TestDatabaseConnection(ref Exception error, DataManager dataManager)
             /// <summary>
             /// Connect to the database
             /// </summary>
-            public bool TestDatabaseConnection(ref Exception error, DataManager dataManager = null)
+            public bool TestDatabaseConnection(ref Exception error, DataManager dataManager)
             {
                 // Initial value
-                this.ConnectionTested = false;
+                ConnectionTested = false;
 
                 try
                 {
                     // Test Data Connection
-                    this.ConnectionTested = SystemController.TestDatabaseConnection(dataManager);
+                    ConnectionTested = SystemController.TestDatabaseConnection(dataManager);
                 }
                 catch (Exception exception)
                 {
@@ -106,7 +106,7 @@ namespace DataAccessComponent.Controllers
                 }
 
                 // return value
-                return this.ConnectionTested;
+                return ConnectionTested;
             }
             #endregion
 
@@ -117,13 +117,13 @@ namespace DataAccessComponent.Controllers
             private void Init()
             {
                 // Create AuthenticationManager
-                this.LoginManager = new AuthenticationManager();
+                LoginManager = new AuthenticationManager();
 
                 // Create DataBridgeManager object (needed for child controllers).
-                this.DataBridge = new DataBridgeManager(this.LoginManager, this.ConnectionName);
+                DataBridge = new DataBridgeManager(LoginManager, ConnectionName);
 
                 // Create System Controller
-                this.SystemController = new SystemController(this.DataBridge);
+                SystemController = new SystemController(DataBridge);
             }
             #endregion
 
@@ -190,6 +190,31 @@ namespace DataAccessComponent.Controllers
             }
             #endregion
 
+            #region DataManager
+            /// <summary>
+            /// This read only property returns the value of DataManager from the object DataBridge.
+            /// </summary>
+            public DataManager DataManager
+            {
+
+                get
+                {
+                    // initial value
+                    DataManager dataManager = null;
+
+                    // if DataBridge exists
+                    if (DataBridge != null)
+                    {
+                        // set the return value
+                        dataManager = DataBridge.DataManager;
+                    }
+
+                    // return value
+                    return dataManager;
+                }
+            }
+            #endregion
+
             #region Exception
             /// <summary>
             /// The last exception from the App Controller when executing
@@ -200,10 +225,10 @@ namespace DataAccessComponent.Controllers
                 get
                 {
                     // initial value
-                    if (this.exception == null)
+                    if (exception == null)
                     {
                         // Set the exception
-                        exception = this.DataBridge.Exception;
+                        exception = DataBridge.Exception;
                     }
 
                     // return value
@@ -215,7 +240,7 @@ namespace DataAccessComponent.Controllers
                     exception = value;
 
                     // Set the Databride exception
-                    this.DataBridge.Exception = value;
+                    DataBridge.Exception = value;
                 }
             }
             #endregion
@@ -229,7 +254,7 @@ namespace DataAccessComponent.Controllers
                 get
                 {
                     // initial value
-                    bool hasConnectionName = (!String.IsNullOrEmpty(this.ConnectionName));
+                    bool hasConnectionName = (!String.IsNullOrEmpty(ConnectionName));
                     
                     // return value
                     return hasConnectionName;
@@ -246,10 +271,27 @@ namespace DataAccessComponent.Controllers
                 get
                 {
                     // initial value
-                    bool hasDataBridge = (this.DataBridge != null);
+                    bool hasDataBridge = (DataBridge != null);
                     
                     // return value
                     return hasDataBridge;
+                }
+            }
+            #endregion
+
+            #region HasDataManager
+            /// <summary>
+            /// This property returns true if this object has a 'DataManager'.
+            /// </summary>
+            public bool HasDataManager
+            {
+                get
+                {
+                    // initial value
+                    bool hasDataManager = (DataManager != null);
+
+                    // return value
+                    return hasDataManager;
                 }
             }
             #endregion

@@ -29,17 +29,17 @@ namespace DataAccessComponent.DataGateway
 
         #region Private Variables
         private ApplicationController appController;
-        private string connectionName;
+        private string connectionName;        
         #endregion
 
         #region Constructor
         /// <summary>
         /// Create a new instance of a Gateway object.
         /// </summary>
-        public Gateway(string connectionName = "")
+        public Gateway(string connectionName)
         {
             // store the ConnectionName
-            this.ConnectionName = connectionName;
+            ConnectionName = connectionName;
 
             // Perform Initializations for this object
             Init();
@@ -105,10 +105,10 @@ namespace DataAccessComponent.DataGateway
                 DataConnector dataConnector = null;
 
                 // if the AppController exists
-                if (this.AppController != null)
+                if (AppController != null)
                 {
                     // return the DataConnector from the AppController
-                    dataConnector = this.AppController.GetDataConnector();
+                    dataConnector = AppController.GetDataConnector();
                 }
 
                 // return value
@@ -129,13 +129,13 @@ namespace DataAccessComponent.DataGateway
                 Exception exception = null;
 
                 // If the AppController object exists
-                if (this.HasAppController)
+                if (HasAppController)
                 {
                     // return the Exception from the AppController
-                    exception = this.AppController.Exception;
+                    exception = AppController.Exception;
 
                     // Set to null after the exception is retrieved so it does not return again
-                    this.AppController.Exception = null;
+                    AppController.Exception = null;
                 }
 
                 // return value
@@ -150,7 +150,7 @@ namespace DataAccessComponent.DataGateway
             private void Init()
             {
                 // Create Application Controller
-                this.AppController = new ApplicationController(ConnectionName);
+                AppController = new ApplicationController(ConnectionName);
             }
             #endregion
 
@@ -180,6 +180,31 @@ namespace DataAccessComponent.DataGateway
             }
             #endregion
             
+            #region DataManager
+            /// <summary>
+            /// This read only property returns the value of DataManager from the object AppController.
+            /// </summary>
+            public DataManager DataManager
+            {
+
+                get
+                {
+                    // initial value
+                    DataManager dataManager = null;
+
+                    // if AppController exists
+                    if (HasAppController)
+                    {
+                        // set the return value
+                        dataManager = AppController.DataManager;
+                    }
+
+                    // return value
+                    return dataManager;
+                }
+            }
+            #endregion
+
             #region HasAppController
             /// <summary>
             /// This property returns true if this object has an 'AppController'.
@@ -210,6 +235,23 @@ namespace DataAccessComponent.DataGateway
                     
                     // return value
                     return hasConnectionName;
+                }
+            }
+            #endregion
+            
+            #region HasDataManager
+            /// <summary>
+            /// This property returns true if this object has a 'DataManager'.
+            /// </summary>
+            public bool HasDataManager
+            {
+                get
+                {
+                    // initial value
+                    bool hasDataManager = (DataManager != null);
+
+                    // return value
+                    return hasDataManager;
                 }
             }
             #endregion

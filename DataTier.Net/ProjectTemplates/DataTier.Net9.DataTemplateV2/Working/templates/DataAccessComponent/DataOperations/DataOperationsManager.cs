@@ -30,7 +30,7 @@ namespace DataAccessComponent.DataOperations
         public DataOperationsManager(DataManager dataManagerArg)
         {
             // Save Arguments
-            this.DataManager = dataManagerArg;
+            DataManager = dataManagerArg;
 
             // Create Child DataOperationMethods
             Init();
@@ -46,7 +46,7 @@ namespace DataAccessComponent.DataOperations
             private void Init()
             {
                 // Create Child DataOperatonMethods
-                this.SystemMethods = new SystemMethods();
+                SystemMethods = new SystemMethods();
             }
             #endregion
 

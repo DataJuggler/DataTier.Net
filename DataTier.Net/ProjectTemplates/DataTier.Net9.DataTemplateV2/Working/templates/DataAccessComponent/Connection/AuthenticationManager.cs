@@ -26,13 +26,13 @@ namespace DataAccessComponent.Connection
 
         #region Methods
 
-            #region ConnectToDatabase(DataManager dataManager = null)
+            #region ConnectToDatabase(DataManager dataManager)
             /// <summary>
             /// This method reads the app.config file to 
             /// load the current configuration.
             /// </summary>
             /// <returns></returns>
-            public static DataManager ConnectToDatabase(DataManager dataManager = null)
+            public static DataManager ConnectToDatabase(DataManager dataManager)
             {
                 // locals
                 string methodName = "ConnectToDatabase";
@@ -40,13 +40,6 @@ namespace DataAccessComponent.Connection
 
                 try
                 {
-                    // if doesn't exist
-                    if (dataManager == null)
-                    {
-                        // Create a new DataManager
-                        dataManager = new DataManager();
-                    }
-
                     // If connection is not set 
                     if(String.IsNullOrEmpty(dataManager.DataConnector.ConnectionString))
                     {
