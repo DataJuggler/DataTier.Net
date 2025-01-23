@@ -106,6 +106,10 @@ For more information read the DataTier.Net User's Guide located in the Class Roo
 https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/DataTier.Net%20Users%20Guide.pdf
 
 --
+Update 11.18.2025: DataTier.Net now supports .NET 9.
+
+Update 12.21.2024: DataTier.Net now supports .NET 8.
+
 Update 12.25.2022: DataTier.Net now supports .NET 7.
 
 Update 11.15.2021: DataTier.Net now supports .NET 6;
