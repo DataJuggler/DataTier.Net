@@ -573,11 +573,11 @@ namespace DataTierClient.Forms
                     StoredProcedureSQLButton.Visible = false;
 				
 					// safeguard
-					if ((this.OpenProject == null) || (this.OpenProject.Databases == null) || (this.OpenProject.Databases.Count < 1))
+					if ((OpenProject == null) || (OpenProject.Databases == null) || (OpenProject.Databases.Count < 1))
 					{
 						// Show a message
-						string message = "The current project is corrupt. Please delete this project and create a new one.";
-						string title = "Corrupt File";
+						string message = "You must add a database before you can build. Please add a database delete and try again." + Environment.NewLine + "If the project is corrupt it is recommended to recreate it.";
+						string title = "Missing or Corrupt Database";
 
 						// Inform user corrupt database
 						MessageHelper.DisplayMessage(message, title);
@@ -585,6 +585,20 @@ namespace DataTierClient.Forms
 						// exit
 						return;
 					}
+
+                    // if the ProjectFolder deos not exist
+                    if (!Directory.Exists(OpenProject.ProjectFolder))
+                    {
+                        // Show a message
+						string message = "The project folder '" + OpenProject.ProjectFolder + "' could not be found. Edit the project and try again.";
+						string title = "Project Folder Missing";
+
+						// Inform user corrupt database
+						MessageHelper.DisplayMessage(message, title);
+
+						// exit
+						return;
+                    }
 
 					// turn on hourglass
 					this.Cursor = Cursors.WaitCursor;
