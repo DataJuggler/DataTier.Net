@@ -25,7 +25,7 @@ namespace DataAccessComponent.DataBridge
     {
 
         #region Private Variables
-        private DataOperationsManager dataOperations;
+        // private DataOperationsManager dataOperations;
         private DataManager dataManager;        
         private AuthenticationManager loginManager;
         private Exception exception;
@@ -81,7 +81,7 @@ namespace DataAccessComponent.DataBridge
                 DataManager = new DataManager(ConnectionName);
 
                 // Create DataOperations
-                DataOperations = new DataOperationsManager(DataManager);
+                // DataOperations = new DataOperationsManager(DataManager);
             }
             #endregion
 
@@ -178,11 +178,11 @@ namespace DataAccessComponent.DataBridge
             /// methods to execute. All of these methods must meet 
             /// the format of the delegate in DataBridgeManager.DataOperationsManager
             /// </summary>
-            public DataOperationsManager DataOperations
-            {
-                get { return dataOperations; }
-                set { dataOperations = value; }
-            }
+            //public DataOperationsManager DataOperations
+            //{
+            //    get { return dataOperations; }
+            //    set { dataOperations = value; }
+            //}
             #endregion
 
             #region Exception

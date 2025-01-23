@@ -83,6 +83,7 @@ namespace ProjectConverter
             replacements.Add(new Replacement("class Connection", "class ConnectionConstants"));
             replacements.Add(new Replacement("DataAccessComponent.DataManager", "DataAccessComponent.Data"));
             replacements.Add(new Replacement("this.", ""));
+            replacements.Add(new Replacement("AppController.ControllerManager.", ""));
 
             // if the value for HasSelectedProject is true
             if (HasSelectedProject)
@@ -157,18 +158,10 @@ namespace ProjectConverter
                             // Delete
                             File.Delete(destinationFileName);
                         }
-
-                        // If the file exists
-                        if (File.Exists(authenticationManagerFile))
-                        {
-                            // Delete
-                            File.Delete(authenticationManagerFile);
-                        }
                         
                         // Copy the ConnectionConstants
                         File.Copy(thisConnectionFile, destinationFileName);
-                        File.Copy(thisAuthenticationManager, authenticationManagerFile);
-
+                        
                         // If the connectionName string exists
                         if (TextHelper.Exists(connectionName))
                         {
@@ -176,15 +169,28 @@ namespace ProjectConverter
                             TextHelper.ReplaceTextInFile(destinationFileName, ConnectionConstants.Name, connectionName);
                         }
 
-                        // Get the DirectoryName
-                        string directoryName = Path.GetDirectoryName(destinationFileName);
-
-                        // Rename the files
-                        ReplaceTextInDirectory(directoryName, ".cs", replacements);
-
                         // Disiplay Result
                         StatusListBox.Items.Add("Connection.cs renamed to ConnectionConstants.cs Complete.", 0);
                     }
+
+                    // If the file exists
+                    if (File.Exists(authenticationManagerFile))
+                    {
+                        // Delete
+                        File.Delete(authenticationManagerFile);
+
+                        // Copy this AuthenticationManager file
+                        File.Copy(thisAuthenticationManager, authenticationManagerFile);
+                    }
+
+                     // Get the DirectoryName
+                    string directoryName = Path.GetDirectoryName(destinationFileName);
+
+                    // Rename the files
+                    ReplaceTextInDirectory(directoryName, ".cs", replacements);
+
+                     // Disiplay Result
+                        StatusListBox.Items.Add("AuthenticationManager update Complete.", 0);
 
                     // Set the Controllers
                     string controllerFolder = Path.Combine(SelectedProject.ProjectFolder, @"ApplicationLogicComponent\Controllers");
@@ -230,6 +236,9 @@ namespace ProjectConverter
                     // Copy the Gateway
                     CopyDirectory(existingGatewayFolder, gatewayDestination);
 
+                    // Replace out invalid using statements
+                    ReplaceTextInDirectory(gatewayDestination, ".cs", replacements);
+
                     // Disiplay Result
                     StatusListBox.Items.Add("Gateway Folder Copy Complete.", 0);
 
@@ -263,6 +272,8 @@ namespace ProjectConverter
                     string dataManagerDestination = Path.Combine(selectedProject.ProjectFolder, @"DataAccessComponent\Data");
                     string thisDataHelper = Path.Combine(currentDirectory, @"Data\DataHelper.cs");
                     string existingDataHelper = Path.Combine(SelectedProject.ProjectFolder, @"DataAccessComponent\Data\DataHelper.cs");
+                    string thisDataManager = Path.Combine(currentDirectory, @"Data\DataManager.cs");
+                    string existingDataManager = Path.Combine(SelectedProject.ProjectFolder, @"DataAccessComponent\Data\DataManager.cs");
 
                     if (Directory.Exists(dataManagerFolder))
                     {
@@ -298,6 +309,30 @@ namespace ProjectConverter
                             TextHelper.ReplaceTextInFile(existingDataHelper, currentDataJugglerNetVersion, dataJugglerNetVersion);
                         }
                     }
+
+                    // If the one exists on their project (should)
+                    if (File.Exists(existingDataManager))
+                    {
+                        // Delete                        
+                        File.Delete(existingDataManager);
+                    }
+                    
+                    // Copy this file
+                    File.Copy(thisDataManager, existingDataManager);
+
+                    // ControllerManager must be removed
+                    string controllerManager = Path.Combine(controllerDestination, "ControllerManager.cs");
+
+                    // If the controllerManager Exists On Disk
+                    if (FileHelper.Exists(controllerManager))
+                    {
+                        // Delete thie file
+                        File.Delete(controllerManager);
+                    }
+
+                    
+
+                    
 
                     // Replace out the text in DataManager
                     ReplaceTextInDirectory(dataManagerDestination, ".cs", replacements);
@@ -414,6 +449,45 @@ namespace ProjectConverter
                         // Remove the Controllers
                         StatusListBox.Items.Add("Controllers Were Removed.", 0);
                     }
+
+                    // load the references
+                    List<ProjectReferencesView> references = gateway.LoadProjectReferencesViewsForProjectId(SelectedProject.ProjectId);
+
+                    // Iterate the collection of ProjectReferencesView objects
+                    foreach (ProjectReferencesView reference in references)
+                    {
+                        // if the reference contains ApplicationLogicComponent
+                        if (reference.ReferenceName.Contains("ApplicationLogicComponent"))
+                        {
+                            // Not an efficient way of doing this, but until ProjectReferencesView contains ReferencesId
+                            // All the References have to be loaded for this references set.
+                            List<ProjectReference> projectReferences = gateway.LoadProjectReferencesForReferencesSetId(reference.ReferencesSetId);
+
+                            // If the projectReferences collection exists and has one or more items
+                            if (ListHelper.HasOneOrMoreItems(projectReferences))
+                            {
+                                // Iterate the collection of ProjectReference objects
+                                foreach (ProjectReference projectReference in projectReferences)
+                                {
+                                    // if this reference contains
+                                    if (projectReference.ReferenceName.Contains("ApplicationLogicComponent"))
+                                    {
+                                        // change the name
+                                        projectReference.ReferenceName = projectReference.ReferenceName.Replace("ApplicationLogicComponent", "DataAccessComponent");
+
+                                        // Clone this
+                                        ProjectReference tempReference = projectReference.Clone();
+
+                                        // Perform Save
+                                        saved = gateway.SaveProjectReference(ref tempReference);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // Set the Backup Path
+                    StatusListBox.Items.Add("Project References Have Been Updated", 0);
                 }
                 else
                 {
@@ -461,6 +535,11 @@ namespace ProjectConverter
                 // Enable or disable controls
                 UIEnable();
             }
+            else
+            {
+                // Get the LastException
+                gateway.GetLastException();
+            }
         }
         #endregion
 
@@ -477,19 +556,25 @@ namespace ProjectConverter
             // if does not already exist
             if (!Directory.Exists(destinationDir))
             {
+                // Create the Destination Directory
                 Directory.CreateDirectory(destinationDir);
             }
 
-            foreach (var file in Directory.GetFiles(sourceDir))
+            // if the directory exists
+            if (Directory.Exists(sourceDir))
             {
-                string destFile = Path.Combine(destinationDir, Path.GetFileName(file));
-                File.Copy(file, destFile, true);
-            }
+                foreach (var file in Directory.GetFiles(sourceDir))
+                {
+                    string destFile = Path.Combine(destinationDir, Path.GetFileName(file));
+                    File.Copy(file, destFile, true);
+                }
 
-            foreach (var dir in Directory.GetDirectories(sourceDir))
-            {
-                string destDir = Path.Combine(destinationDir, Path.GetFileName(dir));
-                CopyDirectory(dir, destDir);
+                // iterate the sub directories
+                foreach (var dir in Directory.GetDirectories(sourceDir))
+                {
+                    string destDir = Path.Combine(destinationDir, Path.GetFileName(dir));
+                    CopyDirectory(dir, destDir);
+                }
             }
         }
         #endregion

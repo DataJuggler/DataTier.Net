@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <PackageIcon>DataTier.Net.png</PackageIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Enumerations.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\DataTier.Net\Images\DataTier.Net.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="Enumerations\Enumerations.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DataJuggler.Win.Controls" Version="9.1.5" />
+  </ItemGroup>
+
+</Project>

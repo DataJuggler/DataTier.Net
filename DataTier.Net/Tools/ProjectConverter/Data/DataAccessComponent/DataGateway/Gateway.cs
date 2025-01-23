@@ -1415,6 +1415,32 @@ namespace DataAccessComponent.DataGateway
             }
             #endregion
 
+            #region LoadProjectReferencesForReferencesSetId(int referencesSetId)
+            /// <summary>
+            /// This method is used to load 'ProjectReference' objects for the ReferencesSetId given.
+            /// </summary>
+            public List<ProjectReference> LoadProjectReferencesForReferencesSetId(int referencesSetId)
+            {
+                // initial value
+                List<ProjectReference> projectReferences = null;
+                
+                // Create a temp ProjectReference object
+                ProjectReference tempProjectReference = new ProjectReference();
+                
+                // Set the value for LoadByReferencesSetId to true
+                tempProjectReference.LoadByReferencesSetId = true;
+                
+                // Set the value for ReferencesSetId
+                tempProjectReference.ReferencesSetId = referencesSetId;
+                
+                // Perform the load
+                projectReferences = LoadProjectReferences(tempProjectReference);
+                
+                // return value
+                return projectReferences;
+            }
+            #endregion
+            
             #region LoadProjectReferencesViews(ProjectReferencesView tempProjectReferencesView = null)
             /// <summary>
             /// This method loads a collection of 'ProjectReferencesView' objects.
@@ -1436,6 +1462,32 @@ namespace DataAccessComponent.DataGateway
             }
             #endregion
 
+            #region LoadProjectReferencesViewsForProjectId(int projectId)
+            /// <summary>
+            /// This method is used to load 'ProjectReferencesView' objects for the ProjectId given.
+            /// </summary>
+            public List<ProjectReferencesView> LoadProjectReferencesViewsForProjectId(int projectId)
+            {
+                // initial value
+                List<ProjectReferencesView> projectReferencesViews = null;
+                
+                // Create a temp ProjectReferencesView object
+                ProjectReferencesView tempProjectReferencesView = new ProjectReferencesView();
+                
+                // Set the value for LoadByProjectId to true
+                tempProjectReferencesView.LoadByProjectId = true;
+                
+                // Set the value for ProjectId
+                tempProjectReferencesView.ProjectId = projectId;
+                
+                // Perform the load
+                projectReferencesViews = LoadProjectReferencesViews(tempProjectReferencesView);
+                
+                // return value
+                return projectReferencesViews;
+            }
+            #endregion
+            
             #region LoadProjects(Project tempProject = null)
             /// <summary>
             /// This method loads a collection of 'Project' objects.
@@ -1872,4 +1924,3 @@ namespace DataAccessComponent.DataGateway
     #endregion
 
 }
-

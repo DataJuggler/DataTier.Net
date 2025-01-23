@@ -3,7 +3,7 @@
   <PropertyGroup>
     
     <PackageType>Template</PackageType>
-    <PackageVersion>9.10.5</PackageVersion>
+    <PackageVersion>9.10.6</PackageVersion>
     <PackageId>DataJuggler.DataTier.Net9.ProjectTemplatesV2</PackageId>
     <Title>DataJuggler.DataTier.Net9.ProjectTemplatesV2</Title>
     <Authors>Data Juggler</Authors>
@@ -23,7 +23,10 @@ and the Data Gateway were both moved to the Data Access Component.
     <PackageProjectUrl>https://github.com/DataJuggler/DataTier.Net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/DataJuggler/DataTier.Net.git</RepositoryUrl>
     <RepositoryType>Git/GitHub</RepositoryType>
-	<PackageReleaseNotes>Update 1.13.2025: The ControllerManager is being phased out.
+	<PackageReleaseNotes>
+		Update 1.23.2025: DataOperationsManager is phased out.
+		
+		Update 1.13.2025: The ControllerManager is being phased out.
 
 Update 11.18.2024: This template is for .Net9.
 

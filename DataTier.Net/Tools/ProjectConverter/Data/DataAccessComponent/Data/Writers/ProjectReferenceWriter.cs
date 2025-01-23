@@ -1,5 +1,4 @@
 
-
 #region using statements
 
 using DataAccessComponent.StoredProcedureManager.DeleteProcedures;
@@ -12,7 +11,6 @@ using System;
 using System.Data;
 
 #endregion
-
 
 namespace DataAccessComponent.Data.Writers
 {
@@ -27,10 +25,38 @@ namespace DataAccessComponent.Data.Writers
 
         #region Static Methods
 
-            // *******************************************
-            // Write any overrides or custom methods here.
-            // *******************************************
+            #region CreateFetchAllProjectReferencesStoredProcedure(ProjectReference projectReference)
+            /// <summary>
+            /// This method creates an instance of a
+            /// 'FetchAllProjectReferencesStoredProcedure' object and
+            /// creates the sql parameter[] array needed
+            /// to execute the procedure 'ProjectReference_FetchAll'.
+            /// </summary>
+            /// <returns>An instance of a(n) 'FetchAllProjectReferencesStoredProcedure' object.</returns>
+            public static new FetchAllProjectReferencesStoredProcedure CreateFetchAllProjectReferencesStoredProcedure(ProjectReference projectReference)
+            {
+                // Initial value
+                FetchAllProjectReferencesStoredProcedure fetchAllProjectReferencesStoredProcedure = new FetchAllProjectReferencesStoredProcedure();
 
+                // if the projectReference object exists
+                if (projectReference != null)
+                {
+                    // if LoadByReferencesSetId is true
+                    if (projectReference.LoadByReferencesSetId)
+                    {
+                        // Change the procedure name
+                        fetchAllProjectReferencesStoredProcedure.ProcedureName = "ProjectReference_FetchAllForReferencesSetId";
+                        
+                        // Create the @ReferencesSetId parameter
+                        fetchAllProjectReferencesStoredProcedure.Parameters = SqlParameterHelper.CreateSqlParameters("@ReferencesSetId", projectReference.ReferencesSetId);
+                    }
+                }
+                
+                // return value
+                return fetchAllProjectReferencesStoredProcedure;
+            }
+            #endregion
+            
         #endregion
 
     }
