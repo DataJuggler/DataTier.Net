@@ -27,11 +27,11 @@ namespace DataTierClient.Builders
             #region Constants
             #endregion
 
-            #region Variables
-            // variables
+            #region Variables            
             private Project currentProject;
             private DataJuggler.Net.DataManager dm;
             private bool businessObjectPass;
+            private string failedReason;
 			#endregion 
             
         #endregion
@@ -230,7 +230,7 @@ namespace DataTierClient.Builders
                 // Create DataManager
                 this.Setup(currentProject);
 
-                // This can not be .NET Framework, .NET5, .NET6 or .NET7.
+                // This can not be .NET Framework, .NET5, .NET6, .NET7, .NET8 or .NET9
                 TargetFrameworkEnum targetFramework = (TargetFrameworkEnum) currentProject.TargetFramework;
                
                 // Create New ClassWriter Object
@@ -244,6 +244,13 @@ namespace DataTierClient.Builders
                 {
                     // Write DataManager
                     success = classWriter.WriteDataClasses(DataManager);
+
+                    // if not success
+                    if (!success)
+                    {
+                        // Set the FailedReason
+                        FailedReason = classWriter.FailedReason;
+                    }
                 }
                 else
                 {
@@ -481,6 +488,17 @@ namespace DataTierClient.Builders
             } 
             #endregion
     
+            #region FailedReason
+            /// <summary>
+            /// This property gets or sets the value for 'FailedReason'.
+            /// </summary>
+            public string FailedReason
+            {
+                get { return failedReason; }
+                set { failedReason = value; }
+            }
+            #endregion
+            
             #region ProjectOutputFolder
             public string ProjectOutputFolder
             {

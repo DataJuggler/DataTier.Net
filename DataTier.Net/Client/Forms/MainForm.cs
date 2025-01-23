@@ -888,8 +888,8 @@ namespace DataTierClient.Forms
 
                 try
                 {
-                    // if data tables exists
-                    if (this.DataTables != null)
+                    // if data tables exists and has at least 1 item
+                    if (ListHelper.HasOneOrMoreItems(DataTables))
                     {
                         // Create ClassBuilder
                         ClassBuilder classBuilder = new ClassBuilder(false);

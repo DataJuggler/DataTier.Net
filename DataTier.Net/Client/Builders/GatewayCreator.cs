@@ -59,7 +59,7 @@ namespace DataTierClient.Builders
             internal void CreateGatewayMethods()
             {
                 // if the GatewayPath exists
-                if ((HasGatewayPath) && (File.Exists(GatewayPath)) && (DataTables != null) && (DataTables.Count > 0))
+                if ((HasGatewayPath) && (File.Exists(GatewayPath)) && (ListHelper.HasOneOrMoreItems(DataTables)))
                 {
                     // set the text of the existing Gateway
                     string gatewayText = File.ReadAllText(GatewayPath);
@@ -109,7 +109,7 @@ namespace DataTierClient.Builders
                 else
                 {
                     // if the DataTables do not exist
-                    if (DataTables == null)
+                    if (ListHelper.HasOneOrMoreItems(dataTables))
                     {
                         // raise an exception so the build fails
                         throw new Exception("The DataTables collection does not exist.");

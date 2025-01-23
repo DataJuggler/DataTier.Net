@@ -42,7 +42,7 @@
       <HintPath>..\..\..\packages\DataJuggler.Core.UltimateHelper.1.7.1\lib\net48\DataJuggler.Core.UltimateHelper.dll</HintPath>
     </Reference>
     <Reference Include="DataJuggler.Net, Version=6.4.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\DataJuggler.Net.6.4.2\lib\net48\DataJuggler.Net.dll</HintPath>
+      <HintPath>..\..\..\packages\DataJuggler.Net.6.4.3\lib\net48\DataJuggler.Net.dll</HintPath>
     </Reference>
     <Reference Include="DataJuggler.Net.Cryptography, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\DataJuggler.Net.Cryptography.1.0.0\lib\net461\DataJuggler.Net.Cryptography.dll</HintPath>

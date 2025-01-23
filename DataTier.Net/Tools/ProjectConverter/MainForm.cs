@@ -1,0 +1,676 @@
+
+
+#region using statements
+
+using DataAccessComponent.Connection;
+using DataAccessComponent.DataGateway;
+using ObjectLibrary.BusinessObjects;
+using ObjectLibrary.Enumerations;
+using DataJuggler.UltimateHelper;
+using DataJuggler.UltimateHelper.Objects;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Text;
+using System.Data;
+
+#endregion
+
+namespace ProjectConverter
+{
+
+    #region class MainForm
+    /// <summary>
+    /// This class is the Main Form for this project.
+    /// </summary>
+    public partial class MainForm : Form
+    {
+
+        #region Private Variables
+        private bool confirmationVisible;
+        private bool confirmed;
+        private Project selectedProject;
+        #endregion
+
+        #region Constructor
+        /// <summary>
+        /// Create a new instance of a 'MainForm' object.
+        /// </summary>
+        public MainForm()
+        {
+            // Create Controls
+            InitializeComponent();
+
+            // Set the ConnectionName
+            ConnectionNameControl.Text = "DataTierNetConnection";
+
+            // Default
+            BackupPathControl.Text = @"C:\Backup\RunnerData";
+
+            // Select File
+            SourceControl.Text = @"C:\Projects\GitHub\Runner\Data\DataTier.Net6.ClassLibrary.sln";
+        }
+        #endregion
+
+        #region Events
+
+        #region CancelConvertButton_Click(object sender, EventArgs e)
+        /// <summary>
+        /// event is fired when the 'CancelConvertButton' is clicked.
+        /// </summary>
+        private void CancelConvertButton_Click(object sender, EventArgs e)
+        {
+            // Set to false            
+            ConfirmationVisible = false;
+
+            // Refresh
+            UIEnable();
+        }
+        #endregion
+
+        #region ConfirmButton_Click(object sender, EventArgs e)
+        /// <summary>
+        /// event is fired when the 'ConfirmButton' is clicked.
+        /// </summary>
+        private void ConfirmButton_Click(object sender, EventArgs e)
+        {
+            // get the currentDirectory
+            string currentDirectory = Environment.CurrentDirectory;
+
+            // Create a list of replacements
+            List<Replacement> replacements = new List<Replacement>();
+
+            // Add two new Replacements
+            replacements.Add(new Replacement("ApplicationLogicComponent", "DataAccessComponent"));
+            replacements.Add(new Replacement("class Connection", "class ConnectionConstants"));
+            replacements.Add(new Replacement("DataAccessComponent.DataManager", "DataAccessComponent.Data"));
+            replacements.Add(new Replacement("this.", ""));
+
+            // if the value for HasSelectedProject is true
+            if (HasSelectedProject)
+            {
+                // Set to true
+                Confirmed = true;
+
+                // Hide the ConfirmPanel
+                ConfirmationVisible = false;
+
+                // Enable or disable controls
+                UIEnable();
+
+                // if checked
+                if ((BackupCheckBox.Checked) && (BackupPathControl.HasText))
+                {  
+                    // Backup The Project
+                    CopyDirectory(SelectedProject.ProjectFolder, BackupPathControl.Text);
+
+                    // Set the Backup Path
+                    StatusListBox.Items.Add("Backup Complete.", 0);
+
+                    // Copy the Controllers
+                    string connectionFolder = Path.Combine(SelectedProject.ProjectFolder, @"ApplicationLogicComponent\Connection");
+                    string connectionDestination = Path.Combine(selectedProject.ProjectFolder, @"DataAccessComponent\Connection");
+
+                    // Move the folder
+                    CopyDirectory(connectionFolder, connectionDestination);
+
+                    // Disiplay Result
+                    StatusListBox.Items.Add("Connection Folder Copy Complete.", 0);
+
+                    // Copy the Exceptions
+                    string exceptionsFolder = Path.Combine(SelectedProject.ProjectFolder, @"ApplicationLogicComponent\Exceptions");
+                    string exceptionsDestination = Path.Combine(selectedProject.ProjectFolder, @"DataAccessComponent\Exceptions");
+
+                    // Move the folder
+                    CopyDirectory(exceptionsFolder, exceptionsDestination);
+
+                    List<string> files = FileHelper.GetFiles(exceptionsDestination, ".cs");
+                    if (ListHelper.HasOneOrMoreItems(files))
+                    {
+                        foreach (string file in files)
+                        {
+                            // Replace ApplicationLogicComponent with DataAccessComponent
+                            TextHelper.ReplaceTextInFile(file, "ApplicationLogicComponent", "DataAccessComponent");
+                        }
+                    }
+
+                    // Disiplay Result
+                    StatusListBox.Items.Add("Exceptions Folder Copy Complete.", 0);
+
+                    // get a path to the ConnectionFile
+                    string connectionFile = Path.Combine(connectionDestination, "Connection.cs");
+                    string authenticationManagerFile = Path.Combine(connectionDestination, "AuthenticationManager.cs");
+                    string thisConnectionFile = Path.Combine(currentDirectory, @"Connection\ConnectionConstants.cs");
+                    string thisAuthenticationManager = Path.Combine(currentDirectory, @"Connection\AuthenticationManager.cs");
+                    string destinationFileName = connectionFile.Replace("Connection.cs", "ConnectionConstants.cs");
+                    
+                    // if the file exists
+                    if (FileHelper.Exists(connectionFile))
+                    {
+                        // Find the ConnectionName
+                        string connectionName =  FindConnectionName(connectionFile);
+
+                        // Delete the old one
+                        File.Delete(connectionFile);
+
+                        // If the file exists
+                        if (File.Exists(destinationFileName))
+                        {
+                            // Delete
+                            File.Delete(destinationFileName);
+                        }
+
+                        // If the file exists
+                        if (File.Exists(authenticationManagerFile))
+                        {
+                            // Delete
+                            File.Delete(authenticationManagerFile);
+                        }
+                        
+                        // Copy the ConnectionConstants
+                        File.Copy(thisConnectionFile, destinationFileName);
+                        File.Copy(thisAuthenticationManager, authenticationManagerFile);
+
+                        // If the connectionName string exists
+                        if (TextHelper.Exists(connectionName))
+                        {
+                            // Update the ConnectionName
+                            TextHelper.ReplaceTextInFile(destinationFileName, ConnectionConstants.Name, connectionName);
+                        }
+
+                        // Get the DirectoryName
+                        string directoryName = Path.GetDirectoryName(destinationFileName);
+
+                        // Rename the files
+                        ReplaceTextInDirectory(directoryName, ".cs", replacements);
+
+                        // Disiplay Result
+                        StatusListBox.Items.Add("Connection.cs renamed to ConnectionConstants.cs Complete.", 0);
+                    }
+
+                    // Set the Controllers
+                    string controllerFolder = Path.Combine(SelectedProject.ProjectFolder, @"ApplicationLogicComponent\Controllers");
+                    string controllerDestination = Path.Combine(selectedProject.ProjectFolder, @"DataAccessComponent\Controllers");
+                    string thisApplicationController = Path.Combine(currentDirectory, @"Controllers\ApplicationController.cs");
+                    string existingApplicationController = Path.Combine(controllerDestination, "ApplicationController.cs");
+                    string thisSystemController = Path.Combine(currentDirectory, @"Controllers\SystemController.cs");
+                    string existingSystemController = Path.Combine(controllerDestination, "SystemController.cs");
+
+                    // Move the Controlelrs folder
+                    CopyDirectory(controllerFolder, controllerDestination);
+
+                    // if the existingApplicationController exists on disk
+                    if (File.Exists(existingApplicationController))
+                    {
+                        // Delete this file
+                        File.Delete(existingApplicationController);
+                    }
+
+                    // Copy this file
+                    File.Copy(thisApplicationController, existingApplicationController);
+
+                    // if the existingSystemController exists on disk
+                    if (File.Exists(existingSystemController))
+                    {
+                        // Delete this file
+                        File.Delete(existingSystemController);
+                    }
+
+                    // Copy this file
+                    File.Copy(thisSystemController, existingSystemController);
+
+                    // Replace all the text in the directory
+                    ReplaceTextInDirectory(controllerDestination, ".cs", replacements);
+
+                    // Disiplay Result
+                    StatusListBox.Items.Add("Controllers Folder Copy Complete.", 0);
+
+                    // Get the existin Gateway folder
+                    string existingGatewayFolder = Path.Combine(SelectedProject.ProjectFolder, @"DataGateway");
+                    string gatewayDestination = Path.Combine(SelectedProject.ProjectFolder, @"DataAccessComponent\DataGateway");
+
+                    // Copy the Gateway
+                    CopyDirectory(existingGatewayFolder, gatewayDestination);
+
+                    // Disiplay Result
+                    StatusListBox.Items.Add("Gateway Folder Copy Complete.", 0);
+
+                    // Copy the Controllers
+                    string dataOperationsFolder = Path.Combine(SelectedProject.ProjectFolder, @"ApplicationLogicComponent\DataOperations");
+                    string dataOperationsDestination = Path.Combine(selectedProject.ProjectFolder, @"DataAccessComponent\DataOperations");
+                    string thisSystemMethods = Path.Combine(currentDirectory, @"DataOperations\SystemMethods.cs");
+                    string existingSystemMethods = Path.Combine(SelectedProject.ProjectFolder, @"DataAccessComponent\DataOperations\SystemMethods.cs");
+
+                    // Move the Data Operations Folder
+                    CopyDirectory(dataOperationsFolder, dataOperationsDestination);
+
+                    // If the file exists
+                    if (File.Exists(existingSystemMethods))
+                    {
+                        // Delete
+                        File.Delete(existingSystemMethods);
+                    }
+
+                    // Now copy this file
+                    File.Copy(thisSystemMethods, existingSystemMethods);
+
+                    // Replace the files in DataOperations
+                    ReplaceTextInDirectory(dataOperationsDestination, ".cs", replacements);
+
+                    // Disiplay Result
+                    StatusListBox.Items.Add("Data Operations Folder Copy Complete.", 0);
+
+                    // Handle Data
+                    string dataManagerFolder = Path.Combine(selectedProject.ProjectFolder, @"DataAccessComponent\DataManager");
+                    string dataManagerDestination = Path.Combine(selectedProject.ProjectFolder, @"DataAccessComponent\Data");
+                    string thisDataHelper = Path.Combine(currentDirectory, @"Data\DataHelper.cs");
+                    string existingDataHelper = Path.Combine(SelectedProject.ProjectFolder, @"DataAccessComponent\Data\DataHelper.cs");
+
+                    if (Directory.Exists(dataManagerFolder))
+                    {
+                        // Perform the Move
+                        Directory.Move(dataManagerFolder, dataManagerDestination);
+                    }
+
+                    // local
+                    string dataJugglerNetVersion = "";
+
+                    // If the one exists on their project (should)
+                    if (File.Exists(existingDataHelper))
+                    {
+                        // get using DataJuggler.NET8.Sql; (example)
+                        dataJugglerNetVersion = FindExistingDataJugglerNetVersion(existingDataHelper);
+
+                        // Delete                        
+                        File.Delete(existingDataHelper);
+                    }
+                    
+                    // Copy this file
+                    File.Copy(thisDataHelper, existingDataHelper);
+
+                    // If the dataJugglerNetVersion string exists
+                    if (TextHelper.Exists(dataJugglerNetVersion))
+                    {
+                        string currentDataJugglerNetVersion = "using DataJuggler.NET9.Sql;";
+
+                        // if not equal
+                        if (!TextHelper.IsEqual(dataJugglerNetVersion, currentDataJugglerNetVersion))
+                        {
+                            // Replace Text in a File
+                            TextHelper.ReplaceTextInFile(existingDataHelper, currentDataJugglerNetVersion, dataJugglerNetVersion);
+                        }
+                    }
+
+                    // Replace out the text in DataManager
+                    ReplaceTextInDirectory(dataManagerDestination, ".cs", replacements);
+
+                    // Now the project file must be edited
+                    string dacProjectFile = Path.Combine(selectedProject.ProjectFolder, @"DataAccessComponent\DataAccessComponent.csproj");
+
+                    // Create a seccond list of replacements
+                    List<Replacement> replacements2 = new List<Replacement>();
+
+                    // <Folder Include="DataManager\Readers\" />
+                    // <Folder Include="DataManager\Writers\" />
+
+                    // Add each of these
+                    replacements2.Add(new Replacement("<Folder Include=\"DataManager\\Readers\\\" />", "<Folder Include=\"Data\\Readers\\\" />"));
+                    replacements2.Add(new Replacement("<Folder Include=\"DataManager\\Writers\\\" />", "<Folder Include=\"Data\\Writers\\\" />"));
+
+                    // Replace the text in the file
+                    TextHelper.ReplaceTextInFile(dacProjectFile, replacements2);
+
+                    // Show a message
+                    StatusListBox.Items.Add("DataManager renamed to Data Complete", 0);
+
+                    // Copy the Controllers
+                    string dataBridgeFolder = Path.Combine(SelectedProject.ProjectFolder, @"ApplicationLogicComponent\DataBridge");
+                    string dataBridgeDestination = Path.Combine(selectedProject.ProjectFolder, @"DataAccessComponent\DataBridge");
+                    string thisDataBridge = Path.Combine(currentDirectory, @"DataBridge\DataBridgeManager.cs");
+                    string existingDataBridge = Path.Combine(SelectedProject.ProjectFolder, @"DataAccessComponent\DataBridge\DataBridgeManager.cs");
+
+                    // Move the Data Operations Folder
+                    CopyDirectory(dataBridgeFolder, dataBridgeDestination);
+
+                    // If the file exists
+                    if (File.Exists(existingDataBridge))
+                    {
+                        // Delete
+                        File.Delete(existingDataBridge);
+                    }
+
+                    // Now copy this DataBridge
+                    File.Move(thisDataBridge, existingDataBridge);
+
+                    // Replace out ApplicationLogicComponent for for DataAccessComponent
+                    ReplaceTextInDirectory(dataBridgeDestination, ".cs", replacements);
+
+                    // Disiplay Result
+                    StatusListBox.Items.Add("Data Bridge Folder Copy Complete.", 0);
+
+                    // Logging Folder comes from this project
+                    // Copy the Controllers
+                    
+                    // set the logging folder and destination
+                    string loggingFolder = Path.Combine(currentDirectory, @"Logging");
+                    string loggingFolderDestination = Path.Combine(selectedProject.ProjectFolder, @"DataAccessComponent\Logging");
+
+                    // Move the Data Operations Folder
+                    CopyDirectory(loggingFolder, loggingFolderDestination);
+
+                    // Set the Backup Path
+                    StatusListBox.Items.Add("Logging Folder Copy Complete", 0);
+
+                    // Update to version2
+                    SelectedProject.TemplateVersion = 2;
+
+                    // Update the ChangedFolders
+                    SelectedProject.ControllerFolder = controllerDestination;
+                    SelectedProject.DataManagerFolder = dataManagerDestination;
+                    SelectedProject.DataOperationsFolder = dataOperationsDestination;
+                    SelectedProject.DataWriterFolder = Path.Combine(dataManagerDestination, @"Writers");
+                    SelectedProject.ReaderFolder = Path.Combine(dataManagerDestination, @"Readers");
+                    SelectedProject.StoredProcedureObjectFolder = Path.Combine(SelectedProject.ProjectFolder, @"DataAccessComponent\StoredProcedureManager");
+                    SelectedProject.StoredProcsFolder = Path.Combine(SelectedProject.ProjectFolder, @"DataAccessComponent\StoredProcedureManager\StoredProcedureSQL");
+
+                    // update
+                    Gateway gateway = new Gateway(ConnectionConstants.Name);
+
+                    // Save this project
+                    bool saved = gateway.SaveProject(ref selectedProject);
+
+                    // if the value for saved is true
+                    if (saved)
+                    {
+                        // Show success
+                        StatusListBox.Items.Add("Project paths have been updated.", 0);
+                    }
+                    else
+                    {
+                        // Show success
+                        StatusListBox.Items.Add("Project path update failed", 1);
+                    }
+
+                    // Now the Controllers need to be removed
+
+                    // Load the Tables
+                    List<DTNTable> tables = gateway.LoadDTNTablesForProjectId(SelectedProject.ProjectId);
+
+                    // If the tables collection exists and has one or more items
+                    if (ListHelper.HasOneOrMoreItems(tables))
+                    {
+                        // Iterate the collection of DTNTable objects
+                        foreach (DTNTable table in tables)
+                        {
+                            // Get the path
+                            string path = Path.Combine(SelectedProject.ProjectFolder, @"DataAccessComponent\Controllers\" + table.TableName + "Controller.cs");
+
+                            // If the path Exists On Disk
+                            if (FileHelper.Exists(path))
+                            {
+                                // Delete this file
+                                File.Delete(path);
+                            }
+                        }
+
+                        // Remove the Controllers
+                        StatusListBox.Items.Add("Controllers Were Removed.", 0);
+                    }
+                }
+                else
+                {
+                    // Set the Backup Path
+                    StatusListBox.Items.Add("Backup Path Must Be Set.", 1);
+                }
+            }
+        }
+        #endregion
+        
+        #region ConvertProjectButton_Click(object sender, EventArgs e)
+        /// <summary>
+        /// event is fired when the 'ConvertProjectButton' is clicked.
+        /// </summary>
+        private void ConvertProjectButton_Click(object sender, EventArgs e)
+        {
+            // Create a fileInfo
+            FileInfo fileInfo = new FileInfo(SourceControl.Text);
+
+            // Get the selectedFolder
+            string selectedfolder = fileInfo.Directory.FullName;
+
+            // Create a new instance of a 'Gateway' object.
+            Gateway gateway = new Gateway(ConnectionConstants.Name);
+
+            // Load the project
+            List<Project> projects = gateway.LoadProjects();
+
+            // If the projects collection exists and has one or more items
+            if (ListHelper.HasOneOrMoreItems(projects))
+            {
+                // Get the tempSelectedProject
+                SelectedProject = projects.FirstOrDefault(x => x.ProjectFolder == fileInfo.Directory.FullName);
+
+                // Show the Panel if the SelectedProject exists and it hasn't been confirmed yet
+                ConfirmationVisible = (HasSelectedProject && !Confirmed);
+
+                // if the value for HasSelectedProject is true
+                if (HasSelectedProject)
+                {
+                    // Set the TextBox
+                    ProjectNameTextBox.Text = SelectedProject.ProjectName;
+                }
+
+                // Enable or disable controls
+                UIEnable();
+            }
+        }
+        #endregion
+
+        #endregion
+
+        #region Methods
+
+        #region CopyDirectory(string sourceDir, string destinationDir)
+        /// <summary>
+        /// method returns the Directory
+        /// </summary>
+        public static void CopyDirectory(string sourceDir, string destinationDir)
+        {
+            // if does not already exist
+            if (!Directory.Exists(destinationDir))
+            {
+                Directory.CreateDirectory(destinationDir);
+            }
+
+            foreach (var file in Directory.GetFiles(sourceDir))
+            {
+                string destFile = Path.Combine(destinationDir, Path.GetFileName(file));
+                File.Copy(file, destFile, true);
+            }
+
+            foreach (var dir in Directory.GetDirectories(sourceDir))
+            {
+                string destDir = Path.Combine(destinationDir, Path.GetFileName(dir));
+                CopyDirectory(dir, destDir);
+            }
+        }
+        #endregion
+
+        #region FindConnectionName(string path)
+        /// <summary>
+        /// Find Connection Name
+        /// </summary>
+        public string FindConnectionName(string path)
+        {
+            // initial value
+            string connectionName = "";
+
+            // Get the textLines
+            List<TextLine> textLines = TextHelper.GetTextLinesFromFile(path);
+
+            // If the textLines collection exists and has one or more items
+            if (ListHelper.HasOneOrMoreItems(textLines))
+            {
+                // Iterate the collection of TextLine objects
+                foreach (TextLine line in textLines)
+                {
+                    // if the line contains public const string Name = 
+                    if (line.Text.Contains("public const string Name = "))
+                    {
+                        // Find the text in quotes - Example public const string Name = "RunnerConnString";                        
+                        connectionName = TextHelper.FindTextInQuotes(line.Text);
+
+                        // exit loop
+                        break;
+                    }
+                }
+            }
+
+            // return value
+            return connectionName;
+        }
+        #endregion
+        
+        #region FindExistingDataJugglerNetVersion(string path)
+        /// <summary>
+        /// returns the Existing Data Juggler Net Version
+        /// </summary>
+        public string FindExistingDataJugglerNetVersion(string path)
+        {
+            // initial value
+            string version = "";
+
+            // If the path Exists On Disk
+            if (FileHelper.Exists(path))
+            {
+                // Get the textLines
+                List<TextLine> textLines = TextHelper.GetTextLinesFromFile(path);
+
+                // If the textLines collection exists and has one or more items
+                if (ListHelper.HasOneOrMoreItems(textLines))
+                {
+                    // Iterate the collection of TextLine objects
+                    foreach (TextLine line in textLines)
+                    {
+                        // if this is the .NET 8 version
+                        if (line.Text.Contains("using DataJuggler.NET8.Sql;"))
+                        {
+                            // set the return value
+                            version = "using DataJuggler.NET8.Sql;";
+
+                            // exit loop
+                            break;
+                        }
+                    }
+                }
+            }
+
+            // return value
+            return version;
+        }
+        #endregion
+        
+        #region ReplaceTextInDirectory(string directory, string extension, List<Replacement> replacements))
+        /// <summary>
+        /// Replace Text In Directory
+        /// </summary>
+        public void ReplaceTextInDirectory(string directory, string extension, List<Replacement> replacements)
+        {
+            // locals
+            List<string> extensions = new List<string>();
+            extensions.Add(extension);
+        
+            // Get a list of flies recursively
+            List<string> files = new List<string>();
+
+            // Get the files
+            FileHelper.GetFilesRecursively(directory, ref files, extensions);
+
+            // If the files collection exists and has one or more items
+            if (ListHelper.HasOneOrMoreItems(files))
+            {
+                // Iterate the collection of string objects
+                foreach (string file in files)
+                {
+                    // Replace the text
+                    TextHelper.ReplaceTextInFile(file, replacements);
+                }
+            }
+        }
+        #endregion
+        
+        #region UIEnable()
+        /// <summary>
+        /// This method enables or disabvles or hides or shows controls
+        /// </summary>
+        public void UIEnable()
+        {
+            // Update
+            ConfirmationPanel.Visible = ConfirmationVisible;
+
+            // Refresh The UI
+            Refresh();
+            Application.DoEvents();
+        }
+        #endregion
+
+        #endregion
+
+        #region Properties
+
+        #region ConfirmationVisible
+        /// <summary>
+        /// This property gets or sets the value for 'ConfirmationVisible'.
+        /// </summary>
+        public bool ConfirmationVisible
+        {
+            get { return confirmationVisible; }
+            set { confirmationVisible = value; }
+        }
+        #endregion
+
+        #region Confirmed
+        /// <summary>
+        /// This property gets or sets the value for 'Confirmed'.
+        /// </summary>
+        public bool Confirmed
+        {
+            get { return confirmed; }
+            set { confirmed = value; }
+        }
+        #endregion
+
+
+
+        #region HasSelectedProject
+        /// <summary>
+        /// This property returns true if this object has a 'SelectedProject'.
+        /// </summary>
+        public bool HasSelectedProject
+        {
+            get
+            {
+                // initial value
+                bool hasSelectedProject = (SelectedProject != null);
+
+                // return value
+                return hasSelectedProject;
+            }
+        }
+        #endregion
+
+        #region SelectedProject
+        /// <summary>
+        /// This property gets or sets the value for 'SelectedProject'.
+        /// </summary>
+        public Project SelectedProject
+        {
+            get { return selectedProject; }
+            set { selectedProject = value; }
+        }
+        #endregion
+
+        #endregion
+
+    }
+    #endregion
+
+}
