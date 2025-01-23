@@ -1242,6 +1242,32 @@ namespace DataAccessComponent.DataGateway
             }
             #endregion
 
+            #region LoadDTNTablesForProjectId(int projectId)
+            /// <summary>
+            /// This method is used to load 'DTNTable' objects for the ProjectId given.
+            /// </summary>
+            public List<DTNTable> LoadDTNTablesForProjectId(int projectId)
+            {
+                // initial value
+                List<DTNTable> dTNTables = null;
+                
+                // Create a temp DTNTable object
+                DTNTable tempDTNTable = new DTNTable();
+                
+                // Set the value for LoadByProjectId to true
+                tempDTNTable.LoadByProjectId = true;
+                
+                // Set the value for ProjectId
+                tempDTNTable.ProjectId = projectId;
+                
+                // Perform the load
+                dTNTables = LoadDTNTables(tempDTNTable);
+                
+                // return value
+                return dTNTables;
+            }
+            #endregion
+            
             #region LoadEnumerations(Enumeration tempEnumeration = null)
             /// <summary>
             /// This method loads a collection of 'Enumeration' objects.
@@ -1846,4 +1872,3 @@ namespace DataAccessComponent.DataGateway
     #endregion
 
 }
-

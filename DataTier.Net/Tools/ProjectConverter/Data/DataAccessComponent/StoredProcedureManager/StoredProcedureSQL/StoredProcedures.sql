@@ -4088,5 +4088,72 @@ BEGIN
 
 END
 
+-- Begin Custom Methods
+
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+Go
+-- =========================================================
+-- Procure Name: DTNTable_FetchAllForProjectId
+-- Author:           Data Juggler - Data Tier.Net Procedure Generator
+-- Create Date:   1/23/2025
+-- Description:    Returns all DTNTable objects for the ProjectId given.
+-- =========================================================
+
+-- Check if the procedure already exists
+IF EXISTS (select * from syscomments where id = object_id ('DTNTable_FetchAllForProjectId'))
+
+    -- Procedure Does Exist, Drop First
+    BEGIN
+
+        -- Execute Drop
+        Drop Procedure DTNTable_FetchAllForProjectId
+
+        -- Test if procedure was dropped
+        IF OBJECT_ID('dbo.DTNTable_FetchAllForProjectId') IS NOT NULL
+
+            -- Print Line Drop Failed
+            PRINT '<<< Drop Failed On Procedure DTNTable_FetchAllForProjectId >>>'
+
+        Else
+
+            -- Print Line Procedure Dropped
+            PRINT '<<< Drop Suceeded On Procedure DTNTable_FetchAllForProjectId >>>'
+
+    End
+
+GO
+
+Create PROCEDURE DTNTable_FetchAllForProjectId
+
+    -- Create @ProjectId Paramater
+    @ProjectId int
+
+
+AS
+BEGIN
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    -- Begin Select Statement
+    Select [ClassFileName],[ClassName],[DatabaseId],[Exclude],[Excluded],[IsView],[ProjectId],[Scope],[Serializable],[TableId],[TableName]
+
+    -- From tableName
+    From [DTNTable]
+
+    -- Load Matching Records
+    Where [ProjectId] = @ProjectId
+
+    -- Order by TableName
+    Order By [TableName]
+
+END
+
+
+-- End Custom Methods
+
 -- Thank you for using DataTier.Net.
 
