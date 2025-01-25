@@ -3,7 +3,7 @@
   <PropertyGroup>
     
     <PackageType>Template</PackageType>
-    <PackageVersion>9.10.6</PackageVersion>
+    <PackageVersion>9.10.7</PackageVersion>
     <PackageId>DataJuggler.DataTier.Net9.ProjectTemplatesV2</PackageId>
     <Title>DataJuggler.DataTier.Net9.ProjectTemplatesV2</Title>
     <Authors>Data Juggler</Authors>

@@ -24,8 +24,7 @@ namespace DataAccessComponent.DataBridge
     public class DataBridgeManager
     {
 
-        #region Private Variables
-        private DataOperationsManager dataOperations;
+        #region Private Variables        
         private DataManager dataManager;        
         private AuthenticationManager loginManager;
         private Exception exception;
@@ -79,9 +78,6 @@ namespace DataAccessComponent.DataBridge
             {
                 // Create DataManager(s)
                 DataManager = new DataManager(ConnectionName);
-
-                // Create DataOperations
-                DataOperations = new DataOperationsManager(DataManager);
             }
             #endregion
 
@@ -169,19 +165,6 @@ namespace DataAccessComponent.DataBridge
             {
                 get { return dataManager; }
                 set { dataManager = value; }
-            }
-            #endregion
-
-            #region DataOperations
-            /// <summary>
-            /// This object contains all of the stored procedure
-            /// methods to execute. All of these methods must meet 
-            /// the format of the delegate in DataBridgeManager.DataOperationsManager
-            /// </summary>
-            public DataOperationsManager DataOperations
-            {
-                get { return dataOperations; }
-                set { dataOperations = value; }
             }
             #endregion
 

@@ -1848,7 +1848,6 @@ namespace DataAccessComponent.DataGateway
             /// </summary>
             public DataManager DataManager
             {
-
                 get
                 {
                     // initial value

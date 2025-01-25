@@ -4,13 +4,10 @@
 
 using DataAccessComponent.Connection;
 using DataAccessComponent.DataGateway;
-using ObjectLibrary.BusinessObjects;
-using ObjectLibrary.Enumerations;
+using DataJuggler.NET9;
 using DataJuggler.UltimateHelper;
 using DataJuggler.UltimateHelper.Objects;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Text;
-using System.Data;
+using ObjectLibrary.BusinessObjects;
 
 #endregion
 
@@ -123,9 +120,13 @@ namespace ProjectConverter
                     // Move the folder
                     CopyDirectory(exceptionsFolder, exceptionsDestination);
 
+                    // Get the .cs files in this folder
                     List<string> files = FileHelper.GetFiles(exceptionsDestination, ".cs");
+
+                    // If the files collection exists and has one or more items
                     if (ListHelper.HasOneOrMoreItems(files))
                     {
+                        // Iterate the collection of string objects
                         foreach (string file in files)
                         {
                             // Replace ApplicationLogicComponent with DataAccessComponent
@@ -150,14 +151,10 @@ namespace ProjectConverter
                         string connectionName =  FindConnectionName(connectionFile);
 
                         // Delete the old one
-                        File.Delete(connectionFile);
+                        RemoveFile(connectionFile);
 
-                        // If the file exists
-                        if (File.Exists(destinationFileName))
-                        {
-                            // Delete
-                            File.Delete(destinationFileName);
-                        }
+                        // Delete
+                        RemoveFile(destinationFileName);
                         
                         // Copy the ConnectionConstants
                         File.Copy(thisConnectionFile, destinationFileName);
@@ -173,16 +170,12 @@ namespace ProjectConverter
                         StatusListBox.Items.Add("Connection.cs renamed to ConnectionConstants.cs Complete.", 0);
                     }
 
-                    // If the file exists
-                    if (File.Exists(authenticationManagerFile))
-                    {
-                        // Delete
-                        File.Delete(authenticationManagerFile);
+                    // Delete
+                    RemoveFile(authenticationManagerFile);
 
-                        // Copy this AuthenticationManager file
-                        File.Copy(thisAuthenticationManager, authenticationManagerFile);
-                    }
-
+                    // Copy this AuthenticationManager file
+                    File.Copy(thisAuthenticationManager, authenticationManagerFile);
+                    
                      // Get the DirectoryName
                     string directoryName = Path.GetDirectoryName(destinationFileName);
 
@@ -190,7 +183,7 @@ namespace ProjectConverter
                     ReplaceTextInDirectory(directoryName, ".cs", replacements);
 
                      // Disiplay Result
-                        StatusListBox.Items.Add("AuthenticationManager update Complete.", 0);
+                    StatusListBox.Items.Add("AuthenticationManager update Complete.", 0);
 
                     // Set the Controllers
                     string controllerFolder = Path.Combine(SelectedProject.ProjectFolder, @"ApplicationLogicComponent\Controllers");
@@ -203,22 +196,14 @@ namespace ProjectConverter
                     // Move the Controlelrs folder
                     CopyDirectory(controllerFolder, controllerDestination);
 
-                    // if the existingApplicationController exists on disk
-                    if (File.Exists(existingApplicationController))
-                    {
-                        // Delete this file
-                        File.Delete(existingApplicationController);
-                    }
+                    // Delete this file
+                    RemoveFile(existingApplicationController);
 
                     // Copy this file
                     File.Copy(thisApplicationController, existingApplicationController);
 
-                    // if the existingSystemController exists on disk
-                    if (File.Exists(existingSystemController))
-                    {
-                        // Delete this file
-                        File.Delete(existingSystemController);
-                    }
+                    // Delete this file
+                    RemoveFile(existingSystemController);
 
                     // Copy this file
                     File.Copy(thisSystemController, existingSystemController);
@@ -242,21 +227,21 @@ namespace ProjectConverter
                     // Disiplay Result
                     StatusListBox.Items.Add("Gateway Folder Copy Complete.", 0);
 
-                    // Copy the Controllers
+                    // Copy the DataOperations                    
                     string dataOperationsFolder = Path.Combine(SelectedProject.ProjectFolder, @"ApplicationLogicComponent\DataOperations");
                     string dataOperationsDestination = Path.Combine(selectedProject.ProjectFolder, @"DataAccessComponent\DataOperations");
+                    string dataOperationsManager = Path.Combine(dataOperationsDestination, "DataOperationsManager.cs");
                     string thisSystemMethods = Path.Combine(currentDirectory, @"DataOperations\SystemMethods.cs");
                     string existingSystemMethods = Path.Combine(SelectedProject.ProjectFolder, @"DataAccessComponent\DataOperations\SystemMethods.cs");
+
+                    // Delete this file
+                    RemoveFile(dataOperationsManager);
 
                     // Move the Data Operations Folder
                     CopyDirectory(dataOperationsFolder, dataOperationsDestination);
 
-                    // If the file exists
-                    if (File.Exists(existingSystemMethods))
-                    {
-                        // Delete
-                        File.Delete(existingSystemMethods);
-                    }
+                    // Delete
+                    RemoveFile(existingSystemMethods);
 
                     // Now copy this file
                     File.Copy(thisSystemMethods, existingSystemMethods);
@@ -291,7 +276,7 @@ namespace ProjectConverter
                         dataJugglerNetVersion = FindExistingDataJugglerNetVersion(existingDataHelper);
 
                         // Delete                        
-                        File.Delete(existingDataHelper);
+                        RemoveFile(existingDataHelper);
                     }
                     
                     // Copy this file
@@ -310,12 +295,8 @@ namespace ProjectConverter
                         }
                     }
 
-                    // If the one exists on their project (should)
-                    if (File.Exists(existingDataManager))
-                    {
-                        // Delete                        
-                        File.Delete(existingDataManager);
-                    }
+                    // Delete                        
+                    RemoveFile(existingDataManager);
                     
                     // Copy this file
                     File.Copy(thisDataManager, existingDataManager);
@@ -327,12 +308,8 @@ namespace ProjectConverter
                     if (FileHelper.Exists(controllerManager))
                     {
                         // Delete thie file
-                        File.Delete(controllerManager);
+                        RemoveFile(controllerManager);
                     }
-
-                    
-
-                    
 
                     // Replace out the text in DataManager
                     ReplaceTextInDirectory(dataManagerDestination, ".cs", replacements);
@@ -369,7 +346,7 @@ namespace ProjectConverter
                     if (File.Exists(existingDataBridge))
                     {
                         // Delete
-                        File.Delete(existingDataBridge);
+                        RemoveFile(existingDataBridge);
                     }
 
                     // Now copy this DataBridge
@@ -397,7 +374,14 @@ namespace ProjectConverter
                     // Update to version2
                     SelectedProject.TemplateVersion = 2;
 
-                    // Update the ChangedFolders
+                    // Update the Namespaces
+                    SelectedProject.ControllerNamespace = "DataAccessComponent.Controllers";
+                    SelectedProject.DataManagerNamespace = "DataAccessComponent.Data";
+                    SelectedProject.DataOperationsNamespace = "DataAccessComponent.DataOperations";
+                    SelectedProject.DataWriterNamespace = "DataAccessComponent.Data.Writers";
+                    SelectedProject.ReaderNamespace = "DataAccessComponent.Data.Readers";
+
+                    // Update the Folders
                     SelectedProject.ControllerFolder = controllerDestination;
                     SelectedProject.DataManagerFolder = dataManagerDestination;
                     SelectedProject.DataOperationsFolder = dataOperationsDestination;
@@ -424,10 +408,17 @@ namespace ProjectConverter
                         StatusListBox.Items.Add("Project path update failed", 1);
                     }
 
-                    // Now the Controllers need to be removed
+                    // Now the Controllers, DataManager & DataOperations need to be removed
 
                     // Load the Tables
                     List<DTNTable> tables = gateway.LoadDTNTablesForProjectId(SelectedProject.ProjectId);
+
+                    // Set the gatewayPath
+                    string gatewayPath = Path.Combine(gatewayDestination, "Gateway.cs");
+                    string thisGatewayPath = Path.Combine(currentDirectory, @"DataGateway\Gateway.cs");
+
+                    // Create a new collection of 'Replacement' objects.
+                    List<Replacement> replacements3 = new List<Replacement>();
 
                     // If the tables collection exists and has one or more items
                     if (ListHelper.HasOneOrMoreItems(tables))
@@ -435,19 +426,132 @@ namespace ProjectConverter
                         // Iterate the collection of DTNTable objects
                         foreach (DTNTable table in tables)
                         {
-                            // Get the path
+                            // Get the path to the Controller for this table
                             string path = Path.Combine(SelectedProject.ProjectFolder, @"DataAccessComponent\Controllers\" + table.TableName + "Controller.cs");
 
-                            // If the path Exists On Disk
-                            if (FileHelper.Exists(path))
+                            // Delete this file
+                            RemoveFile(path);
+
+                            // Get the path to the Controller for this table
+                            path = Path.Combine(SelectedProject.ProjectFolder, @"DataAccessComponent\Data\" + table.TableName + "Manager.cs");
+
+                            // Delete this file
+                            RemoveFile(path);
+
+                            // Get the path to the DataOperation Method for this table
+                            path = Path.Combine(SelectedProject.ProjectFolder, @"DataAccessComponent\DataOperations\" + table.TableName + "Methods.cs");
+
+                            // Delete this file
+                            RemoveFile(path);
+                            
+                            // Create the replacements for all 5 methods for this table
+                            string variableName = TextHelper.CapitalizeFirstChar(table.TableName, true);
+                            string collectionVariableName = PluralWordHelper.GetPluralName(variableName, true);
+                            string tableName = table.TableName;
+                            string controllerName = tableName + "Controller";
+
+                            // Delete
+                            string deleteOld = "deleted = " + controllerName + ".Delete(temp" + tableName + ");";
+                            string deleteNew = "deleted = " + controllerName + ".Delete(temp" + tableName + ", DataManager);";
+                            replacements3.Add(new Replacement(deleteOld, deleteNew));
+
+                            // find
+                            string findNew = variableName + " = " + controllerName + ".Find(temp" + tableName + ");";
+                            string findOld = variableName + " = " + controllerName + ".Find(temp" + tableName + ", DataManager);";
+                            replacements3.Add(new Replacement(findNew, findOld));
+
+                            // load
+                            string loadOld = collectionVariableName + " = " + controllerName + ".FetchAll(temp" + tableName + ");";
+                            string loadNew = collectionVariableName + " = " + controllerName + ".FetchAll(temp" + tableName + ", DataManager);";
+                            replacements3.Add(new Replacement(loadOld, loadNew));
+
+                            // Save
+                            string saveOld = "saved = " + controllerName + ".Save(ref " + variableName + ");";
+                            string saveNew = "saved = " + controllerName + ".Save(ref " + variableName + ", DataManager);";
+                            replacements3.Add(new Replacement(saveOld, saveNew));
+                        }
+                    }
+
+                    // If the replacements3 collection exists and has one or more items
+                    if (ListHelper.HasOneOrMoreItems(replacements3))
+                    {
+                        // If the gatewayPath Exists On Disk
+                        if (FileHelper.Exists(gatewayPath))
+                        {
+                            // Replace out the text in files
+                            TextHelper.ReplaceTextInFile(gatewayPath, replacements3);
+                            
+                            // Show a message
+                            StatusListBox.Items.Add("Gateway has been updated.", 0);
+                        }
+                    }
+
+                    // If the gatewayPath and thisGatewayPath Exist On Disk
+                    if ((FileHelper.Exists(gatewayPath)) && (FileHelper.Exists(thisGatewayPath)))
+                    {
+                        // Get the text lines from file
+                        List<TextLine> lines = TextHelper.GetTextLinesFromFile(gatewayPath);
+
+                        // Get the lines from thisGatewayPath
+                        List<TextLine> lines2 = TextHelper.GetTextLinesFromFile(thisGatewayPath);
+
+                        // if both lists have one or more items
+                        if (ListHelper.HasOneOrMoreItems(lines, lines2))
+                        {
+                            // Find the InsertIndex for the DataManager property
+                            TextLine insertLine = lines.FirstOrDefault(x => x.Text.Contains("#region HasAppController"));
+
+                            // If the insertLine object exists
+                            if (NullHelper.Exists(insertLine))
                             {
-                                // Delete this file
-                                File.Delete(path);
+                                // Now we need to copy a list of lines from thisGatewayPath
+                                TextLine copyLine = lines2.FirstOrDefault(x => x.Text.Contains("#region DataManager"));
+
+                                 // Now we need to copy a list of lines from thisGatewayPath
+                                TextLine existingLine = lines.FirstOrDefault(x => x.Text.Contains("#region DataManager"));
+
+                                // If the copyLine object exists and the existingLine does not
+                                if ((NullHelper.Exists(copyLine)) && (NullHelper.IsNull(existingLine)))
+                                {
+                                    // Get the insert index
+                                    int insertIndex = insertLine.LineNumber - 1;
+
+                                    // Find copy_line start at index in lines2
+                                    int startIndex = copyLine.LineNumber - 1;
+
+                                    // Ensure startIndex is valid and greater than 0
+                                    if (startIndex > 0)
+                                    {
+                                        // Find end of copy_line which is an #endregion
+                                        int endIndex = lines2.FindIndex(startIndex, x => x.Text.Contains("#endregion"));
+
+                                        // Ensure endIndex is greater than startIndex
+                                        if (endIndex > startIndex)
+                                        {
+                                            // Select the range of lines to insert
+                                            List<TextLine> linesToInsert = lines2.GetRange(startIndex, (endIndex - startIndex) + 2);
+
+                                            // Now insert the lines into the insertIndex position of lines
+                                            lines.InsertRange(insertIndex, linesToInsert);
+
+                                            // Export the text
+                                            string fileContent = TextHelper.ExportTextLines(lines);
+
+                                            // Write All Text
+                                            File.WriteAllText(gatewayPath, fileContent);
+
+                                            // Show a message
+                                            StatusListBox.Items.Add("The Property DataManager was added to the Gateway", 0);
+                                        }
+                                    }
+                                }
+                                else if (NullHelper.Exists(existingLine))
+                                {
+                                    // Show a message
+                                    StatusListBox.Items.Add("The Property DataManager already exists in the Gateway", 0);
+                                }
                             }
                         }
-
-                        // Remove the Controllers
-                        StatusListBox.Items.Add("Controllers Were Removed.", 0);
                     }
 
                     // load the references
@@ -457,7 +561,7 @@ namespace ProjectConverter
                     foreach (ProjectReferencesView reference in references)
                     {
                         // if the reference contains ApplicationLogicComponent
-                        if (reference.ReferenceName.Contains("ApplicationLogicComponent"))
+                        if ((reference.ReferenceName.Contains("ApplicationLogicComponent")) || (reference.ReferenceName.Contains("DataAccessComponent.DataManager")))
                         {
                             // Not an efficient way of doing this, but until ProjectReferencesView contains ReferencesId
                             // All the References have to be loaded for this references set.
@@ -481,7 +585,55 @@ namespace ProjectConverter
                                         // Perform Save
                                         saved = gateway.SaveProjectReference(ref tempReference);
                                     }
+                                     // if this reference contains
+                                    else if (projectReference.ReferenceName.Contains("DataAccessComponent.DataManager"))
+                                    {
+                                        // change the name
+                                        projectReference.ReferenceName = projectReference.ReferenceName.Replace("DataAccessComponent.DataManager", "DataAccessComponent.Data");
+
+                                        // Clone this
+                                        ProjectReference tempReference = projectReference.Clone();
+
+                                        // Perform Save
+                                        saved = gateway.SaveProjectReference(ref tempReference);
+                                    }
                                 }
+                            }
+                        }
+                    }
+
+                    // Load the References
+                    List<ProjectReference> controllerReferences = gateway.LoadProjectReferencesForReferencesSetId(SelectedProject.ControllerReferencesSetId);
+
+                    // If the controllerReferences collection exists and has one or more items
+                    if (ListHelper.HasOneOrMoreItems(controllerReferences))
+                    {
+                        // locals
+                        string referenceName = "DataAccessComponent.Data";
+                        ProjectReference dataReference = controllerReferences.FirstOrDefault(x => x.ReferenceName == referenceName);
+
+                        // If the dataReference object does not exist
+                        if (NullHelper.IsNull(dataReference))
+                        {
+                            // Create a new instance of a 'dataReference' object.
+                            dataReference = new ProjectReference();
+
+                            dataReference.ReferenceName = referenceName;
+                            dataReference.ReferencesSetId = selectedProject.ControllerReferencesSetId;
+                            
+                            // Perform Save
+                            saved = gateway.SaveProjectReference(ref dataReference);
+
+                            // if the value for saved is true
+                            if (saved)
+                            {
+                                // Show success
+                                StatusListBox.Items.Add("Controller References Updated", 0);
+                            }
+                            else
+                            {
+                                // Show success
+                                StatusListBox.Items.Add("Controller References update failed", 1);
                             }
                         }
                     }
@@ -653,6 +805,35 @@ namespace ProjectConverter
         }
         #endregion
         
+        #region RemoveFile(string path)
+        /// <summary>
+        /// Remove File
+        /// </summary>
+        public void RemoveFile(string path)
+        {
+            try
+            {
+                // If the path Exists On Disk
+                if (FileHelper.Exists(path))
+                {
+                    // Delete this file
+                    File.Delete(path);
+
+                    // Show an error
+                    StatusListBox.Items.Add("Removed file '" + path, 0);
+                }
+            }
+            catch (Exception error)
+            {
+                // For debugging only
+                DebugHelper.WriteDebugError("RemoveFile", "MainForm.cs", error);
+
+                // Show an error
+                StatusListBox.Items.Add("Could not remove file '" + path, 1);
+            }
+        }
+        #endregion
+        
         #region ReplaceTextInDirectory(string directory, string extension, List<Replacement> replacements))
         /// <summary>
         /// Replace Text In Directory
@@ -722,8 +903,6 @@ namespace ProjectConverter
             set { confirmed = value; }
         }
         #endregion
-
-
 
         #region HasSelectedProject
         /// <summary>
