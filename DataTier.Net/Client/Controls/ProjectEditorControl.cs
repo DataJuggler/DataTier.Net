@@ -90,8 +90,16 @@ namespace DataTierClient.Controls
             /// <param name="e"></param>
             private void BrowseProjectFolderButton_Click(object sender, EventArgs e)
             {
-                // Choose the folder
-                DataJuggler.Core.UltimateHelper.DialogHelper.ChooseFolder(this.ProjectFolderTextBox, this.ProjectFolder);
+                if (Directory.Exists(ProjectFolder))
+                {
+                    // Choose the folder
+                    DataJuggler.Core.UltimateHelper.DialogHelper.ChooseFolder(this.ProjectFolderTextBox, this.ProjectFolder);
+                }
+                else
+                {
+                    // Choose the folder
+                    DataJuggler.Core.UltimateHelper.DialogHelper.ChooseFolder(this.ProjectFolderTextBox, "");
+                }
             }
             #endregion
 
@@ -444,10 +452,10 @@ namespace DataTierClient.Controls
                     string projectFolder = this.SelectedProject.ProjectFolder;
                     
                     // If the ProjectFolder exists and the AutoFill is selected
-                    if(!String.IsNullOrEmpty(projectFolder) && (Directory.Exists(projectFolder)) && (this.AutoFillChildFoldersCheckBox.Checked))
+                    if(!String.IsNullOrEmpty(projectFolder) && (Directory.Exists(projectFolder)) && (AutoFillChildFoldersCheckBox.Checked))
                     {
                         // Auto Fill The Child Folders
-                        this.SelectedProject.AutoFillChildFolders();
+                        SelectedProject.AutoFillChildFolders();
                     }
 
                     // Enable Controls
@@ -468,7 +476,7 @@ namespace DataTierClient.Controls
                 if (this.SelectedProject != null)
                 {
                     // Set the ProjectName
-                    this.SelectedProject.ProjectName = this.ProjectNameTextBox.Text;
+                    SelectedProject.ProjectName = this.ProjectNameTextBox.Text;
 
                     // Enable Controls
                     UIEnable();
@@ -495,13 +503,16 @@ namespace DataTierClient.Controls
                 }
 
                 // if the SelectedProject exists and is new, this must be changed
-                if ((HasSelectedProject) && (SelectedProject.IsNew) && (SelectedProject.TemplateVersion != templateVersion))
+                if ((HasSelectedProject) && (SelectedProject.TemplateVersion != templateVersion))
                 {
                     // Set the TemplateVersion
                     SelectedProject.TemplateVersion = templateVersion;
 
                     // As this changes, the default references need to be recreated.
                     SelectedProject.CreateDefaultReferences();
+
+                    // Change the child folders
+                    SelectedProject.AutoFillChildFolders();
                 }
             }
             #endregion
@@ -924,17 +935,13 @@ namespace DataTierClient.Controls
                 // if the value for HasSelectedProject is true
                 if (HasSelectedProject)
                 {
-                    // Once a project has been saved, this can't be changed.
-                    Version2CheckBox.Enabled = (SelectedProject.IsNew);
-
                     // Show the CreateDotNet5Project control if DotNet5
                     CreateDotNetProject.Visible = SelectedProject.IsDotNetCore;
                 }
                 else
                 {
                     // Do not show for .Net Framework projects
-                    CreateDotNetProject.Visible = false;                    
-                    Version2CheckBox.Enabled = true;
+                    CreateDotNetProject.Visible = false;                       
                 }
 
                 // if the value for ShowAutoFillHelp is true
@@ -952,21 +959,6 @@ namespace DataTierClient.Controls
                 Refresh();
             }
             #endregion
-
-            #region ValidateSelectedProject()
-            /// <summary>
-            /// Validate the selected project. This is required for the interface. Not actually used.
-            /// </summary>
-            public bool ValidateSelectedProject()
-            {
-                // initial value
-                bool valid = true;
-                
-                // return value
-                return valid;
-            }
-
-        #endregion
 
         #endregion
 

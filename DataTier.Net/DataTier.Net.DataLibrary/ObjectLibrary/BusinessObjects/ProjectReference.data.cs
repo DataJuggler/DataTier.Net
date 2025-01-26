@@ -32,7 +32,7 @@ namespace ObjectLibrary.BusinessObjects
             public void UpdateIdentity(int id)
             {
                 // Update The Identity field
-                this.referencesId = id;
+                referencesId = id;
             }
             #endregion
 

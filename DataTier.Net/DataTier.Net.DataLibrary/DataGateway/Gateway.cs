@@ -1240,6 +1240,99 @@ namespace DataGateway
             }
             #endregion
 
+            #region FixProjectReferences()
+            /// <summary>
+            /// Fix Project References
+            /// </summary>
+            public void FixProjectReferences(ref Project project)
+            {
+                // If the project object exists
+                if (NullHelper.Exists(project))
+                {
+                    // Load
+                    ReferencesSet tempSet = new ReferencesSet();
+
+                    // Set the value for the property 'FetchAllForProjectId' to true
+                    tempSet.FetchAllForProjectId = true;
+
+                    // Set the ProjectId
+                    tempSet.ProjectId = project.ProjectId;
+                        
+                    // Load them all
+                    List<ReferencesSet> referencesSets = LoadReferencesSets(tempSet);
+
+                    // If the referencesSets collection exists and has one or more items
+                    if (ListHelper.HasOneOrMoreItems(referencesSets))
+                    {
+                        foreach (ReferencesSet set in referencesSets)
+                        {
+                            switch (set.ReferencesSetName)
+                            {
+                                case "Controllers":
+
+                                    // Set the ControllerReferencesSetId
+                                    project.ControllerReferencesSetId = set.ReferencesSetId;
+
+                                    // required
+                                    break;
+            
+                                case "DataManager":
+
+                                    // Set the DataManagerReferencesSetId
+                                    project.DataManagerReferencesSetId = set.ReferencesSetId;
+
+                                    // required
+                                    break;
+            
+                                case "DataOperations":
+
+                                    // Set the DataOperationsReferencesSetId
+                                    project.DataOperationsReferencesSetId = set.ReferencesSetId;
+
+                                    // required
+                                    break;
+            
+                                case "DataObjects":
+
+                                    // Set the ObjectReferencesSetId
+                                    project.ObjectReferencesSetId = set.ReferencesSetId;
+
+                                    // required
+                                    break;
+            
+                                case "Readers":
+
+                                    // Set the ReaderReferencesSetId
+                                    project.ReaderReferencesSetId = set.ReferencesSetId;
+
+                                    // required
+                                    break;
+            
+                                case "StoredProcedures":
+
+                                    // Set the StoredProcedureReferencesSetId
+                                    project.StoredProcedureReferencesSetId = set.ReferencesSetId;
+
+                                    // required
+                                    break;
+            
+                                case "Writers":
+
+                                    // Set the DataWriterReferencesSetId (note: special mapping)
+                                    project.DataWriterReferencesSetId = set.ReferencesSetId;
+
+                                    // required
+                                    break;
+                            }
+                        }
+                    }
+                }
+
+                // Save the project
+                bool saved = SaveProject(ref project);
+            }
+            #endregion
+            
             #region GetDataConnector()
             /// <summary>
             /// This method (safely) returns the Data Connector from the
@@ -1869,18 +1962,18 @@ namespace DataGateway
                 // if the project exists
                 if(project != null)
                 {
-                    // Load ReferencesSets
-                    project.ControllerReferencesSet = FindReferencesSet(project.ControllerReferencesSetId);
-                    project.DataManagerReferencesSet = FindReferencesSet(project.DataManagerReferencesSetId);
-                    project.DataOperationsReferencesSet = FindReferencesSet(project.DataOperationsReferencesSetId);
-                    project.ObjectReferencesSet = FindReferencesSet(project.ObjectReferencesSetId);
-                    project.ReaderReferencesSet = FindReferencesSet(project.ReaderReferencesSetId);
-                    project.StoredProcedureReferencesSet = FindReferencesSet(project.StoredProcedureReferencesSetId);
-                    project.WriterReferencesSet = FindReferencesSet(project.DataWriterReferencesSetId);
+                    // Load the ReferenceSets for ths project
+                    LoadProjectReferencesSets(ref project);
 
                     // if not valid
                     if (!project.ValidReferences)
                     {
+                        // Fix the ProjectReferences
+                        FixProjectReferences(ref project);
+
+                        // Load the ReferenceSets for ths project
+                        LoadProjectReferencesSets(ref project);
+
                         // Create the default references
                         project.CreateDefaultReferences();
                     }
@@ -1928,6 +2021,27 @@ namespace DataGateway
             }
             #endregion
 
+            #region LoadProjectReferencesSets()
+            /// <summary>
+            /// Load Project References Sets
+            /// </summary>
+            public void LoadProjectReferencesSets(ref Project project)
+            {
+                // If the project object exists
+                if (NullHelper.Exists(project))
+                {
+                    // Load ReferencesSets
+                    project.ControllerReferencesSet = FindReferencesSet(project.ControllerReferencesSetId);
+                    project.DataManagerReferencesSet = FindReferencesSet(project.DataManagerReferencesSetId);
+                    project.DataOperationsReferencesSet = FindReferencesSet(project.DataOperationsReferencesSetId);
+                    project.ObjectReferencesSet = FindReferencesSet(project.ObjectReferencesSetId);
+                    project.ReaderReferencesSet = FindReferencesSet(project.ReaderReferencesSetId);
+                    project.StoredProcedureReferencesSet = FindReferencesSet(project.StoredProcedureReferencesSetId);
+                    project.WriterReferencesSet = FindReferencesSet(project.DataWriterReferencesSetId);
+                }
+            }
+            #endregion
+            
             #region LoadProjectReferencesViews(ProjectReferencesView tempProjectReferencesView = null)
             /// <summary>
             /// This method loads a collection of 'ProjectReferencesView' objects.
@@ -2046,14 +2160,18 @@ namespace DataGateway
                         {
                             // Set references set id
                             referencesSet.SetReferencesSetId(referencesSet.ReferencesSetId);
-                                
+    
                             // save project references
                             // get a local copy
                             List<ProjectReference> references = referencesSet.References;
 
                             // perfrom save
-                            saved = Save(ref references);
+                            saved = Save(ref references, referencesSet.ReferencesSetId);
                         }
+                    }
+                    else if (!saved)
+                    {
+                        
                     }
                 }
 
@@ -2319,6 +2437,11 @@ namespace DataGateway
                 {
                     // perform the save
                     saved = this.AppController.ControllerManager.ProjectReferenceController.Save(ref projectReference);
+
+                    if (!saved)
+                    {
+                        Exception error = GetLastException();
+                    }
                 }
 
                 // return value
@@ -2326,20 +2449,20 @@ namespace DataGateway
             }
             #endregion
 
-            #region Save(ref List<ProjectReference> references)
+            #region Save(ref List<ProjectReference> references, int referencesSetId)
             /// <summary>
             /// This method saves a list of ProjectReference objects.
             /// </summary>
             /// <param name="references"></param>
             /// <returns></returns>
-            public bool Save(ref List<ProjectReference> references)
+            public bool Save(ref List<ProjectReference> references, int referencesSetId)
             {
                 // initial value
                 bool saved = false;
 
-                // local
+                // locals
                 bool tempSaved = true;
-
+                
                 // if project exists
                 if (references != null)
                 {
@@ -2351,6 +2474,27 @@ namespace DataGateway
                     {
                         // get a local database
                         ProjectReference projectReference = references[x];
+
+                        // Why is this one not saved
+                        if (projectReference.IsNew)
+                        {
+                            // Load the projectReferences for this referencesSetId
+                            List<ProjectReference> projectReferences = LoadProjectReferencesForReferencesSetId(referencesSetId);
+
+                            // If the projectReferences collection exists and has one or more items
+                            if (ListHelper.HasOneOrMoreItems(projectReferences))
+                            {
+                                // Find the missing reference
+                                ProjectReference missingReference = projectReferences.FirstOrDefault(a => a.ReferenceName == projectReference.ReferenceName);
+
+                                // If the missingReference object exists
+                                if (NullHelper.Exists(missingReference))
+                                {
+                                    // Update the Id
+                                    projectReference.UpdateIdentity(missingReference.ReferencesId);
+                                }
+                            }
+                        }
 
                         // Save this database
                         tempSaved = SaveProjectReference(ref projectReference);

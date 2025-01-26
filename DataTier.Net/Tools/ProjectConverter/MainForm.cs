@@ -40,10 +40,10 @@ namespace ProjectConverter
             ConnectionNameControl.Text = "DataTierNetConnection";
 
             // Default
-            BackupPathControl.Text = @"C:\Backup\RunnerData";
+            BackupPathControl.Text = @"C:\Backup\CityData";
 
             // Select File
-            SourceControl.Text = @"C:\Projects\GitHub\Runner\Data\DataTier.Net6.ClassLibrary.sln";
+            SourceControl.Text = @"C:\Projects\GitHub\CityDatabase\Data\DataTier.Net8.ClassLibraryV2.sln";
         }
         #endregion
 

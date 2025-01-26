@@ -67,32 +67,6 @@ namespace ApplicationLogicComponent.ClientValidation
         }
         #endregion
 
-        #region Methods
-
-        #region CreateMissingRequiredFieldMessage
-        /// <summary>
-        /// Create the failed message for a missing required field.
-        /// </summary>
-        /// <param name="propertyName">The 'RequiredField' that is missing.</param>
-        /// <returns></returns>
-        public static string CreateMissingRequiredFieldMessage(string fieldName)
-        {
-            // Create StringBuilder
-            StringBuilder sb = new StringBuilder("The field '");
-
-            // append fieldName
-            sb.Append(fieldName);
-
-            // append rest of message
-            sb.Append("' is required.");
-
-            // return value
-            return sb.ToString();
-        }
-        #endregion
-
-        #endregion
-
         #region Properties
 
         #region DataType

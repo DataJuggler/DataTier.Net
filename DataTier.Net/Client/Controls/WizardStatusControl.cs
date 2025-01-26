@@ -231,7 +231,7 @@ namespace DataTierClient.Controls
                 // determine action by the button text
                 switch (tabButton.ButtonText)
                 {
-                    case "Projects":
+                    case "Project":
 
                         // Call the event
                         ProjectsTab_Click(this, new EventArgs());

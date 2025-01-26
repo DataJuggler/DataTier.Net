@@ -58,10 +58,10 @@ namespace ObjectLibrary.BusinessObjects
             public string AppendToProjectFolder(string folderName)
             {
                 // Create StringBuilder
-                StringBuilder sb = new StringBuilder(this.ProjectFolder);
+                StringBuilder sb = new StringBuilder(ProjectFolder);
                 
                 // if it does not end with a back slash add it now
-                if(!this.ProjectFolder.EndsWith(@"\"))
+                if(!ProjectFolder.EndsWith(@"\"))
                 {
                     // Append the backslash
                     sb.Append(@"\");
@@ -88,58 +88,56 @@ namespace ObjectLibrary.BusinessObjects
             public void AutoFillChildFolders()
             {
                 // If the project folder exists
-                if(!String.IsNullOrEmpty(this.ProjectFolder))
+                if(!String.IsNullOrEmpty(ProjectFolder))
                 {
                     // Set the values now
                     
                     // Set the ObjectFolder (Also known as the Data Object Folder).
-                    ObjectFolder = this.AppendToProjectFolder(@"ObjectLibrary\BusinessObjects");
-                    
-                    
-                    
+                    ObjectFolder = AppendToProjectFolder(@"ObjectLibrary\BusinessObjects");
+
                     // if the original 4 project template
                     if (TemplateVersion == 1)
                     {
                         // Set the Data Operations Folder
-                        DataOperationsFolder = this.AppendToProjectFolder(@"ApplicationLogicComponent\DataOperations");
+                        DataOperationsFolder = AppendToProjectFolder(@"ApplicationLogicComponent\DataOperations");
                         
                         // Set the Data Manager Folder.
-                        DataManagerFolder = this.AppendToProjectFolder(@"DataAccessComponent\DataManager");
+                        DataManagerFolder = AppendToProjectFolder(@"DataAccessComponent\DataManager");
                         
                         // Set the Controllers Folder
-                        ControllerFolder = this.AppendToProjectFolder(@"ApplicationLogicComponent\Controllers");
+                        ControllerFolder = AppendToProjectFolder(@"ApplicationLogicComponent\Controllers");
                         
                         // Set the Reader Folder
-                        ReaderFolder = this.AppendToProjectFolder(@"DataAccessComponent\DataManager\Readers");
+                        ReaderFolder = AppendToProjectFolder(@"DataAccessComponent\DataManager\Readers");
                         
                         // Set the Writers Folder
-                        DataWriterFolder = this.AppendToProjectFolder(@"DataAccessComponent\DataManager\Writers");
+                        DataWriterFolder = AppendToProjectFolder(@"DataAccessComponent\DataManager\Writers");
                     }
                     else
                     {
                         // new V2 2 project template
                         
                         // Set the Data Operations Folder
-                        DataOperationsFolder = this.AppendToProjectFolder(@"DataAccessComponent\DataOperations");
+                        DataOperationsFolder = AppendToProjectFolder(@"DataAccessComponent\DataOperations");
                         
                         // Set the Data Manager Folder.
-                        DataManagerFolder = this.AppendToProjectFolder(@"DataAccessComponent\Data");
+                        DataManagerFolder = AppendToProjectFolder(@"DataAccessComponent\Data");
                         
                         // Set the Reader Folder
-                        ReaderFolder = this.AppendToProjectFolder(@"DataAccessComponent\Data\Readers");
+                        ReaderFolder = AppendToProjectFolder(@"DataAccessComponent\Data\Readers");
                         
                         // Set the Writers Folder
-                        DataWriterFolder = this.AppendToProjectFolder(@"DataAccessComponent\Data\Writers");
+                        DataWriterFolder = AppendToProjectFolder(@"DataAccessComponent\Data\Writers");
                         
                         // Set the Controllers Folder
-                        ControllerFolder = this.AppendToProjectFolder(@"DataAccessComponent\Controllers");
+                        ControllerFolder = AppendToProjectFolder(@"DataAccessComponent\Controllers");
                     }
                     
                     // Set the StoredProcedureFolder
-                    StoredProcedureObjectFolder = this.AppendToProjectFolder(@"DataAccessComponent\StoredProcedureManager");
+                    StoredProcedureObjectFolder = AppendToProjectFolder(@"DataAccessComponent\StoredProcedureManager");
                     
                     // Create the StoredProcsFolder
-                    StoredProcsFolder = this.AppendToProjectFolder(@"DataAccessComponent\StoredProcedureManager\StoredProcedureSQL");
+                    StoredProcsFolder = AppendToProjectFolder(@"DataAccessComponent\StoredProcedureManager\StoredProcedureSQL");
                 }
             }
             #endregion
@@ -149,28 +147,43 @@ namespace ObjectLibrary.BusinessObjects
             /// This method creates the default references. Comment so this shows up in changes.
             /// </summary>
             public void CreateDefaultReferences()
-            {
+            {  
                 // local
                 bool hasExistingReferences = (HasObjectReferencesSet && !ObjectReferencesSet.IsNew);
 
                 // Set ObjectNamespace
-                this.ObjectNamespace = "ObjectLibrary.BusinessObjects";
+                ObjectNamespace = "ObjectLibrary.BusinessObjects";
                 
                 // Create ObjectReferencesSet
-                this.ObjectReferencesSet = new ReferencesSet("DataObjects");
+                ObjectReferencesSet = new ReferencesSet("DataObjects");
                 
+                // Update to fix existing projects
+                ObjectReferencesSet.UpdateIdentity(ObjectReferencesSetId);
+
                 // Create Object References
-                this.ObjectReferencesSet.References.Add(new ProjectReference("System"));
-                this.ObjectReferencesSet.References.Add(new ProjectReference("ObjectLibrary.Enumerations"));
+                ObjectReferencesSet.References.Add(new ProjectReference("System"));
+                ObjectReferencesSet.References.Add(new ProjectReference("ObjectLibrary.Enumerations"));
                 
                 // Add this references set to All Refrences
-                this.AllReferences.Add(this.ObjectReferencesSet);
+                AllReferences.Add(ObjectReferencesSet);
                 
-                // Set DataManagerNamespace - Going Forward defaults to Data
-                DataManagerNamespace = "DataAccessComponent.Data";
+                // if the OldVersion
+                if (TemplateVersion == 1)
+                {
+                    // Set DataManagerNamespace - Going Forward defaults to Data
+                    DataManagerNamespace = "DataAccessComponent.DataManager";
+                }
+                else
+                {
+                    // Set DataManagerNamespace - Going Forward defaults to Data
+                    DataManagerNamespace = "DataAccessComponent.Data";
+                }
                 
                 // Create DataManagerReferencesSet
                 DataManagerReferencesSet = new ReferencesSet("DataManager");
+
+                // Update 1.26.2025 - Preserving Id
+                DataManagerReferencesSet.UpdateIdentity(DataManagerReferencesSetId);
                 
                 // Create DataManager References
                 DataManagerReferencesSet.References.Add(new ProjectReference("System"));
@@ -191,6 +204,9 @@ namespace ObjectLibrary.BusinessObjects
                 // Create DataOperationsReferencesSet
                 DataOperationsReferencesSet = new ReferencesSet("DataOperations");
                 
+                // Update 1.26.2025 - Preserving Id
+                DataOperationsReferencesSet.UpdateIdentity(DataOperationsReferencesSetId);
+                
                 // Create DataOperation References
                 DataOperationsReferencesSet.References.Add(new ProjectReference("System"));
                 DataOperationsReferencesSet.References.Add(new ProjectReference("System.Collections.Generic"));
@@ -199,11 +215,23 @@ namespace ObjectLibrary.BusinessObjects
                 DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.InsertProcedures"));
                 DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.UpdateProcedures"));
                 DataOperationsReferencesSet.References.Add(new ProjectReference("ObjectLibrary.BusinessObjects"));
-                DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.Data.Writers"));
-                DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.Data"));
+                
+                if (TemplateVersion == 1)
+                {
+                    DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.DataManager"));
+                    DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.DataManager.Writers"));
+                }
+                else
+                {
+                    DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.Data"));
+                    DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.Data.Writers"));
+                }
                 
                 // Create ControllerReferencesSet
                 ControllerReferencesSet = new ReferencesSet("Controllers");
+
+                // Update, set the Id
+                ControllerReferencesSet.UpdateIdentity(ControllerReferencesSetId);
                 
                 if (TemplateVersion == 1)
                 {
@@ -233,13 +261,26 @@ namespace ObjectLibrary.BusinessObjects
                 ControllerReferencesSet.References.Add(new ProjectReference("System"));
                 ControllerReferencesSet.References.Add(new ProjectReference("System.Collections.Generic"));
                 ControllerReferencesSet.References.Add(new ProjectReference("ObjectLibrary.BusinessObjects"));
+                
+                // Add this grou
                 AllReferences.Add(ControllerReferencesSet);
                 
-                // Set ReaderNamespace
-                ReaderNamespace = "DataAccessComponent.Data.Readers";
+                if (TemplateVersion == 1)
+                {
+                    // Set ReaderNamespace
+                    ReaderNamespace = "DataAccessComponent.DataManager.Readers";
+                }
+                else
+                {
+                    // Set ReaderNamespace
+                    ReaderNamespace = "DataAccessComponent.Data.Readers";
+                }
                 
                 // Add Reader References
                 ReaderReferencesSet = new ReferencesSet("Readers");
+
+                // Update - Preserve Id
+                ReaderReferencesSet.UpdateIdentity(ReaderReferencesSetId);
                 
                 // Set Reader References
                 ReaderReferencesSet.References.Add(new ProjectReference("System"));
@@ -254,6 +295,9 @@ namespace ObjectLibrary.BusinessObjects
                 
                 // Add Writer References
                 WriterReferencesSet = new ReferencesSet("Writers");
+
+                // Update Preserve Id
+                WriterReferencesSet.UpdateIdentity(DataWriterReferencesSetId);
                 
                 // Set Writer References
                 WriterReferencesSet.References.Add(new ProjectReference("System"));
@@ -272,7 +316,7 @@ namespace ObjectLibrary.BusinessObjects
                 }
                 else
                 {
-                    // I think .NET5 and .NETFramework both need  Will answer this question soon.
+                    // All Dot Net Core projects
                     WriterReferencesSet.References.Add(new ProjectReference("System.Data.SqlClient"));
                 }
                 
@@ -284,6 +328,9 @@ namespace ObjectLibrary.BusinessObjects
                 
                 // Stored Procedure References
                 StoredProcedureReferencesSet = new ReferencesSet("StoredProcedures");
+
+                // Update the Id
+                StoredProcedureReferencesSet.UpdateIdentity(StoredProcedureReferencesSetId);
                 
                 // Set Stored Procedure References
                 StoredProcedureReferencesSet.References.Add(new ProjectReference("System"));
@@ -389,7 +436,7 @@ namespace ObjectLibrary.BusinessObjects
                 int tempIndex = -1;
                 
                 // If the Databases object exists
-                if (this.HasDatabases)
+                if (HasDatabases)
                 {
                     // Iterate the collection of DTNDatabase objects
                     foreach (DTNDatabase database in Databases)
@@ -427,7 +474,7 @@ namespace ObjectLibrary.BusinessObjects
                 int tempIndex = -1;
                 
                 // if the AllReferences exist
-                if (this.AllReferences != null)
+                if (AllReferences != null)
                 {
                     // Iterate the collection of ReferencesSet objects
                     foreach (ReferencesSet referencesSet in AllReferences)
@@ -459,16 +506,16 @@ namespace ObjectLibrary.BusinessObjects
             public void Init()
             {
                 // Create Databases Collection
-                this.Databases = new List<DTNDatabase>();
+                Databases = new List<DTNDatabase>();
                 
                 // Create AllReferences
-                this.AllReferences = new List<ReferencesSet>();
+                AllReferences = new List<ReferencesSet>();
                 
                 // Create Enumerations
-                this.Enumerations = new List<Enumeration>();
+                Enumerations = new List<Enumeration>();
                 
                 // Create the Tables collection
-                this.Tables = new List<DTNTable>();
+                Tables = new List<DTNTable>();
                 
                 // New projects now default to .NET 9
                 TargetFramework = TargetFrameworkEnum.Net9;
@@ -482,7 +529,7 @@ namespace ObjectLibrary.BusinessObjects
             public void SetProjectIdOnDatabases(int projectId)
             {
                 // If the Databases object exists
-                if (this.HasDatabases)
+                if (HasDatabases)
                 {
                     // Iterate the collection of ReferencesSet objects
                     foreach (DTNDatabase database in Databases)
@@ -501,7 +548,7 @@ namespace ObjectLibrary.BusinessObjects
             public void SetProjectIdOnReferences(int projectId)
             {
                 // If the AllReferences object exists
-                if (this.HasAllReferences)
+                if (HasAllReferences)
                 {
                     // Iterate the collection of ReferencesSet objects
                     foreach (ReferencesSet referencesSet in AllReferences)
@@ -525,10 +572,10 @@ namespace ObjectLibrary.BusinessObjects
                 string projectName = "";
                 
                 // if the ProjectName exists
-                if(this.ProjectName != null)
+                if(ProjectName != null)
                 {
                     // set projectName
-                    projectName = this.ProjectName;
+                    projectName = ProjectName;
                 }
                 
                 // return the project name
@@ -593,8 +640,8 @@ namespace ObjectLibrary.BusinessObjects
                     // only add if not already there
                     if (index < 0)
                     {
-                        // I think .NET5 and .NETFramework both need this. Will answer this question soon.
-                        this.WriterReferencesSet.References.Add(new ProjectReference("System.Data.SqlClient"));
+                        // I think .NET5 and .NETFramework both need  Will answer this question soon.
+                        WriterReferencesSet.References.Add(new ProjectReference("System.Data.SqlClient"));
                     }
                 }
                 
@@ -771,7 +818,7 @@ namespace ObjectLibrary.BusinessObjects
                 get
                 {
                     // initial value
-                    bool hasAllReferences = (this.AllReferences != null);
+                    bool hasAllReferences = (AllReferences != null);
                     
                     // return value
                     return hasAllReferences;
@@ -788,7 +835,7 @@ namespace ObjectLibrary.BusinessObjects
                 get
                 {
                     // initial value
-                    bool hasControllerReferencesSet = (this.ControllerReferencesSet != null);
+                    bool hasControllerReferencesSet = (ControllerReferencesSet != null);
                     
                     // return value
                     return hasControllerReferencesSet;
@@ -805,7 +852,7 @@ namespace ObjectLibrary.BusinessObjects
                 get
                 {
                     // initial value
-                    bool hasDatabases = (this.Databases != null);
+                    bool hasDatabases = (Databases != null);
                     
                     // return value
                     return hasDatabases;
@@ -822,7 +869,7 @@ namespace ObjectLibrary.BusinessObjects
                 get
                 {
                     // initial value
-                    bool hasDataManagerReferencesSet = (this.DataManagerReferencesSet != null);
+                    bool hasDataManagerReferencesSet = (DataManagerReferencesSet != null);
                     
                     // return value
                     return hasDataManagerReferencesSet;
@@ -839,7 +886,7 @@ namespace ObjectLibrary.BusinessObjects
                 get
                 {
                     // initial value
-                    bool hasDataOperationsReferencesSet = (this.DataOperationsReferencesSet != null);
+                    bool hasDataOperationsReferencesSet = (DataOperationsReferencesSet != null);
                     
                     // return value
                     return hasDataOperationsReferencesSet;
@@ -856,7 +903,7 @@ namespace ObjectLibrary.BusinessObjects
                 get
                 {
                     // initial value
-                    bool hasObjectReferencesSet = (this.ObjectReferencesSet != null);
+                    bool hasObjectReferencesSet = (ObjectReferencesSet != null);
                     
                     // return value
                     return hasObjectReferencesSet;
@@ -873,7 +920,7 @@ namespace ObjectLibrary.BusinessObjects
                 get
                 {
                     // initial value
-                    bool hasReaderReferencesSet = (this.ReaderReferencesSet != null);
+                    bool hasReaderReferencesSet = (ReaderReferencesSet != null);
                     
                     // return value
                     return hasReaderReferencesSet;
@@ -890,7 +937,7 @@ namespace ObjectLibrary.BusinessObjects
                 get
                 {
                     // initial value
-                    bool hasStoredProcedureReferencesSet = (this.StoredProcedureReferencesSet != null);
+                    bool hasStoredProcedureReferencesSet = (StoredProcedureReferencesSet != null);
                     
                     // return value
                     return hasStoredProcedureReferencesSet;
@@ -907,7 +954,7 @@ namespace ObjectLibrary.BusinessObjects
                 get
                 {
                     // initial value
-                    bool hasTables = (this.Tables != null);
+                    bool hasTables = (Tables != null);
                     
                     // return value
                     return hasTables;
@@ -924,7 +971,7 @@ namespace ObjectLibrary.BusinessObjects
                 get
                 {
                     // initial value
-                    bool hasWriterReferencesSet = (this.WriterReferencesSet != null);
+                    bool hasWriterReferencesSet = (WriterReferencesSet != null);
                     
                     // return value
                     return hasWriterReferencesSet;

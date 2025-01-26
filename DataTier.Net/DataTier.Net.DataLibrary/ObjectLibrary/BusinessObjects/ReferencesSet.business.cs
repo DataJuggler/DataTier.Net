@@ -17,6 +17,7 @@ namespace ObjectLibrary.BusinessObjects
 
         #region Private Variables
         private List<ProjectReference> references;
+        private bool fetchAllForProjectId;
         #endregion
 
         #region Constructors
@@ -175,6 +176,17 @@ namespace ObjectLibrary.BusinessObjects
 
         #region Properties
 
+            #region FetchAllForProjectId
+            /// <summary>
+            /// This property gets or sets the value for 'FetchAllForProjectId'.
+            /// </summary>
+            public bool FetchAllForProjectId
+            {
+                get { return fetchAllForProjectId; }
+                set { fetchAllForProjectId = value; }
+            }
+            #endregion
+            
             #region HasReferences
             /// <summary>
             /// This property returns true if this object has a 'References'.

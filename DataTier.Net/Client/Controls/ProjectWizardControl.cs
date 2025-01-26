@@ -60,10 +60,10 @@ namespace DataTierClient.Controls
                 HideControls();
                 
                 // Set SelectedControl to Null
-                this.SelectedControl = null;
+                SelectedControl = null;
 
                 // Set the selected button
-                this.SelectedButton = button;
+                SelectedButton = button;
                 
                 // Determine Which Button To Make Visible
                 switch(button)
@@ -71,7 +71,7 @@ namespace DataTierClient.Controls
                     case ActiveControlEnum.ProjectsTab:
                         
                         // Set SelectedControl
-                        this.SelectedControl = this.ProjectEditor;
+                        SelectedControl = ProjectEditor;
                         
                         // required
                         break;
@@ -79,7 +79,7 @@ namespace DataTierClient.Controls
                     case ActiveControlEnum.DatabasesTab:
 
                         // Set SelectedControl
-                        this.SelectedControl = this.DatabasesEditor;
+                        SelectedControl = DatabasesEditor;
 
                         // required
                         break;
@@ -87,7 +87,7 @@ namespace DataTierClient.Controls
                     case ActiveControlEnum.DataObjectsTab:
 
                         // Set SelectedControl
-                        this.SelectedControl = this.DataObjectsEditor;
+                        SelectedControl = DataObjectsEditor;
 
                         // required
                         break;
@@ -95,7 +95,7 @@ namespace DataTierClient.Controls
                     case ActiveControlEnum.DataManagerTab:
 
                         // set selected control
-                        this.SelectedControl = this.DataManagerEditor;
+                        SelectedControl = DataManagerEditor;
 
                         // required
                         break;
@@ -103,7 +103,7 @@ namespace DataTierClient.Controls
                     case ActiveControlEnum.DataOperationsTab:
 
                         // set selected control
-                        this.SelectedControl = this.DataOperationsEditor;
+                        SelectedControl = DataOperationsEditor;
 
                         // required
                         break;
@@ -111,7 +111,7 @@ namespace DataTierClient.Controls
                     case ActiveControlEnum.ControllersTab:
 
                         // set selected control
-                        this.SelectedControl = this.ControllerEditor;
+                        SelectedControl = ControllerEditor;
 
                         // required
                         break;
@@ -119,7 +119,7 @@ namespace DataTierClient.Controls
                     case ActiveControlEnum.ReadersTab:
 
                         // set selected control
-                        this.SelectedControl = this.ReaderEditor;
+                        SelectedControl = ReaderEditor;
 
                         // required
                         break;
@@ -127,7 +127,7 @@ namespace DataTierClient.Controls
                     case ActiveControlEnum.WritersTab:
 
                         // set selected control
-                        this.SelectedControl = this.WriterEditor;
+                        SelectedControl = WriterEditor;
 
                         // required
                         break;
@@ -135,21 +135,21 @@ namespace DataTierClient.Controls
                     case ActiveControlEnum.StoredProceduresTab:
 
                         // set selected control
-                        this.SelectedControl = this.StoredProcedureEditor;
+                        SelectedControl = StoredProcedureEditor;
 
                         // required
                         break;  
                 }
                 
                 // if a selected control has been set
-                if(this.SelectedControl != null)
+                if(SelectedControl != null)
                 {
                     // Notify the wizard control
-                    this.WizardStatusControl.SetSelectedButton(button);
+                    WizardStatusControl.SetSelectedButton(button);
                 
                     // Cast the selected control as a control so the visible property 
                     // can be set
-                    Control control = this.SelectedControl as Control;
+                    Control control = SelectedControl as Control;
                     
                     // if the control exists
                     if(control != null)
@@ -159,14 +159,14 @@ namespace DataTierClient.Controls
                     }
                     
                     // Display the selected cotnrol
-                    this.SelectedControl.DisplaySelectedProject();
+                    SelectedControl.DisplaySelectedProject();
                     
                     // Enable Controls
                     UIEnable();
                 }
                 
                 // Refresh
-                this.Refresh();
+                Refresh();
             }
             #endregion
 
@@ -177,10 +177,10 @@ namespace DataTierClient.Controls
             public void DisplaySelectedObject()
             {
                 // Display selected project
-                if(this.SelectedControl != null)
+                if(SelectedControl != null)
                 {
                     // Display the selected project on the selected control.
-                    this.SelectedControl.DisplaySelectedProject();   
+                    SelectedControl.DisplaySelectedProject();   
                 }    
             }
             #endregion
@@ -192,7 +192,7 @@ namespace DataTierClient.Controls
             private void HideControls()
             {
                 // loop throgh all controls
-                foreach(Control control in this.MainPanel.Controls)
+                foreach(Control control in MainPanel.Controls)
                 {
                     // hide this control. 
                     control.Visible = false;
@@ -207,7 +207,7 @@ namespace DataTierClient.Controls
             private void Init()
             {
                 // Call the init for each control
-                foreach(Control control in this.MainPanel.Controls)
+                foreach(Control control in MainPanel.Controls)
                 {
                     // call the Init for each method
                     IWizardControl wizardControl = control as IWizardControl;
@@ -221,7 +221,7 @@ namespace DataTierClient.Controls
                 }
             
                 // Set the SelectedControl to the ProjectsTab
-                this.ButtonSelected(ActiveControlEnum.ProjectsTab);
+                ButtonSelected(ActiveControlEnum.ProjectsTab);
 
                 // Enable the controls
                 UIEnable();
@@ -236,10 +236,10 @@ namespace DataTierClient.Controls
             internal void MovePrev()
             {
                 // if the SelectedControl exists
-                if (this.SelectedControl != null)
+                if (SelectedControl != null)
                 {
                     // Move to the next control
-                    this.ButtonSelected(this.SelectedControl.PrevControl);
+                    ButtonSelected(SelectedControl.PrevControl);
                 }      
             }
             #endregion 
@@ -251,10 +251,10 @@ namespace DataTierClient.Controls
             internal void MoveNext()
             {
                 // if the SelectedControl exists
-                if(this.SelectedControl != null)
+                if(SelectedControl != null)
                 {
                     // Move to the next control
-                    this.ButtonSelected(this.SelectedControl.NextControl);
+                    ButtonSelected(SelectedControl.NextControl);
                 }   
             }
             #endregion
@@ -277,22 +277,19 @@ namespace DataTierClient.Controls
                 try
                 {
                     // if the parent form exists
-                    if (this.ParentForm != null)
+                    if (ParentForm != null)
                     {
                         // turn on cursor 
-                        this.ParentForm.Cursor = Cursors.WaitCursor;
+                        ParentForm.Cursor = Cursors.WaitCursor;
                     }
 
-                    // Set the CurrenctDirectory (This fixes a bug for using Relative Paths).
-                    Environment.CurrentDirectory = this.CurrentDirectory;
-
                     // If the selected project exists
-                    if (this.SelectedProject != null)
+                    if (SelectedProject != null)
                     {
                         // Set the current directory back
 
                         // Save the selected proejct
-                        saved = gateway.SaveProject(ref this.selectedProject);
+                        saved = gateway.SaveProject(ref selectedProject);
 
                         // if saved
                         if (saved)
@@ -300,16 +297,16 @@ namespace DataTierClient.Controls
                             // save the children (sounds like a commerical for .55 cents per day)
 
 							// set projectId on each database
-							this.SelectedProject.SetProjectIdOnDatabases(SelectedProject.ProjectId);
+							SelectedProject.SetProjectIdOnDatabases(SelectedProject.ProjectId);
                             
                             // set projectID on each ReferencesSet
-							this.SelectedProject.SetProjectIdOnReferences(this.SelectedProject.ProjectId);
+							SelectedProject.SetProjectIdOnReferences(SelectedProject.ProjectId);
 
                             // Save the databases for this project
                             databasesSaved = SaveProjectDatabases(gateway);
 
                             // save references
-							referencesSaved = gateway.SaveProjectReferences(ref this.selectedProject);
+							referencesSaved = gateway.SaveProjectReferences(ref selectedProject);
                             
 							// If the references did not save
 							if ((!referencesSaved) && (error != null))
@@ -345,8 +342,16 @@ namespace DataTierClient.Controls
                         }
                         else
                         {
-                            // set the message
-                            message = "An error occurred saving the selected 'Project'. The project could not be saved";
+                            if (!referencesSaved)
+                            {
+                                // set the message
+                                message = "An error occurred saving the selected 'Project'. The project could not be saved";
+                            }
+                            else if (!databasesSaved)
+                            {
+                                // set the message
+                                message = "An error occurred saving the selected 'Project'. The database(s) could not be saved";
+                            }
                         }
 
                         // Inform user of error
@@ -354,10 +359,10 @@ namespace DataTierClient.Controls
                     }
 
                     // Close this form
-                    if ((this.WizardForm != null) && (saved))
+                    if ((WizardForm != null) && (saved))
                     {
                         // Close this form
-                        this.WizardForm.Close();
+                        WizardForm.Close();
                     }
                 }
                 catch (Exception error2)
@@ -371,10 +376,10 @@ namespace DataTierClient.Controls
                 finally
                 {
                     // if the parent form exists
-                    if (this.ParentForm != null)
+                    if (ParentForm != null)
                     {
                         // turn off cursor before closing
-                        this.ParentForm.Cursor = Cursors.Default;
+                        ParentForm.Cursor = Cursors.Default;
                     }
                 }
             }
@@ -391,13 +396,13 @@ namespace DataTierClient.Controls
                 bool tempSaved = false;
 
                 // if the SelectedProject has Databases
-				if ((this.SelectedProject.HasDatabases) && (this.selectedProject.Databases.Count > 0))
+				if ((SelectedProject.HasDatabases) && (selectedProject.Databases.Count > 0))
                 {
                     // default to true until a failure happens
                     databasesSaved = true;
 
                     // iterate the Databases
-                    foreach (DTNDatabase database in this.SelectedProject.Databases)
+                    foreach (DTNDatabase database in SelectedProject.Databases)
                     {
                         // clone the object so it can be saved by reference
                         DTNDatabase tempDatabase = database.Clone();
@@ -426,7 +431,7 @@ namespace DataTierClient.Controls
             internal void SetFocusToProjectNameControl()
             {
                 // Set Focus To The ProjectNameControl
-                this.ProjectEditor.SetFocusToProjectNameControl();
+                ProjectEditor.SetFocusToProjectNameControl();
             }
             #endregion
             
@@ -439,10 +444,10 @@ namespace DataTierClient.Controls
             internal void SetImages(Image selectedImage, Image notSelectedImage)
             {
                 // set the images
-                ImageHelper.SetSelectedAndNotSelectedImages(this.WizardStatusControl.Controls, selectedImage, notSelectedImage);
+                ImageHelper.SetSelectedAndNotSelectedImages(WizardStatusControl.Controls, selectedImage, notSelectedImage);
 
                 // refresh this control
-                this.Refresh();
+                Refresh();
             }
             #endregion
 
@@ -455,30 +460,30 @@ namespace DataTierClient.Controls
             internal void Setup(Project projectArg, ActiveControlEnum activeControl, MainForm mainForm)
             {
                  // Set Properties
-                 this.SelectedProject = projectArg;
+                 SelectedProject = projectArg;
 
                  // Set ParentMainForm
-                 this.ParentMainForm = mainForm;
+                 ParentMainForm = mainForm;
                  
                  // Set the text
-                 this.WizardForm.Text = "New Project";
+                 WizardForm.Text = "New Project";
                  
                  // if the selected project exists
-                 if(this.SelectedProject != null)
+                 if(SelectedProject != null)
                  {
                     // If this is an existing project
-                    if(!this.SelectedProject.IsNew)
+                    if(!SelectedProject.IsNew)
                     {
                         // Set the text to edit project
-                        this.WizardForm.Text = "Edit Project";
+                        WizardForm.Text = "Edit Project";
                     }
                  
                     // Create the initial selected proejct
-                    this.InitialSelectedProject = SerializationManager.SerializeObject(this.SelectedProject);
+                    InitialSelectedProject = SerializationManager.SerializeObject(SelectedProject);
                  }
                  
                  // Set Selected Control
-                 this.ButtonSelected(activeControl);
+                 ButtonSelected(activeControl);
             }
             #endregion
             
@@ -493,7 +498,7 @@ namespace DataTierClient.Controls
                 bool valid = false;
                 
                 // If the SelectedProject exists
-                if (this.HasSelectedProject)
+                if (HasSelectedProject)
                 {
                     // Create a ClientValidationManager
                     ClientValidationManager clientValidationManager = new ClientValidationManager();
@@ -501,36 +506,36 @@ namespace DataTierClient.Controls
                     // Create required fields
                     
                     // Create Project Required Fields
-                    RequiredField projectNameField = new RequiredField("ProjectName", RequiredField.CreateMissingRequiredFieldMessage("Project Name", this.SelectedProject.ProjectName, false), this.SelectedProject, false);
-                    RequiredField projectFolderField = new RequiredField("ProjectFolder", RequiredField.CreateMissingRequiredFieldMessage("Project Folder", this.SelectedProject.ProjectFolder, true), this.SelectedProject, true);
+                    RequiredField projectNameField = new RequiredField("ProjectName", RequiredField.CreateMissingRequiredFieldMessage("Project Name", SelectedProject.ProjectName, false), SelectedProject, false);
+                    RequiredField projectFolderField = new RequiredField("ProjectFolder", RequiredField.CreateMissingRequiredFieldMessage("Project Folder", SelectedProject.ProjectFolder, true), SelectedProject, true);
 
                     // Create Object Required Fields
-                    RequiredField objectFolderField = new RequiredField("ObjectFolder", RequiredField.CreateMissingRequiredFieldMessage("Object Folder", this.SelectedProject.ObjectFolder, true), this.SelectedProject, true);
-                    RequiredField objectNamespaceField = new RequiredField("ObjectNamespace", RequiredField.CreateMissingRequiredFieldMessage("Object Namespace", this.SelectedProject.ObjectNamespace, false), this.SelectedProject, false);
+                    RequiredField objectFolderField = new RequiredField("ObjectFolder", RequiredField.CreateMissingRequiredFieldMessage("Object Folder", SelectedProject.ObjectFolder, true), SelectedProject, true);
+                    RequiredField objectNamespaceField = new RequiredField("ObjectNamespace", RequiredField.CreateMissingRequiredFieldMessage("Object Namespace", SelectedProject.ObjectNamespace, false), SelectedProject, false);
 
                     // Create DataManager Required Fields
-                    RequiredField dataManagerFolderField = new RequiredField("DataManagerFolder", RequiredField.CreateMissingRequiredFieldMessage("Data Manager Folder", this.SelectedProject.DataManagerFolder, true), this.SelectedProject, true);
-                    RequiredField dataManagerNamespaceField = new RequiredField("DataManagerNamespace", RequiredField.CreateMissingRequiredFieldMessage("Data Manager Namespace", this.SelectedProject.DataManagerNamespace, false), this.SelectedProject, false);
+                    RequiredField dataManagerFolderField = new RequiredField("DataManagerFolder", RequiredField.CreateMissingRequiredFieldMessage("Data Manager Folder", SelectedProject.DataManagerFolder, true), SelectedProject, true);
+                    RequiredField dataManagerNamespaceField = new RequiredField("DataManagerNamespace", RequiredField.CreateMissingRequiredFieldMessage("Data Manager Namespace", SelectedProject.DataManagerNamespace, false), SelectedProject, false);
                     
                     // Create DataOperations Required Fields
-                    RequiredField dataOperationsFolderField = new RequiredField("DataOperationsFolder", RequiredField.CreateMissingRequiredFieldMessage("Data Operations Folder", this.SelectedProject.DataOperationsFolder, true), this.SelectedProject, true);
-                    RequiredField dataOperationsNamespaceField = new RequiredField("DataOperationsNamespace", RequiredField.CreateMissingRequiredFieldMessage("Data Operations Namespace", this.SelectedProject.DataOperationsNamespace, false), this.SelectedProject, false);
+                    RequiredField dataOperationsFolderField = new RequiredField("DataOperationsFolder", RequiredField.CreateMissingRequiredFieldMessage("Data Operations Folder", SelectedProject.DataOperationsFolder, true), SelectedProject, true);
+                    RequiredField dataOperationsNamespaceField = new RequiredField("DataOperationsNamespace", RequiredField.CreateMissingRequiredFieldMessage("Data Operations Namespace", SelectedProject.DataOperationsNamespace, false), SelectedProject, false);
 
                     // Create Controller Required Fields
-                    RequiredField controllerFolderField = new RequiredField("ControllerFolder", RequiredField.CreateMissingRequiredFieldMessage("Controller Folder", this.SelectedProject.ControllerFolder, true), this.SelectedProject, true);
-                    RequiredField controllerNamespaceField = new RequiredField("ControllerNamespace", RequiredField.CreateMissingRequiredFieldMessage("Controller Namespace", this.SelectedProject.ControllerNamespace, false), this.SelectedProject, false);
+                    RequiredField controllerFolderField = new RequiredField("ControllerFolder", RequiredField.CreateMissingRequiredFieldMessage("Controller Folder", SelectedProject.ControllerFolder, true), SelectedProject, true);
+                    RequiredField controllerNamespaceField = new RequiredField("ControllerNamespace", RequiredField.CreateMissingRequiredFieldMessage("Controller Namespace", SelectedProject.ControllerNamespace, false), SelectedProject, false);
 
                     // Create Reader Required Fields
-                    RequiredField readerFolderField = new RequiredField("ReaderFolder", RequiredField.CreateMissingRequiredFieldMessage("Reader Folder", this.SelectedProject.ReaderFolder, true), SelectedProject, true);
-                    RequiredField readerNamespaceField = new RequiredField("ReaderNamespace", RequiredField.CreateMissingRequiredFieldMessage("Reader Namespace", this.SelectedProject.ReaderNamespace, false), this.SelectedProject, false);
+                    RequiredField readerFolderField = new RequiredField("ReaderFolder", RequiredField.CreateMissingRequiredFieldMessage("Reader Folder", SelectedProject.ReaderFolder, true), SelectedProject, true);
+                    RequiredField readerNamespaceField = new RequiredField("ReaderNamespace", RequiredField.CreateMissingRequiredFieldMessage("Reader Namespace", SelectedProject.ReaderNamespace, false), SelectedProject, false);
 
                     // Create Writer Required Fields
-                    RequiredField writerFolderField = new RequiredField("DataWriterFolder", RequiredField.CreateMissingRequiredFieldMessage("Writer Folder", this.SelectedProject.DataWriterFolder, true), this.SelectedProject, true);
-                    RequiredField writerNamespaceField = new RequiredField("DataWriterNamespace", RequiredField.CreateMissingRequiredFieldMessage("Writer Namespace", this.SelectedProject.DataWriterNamespace, false), this.SelectedProject, false);
+                    RequiredField writerFolderField = new RequiredField("DataWriterFolder", RequiredField.CreateMissingRequiredFieldMessage("Writer Folder", SelectedProject.DataWriterFolder, true), SelectedProject, true);
+                    RequiredField writerNamespaceField = new RequiredField("DataWriterNamespace", RequiredField.CreateMissingRequiredFieldMessage("Writer Namespace", SelectedProject.DataWriterNamespace, false), SelectedProject, false);
                     
                     // Create StoredProcedure Required Fields
-                    RequiredField storedProcFolderField = new RequiredField("StoredProcedureObjectFolder", RequiredField.CreateMissingRequiredFieldMessage("Stored Procedure Object Folder", this.SelectedProject.StoredProcedureObjectFolder, true), this.SelectedProject, true);
-                    RequiredField storedProcNamespaceField = new RequiredField("StoredProcedureObjectNamespace", RequiredField.CreateMissingRequiredFieldMessage("Stored Procedure Object Namespace", this.SelectedProject.StoredProcedureObjectNamespace, false), this.SelectedProject, false);
+                    RequiredField storedProcFolderField = new RequiredField("StoredProcedureObjectFolder", RequiredField.CreateMissingRequiredFieldMessage("Stored Procedure Object Folder", SelectedProject.StoredProcedureObjectFolder, true), SelectedProject, true);
+                    RequiredField storedProcNamespaceField = new RequiredField("StoredProcedureObjectNamespace", RequiredField.CreateMissingRequiredFieldMessage("Stored Procedure Object Namespace", SelectedProject.StoredProcedureObjectNamespace, false), SelectedProject, false);
 
                     // if V2 of Templates
                     if (SelectedProject.TemplateVersion == 2)
@@ -573,7 +578,7 @@ namespace DataTierClient.Controls
                     clientValidationManager.RequiredFields.Add(storedProcNamespaceField);
 
                     // Valildate this object. 
-                    valid = clientValidationManager.Validate(this.SelectedProject);
+                    valid = clientValidationManager.Validate(SelectedProject);
 
                     // if this object is not valid
                     if (!valid)
@@ -606,61 +611,37 @@ namespace DataTierClient.Controls
                 bool saveEnabled = false;
                 
                 // If we have a SelectedControl
-                if(this.SelectedControl != null)
+                if(SelectedControl != null)
                 {
                     // set the values
-                    backEnabled = (this.SelectedControl.PrevControl != ActiveControlEnum.NotSet);
-                    nextEnabled = (this.SelectedControl.NextControl != ActiveControlEnum.NotSet);
+                    backEnabled = (SelectedControl.PrevControl != ActiveControlEnum.NotSet);
+                    nextEnabled = (SelectedControl.NextControl != ActiveControlEnum.NotSet);
                     
                     // if the initial selected project exists
-                    if(this.InitialSelectedProject != null)
+                    if(InitialSelectedProject != null)
                     {
                         // has the object changed
-                        saveEnabled = SerializationManager.HasObjectChanged(this.InitialSelectedProject, this.SelectedProject);
+                        saveEnabled = SerializationManager.HasObjectChanged(InitialSelectedProject, SelectedProject);
                     }
                 }
                 
                 // set the values
-                this.WizardControlPanel.BackButton.Enabled = backEnabled;
-                this.WizardControlPanel.NextButton.Enabled = nextEnabled;
-                this.WizardControlPanel.SaveButton.Enabled = saveEnabled;
+                WizardControlPanel.BackButton.Enabled = backEnabled;
+                WizardControlPanel.NextButton.Enabled = nextEnabled;
+                WizardControlPanel.SaveButton.Enabled = saveEnabled;
 
                 // always enable the DoneButton
-                this.WizardControlPanel.DoneButton.Enabled = true;
-                this.WizardControlPanel.DoneButton.Selected = true;
+                WizardControlPanel.DoneButton.Enabled = true;
+                WizardControlPanel.DoneButton.Selected = true;
 
                 // Refresh
-                this.Refresh();
+                Refresh();
             }
             #endregion
         
         #endregion
         
         #region Properties
-
-            #region CurrentDirectory
-            /// <summary>
-            /// The current directory from the MainForm.
-            /// </summary>
-            public string CurrentDirectory
-            {
-                get
-                {
-                    // initial value
-                    string currentDirectory = "";
-
-                    // If the MainForm exists
-                    if (this.HasParentMainForm)
-                    {
-                        // Set currentDirectory
-                        currentDirectory = this.ParentMainForm.CurrentDirectory;
-                    }
-
-                    // return value
-                    return currentDirectory;
-                }
-            }
-            #endregion
 
             #region InitialSelectedProject
             /// <summary>
@@ -685,7 +666,7 @@ namespace DataTierClient.Controls
                 get
                 {
                     // initial value
-                    bool hasParentMainForm = (this.ParentMainForm != null);
+                    bool hasParentMainForm = (ParentMainForm != null);
 
                     // return value
                     return hasParentMainForm;
@@ -702,7 +683,7 @@ namespace DataTierClient.Controls
                 get
                 {
                     // initial value
-                    bool hasSelectedProject = (this.SelectedProject != null);
+                    bool hasSelectedProject = (SelectedProject != null);
                     
                     // return value
                     return hasSelectedProject;
@@ -764,7 +745,7 @@ namespace DataTierClient.Controls
                 get
                 {
                     // initial value
-                    ProjectWizardForm wizardForm = this.Parent as ProjectWizardForm;
+                    ProjectWizardForm wizardForm = Parent as ProjectWizardForm;
 
                     // return value
                     return wizardForm;

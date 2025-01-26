@@ -3075,6 +3075,9 @@ namespace DataTierClient.Forms
                         // if the references had to be recreated
                         if ((openProject.ReferencesRecreated) && (!OpenProject.IsNew))
                         {
+                            // Toggle Off
+                            OpenProject.ReferencesRecreated = false;
+
                             // Show a message to the user
                             MessageHelper.DisplayMessage("Your references had to be recreated. Any customizations made to your references have been lost. You must select Edit Project and Save your project before building.", "References Recreated");
                         }

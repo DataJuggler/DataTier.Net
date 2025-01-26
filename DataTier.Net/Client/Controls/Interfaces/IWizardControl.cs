@@ -55,7 +55,7 @@ namespace DataTierClient.Controls.Interfaces
         // Methods
         void Init();
         void DisplaySelectedProject();
-        bool ValidateSelectedProject();
+        
     }
     #endregion
     

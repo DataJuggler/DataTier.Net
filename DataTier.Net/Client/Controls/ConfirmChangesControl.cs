@@ -2105,6 +2105,13 @@ namespace DataTierClient.Controls
                         // set the dataManagerFile
                         string dataManagerFile = @"DataAccessComponent\DataManager\" + MethodInfo.SelectedTable.ClassName + "Manager.cs";
 
+                        // if Version 2
+                        if (TemplateVersion == 2)
+                        {
+                            // Now called Data folder
+                            customReaderFile = @"DataAccessComponent\Data\Readers\" + MethodInfo.CustomReader.ClassName + ".cs";
+                        }
+
                         // local used to display the updated Method for the DataManager
                         string updateText6 = "";
 
@@ -2165,6 +2172,13 @@ namespace DataTierClient.Controls
                 {
                     // set the writerFile path
                     string dataManagerFile = Path.Combine(ProjectFolder,  @"DataAccessComponent\DataManager", MethodInfo.SelectedTable.ClassName + "Manager.cs");
+
+                    // if new Templates
+                    if (TemplateVersion == 2)
+                    {
+                        // Change the path to the Data folder
+                        dataManagerFile = Path.Combine(ProjectFolder,  @"DataAccessComponent\Data", MethodInfo.SelectedTable.ClassName + "Manager.cs");    
+                    }
 
                     // if the file exists
                     if (File.Exists(dataManagerFile))
@@ -2917,7 +2931,7 @@ namespace DataTierClient.Controls
             #region UpdateWriter()
             /// <summary>
             /// This method updates the Writer class.
-            /// Example: ProjectFolder\DataAccessComponent\DataManager\PersonWriter.cs.
+            /// Example: ProjectFolder\DataAccessComponent\Data\PersonWriter.cs.
             /// </summary>
             public bool UpdateWriter()
             {
@@ -3301,7 +3315,31 @@ namespace DataTierClient.Controls
                 }
             }
             #endregion
-            
+
+            #region TemplateVersion
+            /// <summary>
+            /// This read only property returns the TempateVersion from the SelectedProject
+            /// </summary>
+            public int TemplateVersion
+            {
+                get
+                {
+                    // initial value
+                    int templateVersion = 2;
+
+                    // if the value for HasProject is true
+                    if (HasProject)
+                    {
+                        // set the return value
+                        templateVersion = Project.TemplateVersion;
+                    }
+
+                    // return value
+                    return templateVersion;
+                }
+            }
+            #endregion
+
             #region UserCancelled
             /// <summary>
             /// This property gets or sets the value for 'UserCancelled'.

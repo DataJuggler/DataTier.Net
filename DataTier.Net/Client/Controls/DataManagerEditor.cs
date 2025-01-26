@@ -267,20 +267,6 @@ namespace DataTierClient.Controls
             }
             #endregion
 
-            #region ValidateSelectedProject()
-            /// <summary>
-            /// Validate the selected project.
-            /// </summary>
-            public bool ValidateSelectedProject()
-            {
-                // initial value
-                bool valid = false;
-
-                // return value
-                return valid;
-            }
-            #endregion
-
         #endregion
 
         #region Properties
