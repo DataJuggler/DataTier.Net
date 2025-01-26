@@ -2463,6 +2463,9 @@ namespace DataGateway
                 // locals
                 bool tempSaved = true;
                 
+                // Load the projectReferences for this referencesSetId
+                List<ProjectReference> projectReferences = LoadProjectReferencesForReferencesSetId(referencesSetId);
+                
                 // if project exists
                 if (references != null)
                 {
@@ -2478,9 +2481,6 @@ namespace DataGateway
                         // Why is this one not saved
                         if (projectReference.IsNew)
                         {
-                            // Load the projectReferences for this referencesSetId
-                            List<ProjectReference> projectReferences = LoadProjectReferencesForReferencesSetId(referencesSetId);
-
                             // If the projectReferences collection exists and has one or more items
                             if (ListHelper.HasOneOrMoreItems(projectReferences))
                             {
