@@ -18,14 +18,14 @@ namespace ConnectionSwitcher
     /// </summary>
     public partial class MainForm : Form, ISelectedIndexListener
     {
-        
+
         #region Private Variables
         private const string EnvironmentVariableName = "DataTierNetConnection";
         private const string DataTierDotNetDotDatabase = "Data Source=Rocket\\SQLExpress;Initial Catalog=DataTier.Net.Database;Integrated Security=True;Encrypt=False;";
         private const string DataTierDotNetDotDatabaseDotDev = "Data Source=Rocket\\SQLExpress;Initial Catalog=DataTier.Net.Database.Dev;Integrated Security=True;Encrypt=False;";
         private const string DataTierDotNetDotDatabaseDotDemo = "Data Source=Rocket\\SQLExpress;Initial Catalog=DataTier.Net.Database.Demo;Integrated Security=True;Encrypt=False;";
         #endregion
-        
+
         #region Constructor
         /// <summary>
         /// Create a new instance of a 'MainForm' object.
@@ -42,99 +42,122 @@ namespace ConnectionSwitcher
 
         #region Events
 
-            #region OnSelectedIndexChanged(LabelComboBoxControl control, int selectedIndex, object selectedItem)
-            /// <summary>
-            /// event is fired when a selection is made in the 'On'.
-            /// </summary>
-            public void OnSelectedIndexChanged(LabelComboBoxControl control, int selectedIndex, object selectedItem)
-            {
-                // Determine the Connection value by the selectedIndex
-                if (selectedIndex == 0)
-                {
-                    // Display the ConnectionString
-                    ConnectionStringControl.Text = DataTierDotNetDotDatabase;
-                }
-                else if (selectedIndex == 1)
-                {
-                    // Display the ConnectionString
-                    ConnectionStringControl.Text = DataTierDotNetDotDatabaseDotDemo;
-                }
-                else if (selectedIndex == 2)
-                {
-                    // Display the ConnectionString
-                    ConnectionStringControl.Text = DataTierDotNetDotDatabaseDotDev;
-                }
-            }
-            #endregion
-            
-            #region UpdateValueButton_Click(object sender, EventArgs e)
-            /// <summary>
-            /// event is fired when the 'UpdateValueButton' is clicked.
-            /// </summary>
-            private void UpdateValueButton_Click(object sender, EventArgs e)
-            {
-                // Set the vale
-                EnvironmentVariableHelper.SetEnvironmentVariableValue(EnvironmentVariableName, ConnectionStringControl.Text, EnvironmentVariableTarget.User);
+        #region DeleteButton_Click(object sender, EventArgs e)
+        /// <summary>
+        /// event is fired when the 'DeleteButton' is clicked.
+        /// </summary>
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            // Set the variableName
+            string variableName = "DataTierNetConnection";
 
-                // Display the result
-                StatusLabel.Text = "The Environment Variable Has Been Updated";
-            }
-            #endregion
-            
+            // Attempt Delete
+            EnvironmentVariableHelper.SetEnvironmentVariableValue(variableName, String.Empty, EnvironmentVariableTarget.User);
+
+            // Erase
+            ConnectionTypeComboBox.SelectedIndex = -1;
+
+            //Erase
+            ConnectionStringControl.Text = "";
+
+            // Show a message
+            StatusLabel.Text = "Deleted";
+        }
         #endregion
         
-        #region Methods
-            
-            #region Init()
-            /// <summary>
-            ///  This method performs initializations for this object.
-            /// </summary>
-            public void Init()
+        #region OnSelectedIndexChanged(LabelComboBoxControl control, int selectedIndex, object selectedItem)
+        /// <summary>
+        /// event is fired when a selection is made in the 'On'.
+        /// </summary>
+        public void OnSelectedIndexChanged(LabelComboBoxControl control, int selectedIndex, object selectedItem)
+        {
+            // Determine the Connection value by the selectedIndex
+            if (selectedIndex == 0)
             {
-                 // Load the ComboBox
-                ConnectionTypeComboBox.LoadItems(typeof(ConnectionTypeEnum));
-
-                // Get the current value
-                string currentValue = EnvironmentVariableHelper.GetEnvironmentVariableValue(EnvironmentVariableName, EnvironmentVariableTarget.User);
-
-                // If the currentValue string exists
-                if (TextHelper.Exists(currentValue))
-                {
-                    // Get the currentValue
-                    switch (currentValue)
-                    {
-                        case DataTierDotNetDotDatabase:
-
-                            // Select this item
-                            ConnectionTypeComboBox.SelectedIndex = 0;
-
-                            // required
-                            break;
-
-                        case DataTierDotNetDotDatabaseDotDemo:
-
-                            // Select this item
-                            ConnectionTypeComboBox.SelectedIndex = 1;
-
-                            // required
-                            break;
-
-                        case DataTierDotNetDotDatabaseDotDev:
-
-                            // Select this item
-                            ConnectionTypeComboBox.SelectedIndex = 2;
-
-                            // required
-                            break;
-                    }
-                }
-
-                // Display the value
-                ConnectionStringControl.Text = currentValue;
-
-                // Setup the Listener
-                ConnectionTypeComboBox.SelectedIndexListener = this;
+                // Display the ConnectionString
+                ConnectionStringControl.Text = DataTierDotNetDotDatabase;
             }
+            else if (selectedIndex == 1)
+            {
+                // Display the ConnectionString
+                ConnectionStringControl.Text = DataTierDotNetDotDatabaseDotDemo;
+            }
+            else if (selectedIndex == 2)
+            {
+                // Display the ConnectionString
+                ConnectionStringControl.Text = DataTierDotNetDotDatabaseDotDev;
+            }
+        }
+        #endregion
+
+        #region UpdateValueButton_Click(object sender, EventArgs e)
+        /// <summary>
+        /// event is fired when the 'UpdateValueButton' is clicked.
+        /// </summary>
+        private void UpdateValueButton_Click(object sender, EventArgs e)
+        {
+            // Set the vale
+            EnvironmentVariableHelper.SetEnvironmentVariableValue(EnvironmentVariableName, ConnectionStringControl.Text, EnvironmentVariableTarget.User);
+
+            // Display the result
+            StatusLabel.Text = "The Environment Variable Has Been Updated";
+        }
+        #endregion
+
+        #endregion
+
+        #region Methods
+
+        #region Init()
+        /// <summary>
+        ///  This method performs initializations for this object.
+        /// </summary>
+        public void Init()
+        {
+            // Load the ComboBox
+            ConnectionTypeComboBox.LoadItems(typeof(ConnectionTypeEnum));
+
+            // Get the current value
+            string currentValue = EnvironmentVariableHelper.GetEnvironmentVariableValue(EnvironmentVariableName, EnvironmentVariableTarget.User);
+
+            // If the currentValue string exists
+            if (TextHelper.Exists(currentValue))
+            {
+                // Get the currentValue
+                switch (currentValue)
+                {
+                    case DataTierDotNetDotDatabase:
+
+                        // Select this item
+                        ConnectionTypeComboBox.SelectedIndex = 0;
+
+                        // required
+                        break;
+
+                    case DataTierDotNetDotDatabaseDotDemo:
+
+                        // Select this item
+                        ConnectionTypeComboBox.SelectedIndex = 1;
+
+                        // required
+                        break;
+
+                    case DataTierDotNetDotDatabaseDotDev:
+
+                        // Select this item
+                        ConnectionTypeComboBox.SelectedIndex = 2;
+
+                        // required
+                        break;
+                }
+            }
+
+            // Display the value
+            ConnectionStringControl.Text = currentValue;
+
+            // Setup the Listener
+            ConnectionTypeComboBox.SelectedIndexListener = this;
+        }
         #endregion
 
         #endregion
@@ -142,7 +165,6 @@ namespace ConnectionSwitcher
         #region Properties
 
         #endregion
-
     }
     #endregion
 

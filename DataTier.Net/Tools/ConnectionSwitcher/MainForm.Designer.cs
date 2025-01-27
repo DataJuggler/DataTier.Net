@@ -33,6 +33,7 @@
             ConnectionStringControl = new DataJuggler.Win.Controls.LabelTextBoxControl();
             ConnectionTypeComboBox = new DataJuggler.Win.Controls.LabelComboBoxControl();
             StatusLabel = new Label();
+            DeleteButton = new DataJuggler.Win.Controls.Button();
             SuspendLayout();
             // 
             // UpdateValueButton
@@ -107,6 +108,7 @@
             // 
             // StatusLabel
             // 
+            StatusLabel.Font = new Font("Calibri", 16F);
             StatusLabel.ForeColor = Color.LemonChiffon;
             StatusLabel.Location = new Point(12, 239);
             StatusLabel.Name = "StatusLabel";
@@ -114,11 +116,27 @@
             StatusLabel.TabIndex = 3;
             StatusLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // DeleteButton
+            // 
+            DeleteButton.BackColor = Color.Transparent;
+            DeleteButton.ButtonText = "Delete";
+            DeleteButton.FlatStyle = FlatStyle.Flat;
+            DeleteButton.Font = new Font("Calibri", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            DeleteButton.ForeColor = Color.LemonChiffon;
+            DeleteButton.Location = new Point(381, 294);
+            DeleteButton.Margin = new Padding(5, 6, 5, 6);
+            DeleteButton.Name = "DeleteButton";
+            DeleteButton.Size = new Size(140, 48);
+            DeleteButton.TabIndex = 4;
+            DeleteButton.Theme = DataJuggler.Win.Controls.Enumerations.ThemeEnum.Glass;
+            DeleteButton.Click += DeleteButton_Click;
+            // 
             // MainForm
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.Black;
             ClientSize = new Size(704, 367);
+            Controls.Add(DeleteButton);
             Controls.Add(StatusLabel);
             Controls.Add(ConnectionTypeComboBox);
             Controls.Add(ConnectionStringControl);
@@ -137,5 +155,6 @@
         private DataJuggler.Win.Controls.LabelTextBoxControl ConnectionStringControl;
         private DataJuggler.Win.Controls.LabelComboBoxControl ConnectionTypeComboBox;
         private Label StatusLabel;
+        private DataJuggler.Win.Controls.Button DeleteButton;
     }
 }

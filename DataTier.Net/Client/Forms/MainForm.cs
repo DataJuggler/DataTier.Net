@@ -91,6 +91,13 @@ namespace DataTierClient.Forms
                 // if the BuildAllButton is enabled
                 if (ButtonManager.IsButtonEnabled(BuildAllButton))
                 {
+                    // Set Focus to the HiddenButton
+                    HiddenButton.Focus();
+
+                    // Update the UI
+                    Refresh();
+                    Application.DoEvents();
+
                      // Build 
                     BuildAll();
                 }
@@ -186,8 +193,12 @@ namespace DataTierClient.Forms
                      // If this object has a ParentMainForm.
                     if (this.HasOpenProject)
                     {
-                        // remove the focus 
+                        // Set Focus to the HiddenButton
                         HiddenButton.Focus();
+
+                        // Update the UI
+                        Refresh();
+                        Application.DoEvents();
 
                         // Edit the existing project
                         EditProject();
@@ -202,6 +213,13 @@ namespace DataTierClient.Forms
             /// </summary>
             private void ManageDataButton_Click(object sender, EventArgs e)
             {
+                // Set Focus to the HiddenButton
+                HiddenButton.Focus();
+
+                // Update the UI
+                Refresh();
+                Application.DoEvents();
+
                 // Reload the table here because because New Tables are not saved if you don't
                 this.OpenProject.Tables = gateway.LoadDTNTablesByProjectId(this.OpenProject.ProjectId);
 
@@ -294,8 +312,12 @@ namespace DataTierClient.Forms
                 // if the OpenProjectButton is enabled
                 if (ButtonManager.IsButtonEnabled(OpenProjectButton))
                 {
-                      // remove the focus 
+                    // Set Focus to the HiddenButton
                     HiddenButton.Focus();
+
+                    // Update the UI
+                    Refresh();
+                    Application.DoEvents();
 
                      // Choose Project
                      this.ChooseProject();    
