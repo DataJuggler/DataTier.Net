@@ -982,6 +982,32 @@ namespace DataAccessComponent.DataGateway
             }
             #endregion
 
+            #region FindProjectByProjectName(string projectName)
+            /// <summary>
+            /// This method is used to find 'Project' objects for the ProjectName given.
+            /// </summary>
+            public Project FindProjectByProjectName(string projectName)
+            {
+                // initial value
+                Project project = null;
+                
+                // Create a temp Project object
+                Project tempProject = new Project();
+                
+                // Set the value for FindByProjectName to true
+                tempProject.FindByProjectName = true;
+                
+                // Set the value for ProjectName
+                tempProject.ProjectName = projectName;
+                
+                // Perform the find
+                project = FindProject(0, tempProject);
+                
+                // return value
+                return project;
+            }
+            #endregion
+            
             #region FindProjectReference(int referencesId, ProjectReference tempProjectReference = null)
             /// <summary>
             /// This method is used to find 'ProjectReference' objects.
@@ -1848,6 +1874,7 @@ namespace DataAccessComponent.DataGateway
             /// </summary>
             public DataManager DataManager
             {
+
                 get
                 {
                     // initial value

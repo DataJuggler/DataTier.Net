@@ -1,5 +1,4 @@
 
-
 #region using statements
 
 using DataAccessComponent.StoredProcedureManager.DeleteProcedures;
@@ -12,7 +11,6 @@ using System;
 using System.Data;
 
 #endregion
-
 
 namespace DataAccessComponent.Data.Writers
 {
@@ -27,10 +25,48 @@ namespace DataAccessComponent.Data.Writers
 
         #region Static Methods
 
-            // *******************************************
-            // Write any overrides or custom methods here.
-            // *******************************************
+            #region CreateFindProjectStoredProcedure(Project project)
+            /// <summary>
+            /// This method creates an instance of a
+            /// 'FindProjectStoredProcedure' object and
+            /// creates the sql parameter[] array needed
+            /// to execute the procedure 'Project_Find'.
+            /// </summary>
+            /// <param name="project">The 'Project' to use to
+            /// get the primary key parameter.</param>
+            /// <returns>An instance of an FetchUserStoredProcedure</returns>
+            public static new FindProjectStoredProcedure CreateFindProjectStoredProcedure(Project project)
+            {
+                // Initial Value
+                FindProjectStoredProcedure findProjectStoredProcedure = null;
 
+                // verify project exists
+                if(project != null)
+                {
+                    // Instanciate findProjectStoredProcedure
+                    findProjectStoredProcedure = new FindProjectStoredProcedure();
+
+                    // if project.FindByProjectName is true
+                    if (project.FindByProjectName)
+                    {
+                            // Change the procedure name
+                            findProjectStoredProcedure.ProcedureName = "Project_FindByProjectName";
+                            
+                            // Create the @ProjectName parameter
+                            findProjectStoredProcedure.Parameters = SqlParameterHelper.CreateSqlParameters("@ProjectName", project.ProjectName);
+                    }
+                    else
+                    {
+                        // Now create parameters for this procedure
+                        findProjectStoredProcedure.Parameters = CreatePrimaryKeyParameter(project);
+                    }
+                }
+
+                // return value
+                return findProjectStoredProcedure;
+            }
+            #endregion
+            
         #endregion
 
     }

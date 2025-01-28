@@ -1,12 +1,10 @@
 
-
 #region using statements
 
 using ObjectLibrary.Enumerations;
 using System;
 
 #endregion
-
 
 namespace ObjectLibrary.BusinessObjects
 {
@@ -17,6 +15,7 @@ namespace ObjectLibrary.BusinessObjects
     {
 
         #region Private Variables
+        private bool findByProjectName;
         #endregion
 
         #region Constructor
@@ -37,22 +36,23 @@ namespace ObjectLibrary.BusinessObjects
                 // Return Cloned Object
                 return newProject;
             }
-        #endregion
-
-            #region ToString()
-            /// <summary>
-            /// method returns the String
-            /// </summary>
-            public override string ToString()
-            {
-                // return the Name
-                return ProjectName;
-            }
             #endregion
-            
+
         #endregion
 
         #region Properties
+
+            #region FindByProjectName
+            /// <summary>
+            /// This property gets or sets the value for 'FindByProjectName'.
+            /// </summary>
+            public bool FindByProjectName
+            {
+                get { return findByProjectName; }
+                set { findByProjectName = value; }
+            }
+            #endregion
+
         #endregion
 
     }

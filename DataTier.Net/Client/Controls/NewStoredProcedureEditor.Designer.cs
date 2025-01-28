@@ -68,12 +68,14 @@ namespace DataTierClient.Controls
             this.WhereTextBox = new System.Windows.Forms.TextBox();
             this.WhereLabel = new System.Windows.Forms.Label();
             this.ProcedureTextBox = new System.Windows.Forms.TextBox();
+            this.DatabaseNameControl = new DataJuggler.Win.Controls.LabelTextBoxControl();
             this.TopPanel.SuspendLayout();
             this.WherePanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // TopPanel
             // 
+            this.TopPanel.Controls.Add(this.DatabaseNameControl);
             this.TopPanel.Controls.Add(this.CustomWhereCheckBox);
             this.TopPanel.Controls.Add(this.ProcedureButton);
             this.TopPanel.Controls.Add(this.UpdateMyDatabaseRadioButton);
@@ -83,7 +85,7 @@ namespace DataTierClient.Controls
             this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.TopPanel.Location = new System.Drawing.Point(0, 0);
             this.TopPanel.Name = "TopPanel";
-            this.TopPanel.Size = new System.Drawing.Size(1080, 112);
+            this.TopPanel.Size = new System.Drawing.Size(1080, 153);
             this.TopPanel.TabIndex = 101;
             // 
             // CustomWhereCheckBox
@@ -163,7 +165,7 @@ namespace DataTierClient.Controls
             this.ProcedureNameControl.LabelText = "Procedure Name:";
             this.ProcedureNameControl.LabelTopMargin = 2;
             this.ProcedureNameControl.LabelWidth = 172;
-            this.ProcedureNameControl.Location = new System.Drawing.Point(16, 64);
+            this.ProcedureNameControl.Location = new System.Drawing.Point(16, 65);
             this.ProcedureNameControl.MultiLine = false;
             this.ProcedureNameControl.Name = "ProcedureNameControl";
             this.ProcedureNameControl.OnTextChangedListener = null;
@@ -215,17 +217,17 @@ namespace DataTierClient.Controls
             // LeftMarginPanel
             // 
             this.LeftMarginPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.LeftMarginPanel.Location = new System.Drawing.Point(0, 112);
+            this.LeftMarginPanel.Location = new System.Drawing.Point(0, 153);
             this.LeftMarginPanel.Name = "LeftMarginPanel";
-            this.LeftMarginPanel.Size = new System.Drawing.Size(20, 428);
+            this.LeftMarginPanel.Size = new System.Drawing.Size(20, 387);
             this.LeftMarginPanel.TabIndex = 105;
             // 
             // RightMarginPanel
             // 
             this.RightMarginPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.RightMarginPanel.Location = new System.Drawing.Point(1060, 112);
+            this.RightMarginPanel.Location = new System.Drawing.Point(1060, 153);
             this.RightMarginPanel.Name = "RightMarginPanel";
-            this.RightMarginPanel.Size = new System.Drawing.Size(20, 428);
+            this.RightMarginPanel.Size = new System.Drawing.Size(20, 387);
             this.RightMarginPanel.TabIndex = 106;
             // 
             // SaveCancelControl
@@ -272,13 +274,40 @@ namespace DataTierClient.Controls
             // ProcedureTextBox
             // 
             this.ProcedureTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ProcedureTextBox.Location = new System.Drawing.Point(20, 112);
+            this.ProcedureTextBox.Location = new System.Drawing.Point(20, 153);
             this.ProcedureTextBox.Multiline = true;
             this.ProcedureTextBox.Name = "ProcedureTextBox";
             this.ProcedureTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ProcedureTextBox.Size = new System.Drawing.Size(1040, 328);
+            this.ProcedureTextBox.Size = new System.Drawing.Size(1040, 287);
             this.ProcedureTextBox.TabIndex = 109;
             this.ProcedureTextBox.TextChanged += new System.EventHandler(this.ProcedureTextBox_TextChanged);
+            // 
+            // DatabaseNameControl
+            // 
+            this.DatabaseNameControl.BackColor = System.Drawing.Color.Transparent;
+            this.DatabaseNameControl.BottomMargin = 0;
+            this.DatabaseNameControl.Editable = false;
+            this.DatabaseNameControl.Encrypted = false;
+            this.DatabaseNameControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatabaseNameControl.LabelBottomMargin = 0;
+            this.DatabaseNameControl.LabelColor = System.Drawing.SystemColors.ControlText;
+            this.DatabaseNameControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatabaseNameControl.LabelText = "Database Name:";
+            this.DatabaseNameControl.LabelTopMargin = 2;
+            this.DatabaseNameControl.LabelWidth = 172;
+            this.DatabaseNameControl.Location = new System.Drawing.Point(16, 106);
+            this.DatabaseNameControl.MultiLine = false;
+            this.DatabaseNameControl.Name = "DatabaseNameControl";
+            this.DatabaseNameControl.OnTextChangedListener = null;
+            this.DatabaseNameControl.PasswordMode = false;
+            this.DatabaseNameControl.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.DatabaseNameControl.Size = new System.Drawing.Size(492, 28);
+            this.DatabaseNameControl.TabIndex = 105;
+            this.DatabaseNameControl.TextBoxBottomMargin = 0;
+            this.DatabaseNameControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
+            this.DatabaseNameControl.TextBoxEditableColor = System.Drawing.Color.White;
+            this.DatabaseNameControl.TextBoxFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatabaseNameControl.TextBoxTopMargin = 0;
             // 
             // NewStoredProcedureEditor
             // 
@@ -311,6 +340,7 @@ namespace DataTierClient.Controls
         private System.Windows.Forms.Label WhereLabel;
         private System.Windows.Forms.TextBox ProcedureTextBox;
         private System.Windows.Forms.TextBox WhereTextBox;
+        private DataJuggler.Win.Controls.LabelTextBoxControl DatabaseNameControl;
     }
     #endregion
 

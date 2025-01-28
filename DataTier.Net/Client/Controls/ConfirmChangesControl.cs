@@ -237,7 +237,7 @@ namespace DataTierClient.Controls
                         UpdateStatus(listItem, gatewayUpdated);
 
                         // if all 3 files were updated
-                        if (dataObjectUpdated && writerUpdated && gatewayUpdated)
+                        if (dataObjectUpdated && writerUpdated)
                         {
                             // now we need to insert a method into the methods table
 
@@ -2456,7 +2456,9 @@ namespace DataTierClient.Controls
                 string setParameterFieldValue = "";
 
                 // if the file exists
-                if ((File.Exists(gatewayFile)) && (MethodInfo != null) && (MethodInfo.HasSelectedTable))
+                bool fileExists = File.Exists(gatewayFile);
+
+                if ((fileExists) && (MethodInfo != null) && (MethodInfo.HasSelectedTable))
                 {
                     // convert the DTN Field back to a DataField
                     DataField parameterField = DataConverter.ConvertDataField(MethodInfo.ParameterField);
@@ -2878,6 +2880,11 @@ namespace DataTierClient.Controls
 
                         // the gateway file was updated
                         updated = true;                        
+                    }
+                    else
+                    {
+                        // Update: 1.28.2025: The Gateway already has this method, so no need to abort
+                        updated = true;
                     }
                 }
                 

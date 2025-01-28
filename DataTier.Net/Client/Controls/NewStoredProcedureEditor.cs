@@ -462,8 +462,15 @@ namespace DataTierClient.Controls
             public void Setup(MethodInfo methodInfo, Project openProject, CustomReader customReader = null, DTNField orderByField = null, FieldSet orderByFieldSet = null)
             {
                 // store the args
-                this.MethodInfo = methodInfo;
-                this.OpenProject = openProject;
+                MethodInfo = methodInfo;
+                OpenProject = openProject;
+               
+                // if the OpenProject exists
+                if ((HasOpenProject) && (ListHelper.HasOneOrMoreItems(OpenProject.Databases)))
+                {
+                    // Set the Database Name
+                    DatabaseNameControl.Text = OpenProject.Databases[0].DatabaseName;
+                }
 
                 // locals
                 DataJuggler.Net.DataField parameter = null;

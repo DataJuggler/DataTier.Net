@@ -11,6 +11,8 @@ using DataJuggler.UltimateHelper.Objects;
 using ObjectLibrary.BusinessObjects;
 using ObjectLibrary.Enumerations;
 using System.IO;
+using DataJuggler.Win.Controls.Interfaces;
+using DataJuggler.Win.Controls;
 
 #endregion
 
@@ -21,7 +23,7 @@ namespace ProjectConverter
     /// <summary>
     /// This class is the Main Form for this project.
     /// </summary>
-    public partial class MainForm : Form
+    public partial class MainForm : Form, ISelectedIndexListener
     {
 
         #region Private Variables
@@ -40,14 +42,8 @@ namespace ProjectConverter
             // Create Controls
             InitializeComponent();
 
-            // Set the ConnectionName
-            ConnectionNameControl.Text = "DataTierNetConnection";
-
-            // Default
-            BackupPathControl.Text = @"C:\Backup\CityData";
-
-            // Select File
-            SourceControl.Text = @"C:\Projects\GitHub\CityDatabase\Data\DataTier.Net8.ClassLibraryV2.sln";
+            // Perform initializations for this object
+            Init();
         }
         #endregion
 
@@ -88,7 +84,8 @@ namespace ProjectConverter
             }
             else if (ScreenType == ScreenTypeEnum.MoveProjects)
             {
-
+                // Move this project
+                MoveDatabase();
             }
         }
         #endregion
@@ -147,10 +144,52 @@ namespace ProjectConverter
         /// </summary>
         private void MoveDatabaseButton_Click(object sender, EventArgs e)
         {
+            // Clear list box
+            StatusListBox.Items.Clear();
 
+            // if the value for HasSelectedProject is true
+            if (HasSelectedProject)
+            {
+                // Show an error
+                StatusListBox.Items.Add("Selected Project " + SelectedProject.ProjectName + " is ready to be moved.", 1);
+
+                // Set ScreenType
+                ScreenType = ScreenTypeEnum.MoveProjects;
+
+                // Set to true
+                ConfirmationVisible = true;
+
+                // Set the text
+                ConfirmationLabel.Text = "Confirm Move Project " + SelectedProject.ProjectName + "?";
+
+                // Enable or disable controls
+                UIEnable();
+            }
+            else
+            {
+                // Show an error
+                StatusListBox.Items.Add("Selected Project Does Not Exist In MoveDatabase_Click", 1);
+            }
         }
         #endregion
 
+        #region OnSelectedIndexChanged(LabelComboBoxControl control, int selectedIndex, object selectedItem)
+        /// <summary>
+        /// event is fired when a selection is made in the 'On'.
+        /// </summary>
+        public void OnSelectedIndexChanged(LabelComboBoxControl control, int selectedIndex, object selectedItem)
+        {
+            // Get the selected project name
+            string projectName = DatabaseComboBox.ComboBoxText;
+
+            // Create a new instance of a 'Gateway' object.
+            Gateway gateway = new Gateway(ConnectionNameControl.Text);
+
+            // Set the Selected Project
+            SelectedProject = gateway.FindProjectByProjectName(projectName);
+        }
+        #endregion
+        
         #region RefreshButton_Click(object sender, EventArgs e)
         /// <summary>
         /// event is fired when the 'RefreshButton' is clicked.
@@ -944,6 +983,36 @@ namespace ProjectConverter
         }
         #endregion
 
+        #region Init()
+        /// <summary>
+        ///  This method performs initializations for this object.
+        /// </summary>
+        public void Init()
+        {
+            // Wire up the listener
+            DatabaseComboBox.SelectedIndexListener = this;
+
+            // Set the ConnectionName
+            ConnectionNameControl.Text = "DataTierNetConnection";
+
+            // Default
+            BackupPathControl.Text = @"C:\Backup\CityData";
+
+            // Select File
+            SourceControl.Text = @"C:\Projects\GitHub\CityDatabase\Data\DataTier.Net8.ClassLibraryV2.sln";
+        }
+        #endregion
+        
+        #region MoveDatabase()
+        /// <summary>
+        /// Move Database
+        /// </summary>
+        public void MoveDatabase()
+        {
+            
+        }
+        #endregion
+        
         #region RemoveFile(string path)
         /// <summary>
         /// Remove File
