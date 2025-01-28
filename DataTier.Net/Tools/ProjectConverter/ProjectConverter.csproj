@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DataJuggler.Win.Controls" Version="9.1.6" />
+    <PackageReference Include="DataJuggler.Win.Controls" Version="9.1.9" />
   </ItemGroup>
 
   <ItemGroup>
