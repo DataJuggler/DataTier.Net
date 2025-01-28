@@ -2,7 +2,6 @@
 
 #region using statements
 
-using DataJuggler.Net.Enumerations;
 using ObjectLibrary.BusinessObjects;
 using ObjectLibrary.Enumerations;
 using System;
@@ -45,9 +44,10 @@ namespace DataAccessComponent.DataManager.Readers
                 int projectNamefield = 5;
                 int readerReferencesSetIdfield = 6;
                 int referenceNamefield = 7;
-                int referencesSetIdfield = 8;
-                int referencesSetNamefield = 9;
-                int storedProcedureReferencesSetIdfield = 10;
+                int referencesIdfield = 8;
+                int referencesSetIdfield = 9;
+                int referencesSetNamefield = 10;
+                int storedProcedureReferencesSetIdfield = 11;
 
                 try
                 {
@@ -60,6 +60,7 @@ namespace DataAccessComponent.DataManager.Readers
                     projectReferencesView.ProjectName = DataHelper.ParseString(dataRow.ItemArray[projectNamefield]);
                     projectReferencesView.ReaderReferencesSetId = DataHelper.ParseInteger(dataRow.ItemArray[readerReferencesSetIdfield], 0);
                     projectReferencesView.ReferenceName = DataHelper.ParseString(dataRow.ItemArray[referenceNamefield]);
+                    projectReferencesView.ReferencesId = DataHelper.ParseInteger(dataRow.ItemArray[referencesIdfield], 0);
                     projectReferencesView.ReferencesSetId = DataHelper.ParseInteger(dataRow.ItemArray[referencesSetIdfield], 0);
                     projectReferencesView.ReferencesSetName = DataHelper.ParseString(dataRow.ItemArray[referencesSetNamefield]);
                     projectReferencesView.StoredProcedureReferencesSetId = DataHelper.ParseInteger(dataRow.ItemArray[storedProcedureReferencesSetIdfield], 0);

@@ -4,11 +4,13 @@
 
 using DataAccessComponent.Connection;
 using DataAccessComponent.DataGateway;
+using DataAccessComponent.StoredProcedureManager.UpdateProcedures;
 using DataJuggler.NET9;
 using DataJuggler.UltimateHelper;
 using DataJuggler.UltimateHelper.Objects;
 using ObjectLibrary.BusinessObjects;
 using ObjectLibrary.Enumerations;
+using System.IO;
 
 #endregion
 
@@ -81,11 +83,12 @@ namespace ProjectConverter
             }
             else if (ScreenType == ScreenTypeEnum.UpgradeProjects)
             {
-                
+                // Update to .NET 9
+                UpdateProjects();
             }
             else if (ScreenType == ScreenTypeEnum.MoveProjects)
             {
-                
+
             }
         }
         #endregion
@@ -144,7 +147,7 @@ namespace ProjectConverter
         /// </summary>
         private void MoveDatabaseButton_Click(object sender, EventArgs e)
         {
-            
+
         }
         #endregion
 
@@ -154,11 +157,77 @@ namespace ProjectConverter
         /// </summary>
         private void RefreshButton_Click(object sender, EventArgs e)
         {
-            // Update the Projects
-            ConvertOrFixProjects();
+            // Set the text
+            DatabaseComboBox.ComboBoxText = "...";
+
+            // Refresh the UI
+            Refresh();
+            Application.DoEvents();
+
+            // Create a new instance of a 'Gateway' object.
+            Gateway gateway = new Gateway(ConnectionNameControl.Text);
+
+            // Load the projects
+            List<Project> projects = gateway.LoadProjects();
+
+            // If the projects collection exists and has one or more items
+            if (ListHelper.HasOneOrMoreItems(projects))
+            {
+                // Load the Items
+                DatabaseComboBox.LoadItems(projects);
+            }
+
+             // Set the text
+            DatabaseComboBox.ComboBoxText = "";
+
+            // Refresh the UI
+            Refresh();
+            Application.DoEvents();
+        }
+        #endregion
+
+        #region RefreshButton_MouseEnter(object sender, EventArgs e)
+        /// <summary>
+        /// event is fired when Refresh Button _ Mouse Enter
+        /// </summary>
+        private void RefreshButton_MouseEnter(object sender, EventArgs e)
+        {
+            // Change the cursor to a hand
+            Cursor = Cursors.Hand;
         }
         #endregion
         
+        #region RefreshButton_MouseLeave(object sender, EventArgs e)
+        /// <summary>
+        /// event is fired when Refresh Button _ Mouse Leave
+        /// </summary>
+        private void RefreshButton_MouseLeave(object sender, EventArgs e)
+        {
+            // Change the cursor back to the default pointer
+            Cursor = Cursors.Default;
+        }
+        #endregion
+        
+        #region UpgradeButton_Click(object sender, EventArgs e)
+        /// <summary>
+        /// event is fired when the 'UpgradeButton' is clicked.
+        /// </summary>
+        private void UpgradeButton_Click(object sender, EventArgs e)
+        {
+            // Set the ScreenType
+            ScreenType = ScreenTypeEnum.UpgradeProjects;
+
+            // Show a message
+            ConfirmationLabel.Text = "Confirm Upgrade to .NET 9";
+
+            // Set the value for the property 'ConfirmationVisible' to true
+            ConfirmationVisible = true;
+
+            // Enable or disable controls
+            UIEnable();
+        }
+        #endregion
+
         #endregion
 
         #region Methods
@@ -665,42 +734,33 @@ namespace ProjectConverter
                             // if the reference contains ApplicationLogicComponent
                             if ((reference.ReferenceName.Contains("ApplicationLogicComponent")) || (reference.ReferenceName.Contains("DataAccessComponent.DataManager")))
                             {
-                                // Not an efficient way of doing this, but until ProjectReferencesView contains ReferencesId
-                                // All the References have to be loaded for this references set.
-                                List<ProjectReference> projectReferences = gateway.LoadProjectReferencesForReferencesSetId(reference.ReferencesSetId);
-
-                                // If the projectReferences collection exists and has one or more items
-                                if (ListHelper.HasOneOrMoreItems(projectReferences))
+                                // Find the Reference
+                                ProjectReference projectReference = gateway.FindProjectReference(reference.ReferencesId);
+                                   
+                                // if this reference contains
+                                if (projectReference.ReferenceName.Contains("ApplicationLogicComponent"))
                                 {
-                                    // Iterate the collection of ProjectReference objects
-                                    foreach (ProjectReference projectReference in projectReferences)
-                                    {
-                                        // if this reference contains
-                                        if (projectReference.ReferenceName.Contains("ApplicationLogicComponent"))
-                                        {
-                                            // change the name
-                                            projectReference.ReferenceName = projectReference.ReferenceName.Replace("ApplicationLogicComponent", "DataAccessComponent");
+                                    // change the name
+                                    projectReference.ReferenceName = projectReference.ReferenceName.Replace("ApplicationLogicComponent", "DataAccessComponent");
 
-                                            // Clone this
-                                            ProjectReference tempReference = projectReference.Clone();
+                                    // Clone this
+                                    ProjectReference tempReference = projectReference.Clone();
 
-                                            // Perform Save
-                                            saved = gateway.SaveProjectReference(ref tempReference);
-                                        }
-                                        // if this reference contains
-                                        else if (projectReference.ReferenceName.Contains("DataAccessComponent.DataManager"))
-                                        {
-                                            // change the name
-                                            projectReference.ReferenceName = projectReference.ReferenceName.Replace("DataAccessComponent.DataManager", "DataAccessComponent.Data");
-
-                                            // Clone this
-                                            ProjectReference tempReference = projectReference.Clone();
-
-                                            // Perform Save
-                                            saved = gateway.SaveProjectReference(ref tempReference);
-                                        }
-                                    }
+                                    // Perform Save
+                                    saved = gateway.SaveProjectReference(ref tempReference);
                                 }
+                                // if this reference contains
+                                else if (projectReference.ReferenceName.Contains("DataAccessComponent.DataManager"))
+                                {
+                                    // change the name
+                                    projectReference.ReferenceName = projectReference.ReferenceName.Replace("DataAccessComponent.DataManager", "DataAccessComponent.Data");
+
+                                    // Clone this
+                                    ProjectReference tempReference = projectReference.Clone();
+
+                                    // Perform Save
+                                    saved = gateway.SaveProjectReference(ref tempReference);
+                                }                                
                             }
                         }
 
@@ -742,6 +802,9 @@ namespace ProjectConverter
 
                         // Set the Backup Path
                         StatusListBox.Items.Add("Project References Have Been Updated", 0);
+
+                        // Show a message
+                        StatusListBox.Items.Add("Convert / Fix Project Complete. You must build with DataTier.NET", 0);
                     }
                     else
                     {
@@ -774,7 +837,7 @@ namespace ProjectConverter
             }
         }
         #endregion
-        
+
         #region CopyDirectory(string sourceDir, string destinationDir)
         /// <summary>
         /// method returns the Directory
@@ -954,6 +1017,142 @@ namespace ProjectConverter
         }
         #endregion
 
+        #region UpdateProjects()
+        /// <summary>
+        /// Update Projects
+        /// </summary>
+        public void UpdateProjects()
+        {
+            // Clear
+            StatusListBox.Items.Clear();
+
+            // locals            
+            string searchText = "net8.0-windows";
+            string searchText2 = "net8.0";
+            string replaceText = "net9.0-windows";
+            bool saved = false;
+            string oldReferenceName = "";
+            string newReferenceName = "";
+
+            // Create a new instance of a 'Gateway' object.
+            Gateway gateway = new Gateway(ConnectionNameControl.Text);
+
+            // Load the Projects
+            List<Project> projects = gateway.LoadProjects();
+
+            // create a fileInfo
+            FileInfo fileInfo = new FileInfo(SourceControl.Text);
+
+             // If the projects collection exists and has one or more items
+            if (ListHelper.HasOneOrMoreItems(projects))
+            {
+                // Get the tempSelectedProject
+                SelectedProject = projects.FirstOrDefault(x => x.ProjectFolder == fileInfo.Directory.FullName);
+            }
+
+            // if the value for HasSelectedProject is true
+            if (HasSelectedProject)
+            {
+                // Create a new collection of 'Replacement' objects.
+                List<Replacement> replacements = new List<Replacement>();
+
+                // Add both
+                replacements.Add(new Replacement(searchText, replaceText));
+                replacements.Add(new Replacement(searchText2, replaceText));
+
+                // if the text exists
+                if (FileHelper.Exists(SourceControl.Text))
+                {
+                    // Set the DAC
+                    string dac = Path.Combine(fileInfo.DirectoryName, @"DataAccessComponent\DataAccessComponent.csproj");
+
+                    // Set the Object Library
+                    string objectLibraryPath = Path.Combine(fileInfo.DirectoryName, @"ObjectLibrary\ObjectLibrary.csproj");
+
+                    // If the dac Exists On Disk
+                    if (FileHelper.Exists(dac))
+                    {
+                        // Replace out the TargetFramework
+                        TextHelper.ReplaceTextInFile(dac, replacements);
+
+                        // Show a message
+                        StatusListBox.Items.Add("DAC Project File Updated", 0);
+                    }
+
+                    // If the objectLibraryPath Exists On Disk
+                    if (FileHelper.Exists(objectLibraryPath))
+                    {
+                        // Show a message
+                        TextHelper.ReplaceTextInFile(objectLibraryPath, replacements);
+
+                        // Show a message
+                        StatusListBox.Items.Add("Object Library Project File Updated", 0);
+                    }                
+
+                    // Load the references
+                    List<ProjectReferencesView> references = gateway.LoadProjectReferencesViewsForProjectId(SelectedProject.ProjectId);
+
+                    // If the references collection exists and has one or more items
+                    if (ListHelper.HasOneOrMoreItems(references))
+                    {
+                        // Iterate the collection of ProjectReferencesView objects
+                        foreach (ProjectReferencesView view in references)
+                        {
+                            // get the old reference name
+                            oldReferenceName = view.ReferenceName;
+
+                            // if .NET 8
+                            if (view.ReferenceName.Contains("DataJuggler.Net8"))
+                            {
+                                // we need to find this ProjectReference
+                                ProjectReference projectReference = gateway.FindProjectReference(view.ReferencesId);
+
+                                // If the projectReference object exists
+                                if (NullHelper.Exists(projectReference))
+                                {
+                                    // Update
+                                    projectReference.ReferenceName = view.ReferenceName.Replace("DataJuggler.Net8", "DataJuggler.NET9");
+
+                                    // Save0
+                                    saved = gateway.SaveProjectReference(ref projectReference);
+
+                                    // if the value for saved is true
+                                    if (saved)
+                                    {
+                                        // set new name
+                                        newReferenceName = view.ReferenceName;
+
+                                        // Show a message
+                                        StatusListBox.Items.Add("Renamed Reference " + oldReferenceName + " to " + newReferenceName + ".", 0);
+                                    }
+                                    else
+                                    {
+                                        // Show a message
+                                        StatusListBox.Items.Add("Renamed Reference failed for " + oldReferenceName + " to " + newReferenceName + ".", 1);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // Show a message
+                    StatusListBox.Items.Add("Update Project Complete. You must build with DataTier.NET", 0);
+                }
+                else
+                {
+                    // Show an error
+                    StatusListBox.Items.Add("Solution Does Not Exist", 1);
+                }
+            }
+            else
+            {
+                // Show an error
+                StatusListBox.Items.Add("A project could not be found matching this folder.", 1);
+                StatusListBox.Items.Add("Verify this folder is correct in DataTier.NET", 1);
+            }
+        }
+        #endregion
+
         #endregion
 
         #region Properties
@@ -1007,7 +1206,7 @@ namespace ProjectConverter
             set { screenType = value; }
         }
         #endregion
-        
+
         #region SelectedProject
         /// <summary>
         /// This property gets or sets the value for 'SelectedProject'.

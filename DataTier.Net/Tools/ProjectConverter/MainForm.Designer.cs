@@ -297,6 +297,7 @@
             UpgradeButton.Size = new Size(200, 46);
             UpgradeButton.TabIndex = 12;
             UpgradeButton.Theme = DataJuggler.Win.Controls.Enumerations.ThemeEnum.Glass;
+            UpgradeButton.Click += UpgradeButton_Click;
             // 
             // DotNetVersion
             // 
@@ -349,6 +350,8 @@
             RefreshButton.TabIndex = 21;
             RefreshButton.TabStop = false;
             RefreshButton.Click += RefreshButton_Click;
+            RefreshButton.MouseEnter += RefreshButton_MouseEnter;
+            RefreshButton.MouseLeave += RefreshButton_MouseLeave;
             // 
             // MoveDatabaseButton
             // 

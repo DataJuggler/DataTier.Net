@@ -25,6 +25,7 @@ namespace ObjectLibrary.BusinessObjects
         private string projectName;
         private int readerReferencesSetId;
         private string referenceName;
+        private int referencesId;
         private int referencesSetId;
         private string referencesSetName;
         private int storedProcedureReferencesSetId;
@@ -107,6 +108,17 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
 
+            #region ReferencesId
+            /// <summary>
+            /// This property gets or sets the value for 'ReferencesId'.
+            /// </summary>
+            public int ReferencesId
+            {
+                get { return referencesId; }
+                set { referencesId = value; }
+            }
+            #endregion
+            
             #region string ProjectName
             public string ProjectName
             {
