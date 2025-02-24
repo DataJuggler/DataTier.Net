@@ -109,7 +109,7 @@ namespace DataTierClient.Builders
                 else
                 {
                     // if the DataTables do not exist
-                    if (ListHelper.HasOneOrMoreItems(dataTables))
+                    if (!ListHelper.HasOneOrMoreItems(dataTables))
                     {
                         // raise an exception so the build fails
                         throw new Exception("The DataTables collection does not exist.");

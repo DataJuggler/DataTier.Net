@@ -2499,8 +2499,19 @@ namespace DataTierClient.Controls
                         // Get the parametersList from the MethodInfo object instead
                         parametersList = MethodInfo.Parameters;
 
-                        // set the parameter
-                        parameter = CSharpClassWriter.LowerCaseFirstCharEx(MethodInfo.ParameterField.FieldName);
+                        // get the words
+                        List<Word> words = TextHelper.GetWords(parametersList);
+
+                        if (ListHelper.HasXOrMoreItems(words, 2))
+                        {
+                            // set the parameter
+                            parameter = words[1].Text;
+                        }
+                        else
+                        {
+                            // set the parameter
+                            parameter = CSharpClassWriter.LowerCaseFirstCharEx(MethodInfo.ParameterField.FieldName);
+                        }
                     }
                     else if ((MethodInfo.ParameterType == ParameterTypeEnum.Field_Set) && (MethodInfo.HasParameterFieldSet) && (MethodInfo.ParameterFieldSet.HasFields))
                     {

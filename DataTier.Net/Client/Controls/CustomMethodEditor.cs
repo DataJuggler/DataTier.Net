@@ -1325,9 +1325,10 @@ namespace DataTierClient.Controls
                     // if this table is a View
                     if (this.SelectedTable.IsView)
                     {
-                        // Remove the Delete By and Find By
-                        this.MethodTypeControl.Items.RemoveAt(1);
-                        this.MethodTypeControl.Items.RemoveAt(0);
+                        // Remove the Delete By, Find By and Update By
+                        MethodTypeControl.Items.RemoveAt(3);
+                        MethodTypeControl.Items.RemoveAt(1);
+                        MethodTypeControl.Items.RemoveAt(0);
 
                         // Set the value for the property 'ViewMode' to true
                         ViewMode = true;

@@ -1714,34 +1714,34 @@ namespace DataTierClient.Forms
 
                 try
                 {
+                    List<string> files = new List<string>();
+                    List<string> extensions = new List<string>();
+                    extensions.Add(".cs");
+
                     // if the projectFolder exists
                     if (Directory.Exists(projectFolder))
                     {
-                        // iterate the directories
-                        foreach (string directory in Directory.GetDirectories(projectFolder))
+                        // get the files
+                        FileHelper.GetFilesRecursively(projectFolder, ref files, extensions);
+
+                        // If the files collection exists and has one or more items
+                        if (ListHelper.HasOneOrMoreItems(files))
                         {
-                            // iterate the files
-                            foreach (string file in Directory.GetFiles(directory, "*.cs", SearchOption.AllDirectories))
+                            // Iterate the collection of string objects
+                            foreach (string file in files)
                             {
                                 // create a fileInfo
                                 FileInfo fileInfo = new FileInfo(file);
 
                                 // if this is the Gateway
-                                if (fileInfo.Name.EndsWith("Gateway.cs"))
+                                if (TextHelper.IsEqual(fileInfo.Name, "Gateway.cs"))
                                 {
                                     // set the return value
                                     gatewayPath = file;
 
-                                    // break out of the loop
+                                    // exit the loop
                                     break;
                                 }
-                            }
-
-                            // if the gatewayPath has been set
-                            if (!String.IsNullOrEmpty(gatewayPath))
-                            {
-                                // break out of the outer loop
-                                break;
                             }
                         }
                     }
