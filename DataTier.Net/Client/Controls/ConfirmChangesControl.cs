@@ -2707,8 +2707,16 @@ namespace DataTierClient.Controls
                         // if this is a SingleField parameter
                         if (MethodInfo.ParameterType == ParameterTypeEnum.Single_Field)
                         {
-                            // set the comment
-                            setParameterFieldValueComment = indent2 + "// Set the value for " + MethodInfo.ParameterField.FieldName;
+                            if (MethodInfo.ParameterField.FieldName != parameter)
+                            {
+                                // set the comment
+                                setParameterFieldValueComment = indent2 + "// Using " + MethodInfo.ParameterField.FieldName + " As " + parameter;
+                            }
+                            else
+                            {
+                                // set the comment
+                                setParameterFieldValueComment = indent2 + "// Set the value for " + MethodInfo.ParameterField.FieldName;
+                            }
 
                             // write out a blank line
                             insertIndex = CodeLineHelper.InsertCodeLine(ref codeLines, setParameterFieldValueComment, insertIndex);
