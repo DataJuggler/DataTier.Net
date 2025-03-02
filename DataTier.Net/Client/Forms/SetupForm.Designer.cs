@@ -35,7 +35,7 @@
             // SetupControl
             // 
             this.SetupControl.BackColor = System.Drawing.Color.Transparent;
-            this.SetupControl.BackgroundImage = global::DataTierClient.Properties.Resources.Setup1;
+            this.SetupControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("SetupControl.BackgroundImage")));
             this.SetupControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.SetupControl.DatabaseSchemaClicked = false;
             this.SetupControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -43,14 +43,14 @@
             this.SetupControl.ForeColor = System.Drawing.Color.GhostWhite;
             this.SetupControl.Location = new System.Drawing.Point(0, 0);
             this.SetupControl.Name = "SetupControl";
-            this.SetupControl.Size = new System.Drawing.Size(1080, 720);
-            this.SetupControl.TabIndex = 0;            
+            this.SetupControl.Size = new System.Drawing.Size(1280, 761);
+            this.SetupControl.TabIndex = 0;
             // 
             // SetupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1080, 720);
+            this.ClientSize = new System.Drawing.Size(1280, 761);
             this.Controls.Add(this.SetupControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SetupForm";

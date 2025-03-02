@@ -2682,7 +2682,7 @@ namespace DataTierClient.Forms
             public void UserCancelledSetup(bool userCancelledSetup, bool restartRequired)
             {
                 // if the user cancelled Setup
-                if (userCancelledSetup)
+                if ((userCancelledSetup) && (!SetupComplete))
                 {
                     // set message
                     string message = "Setup was cancelled by the user. This program will now close.";
@@ -2699,7 +2699,7 @@ namespace DataTierClient.Forms
                     // Exit this routine
                     return;
                 }
-                else if (!restartRequired)
+                else if (restartRequired)
                 {
                         // set message
                     string message = "DataTier.Net was not setup properly. Please restart this program and try again.";

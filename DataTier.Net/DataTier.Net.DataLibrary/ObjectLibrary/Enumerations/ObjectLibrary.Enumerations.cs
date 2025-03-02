@@ -157,6 +157,17 @@ namespace ObjectLibrary.Enumerations
     }
     #endregion    
 
+    #region StepEnum : int
+    /// <summary>
+    /// This enum is how the screen is setup for the SetupControl
+    /// </summary>
+    public enum StepEnum : int
+    {
+        Step1 = 1,
+        Step2 = 2
+    }
+    #endregion
+
     #region UserResponseEnum
     /// <summary>
     /// This enumeration is for the types of responses a user can have from the DialogControl. 

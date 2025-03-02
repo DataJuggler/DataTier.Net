@@ -17,6 +17,7 @@ using DataJuggler.Core.UltimateHelper;
 using DataJuggler.Win.Controls;
 using DataJuggler.Win.Controls.Interfaces;
 using DataTierClient.ClientUtil;
+using ObjectLibrary.Enumerations;
 
 #endregion
 
@@ -35,14 +36,7 @@ namespace DataTierClient.Controls
         private bool userCancelled;
         private bool databaseSchemaClicked;
         private const string DatabaseName = "DataTier.Net.Database";
-        public const string DotNet5ProjectTemplates = "dotnet new -install DataJuggler.DataTier.Net5.ProjectTemplates";
-        public const string UninstallDotNet5ProjectTemplates = "dotnet new -uninstall DataJuggler.DataTier.Net5.ProjectTemplates";
-        public const string DotNet6ProjectTemplates = "dotnet new -install DataJuggler.DataTier.Net6.ProjectTemplates";
-        public const string UninstallDotNet6ProjectTemplates = "dotnet new uninstall DataJuggler.DataTier.Net6.ProjectTemplates";
-        public const string UninstallDotNet7ProjectTemplates = "dotnet new uninstall DataJuggler.DataTier.Net7.ProjectTemplates";
-        public const string UninstallDotNet8ProjectTemplates = "dotnet new uninstall DataJuggler.DataTier.NET8.ProjectTemplates";        
-        public const string UninstallDotNet8ProjectTemplates2 = "dotnet new uninstall DataJuggler.DataTier.NET8V2.ProjectTemplates";
-        public const string UninstallDotNet9ProjectTemplates = "dotnet new uninstall DataJuggler.DataTier.Net9.ProjectTemplatesV2";
+        private StepEnum currentStep;       
         #endregion
         
         #region Constructor
@@ -101,72 +95,6 @@ namespace DataTierClient.Controls
             }
             #endregion
             
-            #region ConfigureButton_Click(object sender, EventArgs e)
-            /// <summary>
-            /// event is fired when the 'ConfigureButton' is clicked.
-            /// </summary>
-            private void ConfigureButton_Click(object sender, EventArgs e)
-            {
-                // Create a new instance of a 'ConnectionStringBuilderForm' object.
-                ConnectionStringBuilderForm form = new ConnectionStringBuilderForm(DatabaseName);
-
-                // Show the form
-                form.ShowDialog();
-
-                // if the user did not cancel
-                if (!form.UserCancelled)
-                {
-                    // Setup is complete
-                    this.UserCancelled = false;
-
-                    // Close the Parentform
-                    this.ParentForm.Close();
-                }
-            }
-            #endregion
-            
-            #region ConfigureButton_MouseHover(object sender, EventArgs e)
-            /// <summary>
-            /// event is fired when Configure Button _ Mouse Hover
-            /// </summary>
-            private void ConfigureButton_MouseHover(object sender, EventArgs e)
-            {
-                 // Show InfoLabel3 while hovering
-                InfoLabel3.Visible = true;
-            }
-            #endregion
-            
-            #region DotNet5Label_Click(object sender, EventArgs e)
-            /// <summary>
-            /// event is fired when the 'DotNet5Label_Click' is clicked.
-            /// </summary>
-            private void DotNet5Label_Click(object sender, EventArgs e)
-            {
-                 try               
-                 {
-                     // Create a Process to launch a command window (hidden) to create the item templates
-                    Process process = new Process();
-                    ProcessStartInfo startInfo = new ProcessStartInfo();
-                    startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                    startInfo.FileName = "cmd.exe";
-                    startInfo.Arguments = "/C " + DotNet5ProjectTemplates;
-                    process.StartInfo = startInfo;
-                    process.Start();
-
-                    // Show the user a message
-                    MessageHelper.DisplayMessage("DataJuggler.DataTier.Net5.ProjectTemplates were installed onto your computer.", "Install Complete");
-                 }
-                 catch (Exception error)
-                 {
-                     // Set the error
-                    DebugHelper.WriteDebugError("DotNet5Label_Click", this.Name, error);
-
-                    // show the user a message
-                    MessageHelper.DisplayMessage("The DataTier.Net5.Project Templates could not be installed. Ensure you are connected to the internet and try again.", "Insteall Templates Failed");
-                 }
-            }
-            #endregion
-            
             #region InstallDatabaseSchemaButton_Click(object sender, EventArgs e)
             /// <summary>
             /// event is fired when the 'InstallDatabaseSchemaButton' is clicked.
@@ -175,7 +103,7 @@ namespace DataTierClient.Controls
             {
                 // Set to clicked
                 DatabaseSchemaClicked = true;
-                ClickHere.Visible = false;
+                ClickHereButton.Visible = false;
 
                 // get the path to the sql
                 string path = "../../../Database/SQL Scripts/DataTier.Net.Database.Schema.sql";
@@ -183,9 +111,6 @@ namespace DataTierClient.Controls
                 // set path2
                 FileInfo fileInfo = new FileInfo(Application.ExecutablePath);
                 string path2 = Path.Combine(fileInfo.DirectoryName,  @"SQL Scripts\DataTier.Net.Database.Schema.sql");
-
-                // local
-                bool started = false;
 
                 // if the path exists
                 if ((File.Exists(path)) || (File.Exists(path2)))
@@ -201,8 +126,8 @@ namespace DataTierClient.Controls
                             // launch SQL Server Management Studio if installed
                             System.Diagnostics.Process.Start(fullPath);
 
-                            // set to true
-                            started = true;
+                            // Advance to the next step
+                            CurrentStep = StepEnum.Step2;
                         }
                         else
                         {
@@ -215,8 +140,8 @@ namespace DataTierClient.Controls
                                 // launch SQL Server Management Studio if installed
                                 System.Diagnostics.Process.Start(fullPath);
 
-                                // set to true
-                                started = true;
+                                // Advance to the next step
+                                CurrentStep = StepEnum.Step2;
                             }
                             else
                             {
@@ -240,298 +165,137 @@ namespace DataTierClient.Controls
                     MessageHelper.DisplayMessage("Could not located the SQL Scripts path. Look for the file 'DataTier.Net.Database.Schema.sql in the install directory for DataTier.Net", "File Not Found");
                 }
 
-                // if started is true
-                if (started)
-                {
-                    // Show Info Label2
-                    InfoLabel.Visible = false;
-                    InfoLabel2.Visible = true;
-                }
+                // Enable or disable controls
+                UIEnable();
             }
             #endregion
-            
-            #region InstallDotNet6Label_Click(object sender, EventArgs e)
-            /// <summary>
-            /// event is fired when the 'InstallDotNet6Label' is clicked.
-            /// </summary>
-            private void InstallDotNet6Label_Click(object sender, EventArgs e)
-            {
-                try               
-                 {
-                     // Create a Process to launch a command window (hidden) to create the item templates
-                    Process process = new Process();
-                    ProcessStartInfo startInfo = new ProcessStartInfo();
-                    startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                    startInfo.FileName = "cmd.exe";
-                    startInfo.Arguments = "/C " + DotNet6ProjectTemplates;
-                    process.StartInfo = startInfo;
-                    process.Start();
-
-                    // Show the user a message
-                    MessageHelper.DisplayMessage("DataJuggler.DataTier.Net6.ProjectTemplates were installed onto your computer.", "Install Complete");
-                 }
-                 catch (Exception error)
-                 {
-                     // Set the error
-                    DebugHelper.WriteDebugError("DotNet6Label_Click", this.Name, error);
-
-                    // show the user a message
-                    MessageHelper.DisplayMessage("The DataTier.Net6.Project Templates could not be installed. Ensure you are connected to the internet and try again.", "Insteall Templates Failed");
-                 }
-            }
-            #endregion
-            
-            #region InstallProjectTemplatesButton_Click(object sender, EventArgs e)
-            /// <summary>
-            /// event is fired when the 'InstallProjectTemplatesButton' is clicked.
-            /// </summary>
-            private void InstallProjectTemplatesButton_Click(object sender, EventArgs e)
-            {
-                // set the path to the vsix install
-                string vsixPath = "../../../../VSIX/DataTierNet.ProjectTemplates.Installer.vsix";
-
-                // if the vsixPath exists
-                if (File.Exists(vsixPath))
-                {
-                    try
-                    {
-                        // get the fullPath (relative paths will not launch the file)
-                        string fullPath = Path.GetFullPath(vsixPath);
-
-                        // launch the VSIX installer to install the DataTier.Net Project Templates into Visual Studio
-                        System.Diagnostics.Process.Start(fullPath);
-                    }
-                    catch (Exception error)
-                    {
-                        // for debugging only
-                        DebugHelper.WriteDebugError("InstallProjectTemplatesButton_Click", this.Name, error);  
-                    }
-                }
-            }
-            #endregion
-            
-            #region InstallProjectTemplatesButton_MouseHover(object sender, EventArgs e)
-            /// <summary>
-            /// event is fired when Install Project Templates Button _ Mouse Hover
-            /// </summary>
-            private void InstallProjectTemplatesButton_MouseHover(object sender, EventArgs e)
-            {
-                // Show InfoLabel2 while hovering
-                InfoLabel2.Visible = true;
-            }
-            #endregion
-            
+          
             #region OnCheckChanged(LabelCheckBoxControl sender, bool isChecked)
             /// <summary>
             /// event is fired when On Check Changed
             /// </summary>
             public void OnCheckChanged(LabelCheckBoxControl sender, bool isChecked)
             {
-                // Show or hide the InfoLabel and InfoLabel1 basedup isChecked value.
-                InfoLabel.Visible = !isChecked;                
-                ClickHere.Visible = ((isChecked) && (!DatabaseSchemaClicked));
+                    // Show or hide the InfoLabel and InfoLabel1 basedup isChecked value.                
+                    ClickHereButton.Visible = ((isChecked) && (!DatabaseSchemaClicked));
 
-                // there is only one label check box control so this has to be the DatabaseCreatedCheckBox
+                    // there is only one label check box control so this has to be the DatabaseCreatedCheckBox
                 
-                // if isChecked is true
-                if (isChecked)
+                    // if isChecked is true
+                    if (isChecked)
+                    {
+                        // Show the button                        
+                        InstallDatabaseSchemaButton.Visible = true;
+                        InstallDatabaseSchemaButton.ForeColor = Color.GhostWhite;
+                    }
+                    else
+                    {
+                        // Hide the button                        
+                        InstallDatabaseSchemaButton.Visible = false;
+                    }
+                }
+                #endregion
+
+            #region RemoveTemplatesButton_Click(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when the 'RemoveTemplatesButton' is clicked.
+            /// </summary>
+            private void RemoveTemplatesButton_Click(object sender, EventArgs e)
+            {
+                // Remove focus from this control
+                HiddenButton.Focus();
+
+                 // Create a new instance of a 'RemoveTemplatesForm' object.
+                RemoveTemplatesForm form = new RemoveTemplatesForm();
+
+                // Show the form
+                form.Show();
+            }
+            #endregion
+            
+            #region Step1Button_Click(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when the 'Step1Button' is clicked.
+            /// </summary>
+            private void Step1Button_Click(object sender, EventArgs e)
+            {
+                
+            }
+            #endregion
+            
+            #region Step1Button_EnabledChanged(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when Step 1 Button _ Enabled Changed
+            /// </summary>
+            private void Step1Button_EnabledChanged(object sender, EventArgs e)
+            {
+                // If Enabled
+                if (Step1Button.Enabled)
                 {
-                    // Enable the button
-                    InstallDatabaseSchemaButton.Enabled = true;
-                    InstallDatabaseSchemaButton.ForeColor = Color.GhostWhite;
+                    // Use Enabled Red Image
+                    Step1Button.BackgroundImage = Properties.Resources.WoodButtonRed;
+
+                    // Use White
+                    Step1Button.ForeColor = Color.White;
                 }
                 else
                 {
-                    // Disable the button
-                    InstallDatabaseSchemaButton.Enabled = false;
-                    InstallDatabaseSchemaButton.ForeColor = Color.DarkGray;
+                    // Use Disabled Dark Gray
+                    Step1Button.BackgroundImage = Properties.Resources.WoodButtonDarkGray;
+
+                    // Use White
+                    Step1Button.ForeColor = Color.FromArgb(20, 20, 20);
                 }
             }
-        #endregion
-
-            #region UninstallDotNet5Label_Click(object sender, EventArgs e)
+            #endregion
+            
+            #region Step2Button_Click(object sender, EventArgs e)
             /// <summary>
-            /// event is fired when the 'UninstallDotNet5Label' is clicked.
+            /// event is fired when the 'Step2Button' is clicked.
             /// </summary>
-            private void UninstallDotNet5Label_Click(object sender, EventArgs e)
+            private void Step2Button_Click(object sender, EventArgs e)
             {
-                try               
-                 {
-                     // Create a Process to launch a command window (hidden) to create the item templates
-                    Process process = new Process();
-                    ProcessStartInfo startInfo = new ProcessStartInfo();
-                    startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                    startInfo.FileName = "cmd.exe";
-                    startInfo.Arguments = "/C " + UninstallDotNet5ProjectTemplates;
-                    process.StartInfo = startInfo;
-                    process.Start();
-                    
-                    // Show the user a message
-                    MessageHelper.DisplayMessage("DataJuggler.DataTier.Net5.ProjectTemplates were uninstalled from your computer.", "Uninstall Complete");
-                 }
-                 catch (Exception error)
-                 {
-                     // Set the error
-                    DebugHelper.WriteDebugError("UninstallDotNet5_Click", this.Name, error);
+                // create a new ConnectionStringBuilderForm
+                ConnectionStringBuilderForm form = new ConnectionStringBuilderForm(DatabaseName);
 
-                    // show the user a message
-                    MessageHelper.DisplayMessage("The DataTier.Net5.Project Templates could not be uninstalled.", "Uninsteall Templates Failed");
-                 }
+                // Show the form
+                form.ShowDialog();
+
+                // if the user did not cancel
+                if (!form.UserCancelled)
+                {
+                    // Setup is complete
+                    UserCancelled = false;
+
+                    // Close the Parentform
+                    ParentForm.Close();
+                }
             }
             #endregion
             
-            #region UninstallDotNet6Label_Click(object sender, EventArgs e)
+            #region Step2Button_EnabledChanged(object sender, EventArgs e)
             /// <summary>
-            /// event is fired when the 'UninstallDotNet6Label' is clicked.
+            /// event is fired when Step 2 Button _ Enabled Changed
             /// </summary>
-            private void UninstallDotNet6Label_Click(object sender, EventArgs e)
+            private void Step2Button_EnabledChanged(object sender, EventArgs e)
             {
-                try               
-                 {
-                     // Create a Process to launch a command window (hidden) to create the item templates
-                    Process process = new Process();
-                    ProcessStartInfo startInfo = new ProcessStartInfo();
-                    startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                    startInfo.FileName = "cmd.exe";
-                    startInfo.Arguments = "/C " + UninstallDotNet6ProjectTemplates;
-                    process.StartInfo = startInfo;
-                    process.Start();
+                // If Enabled
+                if (Step2Button.Enabled)
+                {
+                    // Use Enabled Red Image
+                    Step2Button.BackgroundImage = Properties.Resources.WoodButtonRed;
 
-                    // Show the user a message
-                    MessageHelper.DisplayMessage("DataJuggler.DataTier.Net6.ProjectTemplates were uninstalled from your computer.", "Uninstall Complete");
-                 }
-                 catch (Exception error)
-                 {
-                     // Set the error
-                    DebugHelper.WriteDebugError("UninstallDotNet6_Click", this.Name, error);
+                    // Use White
+                    Step2Button.ForeColor = Color.White;
+                }
+                else
+                {
+                    // Use Disabled Dark Gray
+                    Step2Button.BackgroundImage = Properties.Resources.WoodButtonDarkGray;
 
-                    // show the user a message
-                    MessageHelper.DisplayMessage("The DataTier.Net6.ProjectTemplates could not be uninstalled.", "Uninsteall Templates Failed");
-                 }
-            }
-            #endregion
-            
-            #region UninstallDotNet7Label_Click(object sender, EventArgs e)
-            /// <summary>
-            /// event is fired when the 'UninstallDotNet7Label' is clicked.
-            /// </summary>
-            private void UninstallDotNet7Label_Click(object sender, EventArgs e)
-            {
-                try               
-                 {
-                     // Create a Process to launch a command window (hidden) to create the item templates
-                    Process process = new Process();
-                    ProcessStartInfo startInfo = new ProcessStartInfo();
-                    startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                    startInfo.FileName = "cmd.exe";
-                    startInfo.Arguments = "/C " + UninstallDotNet7ProjectTemplates;
-                    process.StartInfo = startInfo;
-                    process.Start();
-
-                    // Show the user a message
-                    MessageHelper.DisplayMessage("DataJuggler.DataTier.Net7.ProjectTemplates were uninstalled from your computer.", "Uninstall Complete");
-                 }
-                 catch (Exception error)
-                 {
-                     // Set the error
-                    DebugHelper.WriteDebugError("UninstallDotNet7_Click", this.Name, error);
-
-                    // show the user a message
-                    MessageHelper.DisplayMessage("The DataTier.Net7.ProjectTemplates could not be uninstalled.", "Uninsteall Templates Failed");
-                 }
-            }
-            #endregion
-            
-            #region UninstallDotNet8Label_Click(object sender, EventArgs e)
-            /// <summary>
-            /// event is fired when the 'UninstallDotNet8Label' is clicked.
-            /// </summary>
-            private void UninstallDotNet8Label_Click(object sender, EventArgs e)
-            {
-                try               
-                 {
-                     // Create a Process to launch a command window (hidden) to create the item templates
-                    Process process = new Process();
-                    ProcessStartInfo startInfo = new ProcessStartInfo();
-                    startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                    startInfo.FileName = "cmd.exe";
-                    startInfo.Arguments = "/C " + UninstallDotNet8ProjectTemplates;
-                    process.StartInfo = startInfo;
-                    process.Start();
-
-                    // Show the user a message
-                    MessageHelper.DisplayMessage("DataJuggler.DataTier.NET8.ProjectTemplates were uninstalled from your computer.", "Uninstall Complete");
-                 }
-                 catch (Exception error)
-                 {
-                     // Set the error
-                    DebugHelper.WriteDebugError("UninstallDotNet8_Click", this.Name, error);
-
-                    // show the user a message
-                    MessageHelper.DisplayMessage("The DataTier.NET8.ProjectTemplates could not be uninstalled.", "Uninsteall Templates Failed");
-                 }
-            }
-            #endregion
-            
-            #region UninstallDotNet8V2Label_Click(object sender, EventArgs e)
-            /// <summary>
-            /// event is fired when the 'UninstallDotNet8V2Label' is clicked.
-            /// </summary>
-            private void UninstallDotNet8V2Label_Click(object sender, EventArgs e)
-            {
-                try               
-                 {
-                     // Create a Process to launch a command window (hidden) to create the item templates
-                    Process process = new Process();
-                    ProcessStartInfo startInfo = new ProcessStartInfo();
-                    startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                    startInfo.FileName = "cmd.exe";
-                    startInfo.Arguments = "/C " + UninstallDotNet8ProjectTemplates2;
-                    process.StartInfo = startInfo;
-                    process.Start();
-
-                    // Show the user a message
-                    MessageHelper.DisplayMessage("DataJuggler.DataTier.NET8V2.ProjectTemplates were uninstalled from your computer.", "Uninstall Complete");
-                 }
-                 catch (Exception error)
-                 {
-                     // Set the error
-                    DebugHelper.WriteDebugError("UninstallDotNet8_Click", this.Name, error);
-
-                    // show the user a message
-                    MessageHelper.DisplayMessage("The DataTier.NET8V2.ProjectTemplates could not be uninstalled.", "Uninsteall Templates Failed");
-                 }
-            }
-            #endregion
-            
-            #region UninstallDotNet9Label_Click(object sender, EventArgs e)
-            /// <summary>
-            /// event is fired when the 'UninstallDotNet9Label' is clicked.
-            /// </summary>
-            private void UninstallDotNet9Label_Click(object sender, EventArgs e)
-            {
-                try               
-                 {
-                     // Create a Process to launch a command window (hidden) to create the item templates
-                    Process process = new Process();
-                    ProcessStartInfo startInfo = new ProcessStartInfo();
-                    startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                    startInfo.FileName = "cmd.exe";
-                    startInfo.Arguments = "/C " + UninstallDotNet9ProjectTemplates;
-                    process.StartInfo = startInfo;
-                    process.Start();
-
-                    // Show the user a message
-                    MessageHelper.DisplayMessage("DataJuggler.DataTier.NET9.ProjectTemplates were uninstalled from your computer.", "Uninstall Complete");
-                 }
-                 catch (Exception error)
-                 {
-                     // Set the error
-                    DebugHelper.WriteDebugError("UninstallDotNet9_Click", this.Name, error);
-
-                    // show the user a message
-                    MessageHelper.DisplayMessage("The DataTier.NET9.ProjectTemplates could not be uninstalled.", "Uninsteall Templates Failed");
-                 }
+                    // Use White
+                    Step2Button.ForeColor = Color.FromArgb(20, 20, 20);
+                }
             }
             #endregion
             
@@ -609,8 +373,14 @@ namespace DataTierClient.Controls
 
                 // Setup the listener
                 DatabaseCreatedCheckBox.CheckChangedListener = this;
+
+                // Set to 1
+                CurrentStep = StepEnum.Step1;
+
+                // Enable or disable controls
+                UIEnable();
             }
-        #endregion
+            #endregion
 
             #region IsInstalledVersion
             /// <summary>
@@ -652,10 +422,51 @@ namespace DataTierClient.Controls
             }
             #endregion
 
+            #region UIEnable()
+            /// <summary>
+            /// UI Enable
+            /// </summary>
+            public void UIEnable()
+            {
+                // Enable the buttons
+                Step1Button.Enabled = ((int) CurrentStep ==  1);
+                Step2Button.Enabled = ((int) CurrentStep ==  2);  
+                
+                // Deteremine which controls are visible
+                if (CurrentStep == StepEnum.Step1)
+                {
+                    ManHoldingSign.BackgroundImage = Properties.Resources.ManHoldingSignWithSSMSTExt;
+                    DatabaseCreatedCheckBox.Visible = true;
+                }
+                else
+                {
+                    ManHoldingSign.BackgroundImage = Properties.Resources.setupStep2;
+                    InstallDatabaseSchemaButton.Visible = false;
+                    ClickHereButton.Visible = false;
+                    DatabaseCreatedCheckBox.Visible = false;
+                }
+
+                // Update the UI
+                Refresh();
+                Application.DoEvents();
+            }
+            #endregion
+            
         #endregion
 
         #region Properties
 
+            #region CurrentStep
+            /// <summary>
+            /// This property gets or sets the value for 'CurrentStep'.
+            /// </summary>
+            public StepEnum CurrentStep
+            {
+                get { return currentStep; }
+                set { currentStep = value; }
+            }
+            #endregion
+            
             #region DatabaseSchemaClicked
             /// <summary>
             /// This property gets or sets the value for 'DatabaseSchemaClicked'.
@@ -684,6 +495,7 @@ namespace DataTierClient.Controls
         #endregion
 
         #endregion
+
     }
     #endregion
 

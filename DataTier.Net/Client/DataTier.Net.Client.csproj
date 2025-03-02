@@ -313,6 +313,12 @@
     <Compile Include="Controls\ReferencesSetEditor.Designer.cs">
       <DependentUpon>ReferencesSetEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\RemoveTemplatesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\RemoveTemplatesControl.Designer.cs">
+      <DependentUpon>RemoveTemplatesControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SaveCancelControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -529,6 +535,12 @@
     <Compile Include="Forms\ReferenceEditorForm.Designer.cs">
       <DependentUpon>ReferenceEditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\RemoveTemplatesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RemoveTemplatesForm.Designer.cs">
+      <DependentUpon>RemoveTemplatesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SelectSQLServerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -673,6 +685,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>ReferencesSetEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\RemoveTemplatesControl.resx">
+      <DependentUpon>RemoveTemplatesControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\SaveCancelControl.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SaveCancelControl.cs</DependentUpon>
@@ -792,6 +807,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>ReferenceEditorForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RemoveTemplatesForm.resx">
+      <DependentUpon>RemoveTemplatesForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\SelectSQLServerForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SelectSQLServerForm.cs</DependentUpon>
@@ -841,6 +859,8 @@
     <None Include="Resources\arrow-down.png" />
     <None Include="Resources\arrow-up-gray.png" />
     <None Include="Resources\arrow-down-gray.png" />
+    <None Include="Resources\BlackBricks.png" />
+    <None Include="Resources\BlackBackground.png" />
     <Content Include="Resources\BlackButton.png" />
     <None Include="Resources\OrangeBackground.jpg" />
     <None Include="Resources\Success.png" />
@@ -857,11 +877,36 @@
     <None Include="Resources\Setup Background.jpg" />
     <None Include="Resources\Click Here Orange Transparent.png" />
     <None Include="Resources\Next.png" />
-    <None Include="Resources\Setup.png" />
-    <None Include="Resources\Setup1.png" />
-    <None Include="Resources\Setup3.png" />
     <None Include="Resources\Project Folder .NET5 or .NET6.png" />
     <None Include="Resources\HelpImages3.png" />
+    <None Include="Resources\Vector.png" />
+    <None Include="Resources\WoodButton.png" />
+    <None Include="Resources\DataTier.Net3.png" />
+    <None Include="Resources\WoodButtonWideRed.png" />
+    <None Include="Resources\WoodButtonWideRed1.png" />
+    <None Include="Resources\KiloByte.png" />
+    <None Include="Resources\CreateDatabase.png" />
+    <None Include="Resources\ManHoldingSignWithSSMSTExt.png" />
+    <None Include="Resources\RedArrow.png" />
+    <None Include="Resources\ClickHereRed.png" />
+    <None Include="Resources\ClickHereRed2.png" />
+    <None Include="Resources\SetupControl2025.png" />
+    <None Include="Resources\Word.png" />
+    <None Include="Resources\PDF.png" />
+    <None Include="Resources\WoodButtonGray.png" />
+    <None Include="Resources\WoodButtonWideDarkGray.png" />
+    <None Include="Resources\WordIcon.png" />
+    <None Include="Resources\PDFIcon.png" />
+    <None Include="Resources\WoodButtonDarkGray.png" />
+    <None Include="Resources\WoodButtonRed.png" />
+    <None Include="Resources\SetupConnection.png" />
+    <None Include="Resources\setupStep2.png" />
+    <None Include="Resources\Janitor.png" />
+    <None Include="Resources\Janitor1.png" />
+    <None Include="Resources\Janitor3.png" />
+    <None Include="Resources\BlackImageDarker.png" />
+    <None Include="Resources\ClipBoard.png" />
+    <None Include="Resources\Check_48x48.png" />
     <Content Include="Sounds\Alert.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -870,7 +915,6 @@
     <Content Include="Xml\Files\SelectedFieldSet.xml" />
     <None Include="Resources\Information2.png" />
     <None Include="Resources\Information.png" />
-    <None Include="Resources\Setup2.png" />
     <None Include="Resources\DarkBlackButton.png" />
     <None Include="Images\DeepBlue.png" />
     <None Include="Images\DeepGray.png" />
