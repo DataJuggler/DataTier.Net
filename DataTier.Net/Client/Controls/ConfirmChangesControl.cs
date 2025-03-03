@@ -1085,15 +1085,24 @@ namespace DataTierClient.Controls
 
                                 // if this is a SingleField Parameter
                                 if ((MethodInfo.ParameterType == ParameterTypeEnum.Single_Field) && (MethodInfo.HasParameterField))
-                                {
+                                {  
                                     // string for change the procedureName
                                     string createParameterComment = indent3 + "// Create the @" + MethodInfo.ParameterField.FieldName + " parameter";
 
                                     // Insert a codeLine
                                     returnValueIndex = CodeLineHelper.InsertCodeLine(ref method, createParameterComment, returnValueIndex);
 
-                                    // set the parameterLine
-                                    parameterLine = indent3 + storedProcedureVariableName + ".Parameters = SqlParameterHelper.CreateSqlParameters(\"@" + MethodInfo.ParameterField.FieldName + "\", " + variableName + "." + MethodInfo.ParameterField.FieldName + ");";
+                                    // if a ParameterName is set use it
+                                    if (MethodInfo.HasParameterName)
+                                    {
+                                        // set the parameterLine
+                                        parameterLine = indent3 + storedProcedureVariableName + ".Parameters = SqlParameterHelper.CreateSqlParameters(\"@" + MethodInfo.ParameterName + "\", " + variableName + "." + MethodInfo.ParameterField.FieldName + ");";
+                                    }
+                                    else
+                                    {
+                                        // set the parameterLine
+                                        parameterLine = indent3 + storedProcedureVariableName + ".Parameters = SqlParameterHelper.CreateSqlParameters(\"@" + MethodInfo.ParameterField.FieldName + "\", " + variableName + "." + MethodInfo.ParameterField.FieldName + ");";
+                                    }
 
                                     // Insert a codeLine
                                     returnValueIndex = CodeLineHelper.InsertCodeLine(ref method, parameterLine, returnValueIndex);

@@ -325,6 +325,51 @@ namespace DataTierClient.Forms
             }
             #endregion
 
+            #region RepairGatewayButton_Click(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when the 'RepairGatewayButton' is clicked.
+            /// </summary>
+            private void RepairGatewayButton_Click(object sender, EventArgs e)
+            {
+                // get the dataObjectsFolder
+                string gatewayPath = Path.Combine(OpenProject.ProjectFolder, @"DataGateway\Gateway.cs");
+
+                // if the Template Version is 2
+                if (OpenProject.TemplateVersion == 2)
+                {
+                    // V2 inside DataAccessComponent
+                    gatewayPath = Path.Combine(OpenProject.ProjectFolder, @"DataAccessComponent\DataGateway\Gateway.cs");
+                }
+
+                // Take the backup
+                string backupPath = gatewayPath.Replace(".cs", ".cs.backup");
+
+                // if it exists
+                if (!File.Exists(gatewayPath))
+                {
+                    // If the file exists
+                    if (File.Exists(backupPath))
+                    {
+                        // Copy the file back from the backup
+                        File.Copy(backupPath, gatewayPath);
+
+                        // Show a  message
+                        MessageHelper.DisplayMessage("The gateway has been repaired.", "Repair Complete");
+                    }
+                    else
+                    {
+                        // Show a  message
+                        MessageHelper.DisplayMessage("A backup could not be found. You're screwed.", "Beyond Repair");
+                    }
+                }
+                else
+                {
+                    // Show a  message
+                    MessageHelper.DisplayMessage("The Gateway exists. You're screwed.", "Beyond Repair");
+                }
+            }
+            #endregion
+            
             #region RunSetupButton_Click(object sender, EventArgs e)
             /// <summary>
             /// event is fired when the 'RunSetupButton' is clicked.
@@ -2577,7 +2622,29 @@ namespace DataTierClient.Forms
                     ButtonManager.HandleButtonImage(ManageDataButton, false);
                     StoredProcedureSQLButton.Visible = false;
                 }
-                
+
+                // if there is an OpenProject
+                if (HasOpenProject)
+                {
+                    // get the dataObjectsFolder
+                    string gatewayPath = Path.Combine(OpenProject.ProjectFolder, @"DataGateway\Gateway.cs");
+
+                    // if the Template Version is 2
+                    if (OpenProject.TemplateVersion == 2)
+                    {
+                        // V2 inside DataAccessComponent
+                        gatewayPath = Path.Combine(OpenProject.ProjectFolder, @"DataAccessComponent\DataGateway\Gateway.cs");
+                    }
+
+                    // If the file does not exist on disk
+                    RepairGatewayButton.Visible = (!File.Exists(gatewayPath));
+                }
+                else
+                {
+                    // Hide
+                    RepairGatewayButton.Visible = false;
+                }
+
                 // refresh everything
                 this.Refresh();
             }
@@ -3156,7 +3223,6 @@ namespace DataTierClient.Forms
             #endregion
 
         #endregion
-
     }
     #endregion
     

@@ -6,6 +6,8 @@ using DataTier.Net;
 using ObjectLibrary.BusinessObjects;
 using ObjectLibrary.Enumerations;
 using System;
+using DataJuggler.Core.UltimateHelper;
+using DataJuggler.Core.UltimateHelper.Objects;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -71,6 +73,23 @@ namespace DataTierClient.Objects
             {
                 get { return customReader; }
                 set { customReader = value; }
+            }
+            #endregion
+            
+            #region HasParameterName
+            /// <summary>
+            /// This property returns true if the 'ParameterName' exists.
+            /// </summary>
+            public bool HasParameterName
+            {
+                get
+                {
+                    // initial value
+                    bool hasParameterName = (!String.IsNullOrEmpty(this.ParameterName));
+                    
+                    // return value
+                    return hasParameterName;
+                }
             }
             #endregion
             
@@ -323,6 +342,42 @@ namespace DataTierClient.Objects
             {
                 get { return parameterFieldSet; }
                 set { parameterFieldSet = value; }
+            }
+            #endregion
+            
+            #region ParameterName
+            /// <summary>
+            /// This read only property is used to return a parameter name when used in place of a SingleField
+            /// Method. This allows you to 
+            /// </summary>
+            public string ParameterName
+            {
+                get
+                {
+                    // initial value
+                    string parameterName = "";
+
+                    // return the value
+                    if (TextHelper.Exists(Parameters))
+                    {
+                        // get the words
+                        List<Word> words = TextHelper.GetWords(Parameters);
+
+                        // If the words collection exists and has one or more items
+                        if (ListHelper.HasOneOrMoreItems(words))
+                        {
+                            // if there are exactly two
+                            if (words.Count == 2)
+                            {
+                                // Set the return value
+                                parameterName = words[1].Text;
+                            }
+                        }
+                    }
+
+                    // return value
+                    return parameterName;
+                }            
             }
             #endregion
             

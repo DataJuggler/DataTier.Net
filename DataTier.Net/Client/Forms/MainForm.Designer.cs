@@ -70,6 +70,7 @@ namespace DataTierClient.Forms
             this.RunSetupButton = new System.Windows.Forms.Label();
             this.MainPanel = new DataTierClient.Objects.PanelExtender();
             this.RightContainer = new DataTierClient.Objects.PanelExtender();
+            this.RepairGatewayButton = new System.Windows.Forms.Button();
             this.BottomPanel = new DataTierClient.Objects.PanelExtender();
             this.YouTubeButtonRightMarginPanel = new DataTierClient.Objects.PanelExtender();
             this.BottomRightMarginpanel = new DataTierClient.Objects.PanelExtender();
@@ -363,6 +364,7 @@ namespace DataTierClient.Forms
             // 
             // RightContainer
             // 
+            this.RightContainer.Controls.Add(this.RepairGatewayButton);
             this.RightContainer.Controls.Add(this.BottomPanel);
             this.RightContainer.Controls.Add(this.RightPanel);
             this.RightContainer.Dock = System.Windows.Forms.DockStyle.Right;
@@ -370,6 +372,26 @@ namespace DataTierClient.Forms
             this.RightContainer.Name = "RightContainer";
             this.RightContainer.Size = new System.Drawing.Size(380, 649);
             this.RightContainer.TabIndex = 112;
+            // 
+            // RepairGatewayButton
+            // 
+            this.RepairGatewayButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
+            this.RepairGatewayButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.RepairGatewayButton.Enabled = false;
+            this.RepairGatewayButton.FlatAppearance.BorderSize = 0;
+            this.RepairGatewayButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.RepairGatewayButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.RepairGatewayButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RepairGatewayButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RepairGatewayButton.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.RepairGatewayButton.Location = new System.Drawing.Point(21, 527);
+            this.RepairGatewayButton.Name = "RepairGatewayButton";
+            this.RepairGatewayButton.Size = new System.Drawing.Size(191, 40);
+            this.RepairGatewayButton.TabIndex = 108;
+            this.RepairGatewayButton.Text = "Repair Gateway";
+            this.RepairGatewayButton.UseVisualStyleBackColor = true;
+            this.RepairGatewayButton.Visible = false;
+            this.RepairGatewayButton.Click += new System.EventHandler(this.RepairGatewayButton_Click);
             // 
             // BottomPanel
             // 
@@ -578,6 +600,7 @@ namespace DataTierClient.Forms
         private System.Windows.Forms.PictureBox ClassRoomImage;
         private System.Windows.Forms.Label MainStatus;
         private System.Windows.Forms.Timer StatusTimer;
+        private System.Windows.Forms.Button RepairGatewayButton;
     }
     #endregion
 
