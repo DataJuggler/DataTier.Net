@@ -113,36 +113,6 @@ namespace DataTierClient.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Back {
-            get {
-                object obj = ResourceManager.GetObject("Back", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap BlackBackground {
-            get {
-                object obj = ResourceManager.GetObject("BlackBackground", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap BlackBricks {
-            get {
-                object obj = ResourceManager.GetObject("BlackBricks", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap BlackButton {
             get {
                 object obj = ResourceManager.GetObject("BlackButton", resourceCulture);
@@ -163,49 +133,9 @@ namespace DataTierClient.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap BlueWall {
-            get {
-                object obj = ResourceManager.GetObject("BlueWall", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Check_48x48 {
             get {
                 object obj = ResourceManager.GetObject("Check_48x48", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Click_Here_Orange_Transparent {
-            get {
-                object obj = ResourceManager.GetObject("Click Here Orange Transparent", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Click_Here_Orange_Transparent1 {
-            get {
-                object obj = ResourceManager.GetObject("Click Here Orange Transparent1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ClickHereRed {
-            get {
-                object obj = ResourceManager.GetObject("ClickHereRed", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -236,26 +166,6 @@ namespace DataTierClient.Properties {
         internal static System.Drawing.Bitmap Copied {
             get {
                 object obj = ResourceManager.GetObject("Copied", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap CreateDatabase {
-            get {
-                object obj = ResourceManager.GetObject("CreateDatabase", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap DataTier_Net3 {
-            get {
-                object obj = ResourceManager.GetObject("DataTier.Net3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -323,26 +233,6 @@ namespace DataTierClient.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Information {
-            get {
-                object obj = ResourceManager.GetObject("Information", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Information2 {
-            get {
-                object obj = ResourceManager.GetObject("Information2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Installed {
             get {
                 object obj = ResourceManager.GetObject("Installed", resourceCulture);
@@ -353,49 +243,9 @@ namespace DataTierClient.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap JackIsADullBoyGray {
-            get {
-                object obj = ResourceManager.GetObject("JackIsADullBoyGray", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Janitor {
-            get {
-                object obj = ResourceManager.GetObject("Janitor", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Janitor1 {
-            get {
-                object obj = ResourceManager.GetObject("Janitor1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Janitor3 {
             get {
                 object obj = ResourceManager.GetObject("Janitor3", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap KiloByte {
-            get {
-                object obj = ResourceManager.GetObject("KiloByte", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -423,46 +273,6 @@ namespace DataTierClient.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap MellowYellow {
-            get {
-                object obj = ResourceManager.GetObject("MellowYellow", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap MoveLeft {
-            get {
-                object obj = ResourceManager.GetObject("MoveLeft", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap MoveRight {
-            get {
-                object obj = ResourceManager.GetObject("MoveRight", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Next {
-            get {
-                object obj = ResourceManager.GetObject("Next", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap OrderBy {
             get {
                 object obj = ResourceManager.GetObject("OrderBy", resourceCulture);
@@ -476,16 +286,6 @@ namespace DataTierClient.Properties {
         internal static System.Drawing.Bitmap Parameter_Mode {
             get {
                 object obj = ResourceManager.GetObject("Parameter Mode", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap PDF {
-            get {
-                object obj = ResourceManager.GetObject("PDF", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -516,36 +316,6 @@ namespace DataTierClient.Properties {
         internal static System.Drawing.Bitmap ReaderMode {
             get {
                 object obj = ResourceManager.GetObject("ReaderMode", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap RedArrow {
-            get {
-                object obj = ResourceManager.GetObject("RedArrow", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Setup_Background {
-            get {
-                object obj = ResourceManager.GetObject("Setup Background", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap SetupConnection {
-            get {
-                object obj = ResourceManager.GetObject("SetupConnection", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -593,39 +363,9 @@ namespace DataTierClient.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Vector {
-            get {
-                object obj = ResourceManager.GetObject("Vector", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap WoodButton {
-            get {
-                object obj = ResourceManager.GetObject("WoodButton", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap WoodButtonDarkGray {
             get {
                 object obj = ResourceManager.GetObject("WoodButtonDarkGray", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap WoodButtonGray {
-            get {
-                object obj = ResourceManager.GetObject("WoodButtonGray", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -726,16 +466,6 @@ namespace DataTierClient.Properties {
         internal static System.Drawing.Bitmap WoodButtonWidth640Disabled {
             get {
                 object obj = ResourceManager.GetObject("WoodButtonWidth640Disabled", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Word {
-            get {
-                object obj = ResourceManager.GetObject("Word", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -121,29 +121,11 @@
   <data name="Failure" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Failure.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Arrow-Down-Gray" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\arrow-down-gray.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="BlackImageDarker" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BlackImageDarker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="MellowYellow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MellowYellow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Arrow-Up-Gray" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\arrow-up-gray.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Parameter Mode" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\Parameter Mode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="OrderBy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\OrderBy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MoveRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MoveRight2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Janitor" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Janitor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="HelpImages3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\HelpImages3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -154,17 +136,11 @@
   <data name="WoodButtonWideRed1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WoodButtonWideRed1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Deep Black" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Deep Black.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="WordIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WordIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SetupControl2025" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SetupControl2025.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Information2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Information2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PDFIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PDFIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -175,32 +151,14 @@
   <data name="V" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\V.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Arrow-Up" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\arrow-up.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CreateDatabase" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CreateDatabase.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Information" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Information.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="WoodButtonWideRed" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WoodButtonWideRed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Click Here Orange Transparent1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Click Here Orange Transparent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DeepGray" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\DeepGray.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Next" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Next.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ClipBoard" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ClipBoard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DataTier.Net3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DataTier.Net3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ReaderMode" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\ReaderMode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -208,47 +166,20 @@
   <data name="Installed" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Installed.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Vector" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Vector.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="LinenBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LinenBackground.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="WoodButtonWidth2560" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WoodButtonWidth2560.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Arrow-Down" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\arrow-down.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SetupConnection" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SetupConnection.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="JackIsADullBoyGray" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\JackIsADullBoyGray.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AutoFill Child Folders" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\AutoFill Child Folders.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Success" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Success.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="KiloByte" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\KiloByte.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ManHoldingSignWithSSMSTExt" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ManHoldingSignWithSSMSTExt.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="RedArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RedArrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Click Here Orange Transparent" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Click Here Orange Transparent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="WoodButtonWidth640" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WoodButtonWidth640.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BlackBricks" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BlackBricks.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ClickHereRed2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ClickHereRed2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -256,50 +187,17 @@
   <data name="WoodButtonDarkGray" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WoodButtonDarkGray.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ClickHereRed" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ClickHereRed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Project Folder .NET5 or .NET6" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Project Folder .NET5 or .NET6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Back" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Back.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BlackBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BlackBackground.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Janitor1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Janitor1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="WoodButtonGray" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WoodButtonGray.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="setupStep2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\setupStep2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="MoveLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MoveLeft3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="WoodButtonWidth2560Disabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WoodButtonWidth2560Disabled.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Setup Background" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Setup Background.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="EditMode" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\EditMode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="WoodButtonWidth640Disabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WoodButtonWidth640Disabled.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Word" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Word.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BlueWall" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BlueWall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PDF" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\PDF.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Copied" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Copied.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -309,9 +207,6 @@
   </data>
   <data name="WoodButtonWideDarkGray" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WoodButtonWideDarkGray.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="WoodButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WoodButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Janitor3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Janitor3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -324,5 +219,29 @@
   </data>
   <data name="Check_48x48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Check_48x48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Arrow-Down" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrow-down.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Arrow-Down-Gray" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrow-down-gray.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Arrow-Up" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrow-up.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Arrow-Up-Gray" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrow-up-gray.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Deep Black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Deep Black.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Project Folder .NET5 or .NET6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Project Folder .NET5 or .NET6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AutoFill Child Folders" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\AutoFill Child Folders.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Parameter Mode" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\Parameter Mode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
