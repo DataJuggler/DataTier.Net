@@ -1,3 +1,6 @@
+3.2.2025: Verison 5.3.0 - I redid the Setup screen and used a bunch of Pixar type character images should make the UI a little more pleasant.
+I also removed a bunch of unused images.
+
 1.11.2025: This project now Targets .NET 9. There have also been many improvements in terms of memory consumption.
 I am in the process of removing the Controllers and the ControllerManager class, as this does have to be instantiated.
 
