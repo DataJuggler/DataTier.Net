@@ -2164,6 +2164,13 @@ namespace DataTierClient.Forms
                     // User did not cancel, therefore a restart is required
                     userCancelled = false;
 
+                    // if SetupComplete is true
+                    if (!SetupComplete)
+                    {
+                        // Set the value for SetupComplete
+                        SetupComplete = setupForm.SetupComplete;
+                    }
+
                     // DataTier.Net has to be restarted.
                     MessageHelper.DisplayMessage("DataTier.Net has to be restarted to register your changes." + Environment.NewLine + "This program will now end.", "Restart Required");
 
@@ -2766,7 +2773,7 @@ namespace DataTierClient.Forms
                     // Exit this routine
                     return;
                 }
-                else if (restartRequired)
+                else if ((restartRequired) && (!SetupComplete))
                 {
                         // set message
                     string message = "DataTier.Net was not setup properly. Please restart this program and try again.";

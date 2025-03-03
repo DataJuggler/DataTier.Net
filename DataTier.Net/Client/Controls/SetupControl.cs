@@ -267,6 +267,13 @@ namespace DataTierClient.Controls
                     // Setup is complete
                     UserCancelled = false;
 
+                    // if the parent is a mainForm
+                    if (ParentForm is SetupForm parent)
+                    {
+                        // Set to true
+                        parent.SetupComplete = true;
+                    }
+
                     // Close the Parentform
                     ParentForm.Close();
                 }

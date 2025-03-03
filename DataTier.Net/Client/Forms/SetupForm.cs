@@ -25,6 +25,7 @@ namespace DataTierClient.Forms
     {
         
         #region Private Variables
+        private bool setupComplete;
         #endregion
         
         #region Constructor
@@ -40,6 +41,17 @@ namespace DataTierClient.Forms
 
         #region Properties
 
+            #region SetupComplete
+            /// <summary>
+            /// This property gets or sets the value for 'SetupComplete'.
+            /// </summary>
+            public bool SetupComplete
+            {
+                get { return setupComplete; }
+                set { setupComplete = value; }
+            }
+            #endregion
+            
             #region UserCancelled
             /// <summary>
             /// This read only property returns the value for UserCancelled from the SetupControl.
