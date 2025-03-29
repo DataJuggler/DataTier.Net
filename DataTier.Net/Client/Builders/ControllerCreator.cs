@@ -1106,8 +1106,8 @@ namespace DataTierClient.Builders
                 WriteLine("/// <param name='" + parameterName + "'>The '" + dataType + "' object to insert.</param>");
                 WriteLine("/// <returns>True if successful or false if not.</returns>");
 
-                // Get classDeclaration
-                string classDeclaration = "public bool Insert(" + dataType + " " + parameterName + ")";
+                // Get classDeclaration                
+                string classDeclaration = "public static bool Insert(" + dataType + " " + parameterName + ", DataManager dataManager)";
 
                 // Write classDeclaration
                 WriteLine(classDeclaration);
@@ -1185,7 +1185,7 @@ namespace DataTierClient.Builders
                 WriteComment("Perform DataOperation");
 
                 // get performDataOperationLine
-                string performDataOperationLine = "PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, insertMethod , parameters);";
+                string performDataOperationLine = "PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, insertMethod , parameters, dataManager);";
 
                 // Write performDataOperationLine
                 WriteLine(performDataOperationLine);
@@ -1460,7 +1460,7 @@ namespace DataTierClient.Builders
                     string tempObjectName = "temp" + dataTable.Name;
 
                     // Write the line to look up the temp object
-                    WriteLine(dataTable.Name + " " + tempObjectName + " = Find(" + parameterName + ");");
+                    WriteLine(dataTable.Name + " " + tempObjectName + " = Find(" + parameterName + ", dataManager);");
 
                     // write a blank line
                     WriteLine();
@@ -1487,7 +1487,7 @@ namespace DataTierClient.Builders
                     WriteComment("Perform the insert");
 
                     // now perform the insert
-                    WriteLine("saved = Insert(" + parameterName + ");");
+                    WriteLine("saved = Insert(" + parameterName + ", dataManager);");
 
                     // Write a close bracket
                     WriteCloseBracket(true);
@@ -1502,7 +1502,7 @@ namespace DataTierClient.Builders
                     WriteComment("Perform the update");
 
                     // now perform the insert
-                    WriteLine("saved = Update(" + parameterName + ");");
+                    WriteLine("saved = Update(" + parameterName + ", dataManager);");
 
                     // Write a close bracket
                     WriteCloseBracket(true);

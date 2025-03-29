@@ -242,7 +242,7 @@ namespace DataTierClient.Builders
                 // if write classes
                 if (writeClasses)
                 {
-                    // Write DataManager
+                    // Write WriteDataClasses
                     success = classWriter.WriteDataClasses(DataManager);
 
                     // if not success

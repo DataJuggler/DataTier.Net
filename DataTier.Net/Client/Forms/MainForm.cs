@@ -1702,7 +1702,7 @@ namespace DataTierClient.Forms
                 }
 
                 // display value on control
-                this.CurrentProjectLabel.Text = projectName;
+                CurrentProjectLabel.Text = projectName;
 
                 // Enable or disable controls
                 UIEnable();
