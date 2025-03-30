@@ -151,10 +151,6 @@
     <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\DataJuggler.Net\DataJuggler.Net.csproj">
-      <Project>{af3f5ec6-8494-4ca2-aac0-b1fa4f752ef5}</Project>
-      <Name>DataJuggler.Net</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DataAccessComponent\DataAccessComponent.csproj">
       <Project>{94349907-f83f-4087-bf9a-6172008cfb10}</Project>
       <Name>DataAccessComponent</Name>

@@ -76,10 +76,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\DataJuggler.Net\DataJuggler.Net.csproj">
-      <Project>{af3f5ec6-8494-4ca2-aac0-b1fa4f752ef5}</Project>
-      <Name>DataJuggler.Net</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ApplicationLogicComponent\ApplicationLogicComponent.csproj">
       <Project>{C5722498-14B7-4314-9E3B-51B0CA8695C1}</Project>
       <Name>ApplicationLogicComponent</Name>
