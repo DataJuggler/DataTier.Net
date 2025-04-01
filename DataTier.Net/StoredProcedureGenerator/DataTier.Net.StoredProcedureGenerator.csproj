@@ -60,8 +60,8 @@
     <Reference Include="DataJuggler.Core.UltimateHelper, Version=1.7.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\DataJuggler.Core.UltimateHelper.1.7.1\lib\net48\DataJuggler.Core.UltimateHelper.dll</HintPath>
     </Reference>
-    <Reference Include="DataJuggler.Net, Version=6.5.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DataJuggler.Net.6.5.3\lib\net48\DataJuggler.Net.dll</HintPath>
+    <Reference Include="DataJuggler.Net, Version=6.5.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\DataJuggler.Net.6.5.4\lib\net48\DataJuggler.Net.dll</HintPath>
     </Reference>
     <Reference Include="DataJuggler.Net.Cryptography, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\DataJuggler.Net.Cryptography.1.0.0\lib\net461\DataJuggler.Net.Cryptography.dll</HintPath>
