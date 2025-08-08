@@ -102,8 +102,8 @@ namespace ProjectConverter
             // Create a fileInfo
             FileInfo fileInfo = new FileInfo(SourceControl.Text);
 
-            // Get the selectedFolder
-            string selectedfolder = fileInfo.Directory.FullName;
+            // Set the projectFolder
+            string projectFolder = fileInfo.Directory.FullName;
 
             // Create a new instance of a 'Gateway' object.
             Gateway gateway = new Gateway(ConnectionConstants.Name);
@@ -115,7 +115,17 @@ namespace ProjectConverter
             if (ListHelper.HasOneOrMoreItems(projects))
             {
                 // Get the tempSelectedProject
-                SelectedProject = projects.FirstOrDefault(x => x.ProjectFolder == fileInfo.Directory.FullName);
+                SelectedProject = projects.FirstOrDefault(x => x.ProjectFolder == projectFolder);
+
+                // try again without a backslash
+                if (!HasSelectedProject)
+                {
+                    // Add a backslash
+                    projectFolder = TextHelper.CombineStrings(projectFolder, @"\");
+
+                    // Get the tempSelectedProject
+                    SelectedProject = projects.FirstOrDefault(x => x.ProjectFolder == projectFolder);
+                }
 
                 // Show the Panel if the SelectedProject exists and it hasn't been confirmed yet
                 ConfirmationVisible = (HasSelectedProject && !Confirmed);
@@ -996,10 +1006,10 @@ namespace ProjectConverter
             ConnectionNameControl.Text = "DataTierNetConnection";
 
             // Default
-            BackupPathControl.Text = @"C:\Backup\CityData";
+            BackupPathControl.Text = @"C:\Backup\StockData";
 
             // Select File
-            SourceControl.Text = @"C:\Projects\GitHub\CityDatabase\Data\DataTier.Net8.ClassLibraryV2.sln";
+            SourceControl.Text = @"C:\Projects\GitHub\StockData\Data\DataTier.Net7.ClassLibrary.sln";
         }
         #endregion
         

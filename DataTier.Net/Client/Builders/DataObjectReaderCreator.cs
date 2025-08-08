@@ -405,6 +405,7 @@ namespace DataTierClient.Builders
                     case DataManager.DataTypeEnum.Decimal:
                     case DataManager.DataTypeEnum.Currency:
                     case DataManager.DataTypeEnum.Double:
+                    case DataManager.DataTypeEnum.BigInt:
 
                         // set default value
                         defaultValue = "0";
@@ -532,6 +533,14 @@ namespace DataTierClient.Builders
 
                             // set dataType to Integer
                             dataType = "Integer";
+
+                            // Required
+                            break;
+
+                        case DataManager.DataTypeEnum.BigInt:
+                        
+                            // set dataType to Integer
+                            dataType = "Long";
 
                             // Required
                             break;
@@ -918,7 +927,8 @@ namespace DataTierClient.Builders
                         foreach (DataField field in fields)
                         {  
                             // I changed this so only AutoNumber (Identity) Primary Keys call UpdateIdentity.
-                            if (field.PrimaryKey && field.DataType == DataManager.DataTypeEnum.Autonumber)
+                            // Update 4.29.2025 - Views are excluded
+                            if ((field.PrimaryKey && field.DataType == DataManager.DataTypeEnum.Autonumber) && (!dataTable.IsView))
                             {
                                 // Now Write Update Identity Method
                                 WriteUpdateIdentity(dataTable, objectName);

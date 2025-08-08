@@ -330,6 +330,44 @@ namespace DataAccessComponent.DataManager
         }
         #endregion
 
+        #region ParseLong(object dataRowFieldValue, long defaultValue)
+        /// <summary>
+        /// This method parses the dataRowFieldValue passed in 
+        /// into a long value.
+        /// </summary>
+        /// <param name="dataRowFieldValue">The value to parse</param>
+        /// <param name="defaultValue">The value to return if parsing fails</param>
+        /// <returns>A long parsed from the object or the default</returns>
+        public static long ParseLong(object dataRowFieldValue, long defaultValue)
+        {
+            // initial value
+            long longValue = defaultValue;
+
+            try
+            {
+                // if this is a long
+                if (dataRowFieldValue is Int64)
+                {
+                    // set the long value
+                    longValue = (long)dataRowFieldValue;
+                }
+                else if (dataRowFieldValue != null)
+                {
+                    // try parsing the string representation
+                    longValue = System.Int64.Parse(dataRowFieldValue.ToString());
+                }
+            }
+            catch
+            {
+                // set to default value
+                longValue = defaultValue;
+            }
+
+            // return value
+            return longValue;
+        }
+        #endregion
+
         #region ReturnFirstRow(StoredProcedure storedProcedure)
         /// <summary>
         /// This method returns the first data row of the first data table
