@@ -1510,7 +1510,15 @@ namespace DataTier.Net.StoredProcedureGenerator
                     
                         // Set DataType
                         dataTypeString = "int";
+
+                        // required
+                        break;
+
+                    case DataManager.DataTypeEnum.BigInt:
                     
+                        // Set DataType
+                        dataTypeString = "bigint";
+
                         // required
                         break;
 
