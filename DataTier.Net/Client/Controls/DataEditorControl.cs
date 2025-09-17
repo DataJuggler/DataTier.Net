@@ -289,7 +289,7 @@ namespace DataTierClient.Controls
                     ProjectFile writerFile = new ProjectFile(writerFileName, DataManager.ProjectTypeEnum.DAC);
                     ProjectFile writerFileBase = new ProjectFile(writerBaseFileName, DataManager.ProjectTypeEnum.DAC);
 
-                    // only for .NET8 and V2 Templates
+                    // only V2 Templates
                     if (Project.TemplateVersion == 2)
                     {
                         // replace out 
@@ -396,8 +396,12 @@ namespace DataTierClient.Controls
                                     {
                                         if (File.Exists(projectFile.FullFilePath))
                                         {
-                                            // Delete this file
-                                            File.Delete(projectFile.FullFilePath);
+                                            // if this is not the Gateway
+                                            if (!projectFile.FileName.Contains("Gateway"))
+                                            {
+                                                // Delete this file
+                                                File.Delete(projectFile.FullFilePath);
+                                            }
                                         }
                                         else
                                         {

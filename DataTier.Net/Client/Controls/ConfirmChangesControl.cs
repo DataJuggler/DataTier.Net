@@ -2119,6 +2119,9 @@ namespace DataTierClient.Controls
                         {
                             // Now called Data folder
                             customReaderFile = @"DataAccessComponent\Data\Readers\" + MethodInfo.CustomReader.ClassName + ".cs";
+                            
+                            // Set the dataManager file
+                            dataManagerFile = @"DataAccessComponent\Data\" + MethodInfo.SelectedTable.ClassName + "Manager.cs";
                         }
 
                         // local used to display the updated Method for the DataManager

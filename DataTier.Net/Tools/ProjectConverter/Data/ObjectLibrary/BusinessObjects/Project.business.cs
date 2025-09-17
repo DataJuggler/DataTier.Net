@@ -36,8 +36,19 @@ namespace ObjectLibrary.BusinessObjects
                 // Return Cloned Object
                 return newProject;
             }
-            #endregion
+        #endregion
 
+            #region ToString()
+            /// <summary>
+            /// method returns the String
+            /// </summary>
+            public override string ToString()
+            {
+                // helpful forr debugging
+                return ProjectName + " - " + ProjectFolder;
+            }
+            #endregion
+            
         #endregion
 
         #region Properties

@@ -26,7 +26,7 @@ namespace ObjectLibrary.BusinessObjects
         private IList<string> allSolutionProjects;
         #endregion
 
-        #region constructors
+        #region Constructors
 
             #region Default Constructor
             /// <summary>

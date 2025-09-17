@@ -195,7 +195,7 @@ namespace DataTierClient.ClientUtil
                 Type objectType = null;
 
                 // locals
-                double versionNumber = 17;
+                double versionNumber = 18;
                 string programId = "";
         
                 do
@@ -309,21 +309,25 @@ namespace DataTierClient.ClientUtil
 
                 // local (Com objects start at 1)
                 int index = 0;
-                    
+    
                 // iterate project items
                 foreach(ProjectItem projectItem in projectItems)
                 {  
-                    // Increment the value for tempIndex
+                    // Increment the value for index
                     index++;
 
                     // if the name matches
                     if(projectItem.Name == projectFile.FileName)
                     {
-                        // Remove this item
-                        projectItems.Item(index).Remove();
+                        // if this is not the Gateway
+                        if (!projectFile.FileName.Contains("Gateway"))
+                        {
+                            // Remove this item
+                            projectItems.Item(index).Remove();
 
-                        // Set to true
-                        fileRemoved = true;
+                            // Set to true
+                            fileRemoved = true;
+                        }
                             
                         // break out of loop
                         break;
@@ -345,6 +349,62 @@ namespace DataTierClient.ClientUtil
                 // return value
                 return fileRemoved;
             }  
+            #endregion
+
+            #region SafeGetProjectItems(EnvDTE.Project project)
+            /// <summary>
+            /// method returns the Get Project Items
+            /// </summary>
+            private static EnvDTE.ProjectItems SafeGetProjectItems(EnvDTE.Project project)
+            {
+                // initial value
+                EnvDTE.ProjectItems projectItems = null;
+                
+                // if the project exists
+                if (project != null)
+                {
+                    try
+                    {
+                        projectItems = project.ProjectItems;
+                    }
+                    catch
+                    {
+                        // swallow; COM can throw until fully ready
+                    }
+                }
+                
+                // return value
+                return projectItems;
+            }
+            #endregion
+            
+            #region TryTouchProject(EnvDTE.Project project)
+            /// <summary>
+            /// method returns the Touch Project
+            /// </summary>
+            private static void TryTouchProject(EnvDTE.Project project)
+            {
+                // if the project exists
+                if (project != null)
+                {
+                    try
+                    {
+                        // Touching these often triggers load completion
+                        string fullName = project.FullName;
+                        object projectObject = project.Object;
+                        
+                        EnvDTE.Properties properties = project.Properties;
+                        if (properties != null)
+                        {
+                            int propertyCount = properties.Count;
+                        }
+                    }
+                    catch
+                    {
+                        // ignore; we're only nudging
+                    }
+                }
+            }
             #endregion
             
             #region UpdateProject(EnvDTE.Project project, IList<ProjectFile> files, DataManager.ProjectTypeEnum projectType)
@@ -454,6 +514,9 @@ namespace DataTierClient.ClientUtil
                             // each project needs to be updated
                             foreach (EnvDTE.Project project in solution.Projects)
                             {
+                                // wait for the projectItems
+                                WaitUntilProjectItemsReady(project, 2000, 100);
+
                                 // if this project name is the ApplicationLogicComponen project
                                 if (project.Name == visualStudioSolution.ApplicationLogicComponentProjectName)
                                 {
@@ -553,6 +616,56 @@ namespace DataTierClient.ClientUtil
                     
                 // return value
                 return updated;
+            }
+            #endregion
+            
+            #region WaitForProjectItems(EnvDTE.Project project, int timeoutMs, int pollMs)
+            /// <summary>
+            /// method returns the For Project Items
+            /// </summary>
+            private static bool WaitUntilProjectItemsReady(EnvDTE.Project project, int timeoutMilliseconds, int pollMilliseconds)
+            {
+                // initial value
+                bool ready = false;
+
+                // if the project exists
+                if (project != null)
+                {
+                    DateTime endTime = DateTime.UtcNow.AddMilliseconds(timeoutMilliseconds);
+
+                    while (DateTime.UtcNow < endTime)
+                    {
+                        // Nudge project to complete initialization
+                        TryTouchProject(project);
+
+                        EnvDTE.ProjectItems projectItems = SafeGetProjectItems(project);
+
+                        // if the projectItems exist
+                        if (projectItems != null)
+                        {
+                            ready = true;
+                            break;
+                        }
+
+                        System.Windows.Forms.Application.DoEvents();
+                        System.Threading.Thread.Sleep(pollMilliseconds);
+                    }
+
+                    // final attempt after loop
+                    if (!ready)
+                    {
+                        TryTouchProject(project);
+                        EnvDTE.ProjectItems finalItems = SafeGetProjectItems(project);
+
+                        if (finalItems != null)
+                        {
+                            ready = true;
+                        }
+                    }
+                }
+
+                // return value
+                return ready;
             }
             #endregion
             

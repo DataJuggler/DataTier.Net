@@ -8,11 +8,12 @@ using DataAccessComponent.StoredProcedureManager.UpdateProcedures;
 using DataJuggler.NET9;
 using DataJuggler.UltimateHelper;
 using DataJuggler.UltimateHelper.Objects;
+using DataJuggler.Win.Controls;
+using DataJuggler.Win.Controls.Interfaces;
 using ObjectLibrary.BusinessObjects;
 using ObjectLibrary.Enumerations;
 using System.IO;
-using DataJuggler.Win.Controls.Interfaces;
-using DataJuggler.Win.Controls;
+using System.Reflection;
 
 #endregion
 
@@ -96,14 +97,25 @@ namespace ProjectConverter
         /// </summary>
         private void ConvertProjectButton_Click(object sender, EventArgs e)
         {
+            // local
+            string projectFolder = "";
+
             // Set the ScreenType
             ScreenType = ScreenTypeEnum.ConvertOrFixProjects;
 
-            // Create a fileInfo
-            FileInfo fileInfo = new FileInfo(SourceControl.Text);
+            // if the Directory exists
+            if (Directory.Exists(SourceControl.Text))
+            {
+                projectFolder = SourceControl.Text;
+            }
+            else
+            {
+                // Create a fileInfo
+                FileInfo fileInfo = new FileInfo(SourceControl.Text);
 
-            // Set the projectFolder
-            string projectFolder = fileInfo.Directory.FullName;
+                // Set the projectFolder
+                projectFolder = fileInfo.Directory.FullName;
+            }
 
             // Create a new instance of a 'Gateway' object.
             Gateway gateway = new Gateway(ConnectionConstants.Name);
@@ -1006,10 +1018,10 @@ namespace ProjectConverter
             ConnectionNameControl.Text = "DataTierNetConnection";
 
             // Default
-            BackupPathControl.Text = @"C:\Backup\StockData";
+            BackupPathControl.Text = @"D:\Backup\TestOp";
 
             // Select File
-            SourceControl.Text = @"C:\Projects\GitHub\StockData\Data\DataTier.Net7.ClassLibrary.sln";
+            SourceControl.Text = @"C:\Projects\RCPMainBranch\RCP.HydrostaticTests\RCP.HydrostaticTests.Data\RCP.DataLib";
         }
         #endregion
         

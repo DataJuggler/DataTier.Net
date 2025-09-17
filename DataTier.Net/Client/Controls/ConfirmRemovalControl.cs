@@ -186,14 +186,22 @@ namespace DataTierClient.Controls
                     foreach (ProjectFile file in projectFileManager.Files)
                     {
                         // if this is the Gateway
-                        if (file.ProjectType == DataManager.ProjectTypeEnum.Gateway)
+                        if ((file.ProjectType == DataManager.ProjectTypeEnum.Gateway) || (file.FileName.Contains("Gateway")))
                         {
                            // Do not display or remove the Gateway file, but it is needed to remove the Gateway methods
                         }
                         else
                         {
-                            // Add this item
-                            this.CodeItemsListBox.Items.Add(file.ShortFilePath, true);
+                            if (File.Exists(file.FullFilePath))
+                            {
+                                // Add this item with the ShortFilePath
+                                this.CodeItemsListBox.Items.Add(file.FullFilePath, true);
+                            }
+                            else
+                            {
+                                // Add this item with the ShortFilePath
+                                this.CodeItemsListBox.Items.Add(file.ShortFilePath, true);
+                            }
                         }
                     }
                 }
