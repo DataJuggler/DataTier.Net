@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>1.9.2</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://github.com/DataJuggler/SharedRepo/tree/master/License</licenseUrl>
+    <projectUrl>https://github.com/DataJuggler/UltimateHelper</projectUrl>
+    <iconUrl>https://github.com/DataJuggler/SharedRepo/blob/master/Shared/Images/DataJuggler.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>
+		Version 1.9.0 - EnvironmentVariableHelper was updated to have a parameter for User or Machine 
+		Version 1.7.0 - WordParser has been eliminated. Use TextHelper for all methods that WordParser useds to implement.
+		Version 1.6.0 - This project was updated to 4.8 .NET Framework
+		Version 1.5.0 - I am in the process of moving CryptographyHelper to its own package for the .Net Framework. I didn't like all the baggage the Konscious.Security and Argon libraries
+		added to this package, so I removed CryptographyHelper. I also broke ConfigurationHelper if you had any encrypted values, so DataTier.Net has to change, but the change is for the best.
+		Version 1.4.9 - I added a verifyRetries optional parameter to GeneratePasswordHash. It really should be manditory.
+		Version 1.4.8 - I updated CryptographyHelper to have try catches around everything.
+	</releaseNotes>
+    <copyright>Copyright 2019 Data Juggler Software Licensed For Free To Do Whatever You Want. No Lawyers Needed Ever.</copyright>
+    <tags>C# Helper Classes Data Juggler DataJuggler NullHelper TextHelper EnumHelper ListHelper List Helper Dialog Helper MessageBoxHelper Message Box Helper</tags>
+  </metadata>
+</package>
