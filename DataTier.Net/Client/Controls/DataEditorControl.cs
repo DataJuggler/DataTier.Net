@@ -99,6 +99,22 @@ namespace DataTierClient.Controls
             }
             #endregion
             
+            #region CreateGridColumnsButton_Click(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when the 'CreateGridColumnsButton' is clicked.
+            /// </summary>
+            private void CreateGridColumnsButton_Click(object sender, EventArgs e)
+            {
+                GridColumnBuilderForm form = new GridColumnBuilderForm();
+                
+                // Setup the Form
+                form.Setup(this.SelectedTable);
+
+                // launch the form
+                form.Show();
+            }
+            #endregion
+            
             #region CreateMethodButton_Click(object sender, EventArgs e)
             /// <summary>
             /// event is fired when the 'CreateMethodButton' is clicked.
@@ -850,6 +866,7 @@ namespace DataTierClient.Controls
                     ManageReadersButton.Visible = true;
                     ManageFieldSetsButton.Visible = true;
                     ManageMethodButton.Visible = true;
+                    CreateGridColumnsButton.Visible = true;
                 }
                 else
                 {
@@ -861,7 +878,8 @@ namespace DataTierClient.Controls
                     CreateMethodButton.Visible = false;
                     ManageReadersButton.Visible = false;
                     ManageFieldSetsButton.Visible = false;
-                    ManageMethodButton.Visible = false;                    
+                    ManageMethodButton.Visible = false; 
+                    CreateGridColumnsButton.Visible = false;
                 }
                 
                 // Not If Loading

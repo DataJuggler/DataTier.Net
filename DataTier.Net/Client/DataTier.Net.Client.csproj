@@ -264,6 +264,12 @@
     <Compile Include="Controls\FieldSetEditor.Designer.cs">
       <DependentUpon>FieldSetEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GridColumnBuilderControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\GridColumnBuilderControl.Designer.cs">
+      <DependentUpon>GridColumnBuilderControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\HelpControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -465,6 +471,12 @@
     <Compile Include="Forms\FieldSetEditorForm.Designer.cs">
       <DependentUpon>FieldSetEditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\GridColumnBuilderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GridColumnBuilderForm.Designer.cs">
+      <DependentUpon>GridColumnBuilderForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\HelpForm2.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -647,6 +659,9 @@
     <EmbeddedResource Include="Controls\FieldSetEditor.resx">
       <DependentUpon>FieldSetEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\GridColumnBuilderControl.resx">
+      <DependentUpon>GridColumnBuilderControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\HelpControl.resx">
       <DependentUpon>HelpControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -764,6 +779,9 @@
     <EmbeddedResource Include="Forms\FieldSetEditorForm.resx">
       <DependentUpon>FieldSetEditorForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GridColumnBuilderForm.resx">
+      <DependentUpon>GridColumnBuilderForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\HelpForm2.resx">
       <DependentUpon>HelpForm2.cs</DependentUpon>
     </EmbeddedResource>
@@ -878,6 +896,11 @@
     <None Include="Resources\BlackImageDarker.png" />
     <None Include="Resources\ClipBoard.png" />
     <None Include="Resources\Check_48x48.png" />
+    <None Include="Resources\VCRLast.png" />
+    <None Include="Resources\VCRLastLight.png" />
+    <None Include="Resources\VCRNextLight.png" />
+    <None Include="Resources\VCRPrevLight.png" />
+    <None Include="Resources\VCRFirstLight.png" />
     <Content Include="Sounds\Alert.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

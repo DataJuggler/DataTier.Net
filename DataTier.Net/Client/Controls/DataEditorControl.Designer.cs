@@ -68,13 +68,14 @@ namespace DataTierClient.Controls
             this.FieldsLabel = new System.Windows.Forms.Label();
             this.SelectedTableLabel = new System.Windows.Forms.Label();
             this.SelectedTableTextBox = new System.Windows.Forms.TextBox();
-            this.RemoveTableButton = new System.Windows.Forms.Button();
-            this.CreateMethodButton = new System.Windows.Forms.Button();
-            this.ManageMethodButton = new System.Windows.Forms.Button();
-            this.ManageReadersButton = new System.Windows.Forms.Button();
-            this.ManageFieldSetsButton = new System.Windows.Forms.Button();            
             this.AllButton = new System.Windows.Forms.Label();
             this.NoneButton = new System.Windows.Forms.Label();
+            this.CreateGridColumnsButton = new System.Windows.Forms.Button();
+            this.ManageFieldSetsButton = new System.Windows.Forms.Button();
+            this.ManageReadersButton = new System.Windows.Forms.Button();
+            this.ManageMethodButton = new System.Windows.Forms.Button();
+            this.CreateMethodButton = new System.Windows.Forms.Button();
+            this.RemoveTableButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // TablesListBox
@@ -162,111 +163,6 @@ namespace DataTierClient.Controls
             this.SelectedTableTextBox.Size = new System.Drawing.Size(232, 27);
             this.SelectedTableTextBox.TabIndex = 8;
             // 
-            // RemoveTableButton
-            // 
-            this.RemoveTableButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
-            this.RemoveTableButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.RemoveTableButton.FlatAppearance.BorderSize = 0;
-            this.RemoveTableButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.RemoveTableButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.RemoveTableButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RemoveTableButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RemoveTableButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.RemoveTableButton.Location = new System.Drawing.Point(360, 268);
-            this.RemoveTableButton.Name = "RemoveTableButton";
-            this.RemoveTableButton.Size = new System.Drawing.Size(232, 40);
-            this.RemoveTableButton.TabIndex = 97;
-            this.RemoveTableButton.Text = "Remove Table Code";
-            this.RemoveTableButton.UseVisualStyleBackColor = true;
-            this.RemoveTableButton.Visible = false;
-            this.RemoveTableButton.Click += new System.EventHandler(this.RemoveTableButton_Click);
-            this.RemoveTableButton.MouseEnter += new System.EventHandler(this.Button_Enter);
-            this.RemoveTableButton.MouseLeave += new System.EventHandler(this.Button_Leave);
-            // 
-            // CreateMethodButton
-            // 
-            this.CreateMethodButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
-            this.CreateMethodButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.CreateMethodButton.FlatAppearance.BorderSize = 0;
-            this.CreateMethodButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.CreateMethodButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.CreateMethodButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CreateMethodButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CreateMethodButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.CreateMethodButton.Location = new System.Drawing.Point(360, 76);
-            this.CreateMethodButton.Name = "CreateMethodButton";
-            this.CreateMethodButton.Size = new System.Drawing.Size(232, 40);
-            this.CreateMethodButton.TabIndex = 100;
-            this.CreateMethodButton.Text = "Create New Method";
-            this.CreateMethodButton.UseVisualStyleBackColor = true;
-            this.CreateMethodButton.Visible = false;
-            this.CreateMethodButton.Click += new System.EventHandler(this.CreateMethodButton_Click);
-            this.CreateMethodButton.MouseEnter += new System.EventHandler(this.Button_Enter);
-            this.CreateMethodButton.MouseLeave += new System.EventHandler(this.Button_Leave);
-            // 
-            // ManageMethodButton
-            // 
-            this.ManageMethodButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
-            this.ManageMethodButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ManageMethodButton.FlatAppearance.BorderSize = 0;
-            this.ManageMethodButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.ManageMethodButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.ManageMethodButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ManageMethodButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ManageMethodButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.ManageMethodButton.Location = new System.Drawing.Point(360, 124);
-            this.ManageMethodButton.Name = "ManageMethodButton";
-            this.ManageMethodButton.Size = new System.Drawing.Size(232, 40);
-            this.ManageMethodButton.TabIndex = 101;
-            this.ManageMethodButton.Text = "Manage Methods";
-            this.ManageMethodButton.UseVisualStyleBackColor = true;
-            this.ManageMethodButton.Visible = false;
-            this.ManageMethodButton.Click += new System.EventHandler(this.ManageMethodButton_Click);
-            this.ManageMethodButton.MouseEnter += new System.EventHandler(this.Button_Enter);
-            this.ManageMethodButton.MouseLeave += new System.EventHandler(this.Button_Leave);
-            // 
-            // ManageReadersButton
-            // 
-            this.ManageReadersButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
-            this.ManageReadersButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ManageReadersButton.FlatAppearance.BorderSize = 0;
-            this.ManageReadersButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.ManageReadersButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.ManageReadersButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ManageReadersButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ManageReadersButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.ManageReadersButton.Location = new System.Drawing.Point(360, 220);
-            this.ManageReadersButton.Name = "ManageReadersButton";
-            this.ManageReadersButton.Size = new System.Drawing.Size(232, 40);
-            this.ManageReadersButton.TabIndex = 102;
-            this.ManageReadersButton.Text = "Manage Readers";
-            this.ManageReadersButton.UseVisualStyleBackColor = true;
-            this.ManageReadersButton.Visible = false;
-            this.ManageReadersButton.Click += new System.EventHandler(this.ManageReadersButton_Click);
-            this.ManageReadersButton.MouseEnter += new System.EventHandler(this.Button_Enter);
-            this.ManageReadersButton.MouseLeave += new System.EventHandler(this.Button_Leave);
-            // 
-            // ManageFieldSetsButton
-            // 
-            this.ManageFieldSetsButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
-            this.ManageFieldSetsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ManageFieldSetsButton.FlatAppearance.BorderSize = 0;
-            this.ManageFieldSetsButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.ManageFieldSetsButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.ManageFieldSetsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ManageFieldSetsButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ManageFieldSetsButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.ManageFieldSetsButton.Location = new System.Drawing.Point(360, 172);
-            this.ManageFieldSetsButton.Name = "ManageFieldSetsButton";
-            this.ManageFieldSetsButton.Size = new System.Drawing.Size(232, 40);
-            this.ManageFieldSetsButton.TabIndex = 103;
-            this.ManageFieldSetsButton.Text = "Manage Field Sets";
-            this.ManageFieldSetsButton.UseVisualStyleBackColor = true;
-            this.ManageFieldSetsButton.Visible = false;
-            this.ManageFieldSetsButton.Click += new System.EventHandler(this.ManageFieldSetsButton_Click);
-            this.ManageFieldSetsButton.MouseEnter += new System.EventHandler(this.Button_Enter);
-            this.ManageFieldSetsButton.MouseLeave += new System.EventHandler(this.Button_Leave);
-            // 
             // AllButton
             // 
             this.AllButton.AutoSize = true;
@@ -293,12 +189,139 @@ namespace DataTierClient.Controls
             this.NoneButton.MouseEnter += new System.EventHandler(this.Button_Enter);
             this.NoneButton.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
+            // CreateGridColumnsButton
+            // 
+            this.CreateGridColumnsButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
+            this.CreateGridColumnsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.CreateGridColumnsButton.FlatAppearance.BorderSize = 0;
+            this.CreateGridColumnsButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.CreateGridColumnsButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.CreateGridColumnsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CreateGridColumnsButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CreateGridColumnsButton.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.CreateGridColumnsButton.Location = new System.Drawing.Point(360, 321);
+            this.CreateGridColumnsButton.Name = "CreateGridColumnsButton";
+            this.CreateGridColumnsButton.Size = new System.Drawing.Size(232, 40);
+            this.CreateGridColumnsButton.TabIndex = 108;
+            this.CreateGridColumnsButton.Text = "Create Grid Columns";
+            this.CreateGridColumnsButton.UseVisualStyleBackColor = true;
+            this.CreateGridColumnsButton.Visible = false;
+            this.CreateGridColumnsButton.Click += new System.EventHandler(this.CreateGridColumnsButton_Click);
+            this.CreateGridColumnsButton.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.CreateGridColumnsButton.MouseLeave += new System.EventHandler(this.Button_Leave);
+            // 
+            // ManageFieldSetsButton
+            // 
+            this.ManageFieldSetsButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
+            this.ManageFieldSetsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ManageFieldSetsButton.FlatAppearance.BorderSize = 0;
+            this.ManageFieldSetsButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.ManageFieldSetsButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.ManageFieldSetsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ManageFieldSetsButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ManageFieldSetsButton.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.ManageFieldSetsButton.Location = new System.Drawing.Point(360, 174);
+            this.ManageFieldSetsButton.Name = "ManageFieldSetsButton";
+            this.ManageFieldSetsButton.Size = new System.Drawing.Size(232, 40);
+            this.ManageFieldSetsButton.TabIndex = 103;
+            this.ManageFieldSetsButton.Text = "Manage Field Sets";
+            this.ManageFieldSetsButton.UseVisualStyleBackColor = true;
+            this.ManageFieldSetsButton.Visible = false;
+            this.ManageFieldSetsButton.Click += new System.EventHandler(this.ManageFieldSetsButton_Click);
+            this.ManageFieldSetsButton.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.ManageFieldSetsButton.MouseLeave += new System.EventHandler(this.Button_Leave);
+            // 
+            // ManageReadersButton
+            // 
+            this.ManageReadersButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
+            this.ManageReadersButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ManageReadersButton.FlatAppearance.BorderSize = 0;
+            this.ManageReadersButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.ManageReadersButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.ManageReadersButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ManageReadersButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ManageReadersButton.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.ManageReadersButton.Location = new System.Drawing.Point(360, 223);
+            this.ManageReadersButton.Name = "ManageReadersButton";
+            this.ManageReadersButton.Size = new System.Drawing.Size(232, 40);
+            this.ManageReadersButton.TabIndex = 102;
+            this.ManageReadersButton.Text = "Manage Readers";
+            this.ManageReadersButton.UseVisualStyleBackColor = true;
+            this.ManageReadersButton.Visible = false;
+            this.ManageReadersButton.Click += new System.EventHandler(this.ManageReadersButton_Click);
+            this.ManageReadersButton.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.ManageReadersButton.MouseLeave += new System.EventHandler(this.Button_Leave);
+            // 
+            // ManageMethodButton
+            // 
+            this.ManageMethodButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
+            this.ManageMethodButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ManageMethodButton.FlatAppearance.BorderSize = 0;
+            this.ManageMethodButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.ManageMethodButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.ManageMethodButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ManageMethodButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ManageMethodButton.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.ManageMethodButton.Location = new System.Drawing.Point(360, 125);
+            this.ManageMethodButton.Name = "ManageMethodButton";
+            this.ManageMethodButton.Size = new System.Drawing.Size(232, 40);
+            this.ManageMethodButton.TabIndex = 101;
+            this.ManageMethodButton.Text = "Manage Methods";
+            this.ManageMethodButton.UseVisualStyleBackColor = true;
+            this.ManageMethodButton.Visible = false;
+            this.ManageMethodButton.Click += new System.EventHandler(this.ManageMethodButton_Click);
+            this.ManageMethodButton.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.ManageMethodButton.MouseLeave += new System.EventHandler(this.Button_Leave);
+            // 
+            // CreateMethodButton
+            // 
+            this.CreateMethodButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
+            this.CreateMethodButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.CreateMethodButton.FlatAppearance.BorderSize = 0;
+            this.CreateMethodButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.CreateMethodButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.CreateMethodButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CreateMethodButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CreateMethodButton.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.CreateMethodButton.Location = new System.Drawing.Point(360, 76);
+            this.CreateMethodButton.Name = "CreateMethodButton";
+            this.CreateMethodButton.Size = new System.Drawing.Size(232, 40);
+            this.CreateMethodButton.TabIndex = 100;
+            this.CreateMethodButton.Text = "Create New Method";
+            this.CreateMethodButton.UseVisualStyleBackColor = true;
+            this.CreateMethodButton.Visible = false;
+            this.CreateMethodButton.Click += new System.EventHandler(this.CreateMethodButton_Click);
+            this.CreateMethodButton.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.CreateMethodButton.MouseLeave += new System.EventHandler(this.Button_Leave);
+            // 
+            // RemoveTableButton
+            // 
+            this.RemoveTableButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
+            this.RemoveTableButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.RemoveTableButton.FlatAppearance.BorderSize = 0;
+            this.RemoveTableButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.RemoveTableButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.RemoveTableButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RemoveTableButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RemoveTableButton.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.RemoveTableButton.Location = new System.Drawing.Point(360, 272);
+            this.RemoveTableButton.Name = "RemoveTableButton";
+            this.RemoveTableButton.Size = new System.Drawing.Size(232, 40);
+            this.RemoveTableButton.TabIndex = 97;
+            this.RemoveTableButton.Text = "Remove Table Code";
+            this.RemoveTableButton.UseVisualStyleBackColor = true;
+            this.RemoveTableButton.Visible = false;
+            this.RemoveTableButton.Click += new System.EventHandler(this.RemoveTableButton_Click);
+            this.RemoveTableButton.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.RemoveTableButton.MouseLeave += new System.EventHandler(this.Button_Leave);
+            // 
             // DataEditorControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Linen;
+            this.Controls.Add(this.CreateGridColumnsButton);
             this.Controls.Add(this.NoneButton);
-            this.Controls.Add(this.AllButton);            
+            this.Controls.Add(this.AllButton);
             this.Controls.Add(this.ManageFieldSetsButton);
             this.Controls.Add(this.ManageReadersButton);
             this.Controls.Add(this.ManageMethodButton);
@@ -312,7 +335,7 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.FieldsListBox);
             this.Controls.Add(this.ExcludeTableLabel);
             this.Controls.Add(this.SaveCancelControl);
-            this.Controls.Add(this.TablesListBox);            
+            this.Controls.Add(this.TablesListBox);
             this.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "DataEditorControl";
             this.Size = new System.Drawing.Size(964, 496);
@@ -320,11 +343,12 @@ namespace DataTierClient.Controls
             this.PerformLayout();
 
             }
-        #endregion
 
         #endregion
 
-        
+        #endregion
+
+        private System.Windows.Forms.Button CreateGridColumnsButton;
     }
     #endregion
 

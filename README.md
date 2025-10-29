@@ -1,3 +1,12 @@
+10.29.2025: Version 5.7.0 - I created a GridColumnBuilderControl and Form to create grid columns for a 
+DataJuggler.Blazor.Components Grid for any table or view.
+
+10.1.2025: I added a method GetValue method to every data object. This is used by the GridHelper in 
+DataJuggler.Blazor.Components.Grid, so that the GridHelper can create the rows for for the grid. 
+
+7.15.2025: I added a GenerateInsertSQL method to every table (not views). This is used to transfer data
+from one server to another. 
+
 3.2.2025: Verison 5.3.0 - I redid the Setup screen and used a bunch of Pixar type character images should make the UI a little more pleasant.
 I also removed a bunch of unused images.
 

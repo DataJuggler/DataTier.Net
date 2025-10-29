@@ -107,6 +107,7 @@
     <Compile Include="BusinessObjects\FieldSetFieldView.data.cs" />
     <Compile Include="BusinessObjects\FieldView.business.cs" />
     <Compile Include="BusinessObjects\FieldView.data.cs" />
+    <Compile Include="BusinessObjects\GridColumn.cs" />
     <Compile Include="BusinessObjects\Method.business.cs" />
     <Compile Include="BusinessObjects\Method.data.cs" />
     <Compile Include="BusinessObjects\Project.business.cs" />

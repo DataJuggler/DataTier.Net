@@ -21,6 +21,8 @@ namespace ObjectLibrary.BusinessObjects
         private bool deleteAllForProject;
         private bool fetchAllForTable;
         private int fieldSetId;
+        private bool assigned;
+        private GridColumn gridColumn;
         #endregion
 
         #region Constructor
@@ -58,6 +60,19 @@ namespace ObjectLibrary.BusinessObjects
 
         #region Properties
 
+            #region Assigned
+            /// <summary>
+            /// This property gets or sets the value for 'Assigned'.
+            /// This property is not mapped to othe database. It's
+            /// only used to create Grid Columns.
+            /// </summary>
+            public bool Assigned
+            {
+                get { return assigned; }
+                set { assigned = value; }
+            }
+            #endregion
+            
             #region DeleteAllForProject
             /// <summary>
             /// This property gets or sets the value for 'DeleteAllForProject'.
@@ -113,6 +128,28 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
             
+            #region GridColumn
+            /// <summary>
+            /// This property gets or sets the value for 'GridColumn'.
+            /// </summary>
+            public GridColumn GridColumn
+            {
+                get 
+                {
+                    // if the value for HasGridColumn is false
+                    if (!HasGridColumn)
+                    {
+                        // create on demand
+                        gridColumn = new GridColumn();
+                    }
+
+                    // return value
+                    return gridColumn;
+                }
+                set { gridColumn = value; }
+            }
+            #endregion
+            
             #region HasFieldSetId
             /// <summary>
             /// This property returns true if the 'FieldSetId' is set.
@@ -126,6 +163,23 @@ namespace ObjectLibrary.BusinessObjects
                     
                     // return value
                     return hasFieldSetId;
+                }
+            }
+            #endregion
+            
+            #region HasGridColumn
+            /// <summary>
+            /// This property returns true if this object has a 'GridColumn'.
+            /// </summary>
+            public bool HasGridColumn
+            {
+                get
+                {
+                    // initial value
+                    bool hasGridColumn = (gridColumn != null);
+                    
+                    // return value
+                    return hasGridColumn;
                 }
             }
             #endregion
