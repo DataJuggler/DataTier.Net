@@ -1159,7 +1159,7 @@ namespace DataTierClient.Builders
             #region WriteDateParameter(DataField field)
             /// <summary>
             /// This method writes out the DateParameter.
-            /// It handles dates as 1/1/1900 if they are null.
+            /// Update 11.12.2025: Handle dates as NULL if the field is nullable or  as 1/1/1900 if not
             /// </summary>
             /// <param name="field"></param>
             private void WriteDateParameter(string objectName, DataField field)
@@ -1188,10 +1188,24 @@ namespace DataTierClient.Builders
                     
                     // Write Open Bracket and increase Identity
                     WriteOpenBracket(true);
-                    
-                    // Write Comment
-                    WriteComment("Set the value to 1/1/1900");
-                    WriteLine("param.Value = new DateTime(1900, 1, 1);");
+
+                    // if the field can handle null dates
+                    if (field.IsNullable)
+                    {
+                        // Write Comment
+                        WriteComment("Set the value to null");
+
+                        // Write set the value to null;
+                        WriteLine("param.Value = null;");
+                    }
+                    else
+                    {
+                        // Write Comment
+                        WriteComment("Set the value to 1/1/1900");
+
+                        // Write set the value to Jan 1, 1900 - a fake date
+                        WriteLine("param.Value = new DateTime(1900, 1, 1);");
+                    }
                     
                     // Write Close Bracket and decrease Identity
                     WriteCloseBracket(true);
@@ -1210,6 +1224,9 @@ namespace DataTierClient.Builders
                     
                     // Write Close Bracket
                     WriteCloseBracket(true);
+
+                    // Write a blank line
+                    WriteLine();
                 }
             } 
             #endregion

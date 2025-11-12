@@ -37,6 +37,7 @@ namespace DataTierClient.Controls
         private const string GridColumn2 = "    Index=\"[Index]\" ColumnNumber=\"[ColumnNumber]\" Width=\"[Width]\" Height=\"[Height]\"";
         private const string GridColumn2B = "    LastColumn=\"true\"";
         private const string GridColumn3 = "    ClassName=\"[ClassName]\" Format=\"[Format]\" />";
+        private const string GridColumn4 = "    IsImage=\"[IsImage]\" IsImageButton=\"[IsImageButton]\" />";
         #endregion
 
         #region Constructor
@@ -592,6 +593,7 @@ namespace DataTierClient.Controls
                 string gridColumn1 = GridColumn1;
                 string gridColumn2 = GridColumn2;
                 string gridColumn3 = GridColumn3;
+                string gridColumn4 = GridColumn4;
 
                 /*
                 GridColumn1
@@ -611,6 +613,10 @@ namespace DataTierClient.Controls
                 GridColumn3
                 [ClassName]
                 [Format]
+
+                GridColumn4
+                [IsImage]
+                [IsImageButton]
             */
 
 
@@ -623,6 +629,8 @@ namespace DataTierClient.Controls
                 string height = field.GridColumn.Height.ToString();
                 string className = field.GridColumn.ClassName;
                 string format = field.GridColumn.Format;
+                bool isImage = field.GridColumn.IsImage;
+                bool isImageButton = field.GridColumn.IsImageButton;
 
                 // now do the replacements for GridColumn1
                 gridColumn1 = gridColumn1.Replace("[Parent]", parent);
@@ -638,6 +646,33 @@ namespace DataTierClient.Controls
                 // now do the replacements for GridColumn3
                 gridColumn3 = gridColumn3.Replace("[ClassName]", className);
                 gridColumn3 = gridColumn3.Replace("[Format]", format);
+
+                // now do the replacements for GridColumn4
+
+                // if an image
+                if (isImage)
+                {
+                    // set to true
+                    gridColumn4 = gridColumn4.Replace("[IsImage]", "true");
+                }
+                else
+                {
+                    // set to false
+                    gridColumn4 = gridColumn4.Replace("[IsImage]", "false");
+                }
+                
+                // if an image button
+                if (isImageButton)
+                {
+                    // set to true
+                    gridColumn4 = gridColumn4.Replace("[IsImageButton]", "true");
+                }
+                else
+                {
+                    // set to false
+                    gridColumn4 = gridColumn4.Replace("[IsImageButton]", "false");
+                }
+
 
                 // Get the indent
                 string indent = TextHelper.Indent(8);
@@ -681,6 +716,15 @@ namespace DataTierClient.Controls
 
                 // Now add the gridColumn3
                 sb.Append(gridColumn3);
+
+                // Return value
+                sb.Append(Environment.NewLine);
+
+                // Indent
+                sb.Append(indent);
+
+                // Now add the gridColumn4
+                sb.Append(gridColumn4);
 
                 // set the return value
                 gridColumn = sb.ToString();

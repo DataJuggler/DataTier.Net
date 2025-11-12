@@ -51,7 +51,7 @@ namespace DataTierClient.Controls
             this.WidthTextBox = new System.Windows.Forms.TextBox();
             this.WidthLabel = new System.Windows.Forms.Label();
             this.FontBoldLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.DefaultValuesLabel = new System.Windows.Forms.Label();
             this.FontBoldCheckBox = new System.Windows.Forms.CheckBox();
             this.HeightTextBox = new System.Windows.Forms.TextBox();
             this.HeightLabel = new System.Windows.Forms.Label();
@@ -67,6 +67,10 @@ namespace DataTierClient.Controls
             this.ParentLabel = new System.Windows.Forms.Label();
             this.StatusLabel = new System.Windows.Forms.Label();
             this.StatusTimer = new System.Windows.Forms.Timer(this.components);
+            this.ImageCheckBox = new System.Windows.Forms.CheckBox();
+            this.IsImageLabel = new System.Windows.Forms.Label();
+            this.ImageButtonCheckBox = new System.Windows.Forms.CheckBox();
+            this.ImageButtonLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.AssignAllButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AssignSelectedButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RemoveSelectedButton)).BeginInit();
@@ -307,31 +311,31 @@ namespace DataTierClient.Controls
             this.FontBoldLabel.BackColor = System.Drawing.Color.Transparent;
             this.FontBoldLabel.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FontBoldLabel.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.FontBoldLabel.Location = new System.Drawing.Point(856, 469);
+            this.FontBoldLabel.Location = new System.Drawing.Point(854, 471);
             this.FontBoldLabel.Name = "FontBoldLabel";
-            this.FontBoldLabel.Size = new System.Drawing.Size(100, 27);
+            this.FontBoldLabel.Size = new System.Drawing.Size(134, 27);
             this.FontBoldLabel.TabIndex = 118;
             this.FontBoldLabel.Text = "Font Bold:";
-            this.FontBoldLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.FontBoldLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label1
+            // DefaultValuesLabel
             // 
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.label1.Location = new System.Drawing.Point(1128, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(158, 27);
-            this.label1.TabIndex = 121;
-            this.label1.Text = "Default Values";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.DefaultValuesLabel.BackColor = System.Drawing.Color.Transparent;
+            this.DefaultValuesLabel.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DefaultValuesLabel.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.DefaultValuesLabel.Location = new System.Drawing.Point(1128, 24);
+            this.DefaultValuesLabel.Name = "DefaultValuesLabel";
+            this.DefaultValuesLabel.Size = new System.Drawing.Size(158, 27);
+            this.DefaultValuesLabel.TabIndex = 121;
+            this.DefaultValuesLabel.Text = "Default Values";
+            this.DefaultValuesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // FontBoldCheckBox
             // 
             this.FontBoldCheckBox.BackColor = System.Drawing.Color.Transparent;
             this.FontBoldCheckBox.Font = new System.Drawing.Font("Calibri", 16F);
             this.FontBoldCheckBox.ForeColor = System.Drawing.Color.Coral;
-            this.FontBoldCheckBox.Location = new System.Drawing.Point(964, 469);
+            this.FontBoldCheckBox.Location = new System.Drawing.Point(996, 471);
             this.FontBoldCheckBox.Name = "FontBoldCheckBox";
             this.FontBoldCheckBox.Size = new System.Drawing.Size(28, 29);
             this.FontBoldCheckBox.TabIndex = 122;
@@ -429,7 +433,7 @@ namespace DataTierClient.Controls
             this.ClassNameTextBox.Location = new System.Drawing.Point(856, 428);
             this.ClassNameTextBox.Name = "ClassNameTextBox";
             this.ClassNameTextBox.Size = new System.Drawing.Size(504, 34);
-            this.ClassNameTextBox.TabIndex = 132;            
+            this.ClassNameTextBox.TabIndex = 132;
             // 
             // ClassNameLabel
             // 
@@ -469,9 +473,9 @@ namespace DataTierClient.Controls
             this.StatusLabel.BackColor = System.Drawing.Color.Transparent;
             this.StatusLabel.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StatusLabel.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.StatusLabel.Location = new System.Drawing.Point(856, 565);
+            this.StatusLabel.Location = new System.Drawing.Point(856, 590);
             this.StatusLabel.Name = "StatusLabel";
-            this.StatusLabel.Size = new System.Drawing.Size(504, 65);
+            this.StatusLabel.Size = new System.Drawing.Size(504, 40);
             this.StatusLabel.TabIndex = 135;
             this.StatusLabel.Text = "Success";
             this.StatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -482,10 +486,60 @@ namespace DataTierClient.Controls
             this.StatusTimer.Interval = 5000;
             this.StatusTimer.Tick += new System.EventHandler(this.StatusTimer_Tick);
             // 
+            // ImageCheckBox
+            // 
+            this.ImageCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.ImageCheckBox.Font = new System.Drawing.Font("Calibri", 16F);
+            this.ImageCheckBox.ForeColor = System.Drawing.Color.Coral;
+            this.ImageCheckBox.Location = new System.Drawing.Point(996, 507);
+            this.ImageCheckBox.Name = "ImageCheckBox";
+            this.ImageCheckBox.Size = new System.Drawing.Size(28, 29);
+            this.ImageCheckBox.TabIndex = 137;
+            this.ImageCheckBox.UseVisualStyleBackColor = false;
+            // 
+            // IsImageLabel
+            // 
+            this.IsImageLabel.BackColor = System.Drawing.Color.Transparent;
+            this.IsImageLabel.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IsImageLabel.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.IsImageLabel.Location = new System.Drawing.Point(854, 507);
+            this.IsImageLabel.Name = "IsImageLabel";
+            this.IsImageLabel.Size = new System.Drawing.Size(134, 27);
+            this.IsImageLabel.TabIndex = 136;
+            this.IsImageLabel.Text = "Is Image:";
+            this.IsImageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // ImageButtonCheckBox
+            // 
+            this.ImageButtonCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.ImageButtonCheckBox.Font = new System.Drawing.Font("Calibri", 16F);
+            this.ImageButtonCheckBox.ForeColor = System.Drawing.Color.Coral;
+            this.ImageButtonCheckBox.Location = new System.Drawing.Point(996, 546);
+            this.ImageButtonCheckBox.Name = "ImageButtonCheckBox";
+            this.ImageButtonCheckBox.Size = new System.Drawing.Size(28, 29);
+            this.ImageButtonCheckBox.TabIndex = 139;
+            this.ImageButtonCheckBox.UseVisualStyleBackColor = false;
+            // 
+            // ImageButtonLabel
+            // 
+            this.ImageButtonLabel.BackColor = System.Drawing.Color.Transparent;
+            this.ImageButtonLabel.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ImageButtonLabel.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.ImageButtonLabel.Location = new System.Drawing.Point(854, 547);
+            this.ImageButtonLabel.Name = "ImageButtonLabel";
+            this.ImageButtonLabel.Size = new System.Drawing.Size(134, 27);
+            this.ImageButtonLabel.TabIndex = 138;
+            this.ImageButtonLabel.Text = "Image Button:";
+            this.ImageButtonLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // GridColumnBuilderControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImage = global::DataTierClient.Properties.Resources.Deep_Black;
+            this.Controls.Add(this.ImageButtonCheckBox);
+            this.Controls.Add(this.ImageButtonLabel);
+            this.Controls.Add(this.ImageCheckBox);
+            this.Controls.Add(this.IsImageLabel);
             this.Controls.Add(this.StatusLabel);
             this.Controls.Add(this.ParentTextBox);
             this.Controls.Add(this.ParentLabel);
@@ -500,7 +554,7 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.FontNameTextBox);
             this.Controls.Add(this.FontNameLabel);
             this.Controls.Add(this.FontBoldCheckBox);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.DefaultValuesLabel);
             this.Controls.Add(this.FontBoldLabel);
             this.Controls.Add(this.WidthTextBox);
             this.Controls.Add(this.WidthLabel);
@@ -556,7 +610,7 @@ namespace DataTierClient.Controls
         private System.Windows.Forms.TextBox WidthTextBox;
         private System.Windows.Forms.Label WidthLabel;
         private System.Windows.Forms.Label FontBoldLabel;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label DefaultValuesLabel;
         private System.Windows.Forms.CheckBox FontBoldCheckBox;
         private System.Windows.Forms.TextBox HeightTextBox;
         private System.Windows.Forms.Label HeightLabel;
@@ -572,5 +626,9 @@ namespace DataTierClient.Controls
         private System.Windows.Forms.Label ParentLabel;
         private System.Windows.Forms.Label StatusLabel;
         private System.Windows.Forms.Timer StatusTimer;
+        private System.Windows.Forms.CheckBox ImageCheckBox;
+        private System.Windows.Forms.Label IsImageLabel;
+        private System.Windows.Forms.CheckBox ImageButtonCheckBox;
+        private System.Windows.Forms.Label ImageButtonLabel;
     }
 }

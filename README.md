@@ -1,3 +1,6 @@
+11.12.2025 Version 5.7.1 - I added support for Nullable dates. For 22 years or more I used 1/1/1900 and my 
+work's code was affected so I now write NULL to the database if a date doesn't have a valid date (year > 1900).
+
 10.29.2025: Version 5.7.0 - I created a GridColumnBuilderControl and Form to create grid columns for a 
 DataJuggler.Blazor.Components Grid for any table or view.
 

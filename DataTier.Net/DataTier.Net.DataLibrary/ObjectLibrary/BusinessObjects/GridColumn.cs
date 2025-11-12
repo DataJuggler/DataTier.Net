@@ -15,6 +15,7 @@ namespace ObjectLibrary.BusinessObjects
     /// <summary>
     /// This class is used by the Grid to define columns
     /// </summary>
+    [Serializable]
     public class GridColumn
     {
         
@@ -34,6 +35,8 @@ namespace ObjectLibrary.BusinessObjects
         private bool fontBold;
         private bool initialized;
         private DTNField field;
+        private bool isImageButton;
+        private bool isImage;
         #endregion
 
         #region Methods
@@ -375,6 +378,28 @@ namespace ObjectLibrary.BusinessObjects
             {
                 get { return initialized; }
                 set { initialized = value; }
+            }
+            #endregion
+            
+            #region IsImage
+            /// <summary>
+            /// This property gets or sets the value for 'IsImage'.
+            /// </summary>
+            public bool IsImage
+            {
+                get { return isImage; }
+                set { isImage = value; }
+            }
+            #endregion
+            
+            #region IsImageButton
+            /// <summary>
+            /// This property gets or sets the value for 'IsImageButton'.
+            /// </summary>
+            public bool IsImageButton
+            {
+                get { return isImageButton; }
+                set { isImageButton = value; }
             }
             #endregion
             

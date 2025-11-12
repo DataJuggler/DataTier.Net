@@ -41,6 +41,9 @@
     <Reference Include="DataJuggler.Core.UltimateHelper, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\DataJuggler.Core.UltimateHelper.1.9.1\lib\net48\DataJuggler.Core.UltimateHelper.dll</HintPath>
     </Reference>
+    <Reference Include="DataJuggler.Net, Version=6.7.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\DataJuggler.Net.6.7.3\lib\net48\DataJuggler.Net.dll</HintPath>
+    </Reference>
     <Reference Include="DataJuggler.Net.Cryptography, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\DataJuggler.Net.Cryptography.1.0.0\lib\net461\DataJuggler.Net.Cryptography.dll</HintPath>
     </Reference>
@@ -151,10 +154,6 @@
     <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\DataJuggler.Net\DataJuggler.Net.csproj">
-      <Project>{af3f5ec6-8494-4ca2-aac0-b1fa4f752ef5}</Project>
-      <Name>DataJuggler.Net</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DataAccessComponent\DataAccessComponent.csproj">
       <Project>{94349907-f83f-4087-bf9a-6172008cfb10}</Project>
       <Name>DataAccessComponent</Name>
@@ -167,6 +166,10 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data Juggler.ico" />
+    <Content Include="lib\ReadMe.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
