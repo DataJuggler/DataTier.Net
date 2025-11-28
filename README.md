@@ -1,3 +1,7 @@
+11.28.2025 Version 6.0.0 - DataTier.NET now supports .NET 10 projects. .NET 10 is the default for new projects now.
+Also, the Visual Studio Project Updater is not shown after a build except for .NET Framework projects. It wasn't working and 
+is only needed on non-SDK style projects. SDK Projects support globbing, so code generated files are included automatically.
+
 11.12.2025 Version 5.7.1 - I added support for Nullable dates. For 22 years or more I used 1/1/1900 and my 
 work's code was affected so I now write NULL to the database if a date doesn't have a valid date (year > 1900).
 
