@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using DataJuggler.Net;
 using DataTierClient.Controls.Interfaces;
+using DataTierClient.Objects;
 
 #endregion
 
@@ -193,7 +194,7 @@ namespace DataTierClient.Controls
                 // locals
                 string title = "Update Complete";
                 string message = "Your Visual Studio project has been updated.";                
-                bool updated = false;
+                UpdateSolutionResponse response = null;
                 
                 try
                 {
@@ -215,7 +216,7 @@ namespace DataTierClient.Controls
                     if ((!String.IsNullOrEmpty(fileName)) && (this.Files != null))
                     {
                         // update the solution
-                        updated = VisualStudioHelper.UpdateSolution(this.VSSolution, fileName, this.Files.ToList(), removalMode);
+                        response = VisualStudioHelper.UpdateSolution(this.VSSolution, fileName, this.Files.ToList(), removalMode);
                     }
 
                     // If the ParentUpdateForm object exists
@@ -230,16 +231,16 @@ namespace DataTierClient.Controls
                     }
 
                     // if updated
-                    if ((!updated) && (!RemovalMode))
+                    if ((!response.Success) && (!RemovalMode) && (response.FatalError))
                     {
                         // set the title and message with the failure
                         title = "Update Failure";
-                        message = "There was a failure while attempting to update your projecst. You must update your projects manually.";
+                        message = "There was a failure while attempting to update your projects. You must update your projects manually.";
                         
                         // Show a message to the user
                         MessageHelper.DisplayMessage(message, title);
                     }
-                    else if ((!updated) && (RemovalMode))
+                    else if ((!response.Success) && (RemovalMode) && (response.FatalError))
                     {
                         // set the title and message with the failure
                         title = "Removal Failure";
@@ -263,6 +264,24 @@ namespace DataTierClient.Controls
                             this.ParentUpdateForm.Close();
                         }
                     }
+                }
+                catch (System.Runtime.InteropServices.COMException ex)
+                {
+                    // initial value
+                    message = "";
+
+                    // build the error message
+                    message += "A COM exception occurred.";
+                    message += "\r\n";
+                    message += "\r\nMessage: " + ex.Message;
+                    message += "\r\nSource: " + ex.Source;
+                    message += "\r\nHResult: 0x" + ex.HResult.ToString("X8");
+                    message += "\r\n";
+                    message += "\r\nStack:";
+                    message += "\r\n" + ex.StackTrace;
+
+                    // show the message
+                    MessageHelper.DisplayMessage(message, "COM Error");
                 }
                 catch (Exception error)
                 {

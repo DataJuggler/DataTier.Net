@@ -730,10 +730,14 @@ namespace DataTierClient.Forms
                     // Only launch the VisualStudio Project Updater if this new files were added
                     if ((this.HasFileManager) && (FileManager.WereNewFilesCreated))
                     { 
-                        // include the files generated in the project.
-                        IncludeProjectFiles();
+                        // only show this for Non SDK Style Projects, which is only my work project still on .NET Framework
+                        if (OpenProject.TargetFramework == TargetFrameworkEnum.NetFramework)
+                        {
+                            // include the files generated in the project.
+                            IncludeProjectFiles();
+                        }
                     }
-
+                    
                     // Update the value for Excluded after a build.
                     StoreExcludedTables();
 				}

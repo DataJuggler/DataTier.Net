@@ -2,13 +2,15 @@
 
 #region using statements
 
-using EnvDTE;
-using System;
-using System.IO;
-using System.Windows.Forms;
-using ObjectLibrary.BusinessObjects;
 using DataJuggler.Net;
+using DataTierClient.Objects;
+using EnvDTE;
 using System.Collections.Generic;
+using ObjectLibrary.BusinessObjects;
+using System;
+using DataJuggler.Core.UltimateHelper;
+using System.IO;
+using static System.Net.WebRequestMethods;
 
 #endregion
 
@@ -57,9 +59,6 @@ namespace DataTierClient.ClientUtil
                         // if the file does exist
                         if (fileExists)
                         {
-                            // abort this add, file already exists
-                            fileExists = true;
-
                             // break out of loop
                             break;
                         }
@@ -90,7 +89,7 @@ namespace DataTierClient.ClientUtil
                 try
                 {
                     // if the solution file name exists
-                    if ((!String.IsNullOrEmpty(solutionFileName)) && (File.Exists(solutionFileName)))
+                    if ((!String.IsNullOrEmpty(solutionFileName)) && (System.IO.File.Exists(solutionFileName)))
                     {
                         // Update 3.2.2019: The ObjectType should work from 2019 back to 2010
                         //                          But only 2017 & 2019 have been tested recently
@@ -114,6 +113,9 @@ namespace DataTierClient.ClientUtil
                                 // create the solution
                                 solution = new VisualStudioSolution(dte.Solution);
                                 
+                                // Wait until the projects are ready
+                                WaitUntilSolutionProjectsReady(dte, 20000, 250);
+
                                 // iterate projects collection.
                                 foreach (EnvDTE.Project project in dte.Solution.Projects)
                                 { 
@@ -195,7 +197,7 @@ namespace DataTierClient.ClientUtil
                 Type objectType = null;
 
                 // locals
-                double versionNumber = 18;
+                double versionNumber = 19;
                 string programId = "";
         
                 do
@@ -232,6 +234,104 @@ namespace DataTierClient.ClientUtil
             } 
             #endregion
 
+            #region HandleUpdateProject(VisualStudioSolution visualStudioSolution, EnvDTE.Project project, List<ProjectFile> files, bool removalMode)
+            /// <summary>
+            /// returns the Update Project
+            /// </summary>
+            public static UpdateProjectResponse HandleUpdateProject(VisualStudioSolution visualStudioSolution, EnvDTE.Project project, List<ProjectFile> files, bool removalMode)
+            {
+                // initial value
+                UpdateProjectResponse response = new UpdateProjectResponse();
+
+                try
+                {
+                    // wait for the projectItems
+                    WaitUntilProjectItemsReady(project, 2000, 100);
+
+                    // if this project name is the ApplicationLogicComponen project
+                    if (project.Name == visualStudioSolution.ApplicationLogicComponentProjectName)
+                    {
+                        // if we are in RemovalMode
+                        if (removalMode)
+                        {
+                            // update the ApplicationLogicComponent Project 
+                            response = RemoveFilesFromProject(project, files, DataManager.ProjectTypeEnum.ALC);
+                        }
+                        else
+                        {
+                            // update the ApplicationLogicComponent Project 
+                            response = UpdateProject(project, files, DataManager.ProjectTypeEnum.ALC);
+                        }
+                    }
+                    // if this project name is the ApplicationLogicComponen project
+                    else if (project.Name == visualStudioSolution.DataAccessComponentProjectName)
+                    {
+                        // if removalMode
+                        if (removalMode)
+                        {
+                            // update the ApplicationLogicComponent Project 
+                            response = RemoveFilesFromProject(project, files, DataManager.ProjectTypeEnum.DAC);
+                        }
+                        else
+                        {
+                            // update the ApplicationLogicComponent Project 
+                            response = UpdateProject(project, files, DataManager.ProjectTypeEnum.DAC);
+                        }
+                    }
+                    // if this project name is the ObjectLibrary project
+                    else if (project.Name == visualStudioSolution.ObjectLibraryProjectName)
+                    {  
+                        // if removalMode
+                        if (removalMode)
+                        {
+                            // update the ApplicationLogicComponent Project 
+                            response = RemoveFilesFromProject(project, files, DataManager.ProjectTypeEnum.ObjectLibrary);
+                        }
+                        else
+                        {
+                            // update the ApplicationLogicComponent Project 
+                            response = UpdateProject(project, files, DataManager.ProjectTypeEnum.ObjectLibrary);
+                        }
+                    }
+                                    
+                    // if the value for removalMode is true
+                    if (removalMode)
+                    {
+                        // If the value for tempRemovedCount is greater than zero
+                        if (response.FilesRemoved > 0)
+                        {
+                            // Set the value for isDirty to true
+                            response.IsDirty = true;
+
+                            // set updated to true
+                            response.Success = true;
+                        }
+                    }
+                    else
+                    {
+                        // one or more files were added
+                        if (response.FilesAdded > 0)
+                        {
+                            // set isDirty to true so 
+                            // the solution gets saved
+                            response.IsDirty = true;
+
+                            // set updated to true
+                            response.Success = true;
+                        }
+                    }
+                }
+                catch (Exception error)
+                {
+                    // Add this error
+                    response.Exceptions.Add(error);
+                }
+
+                // return value
+                return response;
+            }
+            #endregion
+            
             #region RemoveFilesFromProject(EnvDTE.Project project, List<ProjectFile> files, DataManager.ProjectTypeEnum projectType)
             /// <summary>
             /// This method updates the files for a project that are of the
@@ -241,13 +341,16 @@ namespace DataTierClient.ClientUtil
             /// <param name="files"></param>
             /// <param name="projectTypeEnum"></param>
             /// <returns></returns>
-            private static int RemoveFilesFromProject(EnvDTE.Project project, List<ProjectFile> files, DataManager.ProjectTypeEnum projectType)
+            private static UpdateProjectResponse RemoveFilesFromProject(EnvDTE.Project project, List<ProjectFile> files, DataManager.ProjectTypeEnum projectType)
             {
                 // initial value
-                int filesRemoved = 0;
+                UpdateProjectResponse projectResponse = new UpdateProjectResponse();
+
+                // this is RemoveMode
+                projectResponse.RemoveMode = true;
                     
-                // locals
-                bool fileRemoved = false;
+                // local
+                UpdateFileResponse updateFileResponse = null;
                 
                 try
                 {
@@ -257,8 +360,8 @@ namespace DataTierClient.ClientUtil
                         // iterate collection of ProjectFiles
                         foreach (ProjectFile projectFile in files)
                         {
-                            // reset
-                            fileRemoved = false;
+                            // Create a new instance of an 'updateFileResponse' object.
+                            updateFileResponse = new UpdateFileResponse();
                             
                             // if this file should go in this project
                             if (projectFile.ProjectType == projectType)
@@ -266,13 +369,13 @@ namespace DataTierClient.ClientUtil
                                 try
                                 {
                                     // check if the file already exists
-                                    fileRemoved = RemoveFileIfFileExistsInProject(project, project.ProjectItems, projectFile);
+                                    updateFileResponse = RemoveFileIfFileExistsInProject(project, project.ProjectItems, projectFile);
                                     
                                     // if the file was removed
-                                    if (fileRemoved)
+                                    if (updateFileResponse.Success)
                                     {  
                                         // Increment the value for filesRemoved
-                                        filesRemoved++;
+                                        projectResponse.FilesRemoved++;
                                     }
                                 }
                                 catch (Exception error)
@@ -291,7 +394,7 @@ namespace DataTierClient.ClientUtil
                 }
                     
                 // return value
-                return filesRemoved;
+                return projectResponse;
             }
             #endregion
 
@@ -302,10 +405,10 @@ namespace DataTierClient.ClientUtil
             /// <param name="project"></param>
             /// <param name="projectFile"></param>
             /// <returns></returns>
-            private static bool RemoveFileIfFileExistsInProject(EnvDTE.Project project, ProjectItems projectItems, ProjectFile projectFile)
+            private static UpdateFileResponse RemoveFileIfFileExistsInProject(EnvDTE.Project project, ProjectItems projectItems, ProjectFile projectFile)
             {
                 // initial value
-                bool fileRemoved = false;
+                UpdateFileResponse response = new UpdateFileResponse();
 
                 // local (Com objects start at 1)
                 int index = 0;
@@ -317,7 +420,7 @@ namespace DataTierClient.ClientUtil
                     index++;
 
                     // if the name matches
-                    if(projectItem.Name == projectFile.FileName)
+                    if (projectItem.Name == projectFile.FileName)
                     {
                         // if this is not the Gateway
                         if (!projectFile.FileName.Contains("Gateway"))
@@ -325,8 +428,11 @@ namespace DataTierClient.ClientUtil
                             // Remove this item
                             projectItems.Item(index).Remove();
 
+                            // this file exists
+                            response.FileExists = true;
+
                             // Set to true
-                            fileRemoved = true;
+                            response.Success = true;
                         }
                             
                         // break out of loop
@@ -335,10 +441,10 @@ namespace DataTierClient.ClientUtil
                     else if ((projectItem.ProjectItems != null) && (projectItem.ProjectItems.Count > 0))
                     {
                         // check if the file exists in the project
-                        fileRemoved = RemoveFileIfFileExistsInProject(project, projectItem.ProjectItems, projectFile);
+                        response = RemoveFileIfFileExistsInProject(project, projectItem.ProjectItems, projectFile);
                             
                         // if the file does exist
-                        if (fileRemoved)
+                        if (response.Success)
                         {
                             // break out of loop
                             break;
@@ -347,7 +453,7 @@ namespace DataTierClient.ClientUtil
                 }
                     
                 // return value
-                return fileRemoved;
+                return response;
             }  
             #endregion
 
@@ -416,10 +522,13 @@ namespace DataTierClient.ClientUtil
             /// <param name="files"></param>
             /// <param name="projectTypeEnum"></param>
             /// <returns></returns>
-            private static int UpdateProject(EnvDTE.Project project, List<ProjectFile> files, DataManager.ProjectTypeEnum projectType)
+            private static UpdateProjectResponse UpdateProject(EnvDTE.Project project, List<ProjectFile> files, DataManager.ProjectTypeEnum projectType)
             {
                 // initial value
-                int newFilesAddedCount = 0;
+                UpdateProjectResponse response = new UpdateProjectResponse();
+
+                // This is Add mode
+                response.RemoveMode = false;
                     
                 // locals
                 bool abort = false;
@@ -446,18 +555,20 @@ namespace DataTierClient.ClientUtil
                                     // if we should continue
                                     if (!abort)
                                     {
-                                            
-                                        // add this file
+                                        // This file is being attempted
+                                        response.FilesAttempted++;
+
+                                        // add this file Uncomment This
                                         project.ProjectItems.AddFromFile(projectFile.FullFilePath);
 
-                                        // increment newFilesAddedCount
-                                        newFilesAddedCount++;
+                                        // increment FilesAdded
+                                        response.FilesAdded++;
                                     }
                                 }
                                 catch (Exception error)
                                 {
                                     // for debugging only (for now)
-                                    string err = error.ToString();
+                                    response.Exceptions.Add(error);
                                 }
                             }
                         }
@@ -466,11 +577,11 @@ namespace DataTierClient.ClientUtil
                 catch (Exception error)
                 {
                     // for debugging only (for now)
-                    string err = error.ToString();
+                    response.Exceptions.Add(error);
                 }
                     
                 // return value
-                return newFilesAddedCount;
+                return response;
             }
             #endregion
 
@@ -482,16 +593,15 @@ namespace DataTierClient.ClientUtil
             /// <param name="visualStudioSolution"></param>
             /// <param name="project"></param>
             /// <returns></returns>
-            internal static bool UpdateSolution(VisualStudioSolution visualStudioSolution, string solutionFileName, List<ProjectFile> files, bool removalMode)
+            internal static UpdateSolutionResponse UpdateSolution(VisualStudioSolution visualStudioSolution, string solutionFileName, List<ProjectFile> files, bool removalMode)
             {
                 // intial value
-                bool updated = true;
+                UpdateSolutionResponse response = new UpdateSolutionResponse();
                     
                 // locals
                 Solution solution = null;
                 bool isDirty = false;
-                int tempAddedCount = 0;
-                int tempRemovedCount = 0;
+                UpdateProjectResponse projectResponse = null;
                     
                 try
                 {
@@ -510,85 +620,14 @@ namespace DataTierClient.ClientUtil
                             // open the solution
                             solution.Open(solutionFileName);
                                 
-                            // here the solution is opened, now 
                             // each project needs to be updated
                             foreach (EnvDTE.Project project in solution.Projects)
                             {
-                                // wait for the projectItems
-                                WaitUntilProjectItemsReady(project, 2000, 100);
+                                // Update the files in this project
+                                projectResponse = HandleUpdateProject(visualStudioSolution, project, files, removalMode);                                
 
-                                // if this project name is the ApplicationLogicComponen project
-                                if (project.Name == visualStudioSolution.ApplicationLogicComponentProjectName)
-                                {
-                                    // if we are in RemovalMode
-                                    if (removalMode)
-                                    {
-                                        // update the ApplicationLogicComponent Project 
-                                        tempRemovedCount += RemoveFilesFromProject(project, files, DataManager.ProjectTypeEnum.ALC);
-                                    }
-                                    else
-                                    {
-                                        // update the ApplicationLogicComponent Project 
-                                        tempAddedCount += UpdateProject(project, files, DataManager.ProjectTypeEnum.ALC);
-                                    }
-                                }
-                                // if this project name is the ApplicationLogicComponen project
-                                else if (project.Name == visualStudioSolution.DataAccessComponentProjectName)
-                                {
-                                    // if removalMode
-                                    if (removalMode)
-                                    {
-                                        // update the ApplicationLogicComponent Project 
-                                        tempRemovedCount += RemoveFilesFromProject(project, files, DataManager.ProjectTypeEnum.DAC);
-                                    }
-                                    else
-                                    {
-                                        // update the ApplicationLogicComponent Project 
-                                        tempAddedCount += UpdateProject(project, files, DataManager.ProjectTypeEnum.DAC);
-                                    }
-                                }
-                                // if this project name is the ObjectLibrary project
-                                else if (project.Name == visualStudioSolution.ObjectLibraryProjectName)
-                                {  
-                                    // if removalMode
-                                    if (removalMode)
-                                    {
-                                        // update the ApplicationLogicComponent Project 
-                                        tempRemovedCount += RemoveFilesFromProject(project, files, DataManager.ProjectTypeEnum.ObjectLibrary);
-                                    }
-                                    else
-                                    {
-                                        // update the ApplicationLogicComponent Project 
-                                        tempAddedCount += UpdateProject(project, files, DataManager.ProjectTypeEnum.ObjectLibrary);
-                                    }
-                                }
-                                    
-                                // if the value for removalMode is true
-                                if (removalMode)
-                                {
-                                    // If the value for tempRemovedCount is greater than zero
-                                    if (tempRemovedCount > 0)
-                                    {
-                                        // Set the value for isDirty to true
-                                        isDirty = true;
-
-                                        // set updated to true
-                                        updated = true;
-                                    }
-                                }
-                                else
-                                {
-                                    // one or more files were added
-                                    if (tempAddedCount > 0)
-                                    {
-                                        // set isDirty to true so 
-                                        // the solution gets saved
-                                        isDirty = true;
-
-                                        // set updated to true
-                                        updated = true;
-                                    }
-                                }
+                                // Add this response
+                                response.ProjectResponses.Add(projectResponse);
                             }
                         }
                     }
@@ -596,18 +635,37 @@ namespace DataTierClient.ClientUtil
                 catch (Exception error)
                 {
                     // did not update
-                    updated = false;
-                    
-                    // raise the error
-                    throw error;
+                    response.Success = false;
+
+                    // only raise the error if fatal, it might not be a problem
+                    if (response.FatalError)
+                    {
+                        // raise the error
+                        throw error;
+                    }
                 }
                 finally
                 {
-                    // if the solution exists
-                    if (solution != null)
+                    try
                     {
-                        // close the solution
-                        solution.Close(isDirty);
+                        // if the solution exists
+                        if (solution != null)
+                        {
+                            // close the solution
+                            solution.Close(isDirty);
+                        }
+                    }
+                    catch (Exception error)
+                    {
+                        // store
+                        response.Exception = error;
+
+                        // if this is not fatal, just go with it. 
+                        if (response.FatalError)
+                        {
+                            // raise the error
+                            throw error;  
+                        }
                     }
 
                     // unregister the MessageFilter
@@ -615,7 +673,7 @@ namespace DataTierClient.ClientUtil
                 }
                     
                 // return value
-                return updated;
+                return response;
             }
             #endregion
             
@@ -668,7 +726,101 @@ namespace DataTierClient.ClientUtil
                 return ready;
             }
             #endregion
-            
+
+            #region WaitUntilSolutionProjectsReady(EnvDTE.DTE dte, int timeoutMilliseconds, int pollMilliseconds)
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="dte"></param>
+            /// <param name="timeoutMilliseconds"></param>
+            /// <param name="pollMilliseconds"></param>
+            /// <returns></returns>
+            private static bool WaitUntilSolutionProjectsReady(EnvDTE.DTE dte, int timeoutMilliseconds, int pollMilliseconds)
+            {
+                // initial value
+                bool isReady = false;
+
+                // if the dte and Solution objects exist
+                if ((dte != null) && (dte.Solution != null) && (dte.Solution.IsOpen))
+                {
+                    DateTime endTime = DateTime.UtcNow.AddMilliseconds(timeoutMilliseconds);
+
+                    while ((DateTime.UtcNow < endTime) && (!isReady))
+                    {
+                        try
+                        {
+                            EnvDTE.Projects projects = dte.Solution.Projects;
+
+                            // if the projects collection exists
+                            if (projects != null)
+                            {
+                                foreach (EnvDTE.Project project in projects)
+                                {
+                                    // if the project exists
+                                    if (project == null)
+                                    {
+                                        continue;
+                                    }
+
+                                    bool projectReady = WaitUntilProjectItemsReady(project, pollMilliseconds * 2, pollMilliseconds);
+
+                                    // if the project is ready
+                                    if (projectReady)
+                                    {
+                                        // Set the return value
+                                        isReady = true;
+
+                                        // exit loop
+                                        break;
+                                    }
+                                }
+
+                                // if there were no projects or none required project items
+                                if (!isReady)
+                                {
+                                    // Set the return value
+                                    isReady = true;
+
+                                    // exit loop
+                                    break;
+                                }
+                            }
+                        }
+                        catch
+                        {
+                            // do nothing, VS not ready yet
+                        }
+
+                        System.Windows.Forms.Application.DoEvents();
+                        System.Threading.Thread.Sleep(pollMilliseconds);
+                    }
+
+                    // final attempt after loop if not ready
+                    if (!isReady)
+                    {
+                        try
+                        {
+                            EnvDTE.Projects projects = dte.Solution.Projects;
+
+                            // if the projects collection exists
+                            if (projects != null)
+                            {
+                                // Set the return value
+                                isReady = true;
+                            }
+                        }
+                        catch
+                        {
+                            // swallow any final errors
+                        }
+                    }
+                }
+
+                // return value
+                return isReady;
+            }
+            #endregion
+                    
         #endregion
                 
     } 

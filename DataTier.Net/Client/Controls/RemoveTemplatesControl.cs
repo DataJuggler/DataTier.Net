@@ -32,6 +32,7 @@ namespace DataTierClient.Controls
         public const string UninstallDotNet8ProjectTemplates = "dotnet new uninstall DataJuggler.DataTier.NET8.ProjectTemplates";        
         public const string UninstallDotNet8ProjectTemplates2 = "dotnet new uninstall DataJuggler.DataTier.NET8V2.ProjectTemplates";
         public const string UninstallDotNet9ProjectTemplates = "dotnet new uninstall DataJuggler.DataTier.Net9.ProjectTemplatesV2";
+        public const string UninstallDotNet10ProjectTemplates = "dotnet new uninstall DataJuggler.DataTier.Net10.ProjectTemplatesV2";
         #endregion
         
         #region Constructor
@@ -169,6 +170,14 @@ namespace DataTierClient.Controls
 
                                 // Set to .NET9
                                 SelectedFramework = TargetFrameworkEnum.Net9;
+
+                                // required
+                                break;
+
+                            case "NET10":
+
+                                // Set to .NET9
+                                SelectedFramework = TargetFrameworkEnum.Net10;
 
                                 // required
                                 break;
@@ -355,6 +364,14 @@ namespace DataTierClient.Controls
 
                         // Set the return value
                         argument = "/C " + UninstallDotNet9ProjectTemplates;
+
+                        // Required
+                        break;
+
+                    case TargetFrameworkEnum.Net10:
+
+                        // Set the return value
+                        argument = "/C " + UninstallDotNet10ProjectTemplates;
 
                         // Required
                         break;

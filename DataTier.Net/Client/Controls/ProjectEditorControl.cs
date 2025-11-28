@@ -35,18 +35,24 @@ namespace DataTierClient.Controls
         private ActiveControlEnum prevControl;
         private bool showAutoFillHelp;
         private int attempts;
-        private const string CreateDataTierNet5 = "dotnet new DataTier.Net5.ProjectTemplates";
-        private const string InstallDataTierNet5 = "dotnet new install DataJuggler.DataTier.Net5.ProjectTemplates::2.5.6 --force";
-        private const string CreateDataTierNet6 = "dotnet new DataTier.Net6.ProjectTemplates";
-        private const string InstallDataTierNet6 = "dotnet new install DataJuggler.DataTier.Net6.ProjectTemplates::6.0.2 --force";
-        private const string CreateDataTierNet7 = "dotnet new DataTier.Net7.ProjectTemplates";
-        private const string InstallDataTierNet7 = "dotnet new install DataJuggler.DataTier.Net7.ProjectTemplates::7.1.1 --force";
-        private const string CreateDataTierNet8 = "dotnet new DataTier.NET8.ProjectTemplates";
-        private const string InstallDataTierNet8 = "dotnet new install DataJuggler.DataTier.NET8.ProjectTemplates::8.0.0 --force";
-        private const string CreateDataTierNet8V2 = "dotnet new DataTier.NET8.ProjectTemplatesV2";
-        private const string InstallDataTierNet8V2 = "dotnet new install DataJuggler.DataTier.NET8.ProjectTemplatesV2::8.0.0 --force";
-        private const string CreateDataTierNet9V2 = "dotnet new DataTier.Net9.ProjectTemplatesV2";
-        private const string InstallDataTierNet9V2 = "dotnet new install DataJuggler.DataTier.Net9.ProjectTemplatesV2::9.10.7 --force";
+
+        // Creates
+        private const string CreateDataTierNet5 = "dotnet new DataTier.Net5.ProjectTemplates";        
+        private const string CreateDataTierNet6 = "dotnet new DataTier.Net6.ProjectTemplates";        
+        private const string CreateDataTierNet7 = "dotnet new DataTier.Net7.ProjectTemplates";        
+        private const string CreateDataTierNet8 = "dotnet new DataTier.NET8.ProjectTemplates";        
+        private const string CreateDataTierNet8V2 = "dotnet new DataTier.NET8.ProjectTemplatesV2";        
+        private const string CreateDataTierNet9V2 = "dotnet new DataTier.Net9.ProjectTemplatesV2";        
+        private const string CreateDataTierNet10V2 = "dotnet new DataTier.Net10.ProjectTemplatesV2";
+
+        // Installs
+        private const string InstallDataTierNet5 = "dotnet new install DataJuggler.DataTier.Net5.ProjectTemplates@2.5.6 --force";
+        private const string InstallDataTierNet6 = "dotnet new install DataJuggler.DataTier.Net6.ProjectTemplates@6.0.2 --force";
+        private const string InstallDataTierNet7 = "dotnet new install DataJuggler.DataTier.Net7.ProjectTemplates@7.1.1 --force";
+        private const string InstallDataTierNet8 = "dotnet new install DataJuggler.DataTier.NET8.ProjectTemplates@8.0.0 --force";
+        private const string InstallDataTierNet8V2 = "dotnet new install DataJuggler.DataTier.NET8.ProjectTemplatesV2@8.0.0 --force";
+        private const string InstallDataTierNet9V2 = "dotnet new install DataJuggler.DataTier.Net9.ProjectTemplatesV2@9.10.7 --force";
+        private const string InstallDataTierNet10V2 = "dotnet new install DataJuggler.DataTier.Net10.ProjectTemplatesV2@10.0.1 --force";
         
         // Used to install the Project Templates on the ProjectEditorControl.cs
         private const int GraphWidth = 268;
@@ -207,22 +213,38 @@ namespace DataTierClient.Controls
                                         startInfo.Arguments = "/C " + CreateDataTierNet8V2;
                                     }
                                 }
-                                else 
+                                else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net9)
                                 {
                                     // .NET 9 Only Uses V2 Templates
                                     startInfo.Arguments = "/C " + CreateDataTierNet9V2;                                    
+                                }
+                                else
+                                {
+                                    // .NET 10 Only Uses V2 Templates
+                                    startInfo.Arguments = "/C " + CreateDataTierNet10V2;
                                 }
 
                                 process.StartInfo = startInfo;
                                 process.Start();
 
-                                // get the solution path - default to DotNet8
-                                string solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net9.ClassLibraryV2.sln");
+                                // get the solution path - default to DotNet10
+                                string solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net10.ClassLibraryV2.sln");
 
-                                // if .NET8
-                                if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net8)
+                                if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net10)
                                 {
-                                    // switch for Net6
+                                    // switch for Net9
+                                    solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net10.ClassLibraryV2.sln");
+                                }
+                                // if .NET9
+                                else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net9)
+                                {
+                                    // switch for Net9
+                                    solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net9.ClassLibraryV2.sln");
+                                }
+                                // if .NET8
+                                else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net8)
+                                {
+                                    // switch for Net8
                                     solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net8.ClassLibrary.sln");
 
                                     // if version 2
@@ -235,7 +257,7 @@ namespace DataTierClient.Controls
                                 // if .NET7
                                 if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net7)
                                 {
-                                    // switch for Net6
+                                    // switch for Net7
                                     solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net7.ClassLibrary.sln");
                                 }
                                 // if .NET 6
@@ -247,11 +269,9 @@ namespace DataTierClient.Controls
                                 // if Net5
                                 else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net5)
                                 {
-                                    // switch for Net6
+                                    // switch for Net5
                                     solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net5.ClassLibrary.sln");
                                 }
-
-                                
 
                                 // Set the startTime
                                 DateTime startTime = DateTime.Now;
@@ -678,12 +698,19 @@ namespace DataTierClient.Controls
                             packageName = "DataJuggler.DataTier.Net8.ProjectTemplatesV2";
                         }
                     }
-                    else
+                    else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net9)
                     {
                         // .Net 9
                         
                         // Set the return value
                         packageName = "DataJuggler.DataTier.Net9.ProjectTemplatesV2";                        
+                    }
+                    else
+                    {
+                        // .Net 10
+                        
+                        // Set the return value
+                        packageName = "DataJuggler.DataTier.Net10.ProjectTemplatesV2";                        
                     }
                 }
                 
@@ -832,12 +859,19 @@ namespace DataTierClient.Controls
                                 startInfo.Arguments = "/C " + InstallDataTierNet8V2;
                             }
                         }
-                        else
+                        else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net9)
                         {
                             // .NET 9 can only be TemplateVersion 2
 
                             // Template Version 2
                             startInfo.Arguments = "/C " + InstallDataTierNet9V2;
+                        }
+                        else
+                        {
+                            // .NET 10 can only be TemplateVersion 2
+
+                            // Template Version 2
+                            startInfo.Arguments = "/C " + InstallDataTierNet10V2;
                         }
 
                         // Set the StartInfo

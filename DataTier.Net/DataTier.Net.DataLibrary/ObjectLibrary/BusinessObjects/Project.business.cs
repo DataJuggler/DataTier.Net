@@ -308,7 +308,7 @@ namespace ObjectLibrary.BusinessObjects
                 WriterReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.UpdateProcedures"));
                 WriterReferencesSet.References.Add(new ProjectReference("System.Data"));
                 
-                // if .NET6 or .NET7 or .NET8 or .NET9
+                // if .NET6, .NET7, .NET8, .NET9 or .NET10
                 if ((int) TargetFramework > 5)
                 {
                     // Switch to Microsoft
@@ -335,8 +335,14 @@ namespace ObjectLibrary.BusinessObjects
                 // Set Stored Procedure References
                 StoredProcedureReferencesSet.References.Add(new ProjectReference("System"));
                 
+                // If .NET10
+                if (TargetFramework == TargetFrameworkEnum.Net10)
+                {
+                    // .NET10+
+                    StoredProcedureReferencesSet.References.Add(new ProjectReference("DataJuggler.NET.Data"));
+                }
                 // If .NET9
-                if (TargetFramework == TargetFrameworkEnum.Net9)
+                else if (TargetFramework == TargetFrameworkEnum.Net9)
                 {
                     // .NET9
                     StoredProcedureReferencesSet.References.Add(new ProjectReference("DataJuggler.NET9"));
@@ -517,8 +523,8 @@ namespace ObjectLibrary.BusinessObjects
                 // Create the Tables collection
                 Tables = new List<DTNTable>();
                 
-                // New projects now default to .NET 9
-                TargetFramework = TargetFrameworkEnum.Net9;
+                // New projects now default to .NET 10
+                TargetFramework = TargetFrameworkEnum.Net10;
             }
             #endregion
             
@@ -597,7 +603,7 @@ namespace ObjectLibrary.BusinessObjects
                 // ***********   System.Data.SqlClient and Microsoft.Data.SqlClient    ************
                 // *********************************************************************
                 
-                // if .NET 6 or .NET 7, .NET 8 or .NET9
+                // if .NET 6, .NET 7, .NET 8, .NET9 or .NET10
                 if (((int) TargetFramework > 5) && (WriterReferencesSet != null))
                 {
                     // find the index of System.Data.SqlClient
@@ -647,7 +653,7 @@ namespace ObjectLibrary.BusinessObjects
                 
                 // *********************************************************************************
                 // ***  DataJuggler.Net, DataJuggler.Net5, DataJuggler.Net6, DataJuggler.Net7
-                // ***  DataJuggler.Net8, DataJuggler.NET9
+                // ***  DataJuggler.Net8, DataJuggler.NET9, DataJuggler.NET10
                 // *********************************************************************************
                 
                 // local
@@ -664,9 +670,17 @@ namespace ObjectLibrary.BusinessObjects
                 {
                     // Get the TargetFramework Version
                     int targetFrameworkVersion = (int) TargetFramework;
-                    
-                    // Set the dataJugglerNetReferenceName
-                    dataJugglerNetReferenceName = "DataJuggler.Net" + targetFrameworkVersion;
+
+                    if (targetFrameworkVersion >= 10)
+                    {
+                        // Set the dataJugglerNetReferenceName
+                        dataJugglerNetReferenceName = "DataJuggler.NET.Data";
+                    }
+                    else
+                    {
+                        // Set the dataJugglerNetReferenceName
+                        dataJugglerNetReferenceName = "DataJuggler.Net" + targetFrameworkVersion;
+                    }
                 }
                 
                 // if .Net Framework
@@ -680,8 +694,17 @@ namespace ObjectLibrary.BusinessObjects
                     // Get the TargetFramework Version
                     int previousFrameworkVersionNumber = (int) previousFramework;
                     
-                    // Set the dataJugglerNetReferenceName
-                    prevReferenceName = "DataJuggler.Net" + previousFrameworkVersionNumber;
+                    // Just in case of a downgrade (unlikely)
+                    if (previousFrameworkVersionNumber >= 10)
+                    {
+                        // Set the dataJugglerNetReferenceName
+                        prevReferenceName = "DataJuggler.NET.Data";
+                    }
+                    else
+                    {
+                        // Set the dataJugglerNetReferenceName
+                        prevReferenceName = "DataJuggler.Net" + previousFrameworkVersionNumber;
+                    }
                 }
                 
                 // Now we need to find the index of the old reference name

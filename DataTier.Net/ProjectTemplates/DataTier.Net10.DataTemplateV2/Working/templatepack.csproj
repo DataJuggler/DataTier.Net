@@ -1,0 +1,93 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    
+    <PackageType>Template</PackageType>
+    <PackageVersion>10.0.1</PackageVersion>
+    <PackageId>DataJuggler.DataTier.Net10.ProjectTemplatesV2</PackageId>
+    <Title>DataJuggler.DataTier.Net10.ProjectTemplatesV2</Title>
+    <Authors>Data Juggler</Authors>
+    <Description>This is a new set of templates to use when creating a project for DataTier.Net targeting .NET 10.
+The Version 2 templates combines the 4 projects down to 2. The Application Logic Component
+and the Data Gateway were both moved to the Data Access Component.
+	</Description>
+    <PackageTags>DataTier.Net, DataJuggler.Net;C#;SQL;SQLServer;Entity Framework Alternative;Database</PackageTags>
+    <TargetFramework>net10.0</TargetFramework>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <Version>10.0.1</Version>
+    <Product>DataJuggler.DataTier.Net10.ProjectTemplateV2</Product>
+    <ApplicationIcon></ApplicationIcon>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/DataJuggler/DataTier.Net</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/DataJuggler/DataTier.Net.git</RepositoryUrl>
+    <RepositoryType>Git/GitHub</RepositoryType>
+	<PackageReleaseNotes>
+
+        Update 11.24.2025: Created a new package for .NET 10
+
+		Update 1.23.2025: DataOperationsManager is phased out.
+		
+		Update 1.13.2025: The ControllerManager is being phased out.
+
+        Update 11.18.2024: This template is for .Net9.
+
+		Update 8.20.2023: I added some compiler warnings to ignore to the templates, and added the word static
+		to a method the ControllerCreator creates Create (Object Name) Parameter)
+		
+		Update 8.14.2023: I changed the icon to the DataTier.NET Icon for this template.
+		
+		Update 8.13.2023: DataJuggler..NET7 was updated because DataJuggler.UltimateHelper was updated.
+
+		Update 8.6.2023: I removed an used variabled called exception in the AuthenticationManager.ConnectToDatabase method.
+
+		Update 7.29.2023: I updated this project to the latest Nuget packages for
+		DataJuggler.Net7 and DataJuggler.UltimateHelper.
+
+		Update 4.3.2023: I updated this project to the latest Nuget packages, which solves the bug of EnvironmentVariableHelper
+		now requires a parameter for Target (User, System or Process).
+
+		Update 11.14.2022: I am testing the .NET 7 version now.
+	</PackageReleaseNotes>
+    <Nullable>disable</Nullable>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<PackageReadmeFile>templates\README.md</PackageReadmeFile>
+	<PackageIcon>templates\Icon.png</PackageIcon>
+
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" />
+    <Compile Remove="**\*" />
+    <Compile Remove="templates\DataTier.Net7.ClassLibrary\.vs\**" />
+    <Content Remove="templates\DataTier.Net7.ClassLibrary\.vs\**" />
+    <EmbeddedResource Remove="templates\DataTier.Net7.ClassLibrary\.vs\**" />
+    <None Remove="templates\DataTier.Net7.ClassLibrary\.vs\**" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="Icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+	  <None Update="templates\Icon.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	  <None Update="templates\README.md">
+		  <Pack>True</Pack>
+		  <PackagePath>\</PackagePath>
+	  </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="templates\DataAccessComponent\bin\Release\" />
+    <Folder Include="templates\ObjectLibrary\bin\Release\" />
+    <Folder Include="templates\ObjectLibrary\obj\Release\" />
+  </ItemGroup>
+  
+</Project>
