@@ -82,9 +82,9 @@ For .Net 5 projects, this is not an issue.
 <br/>
 <b>Step 1: Create DataTier.Net Database</b><br/>
 1. Create a new database in SQL Server Management Studio named DataTier.Net.Database<br/>
-2. Check the box 'DataTier.Net Database Has Been Created:<br/>
+2. Check the box 'Database Has Been Created'<br/>
 
-<img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Step%201%20-%20Part%202.png />
+<img src=https://github.com/DataJuggler/SharedRepo/blob/master/Shared/Images/DataTierNetSetupScreenClickHere.png width=582 height=360/>
 
 As the instructions indicate, this will launch SQL Server Management Studio. You may be prompted to login.<br/>
 
