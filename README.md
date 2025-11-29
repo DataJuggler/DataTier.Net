@@ -73,17 +73,30 @@ There are two projects that make up a DataTier.Net project:<br/>
 
 <img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Anatomy%20of%20a%20DataTier.Net%20Project.png>
 
-<b>Data Access Component</b><br/>
+# Data Access Componen<br/>
+
 Contains the Data Manager and Data Managers for each table and Data Readers and Data Writers.
 Controllers are creatred for each for each table and Data Operations (stored procedure calls).
 And the<br/>
-<b>Gateway</b> namespace: DataAccessComponent.Gateway
-Contains methods for Find, Insert, Load, Save, Update and Delete plus any Custom Methods you create.
+# Gateway<br/>
+namespace: DataAccessComponent.Gateway
+
+The Gateway contains methods for Find, Insert, Load, Save, Update and Delete plus any Custom Methods you create.
+
 The Gateway is what your client project "talks to".<br/>
-<b>Object Library</b><br/>
+
+    Gateway gateway = new Gateway(Connection.Name);
+
+Note: DataAccessComponent.Connection contains a constant Name
+
+    // Change this to the name of the Machine Level Environment Variable
+    public const string Name = "[Change To Environment Variable Holding Your ConnectionString]";
+
+#Object Library<br/>
+
 The object library uses partial classes and two files are created for each table or view in your database:
 
-<img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Partial%20Classes.png>
+<img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Partial%20Classes.png><br/>
 
 <b>Do not add any code to the data class or it will be overwritten next time you build with DataTier.Net.</b>
 The file .data.cs is code generated every time you build with DataTier.Net. 
