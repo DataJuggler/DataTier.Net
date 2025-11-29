@@ -73,7 +73,7 @@ There are two projects that make up a DataTier.Net project:<br/>
 
 <img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Anatomy%20of%20a%20DataTier.Net%20Project.png>
 
-# Data Access Componen<br/>
+# Data Access Component<br/>
 
 Contains the Data Manager and Data Managers for each table and Data Readers and Data Writers.
 Controllers are creatred for each for each table and Data Operations (stored procedure calls).
