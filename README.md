@@ -57,9 +57,9 @@ Execute the SQL script to install DataTier.Net tables and stored procedures.<br/
 
 Build your connection string, and once enabled click the Install Conn String & Setup App.config button.<br/>
 
-You will be shown a message box you must restart Visual Studio to complete the setup.<br/>
+You will be shown a message box you must restart DataTier.NET to complete the setup.<br/>
 
-Open the project again in Visual Studio and run DataTier.Net. You should see Test Database Connection Passed.
+Run the project again and you should see Test Database Connection Passed.
 
 <img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Setup%20Complete.png>
 
