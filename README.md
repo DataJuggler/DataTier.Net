@@ -1,6 +1,77 @@
 
 # Major Fix! You Can Now Use Visual Studio 2022 or Visual Studio 2026 For Development!
 
+<b>Setup Instructions</b>
+
+# What You Will Need
+
+1. You will need SQL Server Management Studio and SQL Server or SQL Server Express.
+2. Visual Studio 2022 or Visual Studio 2026 *<br/>
+
+* New - If you target .NET 10 you will need Visual Studio 2026 for your client project.
+Technically Visual Studio 2019 still works for older frameworks (.NET 5 - .NET 7), but 
+.NET 8 - .NET 10 are recommended for new projects.<br/>
+
+<img src=https://github.com/DataJuggler/SharedRepo/blob/master/Shared/Images/DataTierNetSetupScreen.png width=582 height=360>
+(screen shot of DataTier.Net setup screen).
+
+<br/>
+<b>Step 1: Create DataTier.Net Database</b><br/>
+1. Create a new database in SQL Server Management Studio named DataTier.Net.Database<br/>
+2. Check the box 'Database Has Been Created'<br/><br/>
+
+<img src=https://github.com/DataJuggler/SharedRepo/blob/master/Shared/Images/DataTierNetSetupScreenClickHere.png width=582 height=360/>
+
+As the instructions indicate, click the label 'DataTier.Net.Database.sql', this will launch SQL Server Management Studio. 
+You may be prompted to login to your SQL Server.<br/>
+
+Execute the SQL script to install DataTier.Net tables and stored procedures.<br/>
+
+<b>Geeky Note:</b> DataTier.Net was built using DataTier.Net.
+
+<b> Step 2: Step 2 can now be skipped. Project Templates are installed via NuGet when you create a project.
+
+<b>Step 3: Build Your Connection String and Setup App.config<br/>
+  
+<img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Build%20Connection%20String.png><br/>
+
+Build your connection string, and once enabled click the Install Conn String & Setup App.config button.<br/>
+
+You will be shown a message box you must restart Visual Studio to complete the setup.<br/>
+
+Open the project again in Visual Studio and run DataTier.Net. You should see Test Database Connection Passed.
+
+<img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Setup%20Complete.png>
+
+Now you are ready to create your own DataTier.Net projects.
+
+<b>Anatomy of a DataTier.Net Project</b>
+
+<img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Data%20Model.jpg>
+
+There are two projects that make up a DataTier.Net project:<br/>
+
+<img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Anatomy%20of%20a%20DataTier.Net%20Project.png>
+
+<b>1. Data Access Component</b> Contains the Data Manager and Data Managers for each table and Data Readers and Data Writers.<br/>
+      Controllers are creatred for each for each table and Data Operations (stored procedure calls).<br/>
+      And the <b>Gateway</b> contains methods for Find, Insert, Load, Save, Update and Delete plus any Custom Methods you create.<br/>
+<b>2. Object Library</b> The object library uses partial classes and two files are created for each table or view in your database:<br/>
+
+<img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Partial%20Classes.png>
+
+<b>Do not add any code to the data class or it will be overwritten next time you build with DataTier.Net.</b>
+The file .data.cs is code generated every time you build with DataTier.Net. 
+
+The .business.cs is only created if it does not already exist, so you are free to add any custom methods or properties to the business class.
+
+For more information read the DataTier.Net User's Guide located in the Class Room folder if you clone or online here:
+https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/DataTier.Net%20Users%20Guide.pdf
+
+# Updates & News
+
+# Major Fix! You Can Now Use Visual Studio 2022 or Visual Studio 2026 For Development!
+
 11.29.2025: For 5 years I have used Visual Studio 2019 for development because I couldn't get EnvDTE (Visual Studio's internal engine)
 to work with Visual Studio 2022. At the time I didn't have my good friend Chat GPT to help me fix things. I can now uninstall 
 Visual Studio 2019 from my machine.
@@ -74,64 +145,6 @@ For .Net 5 projects, this is not an issue.
 
 <img src=https://github.com/DataJuggler/SharedRepo/blob/master/Shared/Images/DataTier.Net%20Ad.png height=320 width=320>
 
-<b>Setup Instructions</b>
-
-<img src=https://github.com/DataJuggler/SharedRepo/blob/master/Shared/Images/DataTierNetSetupScreen.png width=582 height=360>
-(screen shot of DataTier.Net setup screen).
-
-<br/>
-<b>Step 1: Create DataTier.Net Database</b><br/>
-1. Create a new database in SQL Server Management Studio named DataTier.Net.Database<br/>
-2. Check the box 'Database Has Been Created'<br/>
-
-<img src=https://github.com/DataJuggler/SharedRepo/blob/master/Shared/Images/DataTierNetSetupScreenClickHere.png width=582 height=360/>
-
-As the instructions indicate, this will launch SQL Server Management Studio. You may be prompted to login.<br/>
-
-Execute the SQL script to install DataTier.Net tables and stored procedures.<br/>
-
-<b>Geeky Note:</b> DataTier.Net was built using DataTier.Net.
-
-<b> Step 2: Step 2 can now be skipped. Project Templates are installed via NuGet when you create a project.
-
-<b>Step 3: Build Your Connection String and Setup App.config<br/>
-  
-<img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Build%20Connection%20String.png><br/>
-
-Build your connection string, and once enabled click the Install Conn String & Setup App.config button.<br/>
-
-You will be shown a message box you must restart Visual Studio to complete the setup.<br/>
-
-Open the project again in Visual Studio and run DataTier.Net. You should see Test Database Connection Passed.
-
-<img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Setup%20Complete.png>
-
-Now you are ready to create your own DataTier.Net projects.
-
-<b>Anatomy of a DataTier.Net Project</b>
-
-<img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Data%20Model.jpg>
-
-There are two projects that make up a DataTier.Net project:<br/>
-
-<img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Anatomy%20of%20a%20DataTier.Net%20Project.png>
-
-<b>1. Data Access Component</b> Contains the Data Manager and Data Managers for each table and Data Readers and Data Writers.<br/>
-      Controllers are creatred for each for each table and Data Operations (stored procedure calls).<br/>
-      And the <b>Gateway</b> contains methods for Find, Insert, Load, Save, Update and Delete plus any Custom Methods you create.<br/>
-<b>2. Object Library</b> The object library uses partial classes and two files are created for each table or view in your database:<br/>
-
-<img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Partial%20Classes.png>
-
-<b>Do not add any code to the data class or it will be overwritten next time you build with DataTier.Net.</b>
-The file .data.cs is code generated every time you build with DataTier.Net. 
-
-The .business.cs is only created if it does not already exist, so you are free to add any custom methods or properties to the business class.
-
-For more information read the DataTier.Net User's Guide located in the Class Room folder if you clone or online here:
-https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/DataTier.Net%20Users%20Guide.pdf
-
---
 Update 11.18.2025: DataTier.Net now supports .NET 9.
 
 Update 12.21.2024: DataTier.Net now supports .NET 8.
