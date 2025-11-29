@@ -73,10 +73,15 @@ There are two projects that make up a DataTier.Net project:<br/>
 
 <img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Anatomy%20of%20a%20DataTier.Net%20Project.png>
 
-<b>1. Data Access Component</b> Contains the Data Manager and Data Managers for each table and Data Readers and Data Writers.
-      Controllers are creatred for each for each table and Data Operations (stored procedure calls).
-      And the <b>Gateway</b> contains methods for Find, Insert, Load, Save, Update and Delete plus any Custom Methods you create.
-<b>2. Object Library</b> The object library uses partial classes and two files are created for each table or view in your database:
+<b>Data Access Component</b><br/>
+Contains the Data Manager and Data Managers for each table and Data Readers and Data Writers.
+Controllers are creatred for each for each table and Data Operations (stored procedure calls).
+And the<br/>
+<b>Gateway</b> namespace: DataAccessComponent.Gateway
+Contains methods for Find, Insert, Load, Save, Update and Delete plus any Custom Methods you create.
+The Gateway is what your client project "talks to".<br/>
+<b>Object Library</b><br/>
+The object library uses partial classes and two files are created for each table or view in your database:
 
 <img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Partial%20Classes.png>
 
