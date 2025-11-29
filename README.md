@@ -36,7 +36,9 @@ After launching you will see a setup screen like this.
 (screen shot of DataTier.Net setup screen).
 
 <br/>
-<b>Step 1: Create DataTier.Net Database</b><br/>
+
+# Step 1: Create DataTier.Net Database</b><br/>
+
 1. Create a new database in SQL Server Management Studio named DataTier.Net.Database<br/>
 2. Check the box 'Database Has Been Created'<br/><br/>
 
@@ -49,9 +51,9 @@ Execute the SQL script to install DataTier.Net tables and stored procedures.<br/
 
 <b>Geeky Note:</b> DataTier.Net was built using DataTier.Net.
 
-<b> Step 2: Step 2 can now be skipped. Project Templates are installed via NuGet when you create a project.
+# Step 2: Build Your Connection String and Setup App.config<br/>
 
-<b>Step 3: Build Your Connection String and Setup App.config<br/>
+Click the Step 2 Button. This will launch the Connection Builder Form
   
 <img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/Build%20Connection%20String.png><br/>
 
