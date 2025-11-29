@@ -12,6 +12,26 @@
 Technically Visual Studio 2019 still works for older frameworks (.NET 5 - .NET 7), but 
 .NET 8 - .NET 10 are recommended for new projects.<br/>
 
+# Running The Project
+
+You can either run the source code version or you can install the release version.
+
+# Install Version
+
+Click on the releases tab on the right hand side and download the latest release. Save the installer
+to your system and double click it to run it. The will be named something like DataTier.Net.6.0.0.msi.
+
+# Clone the project
+
+Copy this link and open Visual Studio -> Select Clone A Project and paste this URL. 
+Select where you want to create your project and click 'Clone Project'.
+
+    https://github.com/DataJuggler/DataTier.Net.git
+
+Start debugging by pressing F5 or using the menu item 'Debug -> Start Debugging'.
+
+After launching you will see a setup screen like this.
+
 <img src=https://github.com/DataJuggler/SharedRepo/blob/master/Shared/Images/DataTierNetSetupScreen.png width=582 height=360>
 (screen shot of DataTier.Net setup screen).
 
