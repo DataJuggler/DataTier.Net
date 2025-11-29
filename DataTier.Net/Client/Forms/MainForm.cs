@@ -1930,7 +1930,7 @@ namespace DataTierClient.Forms
                
                 // Adding the version number (taking off the last .0. Probably will never be used).
                 this.Text = "DataTier.Net - Version " + Application.ProductVersion.Substring(0, Application.ProductVersion.Length - 2);
-
+                
                 // Create the buttonManager
                 ButtonManager = new ButtonManager();
 

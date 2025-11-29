@@ -1,3 +1,10 @@
+
+# Major Fix! You Can Now Use Visual Studio 2022 or Visual Studio 2026 For Development!
+
+11.29.2025: For 5 years I have used Visual Studio 2019 for development because I couldn't get EnvDTE (Visual Studio's internal engine)
+to work with Visual Studio 2022. At the time I didn't have my good friend Chat GPT to help me fix things. I can now uninstall 
+Visual Studio 2019 from my machine.
+
 11.28.2025 Version 6.0.0 - DataTier.NET now supports .NET 10 projects. .NET 10 is the default for new projects now.
 Also, the Visual Studio Project Updater is not shown after a build except for .NET Framework projects. It wasn't working and 
 is only needed on non-SDK style projects. SDK Projects support globbing, so code generated files are included automatically.
@@ -39,15 +46,15 @@ Update 4.7.2023: New video showing how to install DataTier.Net and build your fi
 
 New sample project that goes with the above video: https://github.com/DataJuggler/IdeaBank
 
-
 Update 4.3.2023: I fixed the Project Templates for .NET7. I am Working on a new release version now.
 
 Update 3.12.2023: I fixed the install version path not opening the SQL Scripts required to install DataTier.Net.
 
 Update 1.18.2023: DataTier.Net now allows you to target .NET Framework, .NET5, .NET6 or .NET7 (Default).
-There is also a release version now in case you do not want to installed Visual Studio 2019, which is required to use the source code version.
+There is also a release version now in case you do not want to install Visual Studio 2019, which is required to use the source code version
+(fixed now you can use VS 2022 or VS 2026).
 
-Update 3.30.2022: DataJuggler.Net 6.0.4 fixes bugs related to Creating Blazor Data Services for .NEt6. The Blazor Data Services Control was only showing .NET5.
+Update 3.30.2022: DataJuggler.Net 6.0.4 fixes bugs related to Creating Blazor Data Services for .NET6. The Blazor Data Services Control was only showing .NET5.
 Also, DataJuggler.Net was updated because the writing of references was writing for .NET5.
 
 Update 12.30.2021: DataTier.Net 3.0 was just released. The new version allows you to target .NET Framework, .NET5 or .NET6.
@@ -67,9 +74,9 @@ For .Net 5 projects, this is not an issue.
 
 <img src=https://github.com/DataJuggler/SharedRepo/blob/master/Shared/Images/DataTier.Net%20Ad.png height=320 width=320>
 
-<b>Setup Instructions - 3 Easy Steps</b>
+<b>Setup Instructions</b>
 
-<img src=https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Room/Documents/3%20Easy%20Steps.png>
+<img src=https://github.com/DataJuggler/SharedRepo/blob/master/Shared/Images/DataTierNetSetupScreen.png width=582 height=360>
 (screen shot of DataTier.Net setup screen).
 
 <br/>
