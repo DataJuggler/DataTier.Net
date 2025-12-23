@@ -213,7 +213,6 @@ namespace DataTierClient.Controls
             {
                 // locals
                 bool abort = false;
-                string arguments = "";
 
                 // If a framework is selected
                 if (HasSelectedFramework)
@@ -237,7 +236,7 @@ namespace DataTierClient.Controls
                     if (!abort)
                     {
                         // Other wise it should be valid
-                        bool removed = PerformRemove(ref arguments);
+                        bool removed = PerformRemove();
 
                         // if removed
                         if (removed)
@@ -414,17 +413,17 @@ namespace DataTierClient.Controls
             }
             #endregion
 
-            #region PerformRemove(ref string arguments)
+            #region PerformRemove(bool silent = false)
             /// <summary>
             /// returns the Remove
             /// </summary>
-            public bool PerformRemove(ref string arguments)
+            public bool PerformRemove(bool silent = false)
             {
                 // initial value
                 bool removed = false;
 
                 // get the string to remove based on the selected framework
-                arguments = GetArgumentsBasedUponSelectedFramework();
+                string arguments = GetArgumentsBasedUponSelectedFramework();
 
                 try               
                 {
@@ -450,12 +449,16 @@ namespace DataTierClient.Controls
                     }
                  }
                  catch (Exception error)
-                 {
+                 { 
                      // Set the error
-                    DebugHelper.WriteDebugError("UninstallDotNet5_Click", this.Name, error);
+                    DebugHelper.WriteDebugError("PerformRemove", this.Name, error);
 
-                    // show the user a message
-                    MessageBoxHelper.ShowMessage("The DataTier.Net5.Project Templates could not be uninstalled.", "Uninsteall Templates Failed");
+                    // if the value for silent is false
+                    if (!silent)
+                    {
+                        // show the user a message
+                        MessageBoxHelper.ShowMessage("The DataTier.Net Project Templates could not be uninstalled.", "Uninsteall Templates Failed");
+                    }
                  }
                 
                 // return value
@@ -516,6 +519,7 @@ namespace DataTierClient.Controls
         #endregion
 
         #endregion
+
     }
     #endregion
 

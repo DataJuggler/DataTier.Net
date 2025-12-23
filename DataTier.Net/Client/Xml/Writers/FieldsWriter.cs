@@ -136,11 +136,6 @@ namespace DataTierClient.Xml.Writers
                     sb.Append(indentString2);
                     sb.Append("<DefaultValue>" + dTNField.DefaultValue + "</DefaultValue>" + Environment.NewLine);
 
-                    // Write out the value for DeleteAllForProject
-
-                    sb.Append(indentString2);
-                    sb.Append("<DeleteAllForProject>" + dTNField.DeleteAllForProject + "</DeleteAllForProject>" + Environment.NewLine);
-
                     // Write out the value for Descending
 
                     sb.Append(indentString2);
@@ -151,15 +146,10 @@ namespace DataTierClient.Xml.Writers
                     sb.Append(indentString2);
                     sb.Append("<Exclude>" + dTNField.Exclude + "</Exclude>" + Environment.NewLine);
 
-                    // Write out the value for FetchAllForFieldSet
-
-                    sb.Append(indentString2);
-                    sb.Append("<FetchAllForFieldSet>" + dTNField.FetchAllForFieldSet + "</FetchAllForFieldSet>" + Environment.NewLine);
-
                     // Write out the value for FetchAllForTable
 
                     sb.Append(indentString2);
-                    sb.Append("<FetchAllForTable>" + dTNField.FetchAllForTable + "</FetchAllForTable>" + Environment.NewLine);
+                    sb.Append("<FetchAllForTable>" + dTNField.LoadByTableId + "</FetchAllForTable>" + Environment.NewLine);
 
                     // Write out the value for FieldName
 
@@ -170,11 +160,6 @@ namespace DataTierClient.Xml.Writers
 
                     sb.Append(indentString2);
                     sb.Append("<FieldOrdinal>" + dTNField.FieldOrdinal + "</FieldOrdinal>" + Environment.NewLine);
-
-                    // Write out the value for FieldSetId
-
-                    sb.Append(indentString2);
-                    sb.Append("<FieldSetId>" + dTNField.FieldSetId + "</FieldSetId>" + Environment.NewLine);
 
                     // Write out the value for FieldSize
 

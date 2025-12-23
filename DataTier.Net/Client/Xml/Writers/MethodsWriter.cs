@@ -125,7 +125,7 @@ namespace DataTierClient.Xml.Writers
                     // Write out the value for FetchAllForTable
 
                     sb.Append(indentString2);
-                    sb.Append("<FetchAllForTable>" + method.FetchAllForTable + "</FetchAllForTable>" + Environment.NewLine);
+                    sb.Append("<FetchAllForTable>" + method.LoadByTableId + "</FetchAllForTable>" + Environment.NewLine);
 
                     // Write out the value for FindByName
 

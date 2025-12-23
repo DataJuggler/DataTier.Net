@@ -60,7 +60,7 @@ namespace DataTierClient.Controls
             /// This event is fired when theuser click the 'ALCBrowseButton'.
             /// This is used to select the project in the solution if the
             /// name of the project has been changed from the default
-            /// 'ApplicationLogicComponent'.
+            /// 'DataAccessComponent'.
             /// </summary>
             /// <param name="sender"></param>
             /// <param name="e"></param>
@@ -329,7 +329,7 @@ namespace DataTierClient.Controls
                 if (this.HasVSSolution)
                 {
                     // set the values to display
-                    alcProjectName = this.VSSolution.ApplicationLogicComponentProjectName;
+                    alcProjectName = this.VSSolution.DataAccessComponentProjectName;
                     dacProjectName = this.VSSolution.DataAccessComponentProjectName;
                     objectLibraryProjectName = this.VSSolution.ObjectLibraryProjectName;
                 }
@@ -465,7 +465,7 @@ namespace DataTierClient.Controls
 
                 if (CurrentProject != null)
                 {
-                    if (CurrentProject.TemplateVersion == 2)
+                    if (CurrentProject.Ta == 2)
                     {
                         ALCBrowseButton.Visible = false;
                         ALCTextBox.Visible = false;
@@ -524,7 +524,7 @@ namespace DataTierClient.Controls
                 if (this.HasVSSolution)
                 {
                     // is the ALCProjectName set?
-                    bool hasALCProjectName = (!String.IsNullOrEmpty(this.VSSolution.ApplicationLogicComponentProjectName));
+                    bool hasALCProjectName = (!String.IsNullOrEmpty(this.VSSolution.DataAccessComponentProjectName));
 
                     // is the ALCProjectName set?
                     bool hasDACProjectName = (!String.IsNullOrEmpty(this.VSSolution.DataAccessComponentProjectName));
@@ -539,7 +539,7 @@ namespace DataTierClient.Controls
                     valid = ((hasALCProjectName) && (hasDACProjectName) && (hasObjectLibraryProjectName) && (hasFiles));
 
                     // if V2 templates
-                    if (CurrentProject.TemplateVersion == 2)
+                    if (CurrentProject.Ta == 2)
                     {
                         valid = ((hasDACProjectName) && (hasObjectLibraryProjectName) && (hasFiles));
                     }

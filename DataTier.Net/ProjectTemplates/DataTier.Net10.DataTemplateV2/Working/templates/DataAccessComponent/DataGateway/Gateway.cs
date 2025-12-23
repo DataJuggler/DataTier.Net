@@ -2,12 +2,15 @@
 #region using statements
 
 using DataAccessComponent.Controllers;
-using DataAccessComponent.DataOperations;
 using DataAccessComponent.Data;
+using DataAccessComponent.DataOperations;
+using DataAccessComponent.Logging;
+using DataJuggler.UltimateHelper;
 using ObjectLibrary.BusinessObjects;
 using System;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
+using System.Linq;
 
 #endregion
 
@@ -21,8 +24,7 @@ namespace DataAccessComponent.DataGateway
     /// Do not change the method name or the parameters for the
     /// code generated methods or they will be recreated the next 
     /// time you code generate with DataTier.Net. If you need additional
-    /// parameters passed to a method either create an override or
-    /// add or set properties to the temp object that is passed in.
+    /// parameters passed to a method, create a custom method
     /// </summary>
     public class Gateway
     {
@@ -128,11 +130,11 @@ namespace DataAccessComponent.DataGateway
                 // initial value
                 Exception exception = null;
 
-                // If the AppController object exists
-                if (HasAppController)
+                // if the value for HasErrorHandler is true
+                if ((HasErrorHandler) && (ErrorHandler.HasExceptions))
                 {
                     // return the Exception from the AppController
-                    exception = AppController.Exception;
+                    exception = AppController.DataManager.ErrorHandler.Exceptions.LastOrDefault();
 
                     // Set to null after the exception is retrieved so it does not return again
                     AppController.Exception = null;
@@ -154,6 +156,37 @@ namespace DataAccessComponent.DataGateway
             }
             #endregion
 
+            #region TestDatabaseConnection(ref Exception error)
+            /// <summary>
+            /// returns the Database Connection
+            /// </summary>
+            public bool TestDatabaseConnection(ref Exception error)
+            {
+                // initial value
+                bool connected = false;
+
+                // If the this object does not have a HasAppController property
+                if (!this.HasAppController)
+                {
+                    // Create the Controller
+                    this.AppController = new ApplicationController(this.ConnectionName);
+                }
+
+                // If the AppController object exists
+                if ((this.HasAppController) && (!this.AppController.HasConnectionName))
+                {
+                    // Set the ConnectionName
+                    this.AppController.ConnectionName = this.ConnectionName;
+                }
+
+                // perform the test
+                connected = this.AppController.TestDatabaseConnection(ref error, this.DataManager);
+
+                // return value
+                return connected;
+            }
+            #endregion
+            
         #endregion
 
         #region Properties
@@ -201,6 +234,31 @@ namespace DataAccessComponent.DataGateway
 
                     // return value
                     return dataManager;
+                }
+            }
+            #endregion
+
+            #region ErrorHandler
+            /// <summary>
+            /// This read only property returns the value of ErrorHandler from the object DataManager.
+            /// </summary>
+            public ErrorHandler ErrorHandler
+            {
+
+                get
+                {
+                    // initial value
+                    ErrorHandler errorHandler = null;
+
+                    // if DataManager exists
+                    if (HasDataManager)
+                    {
+                        // set the return value
+                        errorHandler = DataManager.ErrorHandler;
+                    }
+
+                    // return value
+                    return errorHandler;
                 }
             }
             #endregion
@@ -256,10 +314,26 @@ namespace DataAccessComponent.DataGateway
             }
             #endregion
             
+            #region HasErrorHandler
+            /// <summary>
+            /// This property returns true if this object has an 'ErrorHandler'.
+            /// </summary>
+            public bool HasErrorHandler
+            {
+                get
+                {
+                    // initial value
+                    bool hasErrorHandler = (ErrorHandler != null);
+
+                    // return value
+                    return hasErrorHandler;
+                }
+            }
+            #endregion
+            
         #endregion
 
     }
     #endregion
 
 }
-

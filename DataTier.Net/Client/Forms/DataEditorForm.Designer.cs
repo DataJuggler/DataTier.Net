@@ -41,10 +41,9 @@ namespace DataTierClient.Forms
             /// the contents of this method with the code editor.
             /// </summary>
             private void InitializeComponent()
-            {
-            DataGateway.Gateway gateway1 = new DataGateway.Gateway();
-            ApplicationLogicComponent.Controllers.ApplicationController applicationController1 = new ApplicationLogicComponent.Controllers.ApplicationController();
-            ApplicationLogicComponent.Logging.ErrorHandler errorHandler1 = new ApplicationLogicComponent.Logging.ErrorHandler();
+            {            
+            DataAccessComponent.Controllers.ApplicationController applicationController1 = new DataAccessComponent.Controllers.ApplicationController();
+            DataAccessComponent.Logging.ErrorHandler errorHandler1 = new DataAccessComponent.Logging.ErrorHandler();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataEditorForm));
             this.DataEditorControl = new DataTierClient.Controls.DataEditorControl();
             this.SuspendLayout();
@@ -55,14 +54,8 @@ namespace DataTierClient.Forms
             this.DataEditorControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DataEditorControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             applicationController1.ConnectionString = null;
-            applicationController1.ConnectionTested = false;
-            errorHandler1.LogAsSystemEvent = false;
-            errorHandler1.LogFileName = null;
-            errorHandler1.LogToFile = false;
-            applicationController1.ErrorProcessor = errorHandler1;
-            applicationController1.Exception = null;
-            gateway1.AppController = applicationController1;
-            this.DataEditorControl.Gateway = gateway1;
+            applicationController1.ConnectionTested = false;            
+            applicationController1.Exception = null;                        
             this.DataEditorControl.Loading = false;
             this.DataEditorControl.Location = new System.Drawing.Point(0, 0);
             this.DataEditorControl.Name = "Manage Data";

@@ -129,7 +129,7 @@ namespace DataTierClient.ClientUtil
                                         solution.AllSolutionProjects.Add(projectName);
                                         
                                         // check the index of different names
-                                        alcIndex = projectName.IndexOf("ApplicationLogicComponent");
+                                        alcIndex = projectName.IndexOf("DataAccessComponent");
                                         dacIndex = projectName.IndexOf("DataAccessComponent");
                                         objectLibraryIndex = projectName.IndexOf("ObjectLibrary");
                                             
@@ -137,7 +137,7 @@ namespace DataTierClient.ClientUtil
                                         if (alcIndex >= 0)
                                         {
                                             // set the project name
-                                            solution.ApplicationLogicComponentProjectName = projectName;
+                                            solution.DataAccessComponentProjectName = projectName;
                                         }
 
                                         // if the dacIndex was found
@@ -249,17 +249,17 @@ namespace DataTierClient.ClientUtil
                     WaitUntilProjectItemsReady(project, 2000, 100);
 
                     // if this project name is the ApplicationLogicComponen project
-                    if (project.Name == visualStudioSolution.ApplicationLogicComponentProjectName)
+                    if (project.Name == visualStudioSolution.DataAccessComponentProjectName)
                     {
                         // if we are in RemovalMode
                         if (removalMode)
                         {
-                            // update the ApplicationLogicComponent Project 
+                            // update the DataAccessComponent Project 
                             response = RemoveFilesFromProject(project, files, DataManager.ProjectTypeEnum.ALC);
                         }
                         else
                         {
-                            // update the ApplicationLogicComponent Project 
+                            // update the DataAccessComponent Project 
                             response = UpdateProject(project, files, DataManager.ProjectTypeEnum.ALC);
                         }
                     }
@@ -269,12 +269,12 @@ namespace DataTierClient.ClientUtil
                         // if removalMode
                         if (removalMode)
                         {
-                            // update the ApplicationLogicComponent Project 
+                            // update the DataAccessComponent Project 
                             response = RemoveFilesFromProject(project, files, DataManager.ProjectTypeEnum.DAC);
                         }
                         else
                         {
-                            // update the ApplicationLogicComponent Project 
+                            // update the DataAccessComponent Project 
                             response = UpdateProject(project, files, DataManager.ProjectTypeEnum.DAC);
                         }
                     }
@@ -284,12 +284,12 @@ namespace DataTierClient.ClientUtil
                         // if removalMode
                         if (removalMode)
                         {
-                            // update the ApplicationLogicComponent Project 
+                            // update the DataAccessComponent Project 
                             response = RemoveFilesFromProject(project, files, DataManager.ProjectTypeEnum.ObjectLibrary);
                         }
                         else
                         {
-                            // update the ApplicationLogicComponent Project 
+                            // update the DataAccessComponent Project 
                             response = UpdateProject(project, files, DataManager.ProjectTypeEnum.ObjectLibrary);
                         }
                     }

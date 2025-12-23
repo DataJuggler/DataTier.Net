@@ -6,7 +6,8 @@ using System;
 using System.Windows.Forms;
 using ObjectLibrary.BusinessObjects;
 using DataTierClient.Controls.Interfaces;
-using DataGateway;
+using DataAccessComponent.Connection;
+using DataAccessComponent.DataGateway;
 using System.ComponentModel;
 
 #endregion
@@ -149,7 +150,7 @@ namespace DataTierClient.Controls
             public void OnSave()
             {
                 // Create a new instance of a 'Gateway' object.
-                Gateway gateway = new Gateway();
+                Gateway gateway = new Gateway(ConnectionConstants.Name);
 
                 // local
                 bool saved = false;

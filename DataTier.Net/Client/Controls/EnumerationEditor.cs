@@ -4,7 +4,9 @@
 
 using System;
 using System.Windows.Forms;
-using DataGateway;
+using DataAccessComponent.Connection;
+using DataAccessComponent.DataGateway;
+using DataAccessComponent.Controllers;
 using ObjectLibrary.BusinessObjects;
 using DataTierClient.Controls.Interfaces;
 using DataTierClient;
@@ -123,8 +125,11 @@ namespace DataTierClient.Controls
                 // if confirmed
                 if (confirmed)
                 {
+                    // Create a new instance of a 'Gateway' object.
+                    Gateway gateway = new Gateway(ConnectionConstants.Name);
+
                     // delete the selected enumeration
-                    bool deleted = this.Gateway.AppController.ControllerManager.EnumerationController.Delete(this.SelectedEnumeration);
+                    bool deleted = gateway.DeleteEnumeration(this.SelectedEnumeration.EnumerationId);
 
                     // if deleted
                     if (deleted)
@@ -203,7 +208,7 @@ namespace DataTierClient.Controls
                 Enumeration enumeration = this.SelectedEnumeration;
 
                 // if saved
-                bool saved = this.Gateway.AppController.ControllerManager.EnumerationController.Save(ref enumeration);
+                bool saved = this.Gateway.SaveEnumeration(ref enumeration);
 
                 // if saved
                 if (saved)
@@ -312,7 +317,7 @@ namespace DataTierClient.Controls
             private void Init()
             {
                 // Create the Gateway
-                this.Gateway = new Gateway();
+                this.Gateway = new Gateway(ConnectionConstants.Name);
             }
             #endregion
 
@@ -385,7 +390,7 @@ namespace DataTierClient.Controls
             private void ReloadAndDisplayEnumerations()
             {
                 // reload the enumerations for this project
-                this.SelectedProject.Enumerations = this.Gateway.LoadEnumerationsForProject(this.SelectedProject.ProjectId);
+                this.SelectedProject.Enumerations = this.Gateway.LoadEnumerationsForProjectId(this.SelectedProject.ProjectId);
 
                 // Redisplay the list of enumerations
                 this.DisplayEnumerations();

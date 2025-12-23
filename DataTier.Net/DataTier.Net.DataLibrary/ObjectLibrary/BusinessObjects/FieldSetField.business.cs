@@ -15,9 +15,7 @@ namespace ObjectLibrary.BusinessObjects
     {
 
         #region Private Variables
-        private bool deleteAllForFieldSet;
-        private bool findByFieldSetId;
-        private bool loadByFieldSetId;
+        private bool deleteByFieldSetId;
         #endregion
 
         #region Constructor
@@ -44,53 +42,14 @@ namespace ObjectLibrary.BusinessObjects
 
         #region Properties
 
-            #region DeleteAllForFieldSet
+            #region DeleteByFieldSetId
             /// <summary>
-            /// This property gets or sets the value for 'DeleteAllForFieldSet'.
+            /// This property gets or sets the value for 'DeleteByFieldSetId'.
             /// </summary>
-            public bool DeleteAllForFieldSet
+            public bool DeleteByFieldSetId
             {
-                get { return deleteAllForFieldSet; }
-                set { deleteAllForFieldSet = value; }
-            }
-            #endregion
-            
-            #region FindByFieldSetId
-            /// <summary>
-            /// This property gets or sets the value for 'FindByFieldSetId'.
-            /// </summary>
-            public bool FindByFieldSetId
-            {
-                get { return findByFieldSetId; }
-                set { findByFieldSetId = value; }
-            }
-            #endregion
-
-            #region HasFieldSetId
-            /// <summary>
-            /// This property returns true if the 'FieldSetId' is set.
-            /// </summary>
-            public bool HasFieldSetId
-            {
-                get
-                {
-                    // initial value
-                    bool hasFieldSetId = (this.FieldSetId > 0);
-                    
-                    // return value
-                    return hasFieldSetId;
-                }
-            }
-            #endregion
-            
-            #region LoadByFieldSetId
-            /// <summary>
-            /// This property gets or sets the value for 'LoadByFieldSetId'.
-            /// </summary>
-            public bool LoadByFieldSetId
-            {
-                get { return loadByFieldSetId; }
-                set { loadByFieldSetId = value; }
+                get { return deleteByFieldSetId; }
+                set { deleteByFieldSetId = value; }
             }
             #endregion
 

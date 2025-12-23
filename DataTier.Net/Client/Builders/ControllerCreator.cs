@@ -244,7 +244,86 @@ namespace DataTierClient.Builders
                 return sb.ToString();
             } 
             #endregion
+
+            #region WriteCatch()
+            /// <summary>
+            /// Writes a standard catch (Exception error) block with guarded error logging.
+            /// </summary>
+            private void WriteCatch()
+            {
+                // Write catch (Exception error)
+                WriteLine("catch (Exception error)");
+
+                // Write Open Bracket
+                WriteOpenBracket(true);
+
+                // Write Comment (plain English for non-programmers)
+                WriteComment("If the dataManager exists and has an ErrorHandler");
+
+                // Write if ((dataManager != null) && (dataManager.HasErrorHandler))
+                WriteLine("if ((dataManager != null) && (dataManager.HasErrorHandler))");
+
+                // Write Open Bracket
+                WriteOpenBracket(true);
+
+                // Write Comment (technical)
+                WriteComment("Log the error");
+
+                // Write LogError call
+                WriteLine("dataManager.ErrorHandler.LogError(methodName, objectName, error);");
+
+                // Write Close Bracket (if)
+                WriteCloseBracket(true);
+
+                // Write Close Bracket (catch)
+                WriteCloseBracket(true);
+            }
+            #endregion
           
+            #region WriteCatchForInserted(string returnObjectName)
+            /// <summary>
+            /// Write Catch For Inserted
+            /// </summary>
+            public void WriteCatchForInserted(string returnObjectName)
+            {
+                // Write catch (Exception error)
+                WriteLine("catch (Exception error)");
+
+                // Write Open Bracket
+                WriteOpenBracket(true);
+
+                // Set to false
+                WriteComment("Set inserted to false");
+
+                // Write the returnObjectName
+                WriteLine(returnObjectName + " = false;");
+
+                // Write blank line
+                WriteLine();
+
+                // Write Line To Log The Current Error
+                WriteComment("if the dataManager exists and the dataManager has an ErrorHandler");
+
+                // write line testing for dataManager.ErrorHandler exists
+                WriteLine("if (dataManager != null) && (dataManager.HasErrorHandler))");
+
+                // Write an open bracket 
+                WriteOpenBracket(true);
+
+                // Write a comment
+                WriteComment("Log the error");
+
+                // Write Line ErrorHandler.LogError(methodName, objectName, error);
+                WriteLine("dataManager.ErrorHandler.LogError(methodName, objectName, error);");
+
+                // Write Close Bracket
+                WriteCloseBracket(true);
+
+                // Write Close Bracket
+                WriteCloseBracket(true);
+            }
+            #endregion
+            
             #region WriteClassSummary(DataTable dataTable)
             /// <summary>
             /// This method writes the summary for a controller object.
@@ -407,7 +486,7 @@ namespace DataTierClient.Builders
                 WriteLine(methodNameLine);
 
                 // get objectName
-                string objectNameLine = GetStringVariableLine("objectName", "ApplicationLogicComponent.Controllers");
+                string objectNameLine = GetStringVariableLine("objectName", "DataAccessComponent.Controllers");
 
                 // Write objectName
                 WriteLine(objectNameLine);
@@ -502,20 +581,8 @@ namespace DataTierClient.Builders
                 // Write CloseBracket
                 WriteCloseBracket(true);
 
-                // Write catch (Exception error)
-                WriteLine("catch (Exception error)");
-
-                 // Write Open Bracket
-                WriteOpenBracket(true);
-
-                // Write Line To Log The Error
-                WriteComment("Log the error");
-
-                // Write Line tErrorHandler.LogError(methodName, objectName, error);
-                WriteLine("ErrorHandler.LogError(methodName, objectName, error);");
-
-                // Write Close Bracket
-                WriteCloseBracket(true);
+                // Write the Catch part of TryCatch
+                WriteCatch();
 
                 // Write Blank Line
                 WriteLine();
@@ -605,7 +672,7 @@ namespace DataTierClient.Builders
                     WriteLine(methodNameLine);
 
                     // get objectName
-                    string objectNameLine = GetStringVariableLine("objectName", "ApplicationLogicComponent.Controllers");
+                    string objectNameLine = GetStringVariableLine("objectName", "DataAccessComponent.Controllers");
 
                     // Write objectName
                     WriteLine(objectNameLine);
@@ -676,20 +743,8 @@ namespace DataTierClient.Builders
                     // Write CloseBracket
                     WriteCloseBracket(true);
 
-                    // Write catch (Exception error)
-                    WriteLine("catch (Exception error)");
-
-                    // Write Open Bracket
-                    WriteOpenBracket(true);
-
-                    // Write Line To Log The Error
-                    WriteComment("Log the error");
-
-                    // Write Line ErrorHandler.LogError(methodName, objectName, error);
-                    WriteLine("ErrorHandler.LogError(methodName, objectName, error);");
-
-                    // Write Close Bracket
-                    WriteCloseBracket(true);
+                    // Write the Catch part of TryCatch
+                    WriteCatch();
 
                     // Write Blank Line
                     WriteLine();
@@ -772,7 +827,7 @@ namespace DataTierClient.Builders
                 WriteLine(methodNameLine);
 
                 // get objectName
-                string objectNameLine = GetStringVariableLine("objectName", "ApplicationLogicComponent.Controllers");
+                string objectNameLine = GetStringVariableLine("objectName", "DataAccessComponent.Controllers");
 
                 // Write objectName
                 WriteLine(objectNameLine);
@@ -858,20 +913,8 @@ namespace DataTierClient.Builders
                 // Write CloseBracket
                 WriteCloseBracket(true);
 
-                // Write catch (Exception error)
-                WriteLine("catch (Exception error)");
-
-                // Write Open Bracket
-                WriteOpenBracket(true);
- 
-                // Write Line To Log The Error
-                WriteComment("Log the error");
-
-                // Write Line ErrorHandler.LogError(methodName, objectName, error);
-                WriteLine("ErrorHandler.LogError(methodName, objectName, error);");
-
-                // Write Close Bracket
-                WriteCloseBracket(true);
+                // Write the Catch part of TryCatch
+                WriteCatch();
 
                 // Write Blank Line
                 WriteLine();
@@ -956,7 +999,7 @@ namespace DataTierClient.Builders
                 WriteLine(methodNameLine);
 
                 // get objectName
-                string objectNameLine = GetStringVariableLine("objectName", "ApplicationLogicComponent.Controllers");
+                string objectNameLine = GetStringVariableLine("objectName", "DataAccessComponent.Controllers");
 
                 // Write objectName
                 WriteLine(objectNameLine);
@@ -1039,20 +1082,8 @@ namespace DataTierClient.Builders
                 // Write CloseBracket
                 WriteCloseBracket(true);
 
-                // Write catch (Exception error)
-                WriteLine("catch (Exception error)");
-
-                // Write Open Bracket
-                WriteOpenBracket(true);
-
-                // Write Line To Log The Error
-                WriteComment("Log the error");
-
-                // Write Line ErrorHandler.LogError(methodName, objectName, error);
-                WriteLine("ErrorHandler.LogError(methodName, objectName, error);");
-
-                // Write Close Bracket
-                WriteCloseBracket(true);
+                // Write the Catch part of TryCatch
+                WriteCatch();
 
                 // Write Blank Line
                 WriteLine();
@@ -1137,7 +1168,7 @@ namespace DataTierClient.Builders
                 WriteLine(methodNameLine);
 
                 // get objectName
-                string objectNameLine = GetStringVariableLine("objectName", "ApplicationLogicComponent.Controllers");
+                string objectNameLine = GetStringVariableLine("objectName", "DataAccessComponent.Controllers");
 
                 // Write objectName
                 WriteLine(objectNameLine);
@@ -1205,29 +1236,8 @@ namespace DataTierClient.Builders
                 // Write CloseBracket
                 WriteCloseBracket(true);
 
-                // Write catch (Exception error)
-                WriteLine("catch (Exception error)");
-
-                // Write Open Bracket
-                WriteOpenBracket(true);
-
-                // Set to false
-                WriteComment("Set inserted to false");
-
-                // Write the returnObjectName
-                WriteLine(returnObjectName + " = false;");
-
-                // Write blank line
-                WriteLine();
-
-                // Write Line To Log The Current Error
-                WriteComment("Log the current error");
-
-                // Write Line ErrorHandler.LogError(methodName, objectName, error);
-                WriteLine("ErrorHandler.LogError(methodName, objectName, error);");
-
-                // Write Close Bracket
-                WriteCloseBracket(true);
+                // Write the catch method for the inserted for a non-identity insert method
+                WriteCatchForInserted(returnObjectName);
 
                 // Write Blank Line
                 WriteLine();
@@ -1597,7 +1607,7 @@ namespace DataTierClient.Builders
                 WriteLine(methodNameLine);
 
                 // get objectName
-                string objectNameLine = GetStringVariableLine("objectName", "ApplicationLogicComponent.Controllers");
+                string objectNameLine = GetStringVariableLine("objectName", "DataAccessComponent.Controllers");
 
                 // Write objectName
                 WriteLine(objectNameLine);
@@ -1674,20 +1684,8 @@ namespace DataTierClient.Builders
                 // Write CloseBracket
                 WriteCloseBracket(true);
 
-                // Write catch (Exception error)
-                WriteLine("catch (Exception error)");
-
-                 // Write Open Bracket
-                WriteOpenBracket(true);
-
-                // Write Line To Log The Error
-                WriteComment("Log the error");
-
-                // Write Line ErrorHandler.LogError(methodName, objectName, error);"
-                WriteLine("ErrorHandler.LogError(methodName, objectName, error);");
-
-                // Write Close Bracket
-                WriteCloseBracket(true);
+                // Write the Catch part of TryCatch
+                WriteCatch();
 
                 // Write Blank Line
                 WriteLine();

@@ -114,7 +114,7 @@ namespace DataTierClient.Xml.Writers
                     // Write out the value for FetchAllForTable
 
                     sb.Append(indentString2);
-                    sb.Append("<FetchAllForTable>" + customReader.FetchAllForTable + "</FetchAllForTable>" + Environment.NewLine);
+                    sb.Append("<FetchAllForTable>" + customReader.LoadByTableId + "</FetchAllForTable>" + Environment.NewLine);
 
                     // If the value for the property customReader.HasFieldSet is true
                     if (customReader.HasFieldSet)

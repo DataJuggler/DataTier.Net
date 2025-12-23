@@ -65,8 +65,12 @@ namespace DataAccessComponent.Connection
                 }
                 catch (Exception error)
                 {
-                    // Log this error
-                    ErrorHandler.LogError(methodName, objectName, error);                    
+                    // if the dataManager exists and has an ErrorHandler
+                    if ((dataManager != null) && (dataManager.HasErrorHandler))
+                    {
+                        // Log this error
+                        dataManager.ErrorHandler.LogError(methodName, objectName, error);                    
+                    }
                 }
 
                 // return value

@@ -1,11 +1,10 @@
 
-
 #region using statements
 
+using ObjectLibrary.Enumerations;
 using System;
 
 #endregion
-
 
 namespace ObjectLibrary.BusinessObjects
 {
@@ -16,13 +15,10 @@ namespace ObjectLibrary.BusinessObjects
     {
 
         #region Private Variables
-        private bool descending;
-        private bool fetchAllForFieldSet;
-        private bool deleteAllForProject;
-        private bool fetchAllForTable;
-        private int fieldSetId;
-        private bool assigned;
         private GridColumn gridColumn;
+        private bool loadByTableId;
+        private bool assigned;
+        private bool descending;
         #endregion
 
         #region Constructor
@@ -47,12 +43,15 @@ namespace ObjectLibrary.BusinessObjects
 
             #region ToString()
             /// <summary>
-            /// This method returns the FieldName when ToString is called.
+            /// returns the String
             /// </summary>
-            /// <returns></returns>
             public override string ToString()
             {
-                return this.FieldName;
+                // initial value
+                string toString = FieldName;
+
+                // return value
+                return toString;
             }
             #endregion
 
@@ -63,24 +62,11 @@ namespace ObjectLibrary.BusinessObjects
             #region Assigned
             /// <summary>
             /// This property gets or sets the value for 'Assigned'.
-            /// This property is not mapped to othe database. It's
-            /// only used to create Grid Columns.
             /// </summary>
             public bool Assigned
             {
                 get { return assigned; }
                 set { assigned = value; }
-            }
-            #endregion
-            
-            #region DeleteAllForProject
-            /// <summary>
-            /// This property gets or sets the value for 'DeleteAllForProject'.
-            /// </summary>
-            public bool DeleteAllForProject
-            {
-                get { return deleteAllForProject; }
-                set { deleteAllForProject = value; }
             }
             #endregion
             
@@ -95,75 +81,14 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
             
-            #region FetchAllForFieldSet
-            /// <summary>
-            /// This property gets or sets the value for 'FetchAllForFieldSet'.
-            /// </summary>
-            public bool FetchAllForFieldSet
-            {
-                get { return fetchAllForFieldSet; }
-                set { fetchAllForFieldSet = value; }
-            }
-            #endregion
-            
-            #region FetchAllForTable
-            /// <summary>
-            /// This property gets or sets the value for 'FetchAllForTable'.
-            /// </summary>
-            public bool FetchAllForTable
-            {
-                get { return fetchAllForTable; }
-                set { fetchAllForTable = value; }
-            }
-            #endregion
-            
-            #region FieldSetId
-            /// <summary>
-            /// This property gets or sets the value for 'FieldSetId'.
-            /// </summary>
-            public int FieldSetId
-            {
-                get { return fieldSetId; }
-                set { fieldSetId = value; }
-            }
-            #endregion
-            
             #region GridColumn
             /// <summary>
             /// This property gets or sets the value for 'GridColumn'.
             /// </summary>
             public GridColumn GridColumn
             {
-                get 
-                {
-                    // if the value for HasGridColumn is false
-                    if (!HasGridColumn)
-                    {
-                        // create on demand
-                        gridColumn = new GridColumn();
-                    }
-
-                    // return value
-                    return gridColumn;
-                }
+                get { return gridColumn; }
                 set { gridColumn = value; }
-            }
-            #endregion
-            
-            #region HasFieldSetId
-            /// <summary>
-            /// This property returns true if the 'FieldSetId' is set.
-            /// </summary>
-            public bool HasFieldSetId
-            {
-                get
-                {
-                    // initial value
-                    bool hasFieldSetId = (this.FieldSetId > 0);
-                    
-                    // return value
-                    return hasFieldSetId;
-                }
             }
             #endregion
             
@@ -176,31 +101,25 @@ namespace ObjectLibrary.BusinessObjects
                 get
                 {
                     // initial value
-                    bool hasGridColumn = (gridColumn != null);
-                    
+                    bool hasGridColumn = (GridColumn != null);
+
                     // return value
                     return hasGridColumn;
                 }
             }
             #endregion
             
-            #region HasTableId
+            #region LoadByTableId
             /// <summary>
-            /// This property returns true if the 'TableId' is set.
+            /// This property gets or sets the value for 'LoadByTableId'.
             /// </summary>
-            public bool HasTableId
+            public bool LoadByTableId
             {
-                get
-                {
-                    // initial value
-                    bool hasTableId = (this.TableId > 0);
-                    
-                    // return value
-                    return hasTableId;
-                }
+                get { return loadByTableId; }
+                set { loadByTableId = value; }
             }
             #endregion
-            
+
         #endregion
 
     }

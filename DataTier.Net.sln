@@ -1,19 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.35706.149
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36811.4 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataTier.Net.Client", "DataTier.Net\Client\DataTier.Net.Client.csproj", "{CE05821E-9A82-4F59-A8F2-A399FDEE9B24}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataTier.Net", "DataTier.Net", "{BF88761D-1DEA-4D4B-83DC-570B0BC403B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationLogicComponent", "DataTier.Net\DataTier.Net.DataLibrary\ApplicationLogicComponent\ApplicationLogicComponent.csproj", "{DBCFCCF2-C6B3-402D-905F-0EBA77F8E9B3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessComponent", "DataTier.Net\DataTier.Net.DataLibrary\DataAccessComponent\DataAccessComponent.csproj", "{94349907-F83F-4087-BF9A-6172008CFB10}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectLibrary", "DataTier.Net\DataTier.Net.DataLibrary\ObjectLibrary\ObjectLibrary.csproj", "{19158508-F27F-4340-AAD4-10B4FBB54404}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataGateway", "DataTier.Net\DataTier.Net.DataLibrary\DataGateway\DataGateway.csproj", "{2A156C95-1B12-47FE-A2EA-CDF999D98817}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataTier.Net.StoredProcedureGenerator", "DataTier.Net\StoredProcedureGenerator\DataTier.Net.StoredProcedureGenerator.csproj", "{27171EDA-23EC-4637-BAB3-0FA3F272495B}"
 EndProject
@@ -22,6 +18,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataJuggler", "DataJuggler", "{04AECD9C-6B82-4670-91E4-01CF9962EB0D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJuggler.Win.Controls", "DataJuggler.Win.Controls\DataJuggler.Win.Controls.csproj", "{70E97B98-9BE2-4747-A3AF-1C274AE401CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJuggler.Net", "..\DataJuggler.Net\DataJuggler.Net.csproj", "{AF3F5EC6-8494-4CA2-AAC0-B1FA4F752EF5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +31,6 @@ Global
 		{CE05821E-9A82-4F59-A8F2-A399FDEE9B24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE05821E-9A82-4F59-A8F2-A399FDEE9B24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE05821E-9A82-4F59-A8F2-A399FDEE9B24}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DBCFCCF2-C6B3-402D-905F-0EBA77F8E9B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DBCFCCF2-C6B3-402D-905F-0EBA77F8E9B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DBCFCCF2-C6B3-402D-905F-0EBA77F8E9B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DBCFCCF2-C6B3-402D-905F-0EBA77F8E9B3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{94349907-F83F-4087-BF9A-6172008CFB10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{94349907-F83F-4087-BF9A-6172008CFB10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94349907-F83F-4087-BF9A-6172008CFB10}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,10 +39,6 @@ Global
 		{19158508-F27F-4340-AAD4-10B4FBB54404}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19158508-F27F-4340-AAD4-10B4FBB54404}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19158508-F27F-4340-AAD4-10B4FBB54404}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2A156C95-1B12-47FE-A2EA-CDF999D98817}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2A156C95-1B12-47FE-A2EA-CDF999D98817}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2A156C95-1B12-47FE-A2EA-CDF999D98817}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2A156C95-1B12-47FE-A2EA-CDF999D98817}.Release|Any CPU.Build.0 = Release|Any CPU
 		{27171EDA-23EC-4637-BAB3-0FA3F272495B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{27171EDA-23EC-4637-BAB3-0FA3F272495B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27171EDA-23EC-4637-BAB3-0FA3F272495B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -57,19 +47,22 @@ Global
 		{70E97B98-9BE2-4747-A3AF-1C274AE401CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70E97B98-9BE2-4747-A3AF-1C274AE401CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70E97B98-9BE2-4747-A3AF-1C274AE401CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF3F5EC6-8494-4CA2-AAC0-B1FA4F752EF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF3F5EC6-8494-4CA2-AAC0-B1FA4F752EF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF3F5EC6-8494-4CA2-AAC0-B1FA4F752EF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF3F5EC6-8494-4CA2-AAC0-B1FA4F752EF5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CE05821E-9A82-4F59-A8F2-A399FDEE9B24} = {BF88761D-1DEA-4D4B-83DC-570B0BC403B5}
-		{DBCFCCF2-C6B3-402D-905F-0EBA77F8E9B3} = {1F6EF59D-ACCF-4C84-9A99-CC0F27092F17}
 		{94349907-F83F-4087-BF9A-6172008CFB10} = {1F6EF59D-ACCF-4C84-9A99-CC0F27092F17}
 		{19158508-F27F-4340-AAD4-10B4FBB54404} = {1F6EF59D-ACCF-4C84-9A99-CC0F27092F17}
-		{2A156C95-1B12-47FE-A2EA-CDF999D98817} = {1F6EF59D-ACCF-4C84-9A99-CC0F27092F17}
 		{27171EDA-23EC-4637-BAB3-0FA3F272495B} = {BF88761D-1DEA-4D4B-83DC-570B0BC403B5}
 		{1F6EF59D-ACCF-4C84-9A99-CC0F27092F17} = {BF88761D-1DEA-4D4B-83DC-570B0BC403B5}
 		{70E97B98-9BE2-4747-A3AF-1C274AE401CE} = {04AECD9C-6B82-4670-91E4-01CF9962EB0D}
+		{AF3F5EC6-8494-4CA2-AAC0-B1FA4F752EF5} = {04AECD9C-6B82-4670-91E4-01CF9962EB0D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {131447C9-774E-4410-AA8D-F03B8B7F974F}

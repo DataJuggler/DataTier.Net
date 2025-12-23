@@ -2,7 +2,7 @@
 
 #region using statements
 
-using ApplicationLogicComponent.ClientValidation;
+using DataAccessComponent.ClientValidation;
 using System.Windows.Forms;
 
 #endregion

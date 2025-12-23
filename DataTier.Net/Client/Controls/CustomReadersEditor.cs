@@ -9,7 +9,8 @@ using DataTierClient.Controls.Interfaces;
 using DataTierClient.Xml.Writers;
 using ObjectLibrary.BusinessObjects;
 using ObjectLibrary.Enumerations;
-using DataGateway;
+using DataAccessComponent.DataGateway;
+using DataAccessComponent.Connection;
 using DataTierClient.Forms;
 using System;
 using System.Collections.Generic;
@@ -138,7 +139,7 @@ namespace DataTierClient.Controls
                     if (isValid)
                     {
                         // Create a new instance of a 'Gateway' object.
-                        Gateway gateway = new Gateway();
+                        Gateway gateway = new Gateway(ConnectionConstants.Name);
 
                         // save the selected reader
                         bool saved = gateway.SaveCustomReader(ref selectedReader);
@@ -147,7 +148,7 @@ namespace DataTierClient.Controls
                         if (saved)
                         {
                             // reload the CustomReaders
-                            this.SelectedTable.CustomReaders = gateway.LoadCustomReadersForTable(this.SelectedTable.TableId);
+                            this.SelectedTable.CustomReaders = gateway.LoadCustomReadersForTableId(this.SelectedTable.TableId);
                             ActionType = ActionTypeEnum.NoAction;
 
                             // set the readerName
@@ -404,7 +405,7 @@ namespace DataTierClient.Controls
                         // user confirmed the delete
                                 
                         // Create a new instance of a 'Gateway' object.
-                        Gateway gateway = new Gateway();
+                        Gateway gateway = new Gateway(ConnectionConstants.Name);
 
                         // perform the delete
                         bool deleted = gateway.DeleteCustomReader(this.SelectedReader.CustomReaderId);
@@ -413,7 +414,7 @@ namespace DataTierClient.Controls
                         if (deleted)
                         {
                             // load the CustomReaders for the SelectedTable
-                            this.SelectedTable.CustomReaders = gateway.LoadCustomReadersForTable(this.SelectedTable.TableId);
+                            this.SelectedTable.CustomReaders = gateway.LoadCustomReadersForTableId(this.SelectedTable.TableId);
 
                             // Redisplay the custom readers
                             DisplayCustomReaders();
@@ -527,10 +528,10 @@ namespace DataTierClient.Controls
                 form.ShowDialog();
 
                 // Create a new instance of a 'Gateway' object.
-                Gateway gateway = new Gateway();
+                Gateway gateway = new Gateway(ConnectionConstants.Name);
 
                 // Load the FieldSets
-                this.SelectedTable.FieldSets = gateway.LoadFieldSetsForTable(this.SelectedTable.TableId);
+                this.SelectedTable.FieldSets = gateway.LoadFieldSetsForTableId(this.SelectedTable.TableId);
 
                 // Reload the FieldSets
                 FieldSetControl.LoadItems(SelectedTable.ReaderFieldSets);

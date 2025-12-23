@@ -9,12 +9,13 @@ using DataJuggler.Net.Sql;
 using DataJuggler.Win.Controls;
 using DataJuggler.Win.Controls.Interfaces;
 using DataTierClient.ClientUtil;
+using DataAccessComponent.Connection;
 using DataTier.Net.StoredProcedureGenerator;
 using DataTierClient.Objects;
 using DataTierClient.Xml.Writers;
 using ObjectLibrary.BusinessObjects;
 using ObjectLibrary.Enumerations;
-using DataGateway;
+using DataAccessComponent.DataGateway;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -418,7 +419,7 @@ namespace DataTierClient.Controls
                 if (this.HasMethodInfo)
                 {
                     // Create a new instance of a 'Gateway' object.
-                    Gateway gateway = new Gateway();
+                    Gateway gateway = new Gateway(ConnectionConstants.Name);
 
                     // find the Method
                     Method method = gateway.FindMethod(this.MethodInfo.MethodId);
@@ -490,10 +491,10 @@ namespace DataTierClient.Controls
                     if (NullHelper.Exists(orderByFieldSet))
                     {
                         // set the gateway
-                        Gateway gateway = new Gateway();
+                        Gateway gateway = new Gateway(ConnectionConstants.Name);
 
                         // load the orderByFields
-                        orderByFieldSet.FieldSetFields = gateway.LoadFieldSetFieldViewsByFieldSetId(orderByFieldSet.FieldSetId);
+                        orderByFieldSet.FieldSetFields = gateway.LoadFieldSetFieldViewsForFieldSetId(orderByFieldSet.FieldSetId);
                     }
 
                     // Set the Name of the Table

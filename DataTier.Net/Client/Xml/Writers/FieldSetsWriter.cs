@@ -107,7 +107,7 @@ namespace DataTierClient.Xml.Writers
                     // Write out the value for FetchAllForTable
 
                     sb.Append(indentString2);
-                    sb.Append("<FetchAllForTable>" + fieldSet.FetchAllForTable + "</FetchAllForTable>" + Environment.NewLine);
+                    sb.Append("<FetchAllForTable>" + fieldSet.LoadByTableId + "</FetchAllForTable>" + Environment.NewLine);
 
                     // Write out the value for Fields
 

@@ -2,7 +2,7 @@
 
 #region using statements
 
-using DataGateway;
+using DataAccessComponent.DataGateway;
 using DataJuggler.Core.UltimateHelper;
 using DataJuggler.Win.Controls;
 using DataJuggler.Win.Controls.Interfaces;
@@ -12,6 +12,7 @@ using DataTierClient.Forms;
 using DataTierClient.Objects;
 using DataTierClient.Xml.Writers;
 using ObjectLibrary.BusinessObjects;
+using DataAccessComponent.Connection;
 using ObjectLibrary.Enumerations;
 using System;
 using System.Collections.Generic;
@@ -107,13 +108,13 @@ namespace DataTierClient.Controls
                         if ((this.HasSelectedFieldSet) && (!this.SelectedFieldSet.IsNew))
                         {
                             // Create a new instance of a 'Gateway' object.
-                            Gateway gateway = new Gateway();
+                            Gateway gateway = new Gateway(ConnectionConstants.Name);
 
                             // Load the FieldSetFields for this table
                             this.SelectedFieldSet.Fields = FieldSetHelper.LoadFieldSetFields(this.SelectedFieldSet.FieldSetId);
 
                             // Load the FieldSetFields
-                            this.SelectedFieldSet.FieldSetFields = gateway.LoadFieldSetFieldViewsByFieldSetId(SelectedFieldSet.FieldSetId);
+                            this.SelectedFieldSet.FieldSetFields = gateway.LoadFieldSetFieldViewsForFieldSetId(SelectedFieldSet.FieldSetId);
                         }
 
                         // Display the selectedFieldSet
@@ -1202,7 +1203,7 @@ namespace DataTierClient.Controls
                     bool isNew = this.SelectedFieldSet.IsNew;
 
                     // Create a new instance of a 'Gateway' object.
-                    Gateway gateway = new Gateway();
+                    Gateway gateway = new Gateway(ConnectionConstants.Name);
 
                     // perform the save
                     bool saved = gateway.SaveFieldSet(ref selectedFieldSet);
@@ -1225,7 +1226,7 @@ namespace DataTierClient.Controls
                         }
 
                         // perform the delete
-                        bool deleted = gateway.DeleteFieldSetFieldsForFieldSetId(this.SelectedFieldSet.FieldSetId);
+                        bool deleted = gateway.DeleteFieldSetFieldByFieldSetId(this.SelectedFieldSet.FieldSetId);
 
                         // make sure the delete was successful
                         if (deleted)
@@ -1278,7 +1279,7 @@ namespace DataTierClient.Controls
                     if (saved)
                     {
                         // reload the FieldSets
-                        this.SelectedTable.FieldSets = gateway.LoadFieldSetsForTable(this.SelectedTable.TableId);
+                        this.SelectedTable.FieldSets = gateway.LoadFieldSetsForTableId(this.SelectedTable.TableId);
 
                         // redisplay the FieldSets
                         DisplayFieldSets(this.SelectedFieldSet.FieldSetId);
@@ -1592,7 +1593,7 @@ namespace DataTierClient.Controls
                             if (confirmed)
                             {
                                 // Create a new instance of a 'Gateway' object.
-                                Gateway gateway = new Gateway();
+                                Gateway gateway = new Gateway(ConnectionConstants.Name);
 
                                 // perform the delete
                                 bool deleted = gateway.DeleteFieldSet(this.SelectedFieldSet.FieldSetId);
@@ -1604,7 +1605,7 @@ namespace DataTierClient.Controls
                                     this.SelectedFieldSet = null;
 
                                     // reload the field sets
-                                    this.SelectedTable.FieldSets = gateway.LoadFieldSetsForTable(this.SelectedTable.TableId);
+                                    this.SelectedTable.FieldSets = gateway.LoadFieldSetsForTableId(this.SelectedTable.TableId);
 
                                     // Redisplay the SelectedFieldSets
                                     this.DisplayFieldSets();
@@ -1690,20 +1691,20 @@ namespace DataTierClient.Controls
                 if (this.HasSelectedTable)
                 {
                     // Create a new instance of a 'Gateway' object.
-                    Gateway gateway = new Gateway();
+                    Gateway gateway = new Gateway(ConnectionConstants.Name);
 
                     // If the value for the property SelectedTable.HasFields is false
                     if (!SelectedTable.HasFields)
                     {
                         // load the fields
-                        SelectedTable.Fields = gateway.LoadDTNFieldsForTable(SelectedTable.TableId);
+                        SelectedTable.Fields = gateway.LoadDTNFieldsForTableId(SelectedTable.TableId);
                     }
 
                     // if the fieldSets have not been loaded
                     if (!SelectedTable.HasFieldSets)
                     {
                         // Load the FieldSets
-                        SelectedTable.FieldSets = gateway.LoadFieldSetsForTable(SelectedTable.TableId);
+                        SelectedTable.FieldSets = gateway.LoadFieldSetsForTableId(SelectedTable.TableId);
 
                         
                     }

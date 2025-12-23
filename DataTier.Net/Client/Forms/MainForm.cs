@@ -2,8 +2,9 @@
 
 #region using statements
 
-using ApplicationLogicComponent.Controllers;
-using DataGateway;
+using DataAccessComponent.Connection;
+using DataAccessComponent.Controllers;
+using DataAccessComponent.DataGateway;
 using DataJuggler.Core.UltimateHelper;
 using DataJuggler.Core.UltimateHelper.Objects;
 using DataJuggler.Net;
@@ -28,6 +29,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Windows.Forms;
+using XmlMirror.Runtime.Objects;
 
 #endregion
 
@@ -221,7 +223,7 @@ namespace DataTierClient.Forms
                 Application.DoEvents();
 
                 // Reload the table here because because New Tables are not saved if you don't
-                this.OpenProject.Tables = gateway.LoadDTNTablesByProjectId(this.OpenProject.ProjectId);
+                this.OpenProject.Tables = gateway.LoadDTNTablesForProjectId(this.OpenProject.ProjectId);
 
                 // Create a new instance of a 'DataEditorForm' object.
                 DataEditorForm dataEditor = new DataEditorForm();
@@ -284,8 +286,8 @@ namespace DataTierClient.Forms
                     // set the value
                     Admin.CheckForUpdates = isChecked;
 
-                    // Create a new instance of a 'Gateway' object.
-                    Gateway gateway = new Gateway();
+                    // Create a new instance of a 'Gateway' object and set the Connection Name
+                    Gateway gateway = new Gateway(ConnectionConstants.Name);
 
                     // save the admin
                     bool saved = gateway.SaveAdmin(ref admin);
@@ -335,7 +337,7 @@ namespace DataTierClient.Forms
                 string gatewayPath = Path.Combine(OpenProject.ProjectFolder, @"DataGateway\Gateway.cs");
 
                 // if the Template Version is 2
-                if (OpenProject.TemplateVersion == 2)
+                if (OpenProject.Ta == 2)
                 {
                     // V2 inside DataAccessComponent
                     gatewayPath = Path.Combine(OpenProject.ProjectFolder, @"DataAccessComponent\DataGateway\Gateway.cs");
@@ -700,9 +702,6 @@ namespace DataTierClient.Forms
 					// Creating Data Operations
 					PerformBuildOperation(BuildDataOperationMethods, "Creating Data Operation Methods...");
 
-					// Creating DataManager
-					PerformBuildOperation(BuildDataManager, "Creating Data Manager...");
-
 					// Creating Stored Procedure Objects
 					PerformBuildOperation(BuildStoredProcedureObjects, "Creating Stored Procedure Objects...");
 
@@ -914,21 +913,13 @@ namespace DataTierClient.Forms
                 try
                 {
                     // if data tables exists
-                    if (this.DataTables != null)
+                    if ((HasOpenProject) && (this.DataTables != null))
                     {
                         // Create ClassBuilder
                         ClassBuilder classBuilder = new ClassBuilder(false);
 
                         // 12.19.2021
                         TargetFrameworkEnum targetFramework = OpenProject.TargetFramework;
-
-                        // 10.28.2021: Testing if this is needed.
-                        // if not .NET8, this needs to be reloaded
-                        //if (targetFramework != TargetFrameworkEnum.Net8)
-                        //{
-                        //    // reload
-                        //    OpenProject.CreateDefaultReferences();
-                        //}
 
                         // load references
                         List<ProjectReference> references = this.OpenProject.WriterReferencesSet.References;
@@ -1115,58 +1106,6 @@ namespace DataTierClient.Forms
                 // return value
                 return success;
             } 
-            #endregion
-
-            #region BuildDataManager(ref Exception error)
-            /// <summary>
-            /// This method builds the DataManager object.
-            /// </summary>
-            private bool BuildDataManager(ref Exception error)
-            {
-                // initial value
-                bool success = false;
-            
-                try
-                {
-                    // if the OpenProject exists
-                    if(this.OpenProject != null)
-                    {
-                        // Create A ClassBuilder to build DataObjects
-                        ClassBuilder classBuilder = new ClassBuilder(false);
-
-                        // load references
-                        List<ProjectReference> references = this.OpenProject.DataManagerReferencesSet.References;
-                        DataJuggler.Net.ReferencesSet convertedReferences = classBuilder.ConvertReferences(references, "Controllers");
-
-                        // Get namespace and project namew
-                        string nameSpaceName = this.OpenProject.DataManagerNamespace;
-                        string rootDataManagerPath = this.OpenProject.DataManagerFolder;
-
-                        // 12.19.2021
-                        TargetFrameworkEnum targetFramework = (TargetFrameworkEnum) OpenProject.TargetFramework;
-
-                        // Create 
-                        DataManagerCreator creator = new DataManagerCreator(this.DataTables, convertedReferences, rootDataManagerPath, OpenProject.ProjectName, nameSpaceName, this.FileManager, targetFramework);
-
-                        // local for created
-                        creator.CreateDataManager(this.DataTables);
-
-                        // success = true
-                        success = true;
-                    }
-                }
-                catch (Exception exception)
-                {
-                    // Set Error
-                    error = exception;
-                
-                    // return value
-                    success = false;
-                }
-                
-                // return value
-                return success;
-            }
             #endregion
 
             #region BuildProcedures(ref Exception error)
@@ -1441,7 +1380,7 @@ namespace DataTierClient.Forms
                             if (NullHelper.Exists(table))
                             {
                                 // now load the fields for this table
-                                table.Fields = gateway.LoadDTNFieldsForTable(method.TableId);
+                                table.Fields = gateway.LoadDTNFieldsForTableId(method.TableId);
 
                                 // Convert the table
                                 dataTable = DataConverter.ConvertDataTable(table, this.OpenProject);
@@ -1627,7 +1566,7 @@ namespace DataTierClient.Forms
                     if (NullHelper.Exists(db, db.Tables, Gateway))
                     {
                         // Update for DataTier.Net: Custom Methods must be loaded
-                        List<Method> methods = this.Gateway.LoadMethodsByProjectId(this.OpenProject.ProjectId);
+                        List<Method> methods = this.Gateway.LoadMethodsForProjectId(this.OpenProject.ProjectId);
                         List<TextLine> textLines = null;
 
                         // If the methods collection exists and has one or more items
@@ -1977,7 +1916,7 @@ namespace DataTierClient.Forms
                     }
 
                     // Create the gateway
-                    this.Gateway = new Gateway();
+                    this.Gateway = new Gateway(ConnectionConstants.Name);
 
                     // Load Projects
                     this.AllProjects = this.Gateway.LoadProjects();
@@ -2100,7 +2039,7 @@ namespace DataTierClient.Forms
                 if (this.HasOpenProject)
                 {
                     // load the tables for this project
-                    OpenProject.Tables = Gateway.LoadDTNTablesByProjectId(this.OpenProject.ProjectId);
+                    OpenProject.Tables = Gateway.LoadDTNTablesForProjectId(this.OpenProject.ProjectId);
 
                     // If the tables collection exists and has one or more items
                     if (ListHelper.HasOneOrMoreItems(OpenProject.Tables))
@@ -2109,7 +2048,7 @@ namespace DataTierClient.Forms
                         foreach (DTNTable table in OpenProject.Tables)
                         {
                             // Load the fields for this table
-                            table.Fields = gateway.LoadDTNFieldsForTable(table.TableId);
+                            table.Fields = gateway.LoadDTNFieldsForTableId(table.TableId);
                         }
                     }
                 }
@@ -2204,7 +2143,7 @@ namespace DataTierClient.Forms
                 Application.DoEvents();
 
                 // Create a new instance of a 'Gateway' object.
-                Gateway gateway = new Gateway();
+                Gateway gateway = new Gateway(ConnectionConstants.Name);
 
                 // locals
                 Exception error = null;
@@ -2221,7 +2160,7 @@ namespace DataTierClient.Forms
                     List<DTNTable> tables = this.OpenProject.Tables;
 
                     // load the existingTables
-                    existingTables = gateway.LoadDTNTablesByProjectId(OpenProject.ProjectId);
+                    existingTables = gateway.LoadDTNTablesForProjectId(OpenProject.ProjectId);
 
                     // The tables above stay loaded in memory, so we still have the values for Exclude 
                     // which is going to be reset after the values are set
@@ -2254,7 +2193,7 @@ namespace DataTierClient.Forms
                                 if (NullHelper.Exists(existingTable))
                                 {
                                     // load the existing Fields
-                                    existingTable.Fields = gateway.LoadDTNFieldsForTable(existingTable.TableId);
+                                    existingTable.Fields = gateway.LoadDTNFieldsForTableId(existingTable.TableId);
 
                                     // preserve the Exclude value
                                     table.Exclude = existingTable.Exclude;
@@ -2557,10 +2496,10 @@ namespace DataTierClient.Forms
             internal bool TestDatabaseConnection()
             {
                 // initial value
-                bool connected = false;
+                bool success = false;
             
                 // Create App Controller
-                this.AppController = new ApplicationController();
+                this.Gateway = new Gateway(ConnectionConstants.Name);
 
                 // Clear ListBox
                 this.StatusListBox.Items.Clear();
@@ -2568,14 +2507,39 @@ namespace DataTierClient.Forms
                 // Add a column header
                 AddColumnHeader();
 
-                // Creating Data Writers
-                connected = PerformBuildOperation(this.AppController.TestDatabaseConnection, "Testing Database Connection...");
+                // initial display
+                string displayText = "Test Database Connection... Passed. ";
+
+                // Display Message
+                ListViewItem listItem = CreateStatusMessage(displayText);
+            
+                // Exception to show the error, if any
+                Exception error = null;
+                
+                // execute method
+                success = Gateway.TestDatabaseConnection(ref error);
+
+                // if not connected
+                if (!success)
+                {
+                    // Show a failure message
+                    displayText = "Test Database Connection... Failed. ";
+
+                    // recreate
+                    listItem = CreateStatusMessage(displayText);                
+                }
+                
+                // set the tag
+                listItem.Tag = error;
+
+                // now update the list item with success or failure
+                UpdateStatus(listItem, success);
 
                 // Create Status Message
                 CreateStatusMessage("Test Complete.");
                 
                 // return value
-                return connected;
+                return success;
             } 
             #endregion
             
@@ -2641,7 +2605,7 @@ namespace DataTierClient.Forms
                     string gatewayPath = Path.Combine(OpenProject.ProjectFolder, @"DataGateway\Gateway.cs");
 
                     // if the Template Version is 2
-                    if (OpenProject.TemplateVersion == 2)
+                    if (OpenProject.Ta == 2)
                     {
                         // V2 inside DataAccessComponent
                         gatewayPath = Path.Combine(OpenProject.ProjectFolder, @"DataAccessComponent\DataGateway\Gateway.cs");

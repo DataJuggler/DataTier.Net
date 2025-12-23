@@ -2,9 +2,10 @@
 #region using statements
 
 using ObjectLibrary.BusinessObjects;
-using DataGateway;
-using ApplicationLogicComponent.ClientValidation;
-using ApplicationLogicComponent.Controllers;
+using DataAccessComponent.DataGateway;
+using DataAccessComponent.ClientValidation;
+using DataAccessComponent.Controllers;
+using DataAccessComponent.Connection;
 using System;
 using System.Windows.Forms;
 using DataTierClient.Controls.Interfaces;
@@ -266,7 +267,7 @@ namespace DataTierClient.Controls
             internal void SaveAndClose()
             {
                 // Create a new instance of a 'DataGateway' object.
-                Gateway gateway = new Gateway();
+                Gateway gateway = new Gateway(ConnectionConstants.Name);
 
                 // locals
 				bool databasesSaved = false;
@@ -538,7 +539,7 @@ namespace DataTierClient.Controls
                     RequiredField storedProcNamespaceField = new RequiredField("StoredProcedureObjectNamespace", RequiredField.CreateMissingRequiredFieldMessage("Stored Procedure Object Namespace", SelectedProject.StoredProcedureObjectNamespace, false), SelectedProject, false);
 
                     // if V2 of Templates
-                    if (SelectedProject.TemplateVersion == 2)
+                    if (SelectedProject.Ta == 2)
                     {
                         string temp = SelectedProject.DataManagerFolder;
                     }

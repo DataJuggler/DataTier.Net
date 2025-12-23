@@ -1,7 +1,7 @@
 
 #region using statements
 
-using DataGateway;
+using DataAccessComponent.DataGateway;
 using DataJuggler.Core.UltimateHelper;
 using DataJuggler.Win.Controls;
 using DataJuggler.Win.Controls.Interfaces;
@@ -52,7 +52,7 @@ namespace DataTierClient.Controls
         private const string InstallDataTierNet8 = "dotnet new install DataJuggler.DataTier.NET8.ProjectTemplates@8.0.0 --force";
         private const string InstallDataTierNet8V2 = "dotnet new install DataJuggler.DataTier.NET8.ProjectTemplatesV2@8.0.0 --force";
         private const string InstallDataTierNet9V2 = "dotnet new install DataJuggler.DataTier.Net9.ProjectTemplatesV2@9.10.7 --force";
-        private const string InstallDataTierNet10V2 = "dotnet new install DataJuggler.DataTier.Net10.ProjectTemplatesV2@10.0.1 --force";
+        private const string InstallDataTierNet10V2 = "dotnet new install DataJuggler.DataTier.Net10.ProjectTemplatesV2@10.0.4 --force";
         
         // Used to install the Project Templates on the ProjectEditorControl.cs
         private const int GraphWidth = 268;
@@ -158,25 +158,9 @@ namespace DataTierClient.Controls
 
                             // if the value for installed is true
                             if (installed)
-                            {
-                                // wait a small delay
-                                int second = DateTime.Now.Second;
-                                int newSecond = 0;
-                                int duration = 0;
-
-                                do
-                                {
-                                    // Get the new second
-                                    newSecond = DateTime.Now.Second;
-
-                                    // if a second changed
-                                    if (newSecond != second)
-                                    {
-                                        // Increment the value for duration
-                                        duration++;
-                                    }
-
-                                } while (duration < 2);
+                            {  
+                                // Delay for 3 seconds
+                               DelayHelper.Delay(3);
 
                                 // Create a Process to launch a command window (hidden) to create the item templates
                                 Process process = new Process();
@@ -202,7 +186,7 @@ namespace DataTierClient.Controls
                                 }
                                 else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net8)
                                 {
-                                    if (SelectedProject.TemplateVersion == 1)
+                                    if (SelectedProject.Ta == 1)
                                     {
                                         // Create .NET8
                                         startInfo.Arguments = "/C " + CreateDataTierNet8;
@@ -248,20 +232,20 @@ namespace DataTierClient.Controls
                                     solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net8.ClassLibrary.sln");
 
                                     // if version 2
-                                    if (SelectedProject.TemplateVersion == 2)
+                                    if (SelectedProject.Ta == 2)
                                     {
                                         // Change for V2 templates
                                         solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net8.ClassLibraryV2.sln");
                                     }
                                 }
                                 // if .NET7
-                                if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net7)
+                                else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net7)
                                 {
                                     // switch for Net7
                                     solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net7.ClassLibrary.sln");
                                 }
                                 // if .NET 6
-                                if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net6)
+                                else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net6)
                                 {
                                     // switch for Net6
                                     solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net6.ClassLibrary.sln");
@@ -402,7 +386,7 @@ namespace DataTierClient.Controls
                     // Show the helpForm
                     helpForm.ShowDialog();
                 }
-                else if (SelectedProject.TemplateVersion == 2)
+                else if (SelectedProject.Ta == 2)
                 {
                     // Create the helpForm
                     HelpForm3 helpForm3 = new HelpForm3();
@@ -523,10 +507,10 @@ namespace DataTierClient.Controls
                 }
 
                 // if the SelectedProject exists and is new, this must be changed
-                if ((HasSelectedProject) && (SelectedProject.TemplateVersion != templateVersion))
+                if ((HasSelectedProject) && (SelectedProject.Ta != templateVersion))
                 {
                     // Set the TemplateVersion
-                    SelectedProject.TemplateVersion = templateVersion;
+                    SelectedProject.Ta = templateVersion;
 
                     // As this changes, the default references need to be recreated.
                     SelectedProject.CreateDefaultReferences();
@@ -554,27 +538,6 @@ namespace DataTierClient.Controls
         #endregion
         
         #region Methods
-
-            #region CheckIfTemplatesInstalled()
-            /// <summary>
-            /// returns the If Templates Installed
-            /// </summary>
-            public bool CheckIfTemplatesInstalled()
-            {
-                // initial value
-                bool isTemplatesInstalled = false;
-
-                // locals                
-                string packageName = GetPackageName();
-                // string version = GetPackageVersion();
-
-                // Is this package installed
-                isTemplatesInstalled = DotNetCLIHelper.IsTemplatePackageInstalled(packageName);
-                
-                // return value
-                return isTemplatesInstalled;
-            }
-            #endregion
             
             #region DisplaySelectedProject()
             /// <summary>
@@ -594,14 +557,14 @@ namespace DataTierClient.Controls
                     // set values
                     projectName = this.SelectedProject.ProjectName;
                     projectFolder = this.SelectedProject.ProjectFolder;                    
-                    projectTemplatesVersion2 = (SelectedProject.TemplateVersion == 2);
+                    projectTemplatesVersion2 = (SelectedProject.Ta == 2);
                     projectTypeIndex = ProjectTypeControl.FindItemIndexByValue(SelectedProject.TargetFramework.ToString());                    
 
                     // if a new project
                     if (SelectedProject.IsNew)
                     {
                         // New projects should be version 2
-                        SelectedProject.TemplateVersion = 2;
+                        SelectedProject.Ta = 2;
                         projectTemplatesVersion2 = true;
                     }
                 }
@@ -658,118 +621,6 @@ namespace DataTierClient.Controls
                 return index;
             }
             #endregion
-
-            #region GetPackageName()
-            /// <summary>
-            /// returns the Package Name
-            /// </summary>
-            public string GetPackageName()
-            {
-                // initial value
-                string packageName = "";
-
-                if (HasSelectedProject)
-                {
-                    if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net5)
-                    {
-                        // Set the return value
-                        packageName = "DataJuggler.DataTier.Net5.ProjectTemplates";
-                    }
-                    else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net6)
-                    {
-                        // Set the return value
-                        packageName = "DataJuggler.DataTier.Net6.ProjectTemplates";
-                    }
-                    else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net7)
-                    {
-                        // Set the return value
-                        packageName = "DataJuggler.DataTier.Net7.ProjectTemplates";
-                    }
-                    else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net8)
-                    {
-                        if (SelectedProject.TemplateVersion == 1)
-                        {
-                            // Set the return value
-                            packageName = "DataJuggler.DataTier.Net8.ProjectTemplates";
-                        }
-                        else
-                        {
-                            // Set the return value
-                            packageName = "DataJuggler.DataTier.Net8.ProjectTemplatesV2";
-                        }
-                    }
-                    else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net9)
-                    {
-                        // .Net 9
-                        
-                        // Set the return value
-                        packageName = "DataJuggler.DataTier.Net9.ProjectTemplatesV2";                        
-                    }
-                    else
-                    {
-                        // .Net 10
-                        
-                        // Set the return value
-                        packageName = "DataJuggler.DataTier.Net10.ProjectTemplatesV2";                        
-                    }
-                }
-                
-                // return value
-                return packageName;
-            }
-            #endregion
-            
-            #region GetPackageVersion()
-            /// <summary>
-            /// returns the Package Version
-            /// </summary>
-            public string GetPackageVersion()
-            {
-                // initial value
-                string version = "";
-
-                if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net5)
-                {
-                    // Use Net5
-                    
-                    version = "2.5.6";
-                }
-                else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net6)
-                {  
-                    version = "6.0.2";
-                }
-                else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net7)
-                {
-                    // Use Net6                    
-                    version = "7.1.1";
-                }                                        
-                else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net8)
-                {
-                    // Dot Net 8 can be TemplateVersion 1 or 2
-
-                    if (SelectedProject.TemplateVersion == 1)
-                    {
-                        // .NET 8 Template Version 1                        
-                        version = "8.0.0";
-                    }
-                    else
-                    {
-                        // Template Version 2                        
-                        version = "8.0.0";
-                    }
-                }
-                else
-                {
-                    // .NET 9 can only be TemplateVersion 2
-
-                    // Template Version 2                    
-                    version = "9.0.1";
-                }
-
-                // return value
-                return version;
-            }
-            #endregion
             
             #region Init()
             /// <summary>
@@ -812,77 +663,92 @@ namespace DataTierClient.Controls
                 // Increment the value for Attempts
                 Attempts++;
 
+                // Uninstall doesn't seem to work, or causes the install to fail. 
+
+                // Show this label for this part so the user knows something is happening
+                UninstallLabel.Visible = true;
+
+                // Update the UI
+                Refresh();
+                Application.DoEvents();
+
+                // Uninstall an old version in case there is one
+                UninstallPreviousVersion();
+
+                // Wait up to 5 seconds for the uninstall to finish
+                DelayHelper.Delay(5);
+
+                // No longer visible
+                UninstallLabel.Visible = false;
+
+                // Update the UI
+                Refresh();
+                Application.DoEvents();
+
                 try               
-                 {
-                    // Update 11.20.2024: Trying some new code to detect if a Package is installed.
-                    installed = CheckIfTemplatesInstalled();
+                { 
+                    // Create a Process to launch a command window (hidden) to create the item templates
+                    Process process = new Process();
+                    ProcessStartInfo startInfo = new ProcessStartInfo();
+                    startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    startInfo.FileName = "cmd.exe";
+                    startInfo.WorkingDirectory = SelectedProject.ProjectFolder;
 
-                    // if not installed
-                    if (!installed)
+                    // Note: The /C parameter tells the command window to terminate after completion.
+
+                    if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net5)
                     {
-                        // Create a Process to launch a command window (hidden) to create the item templates
-                        Process process = new Process();
-                        ProcessStartInfo startInfo = new ProcessStartInfo();
-                        startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                        startInfo.FileName = "cmd.exe";
-                        startInfo.WorkingDirectory = SelectedProject.ProjectFolder;
+                        // Use Net5
+                        startInfo.Arguments = "/C " + InstallDataTierNet5;
+                    }
+                    else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net6)
+                    {
+                        // Use Net6
+                        startInfo.Arguments = "/C " + InstallDataTierNet6;
+                    }
+                    else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net7)
+                    {
+                        // Use Net6
+                        startInfo.Arguments = "/C " + InstallDataTierNet7;
+                    }                                        
+                    else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net8)
+                    {
+                        // Dot Net 8 can be TemplateVersion 1 or 2
 
-                        // Note: The /C parameter tells the command window to terminate after completion.
-
-                        if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net5)
+                        if (SelectedProject.Ta == 1)
                         {
-                            // Use Net5
-                            startInfo.Arguments = "/C " + InstallDataTierNet5;
-                        }
-                        else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net6)
-                        {
-                            // Use Net6
-                            startInfo.Arguments = "/C " + InstallDataTierNet6;
-                        }
-                        else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net7)
-                        {
-                            // Use Net6
-                            startInfo.Arguments = "/C " + InstallDataTierNet7;
-                        }                                        
-                        else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net8)
-                        {
-                            // Dot Net 8 can be TemplateVersion 1 or 2
-
-                            if (SelectedProject.TemplateVersion == 1)
-                            {
-                                // .NET 8 Template Version 1
-                                startInfo.Arguments = "/C " + InstallDataTierNet8;
-                            }
-                            else
-                            {
-                                // Template Version 2
-                                startInfo.Arguments = "/C " + InstallDataTierNet8V2;
-                            }
-                        }
-                        else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net9)
-                        {
-                            // .NET 9 can only be TemplateVersion 2
-
-                            // Template Version 2
-                            startInfo.Arguments = "/C " + InstallDataTierNet9V2;
+                            // .NET 8 Template Version 1
+                            startInfo.Arguments = "/C " + InstallDataTierNet8;
                         }
                         else
                         {
-                            // .NET 10 can only be TemplateVersion 2
-
                             // Template Version 2
-                            startInfo.Arguments = "/C " + InstallDataTierNet10V2;
+                            startInfo.Arguments = "/C " + InstallDataTierNet8V2;
                         }
-
-                        // Set the StartInfo
-                        process.StartInfo = startInfo;
-
-                        // Start
-                        process.Start();
-
-                        // Set to true
-                        installed = true;
                     }
+                    else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net9)
+                    {
+                        // .NET 9 can only be TemplateVersion 2
+
+                        // Template Version 2
+                        startInfo.Arguments = "/C " + InstallDataTierNet9V2;
+                    }
+                    else
+                    {
+                        // .NET 10 can only be TemplateVersion 2
+
+                        // Template Version 2
+                        startInfo.Arguments = "/C " + InstallDataTierNet10V2;
+                    }
+
+                    // Set the StartInfo
+                    process.StartInfo = startInfo;
+
+                    // Start
+                    process.Start();
+
+                    // Set to true
+                    installed = true;
                  }
                  catch (Exception error)
                  {
@@ -994,6 +860,30 @@ namespace DataTierClient.Controls
             }
             #endregion
 
+            #region UninstallPreviousVersion()
+            /// <summary>
+            /// Uninstall Previous Version
+            /// </summary>
+            public void UninstallPreviousVersion()
+            {
+                try
+                {
+                    // create the control
+                    RemoveTemplatesControl control = new RemoveTemplatesControl();
+
+                    // Set the SelectedFramework
+                    control.SelectedFramework = this.SelectedProject.TargetFramework;
+
+                    // perform the remove
+                    control.PerformRemove(true);
+                }
+                catch
+                {
+                    
+                }
+            }
+            #endregion
+            
         #endregion
 
         #region Properties

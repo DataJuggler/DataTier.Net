@@ -2,7 +2,7 @@
 
 #region using statements
 
-using DataGateway;
+using DataAccessComponent.DataGateway;
 using DataJuggler.Core.UltimateHelper;
 using System;
 using System.Collections.Generic;
@@ -11,6 +11,7 @@ using ObjectLibrary.BusinessObjects;
 using ObjectLibrary.Enumerations;
 using System.Linq;
 using System.Windows.Forms;
+using DataAccessComponent.Connection;
 using System.Text;
 using DataTierClient.ClientUtil;
 using DataJuggler.Net.Enumerations;
@@ -280,10 +281,10 @@ namespace DataTierClient.Builders
                 if ((NullHelper.Exists(db)) && (!ListHelper.HasOneOrMoreItems(db.Tables)))
                 {
                     // Create a new instance of a 'Gateway' object.
-                    Gateway gateway = new Gateway();
+                    Gateway gateway = new Gateway(ConnectionConstants.Name);
 
                     // load the tables
-                    db.Tables = gateway.LoadDTNTablesByProjectId(this.CurrentProject.ProjectId);
+                    db.Tables = gateway.LoadDTNTablesForProjectId(this.CurrentProject.ProjectId);
                 }
 
                 // if the DataManager does not exist

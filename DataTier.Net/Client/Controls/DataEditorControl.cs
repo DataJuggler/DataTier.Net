@@ -7,7 +7,8 @@ using DataJuggler.Win.Controls.Interfaces;
 using DataJuggler.Net;
 using DataTierClient.Forms;
 using DataJuggler.Core.UltimateHelper;
-using DataGateway;
+using DataAccessComponent.Connection;
+using DataAccessComponent.DataGateway;
 using DataTierClient.ClientUtil;
 using DataTierClient.Controls.Interfaces;
 using DataTierClient.Objects;
@@ -275,7 +276,7 @@ namespace DataTierClient.Controls
                     
                     // Create each file name
                     string businessObjectFileName = Path.Combine(Project.ProjectFolder, @"ObjectLibrary\BusinessObjects", this.SelectedTable.TableName + ".business.cs");
-                    string controllerFileName = Path.Combine(Project.ProjectFolder, @"ApplicationLogicComponent\Controllers", this.SelectedTable.TableName + "Controller.cs");
+                    string controllerFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\Controllers", this.SelectedTable.TableName + "Controller.cs");
                     string dataManagerFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\Data", SelectedTable.TableName + "Manager.cs");
                     string dataObjectFileName = Path.Combine(Project.ProjectFolder, @"ObjectLibrary\BusinessObjects", this.SelectedTable.TableName + ".data.cs");
                     string deleteProcFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\StoredProcedureManager\DeleteProcedures", "Delete" + this.SelectedTable.TableName + "StoredProcedure.cs");
@@ -283,7 +284,7 @@ namespace DataTierClient.Controls
                     string findProcFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\StoredProcedureManager\FetchProcedures", "Find" + this.SelectedTable.TableName + "StoredProcedure.cs");
                     string gatewayFileName = Path.Combine(Project.ProjectFolder, @"DataGateway", "Gateway.cs");
                     string insertProcFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\StoredProcedureManager\InsertProcedures", "Insert" + this.SelectedTable.TableName + "StoredProcedure.cs");
-                    string methodsFileName = Path.Combine(Project.ProjectFolder, @"ApplicationLogicComponent\DataOperations", this.SelectedTable.TableName + "Methods.cs");
+                    string methodsFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\DataOperations", this.SelectedTable.TableName + "Methods.cs");
                     string readerFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\Data\Readers", this.SelectedTable.TableName + "Reader.cs");
                     string updateProcFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\StoredProcedureManager\UpdateProcedures", "Update" + this.SelectedTable.TableName + "StoredProcedure.cs");
                     string writerBaseFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\Data\Writers", this.SelectedTable.TableName + "WriterBase.cs");
@@ -306,7 +307,7 @@ namespace DataTierClient.Controls
                     ProjectFile writerFileBase = new ProjectFile(writerBaseFileName, DataManager.ProjectTypeEnum.DAC);
 
                     // only V2 Templates
-                    if (Project.TemplateVersion == 2)
+                    if (Project.Ta == 2)
                     {
                         // replace out 
                         controllerFile.ProjectType = DataManager.ProjectTypeEnum.DAC;                        
@@ -351,7 +352,7 @@ namespace DataTierClient.Controls
                     projectFileManager.GatewayMethodNames.Add("Save" + this.SelectedTable.TableName);
 
                     // load the methods for this project
-                    List<Method> methods = gateway.LoadMethodsForTable(this.SelectedTable.TableId);
+                    List<Method> methods = gateway.LoadMethodsForTableId(this.SelectedTable.TableId);
 
                     // If the methods collection exists and has one or more items
                     if (ListHelper.HasOneOrMoreItems(methods))
@@ -509,7 +510,7 @@ namespace DataTierClient.Controls
                     if (table.TableId > 0)
                     {
                         // load the fields for this table
-                        table.Fields = this.Gateway.LoadDTNFieldsForTable(table.TableId);
+                        table.Fields = this.Gateway.LoadDTNFieldsForTableId(table.TableId);
 
                         // Set the SelectedTable (this displays the fields)
                         this.SelectedTable = table;
@@ -518,13 +519,13 @@ namespace DataTierClient.Controls
                         if (this.HasSelectedTable)
                         {
                             // Load the Methods
-                            this.SelectedTable.Methods = this.Gateway.LoadMethodsForTable(this.SelectedTable.TableId);
+                            this.SelectedTable.Methods = this.Gateway.LoadMethodsForTableId(this.SelectedTable.TableId);
 
                             // Load the CustomReaders
-                            this.SelectedTable.CustomReaders = this.Gateway.LoadCustomReadersForTable(this.SelectedTable.TableId);
+                            this.SelectedTable.CustomReaders = this.Gateway.LoadCustomReadersForTableId(this.SelectedTable.TableId);
 
                             // Load the FieldSets
-                            this.SelectedTable.FieldSets = this.Gateway.LoadFieldSetsForTable(this.SelectedTable.TableId);
+                            this.SelectedTable.FieldSets = this.Gateway.LoadFieldSetsForTableId(this.SelectedTable.TableId);
                         }
 
                         // Set Loading to false
@@ -769,7 +770,7 @@ namespace DataTierClient.Controls
                 this.UserCancelled = true;
                 
                 // Create a new instance of a 'Gateway' object.
-                this.Gateway = new Gateway();
+                this.Gateway = new Gateway(ConnectionConstants.Name);
 
                 // Setup the Done button
                 this.SaveCancelControl.SetupCancelButton("Done", 80);
@@ -830,13 +831,13 @@ namespace DataTierClient.Controls
                 if ((HasProject) && (ListHelper.HasOneOrMoreItems(Project.Tables)))
                 {  
                     // create a new gateway object
-                    Gateway gateway = new Gateway();
+                    Gateway gateway = new Gateway(ConnectionConstants.Name);
 
                     // the fields for any projects
                     foreach (DTNTable table in project.Tables)
                     {
                         // Load the fields for this table
-                        table.Fields = gateway.LoadDTNFieldsForTable(table.TableId);
+                        table.Fields = gateway.LoadDTNFieldsForTableId(table.TableId);
                     }
 
                     // Get the original values

@@ -33,6 +33,121 @@ namespace ObjectLibrary.BusinessObjects
 
         #region Methods
 
+            #region GetValue(string fieldName)
+            // <summary>
+            // This method returns the value for the fieldName given
+            // </summary>
+            public object GetValue(string fieldName)
+            {
+                // initial value
+                object value = "";
+
+                // // Determine the action by the fieldName
+                switch (fieldName)
+                {
+                    case "ControllerReferencesSetId":
+
+                        // set the value
+                        value = this.ControllerReferencesSetId;
+
+                        // required
+                        break;
+
+                    case "DataManagerReferencesSetId":
+
+                        // set the value
+                        value = this.DataManagerReferencesSetId;
+
+                        // required
+                        break;
+
+                    case "DataWriterReferencesSetId":
+
+                        // set the value
+                        value = this.DataWriterReferencesSetId;
+
+                        // required
+                        break;
+
+                    case "ObjectReferencesSetId":
+
+                        // set the value
+                        value = this.ObjectReferencesSetId;
+
+                        // required
+                        break;
+
+                    case "ProjectId":
+
+                        // set the value
+                        value = this.ProjectId;
+
+                        // required
+                        break;
+
+                    case "ProjectName":
+
+                        // set the value
+                        value = this.ProjectName;
+
+                        // required
+                        break;
+
+                    case "ReaderReferencesSetId":
+
+                        // set the value
+                        value = this.ReaderReferencesSetId;
+
+                        // required
+                        break;
+
+                    case "ReferenceName":
+
+                        // set the value
+                        value = this.ReferenceName;
+
+                        // required
+                        break;
+
+                    case "ReferencesId":
+
+                        // set the value
+                        value = this.ReferencesId;
+
+                        // required
+                        break;
+
+                    case "ReferencesSetId":
+
+                        // set the value
+                        value = this.ReferencesSetId;
+
+                        // required
+                        break;
+
+                    case "ReferencesSetName":
+
+                        // set the value
+                        value = this.ReferencesSetName;
+
+                        // required
+                        break;
+
+                    case "StoredProcedureReferencesSetId":
+
+                        // set the value
+                        value = this.StoredProcedureReferencesSetId;
+
+                        // required
+                        break;
+
+                }
+
+                // return value
+                return value;
+            }
+            #endregion
+
 
         #endregion
 
@@ -108,17 +223,6 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
 
-            #region ReferencesId
-            /// <summary>
-            /// This property gets or sets the value for 'ReferencesId'.
-            /// </summary>
-            public int ReferencesId
-            {
-                get { return referencesId; }
-                set { referencesId = value; }
-            }
-            #endregion
-            
             #region string ProjectName
             public string ProjectName
             {
@@ -157,6 +261,20 @@ namespace ObjectLibrary.BusinessObjects
                 set
                 {
                     referenceName = value;
+                }
+            }
+            #endregion
+
+            #region int ReferencesId
+            public int ReferencesId
+            {
+                get
+                {
+                    return referencesId;
+                }
+                set
+                {
+                    referencesId = value;
                 }
             }
             #endregion

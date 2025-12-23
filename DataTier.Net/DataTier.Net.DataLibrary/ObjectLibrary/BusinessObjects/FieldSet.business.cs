@@ -1,10 +1,10 @@
 
 #region using statements
 
+using DataJuggler.Net;
 using ObjectLibrary.Enumerations;
 using System;
 using System.Collections.Generic;
-using DataJuggler.Net;
 
 #endregion
 
@@ -16,11 +16,11 @@ namespace ObjectLibrary.BusinessObjects
     public partial class FieldSet
     {
 
-        #region Private Variables
-        private bool fetchAllForTable;
+        #region Private Variables        
         private List<DTNField> fields;
         private List<DataField> dataFields;
         private List<FieldSetFieldView> fieldSetFields;
+        private bool loadByTableId;
         #endregion
 
         #region Constructor
@@ -41,6 +41,18 @@ namespace ObjectLibrary.BusinessObjects
 
                 // Return Cloned Object
                 return newFieldSet;
+            }
+            #endregion
+
+            #region Init()
+            /// <summary>
+            /// This method performs initializations for this object.
+            /// </summary>
+            public void Init()
+            {
+                // Create the sub objects
+                this.Fields = new List<DTNField>();
+                this.FieldSetFields = new List<FieldSetFieldView>();
             }
             #endregion
 
@@ -107,18 +119,6 @@ namespace ObjectLibrary.BusinessObjects
                 return fieldSetFieldView;
             }
             #endregion
-            
-            #region Init()
-            /// <summary>
-            /// This method performs initializations for this object.
-            /// </summary>
-            public void Init()
-            {
-                // Create the sub objects
-                this.Fields = new List<DTNField>();
-                this.FieldSetFields = new List<FieldSetFieldView>();
-            }
-        #endregion
 
             #region ToString()
             /// <summary>
@@ -162,17 +162,6 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
             
-            #region FetchAllForTable
-            /// <summary>
-            /// This property gets or sets the value for 'FetchAllForTable'.
-            /// </summary>
-            public bool FetchAllForTable
-            {
-                get { return fetchAllForTable; }
-                set { fetchAllForTable = value; }
-            }
-            #endregion
-            
             #region Fields
             /// <summary>
             /// This property gets or sets the value for 'Fields'.
@@ -204,8 +193,8 @@ namespace ObjectLibrary.BusinessObjects
                 get
                 {
                     // initial value
-                    bool hasDataFields = (this.DataFields != null);
-                    
+                    bool hasDataFields = (DataFields != null);
+
                     // return value
                     return hasDataFields;
                 }
@@ -221,8 +210,8 @@ namespace ObjectLibrary.BusinessObjects
                 get
                 {
                     // initial value
-                    bool hasFields = (this.Fields != null);
-                    
+                    bool hasFields = (Fields != null);
+
                     // return value
                     return hasFields;
                 }
@@ -238,14 +227,14 @@ namespace ObjectLibrary.BusinessObjects
                 get
                 {
                     // initial value
-                    bool hasFieldSetFields = (this.FieldSetFields != null);
-                    
+                    bool hasFieldSetFields = (FieldSetFields != null);
+
                     // return value
                     return hasFieldSetFields;
                 }
             }
             #endregion
-            
+
             #region HasName
             /// <summary>
             /// This property returns true if the 'Name' exists.
@@ -263,23 +252,17 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
             
-            #region HasTableId
+            #region LoadByTableId
             /// <summary>
-            /// This property returns true if the 'TableId' is set.
+            /// This property gets or sets the value for 'LoadByTableId'.
             /// </summary>
-            public bool HasTableId
+            public bool LoadByTableId
             {
-                get
-                {
-                    // initial value
-                    bool hasTableId = (this.TableId > 0);
-                    
-                    // return value
-                    return hasTableId;
-                }
+                get { return loadByTableId; }
+                set { loadByTableId = value; }
             }
             #endregion
-            
+
         #endregion
 
     }

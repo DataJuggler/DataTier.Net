@@ -2,25 +2,24 @@
 
 #region using statements
 
-using System;
-using System.Collections.Generic;
 using DataJuggler.Net.Enumerations;
 using ObjectLibrary.Enumerations;
+using System;
+using System.Collections.Generic;
 using System.Text;
+using DataJuggler.Core.UltimateHelper;
 
 #endregion
+
 
 namespace ObjectLibrary.BusinessObjects
 {
 
     #region class Project
-    /// <summary>
-    /// This class represents a project.
-    /// </summary>
     [Serializable]
     public partial class Project
     {
-        
+
         #region Private Variables
         private List<ReferencesSet> allReferences;
         private List<DTNDatabase> databases;
@@ -35,20 +34,17 @@ namespace ObjectLibrary.BusinessObjects
         private ReferencesSet writerReferencesSet;
         private bool referencesRecreated;
         #endregion
-        
+
         #region Constructor
-        /// <summary>
-        /// Create a new instance of a 'Project' object.
-        /// </summary>
         public Project()
         {
-            // Perform Initializations
+            // Perform initializations for this object
             Init();
         }
         #endregion
-        
+
         #region Methods
-            
+
             #region AppendToProjectFolder(string folderName)
             /// <summary>
             /// This method appends the string to the ProjectFolder
@@ -96,16 +92,16 @@ namespace ObjectLibrary.BusinessObjects
                     ObjectFolder = AppendToProjectFolder(@"ObjectLibrary\BusinessObjects");
 
                     // if the original 4 project template
-                    if (TemplateVersion == 1)
+                    if (Ta == 1)
                     {
                         // Set the Data Operations Folder
-                        DataOperationsFolder = AppendToProjectFolder(@"ApplicationLogicComponent\DataOperations");
+                        DataOperationsFolder = AppendToProjectFolder(@"DataAccessComponent\DataOperations");
                         
                         // Set the Data Manager Folder.
                         DataManagerFolder = AppendToProjectFolder(@"DataAccessComponent\DataManager");
                         
                         // Set the Controllers Folder
-                        ControllerFolder = AppendToProjectFolder(@"ApplicationLogicComponent\Controllers");
+                        ControllerFolder = AppendToProjectFolder(@"DataAccessComponent\Controllers");
                         
                         // Set the Reader Folder
                         ReaderFolder = AppendToProjectFolder(@"DataAccessComponent\DataManager\Readers");
@@ -168,7 +164,7 @@ namespace ObjectLibrary.BusinessObjects
                 AllReferences.Add(ObjectReferencesSet);
                 
                 // if the OldVersion
-                if (TemplateVersion == 1)
+                if (Ta == 1)
                 {
                     // Set DataManagerNamespace - Going Forward defaults to Data
                     DataManagerNamespace = "DataAccessComponent.DataManager";
@@ -216,7 +212,7 @@ namespace ObjectLibrary.BusinessObjects
                 DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.UpdateProcedures"));
                 DataOperationsReferencesSet.References.Add(new ProjectReference("ObjectLibrary.BusinessObjects"));
                 
-                if (TemplateVersion == 1)
+                if (Ta == 1)
                 {
                     DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.DataManager"));
                     DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.DataManager.Writers"));
@@ -233,15 +229,15 @@ namespace ObjectLibrary.BusinessObjects
                 // Update, set the Id
                 ControllerReferencesSet.UpdateIdentity(ControllerReferencesSetId);
                 
-                if (TemplateVersion == 1)
+                if (Ta == 1)
                 {
                     // Set DataOperationNamespace
-                    DataOperationsNamespace = "ApplicationLogicComponent.DataOperations";
-                    DataOperationsReferencesSet.References.Add(new ProjectReference("ApplicationLogicComponent.DataBridge"));
-                    ControllerNamespace = "ApplicationLogicComponent.Controllers";
-                    ControllerReferencesSet.References.Add(new ProjectReference("ApplicationLogicComponent.Logging"));
-                    ControllerReferencesSet.References.Add(new ProjectReference("ApplicationLogicComponent.DataOperations"));
-                    ControllerReferencesSet.References.Add(new ProjectReference("ApplicationLogicComponent.DataBridge"));
+                    DataOperationsNamespace = "DataAccessComponent.DataOperations";
+                    DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.DataBridge"));
+                    ControllerNamespace = "DataAccessComponent.Controllers";
+                    ControllerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.Logging"));
+                    ControllerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.DataOperations"));
+                    ControllerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.DataBridge"));
                 }
                 else
                 {
@@ -265,7 +261,7 @@ namespace ObjectLibrary.BusinessObjects
                 // Add this grou
                 AllReferences.Add(ControllerReferencesSet);
                 
-                if (TemplateVersion == 1)
+                if (Ta == 1)
                 {
                     // Set ReaderNamespace
                     ReaderNamespace = "DataAccessComponent.DataManager.Readers";
@@ -503,8 +499,8 @@ namespace ObjectLibrary.BusinessObjects
                 // return value
                 return index;
             }
-            #endregion
-            
+            #endregion            
+
             #region Init()
             /// <summary>
             /// Perform Initializations
@@ -527,7 +523,7 @@ namespace ObjectLibrary.BusinessObjects
                 TargetFramework = TargetFrameworkEnum.Net10;
             }
             #endregion
-            
+
             #region SetProjectIdOnDatabases(int projectId)
             /// <summary>
             /// This method Set Project ID On Databases
@@ -568,24 +564,15 @@ namespace ObjectLibrary.BusinessObjects
             
             #region ToString()
             /// <summary>
-            /// This method returns the project name
-            /// when ToString is called.
+            /// returns the String
             /// </summary>
-            /// <returns></returns>
             public override string ToString()
             {
                 // initial value
-                string projectName = "";
-                
-                // if the ProjectName exists
-                if(ProjectName != null)
-                {
-                    // set projectName
-                    projectName = ProjectName;
-                }
-                
-                // return the project name
-                return projectName;
+                string toString = ProjectName;
+
+                // return value
+                return toString;
             }
             #endregion
             
@@ -731,55 +718,25 @@ namespace ObjectLibrary.BusinessObjects
                 }
             }
             #endregion
-            
+
         #endregion
-        
+
         #region Properties
-            
+
             #region AllReferences
             /// <summary>
-            /// A collection of all ReferencesSets in the database.
+            /// This property gets or sets the value for 'AllReferences'.
             /// </summary>
             public List<ReferencesSet> AllReferences
             {
                 get { return allReferences; }
-                set
-                {
-                    if (value != null)
-                    {
-                        allReferences = value;
-                    }
-                }
-            }
-            #endregion
-            
-            #region AllReferencesCount
-            /// <summary>
-            /// This read only property returns the value for 'AllReferencesCount'.
-            /// </summary>
-            public int AllReferencesCount
-            {
-                get
-                {
-                    // initial value
-                    int allReferencesCount = 0;
-                    
-                    // If the AllReferences object exists
-                    if (AllReferences != null)
-                    {
-                        // set the return value
-                        allReferencesCount = AllReferences.Count;
-                    }
-                    
-                    // return value
-                    return allReferencesCount;
-                }
+                set { allReferences = value; }
             }
             #endregion
             
             #region ControllerReferencesSet
             /// <summary>
-            /// The controller references set.
+            /// This property gets or sets the value for 'ControllerReferencesSet'.
             /// </summary>
             public ReferencesSet ControllerReferencesSet
             {
@@ -790,7 +747,7 @@ namespace ObjectLibrary.BusinessObjects
             
             #region Databases
             /// <summary>
-            /// The databases for this project.
+            /// This property gets or sets the value for 'Databases'.
             /// </summary>
             public List<DTNDatabase> Databases
             {
@@ -801,7 +758,7 @@ namespace ObjectLibrary.BusinessObjects
             
             #region DataManagerReferencesSet
             /// <summary>
-            /// The ReferencesSet For DataManager.
+            /// This property gets or sets the value for 'DataManagerReferencesSet'.
             /// </summary>
             public ReferencesSet DataManagerReferencesSet
             {
@@ -812,7 +769,7 @@ namespace ObjectLibrary.BusinessObjects
             
             #region DataOperationsReferencesSet
             /// <summary>
-            /// The references set for DataOperations.
+            /// This property gets or sets the value for 'DataOperationsReferencesSet'.
             /// </summary>
             public ReferencesSet DataOperationsReferencesSet
             {
@@ -823,7 +780,7 @@ namespace ObjectLibrary.BusinessObjects
             
             #region Enumerations
             /// <summary>
-            /// A collection of enumerations for this project.
+            /// This property gets or sets the value for 'Enumerations'.
             /// </summary>
             public List<Enumeration> Enumerations
             {
@@ -842,7 +799,7 @@ namespace ObjectLibrary.BusinessObjects
                 {
                     // initial value
                     bool hasAllReferences = (AllReferences != null);
-                    
+
                     // return value
                     return hasAllReferences;
                 }
@@ -859,7 +816,7 @@ namespace ObjectLibrary.BusinessObjects
                 {
                     // initial value
                     bool hasControllerReferencesSet = (ControllerReferencesSet != null);
-                    
+
                     // return value
                     return hasControllerReferencesSet;
                 }
@@ -876,7 +833,7 @@ namespace ObjectLibrary.BusinessObjects
                 {
                     // initial value
                     bool hasDatabases = (Databases != null);
-                    
+
                     // return value
                     return hasDatabases;
                 }
@@ -893,7 +850,7 @@ namespace ObjectLibrary.BusinessObjects
                 {
                     // initial value
                     bool hasDataManagerReferencesSet = (DataManagerReferencesSet != null);
-                    
+
                     // return value
                     return hasDataManagerReferencesSet;
                 }
@@ -910,7 +867,7 @@ namespace ObjectLibrary.BusinessObjects
                 {
                     // initial value
                     bool hasDataOperationsReferencesSet = (DataOperationsReferencesSet != null);
-                    
+
                     // return value
                     return hasDataOperationsReferencesSet;
                 }
@@ -927,7 +884,7 @@ namespace ObjectLibrary.BusinessObjects
                 {
                     // initial value
                     bool hasObjectReferencesSet = (ObjectReferencesSet != null);
-                    
+
                     // return value
                     return hasObjectReferencesSet;
                 }
@@ -944,7 +901,7 @@ namespace ObjectLibrary.BusinessObjects
                 {
                     // initial value
                     bool hasReaderReferencesSet = (ReaderReferencesSet != null);
-                    
+
                     // return value
                     return hasReaderReferencesSet;
                 }
@@ -961,7 +918,7 @@ namespace ObjectLibrary.BusinessObjects
                 {
                     // initial value
                     bool hasStoredProcedureReferencesSet = (StoredProcedureReferencesSet != null);
-                    
+
                     // return value
                     return hasStoredProcedureReferencesSet;
                 }
@@ -978,7 +935,7 @@ namespace ObjectLibrary.BusinessObjects
                 {
                     // initial value
                     bool hasTables = (Tables != null);
-                    
+
                     // return value
                     return hasTables;
                 }
@@ -995,13 +952,13 @@ namespace ObjectLibrary.BusinessObjects
                 {
                     // initial value
                     bool hasWriterReferencesSet = (WriterReferencesSet != null);
-                    
+
                     // return value
                     return hasWriterReferencesSet;
                 }
             }
             #endregion
-            
+
             #region IsDotNetCore
             /// <summary>
             /// this read only property returns true if the TargetFramework is .Net5 or .Net6 or .Net7
@@ -1038,7 +995,7 @@ namespace ObjectLibrary.BusinessObjects
             
             #region ObjectReferencesSet
             /// <summary>
-            /// The object references set.
+            /// This property gets or sets the value for 'ObjectReferencesSet'.
             /// </summary>
             public ReferencesSet ObjectReferencesSet
             {
@@ -1049,7 +1006,7 @@ namespace ObjectLibrary.BusinessObjects
             
             #region ReaderReferencesSet
             /// <summary>
-            /// The ReaderReferencesSet
+            /// This property gets or sets the value for 'ReaderReferencesSet'.
             /// </summary>
             public ReferencesSet ReaderReferencesSet
             {
@@ -1071,7 +1028,7 @@ namespace ObjectLibrary.BusinessObjects
             
             #region StoredProcedureReferencesSet
             /// <summary>
-            /// this property is the ReferencesSets for a StoredProcedure.
+            /// This property gets or sets the value for 'StoredProcedureReferencesSet'.
             /// </summary>
             public ReferencesSet StoredProcedureReferencesSet
             {
@@ -1090,7 +1047,7 @@ namespace ObjectLibrary.BusinessObjects
                 set { tables = value; }
             }
             #endregion
-            
+
             #region ValidReferences
             /// <summary>
             /// This read only property returns true if all the References are loaded
@@ -1104,6 +1061,53 @@ namespace ObjectLibrary.BusinessObjects
                                                       HasObjectReferencesSet && HasReaderReferencesSet && 
                                                       HasStoredProcedureReferencesSet && HasWriterReferencesSet &&
                                                       HasDataManagerReferencesSet);
+
+                    // check each one
+                    if (validReferences)
+                    {
+                        // Controller
+                        if (!ListHelper.HasOneOrMoreItems(ControllerReferencesSet.References))
+                        {
+                            validReferences = false;
+                        }
+
+                        // DataOperations
+                        if (!ListHelper.HasOneOrMoreItems(DataOperationsReferencesSet.References))
+                        {
+                            validReferences = false;
+                        }
+
+                        // Object
+                        if (!ListHelper.HasOneOrMoreItems(ObjectReferencesSet.References))
+                        {
+                            validReferences = false;
+                        }
+
+                        // Reader
+                        if (!ListHelper.HasOneOrMoreItems(ReaderReferencesSet.References))
+                        {
+                            validReferences = false;
+                        }
+
+                        // StoredProcedure
+                        if (!ListHelper.HasOneOrMoreItems(StoredProcedureReferencesSet.References))
+                        {
+                            validReferences = false;
+                        }
+
+                        // Writer
+                        if (!ListHelper.HasOneOrMoreItems(WriterReferencesSet.References))
+                        {
+                            validReferences = false;
+                        }
+
+                        // DataManager
+                        if (!ListHelper.HasOneOrMoreItems(DataManagerReferencesSet.References))
+                        {
+                            validReferences = false;
+                        }
+                    }
+
                     
                     // return value
                     return validReferences;
@@ -1113,7 +1117,7 @@ namespace ObjectLibrary.BusinessObjects
             
             #region WriterReferencesSet
             /// <summary>
-            /// The Writer ReferencesSet
+            /// This property gets or sets the value for 'WriterReferencesSet'.
             /// </summary>
             public ReferencesSet WriterReferencesSet
             {
@@ -1123,7 +1127,7 @@ namespace ObjectLibrary.BusinessObjects
             #endregion
             
         #endregion
-        
+
     }
     #endregion
 

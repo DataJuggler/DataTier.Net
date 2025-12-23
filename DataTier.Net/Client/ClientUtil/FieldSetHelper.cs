@@ -5,7 +5,8 @@
 using DataJuggler.Core.UltimateHelper;
 using ObjectLibrary.BusinessObjects;
 using ObjectLibrary.Enumerations;
-using DataGateway;
+using DataAccessComponent.DataGateway;
+using DataAccessComponent.Connection;
 using DataJuggler.Net;
 using System;
 using System.Collections.Generic;
@@ -205,7 +206,7 @@ namespace DataTierClient.ClientUtil
                 if (fieldSetId > 0)
                 {
                     // Create a new instance of a 'Gateway' object.
-                    Gateway gateway = new Gateway();
+                    Gateway gateway = new Gateway(ConnectionConstants.Name);
 
                     // find the fieldSet
                     FieldSet fieldSet = gateway.FindFieldSet(fieldSetId);
@@ -214,7 +215,7 @@ namespace DataTierClient.ClientUtil
                     if (NullHelper.Exists(fieldSet))
                     {
                         // load the field set field view for this fieldSetId
-                        fieldSetFields = gateway.LoadFieldSetFieldViewsByFieldSetId(fieldSetId);
+                        fieldSetFields = gateway.LoadFieldSetFieldViewsForFieldSetId(fieldSetId);
 
                         // If the fieldSetFields collection exists and has one or more items
                         if (ListHelper.HasOneOrMoreItems(fieldSetFields))

@@ -2,7 +2,7 @@
 
 #region using statements
 
-using DataGateway;
+using DataAccessComponent.DataGateway;
 using DataTierClient.Controls.Interfaces;
 using DataTierClient.Forms;
 using DataJuggler.Core.UltimateHelper;
@@ -10,6 +10,7 @@ using ObjectLibrary.BusinessObjects;
 using ObjectLibrary.Enumerations;
 using System;
 using System.Collections.Generic;
+using DataAccessComponent.Connection;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
@@ -224,7 +225,7 @@ namespace DataTierClient.Controls
                                 // user confirmed the delete
                                 
                                 // Create a new instance of a 'Gateway' object.
-                                Gateway gateway = new Gateway();
+                                Gateway gateway = new Gateway(ConnectionConstants.Name);
 
                                 // perform the delete
                                 bool deleted = gateway.DeleteMethod(this.selectedMethod.MethodId);
@@ -233,7 +234,7 @@ namespace DataTierClient.Controls
                                 if (deleted)
                                 {
                                     // load the Methods for the SelectedTable
-                                    this.SelectedTable.Methods = gateway.LoadMethodsForTable(this.SelectedTable.TableId);
+                                    this.SelectedTable.Methods = gateway.LoadMethodsForTableId(this.SelectedTable.TableId);
 
                                     // Set the MethodsList
                                     MethodsList = this.SelectedTable.Methods;

@@ -3,6 +3,10 @@
 More info about DataTier.Net is available here:
 https://github.com/DataJuggler/DataTier.Net
 
+Update 12.22.2025: This template is for creating a DataTier.Net project targeting .NET 10.
+A change was made to where now the DataManager.ErrorHandler is an instance method,
+so this breaks existing projects. Working on a converter soon.
+
 Update 11.20.2024: This template is for creating a DataTier.Net project targeting .NET 9.
 
 Update 11.18.2023: This template is for creating a DataTier.Net project targeting .NET 8.

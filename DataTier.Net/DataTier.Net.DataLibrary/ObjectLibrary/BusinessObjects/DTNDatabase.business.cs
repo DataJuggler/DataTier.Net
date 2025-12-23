@@ -1,12 +1,11 @@
 
-
 #region using statements
 
+using ObjectLibrary.Enumerations;
 using System;
 using System.Collections.Generic;
 
 #endregion
-
 
 namespace ObjectLibrary.BusinessObjects
 {
@@ -18,6 +17,7 @@ namespace ObjectLibrary.BusinessObjects
 
         #region Private Variables
         private List<DTNTable> tables;
+        private bool loadByProjectId;
         #endregion
 
         #region Constructor
@@ -55,6 +55,34 @@ namespace ObjectLibrary.BusinessObjects
         #endregion
 
         #region Properties
+
+            #region HasTables
+            /// <summary>
+            /// This property returns true if this object has a 'Tables'.
+            /// </summary>
+            public bool HasTables
+            {
+                get
+                {
+                    // initial value
+                    bool hasTables = (Tables != null);
+
+                    // return value
+                    return hasTables;
+                }
+            }
+            #endregion
+            
+            #region LoadByProjectId
+            /// <summary>
+            /// This property gets or sets the value for 'LoadByProjectId'.
+            /// </summary>
+            public bool LoadByProjectId
+            {
+                get { return loadByProjectId; }
+                set { loadByProjectId = value; }
+            }
+            #endregion
 
             #region Tables
             /// <summary>

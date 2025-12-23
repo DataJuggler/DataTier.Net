@@ -2,7 +2,7 @@
 #region using statements
 
 using System.ComponentModel;
-using DataGateway;
+using DataAccessComponent.DataGateway;
 using DataJuggler.Core.UltimateHelper;
 using DataJuggler.Net;
 using DataTierClient.ClientUtil;
@@ -12,6 +12,7 @@ using DataTierClient.Controls.Interfaces;
 using DataTierClient.Forms;
 using DataTierClient.Objects;
 using ObjectLibrary.BusinessObjects;
+using DataAccessComponent.Connection;
 using ObjectLibrary.Enumerations;
 using ObjectLibrary.Parsers;
 using System;
@@ -149,7 +150,7 @@ namespace DataTierClient.Controls
                     if (NullHelper.Exists(customReader))
                     {
                         // Create a new instance of a 'Gateway' object.
-                        Gateway gateway = new Gateway();
+                        Gateway gateway = new Gateway(ConnectionConstants.Name);
 
                         // load the fieldSet
                         customReader.FieldSet = gateway.FindFieldSet(customReader.FieldSetId);
@@ -639,7 +640,7 @@ namespace DataTierClient.Controls
             public void OnTabButtonClicked(TabButton tabButton)
             {
                 // Create a new instance of a 'Gateway' object.
-                Gateway gateway = new Gateway();
+                Gateway gateway = new Gateway(ConnectionConstants.Name);
 
                 // if the SelectedTable exists
                 if (this.HasSelectedTable)
@@ -676,7 +677,7 @@ namespace DataTierClient.Controls
                             readersForm.ShowDialog();
                            
                             // reload the CustomReaders
-                            this.SelectedTable.CustomReaders = gateway.LoadCustomReadersForTable(this.SelectedTable.TableId);
+                            this.SelectedTable.CustomReaders = gateway.LoadCustomReadersForTableId(this.SelectedTable.TableId);
 
                             // reload the CustomReaders
                             this.CustomReaderControl.LoadItems(this.SelectedTable.CustomReaders);
@@ -696,7 +697,7 @@ namespace DataTierClient.Controls
                             fieldSetEditorForm.ShowDialog();
 
                             // load the FieldSets for the table
-                            this.SelectedTable.FieldSets = gateway.LoadFieldSetsForTable(this.SelectedTable.TableId);
+                            this.SelectedTable.FieldSets = gateway.LoadFieldSetsForTableId(this.SelectedTable.TableId);
 
                             // Reload the combo box
                             OrderByFieldSetControl.LoadItems(SelectedTable.OrderByFieldSets);
@@ -941,7 +942,7 @@ namespace DataTierClient.Controls
                 if (this.HasSelectedMethod)
                 {
                     // Create a new instance of a 'Gateway' object.
-                    Gateway gateway = new Gateway();
+                    Gateway gateway = new Gateway(ConnectionConstants.Name);
 
                     // if the ParameterType is a Single Field
                     if (this.SelectedMethod.ParameterType == ParameterTypeEnum.Single_Field)
@@ -1225,10 +1226,10 @@ namespace DataTierClient.Controls
                 if (this.HasSelectedTable)
                 {
                     // Create a new instance of a 'Gateway' object.
-                    Gateway gateway = new Gateway();
+                    Gateway gateway = new Gateway(ConnectionConstants.Name);
 
                     // reload the FieldsSets
-                    this.SelectedTable.FieldSets = gateway.LoadFieldSetsForTable(this.SelectedTable.TableId);
+                    this.SelectedTable.FieldSets = gateway.LoadFieldSetsForTableId(this.SelectedTable.TableId);
 
                     // load the ParamterFieldSets (FieldSets for a table with ParameterMode set to true
                     ParameterFieldSetControl.LoadItems(this.SelectedTable.ParameterFieldSets);
@@ -1249,10 +1250,10 @@ namespace DataTierClient.Controls
                 if ((this.HasSelectedTable) && (!SelectedTable.IsNew))
                 {
                     // Create a new instance of a 'Gateway' object.
-                    Gateway gateway = new Gateway();
+                    Gateway gateway = new Gateway(ConnectionConstants.Name);
 
                     // Load the Parameter FieldSets for the SelectedTable
-                    this.SelectedTable.FieldSets = gateway.LoadFieldSetsForTable(this.SelectedTable.TableId);
+                    this.SelectedTable.FieldSets = gateway.LoadFieldSetsForTableId(this.SelectedTable.TableId);
 
                     // load the FieldSets
                     this.ParameterFieldSetControl.LoadItems(this.SelectedTable.ParameterFieldSets);

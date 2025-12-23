@@ -5,7 +5,8 @@
 using ObjectLibrary.BusinessObjects;
 using DataTierClient.Controls;
 using DataTierClient.Controls.Interfaces;
-using DataGateway;
+using DataAccessComponent.Connection;
+using DataAccessComponent.DataGateway;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -48,7 +49,7 @@ namespace DataTierClient.Forms
                 InitializeComponent();
                 
                 // Create the gateway
-                this.Gateway = new Gateway();
+                this.Gateway = new Gateway(ConnectionConstants.Name);
                 
                 // The user did cancel by default
                 this.UserCancelled = true;
@@ -76,7 +77,7 @@ namespace DataTierClient.Forms
                     this.VisualStudioMode = true;
 
                     // Create the gateway
-                    this.Gateway = new Gateway();
+                    this.Gateway = new Gateway(ConnectionConstants.Name);
 
                     // The user did cancel by default
                     this.UserCancelled = true;
@@ -150,7 +151,7 @@ namespace DataTierClient.Forms
                         this.SelectedProject = project;
 
                         // Create a new instance of a 'Gateway' object.
-                        Gateway gateway = new Gateway();
+                        Gateway gateway = new Gateway(ConnectionConstants.Name);
 
                         // Load the AllReferences
                         gateway.LoadProjectReferencesForProject(ref project);
@@ -189,13 +190,13 @@ namespace DataTierClient.Forms
 						if(dialogResult == DialogResult.Yes)
 						{	
 							// Delete the project
-							bool deleted = this.Gateway.AppController.ControllerManager.ProjectController.Delete(selectedProject);
+							bool deleted = this.Gateway.DeleteProject(SelectedProject.ProjectId);
 							
 							// if the project was deleted
 							if(deleted)
 							{	
 								// Fetch All Projects
-								this.AllProjects = this.Gateway.AppController.ControllerManager.ProjectController.FetchAll(null);
+								this.AllProjects = this.Gateway.LoadProjects();
 								
 								// Display Projects
 								this.DisplayProjects();

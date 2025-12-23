@@ -36,7 +36,7 @@ namespace ObjectLibrary.BusinessObjects
                 // Return Cloned Object
                 return newFieldSetFieldView;
             }
-        #endregion
+            #endregion
 
             #region ToString()
             /// <summary>
@@ -64,11 +64,11 @@ namespace ObjectLibrary.BusinessObjects
 
         #region Properties
 
-        #region LoadByFieldSetId
-        /// <summary>
-        /// This property gets or sets the value for 'LoadByFieldSetId'.
-        /// </summary>
-        public bool LoadByFieldSetId
+            #region LoadByFieldSetId
+            /// <summary>
+            /// This property gets or sets the value for 'LoadByFieldSetId'.
+            /// </summary>
+            public bool LoadByFieldSetId
             {
                 get { return loadByFieldSetId; }
                 set { loadByFieldSetId = value; }

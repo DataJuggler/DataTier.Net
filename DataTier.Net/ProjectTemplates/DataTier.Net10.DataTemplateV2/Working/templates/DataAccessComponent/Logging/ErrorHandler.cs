@@ -14,24 +14,34 @@ using DataAccessComponent.Connection;
 
 #endregion
 
-
 namespace DataAccessComponent.Logging
 {
 
-    #region ErrorHandler
+    #region class ErrorHandler
     /// <summary>
-    /// This class handles logging of errors.
-    /// This class will have the ability to log
-    /// errors as system errors or log to a log file 
-    /// or both.
+    /// This class is used to Log Errors to files or System Events and (or) keep in memory
     /// </summary>
-    
     public class ErrorHandler
-    {  
+    {
+        
+        #region Private Variables
+        private List<Exception> exceptions;
+        #endregion
+
+        #region Constructor
+        /// <summary>
+        /// Create a new instance of an ErrorHandler object
+        /// </summary>
+        public ErrorHandler()
+        {
+            // Create a new collection of 'Exception' objects.
+            Exceptions = new List<Exception>();
+        }
+        #endregion
 
         #region Methods
 
-            #region CreateMessage
+            #region CreateMessage(CustomException error)
             /// <summary>
             /// Create the message from the exception
             /// </summary>
@@ -87,18 +97,49 @@ namespace DataAccessComponent.Logging
                 return sb.ToString();
             }
             #endregion
+            
+            #region LogError(CustomException exception)
+            /// <summary>
+            /// method Log Error
+            /// </summary>
+            public void LogError(CustomException exception)
+            {
+                try
+                {
+                    // verify exception exists
+                    if (exception != null)
+                    {
+                        // if the value for HasExceptions is true
+                        if (HasExceptions)
+                        {
+                            // Add this error
+                            Exceptions.Add(exception);
+                        }
 
+                        // Log the error to a file.
+                        LogErrorToFile(exception);
+
+                        // Attempt to log this as a SystemEvent
+                        LogErrorAsSystemEvent(exception);
+                    }
+                }
+                catch
+                {
+                }
+            }
+            #endregion
+            
             #region LogError(string methodName, string objectName, object errorObject)
             /// <summary>
             /// This class logs errors as they come in.
             /// </summary>
             /// <param name="error"></param>
-            public static void LogError(string methodName, string objectName, object errorObject)
+            public void LogError(string methodName, string objectName, object errorObject)
             {
                 // locals
                 CustomException exception = null;
 
-                // if this object is 
+                // if this object is
                 if (errorObject is CustomException tempError)
                 {
                     // Set exception to errorObject
@@ -112,7 +153,7 @@ namespace DataAccessComponent.Logging
                         // Create error
                         Exception error = tempError2;
 
-                        // create exception 
+                        // create exception
                         exception = new UnknownErrorException(methodName, objectName, error);
                     }
                 }
@@ -127,43 +168,15 @@ namespace DataAccessComponent.Logging
                 }
             }
             #endregion
-
-            #region LogError(CustomException error)
-            /// <summary>
-            /// This class logs exceptions as they happen.
-            /// </summary>
-            /// <param name="error"></param>
             
-            public static void LogError(CustomException exception)
-            {
-                try
-                {
-                    // verify exception exists
-                    if (exception != null)
-                    {  
-                        // Log the error to a file.
-                        LogErrorToFile(exception);
-
-                        // Attempt to log this as a SystemEvent
-                        LogErrorAsSystemEvent(exception);
-                    }
-                }
-                catch
-                {
-                }
-            }
-            #endregion
-
             #region LogErrorAsSystemEvent(CustomException exception)
             /// <summary>
-            /// This method logs errors to the system event log.
+            /// event is fired when Log Error As System Event
             /// </summary>
-            /// <param name="exception"></param>
-            
-            private static void LogErrorAsSystemEvent(CustomException exception)
+            private void LogErrorAsSystemEvent(CustomException exception)
             {
                 // set the eventLogResourceName
-                string eventLogResourceName = EnvironmentVariableHelper.GetEnvironmentVariableValue(ConnectionConstants.LogEventResourceName, EnvironmentVariableTarget.Machine);
+                string eventLogResourceName = EnvironmentVariableHelper.GetEnvironmentVariableValue(ConnectionConstants.LogEventResourceName, EnvironmentVariableTarget.User);
 
                 // If the eventLogResourceName string exists
                 if (TextHelper.Exists(eventLogResourceName))
@@ -189,49 +202,85 @@ namespace DataAccessComponent.Logging
             /// This method logs an error to a file.
             /// </summary>
             /// <param name="error"></param>
-            private static void LogErrorToFile(CustomException error)
+            private void LogErrorToFile(CustomException error)
             {
-                // local
-                StreamWriter writer = null;
-
-                // Get the logfileName
-                string logFileName = EnvironmentVariableHelper.GetEnvironmentVariableValue("RunnerLogFileName", EnvironmentVariableTarget.Machine);
-
-                // Verify Log File Exists
-                if (!String.IsNullOrEmpty(logFileName))
+                // if the Error exists and the Exceptions exist
+                if ((NullHelper.Exists(error)) && (HasExceptions))
                 {
-                    // check if file exists
-                    if (File.Exists(logFileName))
+                    // local
+                    StreamWriter writer = null;
+
+                    // Get the logfileName
+                    string logFileName = EnvironmentVariableHelper.GetEnvironmentVariableValue("DataTierNetLogFileName", EnvironmentVariableTarget.User);
+
+                    // Verify Log File Exists
+                    if (!String.IsNullOrEmpty(logFileName))
                     {
-                        // Create writer while appending text to the file
-                        writer = File.AppendText(logFileName);
+                        // check if file exists
+                        if (File.Exists(logFileName))
+                        {
+                            // Create writer while appending text to the file
+                            writer = File.AppendText(logFileName);
+                        }
+                        else
+                        {
+                            // Create Writer for create
+                            writer = File.CreateText(logFileName);
+                        }
+
+                        // Create Message
+                        string message = CreateMessage(error);
+
+                        // Write Message
+                        writer.WriteLine(message);
+
+                        // flush writer
+                        writer.Flush();
+
+                        // close stream
+                        writer.Close();
+
+                        // set writer to nothing
+                        writer = null;
                     }
-                    else
-                    {
-                        // Create Writer for create
-                        writer = File.CreateText(logFileName);
-                    }
-
-                    // Create Message
-                    string message = CreateMessage(error);
-
-                    // Write Message
-                    writer.WriteLine(message);
-
-                    // flush writer
-                    writer.Flush();
-
-                    // close stream 
-                    writer.Close();
-
-                    // set writer to nothing 
-                    writer = null;
                 }
             }
             #endregion
-
+            
         #endregion
+        
+        #region Properties
+            
+            #region Exceptions
+            /// <summary>
+            /// This property gets or sets the value for 'Exceptions'.
+            /// </summary>
+            public List<Exception> Exceptions
+            {
+                get { return exceptions; }
+                set { exceptions = value; }
+            }
+            #endregion
+            
+            #region HasExceptions
+            /// <summary>
+            /// This property returns true if this object has an 'Exceptions'.
+            /// </summary>
+            public bool HasExceptions
+            {
+                get
+                {
+                    // initial value
+                    bool hasExceptions = (Exceptions != null);
 
+                    // return value
+                    return hasExceptions;
+                }
+            }
+            #endregion
+            
+        #endregion
+        
     }
     #endregion
 

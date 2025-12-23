@@ -710,7 +710,7 @@ namespace DataTierClient.Forms
                 if (TextHelper.Exists(ConnectionString))
                 {
                     // Set the value
-                    bool environmentVariableSet = ApplicationLogicComponent.Connection.EnvironmentVariableHelper.SetEnvironmentVariableValue(MainForm.DataTierNetConnectionName, ConnectionString);
+                    bool environmentVariableSet = EnvironmentVariableHelper.SetEnvironmentVariableValue(MainForm.DataTierNetConnectionName, ConnectionString, EnvironmentVariableTarget.User);
 
                     // if the value for environmentVariableSet is true
                     if (environmentVariableSet)

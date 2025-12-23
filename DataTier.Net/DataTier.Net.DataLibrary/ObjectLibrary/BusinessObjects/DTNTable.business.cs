@@ -1,11 +1,14 @@
 
+
 #region using statements
 
+using ObjectLibrary.Enumerations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 #endregion
+
 
 namespace ObjectLibrary.BusinessObjects
 {
@@ -47,46 +50,15 @@ namespace ObjectLibrary.BusinessObjects
 
             #region ToString()
             /// <summary>
-            /// This method returns the TableName when ToString is called.
+            /// returns the String
             /// </summary>
-            /// <returns></returns>
             public override string ToString()
-            {   
-                // initial value
-                string tableName = "";
-
-                // if the tableName exists
-                if (!String.IsNullOrEmpty(TableName))
-                {
-                    // set the return value
-                    tableName = this.TableName;
-                }
-                else
-                {
-                    // set the return value
-                    tableName = "DTNTable";
-                }
-
-                return this.TableName;
-            }
-            #endregion
-
-            #region UpdateTableIdForFields()
-            /// <summary>
-            /// This method Update Table Id For Fields
-            /// </summary>
-            public void UpdateTableIdForFields()
             {
-                // If the Fields object exists
-                if (this.HasFields)
-                {
-                    // Iterate the collection of DTNField objects
-                    foreach (DTNField field in Fields)
-                    {
-                        // set the tableId                        
-                        field.TableId = this.TableId;
-                    }
-                }
+                // initial value
+                string toString = TableName;
+
+                // return value
+                return toString;
             }
             #endregion
             
@@ -158,8 +130,8 @@ namespace ObjectLibrary.BusinessObjects
                 get
                 {
                     // initial value
-                    bool hasCustomReaders = (this.CustomReaders != null);
-                    
+                    bool hasCustomReaders = (CustomReaders != null);
+
                     // return value
                     return hasCustomReaders;
                 }
@@ -175,8 +147,8 @@ namespace ObjectLibrary.BusinessObjects
                 get
                 {
                     // initial value
-                    bool hasFields = (this.Fields != null);
-                    
+                    bool hasFields = (Fields != null);
+
                     // return value
                     return hasFields;
                 }
@@ -192,8 +164,8 @@ namespace ObjectLibrary.BusinessObjects
                 get
                 {
                     // initial value
-                    bool hasFieldSets = (this.FieldSets != null);
-                    
+                    bool hasFieldSets = (FieldSets != null);
+
                     // return value
                     return hasFieldSets;
                 }
@@ -209,8 +181,8 @@ namespace ObjectLibrary.BusinessObjects
                 get
                 {
                     // initial value
-                    bool hasMethods = (this.Methods != null);
-                    
+                    bool hasMethods = (Methods != null);
+
                     // return value
                     return hasMethods;
                 }
@@ -226,8 +198,8 @@ namespace ObjectLibrary.BusinessObjects
                 get
                 {
                     // initial value
-                    bool hasOrderByFieldSets = (this.OrderByFieldSets != null);
-                    
+                    bool hasOrderByFieldSets = (OrderByFieldSets != null);
+
                     // return value
                     return hasOrderByFieldSets;
                 }
@@ -243,27 +215,10 @@ namespace ObjectLibrary.BusinessObjects
                 get
                 {
                     // initial value
-                    bool hasParameterFieldSets = (this.ParameterFieldSets != null);
-                    
+                    bool hasParameterFieldSets = (ParameterFieldSets != null);
+
                     // return value
                     return hasParameterFieldSets;
-                }
-            }
-            #endregion
-            
-            #region HasProjectId
-            /// <summary>
-            /// This property returns true if the 'ProjectId' is set.
-            /// </summary>
-            public bool HasProjectId
-            {
-                get
-                {
-                    // initial value
-                    bool hasProjectId = (this.ProjectId > 0);
-                    
-                    // return value
-                    return hasProjectId;
                 }
             }
             #endregion
@@ -277,8 +232,8 @@ namespace ObjectLibrary.BusinessObjects
                 get
                 {
                     // initial value
-                    bool hasReaderFieldSets = (this.ReaderFieldSets != null);
-                    
+                    bool hasReaderFieldSets = (ReaderFieldSets != null);
+
                     // return value
                     return hasReaderFieldSets;
                 }
@@ -295,7 +250,7 @@ namespace ObjectLibrary.BusinessObjects
                 set { loadByProjectId = value; }
             }
             #endregion
-
+            
             #region Methods
             /// <summary>
             /// This property gets or sets the value for 'Methods'.

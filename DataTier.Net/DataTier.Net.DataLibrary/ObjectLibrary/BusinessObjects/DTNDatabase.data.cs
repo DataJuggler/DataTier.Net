@@ -33,6 +33,254 @@ namespace ObjectLibrary.BusinessObjects
 
         #region Methods
 
+            #region CreateValuesList
+            // <summary>
+            // This method creates the ValuesList for an Insert SQL Statement.'
+            // </summary>
+            public string CreateValuesList()
+            {
+                // initial value
+                string valuesList = "";
+
+                // locals
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                string comma = ",";
+                string singleQuote = "'";
+
+                // AuthenticationType
+
+                sb.Append(AuthenticationType);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // ConnectionString
+
+                sb.Append(singleQuote);
+                sb.Append(ConnectionString);
+                sb.Append(singleQuote);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // DatabaseName
+
+                sb.Append(singleQuote);
+                sb.Append(DatabaseName);
+                sb.Append(singleQuote);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // DatabaseType
+
+                sb.Append(DatabaseType);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // DBPassword
+
+                sb.Append(singleQuote);
+                sb.Append(DBPassword);
+                sb.Append(singleQuote);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // Exclude
+
+                sb.Append(Exclude);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // Path
+
+                sb.Append(singleQuote);
+                sb.Append(Path);
+                sb.Append(singleQuote);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // ProjectId
+
+                sb.Append(ProjectId);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // Serializable
+
+                // If Serializable is true
+                if (Serializable)
+                {
+                    sb.Append(1);
+                }
+                else
+                {
+                    sb.Append(0);
+                }
+
+                // Add a comma
+                sb.Append(comma);
+
+                // ServerName
+
+                sb.Append(singleQuote);
+                sb.Append(ServerName);
+                sb.Append(singleQuote);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // UserId
+
+                sb.Append(singleQuote);
+                sb.Append(UserId);
+                sb.Append(singleQuote);
+
+                // Set the return value
+                valuesList = sb.ToString();
+
+                // Return Value
+                return valuesList;
+            }
+            #endregion
+
+            #region GenerateInsertSQL
+            // <summary>
+            // This method generates a SQL Insert statement for ah object loaded.'
+            // </summary>
+            public string GenerateInsertSQL()
+            {
+                // local
+                string valuesList = CreateValuesList();
+
+                // Set the return Value
+                string insertSQL = "INSERT INTO [DTNDatabase] (AuthenticationType,ConnectionString,DatabaseName,DatabaseType,DBPassword,Exclude,Path,ProjectId,Serializable,ServerName,UserId) VALUES (" + valuesList + ") " + Environment.NewLine + "SELECT SCOPE_IDENTITY()" + Environment.NewLine;
+
+                // Return Value
+                return insertSQL;
+            }
+            #endregion
+
+            #region GetValue(string fieldName)
+            // <summary>
+            // This method returns the value for the fieldName given
+            // </summary>
+            public object GetValue(string fieldName)
+            {
+                // initial value
+                object value = "";
+
+                // // Determine the action by the fieldName
+                switch (fieldName)
+                {
+                    case "AuthenticationType":
+
+                        // set the value
+                        value = this.AuthenticationType;
+
+                        // required
+                        break;
+
+                    case "ConnectionString":
+
+                        // set the value
+                        value = this.ConnectionString;
+
+                        // required
+                        break;
+
+                    case "DatabaseId":
+
+                        // set the value
+                        value = this.DatabaseId;
+
+                        // required
+                        break;
+
+                    case "DatabaseName":
+
+                        // set the value
+                        value = this.DatabaseName;
+
+                        // required
+                        break;
+
+                    case "DatabaseType":
+
+                        // set the value
+                        value = this.DatabaseType;
+
+                        // required
+                        break;
+
+                    case "DBPassword":
+
+                        // set the value
+                        value = this.DBPassword;
+
+                        // required
+                        break;
+
+                    case "Exclude":
+
+                        // set the value
+                        value = this.Exclude;
+
+                        // required
+                        break;
+
+                    case "Path":
+
+                        // set the value
+                        value = this.Path;
+
+                        // required
+                        break;
+
+                    case "ProjectId":
+
+                        // set the value
+                        value = this.ProjectId;
+
+                        // required
+                        break;
+
+                    case "Serializable":
+
+                        // set the value
+                        value = this.Serializable;
+
+                        // required
+                        break;
+
+                    case "ServerName":
+
+                        // set the value
+                        value = this.ServerName;
+
+                        // required
+                        break;
+
+                    case "UserId":
+
+                        // set the value
+                        value = this.UserId;
+
+                        // required
+                        break;
+
+                }
+
+                // return value
+                return value;
+            }
+            #endregion
+
             #region UpdateIdentity(int id)
             // <summary>
             // This method provides a 'setter'

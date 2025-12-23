@@ -3,10 +3,11 @@
 
 using DataTierClient.Controls.Interfaces;
 using DataTierClient.Enumerations;
+using DataAccessComponent.Connection;
 using System;
 using System.Windows.Forms;
 using DataTierClient.Forms;
-using DataGateway;
+using DataAccessComponent.DataGateway;
 using ObjectLibrary.BusinessObjects;
 
 #endregion
@@ -131,7 +132,7 @@ namespace DataTierClient.Controls
                     if (confirmed)
                     {
                         // Create instance of the gateway
-                        Gateway gateway = new Gateway();
+                        Gateway gateway = new Gateway(ConnectionConstants.Name);
                         
                         // Delete the selected database
                         bool deleted = gateway.DeleteDTNDatabase(this.SelectedDatabase.DatabaseId);
@@ -140,7 +141,7 @@ namespace DataTierClient.Controls
                         if (deleted)
                         {   
                             // Reload the databases after a delete
-                            this.SelectedProject.Databases = gateway.LoadProjectDatabases(this.SelectedProject.ProjectId);
+                            this.SelectedProject.Databases = gateway.LoadDTNDatabasesForProjectId(this.SelectedProject.ProjectId);
                             
                             // Redisplay
                             this.DisplaySelectedProject();

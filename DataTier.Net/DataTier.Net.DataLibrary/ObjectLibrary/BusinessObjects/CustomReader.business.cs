@@ -1,12 +1,10 @@
 
-
 #region using statements
 
 using ObjectLibrary.Enumerations;
 using System;
 
 #endregion
-
 
 namespace ObjectLibrary.BusinessObjects
 {
@@ -16,16 +14,16 @@ namespace ObjectLibrary.BusinessObjects
     public partial class CustomReader
     {
 
-        #region Private Variables
-        private bool fetchAllForTable;
+        #region Private Variables        
         private FieldSet fieldSet;
         private DTNTable table;
+        private bool loadByTableId;
         #endregion
 
         #region Constructor
         public CustomReader()
         {
-            
+
         }
         #endregion
 
@@ -40,8 +38,8 @@ namespace ObjectLibrary.BusinessObjects
                 // Return Cloned Object
                 return newCustomReader;
             }
-        #endregion
-                        
+            #endregion
+
             #region ToString()
             /// <summary>
             /// method returns the Name of this object when ToString is called.
@@ -52,21 +50,10 @@ namespace ObjectLibrary.BusinessObjects
                 return ReaderName;
             }
             #endregion
-            
+
         #endregion
 
         #region Properties
-
-            #region FetchAllForTable
-            /// <summary>
-            /// This property gets or sets the value for 'FetchAllForTable'.
-            /// </summary>
-            public bool FetchAllForTable
-            {
-                get { return fetchAllForTable; }
-                set { fetchAllForTable = value; }
-            }
-            #endregion
             
             #region FieldSet
             /// <summary>
@@ -78,7 +65,7 @@ namespace ObjectLibrary.BusinessObjects
                 set { fieldSet = value; }
             }
             #endregion
-            
+
             #region HasFieldSet
             /// <summary>
             /// This property returns true if this object has a 'FieldSet'.
@@ -147,6 +134,17 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
             
+            #region LoadByTableId
+            /// <summary>
+            /// This property gets or sets the value for 'LoadByTableId'.
+            /// </summary>
+            public bool LoadByTableId
+            {
+                get { return loadByTableId; }
+                set { loadByTableId = value; }
+            }
+            #endregion
+
             #region Table
             /// <summary>
             /// This property gets or sets the value for 'Table'.

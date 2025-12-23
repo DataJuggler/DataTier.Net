@@ -8,7 +8,8 @@ using System.Windows.Forms;
 using DataTierClient.Controls.Interfaces;
 using DataTierClient.Forms;
 using ObjectLibrary.BusinessObjects;
-using DataGateway;
+using DataAccessComponent.Connection;
+using DataAccessComponent.DataGateway;
 using System.ComponentModel;
 
 #endregion
@@ -88,7 +89,7 @@ namespace DataTierClient.Controls
                     int index = this.SelectedReferencesSet.GetReferenceIndex(reference.ReferencesId);
 
                     // delete the reference
-                    Gateway gateway = new Gateway();
+                    Gateway gateway = new Gateway(ConnectionConstants.Name);
                     
                     // delete the ProjectReference
                     bool deleted = gateway.DeleteProjectReference(this.SelectedReference.ReferencesId);

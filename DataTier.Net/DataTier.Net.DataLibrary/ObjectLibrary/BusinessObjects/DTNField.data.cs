@@ -40,6 +40,379 @@ namespace ObjectLibrary.BusinessObjects
 
         #region Methods
 
+            #region CreateValuesList
+            // <summary>
+            // This method creates the ValuesList for an Insert SQL Statement.'
+            // </summary>
+            public string CreateValuesList()
+            {
+                // initial value
+                string valuesList = "";
+
+                // locals
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                string comma = ",";
+                string singleQuote = "'";
+
+                // AccessMode
+
+                sb.Append(AccessMode);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // Caption
+
+                sb.Append(singleQuote);
+                sb.Append(Caption);
+                sb.Append(singleQuote);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // DatabaseId
+
+                sb.Append(DatabaseId);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // DataType
+
+                sb.Append(DataType);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // DecimalPlaces
+
+                sb.Append(DecimalPlaces);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // DefaultValue
+
+                sb.Append(singleQuote);
+                sb.Append(DefaultValue);
+                sb.Append(singleQuote);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // EnumDataTypeName
+
+                sb.Append(singleQuote);
+                sb.Append(EnumDataTypeName);
+                sb.Append(singleQuote);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // Exclude
+
+                // If Exclude is true
+                if (Exclude)
+                {
+                    sb.Append(1);
+                }
+                else
+                {
+                    sb.Append(0);
+                }
+
+                // Add a comma
+                sb.Append(comma);
+
+                // FieldName
+
+                sb.Append(singleQuote);
+                sb.Append(FieldName);
+                sb.Append(singleQuote);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // FieldOrdinal
+
+                sb.Append(FieldOrdinal);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // FieldSize
+
+                sb.Append(FieldSize);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // IsEnumeration
+
+                // If IsEnumeration is true
+                if (IsEnumeration)
+                {
+                    sb.Append(1);
+                }
+                else
+                {
+                    sb.Append(0);
+                }
+
+                // Add a comma
+                sb.Append(comma);
+
+                // IsNullable
+
+                sb.Append(IsNullable);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // PrimaryKey
+
+                // If PrimaryKey is true
+                if (PrimaryKey)
+                {
+                    sb.Append(1);
+                }
+                else
+                {
+                    sb.Append(0);
+                }
+
+                // Add a comma
+                sb.Append(comma);
+
+                // ProjectId
+
+                sb.Append(ProjectId);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // Required
+
+                // If Required is true
+                if (Required)
+                {
+                    sb.Append(1);
+                }
+                else
+                {
+                    sb.Append(0);
+                }
+
+                // Add a comma
+                sb.Append(comma);
+
+                // Scope
+
+                sb.Append(Scope);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // TableId
+
+                sb.Append(TableId);
+
+                // Set the return value
+                valuesList = sb.ToString();
+
+                // Return Value
+                return valuesList;
+            }
+            #endregion
+
+            #region GenerateInsertSQL
+            // <summary>
+            // This method generates a SQL Insert statement for ah object loaded.'
+            // </summary>
+            public string GenerateInsertSQL()
+            {
+                // local
+                string valuesList = CreateValuesList();
+
+                // Set the return Value
+                string insertSQL = "INSERT INTO [DTNField] (AccessMode,Caption,DatabaseId,DataType,DecimalPlaces,DefaultValue,EnumDataTypeName,Exclude,FieldName,FieldOrdinal,FieldSize,IsEnumeration,IsNullable,PrimaryKey,ProjectId,Required,Scope,TableId) VALUES (" + valuesList + ") " + Environment.NewLine + "SELECT SCOPE_IDENTITY()" + Environment.NewLine;
+
+                // Return Value
+                return insertSQL;
+            }
+            #endregion
+
+            #region GetValue(string fieldName)
+            // <summary>
+            // This method returns the value for the fieldName given
+            // </summary>
+            public object GetValue(string fieldName)
+            {
+                // initial value
+                object value = "";
+
+                // // Determine the action by the fieldName
+                switch (fieldName)
+                {
+                    case "AccessMode":
+
+                        // set the value
+                        value = this.AccessMode;
+
+                        // required
+                        break;
+
+                    case "Caption":
+
+                        // set the value
+                        value = this.Caption;
+
+                        // required
+                        break;
+
+                    case "DatabaseId":
+
+                        // set the value
+                        value = this.DatabaseId;
+
+                        // required
+                        break;
+
+                    case "DataType":
+
+                        // set the value
+                        value = this.DataType;
+
+                        // required
+                        break;
+
+                    case "DecimalPlaces":
+
+                        // set the value
+                        value = this.DecimalPlaces;
+
+                        // required
+                        break;
+
+                    case "DefaultValue":
+
+                        // set the value
+                        value = this.DefaultValue;
+
+                        // required
+                        break;
+
+                    case "EnumDataTypeName":
+
+                        // set the value
+                        value = this.EnumDataTypeName;
+
+                        // required
+                        break;
+
+                    case "Exclude":
+
+                        // set the value
+                        value = this.Exclude;
+
+                        // required
+                        break;
+
+                    case "FieldId":
+
+                        // set the value
+                        value = this.FieldId;
+
+                        // required
+                        break;
+
+                    case "FieldName":
+
+                        // set the value
+                        value = this.FieldName;
+
+                        // required
+                        break;
+
+                    case "FieldOrdinal":
+
+                        // set the value
+                        value = this.FieldOrdinal;
+
+                        // required
+                        break;
+
+                    case "FieldSize":
+
+                        // set the value
+                        value = this.FieldSize;
+
+                        // required
+                        break;
+
+                    case "IsEnumeration":
+
+                        // set the value
+                        value = this.IsEnumeration;
+
+                        // required
+                        break;
+
+                    case "IsNullable":
+
+                        // set the value
+                        value = this.IsNullable;
+
+                        // required
+                        break;
+
+                    case "PrimaryKey":
+
+                        // set the value
+                        value = this.PrimaryKey;
+
+                        // required
+                        break;
+
+                    case "ProjectId":
+
+                        // set the value
+                        value = this.ProjectId;
+
+                        // required
+                        break;
+
+                    case "Required":
+
+                        // set the value
+                        value = this.Required;
+
+                        // required
+                        break;
+
+                    case "Scope":
+
+                        // set the value
+                        value = this.Scope;
+
+                        // required
+                        break;
+
+                    case "TableId":
+
+                        // set the value
+                        value = this.TableId;
+
+                        // required
+                        break;
+
+                }
+
+                // return value
+                return value;
+            }
+            #endregion
+
             #region UpdateIdentity(int id)
             // <summary>
             // This method provides a 'setter'

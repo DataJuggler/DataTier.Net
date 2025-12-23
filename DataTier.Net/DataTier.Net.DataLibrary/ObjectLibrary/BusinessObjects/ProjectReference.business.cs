@@ -1,12 +1,10 @@
 
-
 #region using statements
 
+using ObjectLibrary.Enumerations;
 using System;
-using System.Collections.Generic;
 
 #endregion
-
 
 namespace ObjectLibrary.BusinessObjects
 {
@@ -17,6 +15,7 @@ namespace ObjectLibrary.BusinessObjects
     {
 
         #region Private Variables
+        private bool loadByReferencesSetId;
         #endregion
 
         #region Constructors
@@ -57,7 +56,7 @@ namespace ObjectLibrary.BusinessObjects
                 return newProjectReference;
             }
             #endregion
-            
+
             #region ToString()
             /// <summary>
             /// This method is used to return the ReferenceName when ToString is called.
@@ -88,6 +87,17 @@ namespace ObjectLibrary.BusinessObjects
                     // return value
                     return hasReferenceName;
                 }
+            }
+            #endregion
+
+            #region LoadByReferencesSetId
+            /// <summary>
+            /// This property gets or sets the value for 'LoadByReferencesSetId'.
+            /// </summary>
+            public bool LoadByReferencesSetId
+            {
+                get { return loadByReferencesSetId; }
+                set { loadByReferencesSetId = value; }
             }
             #endregion
 

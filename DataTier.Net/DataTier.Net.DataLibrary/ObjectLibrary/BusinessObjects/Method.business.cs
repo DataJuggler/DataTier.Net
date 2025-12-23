@@ -15,10 +15,10 @@ namespace ObjectLibrary.BusinessObjects
     {
 
         #region Private Variables
-        private bool fetchAllForTable;
-        private bool loadByProjectId;
         private bool findByName;
         private CustomReader customReader;
+        private bool loadByTableId;
+        private bool loadByProjectId;
         #endregion
 
         #region Constructor
@@ -51,7 +51,7 @@ namespace ObjectLibrary.BusinessObjects
                 return this.Name;
             }
             #endregion
-            
+
         #endregion
 
         #region Properties
@@ -64,17 +64,6 @@ namespace ObjectLibrary.BusinessObjects
             {
                 get { return customReader; }
                 set { customReader = value; }
-            }
-            #endregion
-            
-            #region FetchAllForTable
-            /// <summary>
-            /// This property gets or sets the value for 'FetchAllForTable'.
-            /// </summary>
-            public bool FetchAllForTable
-            {
-                get { return fetchAllForTable; }
-                set { fetchAllForTable = value; }
             }
             #endregion
             
@@ -98,14 +87,14 @@ namespace ObjectLibrary.BusinessObjects
                 get
                 {
                     // initial value
-                    bool hasCustomReader = (this.CustomReader != null);
-                    
+                    bool hasCustomReader = (CustomReader != null);
+
                     // return value
                     return hasCustomReader;
                 }
             }
             #endregion
-            
+
             #region HasProjectId
             /// <summary>
             /// This property returns true if the 'ProjectId' is set.
@@ -122,7 +111,7 @@ namespace ObjectLibrary.BusinessObjects
                 }
             }
             #endregion
-            
+
             #region HasTableId
             /// <summary>
             /// This property returns true if the 'TableId' is set.
@@ -148,6 +137,17 @@ namespace ObjectLibrary.BusinessObjects
             {
                 get { return loadByProjectId; }
                 set { loadByProjectId = value; }
+            }
+            #endregion
+
+            #region LoadByTableId
+            /// <summary>
+            /// This property gets or sets the value for 'LoadByTableId'.
+            /// </summary>
+            public bool LoadByTableId
+            {
+                get { return loadByTableId; }
+                set { loadByTableId = value; }
             }
             #endregion
 
