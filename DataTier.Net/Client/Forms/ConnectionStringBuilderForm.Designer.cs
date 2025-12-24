@@ -1,4 +1,4 @@
-﻿
+
 
 #region using statements
 
@@ -89,8 +89,8 @@ namespace DataTierClient.Forms
             // SQLServerAuthenticationRadioButton
             // 
             this.SQLServerAuthenticationRadioButton.BackColor = System.Drawing.Color.Transparent;
-            this.SQLServerAuthenticationRadioButton.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold);
-            this.SQLServerAuthenticationRadioButton.Location = new System.Drawing.Point(212, 108);
+            this.SQLServerAuthenticationRadioButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold);
+            this.SQLServerAuthenticationRadioButton.Location = new System.Drawing.Point(212, 100);
             this.SQLServerAuthenticationRadioButton.Name = "SQLServerAuthenticationRadioButton";
             this.SQLServerAuthenticationRadioButton.Size = new System.Drawing.Size(239, 27);
             this.SQLServerAuthenticationRadioButton.TabIndex = 2;
@@ -103,10 +103,10 @@ namespace DataTierClient.Forms
             this.WindowsAuthenticationRadioButton.AutoSize = true;
             this.WindowsAuthenticationRadioButton.BackColor = System.Drawing.Color.Transparent;
             this.WindowsAuthenticationRadioButton.Checked = true;
-            this.WindowsAuthenticationRadioButton.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold);
-            this.WindowsAuthenticationRadioButton.Location = new System.Drawing.Point(457, 108);
+            this.WindowsAuthenticationRadioButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold);
+            this.WindowsAuthenticationRadioButton.Location = new System.Drawing.Point(457, 100);
             this.WindowsAuthenticationRadioButton.Name = "WindowsAuthenticationRadioButton";
-            this.WindowsAuthenticationRadioButton.Size = new System.Drawing.Size(295, 27);
+            this.WindowsAuthenticationRadioButton.Size = new System.Drawing.Size(259, 31);
             this.WindowsAuthenticationRadioButton.TabIndex = 3;
             this.WindowsAuthenticationRadioButton.TabStop = true;
             this.WindowsAuthenticationRadioButton.Text = "Windows Authentication";
@@ -123,9 +123,9 @@ namespace DataTierClient.Forms
             this.BuildConnectionStringButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.BuildConnectionStringButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BuildConnectionStringButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BuildConnectionStringButton.Font = new System.Drawing.Font("Verdana", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BuildConnectionStringButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BuildConnectionStringButton.ForeColor = System.Drawing.Color.DarkGray;
-            this.BuildConnectionStringButton.Location = new System.Drawing.Point(305, 573);
+            this.BuildConnectionStringButton.Location = new System.Drawing.Point(305, 581);
             this.BuildConnectionStringButton.Name = "BuildConnectionStringButton";
             this.BuildConnectionStringButton.Size = new System.Drawing.Size(228, 40);
             this.BuildConnectionStringButton.TabIndex = 8;
@@ -145,9 +145,9 @@ namespace DataTierClient.Forms
             this.CancelButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.CancelButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.CancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CancelButton.Font = new System.Drawing.Font("Verdana", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CancelButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CancelButton.ForeColor = System.Drawing.Color.Black;
-            this.CancelButton.Location = new System.Drawing.Point(647, 573);
+            this.CancelButton.Location = new System.Drawing.Point(647, 581);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(104, 40);
             this.CancelButton.TabIndex = 10;
@@ -167,9 +167,9 @@ namespace DataTierClient.Forms
             this.CopyButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.CopyButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.CopyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CopyButton.Font = new System.Drawing.Font("Verdana", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CopyButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CopyButton.ForeColor = System.Drawing.Color.DarkGray;
-            this.CopyButton.Location = new System.Drawing.Point(538, 573);
+            this.CopyButton.Location = new System.Drawing.Point(538, 581);
             this.CopyButton.Name = "CopyButton";
             this.CopyButton.Size = new System.Drawing.Size(104, 40);
             this.CopyButton.TabIndex = 9;
@@ -190,9 +190,9 @@ namespace DataTierClient.Forms
             this.InstallConnectionStringButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.InstallConnectionStringButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.InstallConnectionStringButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.InstallConnectionStringButton.Font = new System.Drawing.Font("Verdana", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InstallConnectionStringButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.InstallConnectionStringButton.ForeColor = System.Drawing.Color.DarkGray;
-            this.InstallConnectionStringButton.Location = new System.Drawing.Point(305, 527);
+            this.InstallConnectionStringButton.Location = new System.Drawing.Point(305, 535);
             this.InstallConnectionStringButton.Name = "InstallConnectionStringButton";
             this.InstallConnectionStringButton.Size = new System.Drawing.Size(450, 40);
             this.InstallConnectionStringButton.TabIndex = 7;
@@ -209,14 +209,14 @@ namespace DataTierClient.Forms
             this.DatabaseNameControl.BottomMargin = 0;
             this.DatabaseNameControl.Editable = true;
             this.DatabaseNameControl.Encrypted = false;
-            this.DatabaseNameControl.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatabaseNameControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DatabaseNameControl.LabelBottomMargin = 0;
             this.DatabaseNameControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.DatabaseNameControl.LabelFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatabaseNameControl.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DatabaseNameControl.LabelText = "Database Name:";
             this.DatabaseNameControl.LabelTopMargin = 0;
             this.DatabaseNameControl.LabelWidth = 240;
-            this.DatabaseNameControl.Location = new System.Drawing.Point(32, 64);
+            this.DatabaseNameControl.Location = new System.Drawing.Point(32, 60);
             this.DatabaseNameControl.MultiLine = false;
             this.DatabaseNameControl.Name = "DatabaseNameControl";
             this.DatabaseNameControl.OnTextChangedListener = null;
@@ -227,7 +227,7 @@ namespace DataTierClient.Forms
             this.DatabaseNameControl.TextBoxBottomMargin = 0;
             this.DatabaseNameControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
             this.DatabaseNameControl.TextBoxEditableColor = System.Drawing.Color.White;
-            this.DatabaseNameControl.TextBoxFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatabaseNameControl.TextBoxFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DatabaseNameControl.TextBoxTopMargin = 0;
             // 
             // DatabaseServerControl
@@ -236,10 +236,10 @@ namespace DataTierClient.Forms
             this.DatabaseServerControl.BottomMargin = 0;
             this.DatabaseServerControl.Editable = true;
             this.DatabaseServerControl.Encrypted = false;
-            this.DatabaseServerControl.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatabaseServerControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DatabaseServerControl.LabelBottomMargin = 0;
             this.DatabaseServerControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.DatabaseServerControl.LabelFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatabaseServerControl.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DatabaseServerControl.LabelText = "Database Server:";
             this.DatabaseServerControl.LabelTopMargin = 0;
             this.DatabaseServerControl.LabelWidth = 240;
@@ -254,7 +254,7 @@ namespace DataTierClient.Forms
             this.DatabaseServerControl.TextBoxBottomMargin = 0;
             this.DatabaseServerControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
             this.DatabaseServerControl.TextBoxEditableColor = System.Drawing.Color.White;
-            this.DatabaseServerControl.TextBoxFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatabaseServerControl.TextBoxFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DatabaseServerControl.TextBoxTopMargin = 0;
             // 
             // DatabaseUserControl
@@ -263,14 +263,14 @@ namespace DataTierClient.Forms
             this.DatabaseUserControl.BottomMargin = 0;
             this.DatabaseUserControl.Editable = true;
             this.DatabaseUserControl.Encrypted = false;
-            this.DatabaseUserControl.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatabaseUserControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DatabaseUserControl.LabelBottomMargin = 0;
             this.DatabaseUserControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.DatabaseUserControl.LabelFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatabaseUserControl.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DatabaseUserControl.LabelText = "Database User Name:";
             this.DatabaseUserControl.LabelTopMargin = 0;
             this.DatabaseUserControl.LabelWidth = 240;
-            this.DatabaseUserControl.Location = new System.Drawing.Point(32, 148);
+            this.DatabaseUserControl.Location = new System.Drawing.Point(32, 140);
             this.DatabaseUserControl.MultiLine = false;
             this.DatabaseUserControl.Name = "DatabaseUserControl";
             this.DatabaseUserControl.OnTextChangedListener = null;
@@ -281,7 +281,7 @@ namespace DataTierClient.Forms
             this.DatabaseUserControl.TextBoxBottomMargin = 0;
             this.DatabaseUserControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
             this.DatabaseUserControl.TextBoxEditableColor = System.Drawing.Color.White;
-            this.DatabaseUserControl.TextBoxFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatabaseUserControl.TextBoxFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DatabaseUserControl.TextBoxTopMargin = 0;
             // 
             // DatabasePasswordControl
@@ -290,14 +290,14 @@ namespace DataTierClient.Forms
             this.DatabasePasswordControl.BottomMargin = 0;
             this.DatabasePasswordControl.Editable = true;
             this.DatabasePasswordControl.Encrypted = false;
-            this.DatabasePasswordControl.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatabasePasswordControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DatabasePasswordControl.LabelBottomMargin = 0;
             this.DatabasePasswordControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.DatabasePasswordControl.LabelFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatabasePasswordControl.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DatabasePasswordControl.LabelText = "Database Password:";
             this.DatabasePasswordControl.LabelTopMargin = 0;
             this.DatabasePasswordControl.LabelWidth = 240;
-            this.DatabasePasswordControl.Location = new System.Drawing.Point(32, 192);
+            this.DatabasePasswordControl.Location = new System.Drawing.Point(32, 180);
             this.DatabasePasswordControl.MultiLine = false;
             this.DatabasePasswordControl.Name = "DatabasePasswordControl";
             this.DatabasePasswordControl.OnTextChangedListener = null;
@@ -308,7 +308,7 @@ namespace DataTierClient.Forms
             this.DatabasePasswordControl.TextBoxBottomMargin = 0;
             this.DatabasePasswordControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
             this.DatabasePasswordControl.TextBoxEditableColor = System.Drawing.Color.White;
-            this.DatabasePasswordControl.TextBoxFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatabasePasswordControl.TextBoxFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DatabasePasswordControl.TextBoxTopMargin = 0;
             // 
             // ConnectionstringControl
@@ -317,14 +317,14 @@ namespace DataTierClient.Forms
             this.ConnectionstringControl.BottomMargin = 0;
             this.ConnectionstringControl.Editable = true;
             this.ConnectionstringControl.Encrypted = false;
-            this.ConnectionstringControl.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ConnectionstringControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ConnectionstringControl.LabelBottomMargin = 0;
             this.ConnectionstringControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.ConnectionstringControl.LabelFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ConnectionstringControl.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ConnectionstringControl.LabelText = "Connection String:";
             this.ConnectionstringControl.LabelTopMargin = 0;
             this.ConnectionstringControl.LabelWidth = 240;
-            this.ConnectionstringControl.Location = new System.Drawing.Point(32, 320);
+            this.ConnectionstringControl.Location = new System.Drawing.Point(32, 332);
             this.ConnectionstringControl.MultiLine = true;
             this.ConnectionstringControl.Name = "ConnectionstringControl";
             this.ConnectionstringControl.OnTextChangedListener = null;
@@ -335,13 +335,13 @@ namespace DataTierClient.Forms
             this.ConnectionstringControl.TextBoxBottomMargin = 0;
             this.ConnectionstringControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
             this.ConnectionstringControl.TextBoxEditableColor = System.Drawing.Color.White;
-            this.ConnectionstringControl.TextBoxFont = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ConnectionstringControl.TextBoxFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ConnectionstringControl.TextBoxTopMargin = 0;
             // 
             // StatusLabel
             // 
             this.StatusLabel.BackColor = System.Drawing.Color.Transparent;
-            this.StatusLabel.Location = new System.Drawing.Point(387, 468);
+            this.StatusLabel.Location = new System.Drawing.Point(387, 482);
             this.StatusLabel.Name = "StatusLabel";
             this.StatusLabel.Size = new System.Drawing.Size(308, 37);
             this.StatusLabel.TabIndex = 15;
@@ -354,7 +354,7 @@ namespace DataTierClient.Forms
             this.StatusImage.BackColor = System.Drawing.Color.Transparent;
             this.StatusImage.BackgroundImage = global::DataTierClient.Properties.Resources.Failure;
             this.StatusImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.StatusImage.Location = new System.Drawing.Point(699, 462);
+            this.StatusImage.Location = new System.Drawing.Point(702, 476);
             this.StatusImage.Name = "StatusImage";
             this.StatusImage.Size = new System.Drawing.Size(48, 48);
             this.StatusImage.TabIndex = 16;
@@ -366,7 +366,7 @@ namespace DataTierClient.Forms
             this.CopiedImage.BackColor = System.Drawing.Color.Transparent;
             this.CopiedImage.BackgroundImage = global::DataTierClient.Properties.Resources.Copied;
             this.CopiedImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.CopiedImage.Location = new System.Drawing.Point(12, 546);
+            this.CopiedImage.Location = new System.Drawing.Point(12, 554);
             this.CopiedImage.Name = "CopiedImage";
             this.CopiedImage.Size = new System.Drawing.Size(120, 68);
             this.CopiedImage.TabIndex = 17;
@@ -388,9 +388,9 @@ namespace DataTierClient.Forms
             this.TestButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.TestButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.TestButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.TestButton.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TestButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TestButton.ForeColor = System.Drawing.Color.DarkGray;
-            this.TestButton.Location = new System.Drawing.Point(272, 466);
+            this.TestButton.Location = new System.Drawing.Point(272, 480);
             this.TestButton.Name = "TestButton";
             this.TestButton.Size = new System.Drawing.Size(125, 40);
             this.TestButton.TabIndex = 18;
@@ -407,7 +407,7 @@ namespace DataTierClient.Forms
             this.InstalledImage.BackgroundImage = global::DataTierClient.Properties.Resources.Installed;
             this.InstalledImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.InstalledImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.InstalledImage.Location = new System.Drawing.Point(12, 546);
+            this.InstalledImage.Location = new System.Drawing.Point(12, 554);
             this.InstalledImage.Name = "InstalledImage";
             this.InstalledImage.Size = new System.Drawing.Size(200, 68);
             this.InstalledImage.TabIndex = 19;
@@ -422,11 +422,11 @@ namespace DataTierClient.Forms
             // InfoLabel
             // 
             this.InfoLabel.BackColor = System.Drawing.Color.Transparent;
-            this.InfoLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InfoLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.InfoLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.InfoLabel.Location = new System.Drawing.Point(56, 225);
+            this.InfoLabel.Location = new System.Drawing.Point(54, 225);
             this.InfoLabel.Name = "InfoLabel";
-            this.InfoLabel.Size = new System.Drawing.Size(699, 44);
+            this.InfoLabel.Size = new System.Drawing.Size(701, 56);
             this.InfoLabel.TabIndex = 20;
             this.InfoLabel.Text = "Microsoft.Data.SqlClient requires you to set Encrypt=False if your database is no" +
     "t encrypted. Leave this checked if you are targeting .NET Core.\r\n";
@@ -439,7 +439,7 @@ namespace DataTierClient.Forms
             this.EncryptValueComboBox.ComoboBoxFont = null;
             this.EncryptValueComboBox.Editable = true;
             this.EncryptValueComboBox.Enabled = false;
-            this.EncryptValueComboBox.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EncryptValueComboBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EncryptValueComboBox.HideLabel = false;
             this.EncryptValueComboBox.LabelBottomMargin = 0;
             this.EncryptValueComboBox.LabelColor = System.Drawing.SystemColors.ControlText;
@@ -448,7 +448,7 @@ namespace DataTierClient.Forms
             this.EncryptValueComboBox.LabelTopMargin = 0;
             this.EncryptValueComboBox.LabelWidth = 180;
             this.EncryptValueComboBox.List = null;
-            this.EncryptValueComboBox.Location = new System.Drawing.Point(392, 270);
+            this.EncryptValueComboBox.Location = new System.Drawing.Point(392, 286);
             this.EncryptValueComboBox.Name = "EncryptValueComboBox";
             this.EncryptValueComboBox.SelectedIndex = -1;
             this.EncryptValueComboBox.SelectedIndexListener = null;
@@ -465,12 +465,12 @@ namespace DataTierClient.Forms
             this.IncludeEncryptCheckBox.CheckChangedListener = null;
             this.IncludeEncryptCheckBox.Checked = false;
             this.IncludeEncryptCheckBox.Editable = true;
-            this.IncludeEncryptCheckBox.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IncludeEncryptCheckBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IncludeEncryptCheckBox.LabelColor = System.Drawing.SystemColors.ControlText;
             this.IncludeEncryptCheckBox.LabelFont = null;
             this.IncludeEncryptCheckBox.LabelText = "Include Encrypt:";
             this.IncludeEncryptCheckBox.LabelWidth = 240;
-            this.IncludeEncryptCheckBox.Location = new System.Drawing.Point(32, 272);
+            this.IncludeEncryptCheckBox.Location = new System.Drawing.Point(32, 288);
             this.IncludeEncryptCheckBox.Name = "IncludeEncryptCheckBox";
             this.IncludeEncryptCheckBox.Size = new System.Drawing.Size(280, 28);
             this.IncludeEncryptCheckBox.TabIndex = 21;
@@ -502,7 +502,7 @@ namespace DataTierClient.Forms
             this.Controls.Add(this.WindowsAuthenticationRadioButton);
             this.Controls.Add(this.InstalledImage);
             this.DoubleBuffered = true;
-            this.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(808, 800);
             this.MinimizeBox = false;
@@ -531,3 +531,6 @@ namespace DataTierClient.Forms
     #endregion
 
 }
+
+
+

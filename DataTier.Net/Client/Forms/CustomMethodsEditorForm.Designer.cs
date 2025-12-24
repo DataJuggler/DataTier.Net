@@ -1,4 +1,4 @@
-﻿
+
 
 #region using statements
 
@@ -53,7 +53,7 @@ namespace DataTierClient.Forms
             this.CustomMethodsEditor.ActionType = ObjectLibrary.Enumerations.ActionTypeEnum.NoAction;
             this.CustomMethodsEditor.BackColor = System.Drawing.Color.Linen;
             this.CustomMethodsEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CustomMethodsEditor.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CustomMethodsEditor.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomMethodsEditor.Location = new System.Drawing.Point(0, 0);
             this.CustomMethodsEditor.MethodsList = null;
             this.CustomMethodsEditor.Name = "CustomMethodsEditor";
@@ -67,7 +67,7 @@ namespace DataTierClient.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(420, 240);
             this.Controls.Add(this.CustomMethodsEditor);
-            this.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "CustomMethodsEditorForm";
@@ -84,3 +84,5 @@ namespace DataTierClient.Forms
     #endregion
 
 }
+
+

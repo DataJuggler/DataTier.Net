@@ -1,4 +1,4 @@
-﻿
+
 
 #region using statements
 
@@ -54,6 +54,7 @@ namespace DataTierClient.Controls
             private void InitializeComponent()
             {
             this.TopPanel = new System.Windows.Forms.Panel();
+            this.DatabaseNameControl = new DataJuggler.Win.Controls.LabelTextBoxControl();
             this.CustomWhereCheckBox = new DataJuggler.Win.Controls.LabelCheckBoxControl();
             this.ProcedureButton = new System.Windows.Forms.Button();
             this.UpdateMyDatabaseRadioButton = new System.Windows.Forms.RadioButton();
@@ -68,7 +69,6 @@ namespace DataTierClient.Controls
             this.WhereTextBox = new System.Windows.Forms.TextBox();
             this.WhereLabel = new System.Windows.Forms.Label();
             this.ProcedureTextBox = new System.Windows.Forms.TextBox();
-            this.DatabaseNameControl = new DataJuggler.Win.Controls.LabelTextBoxControl();
             this.TopPanel.SuspendLayout();
             this.WherePanel.SuspendLayout();
             this.SuspendLayout();
@@ -88,22 +88,49 @@ namespace DataTierClient.Controls
             this.TopPanel.Size = new System.Drawing.Size(1080, 153);
             this.TopPanel.TabIndex = 101;
             // 
+            // DatabaseNameControl
+            // 
+            this.DatabaseNameControl.BackColor = System.Drawing.Color.Transparent;
+            this.DatabaseNameControl.BottomMargin = 0;
+            this.DatabaseNameControl.Editable = false;
+            this.DatabaseNameControl.Encrypted = false;
+            this.DatabaseNameControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatabaseNameControl.LabelBottomMargin = 0;
+            this.DatabaseNameControl.LabelColor = System.Drawing.SystemColors.ControlText;
+            this.DatabaseNameControl.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatabaseNameControl.LabelText = "Database Name:";
+            this.DatabaseNameControl.LabelTopMargin = 2;
+            this.DatabaseNameControl.LabelWidth = 172;
+            this.DatabaseNameControl.Location = new System.Drawing.Point(16, 106);
+            this.DatabaseNameControl.MultiLine = false;
+            this.DatabaseNameControl.Name = "DatabaseNameControl";
+            this.DatabaseNameControl.OnTextChangedListener = null;
+            this.DatabaseNameControl.PasswordMode = false;
+            this.DatabaseNameControl.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.DatabaseNameControl.Size = new System.Drawing.Size(492, 28);
+            this.DatabaseNameControl.TabIndex = 105;
+            this.DatabaseNameControl.TextBoxBottomMargin = 0;
+            this.DatabaseNameControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
+            this.DatabaseNameControl.TextBoxEditableColor = System.Drawing.Color.White;
+            this.DatabaseNameControl.TextBoxFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatabaseNameControl.TextBoxTopMargin = 0;
+            // 
             // CustomWhereCheckBox
             // 
             this.CustomWhereCheckBox.BackColor = System.Drawing.Color.Transparent;
             this.CustomWhereCheckBox.CheckBoxHorizontalOffSet = 0;
-            this.CustomWhereCheckBox.CheckBoxVerticalOffSet = 3;
+            this.CustomWhereCheckBox.CheckBoxVerticalOffSet = 5;
             this.CustomWhereCheckBox.CheckChangedListener = null;
             this.CustomWhereCheckBox.Checked = false;
             this.CustomWhereCheckBox.Editable = true;
-            this.CustomWhereCheckBox.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CustomWhereCheckBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomWhereCheckBox.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.CustomWhereCheckBox.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CustomWhereCheckBox.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomWhereCheckBox.LabelText = "Custom Where:";
-            this.CustomWhereCheckBox.LabelWidth = 148;
-            this.CustomWhereCheckBox.Location = new System.Drawing.Point(512, 69);
+            this.CustomWhereCheckBox.LabelWidth = 180;
+            this.CustomWhereCheckBox.Location = new System.Drawing.Point(512, 81);
             this.CustomWhereCheckBox.Name = "CustomWhereCheckBox";
-            this.CustomWhereCheckBox.Size = new System.Drawing.Size(169, 28);
+            this.CustomWhereCheckBox.Size = new System.Drawing.Size(361, 32);
             this.CustomWhereCheckBox.TabIndex = 104;
             // 
             // ProcedureButton
@@ -114,11 +141,11 @@ namespace DataTierClient.Controls
             this.ProcedureButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.ProcedureButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.ProcedureButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ProcedureButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProcedureButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProcedureButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.ProcedureButton.Location = new System.Drawing.Point(882, 33);
+            this.ProcedureButton.Location = new System.Drawing.Point(882, 27);
             this.ProcedureButton.Name = "ProcedureButton";
-            this.ProcedureButton.Size = new System.Drawing.Size(180, 40);
+            this.ProcedureButton.Size = new System.Drawing.Size(180, 44);
             this.ProcedureButton.TabIndex = 103;
             this.ProcedureButton.Text = "Copy Procedure";
             this.ProcedureButton.UseVisualStyleBackColor = true;
@@ -129,10 +156,10 @@ namespace DataTierClient.Controls
             // UpdateMyDatabaseRadioButton
             // 
             this.UpdateMyDatabaseRadioButton.AutoSize = true;
-            this.UpdateMyDatabaseRadioButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UpdateMyDatabaseRadioButton.Location = new System.Drawing.Point(518, 43);
+            this.UpdateMyDatabaseRadioButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UpdateMyDatabaseRadioButton.Location = new System.Drawing.Point(518, 47);
             this.UpdateMyDatabaseRadioButton.Name = "UpdateMyDatabaseRadioButton";
-            this.UpdateMyDatabaseRadioButton.Size = new System.Drawing.Size(354, 22);
+            this.UpdateMyDatabaseRadioButton.Size = new System.Drawing.Size(365, 31);
             this.UpdateMyDatabaseRadioButton.TabIndex = 102;
             this.UpdateMyDatabaseRadioButton.TabStop = true;
             this.UpdateMyDatabaseRadioButton.Text = "Insert Stored Procedure In Database";
@@ -142,10 +169,10 @@ namespace DataTierClient.Controls
             // ManualUpdateRadioButton
             // 
             this.ManualUpdateRadioButton.AutoSize = true;
-            this.ManualUpdateRadioButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ManualUpdateRadioButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ManualUpdateRadioButton.Location = new System.Drawing.Point(518, 15);
             this.ManualUpdateRadioButton.Name = "ManualUpdateRadioButton";
-            this.ManualUpdateRadioButton.Size = new System.Drawing.Size(335, 22);
+            this.ManualUpdateRadioButton.Size = new System.Drawing.Size(355, 31);
             this.ManualUpdateRadioButton.TabIndex = 101;
             this.ManualUpdateRadioButton.TabStop = true;
             this.ManualUpdateRadioButton.Text = "I will update my database manually";
@@ -158,10 +185,10 @@ namespace DataTierClient.Controls
             this.ProcedureNameControl.BottomMargin = 0;
             this.ProcedureNameControl.Editable = false;
             this.ProcedureNameControl.Encrypted = false;
-            this.ProcedureNameControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProcedureNameControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProcedureNameControl.LabelBottomMargin = 0;
             this.ProcedureNameControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.ProcedureNameControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProcedureNameControl.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProcedureNameControl.LabelText = "Procedure Name:";
             this.ProcedureNameControl.LabelTopMargin = 2;
             this.ProcedureNameControl.LabelWidth = 172;
@@ -176,7 +203,7 @@ namespace DataTierClient.Controls
             this.ProcedureNameControl.TextBoxBottomMargin = 0;
             this.ProcedureNameControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
             this.ProcedureNameControl.TextBoxEditableColor = System.Drawing.Color.White;
-            this.ProcedureNameControl.TextBoxFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProcedureNameControl.TextBoxFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProcedureNameControl.TextBoxTopMargin = 0;
             // 
             // SelectedTableControl
@@ -185,10 +212,10 @@ namespace DataTierClient.Controls
             this.SelectedTableControl.BottomMargin = 0;
             this.SelectedTableControl.Editable = false;
             this.SelectedTableControl.Encrypted = false;
-            this.SelectedTableControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SelectedTableControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SelectedTableControl.LabelBottomMargin = 0;
             this.SelectedTableControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.SelectedTableControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SelectedTableControl.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SelectedTableControl.LabelText = "Selected Table:";
             this.SelectedTableControl.LabelTopMargin = 4;
             this.SelectedTableControl.LabelWidth = 172;
@@ -203,13 +230,13 @@ namespace DataTierClient.Controls
             this.SelectedTableControl.TextBoxBottomMargin = 0;
             this.SelectedTableControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
             this.SelectedTableControl.TextBoxEditableColor = System.Drawing.Color.White;
-            this.SelectedTableControl.TextBoxFont = new System.Drawing.Font("Verdana", 14.25F);
+            this.SelectedTableControl.TextBoxFont = new System.Drawing.Font("Calibri", 16F);
             this.SelectedTableControl.TextBoxTopMargin = 0;
             // 
             // SeperatorPanel
             // 
             this.SeperatorPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.SeperatorPanel.Location = new System.Drawing.Point(0, 540);
+            this.SeperatorPanel.Location = new System.Drawing.Point(0, 532);
             this.SeperatorPanel.Name = "SeperatorPanel";
             this.SeperatorPanel.Size = new System.Drawing.Size(1080, 20);
             this.SeperatorPanel.TabIndex = 103;
@@ -219,7 +246,7 @@ namespace DataTierClient.Controls
             this.LeftMarginPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.LeftMarginPanel.Location = new System.Drawing.Point(0, 153);
             this.LeftMarginPanel.Name = "LeftMarginPanel";
-            this.LeftMarginPanel.Size = new System.Drawing.Size(20, 387);
+            this.LeftMarginPanel.Size = new System.Drawing.Size(20, 379);
             this.LeftMarginPanel.TabIndex = 105;
             // 
             // RightMarginPanel
@@ -227,16 +254,16 @@ namespace DataTierClient.Controls
             this.RightMarginPanel.Dock = System.Windows.Forms.DockStyle.Right;
             this.RightMarginPanel.Location = new System.Drawing.Point(1060, 153);
             this.RightMarginPanel.Name = "RightMarginPanel";
-            this.RightMarginPanel.Size = new System.Drawing.Size(20, 387);
+            this.RightMarginPanel.Size = new System.Drawing.Size(20, 379);
             this.RightMarginPanel.TabIndex = 106;
             // 
             // SaveCancelControl
             // 
             this.SaveCancelControl.BackColor = System.Drawing.Color.Transparent;
             this.SaveCancelControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.SaveCancelControl.Location = new System.Drawing.Point(0, 560);
+            this.SaveCancelControl.Location = new System.Drawing.Point(0, 552);
             this.SaveCancelControl.Name = "SaveCancelControl";
-            this.SaveCancelControl.Size = new System.Drawing.Size(1080, 40);
+            this.SaveCancelControl.Size = new System.Drawing.Size(1080, 48);
             this.SaveCancelControl.TabIndex = 99;
             // 
             // WherePanel
@@ -244,7 +271,7 @@ namespace DataTierClient.Controls
             this.WherePanel.Controls.Add(this.WhereTextBox);
             this.WherePanel.Controls.Add(this.WhereLabel);
             this.WherePanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.WherePanel.Location = new System.Drawing.Point(20, 440);
+            this.WherePanel.Location = new System.Drawing.Point(20, 432);
             this.WherePanel.Name = "WherePanel";
             this.WherePanel.Size = new System.Drawing.Size(1040, 100);
             this.WherePanel.TabIndex = 108;
@@ -263,7 +290,7 @@ namespace DataTierClient.Controls
             // WhereLabel
             // 
             this.WhereLabel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.WhereLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.WhereLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.WhereLabel.Location = new System.Drawing.Point(0, 0);
             this.WhereLabel.Name = "WhereLabel";
             this.WhereLabel.Size = new System.Drawing.Size(1040, 22);
@@ -278,36 +305,9 @@ namespace DataTierClient.Controls
             this.ProcedureTextBox.Multiline = true;
             this.ProcedureTextBox.Name = "ProcedureTextBox";
             this.ProcedureTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ProcedureTextBox.Size = new System.Drawing.Size(1040, 287);
+            this.ProcedureTextBox.Size = new System.Drawing.Size(1040, 279);
             this.ProcedureTextBox.TabIndex = 109;
             this.ProcedureTextBox.TextChanged += new System.EventHandler(this.ProcedureTextBox_TextChanged);
-            // 
-            // DatabaseNameControl
-            // 
-            this.DatabaseNameControl.BackColor = System.Drawing.Color.Transparent;
-            this.DatabaseNameControl.BottomMargin = 0;
-            this.DatabaseNameControl.Editable = false;
-            this.DatabaseNameControl.Encrypted = false;
-            this.DatabaseNameControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DatabaseNameControl.LabelBottomMargin = 0;
-            this.DatabaseNameControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.DatabaseNameControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DatabaseNameControl.LabelText = "Database Name:";
-            this.DatabaseNameControl.LabelTopMargin = 2;
-            this.DatabaseNameControl.LabelWidth = 172;
-            this.DatabaseNameControl.Location = new System.Drawing.Point(16, 106);
-            this.DatabaseNameControl.MultiLine = false;
-            this.DatabaseNameControl.Name = "DatabaseNameControl";
-            this.DatabaseNameControl.OnTextChangedListener = null;
-            this.DatabaseNameControl.PasswordMode = false;
-            this.DatabaseNameControl.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.DatabaseNameControl.Size = new System.Drawing.Size(492, 28);
-            this.DatabaseNameControl.TabIndex = 105;
-            this.DatabaseNameControl.TextBoxBottomMargin = 0;
-            this.DatabaseNameControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
-            this.DatabaseNameControl.TextBoxEditableColor = System.Drawing.Color.White;
-            this.DatabaseNameControl.TextBoxFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DatabaseNameControl.TextBoxTopMargin = 0;
             // 
             // NewStoredProcedureEditor
             // 
@@ -320,7 +320,7 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.SeperatorPanel);
             this.Controls.Add(this.TopPanel);
             this.Controls.Add(this.SaveCancelControl);
-            this.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "NewStoredProcedureEditor";
             this.Size = new System.Drawing.Size(1080, 600);
             this.TopPanel.ResumeLayout(false);
@@ -345,3 +345,5 @@ namespace DataTierClient.Controls
     #endregion
 
 }
+
+

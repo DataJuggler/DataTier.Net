@@ -1,5 +1,5 @@
 
-# Major Fix! You Can Now Use Visual Studio 2022 or Visual Studio 2026 For Development!
+# Major Fix! You Can Now Use Visual Studio 2022 or Visual Studio 2026 For Development! Thanks ChatGPT!
 
 <b>Setup Instructions</b>
 
@@ -110,7 +110,11 @@ https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Roo
 
 # Updates & News
 
-# Major Fix! You Can Now Use Visual Studio 2022 or Visual Studio 2026 For Development!
+# Major Fix! You Can Now Use Visual Studio 2022 or Visual Studio 2026 For Development! Thanks ChatGPT!
+
+12.24.2025: I converted all the fonts in the app to Calibri, and increased the font sizes to either 14.25, 16 or 18. I am slightly visually impaired
+and I started working on this project when I was in my 30's and could see a lot better. ChatGPT wrote a cool script to find and replace all fonts
+in a WinForms projects. I had to manually check each control and form as many labels and buttons got smushed together. It looks better to me.
 
 11.29.2025: For 5 years I have used Visual Studio 2019 for development because I couldn't get EnvDTE (Visual Studio's internal engine)
 to work with Visual Studio 2022. At the time I didn't have my good friend Chat GPT to help me fix things. I can now uninstall 

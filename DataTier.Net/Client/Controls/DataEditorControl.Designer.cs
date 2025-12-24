@@ -1,4 +1,4 @@
-﻿
+
 
 #region using statements
 
@@ -18,7 +18,6 @@ namespace DataTierClient.Controls
         #region Private Variables
         private System.ComponentModel.IContainer components = null;
         private System.Windows.Forms.CheckedListBox TablesListBox;
-        private SaveCancelControl SaveCancelControl;
         private System.Windows.Forms.Label ExcludeTableLabel;
         private System.Windows.Forms.Label ExcludeFieldLabel;
         private System.Windows.Forms.CheckedListBox FieldsListBox;
@@ -60,7 +59,6 @@ namespace DataTierClient.Controls
             private void InitializeComponent()
             {
             this.TablesListBox = new System.Windows.Forms.CheckedListBox();
-            this.SaveCancelControl = new DataTierClient.Controls.SaveCancelControl();
             this.ExcludeTableLabel = new System.Windows.Forms.Label();
             this.ExcludeFieldLabel = new System.Windows.Forms.Label();
             this.FieldsListBox = new System.Windows.Forms.CheckedListBox();
@@ -76,6 +74,7 @@ namespace DataTierClient.Controls
             this.ManageMethodButton = new System.Windows.Forms.Button();
             this.CreateMethodButton = new System.Windows.Forms.Button();
             this.RemoveTableButton = new System.Windows.Forms.Button();
+            this.SaveCancelControl = new DataTierClient.Controls.SaveCancelControl();
             this.SuspendLayout();
             // 
             // TablesListBox
@@ -83,23 +82,14 @@ namespace DataTierClient.Controls
             this.TablesListBox.FormattingEnabled = true;
             this.TablesListBox.Location = new System.Drawing.Point(24, 36);
             this.TablesListBox.Name = "TablesListBox";
-            this.TablesListBox.Size = new System.Drawing.Size(320, 356);
+            this.TablesListBox.Size = new System.Drawing.Size(320, 352);
             this.TablesListBox.TabIndex = 0;
             this.TablesListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.TablesListBox_ItemCheck);
             this.TablesListBox.SelectedIndexChanged += new System.EventHandler(this.TablesListBox_SelectedIndexChanged);
             // 
-            // SaveCancelControl
-            // 
-            this.SaveCancelControl.BackColor = System.Drawing.Color.Transparent;
-            this.SaveCancelControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.SaveCancelControl.Location = new System.Drawing.Point(0, 456);
-            this.SaveCancelControl.Name = "SaveCancelControl";
-            this.SaveCancelControl.Size = new System.Drawing.Size(964, 40);
-            this.SaveCancelControl.TabIndex = 1;
-            // 
             // ExcludeTableLabel
             // 
-            this.ExcludeTableLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExcludeTableLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ExcludeTableLabel.Location = new System.Drawing.Point(24, 394);
             this.ExcludeTableLabel.Name = "ExcludeTableLabel";
             this.ExcludeTableLabel.Size = new System.Drawing.Size(282, 29);
@@ -108,7 +98,7 @@ namespace DataTierClient.Controls
             // 
             // ExcludeFieldLabel
             // 
-            this.ExcludeFieldLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExcludeFieldLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ExcludeFieldLabel.Location = new System.Drawing.Point(608, 394);
             this.ExcludeFieldLabel.Name = "ExcludeFieldLabel";
             this.ExcludeFieldLabel.Size = new System.Drawing.Size(282, 29);
@@ -121,23 +111,23 @@ namespace DataTierClient.Controls
             this.FieldsListBox.FormattingEnabled = true;
             this.FieldsListBox.Location = new System.Drawing.Point(608, 36);
             this.FieldsListBox.Name = "FieldsListBox";
-            this.FieldsListBox.Size = new System.Drawing.Size(320, 356);
+            this.FieldsListBox.Size = new System.Drawing.Size(320, 352);
             this.FieldsListBox.TabIndex = 3;
             this.FieldsListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.FieldsListBox_ItemCheck);
             // 
             // TablesLabel
             // 
-            this.TablesLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TablesLabel.Location = new System.Drawing.Point(24, 14);
+            this.TablesLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TablesLabel.Location = new System.Drawing.Point(24, 4);
             this.TablesLabel.Name = "TablesLabel";
-            this.TablesLabel.Size = new System.Drawing.Size(94, 18);
+            this.TablesLabel.Size = new System.Drawing.Size(94, 29);
             this.TablesLabel.TabIndex = 5;
             this.TablesLabel.Text = "Tables:";
             this.TablesLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // FieldsLabel
             // 
-            this.FieldsLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FieldsLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FieldsLabel.Location = new System.Drawing.Point(608, 4);
             this.FieldsLabel.Name = "FieldsLabel";
             this.FieldsLabel.Size = new System.Drawing.Size(282, 29);
@@ -147,10 +137,10 @@ namespace DataTierClient.Controls
             // 
             // SelectedTableLabel
             // 
-            this.SelectedTableLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SelectedTableLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SelectedTableLabel.Location = new System.Drawing.Point(360, 4);
             this.SelectedTableLabel.Name = "SelectedTableLabel";
-            this.SelectedTableLabel.Size = new System.Drawing.Size(147, 29);
+            this.SelectedTableLabel.Size = new System.Drawing.Size(156, 29);
             this.SelectedTableLabel.TabIndex = 7;
             this.SelectedTableLabel.Text = "Selected Table:";
             this.SelectedTableLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -160,16 +150,16 @@ namespace DataTierClient.Controls
             this.SelectedTableTextBox.Location = new System.Drawing.Point(360, 36);
             this.SelectedTableTextBox.Name = "SelectedTableTextBox";
             this.SelectedTableTextBox.ReadOnly = true;
-            this.SelectedTableTextBox.Size = new System.Drawing.Size(232, 27);
+            this.SelectedTableTextBox.Size = new System.Drawing.Size(232, 34);
             this.SelectedTableTextBox.TabIndex = 8;
             // 
             // AllButton
             // 
             this.AllButton.AutoSize = true;
-            this.AllButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AllButton.Location = new System.Drawing.Point(177, 14);
+            this.AllButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AllButton.Location = new System.Drawing.Point(177, 4);
             this.AllButton.Name = "AllButton";
-            this.AllButton.Size = new System.Drawing.Size(28, 18);
+            this.AllButton.Size = new System.Drawing.Size(35, 27);
             this.AllButton.TabIndex = 106;
             this.AllButton.Text = "All";
             this.AllButton.Click += new System.EventHandler(this.AllButton_Click);
@@ -179,10 +169,10 @@ namespace DataTierClient.Controls
             // NoneButton
             // 
             this.NoneButton.AutoSize = true;
-            this.NoneButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NoneButton.Location = new System.Drawing.Point(232, 14);
+            this.NoneButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NoneButton.Location = new System.Drawing.Point(232, 4);
             this.NoneButton.Name = "NoneButton";
-            this.NoneButton.Size = new System.Drawing.Size(54, 18);
+            this.NoneButton.Size = new System.Drawing.Size(61, 27);
             this.NoneButton.TabIndex = 107;
             this.NoneButton.Text = "None";
             this.NoneButton.Click += new System.EventHandler(this.NoneButton_Click);
@@ -197,11 +187,11 @@ namespace DataTierClient.Controls
             this.CreateGridColumnsButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.CreateGridColumnsButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.CreateGridColumnsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CreateGridColumnsButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CreateGridColumnsButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CreateGridColumnsButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.CreateGridColumnsButton.Location = new System.Drawing.Point(360, 321);
+            this.CreateGridColumnsButton.Location = new System.Drawing.Point(360, 333);
             this.CreateGridColumnsButton.Name = "CreateGridColumnsButton";
-            this.CreateGridColumnsButton.Size = new System.Drawing.Size(232, 40);
+            this.CreateGridColumnsButton.Size = new System.Drawing.Size(232, 44);
             this.CreateGridColumnsButton.TabIndex = 108;
             this.CreateGridColumnsButton.Text = "Create Grid Columns";
             this.CreateGridColumnsButton.UseVisualStyleBackColor = true;
@@ -218,11 +208,11 @@ namespace DataTierClient.Controls
             this.ManageFieldSetsButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.ManageFieldSetsButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.ManageFieldSetsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ManageFieldSetsButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ManageFieldSetsButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ManageFieldSetsButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.ManageFieldSetsButton.Location = new System.Drawing.Point(360, 174);
+            this.ManageFieldSetsButton.Location = new System.Drawing.Point(360, 162);
             this.ManageFieldSetsButton.Name = "ManageFieldSetsButton";
-            this.ManageFieldSetsButton.Size = new System.Drawing.Size(232, 40);
+            this.ManageFieldSetsButton.Size = new System.Drawing.Size(232, 44);
             this.ManageFieldSetsButton.TabIndex = 103;
             this.ManageFieldSetsButton.Text = "Manage Field Sets";
             this.ManageFieldSetsButton.UseVisualStyleBackColor = true;
@@ -239,11 +229,11 @@ namespace DataTierClient.Controls
             this.ManageReadersButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.ManageReadersButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.ManageReadersButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ManageReadersButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ManageReadersButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ManageReadersButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.ManageReadersButton.Location = new System.Drawing.Point(360, 223);
+            this.ManageReadersButton.Location = new System.Drawing.Point(360, 219);
             this.ManageReadersButton.Name = "ManageReadersButton";
-            this.ManageReadersButton.Size = new System.Drawing.Size(232, 40);
+            this.ManageReadersButton.Size = new System.Drawing.Size(232, 44);
             this.ManageReadersButton.TabIndex = 102;
             this.ManageReadersButton.Text = "Manage Readers";
             this.ManageReadersButton.UseVisualStyleBackColor = true;
@@ -260,11 +250,11 @@ namespace DataTierClient.Controls
             this.ManageMethodButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.ManageMethodButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.ManageMethodButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ManageMethodButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ManageMethodButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ManageMethodButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.ManageMethodButton.Location = new System.Drawing.Point(360, 125);
+            this.ManageMethodButton.Location = new System.Drawing.Point(360, 105);
             this.ManageMethodButton.Name = "ManageMethodButton";
-            this.ManageMethodButton.Size = new System.Drawing.Size(232, 40);
+            this.ManageMethodButton.Size = new System.Drawing.Size(232, 44);
             this.ManageMethodButton.TabIndex = 101;
             this.ManageMethodButton.Text = "Manage Methods";
             this.ManageMethodButton.UseVisualStyleBackColor = true;
@@ -281,11 +271,11 @@ namespace DataTierClient.Controls
             this.CreateMethodButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.CreateMethodButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.CreateMethodButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CreateMethodButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CreateMethodButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CreateMethodButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.CreateMethodButton.Location = new System.Drawing.Point(360, 76);
+            this.CreateMethodButton.Location = new System.Drawing.Point(360, 48);
             this.CreateMethodButton.Name = "CreateMethodButton";
-            this.CreateMethodButton.Size = new System.Drawing.Size(232, 40);
+            this.CreateMethodButton.Size = new System.Drawing.Size(232, 44);
             this.CreateMethodButton.TabIndex = 100;
             this.CreateMethodButton.Text = "Create New Method";
             this.CreateMethodButton.UseVisualStyleBackColor = true;
@@ -302,11 +292,11 @@ namespace DataTierClient.Controls
             this.RemoveTableButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.RemoveTableButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.RemoveTableButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RemoveTableButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RemoveTableButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RemoveTableButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.RemoveTableButton.Location = new System.Drawing.Point(360, 272);
+            this.RemoveTableButton.Location = new System.Drawing.Point(360, 276);
             this.RemoveTableButton.Name = "RemoveTableButton";
-            this.RemoveTableButton.Size = new System.Drawing.Size(232, 40);
+            this.RemoveTableButton.Size = new System.Drawing.Size(232, 44);
             this.RemoveTableButton.TabIndex = 97;
             this.RemoveTableButton.Text = "Remove Table Code";
             this.RemoveTableButton.UseVisualStyleBackColor = true;
@@ -315,10 +305,20 @@ namespace DataTierClient.Controls
             this.RemoveTableButton.MouseEnter += new System.EventHandler(this.Button_Enter);
             this.RemoveTableButton.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
+            // SaveCancelControl
+            // 
+            this.SaveCancelControl.BackColor = System.Drawing.Color.Transparent;
+            this.SaveCancelControl.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.SaveCancelControl.Location = new System.Drawing.Point(0, 448);
+            this.SaveCancelControl.Name = "SaveCancelControl";
+            this.SaveCancelControl.Size = new System.Drawing.Size(964, 48);
+            this.SaveCancelControl.TabIndex = 109;
+            // 
             // DataEditorControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Linen;
+            this.Controls.Add(this.SaveCancelControl);
             this.Controls.Add(this.CreateGridColumnsButton);
             this.Controls.Add(this.NoneButton);
             this.Controls.Add(this.AllButton);
@@ -334,9 +334,8 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.ExcludeFieldLabel);
             this.Controls.Add(this.FieldsListBox);
             this.Controls.Add(this.ExcludeTableLabel);
-            this.Controls.Add(this.SaveCancelControl);
             this.Controls.Add(this.TablesListBox);
-            this.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "DataEditorControl";
             this.Size = new System.Drawing.Size(964, 496);
             this.ResumeLayout(false);
@@ -349,7 +348,10 @@ namespace DataTierClient.Controls
         #endregion
 
         private System.Windows.Forms.Button CreateGridColumnsButton;
+        private SaveCancelControl SaveCancelControl;
     }
     #endregion
 
 }
+
+

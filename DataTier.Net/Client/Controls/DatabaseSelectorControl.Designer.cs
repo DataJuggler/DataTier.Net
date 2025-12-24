@@ -68,7 +68,7 @@ namespace DataTierClient.Controls
             // BottomFillerPanel
             // 
             this.BottomFillerPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.BottomFillerPanel.Location = new System.Drawing.Point(0, 493);
+            this.BottomFillerPanel.Location = new System.Drawing.Point(0, 485);
             this.BottomFillerPanel.Name = "BottomFillerPanel";
             this.BottomFillerPanel.Size = new System.Drawing.Size(592, 16);
             this.BottomFillerPanel.TabIndex = 8;
@@ -78,7 +78,7 @@ namespace DataTierClient.Controls
             this.LeftMarginPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.LeftMarginPanel.Location = new System.Drawing.Point(0, 16);
             this.LeftMarginPanel.Name = "LeftMarginPanel";
-            this.LeftMarginPanel.Size = new System.Drawing.Size(16, 477);
+            this.LeftMarginPanel.Size = new System.Drawing.Size(16, 469);
             this.LeftMarginPanel.TabIndex = 9;
             // 
             // RightMarginPanel
@@ -86,16 +86,16 @@ namespace DataTierClient.Controls
             this.RightMarginPanel.Dock = System.Windows.Forms.DockStyle.Right;
             this.RightMarginPanel.Location = new System.Drawing.Point(576, 16);
             this.RightMarginPanel.Name = "RightMarginPanel";
-            this.RightMarginPanel.Size = new System.Drawing.Size(16, 477);
+            this.RightMarginPanel.Size = new System.Drawing.Size(16, 469);
             this.RightMarginPanel.TabIndex = 10;
             // 
             // SaveCancelControl
             // 
             this.SaveCancelControl.BackColor = System.Drawing.Color.Transparent;
             this.SaveCancelControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.SaveCancelControl.Location = new System.Drawing.Point(0, 509);
+            this.SaveCancelControl.Location = new System.Drawing.Point(0, 501);
             this.SaveCancelControl.Name = "SaveCancelControl";
-            this.SaveCancelControl.Size = new System.Drawing.Size(592, 40);
+            this.SaveCancelControl.Size = new System.Drawing.Size(592, 48);
             this.SaveCancelControl.TabIndex = 4;
             // 
             // SqlDatabaseEditor
@@ -105,7 +105,7 @@ namespace DataTierClient.Controls
             this.SqlDatabaseEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SqlDatabaseEditor.Location = new System.Drawing.Point(16, 16);
             this.SqlDatabaseEditor.Name = "SqlDatabaseEditor";
-            this.SqlDatabaseEditor.Size = new System.Drawing.Size(560, 477);
+            this.SqlDatabaseEditor.Size = new System.Drawing.Size(560, 469);
             this.SqlDatabaseEditor.TabIndex = 14;
             this.SqlDatabaseEditor.Visible = false;
             // 
@@ -122,7 +122,7 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.TopMarginPanel);
             this.Controls.Add(this.SaveCancelControl);
             this.Name = "DatabaseSelectorControl";
-            this.Size = new System.Drawing.Size(592, 549);            
+            this.Size = new System.Drawing.Size(592, 549);
             this.ResumeLayout(false);
 
             }

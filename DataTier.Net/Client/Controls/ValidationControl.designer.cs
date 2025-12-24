@@ -53,23 +53,23 @@ namespace DataTierClient.Controls
             // 
             // ValidationListBox
             // 
-            this.ValidationListBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ValidationListBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ValidationListBox.ForeColor = System.Drawing.Color.Red;
             this.ValidationListBox.FormattingEnabled = true;
-            this.ValidationListBox.ItemHeight = 18;
-            this.ValidationListBox.Location = new System.Drawing.Point(20, 34);
+            this.ValidationListBox.ItemHeight = 26;
+            this.ValidationListBox.Location = new System.Drawing.Point(20, 40);
             this.ValidationListBox.Name = "ValidationListBox";
-            this.ValidationListBox.Size = new System.Drawing.Size(800, 112);
+            this.ValidationListBox.Size = new System.Drawing.Size(800, 134);
             this.ValidationListBox.TabIndex = 0;
             // 
             // InvalidMessageLabel
             // 
             this.InvalidMessageLabel.BackColor = System.Drawing.Color.Transparent;
-            this.InvalidMessageLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InvalidMessageLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.InvalidMessageLabel.ForeColor = System.Drawing.Color.Black;
-            this.InvalidMessageLabel.Location = new System.Drawing.Point(20, 12);
+            this.InvalidMessageLabel.Location = new System.Drawing.Point(18, 12);
             this.InvalidMessageLabel.Name = "InvalidMessageLabel";
-            this.InvalidMessageLabel.Size = new System.Drawing.Size(388, 20);
+            this.InvalidMessageLabel.Size = new System.Drawing.Size(419, 24);
             this.InvalidMessageLabel.TabIndex = 1;
             this.InvalidMessageLabel.Text = "The following fields are missing or invalid:";
             // 
@@ -81,9 +81,9 @@ namespace DataTierClient.Controls
             this.OKButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.OKButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.OKButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.OKButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OKButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OKButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.OKButton.Location = new System.Drawing.Point(378, 180);
+            this.OKButton.Location = new System.Drawing.Point(378, 184);
             this.OKButton.Name = "OKButton";
             this.OKButton.Size = new System.Drawing.Size(84, 40);
             this.OKButton.TabIndex = 97;
@@ -103,7 +103,7 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.InvalidMessageLabel);
             this.Controls.Add(this.ValidationListBox);
             this.DoubleBuffered = true;
-            this.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "ValidationControl";
             this.Size = new System.Drawing.Size(840, 240);
             this.ResumeLayout(false);
@@ -117,3 +117,6 @@ namespace DataTierClient.Controls
     #endregion
 
 }
+
+
+

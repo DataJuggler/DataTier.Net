@@ -644,7 +644,7 @@ namespace DataTierClient.Controls
                 ProjectTypeControl.SelectedIndexListener = this;
 
                 // Set the SelectedIndex
-                ProjectTypeControl.SelectedIndex = ProjectTypeControl.FindItemIndexByValue("Net7");
+                ProjectTypeControl.SelectedIndex = ProjectTypeControl.FindItemIndexByValue("Net10");
 
                 // Should call UIEnable
                 OnSelectedIndexChanged(ProjectTypeControl, ProjectTypeControl.SelectedIndex, ProjectTypeControl.SelectedObject);

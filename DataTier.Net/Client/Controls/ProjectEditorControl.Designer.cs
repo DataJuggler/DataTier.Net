@@ -73,38 +73,38 @@ namespace DataTierClient.Controls
             // 
             // ProjectFolderTextBox
             // 
-            this.ProjectFolderTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ProjectFolderTextBox.Location = new System.Drawing.Point(210, 64);
+            this.ProjectFolderTextBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProjectFolderTextBox.Location = new System.Drawing.Point(198, 64);
             this.ProjectFolderTextBox.Name = "ProjectFolderTextBox";
-            this.ProjectFolderTextBox.Size = new System.Drawing.Size(373, 27);
+            this.ProjectFolderTextBox.Size = new System.Drawing.Size(385, 34);
             this.ProjectFolderTextBox.TabIndex = 74;
             this.ProjectFolderTextBox.TextChanged += new System.EventHandler(this.ProjectFolderTextBox_TextChanged);
             // 
             // ProjectNameTextBox
             // 
-            this.ProjectNameTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ProjectNameTextBox.Location = new System.Drawing.Point(210, 20);
+            this.ProjectNameTextBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProjectNameTextBox.Location = new System.Drawing.Point(198, 20);
             this.ProjectNameTextBox.Name = "ProjectNameTextBox";
-            this.ProjectNameTextBox.Size = new System.Drawing.Size(218, 27);
+            this.ProjectNameTextBox.Size = new System.Drawing.Size(230, 34);
             this.ProjectNameTextBox.TabIndex = 73;
             this.ProjectNameTextBox.TextChanged += new System.EventHandler(this.ProjectNameTextBox_TextChanged);
             // 
             // ProjectFolderLabel
             // 
-            this.ProjectFolderLabel.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ProjectFolderLabel.Location = new System.Drawing.Point(32, 67);
+            this.ProjectFolderLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProjectFolderLabel.Location = new System.Drawing.Point(52, 67);
             this.ProjectFolderLabel.Name = "ProjectFolderLabel";
-            this.ProjectFolderLabel.Size = new System.Drawing.Size(180, 20);
+            this.ProjectFolderLabel.Size = new System.Drawing.Size(150, 20);
             this.ProjectFolderLabel.TabIndex = 71;
             this.ProjectFolderLabel.Text = "Project Folder:";
             this.ProjectFolderLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // ProjectNameLabel
             // 
-            this.ProjectNameLabel.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ProjectNameLabel.Location = new System.Drawing.Point(32, 24);
+            this.ProjectNameLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProjectNameLabel.Location = new System.Drawing.Point(52, 24);
             this.ProjectNameLabel.Name = "ProjectNameLabel";
-            this.ProjectNameLabel.Size = new System.Drawing.Size(180, 20);
+            this.ProjectNameLabel.Size = new System.Drawing.Size(150, 20);
             this.ProjectNameLabel.TabIndex = 70;
             this.ProjectNameLabel.Text = "Project Name:";
             this.ProjectNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -114,10 +114,10 @@ namespace DataTierClient.Controls
             this.AutoFillChildFoldersCheckBox.AutoSize = true;
             this.AutoFillChildFoldersCheckBox.Checked = true;
             this.AutoFillChildFoldersCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.AutoFillChildFoldersCheckBox.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AutoFillChildFoldersCheckBox.Location = new System.Drawing.Point(80, 145);
+            this.AutoFillChildFoldersCheckBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AutoFillChildFoldersCheckBox.Location = new System.Drawing.Point(52, 152);
             this.AutoFillChildFoldersCheckBox.Name = "AutoFillChildFoldersCheckBox";
-            this.AutoFillChildFoldersCheckBox.Size = new System.Drawing.Size(194, 27);
+            this.AutoFillChildFoldersCheckBox.Size = new System.Drawing.Size(228, 31);
             this.AutoFillChildFoldersCheckBox.TabIndex = 77;
             this.AutoFillChildFoldersCheckBox.Text = "Auto Fill Child Folders";
             this.AutoFillChildFoldersCheckBox.UseVisualStyleBackColor = true;
@@ -125,10 +125,10 @@ namespace DataTierClient.Controls
             // CreateDotNetProject
             // 
             this.CreateDotNetProject.AutoSize = true;
-            this.CreateDotNetProject.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CreateDotNetProject.Location = new System.Drawing.Point(347, 147);
+            this.CreateDotNetProject.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CreateDotNetProject.Location = new System.Drawing.Point(347, 154);
             this.CreateDotNetProject.Name = "CreateDotNetProject";
-            this.CreateDotNetProject.Size = new System.Drawing.Size(259, 23);
+            this.CreateDotNetProject.Size = new System.Drawing.Size(308, 27);
             this.CreateDotNetProject.TabIndex = 85;
             this.CreateDotNetProject.Text = "Create DataTier in Project Folder";
             this.CreateDotNetProject.Visible = false;
@@ -139,9 +139,9 @@ namespace DataTierClient.Controls
             // Graph
             // 
             this.Graph.BackColor = System.Drawing.Color.MidnightBlue;
-            this.Graph.Location = new System.Drawing.Point(347, 170);
+            this.Graph.Location = new System.Drawing.Point(347, 182);
             this.Graph.Name = "Graph";
-            this.Graph.Size = new System.Drawing.Size(268, 13);
+            this.Graph.Size = new System.Drawing.Size(303, 13);
             this.Graph.TabIndex = 86;
             this.Graph.Visible = false;
             // 
@@ -166,7 +166,7 @@ namespace DataTierClient.Controls
             this.ShowAutoFillHelpButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ShowAutoFillHelpButton.FlatAppearance.BorderSize = 0;
             this.ShowAutoFillHelpButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ShowAutoFillHelpButton.Location = new System.Drawing.Point(285, 142);
+            this.ShowAutoFillHelpButton.Location = new System.Drawing.Point(277, 151);
             this.ShowAutoFillHelpButton.Name = "ShowAutoFillHelpButton";
             this.ShowAutoFillHelpButton.Size = new System.Drawing.Size(32, 32);
             this.ShowAutoFillHelpButton.TabIndex = 90;
@@ -181,7 +181,7 @@ namespace DataTierClient.Controls
             this.HelpButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.HelpButton.FlatAppearance.BorderSize = 0;
             this.HelpButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.HelpButton.Location = new System.Drawing.Point(629, 61);
+            this.HelpButton.Location = new System.Drawing.Point(629, 64);
             this.HelpButton.Name = "HelpButton";
             this.HelpButton.Size = new System.Drawing.Size(32, 32);
             this.HelpButton.TabIndex = 81;
@@ -196,7 +196,7 @@ namespace DataTierClient.Controls
             this.BrowseProjectFolderButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BrowseProjectFolderButton.ButtonNumber = 0;
             this.BrowseProjectFolderButton.ButtonText = "...";
-            this.BrowseProjectFolderButton.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BrowseProjectFolderButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BrowseProjectFolderButton.Location = new System.Drawing.Point(582, 63);
             this.BrowseProjectFolderButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.BrowseProjectFolderButton.Name = "BrowseProjectFolderButton";
@@ -204,7 +204,7 @@ namespace DataTierClient.Controls
             this.BrowseProjectFolderButton.Selected = false;
             this.BrowseProjectFolderButton.SelectedImage = null;
             this.BrowseProjectFolderButton.ShowNotSelectedImageWhenDisabled = true;
-            this.BrowseProjectFolderButton.Size = new System.Drawing.Size(40, 28);
+            this.BrowseProjectFolderButton.Size = new System.Drawing.Size(40, 35);
             this.BrowseProjectFolderButton.TabIndex = 80;
             // 
             // EnumerationsButton
@@ -213,7 +213,7 @@ namespace DataTierClient.Controls
             this.EnumerationsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.EnumerationsButton.ButtonNumber = 0;
             this.EnumerationsButton.ButtonText = "Enumerations";
-            this.EnumerationsButton.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EnumerationsButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EnumerationsButton.Location = new System.Drawing.Point(430, 19);
             this.EnumerationsButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.EnumerationsButton.Name = "EnumerationsButton";
@@ -221,7 +221,7 @@ namespace DataTierClient.Controls
             this.EnumerationsButton.Selected = false;
             this.EnumerationsButton.SelectedImage = null;
             this.EnumerationsButton.ShowNotSelectedImageWhenDisabled = true;
-            this.EnumerationsButton.Size = new System.Drawing.Size(132, 28);
+            this.EnumerationsButton.Size = new System.Drawing.Size(153, 32);
             this.EnumerationsButton.TabIndex = 79;
             // 
             // ProjectTypeControl
@@ -231,16 +231,16 @@ namespace DataTierClient.Controls
             this.ProjectTypeControl.ComboBoxText = "";
             this.ProjectTypeControl.ComoboBoxFont = null;
             this.ProjectTypeControl.Editable = true;
-            this.ProjectTypeControl.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProjectTypeControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProjectTypeControl.HideLabel = false;
             this.ProjectTypeControl.LabelBottomMargin = 0;
             this.ProjectTypeControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.ProjectTypeControl.LabelFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProjectTypeControl.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProjectTypeControl.LabelText = "Project Type:";
             this.ProjectTypeControl.LabelTopMargin = 0;
-            this.ProjectTypeControl.LabelWidth = 120;
+            this.ProjectTypeControl.LabelWidth = 140;
             this.ProjectTypeControl.List = null;
-            this.ProjectTypeControl.Location = new System.Drawing.Point(90, 206);
+            this.ProjectTypeControl.Location = new System.Drawing.Point(90, 222);
             this.ProjectTypeControl.Name = "ProjectTypeControl";
             this.ProjectTypeControl.SelectedIndex = -1;
             this.ProjectTypeControl.SelectedIndexListener = null;
@@ -254,10 +254,10 @@ namespace DataTierClient.Controls
             this.Version2CheckBox.AutoSize = true;
             this.Version2CheckBox.Checked = true;
             this.Version2CheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.Version2CheckBox.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Version2CheckBox.Location = new System.Drawing.Point(80, 115);
+            this.Version2CheckBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Version2CheckBox.Location = new System.Drawing.Point(52, 115);
             this.Version2CheckBox.Name = "Version2CheckBox";
-            this.Version2CheckBox.Size = new System.Drawing.Size(241, 27);
+            this.Version2CheckBox.Size = new System.Drawing.Size(281, 31);
             this.Version2CheckBox.TabIndex = 93;
             this.Version2CheckBox.Text = "Project Templates Version 2";
             this.Version2CheckBox.UseVisualStyleBackColor = true;
@@ -267,11 +267,11 @@ namespace DataTierClient.Controls
             // 
             this.UninstallLabel.AutoSize = true;
             this.UninstallLabel.BackColor = System.Drawing.Color.Brown;
-            this.UninstallLabel.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UninstallLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UninstallLabel.ForeColor = System.Drawing.Color.PeachPuff;
             this.UninstallLabel.Location = new System.Drawing.Point(348, 115);
             this.UninstallLabel.Name = "UninstallLabel";
-            this.UninstallLabel.Size = new System.Drawing.Size(256, 23);
+            this.UninstallLabel.Size = new System.Drawing.Size(302, 27);
             this.UninstallLabel.TabIndex = 94;
             this.UninstallLabel.Text = "Uninstalling Previous Versions...";
             this.UninstallLabel.Visible = false;
@@ -280,13 +280,13 @@ namespace DataTierClient.Controls
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.CreateDotNetProject);
             this.Controls.Add(this.UninstallLabel);
             this.Controls.Add(this.Version2CheckBox);
             this.Controls.Add(this.ProjectTypeControl);
             this.Controls.Add(this.AutoFillChildFolderInfo);
             this.Controls.Add(this.ShowAutoFillHelpButton);
             this.Controls.Add(this.Graph);
-            this.Controls.Add(this.CreateDotNetProject);
             this.Controls.Add(this.HelpButton);
             this.Controls.Add(this.BrowseProjectFolderButton);
             this.Controls.Add(this.EnumerationsButton);
@@ -295,7 +295,7 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.ProjectNameTextBox);
             this.Controls.Add(this.ProjectFolderLabel);
             this.Controls.Add(this.ProjectNameLabel);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "ProjectEditorControl";
             this.Size = new System.Drawing.Size(680, 308);
             ((System.ComponentModel.ISupportInitialize)(this.AutoFillChildFolderInfo)).EndInit();
@@ -317,3 +317,7 @@ namespace DataTierClient.Controls
     #endregion
 
 }
+
+
+
+

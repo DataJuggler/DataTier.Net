@@ -53,7 +53,7 @@ namespace DataTierClient.Controls
             this.MainButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.MainButton.Location = new System.Drawing.Point(0, 0);
             this.MainButton.Name = "MainButton";
-            this.MainButton.Size = new System.Drawing.Size(80, 28);
+            this.MainButton.Size = new System.Drawing.Size(96, 32);
             this.MainButton.TabIndex = 2;
             this.MainButton.Text = "Button Text";
             this.MainButton.UseVisualStyleBackColor = false;
@@ -68,10 +68,10 @@ namespace DataTierClient.Controls
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Controls.Add(this.MainButton);
             this.DoubleBuffered = true;
-            this.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "TabButton";
-            this.Size = new System.Drawing.Size(80, 28);
+            this.Size = new System.Drawing.Size(96, 32);
             this.EnabledChanged += new System.EventHandler(this.TabButton_EnabledChanged);
             this.Click += new System.EventHandler(this.TabButton_Click);
             this.ResumeLayout(false);
@@ -85,3 +85,5 @@ namespace DataTierClient.Controls
     #endregion
 
 }
+
+

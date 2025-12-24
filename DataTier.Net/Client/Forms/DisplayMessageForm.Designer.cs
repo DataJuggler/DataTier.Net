@@ -1,4 +1,4 @@
-﻿
+
 namespace DataTierClient.Forms
 {
     partial class DisplayMessageForm
@@ -37,7 +37,7 @@ namespace DataTierClient.Forms
             // 
             this.DisplayMessageControl.BackColor = System.Drawing.Color.Linen;
             this.DisplayMessageControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DisplayMessageControl.Font = new System.Drawing.Font("Verdana", 12F);
+            this.DisplayMessageControl.Font = new System.Drawing.Font("Calibri", 16F);
             this.DisplayMessageControl.Location = new System.Drawing.Point(0, 0);
             this.DisplayMessageControl.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.DisplayMessageControl.MessageText = null;
@@ -50,7 +50,7 @@ namespace DataTierClient.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(508, 172);
             this.Controls.Add(this.DisplayMessageControl);
-            this.Font = new System.Drawing.Font("Verdana", 12F);
+            this.Font = new System.Drawing.Font("Calibri", 16F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Name = "DisplayMessageForm";
@@ -66,3 +66,4 @@ namespace DataTierClient.Forms
         private Controls.DisplayMessageControl DisplayMessageControl;
     }
 }
+

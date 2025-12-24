@@ -1,4 +1,4 @@
-﻿
+
 
 #region using statements
 
@@ -112,19 +112,19 @@ namespace DataTierClient.Controls
             // 
             // FieldSetsListBox
             // 
-            this.FieldSetsListBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FieldSetsListBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FieldSetsListBox.FormattingEnabled = true;
-            this.FieldSetsListBox.ItemHeight = 18;
-            this.FieldSetsListBox.Location = new System.Drawing.Point(60, 85);
+            this.FieldSetsListBox.ItemHeight = 26;
+            this.FieldSetsListBox.Location = new System.Drawing.Point(35, 93);
             this.FieldSetsListBox.Name = "FieldSetsListBox";
-            this.FieldSetsListBox.Size = new System.Drawing.Size(222, 130);
+            this.FieldSetsListBox.Size = new System.Drawing.Size(304, 108);
             this.FieldSetsListBox.TabIndex = 101;
             this.FieldSetsListBox.SelectedIndexChanged += new System.EventHandler(this.FieldSetsListBox_SelectedIndexChanged);
             // 
             // FieldSetsLabel
             // 
-            this.FieldSetsLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FieldSetsLabel.Location = new System.Drawing.Point(60, 64);
+            this.FieldSetsLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FieldSetsLabel.Location = new System.Drawing.Point(35, 64);
             this.FieldSetsLabel.Name = "FieldSetsLabel";
             this.FieldSetsLabel.Size = new System.Drawing.Size(178, 20);
             this.FieldSetsLabel.TabIndex = 100;
@@ -133,8 +133,8 @@ namespace DataTierClient.Controls
             // 
             // FieldsLabel
             // 
-            this.FieldsLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FieldsLabel.Location = new System.Drawing.Point(378, 85);
+            this.FieldsLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FieldsLabel.Location = new System.Drawing.Point(378, 93);
             this.FieldsLabel.Name = "FieldsLabel";
             this.FieldsLabel.Size = new System.Drawing.Size(100, 20);
             this.FieldsLabel.TabIndex = 107;
@@ -146,9 +146,9 @@ namespace DataTierClient.Controls
             this.FieldsListBox.CheckOnClick = true;
             this.FieldsListBox.Enabled = false;
             this.FieldsListBox.FormattingEnabled = true;
-            this.FieldsListBox.Location = new System.Drawing.Point(482, 85);
+            this.FieldsListBox.Location = new System.Drawing.Point(482, 93);
             this.FieldsListBox.Name = "FieldsListBox";
-            this.FieldsListBox.Size = new System.Drawing.Size(316, 312);
+            this.FieldsListBox.Size = new System.Drawing.Size(316, 294);
             this.FieldsListBox.TabIndex = 105;
             this.ToolTip.SetToolTip(this.FieldsListBox, "Press Ctrl + A to Check All.\r\nPress Ctrl + N to Check None.");
             this.FieldsListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.FieldsListBox_ItemCheck);
@@ -213,10 +213,10 @@ namespace DataTierClient.Controls
             this.TableControl.BottomMargin = 0;
             this.TableControl.Editable = false;
             this.TableControl.Encrypted = false;
-            this.TableControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TableControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TableControl.LabelBottomMargin = 0;
             this.TableControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.TableControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold);
+            this.TableControl.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold);
             this.TableControl.LabelText = "Selected Table:";
             this.TableControl.LabelTopMargin = 0;
             this.TableControl.LabelWidth = 180;
@@ -231,7 +231,7 @@ namespace DataTierClient.Controls
             this.TableControl.TextBoxBottomMargin = 0;
             this.TableControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
             this.TableControl.TextBoxEditableColor = System.Drawing.Color.White;
-            this.TableControl.TextBoxFont = new System.Drawing.Font("Verdana", 12F);
+            this.TableControl.TextBoxFont = new System.Drawing.Font("Calibri", 16F);
             this.TableControl.TextBoxTopMargin = 0;
             // 
             // EditPanel
@@ -254,9 +254,9 @@ namespace DataTierClient.Controls
             this.ReaderModeCheckBox.CheckChangedListener = null;
             this.ReaderModeCheckBox.Checked = false;
             this.ReaderModeCheckBox.Editable = true;
-            this.ReaderModeCheckBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ReaderModeCheckBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ReaderModeCheckBox.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.ReaderModeCheckBox.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ReaderModeCheckBox.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ReaderModeCheckBox.LabelText = "Reader Mode:";
             this.ReaderModeCheckBox.LabelWidth = 180;
             this.ReaderModeCheckBox.Location = new System.Drawing.Point(20, 115);
@@ -272,9 +272,9 @@ namespace DataTierClient.Controls
             this.OrderByModeCheckBox.CheckChangedListener = null;
             this.OrderByModeCheckBox.Checked = false;
             this.OrderByModeCheckBox.Editable = true;
-            this.OrderByModeCheckBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OrderByModeCheckBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OrderByModeCheckBox.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.OrderByModeCheckBox.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OrderByModeCheckBox.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OrderByModeCheckBox.LabelText = "Order By Mode:";
             this.OrderByModeCheckBox.LabelWidth = 180;
             this.OrderByModeCheckBox.Location = new System.Drawing.Point(20, 85);
@@ -286,9 +286,9 @@ namespace DataTierClient.Controls
             // 
             this.SaveCancelControl2.BackColor = System.Drawing.Color.Transparent;
             this.SaveCancelControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.SaveCancelControl2.Location = new System.Drawing.Point(0, 155);
+            this.SaveCancelControl2.Location = new System.Drawing.Point(0, 147);
             this.SaveCancelControl2.Name = "SaveCancelControl2";
-            this.SaveCancelControl2.Size = new System.Drawing.Size(447, 40);
+            this.SaveCancelControl2.Size = new System.Drawing.Size(447, 48);
             this.SaveCancelControl2.TabIndex = 117;
             // 
             // ParameterModeCheckBox
@@ -299,9 +299,9 @@ namespace DataTierClient.Controls
             this.ParameterModeCheckBox.CheckChangedListener = null;
             this.ParameterModeCheckBox.Checked = false;
             this.ParameterModeCheckBox.Editable = true;
-            this.ParameterModeCheckBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ParameterModeCheckBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ParameterModeCheckBox.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.ParameterModeCheckBox.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ParameterModeCheckBox.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ParameterModeCheckBox.LabelText = "Parameter Mode:";
             this.ParameterModeCheckBox.LabelWidth = 180;
             this.ParameterModeCheckBox.Location = new System.Drawing.Point(20, 54);
@@ -315,10 +315,10 @@ namespace DataTierClient.Controls
             this.FieldSetNameControl.BottomMargin = 0;
             this.FieldSetNameControl.Editable = false;
             this.FieldSetNameControl.Encrypted = false;
-            this.FieldSetNameControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FieldSetNameControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FieldSetNameControl.LabelBottomMargin = 0;
             this.FieldSetNameControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.FieldSetNameControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold);
+            this.FieldSetNameControl.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold);
             this.FieldSetNameControl.LabelText = "Field Set Name:";
             this.FieldSetNameControl.LabelTopMargin = 0;
             this.FieldSetNameControl.LabelWidth = 180;
@@ -333,7 +333,7 @@ namespace DataTierClient.Controls
             this.FieldSetNameControl.TextBoxBottomMargin = 0;
             this.FieldSetNameControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
             this.FieldSetNameControl.TextBoxEditableColor = System.Drawing.Color.White;
-            this.FieldSetNameControl.TextBoxFont = new System.Drawing.Font("Verdana", 12F);
+            this.FieldSetNameControl.TextBoxFont = new System.Drawing.Font("Calibri", 16F);
             this.FieldSetNameControl.TextBoxTopMargin = 2;
             // 
             // TagsPanel
@@ -351,7 +351,7 @@ namespace DataTierClient.Controls
             // BottomFillerPanel
             // 
             this.BottomFillerPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.BottomFillerPanel.Location = new System.Drawing.Point(0, 492);
+            this.BottomFillerPanel.Location = new System.Drawing.Point(0, 484);
             this.BottomFillerPanel.Name = "BottomFillerPanel";
             this.BottomFillerPanel.Size = new System.Drawing.Size(1205, 20);
             this.BottomFillerPanel.TabIndex = 130;
@@ -359,24 +359,24 @@ namespace DataTierClient.Controls
             // ValidationLabel
             // 
             this.ValidationLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ValidationLabel.Font = new System.Drawing.Font("Verdana", 12F);
+            this.ValidationLabel.Font = new System.Drawing.Font("Calibri", 16F);
             this.ValidationLabel.LabelColor = System.Drawing.Color.Firebrick;
             this.ValidationLabel.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ValidationLabel.LabelText = "Error:";
             this.ValidationLabel.LabelWidth = 80;
-            this.ValidationLabel.Location = new System.Drawing.Point(0, 468);
+            this.ValidationLabel.Location = new System.Drawing.Point(0, 460);
             this.ValidationLabel.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.ValidationLabel.Name = "ValidationLabel";
             this.ValidationLabel.Size = new System.Drawing.Size(1205, 24);
             this.ValidationLabel.TabIndex = 131;
             this.ValidationLabel.ValueLabelColor = System.Drawing.Color.Firebrick;
-            this.ValidationLabel.ValueLabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ValidationLabel.ValueLabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ValidationLabel.Visible = false;
             // 
             // Filler1
             // 
             this.Filler1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.Filler1.Location = new System.Drawing.Point(0, 464);
+            this.Filler1.Location = new System.Drawing.Point(0, 456);
             this.Filler1.Name = "Filler1";
             this.Filler1.Size = new System.Drawing.Size(1205, 4);
             this.Filler1.TabIndex = 133;
@@ -385,26 +385,26 @@ namespace DataTierClient.Controls
             // 
             this.SaveCancelControl.BackColor = System.Drawing.Color.Transparent;
             this.SaveCancelControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.SaveCancelControl.Location = new System.Drawing.Point(0, 512);
+            this.SaveCancelControl.Location = new System.Drawing.Point(0, 504);
             this.SaveCancelControl.Name = "SaveCancelControl";
-            this.SaveCancelControl.Size = new System.Drawing.Size(1205, 40);
+            this.SaveCancelControl.Size = new System.Drawing.Size(1205, 48);
             this.SaveCancelControl.TabIndex = 110;
             // 
             // OrderByFieldsListBox
             // 
             this.OrderByFieldsListBox.Enabled = false;
             this.OrderByFieldsListBox.FormattingEnabled = true;
-            this.OrderByFieldsListBox.ItemHeight = 18;
-            this.OrderByFieldsListBox.Location = new System.Drawing.Point(817, 85);
+            this.OrderByFieldsListBox.ItemHeight = 26;
+            this.OrderByFieldsListBox.Location = new System.Drawing.Point(817, 93);
             this.OrderByFieldsListBox.Name = "OrderByFieldsListBox";
-            this.OrderByFieldsListBox.Size = new System.Drawing.Size(316, 148);
+            this.OrderByFieldsListBox.Size = new System.Drawing.Size(316, 134);
             this.OrderByFieldsListBox.TabIndex = 136;
             this.OrderByFieldsListBox.SelectedIndexChanged += new System.EventHandler(this.OrderByFields_SelectedIndexChanged);
             // 
             // OrderByFieldsLabel
             // 
-            this.OrderByFieldsLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.OrderByFieldsLabel.Location = new System.Drawing.Point(815, 62);
+            this.OrderByFieldsLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OrderByFieldsLabel.Location = new System.Drawing.Point(815, 66);
             this.OrderByFieldsLabel.Name = "OrderByFieldsLabel";
             this.OrderByFieldsLabel.Size = new System.Drawing.Size(154, 20);
             this.OrderByFieldsLabel.TabIndex = 135;
@@ -419,7 +419,7 @@ namespace DataTierClient.Controls
             this.MoveDownButton.Enabled = false;
             this.MoveDownButton.FlatAppearance.BorderSize = 0;
             this.MoveDownButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.MoveDownButton.Location = new System.Drawing.Point(1137, 127);
+            this.MoveDownButton.Location = new System.Drawing.Point(1137, 135);
             this.MoveDownButton.Name = "MoveDownButton";
             this.MoveDownButton.Size = new System.Drawing.Size(32, 32);
             this.MoveDownButton.TabIndex = 138;
@@ -434,7 +434,7 @@ namespace DataTierClient.Controls
             this.MoveUpButton.Enabled = false;
             this.MoveUpButton.FlatAppearance.BorderSize = 0;
             this.MoveUpButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.MoveUpButton.Location = new System.Drawing.Point(1137, 89);
+            this.MoveUpButton.Location = new System.Drawing.Point(1137, 97);
             this.MoveUpButton.Name = "MoveUpButton";
             this.MoveUpButton.Size = new System.Drawing.Size(32, 32);
             this.MoveUpButton.TabIndex = 137;
@@ -450,15 +450,15 @@ namespace DataTierClient.Controls
             this.DeleteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.DeleteButton.ButtonNumber = 0;
             this.DeleteButton.ButtonText = "Delete";
-            this.DeleteButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DeleteButton.Location = new System.Drawing.Point(206, 223);
+            this.DeleteButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DeleteButton.Location = new System.Drawing.Point(244, 207);
             this.DeleteButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.NotSelectedImage = global::DataTierClient.Properties.Resources.DeepGray;
             this.DeleteButton.Selected = false;
             this.DeleteButton.SelectedImage = global::DataTierClient.Properties.Resources.DeepBlue;
             this.DeleteButton.ShowNotSelectedImageWhenDisabled = true;
-            this.DeleteButton.Size = new System.Drawing.Size(76, 26);
+            this.DeleteButton.Size = new System.Drawing.Size(84, 32);
             this.DeleteButton.TabIndex = 104;
             // 
             // AddButton
@@ -467,15 +467,15 @@ namespace DataTierClient.Controls
             this.AddButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.AddButton.ButtonNumber = 0;
             this.AddButton.ButtonText = "Add";
-            this.AddButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddButton.Location = new System.Drawing.Point(60, 223);
+            this.AddButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddButton.Location = new System.Drawing.Point(44, 207);
             this.AddButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.AddButton.Name = "AddButton";
             this.AddButton.NotSelectedImage = global::DataTierClient.Properties.Resources.DeepGray;
             this.AddButton.Selected = true;
             this.AddButton.SelectedImage = global::DataTierClient.Properties.Resources.DeepBlue;
             this.AddButton.ShowNotSelectedImageWhenDisabled = true;
-            this.AddButton.Size = new System.Drawing.Size(64, 26);
+            this.AddButton.Size = new System.Drawing.Size(84, 32);
             this.AddButton.TabIndex = 102;
             // 
             // EditButton
@@ -484,15 +484,15 @@ namespace DataTierClient.Controls
             this.EditButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.EditButton.ButtonNumber = 0;
             this.EditButton.ButtonText = "Edit";
-            this.EditButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EditButton.Location = new System.Drawing.Point(133, 223);
+            this.EditButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EditButton.Location = new System.Drawing.Point(144, 207);
             this.EditButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.EditButton.Name = "EditButton";
             this.EditButton.NotSelectedImage = global::DataTierClient.Properties.Resources.DeepGray;
             this.EditButton.Selected = false;
             this.EditButton.SelectedImage = global::DataTierClient.Properties.Resources.DeepBlue;
             this.EditButton.ShowNotSelectedImageWhenDisabled = true;
-            this.EditButton.Size = new System.Drawing.Size(64, 26);
+            this.EditButton.Size = new System.Drawing.Size(84, 32);
             this.EditButton.TabIndex = 103;
             // 
             // DescendingCheckBox
@@ -503,19 +503,19 @@ namespace DataTierClient.Controls
             this.DescendingCheckBox.CheckChangedListener = null;
             this.DescendingCheckBox.Checked = false;
             this.DescendingCheckBox.Editable = true;
-            this.DescendingCheckBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DescendingCheckBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DescendingCheckBox.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.DescendingCheckBox.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DescendingCheckBox.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DescendingCheckBox.LabelText = "Descending:";
             this.DescendingCheckBox.LabelWidth = 120;
-            this.DescendingCheckBox.Location = new System.Drawing.Point(996, 60);
+            this.DescendingCheckBox.Location = new System.Drawing.Point(996, 64);
             this.DescendingCheckBox.Name = "DescendingCheckBox";
             this.DescendingCheckBox.Size = new System.Drawing.Size(155, 24);
             this.DescendingCheckBox.TabIndex = 139;
             // 
             // SelectedFieldsCountLabel
             // 
-            this.SelectedFieldsCountLabel.Font = new System.Drawing.Font("Verdana", 12F);
+            this.SelectedFieldsCountLabel.Font = new System.Drawing.Font("Calibri", 16F);
             this.SelectedFieldsCountLabel.ForeColor = System.Drawing.Color.Black;
             this.SelectedFieldsCountLabel.LabelColor = System.Drawing.Color.Black;
             this.SelectedFieldsCountLabel.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -527,7 +527,7 @@ namespace DataTierClient.Controls
             this.SelectedFieldsCountLabel.Size = new System.Drawing.Size(305, 24);
             this.SelectedFieldsCountLabel.TabIndex = 140;
             this.SelectedFieldsCountLabel.ValueLabelColor = System.Drawing.Color.Black;
-            this.SelectedFieldsCountLabel.ValueLabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SelectedFieldsCountLabel.ValueLabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SelectedFieldsCountLabel.Visible = false;
             // 
             // FieldSetEditor
@@ -555,7 +555,7 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.FieldSetsLabel);
             this.Controls.Add(this.EditButton);
             this.DoubleBuffered = true;
-            this.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "FieldSetEditor";
             this.Size = new System.Drawing.Size(1205, 552);
             ((System.ComponentModel.ISupportInitialize)(this.EditModeImage)).EndInit();
@@ -577,3 +577,5 @@ namespace DataTierClient.Controls
     #endregion
 
 }
+
+

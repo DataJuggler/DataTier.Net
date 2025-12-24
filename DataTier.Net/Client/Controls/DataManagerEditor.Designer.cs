@@ -64,58 +64,58 @@ namespace DataTierClient.Controls
             // 
             // DataManagerReferencesSetComboBox
             // 
-            this.DataManagerReferencesSetComboBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DataManagerReferencesSetComboBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DataManagerReferencesSetComboBox.FormattingEnabled = true;
-            this.DataManagerReferencesSetComboBox.Location = new System.Drawing.Point(218, 100);
+            this.DataManagerReferencesSetComboBox.Location = new System.Drawing.Point(218, 108);
             this.DataManagerReferencesSetComboBox.Name = "DataManagerReferencesSetComboBox";
-            this.DataManagerReferencesSetComboBox.Size = new System.Drawing.Size(271, 26);
+            this.DataManagerReferencesSetComboBox.Size = new System.Drawing.Size(271, 34);
             this.DataManagerReferencesSetComboBox.TabIndex = 124;
             this.DataManagerReferencesSetComboBox.SelectedIndexChanged += new System.EventHandler(this.DataManagerReferencesSetComboBox_SelectedIndexChanged);
             // 
             // DataManagerFolderTextBox
             // 
-            this.DataManagerFolderTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DataManagerFolderTextBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DataManagerFolderTextBox.Location = new System.Drawing.Point(218, 20);
             this.DataManagerFolderTextBox.Name = "DataManagerFolderTextBox";
-            this.DataManagerFolderTextBox.Size = new System.Drawing.Size(404, 27);
+            this.DataManagerFolderTextBox.Size = new System.Drawing.Size(404, 34);
             this.DataManagerFolderTextBox.TabIndex = 122;
             this.DataManagerFolderTextBox.TextChanged += new System.EventHandler(this.DataManagerFolderTextBox_TextChanged);
             // 
             // DataManagerNamespaceTextBox
             // 
-            this.DataManagerNamespaceTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DataManagerNamespaceTextBox.Location = new System.Drawing.Point(218, 60);
+            this.DataManagerNamespaceTextBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DataManagerNamespaceTextBox.Location = new System.Drawing.Point(218, 64);
             this.DataManagerNamespaceTextBox.Name = "DataManagerNamespaceTextBox";
-            this.DataManagerNamespaceTextBox.Size = new System.Drawing.Size(437, 27);
+            this.DataManagerNamespaceTextBox.Size = new System.Drawing.Size(437, 34);
             this.DataManagerNamespaceTextBox.TabIndex = 121;
             this.DataManagerNamespaceTextBox.TextChanged += new System.EventHandler(this.DataManagerNamespaceTextBox_TextChanged);
             // 
             // DataManagerFolderLabel
             // 
-            this.DataManagerFolderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DataManagerFolderLabel.Location = new System.Drawing.Point(20, 24);
+            this.DataManagerFolderLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DataManagerFolderLabel.Location = new System.Drawing.Point(3, 24);
             this.DataManagerFolderLabel.Name = "DataManagerFolderLabel";
-            this.DataManagerFolderLabel.Size = new System.Drawing.Size(200, 20);
+            this.DataManagerFolderLabel.Size = new System.Drawing.Size(217, 24);
             this.DataManagerFolderLabel.TabIndex = 120;
             this.DataManagerFolderLabel.Text = "Data Mgr Folder:";
             this.DataManagerFolderLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // DataManagerReferencesSetLabel
             // 
-            this.DataManagerReferencesSetLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DataManagerReferencesSetLabel.Location = new System.Drawing.Point(20, 104);
+            this.DataManagerReferencesSetLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DataManagerReferencesSetLabel.Location = new System.Drawing.Point(3, 112);
             this.DataManagerReferencesSetLabel.Name = "DataManagerReferencesSetLabel";
-            this.DataManagerReferencesSetLabel.Size = new System.Drawing.Size(200, 20);
+            this.DataManagerReferencesSetLabel.Size = new System.Drawing.Size(217, 24);
             this.DataManagerReferencesSetLabel.TabIndex = 119;
             this.DataManagerReferencesSetLabel.Text = "Data Mgr Ref Set:";
             this.DataManagerReferencesSetLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // DataManagerNamespaceLabel
             // 
-            this.DataManagerNamespaceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DataManagerNamespaceLabel.Location = new System.Drawing.Point(20, 64);
+            this.DataManagerNamespaceLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DataManagerNamespaceLabel.Location = new System.Drawing.Point(3, 68);
             this.DataManagerNamespaceLabel.Name = "DataManagerNamespaceLabel";
-            this.DataManagerNamespaceLabel.Size = new System.Drawing.Size(200, 20);
+            this.DataManagerNamespaceLabel.Size = new System.Drawing.Size(217, 24);
             this.DataManagerNamespaceLabel.TabIndex = 118;
             this.DataManagerNamespaceLabel.Text = "Data Mgr Namespace:";
             this.DataManagerNamespaceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -126,15 +126,15 @@ namespace DataTierClient.Controls
             this.BrowseDataManagerFolderButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BrowseDataManagerFolderButton.ButtonNumber = 0;
             this.BrowseDataManagerFolderButton.ButtonText = "...";
-            this.BrowseDataManagerFolderButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BrowseDataManagerFolderButton.Location = new System.Drawing.Point(615, 19);
+            this.BrowseDataManagerFolderButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BrowseDataManagerFolderButton.Location = new System.Drawing.Point(615, 20);
             this.BrowseDataManagerFolderButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.BrowseDataManagerFolderButton.Name = "BrowseDataManagerFolderButton";
             this.BrowseDataManagerFolderButton.NotSelectedImage = null;
             this.BrowseDataManagerFolderButton.Selected = false;
             this.BrowseDataManagerFolderButton.SelectedImage = null;
             this.BrowseDataManagerFolderButton.ShowNotSelectedImageWhenDisabled = true;
-            this.BrowseDataManagerFolderButton.Size = new System.Drawing.Size(40, 28);
+            this.BrowseDataManagerFolderButton.Size = new System.Drawing.Size(40, 32);
             this.BrowseDataManagerFolderButton.TabIndex = 127;
             // 
             // EditDataManagerReferencesSetButton
@@ -143,15 +143,15 @@ namespace DataTierClient.Controls
             this.EditDataManagerReferencesSetButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.EditDataManagerReferencesSetButton.ButtonNumber = 0;
             this.EditDataManagerReferencesSetButton.ButtonText = "Edit";
-            this.EditDataManagerReferencesSetButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EditDataManagerReferencesSetButton.Location = new System.Drawing.Point(583, 99);
+            this.EditDataManagerReferencesSetButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EditDataManagerReferencesSetButton.Location = new System.Drawing.Point(583, 107);
             this.EditDataManagerReferencesSetButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.EditDataManagerReferencesSetButton.Name = "EditDataManagerReferencesSetButton";
             this.EditDataManagerReferencesSetButton.NotSelectedImage = global::DataTierClient.Properties.Resources.DeepGray;
             this.EditDataManagerReferencesSetButton.Selected = false;
             this.EditDataManagerReferencesSetButton.SelectedImage = global::DataTierClient.Properties.Resources.DeepBlue;
             this.EditDataManagerReferencesSetButton.ShowNotSelectedImageWhenDisabled = true;
-            this.EditDataManagerReferencesSetButton.Size = new System.Drawing.Size(72, 28);
+            this.EditDataManagerReferencesSetButton.Size = new System.Drawing.Size(72, 32);
             this.EditDataManagerReferencesSetButton.TabIndex = 128;
             // 
             // DataManagerEditor
@@ -181,3 +181,6 @@ namespace DataTierClient.Controls
     #endregion
 
 }
+
+
+

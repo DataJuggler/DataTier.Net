@@ -1,4 +1,4 @@
-﻿
+
 
 #region using statements
 
@@ -54,7 +54,7 @@ namespace DataTierClient.Forms
                 this.FieldSetEditor.Dock = System.Windows.Forms.DockStyle.Fill;
                 this.FieldSetEditor.EditMode = ObjectLibrary.Enumerations.EditModeEnum.Unknown;
                 this.FieldSetEditor.FailedReason = null;
-                this.FieldSetEditor.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                this.FieldSetEditor.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 this.FieldSetEditor.Loading = false;
                 this.FieldSetEditor.Location = new System.Drawing.Point(0, 0);
                 this.FieldSetEditor.Name = "FieldSetEditor";
@@ -91,3 +91,5 @@ namespace DataTierClient.Forms
     #endregion
 
 }
+
+

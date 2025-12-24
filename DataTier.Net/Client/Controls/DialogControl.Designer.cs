@@ -1,4 +1,4 @@
-﻿namespace DataTierClient.Controls
+namespace DataTierClient.Controls
 {
     partial class DialogControl
     {
@@ -78,7 +78,7 @@
             this.YesButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.YesButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.YesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.YesButton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.YesButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.YesButton.ForeColor = System.Drawing.Color.LemonChiffon;
             this.YesButton.Location = new System.Drawing.Point(207, 183);
             this.YesButton.Name = "YesButton";
@@ -98,7 +98,7 @@
             this.NoButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.NoButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.NoButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.NoButton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NoButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NoButton.ForeColor = System.Drawing.Color.LemonChiffon;
             this.NoButton.Location = new System.Drawing.Point(335, 183);
             this.NoButton.Name = "NoButton";
@@ -121,7 +121,7 @@
             this.Controls.Add(this.TopMarginPanel);
             this.Controls.Add(this.RightMarginPanel);
             this.Controls.Add(this.LeftMarginPanel);
-            this.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "DialogControl";
             this.Size = new System.Drawing.Size(638, 248);
             this.ResumeLayout(false);
@@ -138,3 +138,6 @@
         private System.Windows.Forms.Button NoButton;
     }
 }
+
+
+

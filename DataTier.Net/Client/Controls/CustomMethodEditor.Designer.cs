@@ -1,4 +1,4 @@
-﻿
+
 
 #region using statements
 
@@ -100,11 +100,11 @@ namespace DataTierClient.Controls
             this.CustomReaderControl.ComoboBoxFont = null;
             this.CustomReaderControl.Editable = true;
             this.CustomReaderControl.Enabled = false;
-            this.CustomReaderControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CustomReaderControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomReaderControl.HideLabel = false;
             this.CustomReaderControl.LabelBottomMargin = 0;
             this.CustomReaderControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.CustomReaderControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CustomReaderControl.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomReaderControl.LabelText = "Custom Reader:";
             this.CustomReaderControl.LabelTopMargin = 0;
             this.CustomReaderControl.LabelWidth = 188;
@@ -127,9 +127,9 @@ namespace DataTierClient.Controls
             this.UseCustomReaderCheckBox.CheckChangedListener = null;
             this.UseCustomReaderCheckBox.Checked = false;
             this.UseCustomReaderCheckBox.Editable = true;
-            this.UseCustomReaderCheckBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UseCustomReaderCheckBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UseCustomReaderCheckBox.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.UseCustomReaderCheckBox.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UseCustomReaderCheckBox.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UseCustomReaderCheckBox.LabelText = "Use Custom Reader:";
             this.UseCustomReaderCheckBox.LabelWidth = 200;
             this.UseCustomReaderCheckBox.Location = new System.Drawing.Point(8, 380);
@@ -144,11 +144,11 @@ namespace DataTierClient.Controls
             this.ParameterFieldControl.ComboBoxText = "";
             this.ParameterFieldControl.ComoboBoxFont = null;
             this.ParameterFieldControl.Editable = true;
-            this.ParameterFieldControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ParameterFieldControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ParameterFieldControl.HideLabel = false;
             this.ParameterFieldControl.LabelBottomMargin = 0;
             this.ParameterFieldControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.ParameterFieldControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ParameterFieldControl.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ParameterFieldControl.LabelText = "Parameter Field:";
             this.ParameterFieldControl.LabelTopMargin = 0;
             this.ParameterFieldControl.LabelWidth = 188;
@@ -170,11 +170,11 @@ namespace DataTierClient.Controls
             this.ParameterTypeControl.ComboBoxText = "";
             this.ParameterTypeControl.ComoboBoxFont = null;
             this.ParameterTypeControl.Editable = true;
-            this.ParameterTypeControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ParameterTypeControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ParameterTypeControl.HideLabel = false;
             this.ParameterTypeControl.LabelBottomMargin = 0;
             this.ParameterTypeControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.ParameterTypeControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ParameterTypeControl.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ParameterTypeControl.LabelText = "Parameter Type:";
             this.ParameterTypeControl.LabelTopMargin = 0;
             this.ParameterTypeControl.LabelWidth = 188;
@@ -194,10 +194,10 @@ namespace DataTierClient.Controls
             this.ProcedureNameControl.BottomMargin = 0;
             this.ProcedureNameControl.Editable = true;
             this.ProcedureNameControl.Encrypted = false;
-            this.ProcedureNameControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProcedureNameControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProcedureNameControl.LabelBottomMargin = 0;
             this.ProcedureNameControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.ProcedureNameControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProcedureNameControl.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProcedureNameControl.LabelText = "Procedure Name:";
             this.ProcedureNameControl.LabelTopMargin = 2;
             this.ProcedureNameControl.LabelWidth = 188;
@@ -212,7 +212,7 @@ namespace DataTierClient.Controls
             this.ProcedureNameControl.TextBoxBottomMargin = 0;
             this.ProcedureNameControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
             this.ProcedureNameControl.TextBoxEditableColor = System.Drawing.Color.White;
-            this.ProcedureNameControl.TextBoxFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProcedureNameControl.TextBoxFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProcedureNameControl.TextBoxTopMargin = 0;
             // 
             // ParametersControl
@@ -221,10 +221,10 @@ namespace DataTierClient.Controls
             this.ParametersControl.BottomMargin = 0;
             this.ParametersControl.Editable = true;
             this.ParametersControl.Encrypted = false;
-            this.ParametersControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ParametersControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ParametersControl.LabelBottomMargin = 0;
             this.ParametersControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.ParametersControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ParametersControl.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ParametersControl.LabelText = "Parameter:";
             this.ParametersControl.LabelTopMargin = 2;
             this.ParametersControl.LabelWidth = 188;
@@ -239,7 +239,7 @@ namespace DataTierClient.Controls
             this.ParametersControl.TextBoxBottomMargin = 0;
             this.ParametersControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
             this.ParametersControl.TextBoxEditableColor = System.Drawing.Color.White;
-            this.ParametersControl.TextBoxFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ParametersControl.TextBoxFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ParametersControl.TextBoxTopMargin = 0;
             // 
             // MethodNameControl
@@ -248,10 +248,10 @@ namespace DataTierClient.Controls
             this.MethodNameControl.BottomMargin = 0;
             this.MethodNameControl.Editable = true;
             this.MethodNameControl.Encrypted = false;
-            this.MethodNameControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MethodNameControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MethodNameControl.LabelBottomMargin = 0;
             this.MethodNameControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.MethodNameControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MethodNameControl.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MethodNameControl.LabelText = "Method Name:";
             this.MethodNameControl.LabelTopMargin = 2;
             this.MethodNameControl.LabelWidth = 188;
@@ -266,7 +266,7 @@ namespace DataTierClient.Controls
             this.MethodNameControl.TextBoxBottomMargin = 0;
             this.MethodNameControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
             this.MethodNameControl.TextBoxEditableColor = System.Drawing.Color.White;
-            this.MethodNameControl.TextBoxFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MethodNameControl.TextBoxFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MethodNameControl.TextBoxTopMargin = 0;
             // 
             // MethodTypeControl
@@ -276,11 +276,11 @@ namespace DataTierClient.Controls
             this.MethodTypeControl.ComboBoxText = "";
             this.MethodTypeControl.ComoboBoxFont = null;
             this.MethodTypeControl.Editable = true;
-            this.MethodTypeControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MethodTypeControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MethodTypeControl.HideLabel = false;
             this.MethodTypeControl.LabelBottomMargin = 0;
             this.MethodTypeControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.MethodTypeControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MethodTypeControl.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MethodTypeControl.LabelText = "Method Type:";
             this.MethodTypeControl.LabelTopMargin = 0;
             this.MethodTypeControl.LabelWidth = 188;
@@ -300,10 +300,10 @@ namespace DataTierClient.Controls
             this.SelectedTableControl.BottomMargin = 0;
             this.SelectedTableControl.Editable = false;
             this.SelectedTableControl.Encrypted = false;
-            this.SelectedTableControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SelectedTableControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SelectedTableControl.LabelBottomMargin = 0;
             this.SelectedTableControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.SelectedTableControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SelectedTableControl.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SelectedTableControl.LabelText = "Selected Table:";
             this.SelectedTableControl.LabelTopMargin = 4;
             this.SelectedTableControl.LabelWidth = 188;
@@ -318,7 +318,7 @@ namespace DataTierClient.Controls
             this.SelectedTableControl.TextBoxBottomMargin = 0;
             this.SelectedTableControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
             this.SelectedTableControl.TextBoxEditableColor = System.Drawing.Color.White;
-            this.SelectedTableControl.TextBoxFont = new System.Drawing.Font("Verdana", 14.25F);
+            this.SelectedTableControl.TextBoxFont = new System.Drawing.Font("Calibri", 16F);
             this.SelectedTableControl.TextBoxTopMargin = 0;
             // 
             // ParameterFieldSetControl
@@ -329,11 +329,11 @@ namespace DataTierClient.Controls
             this.ParameterFieldSetControl.ComoboBoxFont = null;
             this.ParameterFieldSetControl.Editable = true;
             this.ParameterFieldSetControl.Enabled = false;
-            this.ParameterFieldSetControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ParameterFieldSetControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ParameterFieldSetControl.HideLabel = false;
             this.ParameterFieldSetControl.LabelBottomMargin = 0;
             this.ParameterFieldSetControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.ParameterFieldSetControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ParameterFieldSetControl.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ParameterFieldSetControl.LabelText = "Parameter Set:";
             this.ParameterFieldSetControl.LabelTopMargin = 0;
             this.ParameterFieldSetControl.LabelWidth = 188;
@@ -353,9 +353,9 @@ namespace DataTierClient.Controls
             // 
             this.SaveCancelControl.BackColor = System.Drawing.Color.Transparent;
             this.SaveCancelControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.SaveCancelControl.Location = new System.Drawing.Point(0, 600);
+            this.SaveCancelControl.Location = new System.Drawing.Point(0, 592);
             this.SaveCancelControl.Name = "SaveCancelControl";
-            this.SaveCancelControl.Size = new System.Drawing.Size(720, 40);
+            this.SaveCancelControl.Size = new System.Drawing.Size(720, 48);
             this.SaveCancelControl.TabIndex = 13;
             // 
             // PropertyNameControl
@@ -364,10 +364,10 @@ namespace DataTierClient.Controls
             this.PropertyNameControl.BottomMargin = 0;
             this.PropertyNameControl.Editable = true;
             this.PropertyNameControl.Encrypted = false;
-            this.PropertyNameControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PropertyNameControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PropertyNameControl.LabelBottomMargin = 0;
             this.PropertyNameControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.PropertyNameControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PropertyNameControl.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PropertyNameControl.LabelText = "Property Name:";
             this.PropertyNameControl.LabelTopMargin = 2;
             this.PropertyNameControl.LabelWidth = 188;
@@ -382,7 +382,7 @@ namespace DataTierClient.Controls
             this.PropertyNameControl.TextBoxBottomMargin = 0;
             this.PropertyNameControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
             this.PropertyNameControl.TextBoxEditableColor = System.Drawing.Color.White;
-            this.PropertyNameControl.TextBoxFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PropertyNameControl.TextBoxFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PropertyNameControl.TextBoxTopMargin = 0;
             // 
             // UpdateOnBuildCheckbox
@@ -393,9 +393,9 @@ namespace DataTierClient.Controls
             this.UpdateOnBuildCheckbox.CheckChangedListener = null;
             this.UpdateOnBuildCheckbox.Checked = true;
             this.UpdateOnBuildCheckbox.Editable = true;
-            this.UpdateOnBuildCheckbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UpdateOnBuildCheckbox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UpdateOnBuildCheckbox.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.UpdateOnBuildCheckbox.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UpdateOnBuildCheckbox.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UpdateOnBuildCheckbox.LabelText = "Update On Build:";
             this.UpdateOnBuildCheckbox.LabelWidth = 200;
             this.UpdateOnBuildCheckbox.Location = new System.Drawing.Point(8, 340);
@@ -423,7 +423,7 @@ namespace DataTierClient.Controls
             this.EditParametersSetButton.ButtonNumber = 0;
             this.EditParametersSetButton.ButtonText = "...";
             this.EditParametersSetButton.Enabled = false;
-            this.EditParametersSetButton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EditParametersSetButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EditParametersSetButton.Location = new System.Drawing.Point(640, 140);
             this.EditParametersSetButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.EditParametersSetButton.Name = "EditParametersSetButton";
@@ -431,7 +431,7 @@ namespace DataTierClient.Controls
             this.EditParametersSetButton.Selected = false;
             this.EditParametersSetButton.SelectedImage = null;
             this.EditParametersSetButton.ShowNotSelectedImageWhenDisabled = true;
-            this.EditParametersSetButton.Size = new System.Drawing.Size(40, 28);
+            this.EditParametersSetButton.Size = new System.Drawing.Size(40, 32);
             this.EditParametersSetButton.TabIndex = 999;
             this.EditParametersSetButton.TabStop = false;
             this.EditParametersSetButton.Visible = false;
@@ -443,7 +443,7 @@ namespace DataTierClient.Controls
             this.EditReadersButton.ButtonNumber = 0;
             this.EditReadersButton.ButtonText = "...";
             this.EditReadersButton.Enabled = false;
-            this.EditReadersButton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EditReadersButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EditReadersButton.Location = new System.Drawing.Point(640, 419);
             this.EditReadersButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.EditReadersButton.Name = "EditReadersButton";
@@ -451,7 +451,7 @@ namespace DataTierClient.Controls
             this.EditReadersButton.Selected = false;
             this.EditReadersButton.SelectedImage = null;
             this.EditReadersButton.ShowNotSelectedImageWhenDisabled = true;
-            this.EditReadersButton.Size = new System.Drawing.Size(40, 28);
+            this.EditReadersButton.Size = new System.Drawing.Size(40, 32);
             this.EditReadersButton.TabIndex = 999;
             this.EditReadersButton.TabStop = false;
             // 
@@ -463,11 +463,11 @@ namespace DataTierClient.Controls
             this.OrderByFieldSetControl.ComoboBoxFont = null;
             this.OrderByFieldSetControl.Editable = true;
             this.OrderByFieldSetControl.Enabled = false;
-            this.OrderByFieldSetControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OrderByFieldSetControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OrderByFieldSetControl.HideLabel = false;
             this.OrderByFieldSetControl.LabelBottomMargin = 0;
             this.OrderByFieldSetControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.OrderByFieldSetControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OrderByFieldSetControl.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OrderByFieldSetControl.LabelText = "Order By Field Set:";
             this.OrderByFieldSetControl.LabelTopMargin = 0;
             this.OrderByFieldSetControl.LabelWidth = 188;
@@ -489,7 +489,7 @@ namespace DataTierClient.Controls
             this.EditOrderByFieldSetsButton.ButtonNumber = 0;
             this.EditOrderByFieldSetsButton.ButtonText = "...";
             this.EditOrderByFieldSetsButton.Enabled = false;
-            this.EditOrderByFieldSetsButton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EditOrderByFieldSetsButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EditOrderByFieldSetsButton.Location = new System.Drawing.Point(640, 499);
             this.EditOrderByFieldSetsButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.EditOrderByFieldSetsButton.Name = "EditOrderByFieldSetsButton";
@@ -497,7 +497,7 @@ namespace DataTierClient.Controls
             this.EditOrderByFieldSetsButton.Selected = false;
             this.EditOrderByFieldSetsButton.SelectedImage = null;
             this.EditOrderByFieldSetsButton.ShowNotSelectedImageWhenDisabled = true;
-            this.EditOrderByFieldSetsButton.Size = new System.Drawing.Size(40, 28);
+            this.EditOrderByFieldSetsButton.Size = new System.Drawing.Size(40, 32);
             this.EditOrderByFieldSetsButton.TabIndex = 1003;
             this.EditOrderByFieldSetsButton.TabStop = false;
             this.EditOrderByFieldSetsButton.Visible = false;
@@ -509,11 +509,11 @@ namespace DataTierClient.Controls
             this.OrderByTypeControl.ComboBoxText = "";
             this.OrderByTypeControl.ComoboBoxFont = null;
             this.OrderByTypeControl.Editable = true;
-            this.OrderByTypeControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OrderByTypeControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OrderByTypeControl.HideLabel = false;
             this.OrderByTypeControl.LabelBottomMargin = 0;
             this.OrderByTypeControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.OrderByTypeControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OrderByTypeControl.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OrderByTypeControl.LabelText = "Order By Type:";
             this.OrderByTypeControl.LabelTopMargin = 0;
             this.OrderByTypeControl.LabelWidth = 188;
@@ -534,11 +534,11 @@ namespace DataTierClient.Controls
             this.OrderByFieldControl.ComboBoxText = "";
             this.OrderByFieldControl.ComoboBoxFont = null;
             this.OrderByFieldControl.Editable = true;
-            this.OrderByFieldControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OrderByFieldControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OrderByFieldControl.HideLabel = false;
             this.OrderByFieldControl.LabelBottomMargin = 0;
             this.OrderByFieldControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.OrderByFieldControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OrderByFieldControl.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OrderByFieldControl.LabelText = "Order By Field:";
             this.OrderByFieldControl.LabelTopMargin = 0;
             this.OrderByFieldControl.LabelWidth = 188;
@@ -561,9 +561,9 @@ namespace DataTierClient.Controls
             this.DescendingCheckBox.CheckChangedListener = null;
             this.DescendingCheckBox.Checked = false;
             this.DescendingCheckBox.Editable = true;
-            this.DescendingCheckBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DescendingCheckBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DescendingCheckBox.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.DescendingCheckBox.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DescendingCheckBox.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DescendingCheckBox.LabelText = "Descending:";
             this.DescendingCheckBox.LabelWidth = 188;
             this.DescendingCheckBox.Location = new System.Drawing.Point(20, 533);
@@ -577,10 +577,10 @@ namespace DataTierClient.Controls
             this.TopRowsControl.BottomMargin = 0;
             this.TopRowsControl.Editable = true;
             this.TopRowsControl.Encrypted = false;
-            this.TopRowsControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TopRowsControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TopRowsControl.LabelBottomMargin = 0;
             this.TopRowsControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.TopRowsControl.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TopRowsControl.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TopRowsControl.LabelText = "Select Top Rows:";
             this.TopRowsControl.LabelTopMargin = 2;
             this.TopRowsControl.LabelWidth = 188;
@@ -595,7 +595,7 @@ namespace DataTierClient.Controls
             this.TopRowsControl.TextBoxBottomMargin = 0;
             this.TopRowsControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
             this.TopRowsControl.TextBoxEditableColor = System.Drawing.Color.White;
-            this.TopRowsControl.TextBoxFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TopRowsControl.TextBoxFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TopRowsControl.TextBoxTopMargin = 0;
             // 
             // CustomWhereCheckBox
@@ -606,9 +606,9 @@ namespace DataTierClient.Controls
             this.CustomWhereCheckBox.CheckChangedListener = null;
             this.CustomWhereCheckBox.Checked = false;
             this.CustomWhereCheckBox.Editable = true;
-            this.CustomWhereCheckBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CustomWhereCheckBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomWhereCheckBox.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.CustomWhereCheckBox.LabelFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CustomWhereCheckBox.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomWhereCheckBox.LabelText = "Custom Where:";
             this.CustomWhereCheckBox.LabelWidth = 188;
             this.CustomWhereCheckBox.Location = new System.Drawing.Point(437, 340);
@@ -643,7 +643,7 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.ParameterFieldSetControl);
             this.Controls.Add(this.OrderByFieldControl);
             this.Controls.Add(this.OrderByFieldSetControl);
-            this.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "CustomMethodEditor";
             this.Size = new System.Drawing.Size(720, 640);
             ((System.ComponentModel.ISupportInitialize)(this.IsViewIcon)).EndInit();
@@ -661,3 +661,6 @@ namespace DataTierClient.Controls
     #endregion
 
 }
+
+
+

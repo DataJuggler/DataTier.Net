@@ -62,58 +62,58 @@ namespace DataTierClient.Controls
             // 
             // WriterReferencesSetComboBox
             // 
-            this.WriterReferencesSetComboBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.WriterReferencesSetComboBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.WriterReferencesSetComboBox.FormattingEnabled = true;
             this.WriterReferencesSetComboBox.Location = new System.Drawing.Point(218, 100);
             this.WriterReferencesSetComboBox.Name = "WriterReferencesSetComboBox";
-            this.WriterReferencesSetComboBox.Size = new System.Drawing.Size(271, 26);
+            this.WriterReferencesSetComboBox.Size = new System.Drawing.Size(271, 34);
             this.WriterReferencesSetComboBox.TabIndex = 133;
             this.WriterReferencesSetComboBox.SelectedIndexChanged += new System.EventHandler(this.WriterReferencesSetComboBox_SelectedIndexChanged);
             // 
             // WriterFolderTextBox
             // 
-            this.WriterFolderTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.WriterFolderTextBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.WriterFolderTextBox.Location = new System.Drawing.Point(218, 20);
             this.WriterFolderTextBox.Name = "WriterFolderTextBox";
-            this.WriterFolderTextBox.Size = new System.Drawing.Size(404, 27);
+            this.WriterFolderTextBox.Size = new System.Drawing.Size(404, 34);
             this.WriterFolderTextBox.TabIndex = 131;
             this.WriterFolderTextBox.TextChanged += new System.EventHandler(this.WriterFolderTextBox_TextChanged);
             // 
             // WriterNamespaceTextBox
             // 
-            this.WriterNamespaceTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.WriterNamespaceTextBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.WriterNamespaceTextBox.Location = new System.Drawing.Point(218, 60);
             this.WriterNamespaceTextBox.Name = "WriterNamespaceTextBox";
-            this.WriterNamespaceTextBox.Size = new System.Drawing.Size(437, 27);
+            this.WriterNamespaceTextBox.Size = new System.Drawing.Size(437, 34);
             this.WriterNamespaceTextBox.TabIndex = 130;
             this.WriterNamespaceTextBox.TextChanged += new System.EventHandler(this.WriterNamespaceTextBox_TextChanged);
             // 
             // WriterFolderLabel
             // 
-            this.WriterFolderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WriterFolderLabel.Location = new System.Drawing.Point(20, 24);
+            this.WriterFolderLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.WriterFolderLabel.Location = new System.Drawing.Point(10, 27);
             this.WriterFolderLabel.Name = "WriterFolderLabel";
-            this.WriterFolderLabel.Size = new System.Drawing.Size(200, 20);
+            this.WriterFolderLabel.Size = new System.Drawing.Size(212, 24);
             this.WriterFolderLabel.TabIndex = 129;
             this.WriterFolderLabel.Text = "Writer Folder:";
             this.WriterFolderLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // WriterReferencesSetLabel
             // 
-            this.WriterReferencesSetLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WriterReferencesSetLabel.Location = new System.Drawing.Point(20, 104);
+            this.WriterReferencesSetLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.WriterReferencesSetLabel.Location = new System.Drawing.Point(10, 107);
             this.WriterReferencesSetLabel.Name = "WriterReferencesSetLabel";
-            this.WriterReferencesSetLabel.Size = new System.Drawing.Size(200, 20);
+            this.WriterReferencesSetLabel.Size = new System.Drawing.Size(212, 24);
             this.WriterReferencesSetLabel.TabIndex = 128;
             this.WriterReferencesSetLabel.Text = "Writer Reference Set:";
             this.WriterReferencesSetLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // WriterNamespaceLabel
             // 
-            this.WriterNamespaceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WriterNamespaceLabel.Location = new System.Drawing.Point(20, 64);
+            this.WriterNamespaceLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.WriterNamespaceLabel.Location = new System.Drawing.Point(10, 67);
             this.WriterNamespaceLabel.Name = "WriterNamespaceLabel";
-            this.WriterNamespaceLabel.Size = new System.Drawing.Size(200, 20);
+            this.WriterNamespaceLabel.Size = new System.Drawing.Size(212, 24);
             this.WriterNamespaceLabel.TabIndex = 127;
             this.WriterNamespaceLabel.Text = "Writer Namespace:";
             this.WriterNamespaceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -124,7 +124,7 @@ namespace DataTierClient.Controls
             this.EditWriterReferencesSetButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.EditWriterReferencesSetButton.ButtonNumber = 0;
             this.EditWriterReferencesSetButton.ButtonText = "Edit";
-            this.EditWriterReferencesSetButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EditWriterReferencesSetButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EditWriterReferencesSetButton.Location = new System.Drawing.Point(583, 99);
             this.EditWriterReferencesSetButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.EditWriterReferencesSetButton.Name = "EditWriterReferencesSetButton";
@@ -132,7 +132,7 @@ namespace DataTierClient.Controls
             this.EditWriterReferencesSetButton.Selected = false;
             this.EditWriterReferencesSetButton.SelectedImage = global::DataTierClient.Properties.Resources.DeepBlue;
             this.EditWriterReferencesSetButton.ShowNotSelectedImageWhenDisabled = true;
-            this.EditWriterReferencesSetButton.Size = new System.Drawing.Size(72, 28);
+            this.EditWriterReferencesSetButton.Size = new System.Drawing.Size(72, 32);
             this.EditWriterReferencesSetButton.TabIndex = 138;
             // 
             // BrowseWriterManagerFolderButton
@@ -141,15 +141,15 @@ namespace DataTierClient.Controls
             this.BrowseWriterManagerFolderButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BrowseWriterManagerFolderButton.ButtonNumber = 0;
             this.BrowseWriterManagerFolderButton.ButtonText = "...";
-            this.BrowseWriterManagerFolderButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BrowseWriterManagerFolderButton.Location = new System.Drawing.Point(615, 19);
+            this.BrowseWriterManagerFolderButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BrowseWriterManagerFolderButton.Location = new System.Drawing.Point(615, 21);
             this.BrowseWriterManagerFolderButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.BrowseWriterManagerFolderButton.Name = "BrowseWriterManagerFolderButton";
             this.BrowseWriterManagerFolderButton.NotSelectedImage = null;
             this.BrowseWriterManagerFolderButton.Selected = false;
             this.BrowseWriterManagerFolderButton.SelectedImage = null;
             this.BrowseWriterManagerFolderButton.ShowNotSelectedImageWhenDisabled = true;
-            this.BrowseWriterManagerFolderButton.Size = new System.Drawing.Size(40, 28);
+            this.BrowseWriterManagerFolderButton.Size = new System.Drawing.Size(40, 32);
             this.BrowseWriterManagerFolderButton.TabIndex = 136;
             // 
             // WriterEditor
@@ -178,3 +178,6 @@ namespace DataTierClient.Controls
     #endregion
 
 }
+
+
+

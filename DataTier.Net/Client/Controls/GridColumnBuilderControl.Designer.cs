@@ -1,4 +1,4 @@
-﻿
+
 namespace DataTierClient.Controls
 {
     partial class GridColumnBuilderControl
@@ -191,7 +191,7 @@ namespace DataTierClient.Controls
             // SelectedTableLabel
             // 
             this.SelectedTableLabel.BackColor = System.Drawing.Color.Transparent;
-            this.SelectedTableLabel.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SelectedTableLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SelectedTableLabel.ForeColor = System.Drawing.Color.LemonChiffon;
             this.SelectedTableLabel.Location = new System.Drawing.Point(316, 24);
             this.SelectedTableLabel.Name = "SelectedTableLabel";
@@ -209,11 +209,11 @@ namespace DataTierClient.Controls
             this.CreateGridColumnsButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.CreateGridColumnsButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.CreateGridColumnsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CreateGridColumnsButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CreateGridColumnsButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CreateGridColumnsButton.ForeColor = System.Drawing.Color.LemonChiffon;
             this.CreateGridColumnsButton.Location = new System.Drawing.Point(316, 590);
             this.CreateGridColumnsButton.Name = "CreateGridColumnsButton";
-            this.CreateGridColumnsButton.Size = new System.Drawing.Size(232, 40);
+            this.CreateGridColumnsButton.Size = new System.Drawing.Size(232, 44);
             this.CreateGridColumnsButton.TabIndex = 109;
             this.CreateGridColumnsButton.Text = "Create Grid Columns";
             this.CreateGridColumnsButton.UseVisualStyleBackColor = false;
@@ -233,7 +233,7 @@ namespace DataTierClient.Controls
             // SelectedFieldLabel
             // 
             this.SelectedFieldLabel.BackColor = System.Drawing.Color.Transparent;
-            this.SelectedFieldLabel.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SelectedFieldLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SelectedFieldLabel.ForeColor = System.Drawing.Color.LemonChiffon;
             this.SelectedFieldLabel.Location = new System.Drawing.Point(856, 24);
             this.SelectedFieldLabel.Name = "SelectedFieldLabel";
@@ -254,7 +254,7 @@ namespace DataTierClient.Controls
             // CaptionLabel
             // 
             this.CaptionLabel.BackColor = System.Drawing.Color.Transparent;
-            this.CaptionLabel.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CaptionLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CaptionLabel.ForeColor = System.Drawing.Color.LemonChiffon;
             this.CaptionLabel.Location = new System.Drawing.Point(856, 96);
             this.CaptionLabel.Name = "CaptionLabel";
@@ -276,7 +276,7 @@ namespace DataTierClient.Controls
             // DataTypeLabel
             // 
             this.DataTypeLabel.BackColor = System.Drawing.Color.Transparent;
-            this.DataTypeLabel.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DataTypeLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DataTypeLabel.ForeColor = System.Drawing.Color.LemonChiffon;
             this.DataTypeLabel.Location = new System.Drawing.Point(856, 172);
             this.DataTypeLabel.Name = "DataTypeLabel";
@@ -297,7 +297,7 @@ namespace DataTierClient.Controls
             // WidthLabel
             // 
             this.WidthLabel.BackColor = System.Drawing.Color.Transparent;
-            this.WidthLabel.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.WidthLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.WidthLabel.ForeColor = System.Drawing.Color.LemonChiffon;
             this.WidthLabel.Location = new System.Drawing.Point(856, 248);
             this.WidthLabel.Name = "WidthLabel";
@@ -309,7 +309,7 @@ namespace DataTierClient.Controls
             // FontBoldLabel
             // 
             this.FontBoldLabel.BackColor = System.Drawing.Color.Transparent;
-            this.FontBoldLabel.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FontBoldLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FontBoldLabel.ForeColor = System.Drawing.Color.LemonChiffon;
             this.FontBoldLabel.Location = new System.Drawing.Point(854, 471);
             this.FontBoldLabel.Name = "FontBoldLabel";
@@ -321,7 +321,7 @@ namespace DataTierClient.Controls
             // DefaultValuesLabel
             // 
             this.DefaultValuesLabel.BackColor = System.Drawing.Color.Transparent;
-            this.DefaultValuesLabel.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DefaultValuesLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DefaultValuesLabel.ForeColor = System.Drawing.Color.LemonChiffon;
             this.DefaultValuesLabel.Location = new System.Drawing.Point(1128, 24);
             this.DefaultValuesLabel.Name = "DefaultValuesLabel";
@@ -354,7 +354,7 @@ namespace DataTierClient.Controls
             // HeightLabel
             // 
             this.HeightLabel.BackColor = System.Drawing.Color.Transparent;
-            this.HeightLabel.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HeightLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HeightLabel.ForeColor = System.Drawing.Color.LemonChiffon;
             this.HeightLabel.Location = new System.Drawing.Point(1128, 248);
             this.HeightLabel.Name = "HeightLabel";
@@ -376,7 +376,7 @@ namespace DataTierClient.Controls
             // FontSizeLabel
             // 
             this.FontSizeLabel.BackColor = System.Drawing.Color.Transparent;
-            this.FontSizeLabel.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FontSizeLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FontSizeLabel.ForeColor = System.Drawing.Color.LemonChiffon;
             this.FontSizeLabel.Location = new System.Drawing.Point(1128, 172);
             this.FontSizeLabel.Name = "FontSizeLabel";
@@ -397,7 +397,7 @@ namespace DataTierClient.Controls
             // FontNameLabel
             // 
             this.FontNameLabel.BackColor = System.Drawing.Color.Transparent;
-            this.FontNameLabel.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FontNameLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FontNameLabel.ForeColor = System.Drawing.Color.LemonChiffon;
             this.FontNameLabel.Location = new System.Drawing.Point(1128, 96);
             this.FontNameLabel.Name = "FontNameLabel";
@@ -418,7 +418,7 @@ namespace DataTierClient.Controls
             // FormatLabel
             // 
             this.FormatLabel.BackColor = System.Drawing.Color.Transparent;
-            this.FormatLabel.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormatLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormatLabel.ForeColor = System.Drawing.Color.LemonChiffon;
             this.FormatLabel.Location = new System.Drawing.Point(856, 324);
             this.FormatLabel.Name = "FormatLabel";
@@ -438,7 +438,7 @@ namespace DataTierClient.Controls
             // ClassNameLabel
             // 
             this.ClassNameLabel.BackColor = System.Drawing.Color.Transparent;
-            this.ClassNameLabel.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ClassNameLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ClassNameLabel.ForeColor = System.Drawing.Color.LemonChiffon;
             this.ClassNameLabel.Location = new System.Drawing.Point(856, 400);
             this.ClassNameLabel.Name = "ClassNameLabel";
@@ -459,11 +459,11 @@ namespace DataTierClient.Controls
             // ParentLabel
             // 
             this.ParentLabel.BackColor = System.Drawing.Color.Transparent;
-            this.ParentLabel.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ParentLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ParentLabel.ForeColor = System.Drawing.Color.LemonChiffon;
             this.ParentLabel.Location = new System.Drawing.Point(1128, 326);
             this.ParentLabel.Name = "ParentLabel";
-            this.ParentLabel.Size = new System.Drawing.Size(185, 27);
+            this.ParentLabel.Size = new System.Drawing.Size(202, 27);
             this.ParentLabel.TabIndex = 133;
             this.ParentLabel.Text = "Parent (Grid Name):";
             this.ParentLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -471,7 +471,7 @@ namespace DataTierClient.Controls
             // StatusLabel
             // 
             this.StatusLabel.BackColor = System.Drawing.Color.Transparent;
-            this.StatusLabel.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StatusLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StatusLabel.ForeColor = System.Drawing.Color.LemonChiffon;
             this.StatusLabel.Location = new System.Drawing.Point(856, 590);
             this.StatusLabel.Name = "StatusLabel";
@@ -500,7 +500,7 @@ namespace DataTierClient.Controls
             // IsImageLabel
             // 
             this.IsImageLabel.BackColor = System.Drawing.Color.Transparent;
-            this.IsImageLabel.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IsImageLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IsImageLabel.ForeColor = System.Drawing.Color.LemonChiffon;
             this.IsImageLabel.Location = new System.Drawing.Point(854, 507);
             this.IsImageLabel.Name = "IsImageLabel";
@@ -523,7 +523,7 @@ namespace DataTierClient.Controls
             // ImageButtonLabel
             // 
             this.ImageButtonLabel.BackColor = System.Drawing.Color.Transparent;
-            this.ImageButtonLabel.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ImageButtonLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ImageButtonLabel.ForeColor = System.Drawing.Color.LemonChiffon;
             this.ImageButtonLabel.Location = new System.Drawing.Point(854, 547);
             this.ImageButtonLabel.Name = "ImageButtonLabel";
@@ -632,3 +632,5 @@ namespace DataTierClient.Controls
         private System.Windows.Forms.Label ImageButtonLabel;
     }
 }
+
+

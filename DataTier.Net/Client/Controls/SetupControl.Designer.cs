@@ -1,4 +1,4 @@
-﻿
+
 
 #region using statements
 
@@ -183,7 +183,7 @@ namespace DataTierClient.Controls
             // InstallDatabaseSchemaButton
             // 
             this.InstallDatabaseSchemaButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.InstallDatabaseSchemaButton.Font = new System.Drawing.Font("Calibri", 14.25F);
+            this.InstallDatabaseSchemaButton.Font = new System.Drawing.Font("Calibri", 16F);
             this.InstallDatabaseSchemaButton.ForeColor = System.Drawing.Color.White;
             this.InstallDatabaseSchemaButton.Location = new System.Drawing.Point(0, 399);
             this.InstallDatabaseSchemaButton.Name = "InstallDatabaseSchemaButton";
@@ -205,9 +205,9 @@ namespace DataTierClient.Controls
             this.DatabaseCreatedCheckBox.Checked = false;
             this.DatabaseCreatedCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.DatabaseCreatedCheckBox.Editable = true;
-            this.DatabaseCreatedCheckBox.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatabaseCreatedCheckBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DatabaseCreatedCheckBox.LabelColor = System.Drawing.Color.GhostWhite;
-            this.DatabaseCreatedCheckBox.LabelFont = new System.Drawing.Font("Calibri", 14.25F);
+            this.DatabaseCreatedCheckBox.LabelFont = new System.Drawing.Font("Calibri", 16F);
             this.DatabaseCreatedCheckBox.LabelText = "Database Has Been Created:";
             this.DatabaseCreatedCheckBox.LabelWidth = 320;
             this.DatabaseCreatedCheckBox.Location = new System.Drawing.Point(0, 371);
@@ -286,7 +286,7 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.Step2Button);
             this.Controls.Add(this.Step1Button);
             this.DoubleBuffered = true;
-            this.Font = new System.Drawing.Font("Calibri", 14.25F);
+            this.Font = new System.Drawing.Font("Calibri", 16F);
             this.ForeColor = System.Drawing.Color.GhostWhite;
             this.Name = "SetupControl";
             this.Size = new System.Drawing.Size(1280, 760);
@@ -316,3 +316,5 @@ namespace DataTierClient.Controls
     #endregion
 
 }
+
+

@@ -207,6 +207,9 @@ namespace DataTierClient.Controls
             /// </summary>
             private void Init()
             {
+                // Set the button fonts
+                WizardStatusControl.SetButtonFont("Calibri", 15);
+
                 // Call the init for each control
                 foreach(Control control in MainPanel.Controls)
                 {
@@ -214,7 +217,7 @@ namespace DataTierClient.Controls
                     IWizardControl wizardControl = control as IWizardControl;
                     
                     // if the wizard control exists
-                    if(wizardControl != null)
+                    if (wizardControl != null)
                     {
                         // Call the Init method
                         wizardControl.Init();

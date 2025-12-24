@@ -1,4 +1,4 @@
-﻿namespace DataTierClient.Forms
+namespace DataTierClient.Forms
 {
     partial class NewStoredProcedureEditorForm
     {
@@ -36,7 +36,7 @@
             // 
             this.NewStoredProcedureEditor.BackColor = System.Drawing.Color.Linen;
             this.NewStoredProcedureEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.NewStoredProcedureEditor.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NewStoredProcedureEditor.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NewStoredProcedureEditor.Location = new System.Drawing.Point(0, 0);
             this.NewStoredProcedureEditor.Name = "NewStoredProcedureEditor";
             this.NewStoredProcedureEditor.Size = new System.Drawing.Size(1080, 600);
@@ -61,3 +61,4 @@
         private Controls.NewStoredProcedureEditor NewStoredProcedureEditor;
     }
 }
+

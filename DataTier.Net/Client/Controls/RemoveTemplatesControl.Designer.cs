@@ -1,4 +1,4 @@
-﻿
+
 namespace DataTierClient.Controls
 {
     partial class RemoveTemplatesControl
@@ -85,11 +85,11 @@ namespace DataTierClient.Controls
             this.FrameworkComboBox.ComboBoxText = "";
             this.FrameworkComboBox.ComoboBoxFont = null;
             this.FrameworkComboBox.Editable = true;
-            this.FrameworkComboBox.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FrameworkComboBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FrameworkComboBox.HideLabel = false;
             this.FrameworkComboBox.LabelBottomMargin = 0;
             this.FrameworkComboBox.LabelColor = System.Drawing.Color.LemonChiffon;
-            this.FrameworkComboBox.LabelFont = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FrameworkComboBox.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FrameworkComboBox.LabelText = "Framework:";
             this.FrameworkComboBox.LabelTopMargin = 4;
             this.FrameworkComboBox.LabelWidth = 120;
@@ -107,7 +107,7 @@ namespace DataTierClient.Controls
             // 
             this.Version1RadioButton.AutoSize = true;
             this.Version1RadioButton.BackColor = System.Drawing.Color.Transparent;
-            this.Version1RadioButton.Font = new System.Drawing.Font("Calibri", 14.25F);
+            this.Version1RadioButton.Font = new System.Drawing.Font("Calibri", 16F);
             this.Version1RadioButton.ForeColor = System.Drawing.Color.LemonChiffon;
             this.Version1RadioButton.Location = new System.Drawing.Point(676, 137);
             this.Version1RadioButton.Name = "Version1RadioButton";
@@ -122,7 +122,7 @@ namespace DataTierClient.Controls
             // 
             this.Version2RadioButton.AutoSize = true;
             this.Version2RadioButton.BackColor = System.Drawing.Color.Transparent;
-            this.Version2RadioButton.Font = new System.Drawing.Font("Calibri", 14.25F);
+            this.Version2RadioButton.Font = new System.Drawing.Font("Calibri", 16F);
             this.Version2RadioButton.ForeColor = System.Drawing.Color.LemonChiffon;
             this.Version2RadioButton.Location = new System.Drawing.Point(810, 137);
             this.Version2RadioButton.Name = "Version2RadioButton";
@@ -136,7 +136,7 @@ namespace DataTierClient.Controls
             // StatusLabel
             // 
             this.StatusLabel.BackColor = System.Drawing.Color.Transparent;
-            this.StatusLabel.Font = new System.Drawing.Font("Calibri", 14.25F);
+            this.StatusLabel.Font = new System.Drawing.Font("Calibri", 16F);
             this.StatusLabel.ForeColor = System.Drawing.Color.LemonChiffon;
             this.StatusLabel.Location = new System.Drawing.Point(658, 250);
             this.StatusLabel.Name = "StatusLabel";
@@ -252,3 +252,4 @@ namespace DataTierClient.Controls
         private System.Windows.Forms.Timer CopyTimer;
     }
 }
+

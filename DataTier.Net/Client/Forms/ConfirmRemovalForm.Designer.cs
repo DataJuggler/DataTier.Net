@@ -1,4 +1,4 @@
-﻿
+
 #region using statements
 
 #endregion
@@ -50,7 +50,7 @@ namespace DataTierClient.Forms
                 // 
                 this.ConfirmRemovalControl.BackColor = System.Drawing.Color.Linen;
                 this.ConfirmRemovalControl.Dock = System.Windows.Forms.DockStyle.Fill;
-                this.ConfirmRemovalControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                this.ConfirmRemovalControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 this.ConfirmRemovalControl.Loading = false;
                 this.ConfirmRemovalControl.Location = new System.Drawing.Point(0, 0);
                 this.ConfirmRemovalControl.Name = "ConfirmRemovalControl";
@@ -81,3 +81,5 @@ namespace DataTierClient.Forms
     #endregion
 
 }
+
+

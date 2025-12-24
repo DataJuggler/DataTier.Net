@@ -1,4 +1,4 @@
-﻿
+
 
 #region using statements
 
@@ -51,7 +51,7 @@ namespace DataTierClient.Forms
             // 
             this.CustomMethodEditor.BackColor = System.Drawing.Color.Linen;
             this.CustomMethodEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CustomMethodEditor.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CustomMethodEditor.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomMethodEditor.Location = new System.Drawing.Point(0, 0);
             this.CustomMethodEditor.MethodInfo = null;
             this.CustomMethodEditor.Name = "CustomMethodEditor";
@@ -82,3 +82,5 @@ namespace DataTierClient.Forms
     #endregion
 
 }
+
+

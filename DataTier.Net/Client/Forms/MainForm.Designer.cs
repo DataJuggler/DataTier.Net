@@ -136,7 +136,7 @@ namespace DataTierClient.Forms
             this.ManageDataButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.ManageDataButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.ManageDataButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ManageDataButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ManageDataButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ManageDataButton.ForeColor = System.Drawing.Color.LemonChiffon;
             this.ManageDataButton.Location = new System.Drawing.Point(186, 114);
             this.ManageDataButton.Name = "ManageDataButton";
@@ -151,7 +151,7 @@ namespace DataTierClient.Forms
             // StatusListBox
             // 
             this.StatusListBox.AutoArrange = false;
-            this.StatusListBox.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StatusListBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StatusListBox.FullRowSelect = true;
             this.StatusListBox.HideSelection = false;
             this.StatusListBox.Location = new System.Drawing.Point(20, 170);
@@ -165,13 +165,12 @@ namespace DataTierClient.Forms
             // 
             // ProjectLabel
             // 
-            this.ProjectLabel.AutoSize = true;
             this.ProjectLabel.BackColor = System.Drawing.Color.Transparent;
-            this.ProjectLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProjectLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProjectLabel.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.ProjectLabel.Location = new System.Drawing.Point(21, 19);
+            this.ProjectLabel.Location = new System.Drawing.Point(15, 19);
             this.ProjectLabel.Name = "ProjectLabel";
-            this.ProjectLabel.Size = new System.Drawing.Size(78, 18);
+            this.ProjectLabel.Size = new System.Drawing.Size(88, 27);
             this.ProjectLabel.TabIndex = 70;
             this.ProjectLabel.Text = "Project:";
             this.ProjectLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -179,11 +178,11 @@ namespace DataTierClient.Forms
             // CurrentProjectLabel
             // 
             this.CurrentProjectLabel.BackColor = System.Drawing.Color.Transparent;
-            this.CurrentProjectLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CurrentProjectLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CurrentProjectLabel.ForeColor = System.Drawing.Color.DimGray;
-            this.CurrentProjectLabel.Location = new System.Drawing.Point(94, 20);
+            this.CurrentProjectLabel.Location = new System.Drawing.Point(95, 20);
             this.CurrentProjectLabel.Name = "CurrentProjectLabel";
-            this.CurrentProjectLabel.Size = new System.Drawing.Size(253, 18);
+            this.CurrentProjectLabel.Size = new System.Drawing.Size(242, 24);
             this.CurrentProjectLabel.TabIndex = 71;
             this.CurrentProjectLabel.Text = "No Project Selected";
             this.CurrentProjectLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -196,7 +195,7 @@ namespace DataTierClient.Forms
             this.NewProjectButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.NewProjectButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.NewProjectButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.NewProjectButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NewProjectButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NewProjectButton.ForeColor = System.Drawing.Color.LemonChiffon;
             this.NewProjectButton.Location = new System.Drawing.Point(20, 57);
             this.NewProjectButton.Name = "NewProjectButton";
@@ -216,7 +215,7 @@ namespace DataTierClient.Forms
             this.OpenProjectButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.OpenProjectButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.OpenProjectButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.OpenProjectButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OpenProjectButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OpenProjectButton.ForeColor = System.Drawing.Color.LemonChiffon;
             this.OpenProjectButton.Location = new System.Drawing.Point(186, 57);
             this.OpenProjectButton.Name = "OpenProjectButton";
@@ -237,7 +236,7 @@ namespace DataTierClient.Forms
             this.EditProjectButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.EditProjectButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.EditProjectButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.EditProjectButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EditProjectButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EditProjectButton.ForeColor = System.Drawing.Color.DimGray;
             this.EditProjectButton.Location = new System.Drawing.Point(352, 57);
             this.EditProjectButton.Name = "EditProjectButton";
@@ -258,7 +257,7 @@ namespace DataTierClient.Forms
             this.CloseProjectButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.CloseProjectButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.CloseProjectButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CloseProjectButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CloseProjectButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CloseProjectButton.ForeColor = System.Drawing.Color.DimGray;
             this.CloseProjectButton.Location = new System.Drawing.Point(352, 114);
             this.CloseProjectButton.Name = "CloseProjectButton";
@@ -279,7 +278,7 @@ namespace DataTierClient.Forms
             this.BuildAllButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.BuildAllButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BuildAllButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BuildAllButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BuildAllButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BuildAllButton.ForeColor = System.Drawing.Color.DimGray;
             this.BuildAllButton.Location = new System.Drawing.Point(20, 114);
             this.BuildAllButton.Name = "BuildAllButton";
@@ -299,7 +298,7 @@ namespace DataTierClient.Forms
             this.HiddenButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.HiddenButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.HiddenButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.HiddenButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HiddenButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HiddenButton.ForeColor = System.Drawing.Color.LemonChiffon;
             this.HiddenButton.Location = new System.Drawing.Point(-1000, 655);
             this.HiddenButton.Name = "HiddenButton";
@@ -324,11 +323,11 @@ namespace DataTierClient.Forms
             // 
             // RunSetupButton
             // 
-            this.RunSetupButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RunSetupButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RunSetupButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.RunSetupButton.Location = new System.Drawing.Point(352, 20);
+            this.RunSetupButton.Location = new System.Drawing.Point(345, 20);
             this.RunSetupButton.Name = "RunSetupButton";
-            this.RunSetupButton.Size = new System.Drawing.Size(150, 18);
+            this.RunSetupButton.Size = new System.Drawing.Size(164, 24);
             this.RunSetupButton.TabIndex = 110;
             this.RunSetupButton.Text = "Run Setup Again";
             this.RunSetupButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -356,7 +355,7 @@ namespace DataTierClient.Forms
             this.MainPanel.Controls.Add(this.StatusListBox);
             this.MainPanel.Controls.Add(this.ManageDataButton);
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainPanel.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MainPanel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MainPanel.Location = new System.Drawing.Point(0, 0);
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(900, 681);
@@ -382,7 +381,7 @@ namespace DataTierClient.Forms
             this.RepairGatewayButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.RepairGatewayButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.RepairGatewayButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RepairGatewayButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RepairGatewayButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RepairGatewayButton.ForeColor = System.Drawing.Color.LemonChiffon;
             this.RepairGatewayButton.Location = new System.Drawing.Point(21, 527);
             this.RepairGatewayButton.Name = "RepairGatewayButton";
@@ -431,7 +430,7 @@ namespace DataTierClient.Forms
             this.RightPanel.Controls.Add(this.ClassRoomImage);
             this.RightPanel.Location = new System.Drawing.Point(31, 57);
             this.RightPanel.Name = "RightPanel";
-            this.RightPanel.Size = new System.Drawing.Size(319, 370);
+            this.RightPanel.Size = new System.Drawing.Size(319, 423);
             this.RightPanel.TabIndex = 101;
             // 
             // ViewPDFButton2
@@ -468,11 +467,11 @@ namespace DataTierClient.Forms
             // 
             // UsersGuideLabel
             // 
-            this.UsersGuideLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UsersGuideLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UsersGuideLabel.ForeColor = System.Drawing.Color.LemonChiffon;
             this.UsersGuideLabel.Location = new System.Drawing.Point(34, 335);
             this.UsersGuideLabel.Name = "UsersGuideLabel";
-            this.UsersGuideLabel.Size = new System.Drawing.Size(236, 17);
+            this.UsersGuideLabel.Size = new System.Drawing.Size(236, 24);
             this.UsersGuideLabel.TabIndex = 105;
             this.UsersGuideLabel.Text = "DataTier.Net User\'s Guide";
             this.UsersGuideLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -511,11 +510,11 @@ namespace DataTierClient.Forms
             // 
             // QuickStartLabel
             // 
-            this.QuickStartLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.QuickStartLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.QuickStartLabel.ForeColor = System.Drawing.Color.LemonChiffon;
             this.QuickStartLabel.Location = new System.Drawing.Point(34, 218);
             this.QuickStartLabel.Name = "QuickStartLabel";
-            this.QuickStartLabel.Size = new System.Drawing.Size(236, 17);
+            this.QuickStartLabel.Size = new System.Drawing.Size(236, 24);
             this.QuickStartLabel.TabIndex = 102;
             this.QuickStartLabel.Text = "DataTier.Net Quick Start";
             this.QuickStartLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -533,7 +532,7 @@ namespace DataTierClient.Forms
             // MainStatus
             // 
             this.MainStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.MainStatus.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MainStatus.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MainStatus.ForeColor = System.Drawing.Color.LemonChiffon;
             this.MainStatus.Location = new System.Drawing.Point(0, 649);
             this.MainStatus.Name = "MainStatus";
@@ -560,7 +559,6 @@ namespace DataTierClient.Forms
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DataTier.Net";
             this.MainPanel.ResumeLayout(false);
-            this.MainPanel.PerformLayout();
             this.RightContainer.ResumeLayout(false);
             this.BottomPanel.ResumeLayout(false);
             this.RightPanel.ResumeLayout(false);
@@ -605,3 +603,6 @@ namespace DataTierClient.Forms
     #endregion
 
 }
+
+
+

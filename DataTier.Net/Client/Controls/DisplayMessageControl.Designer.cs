@@ -1,4 +1,4 @@
-﻿
+
 
 #region using statements
 
@@ -113,7 +113,7 @@ namespace DataTierClient.Controls
             this.OKButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.OKButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.OKButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.OKButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OKButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OKButton.ForeColor = System.Drawing.Color.LemonChiffon;
             this.OKButton.Location = new System.Drawing.Point(200, 0);
             this.OKButton.Name = "OKButton";
@@ -136,7 +136,7 @@ namespace DataTierClient.Controls
             // MessageLabel
             // 
             this.MessageLabel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.MessageLabel.Font = new System.Drawing.Font("Verdana", 12F);
+            this.MessageLabel.Font = new System.Drawing.Font("Calibri", 16F);
             this.MessageLabel.Location = new System.Drawing.Point(16, 16);
             this.MessageLabel.MaximumSize = new System.Drawing.Size(476, 92);
             this.MessageLabel.Name = "MessageLabel";
@@ -155,7 +155,7 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.TopMarginPanel);
             this.Controls.Add(this.RightMarginPanel);
             this.Controls.Add(this.LeftMarginPanel);
-            this.Font = new System.Drawing.Font("Verdana", 12F);
+            this.Font = new System.Drawing.Font("Calibri", 16F);
             this.Name = "DisplayMessageControl";
             this.Size = new System.Drawing.Size(508, 172);
             this.Resize += new System.EventHandler(this.DisplayMessageControl_Resize);
@@ -171,3 +171,6 @@ namespace DataTierClient.Controls
     #endregion
 
 }
+
+
+

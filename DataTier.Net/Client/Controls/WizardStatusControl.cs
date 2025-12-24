@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using DataTierClient.Controls.Interfaces;
 using DataTierClient.Enumerations;
 using DataTierClient.Controls.Images;
+using System.Drawing;
 
 #endregion
 
@@ -33,7 +34,7 @@ namespace DataTierClient.Controls
         {
             // Create Controls
             InitializeComponent();
-            
+
             // Perform Initializations For This Object
             Init();
         }
@@ -215,6 +216,9 @@ namespace DataTierClient.Controls
             {
                 // Default To Left
                 this.Dock = DockStyle.Left;   
+
+                // Set the font for the button
+                SetButtonFont("Calibri", 15);
             }
             #endregion
 
@@ -306,6 +310,25 @@ namespace DataTierClient.Controls
             }
             #endregion
 
+            #region SetButtonFont()
+            /// <summary>
+            /// Set Button Font
+            /// </summary>
+            public void SetButtonFont(string fontFamily, float fontSize)
+            {
+                // using font size 15 to fit
+                ProjectsTab.Font = new Font(fontFamily, fontSize);
+                DatabasesTab.Font = new Font(fontFamily, fontSize);
+                DataManagerTab.Font = new Font(fontFamily, fontSize);
+                DataObjectsTab.Font = new Font(fontFamily, fontSize);
+                DataOperationsTab.Font = new Font(fontFamily, fontSize);
+                ControllersTab.Font = new Font(fontFamily, fontSize);
+                ReadersTab.Font = new Font(fontFamily, fontSize);
+                WritersTab.Font = new Font(fontFamily, fontSize);
+                StoredProceduresTab.Font = new Font(fontFamily, fontSize);
+            }
+            #endregion
+            
             #region SetSelectedButton(TabButton tabButton)
             /// <summary>
             /// This method sets the selected button by passing in

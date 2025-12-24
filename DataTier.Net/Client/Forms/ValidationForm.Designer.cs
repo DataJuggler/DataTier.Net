@@ -1,4 +1,4 @@
-﻿namespace DataTierClient.Forms
+namespace DataTierClient.Forms
 {
     partial class ValidationForm
     {
@@ -38,7 +38,7 @@
             this.ValidationControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ValidationControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ValidationControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ValidationControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ValidationControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ValidationControl.Location = new System.Drawing.Point(0, 0);
             this.ValidationControl.Name = "ValidationControl";
             this.ValidationControl.Size = new System.Drawing.Size(840, 240);
@@ -63,3 +63,4 @@
         private Controls.ValidationControl ValidationControl;
     }
 }
+

@@ -1,4 +1,4 @@
-﻿
+
 
 #region using statements
 
@@ -97,7 +97,7 @@ namespace DataTierClient.Controls
             // HelpTopicLabel
             // 
             this.HelpTopicLabel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.HelpTopicLabel.Font = new System.Drawing.Font("Verdana", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HelpTopicLabel.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HelpTopicLabel.ForeColor = System.Drawing.Color.Firebrick;
             this.HelpTopicLabel.Location = new System.Drawing.Point(16, 16);
             this.HelpTopicLabel.Name = "HelpTopicLabel";
@@ -108,7 +108,7 @@ namespace DataTierClient.Controls
             // HelpTopicText
             // 
             this.HelpTopicText.Dock = System.Windows.Forms.DockStyle.Top;
-            this.HelpTopicText.Font = new System.Drawing.Font("Verdana", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HelpTopicText.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HelpTopicText.Location = new System.Drawing.Point(16, 51);
             this.HelpTopicText.Name = "HelpTopicText";
             this.HelpTopicText.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
@@ -160,3 +160,5 @@ namespace DataTierClient.Controls
     #endregion
 
 }
+
+

@@ -53,20 +53,20 @@ namespace DataTierClient.Controls
             // 
             // ReferenceTextBox
             // 
-            this.ReferenceTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ReferenceTextBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ReferenceTextBox.Location = new System.Drawing.Point(184, 16);
             this.ReferenceTextBox.Name = "ReferenceTextBox";
-            this.ReferenceTextBox.Size = new System.Drawing.Size(447, 27);
+            this.ReferenceTextBox.Size = new System.Drawing.Size(447, 34);
             this.ReferenceTextBox.TabIndex = 99;
             this.ReferenceTextBox.TextChanged += new System.EventHandler(this.ReferenceTextBox_TextChanged);
             this.ReferenceTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ReferenceTextBox_KeyDown);
             // 
             // ReferenceNameLabel
             // 
-            this.ReferenceNameLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ReferenceNameLabel.Location = new System.Drawing.Point(23, 22);
+            this.ReferenceNameLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ReferenceNameLabel.Location = new System.Drawing.Point(15, 24);
             this.ReferenceNameLabel.Name = "ReferenceNameLabel";
-            this.ReferenceNameLabel.Size = new System.Drawing.Size(160, 20);
+            this.ReferenceNameLabel.Size = new System.Drawing.Size(174, 24);
             this.ReferenceNameLabel.TabIndex = 98;
             this.ReferenceNameLabel.Text = "Reference  Name:";
             this.ReferenceNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -75,9 +75,9 @@ namespace DataTierClient.Controls
             // 
             this.SaveCancelControl.BackColor = System.Drawing.Color.Transparent;
             this.SaveCancelControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.SaveCancelControl.Location = new System.Drawing.Point(0, 96);
+            this.SaveCancelControl.Location = new System.Drawing.Point(0, 88);
             this.SaveCancelControl.Name = "SaveCancelControl";
-            this.SaveCancelControl.Size = new System.Drawing.Size(664, 40);
+            this.SaveCancelControl.Size = new System.Drawing.Size(664, 48);
             this.SaveCancelControl.TabIndex = 100;
             // 
             // ReferenceEditor
@@ -102,3 +102,6 @@ namespace DataTierClient.Controls
     #endregion
 
 }
+
+
+

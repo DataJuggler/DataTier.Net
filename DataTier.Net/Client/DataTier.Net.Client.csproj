@@ -366,12 +366,6 @@
     <Compile Include="Controls\DataEditorControl.Designer.cs">
       <DependentUpon>DataEditorControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\UpdateControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\UpdateControl.Designer.cs">
-      <DependentUpon>UpdateControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\ValidationControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -570,12 +564,6 @@
     <Compile Include="Forms\SetupForm.Designer.cs">
       <DependentUpon>SetupForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UpdateForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UpdateForm.Designer.cs">
-      <DependentUpon>UpdateForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\ValidationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -737,9 +725,6 @@
     <EmbeddedResource Include="Controls\DataEditorControl.resx">
       <DependentUpon>DataEditorControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\UpdateControl.resx">
-      <DependentUpon>UpdateControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ValidationControl.resx">
       <DependentUpon>ValidationControl.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -843,9 +828,6 @@
     <EmbeddedResource Include="Forms\SetupForm.resx">
       <DependentUpon>SetupForm.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UpdateForm.resx">
-      <DependentUpon>UpdateForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ValidationForm.resx">
       <DependentUpon>ValidationForm.cs</DependentUpon>

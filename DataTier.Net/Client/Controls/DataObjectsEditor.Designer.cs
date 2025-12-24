@@ -62,58 +62,58 @@ namespace DataTierClient.Controls
             // 
             // ObjectReferencesComboBox
             // 
-            this.ObjectReferencesComboBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ObjectReferencesComboBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ObjectReferencesComboBox.FormattingEnabled = true;
             this.ObjectReferencesComboBox.Location = new System.Drawing.Point(218, 100);
             this.ObjectReferencesComboBox.Name = "ObjectReferencesComboBox";
-            this.ObjectReferencesComboBox.Size = new System.Drawing.Size(271, 26);
+            this.ObjectReferencesComboBox.Size = new System.Drawing.Size(271, 34);
             this.ObjectReferencesComboBox.TabIndex = 88;
             this.ObjectReferencesComboBox.SelectedIndexChanged += new System.EventHandler(this.ObjectReferencesComboBox_SelectedIndexChanged);
             // 
             // ObjectNamespaceTextBox
             // 
-            this.ObjectNamespaceTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ObjectNamespaceTextBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ObjectNamespaceTextBox.Location = new System.Drawing.Point(218, 60);
             this.ObjectNamespaceTextBox.Name = "ObjectNamespaceTextBox";
-            this.ObjectNamespaceTextBox.Size = new System.Drawing.Size(437, 27);
+            this.ObjectNamespaceTextBox.Size = new System.Drawing.Size(437, 34);
             this.ObjectNamespaceTextBox.TabIndex = 87;
             this.ObjectNamespaceTextBox.TextChanged += new System.EventHandler(this.ObjectNamespaceTextBox_TextChanged);
             // 
             // ObjectFolderTextBox
             // 
-            this.ObjectFolderTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ObjectFolderTextBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ObjectFolderTextBox.Location = new System.Drawing.Point(218, 20);
             this.ObjectFolderTextBox.Name = "ObjectFolderTextBox";
-            this.ObjectFolderTextBox.Size = new System.Drawing.Size(404, 27);
+            this.ObjectFolderTextBox.Size = new System.Drawing.Size(404, 34);
             this.ObjectFolderTextBox.TabIndex = 85;
             this.ObjectFolderTextBox.TextChanged += new System.EventHandler(this.ObjectFolderTextBox_TextChanged);
             // 
             // ObjectNamespaceLabel
             // 
-            this.ObjectNamespaceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ObjectNamespaceLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ObjectNamespaceLabel.Location = new System.Drawing.Point(20, 64);
             this.ObjectNamespaceLabel.Name = "ObjectNamespaceLabel";
-            this.ObjectNamespaceLabel.Size = new System.Drawing.Size(200, 20);
+            this.ObjectNamespaceLabel.Size = new System.Drawing.Size(200, 24);
             this.ObjectNamespaceLabel.TabIndex = 84;
             this.ObjectNamespaceLabel.Text = "Object Namespace:";
             this.ObjectNamespaceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // ObjectReferencesLabel
             // 
-            this.ObjectReferencesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ObjectReferencesLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ObjectReferencesLabel.Location = new System.Drawing.Point(20, 104);
             this.ObjectReferencesLabel.Name = "ObjectReferencesLabel";
-            this.ObjectReferencesLabel.Size = new System.Drawing.Size(200, 20);
+            this.ObjectReferencesLabel.Size = new System.Drawing.Size(200, 24);
             this.ObjectReferencesLabel.TabIndex = 83;
             this.ObjectReferencesLabel.Text = "Object References Set:";
             this.ObjectReferencesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // ObjectFolderLabel
             // 
-            this.ObjectFolderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ObjectFolderLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ObjectFolderLabel.Location = new System.Drawing.Point(20, 24);
             this.ObjectFolderLabel.Name = "ObjectFolderLabel";
-            this.ObjectFolderLabel.Size = new System.Drawing.Size(200, 20);
+            this.ObjectFolderLabel.Size = new System.Drawing.Size(200, 24);
             this.ObjectFolderLabel.TabIndex = 82;
             this.ObjectFolderLabel.Text = "Object Folder:";
             this.ObjectFolderLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -124,15 +124,15 @@ namespace DataTierClient.Controls
             this.BrowseDataObjectsFolderButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BrowseDataObjectsFolderButton.ButtonNumber = 0;
             this.BrowseDataObjectsFolderButton.ButtonText = "...";
-            this.BrowseDataObjectsFolderButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BrowseDataObjectsFolderButton.Location = new System.Drawing.Point(615, 19);
+            this.BrowseDataObjectsFolderButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BrowseDataObjectsFolderButton.Location = new System.Drawing.Point(615, 20);
             this.BrowseDataObjectsFolderButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.BrowseDataObjectsFolderButton.Name = "BrowseDataObjectsFolderButton";
             this.BrowseDataObjectsFolderButton.NotSelectedImage = null;
             this.BrowseDataObjectsFolderButton.Selected = false;
             this.BrowseDataObjectsFolderButton.SelectedImage = null;
             this.BrowseDataObjectsFolderButton.ShowNotSelectedImageWhenDisabled = true;
-            this.BrowseDataObjectsFolderButton.Size = new System.Drawing.Size(40, 28);
+            this.BrowseDataObjectsFolderButton.Size = new System.Drawing.Size(40, 32);
             this.BrowseDataObjectsFolderButton.TabIndex = 91;
             // 
             // EditObjectReferencesButton
@@ -141,7 +141,7 @@ namespace DataTierClient.Controls
             this.EditObjectReferencesButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.EditObjectReferencesButton.ButtonNumber = 0;
             this.EditObjectReferencesButton.ButtonText = "Edit";
-            this.EditObjectReferencesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EditObjectReferencesButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EditObjectReferencesButton.Location = new System.Drawing.Point(583, 99);
             this.EditObjectReferencesButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.EditObjectReferencesButton.Name = "EditObjectReferencesButton";
@@ -149,7 +149,7 @@ namespace DataTierClient.Controls
             this.EditObjectReferencesButton.Selected = false;
             this.EditObjectReferencesButton.SelectedImage = global::DataTierClient.Properties.Resources.DeepBlue;
             this.EditObjectReferencesButton.ShowNotSelectedImageWhenDisabled = true;
-            this.EditObjectReferencesButton.Size = new System.Drawing.Size(72, 28);
+            this.EditObjectReferencesButton.Size = new System.Drawing.Size(72, 32);
             this.EditObjectReferencesButton.TabIndex = 93;
             // 
             // DataObjectsEditor
@@ -179,3 +179,6 @@ namespace DataTierClient.Controls
     #endregion
 
 }
+
+
+

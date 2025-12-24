@@ -1,4 +1,4 @@
-﻿
+
 #region using statements
 
 #endregion
@@ -41,9 +41,7 @@ namespace DataTierClient.Forms
             /// the contents of this method with the code editor.
             /// </summary>
             private void InitializeComponent()
-            {            
-            DataAccessComponent.Controllers.ApplicationController applicationController1 = new DataAccessComponent.Controllers.ApplicationController();
-            DataAccessComponent.Logging.ErrorHandler errorHandler1 = new DataAccessComponent.Logging.ErrorHandler();
+            {                        
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataEditorForm));
             this.DataEditorControl = new DataTierClient.Controls.DataEditorControl();
             this.SuspendLayout();
@@ -52,10 +50,7 @@ namespace DataTierClient.Forms
             // 
             this.DataEditorControl.BackColor = System.Drawing.Color.Linen;
             this.DataEditorControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DataEditorControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            applicationController1.ConnectionString = null;
-            applicationController1.ConnectionTested = false;            
-            applicationController1.Exception = null;                        
+            this.DataEditorControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));                         
             this.DataEditorControl.Loading = false;
             this.DataEditorControl.Location = new System.Drawing.Point(0, 0);
             this.DataEditorControl.Name = "Manage Data";
@@ -71,7 +66,7 @@ namespace DataTierClient.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(964, 496);
             this.Controls.Add(this.DataEditorControl);
-            this.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "DataEditorForm";

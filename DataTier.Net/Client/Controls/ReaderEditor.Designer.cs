@@ -64,58 +64,58 @@ namespace DataTierClient.Controls
             // 
             // ReaderReferencesSetComboBox
             // 
-            this.ReaderReferencesSetComboBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ReaderReferencesSetComboBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ReaderReferencesSetComboBox.FormattingEnabled = true;
-            this.ReaderReferencesSetComboBox.Location = new System.Drawing.Point(218, 100);
+            this.ReaderReferencesSetComboBox.Location = new System.Drawing.Point(218, 108);
             this.ReaderReferencesSetComboBox.Name = "ReaderReferencesSetComboBox";
-            this.ReaderReferencesSetComboBox.Size = new System.Drawing.Size(271, 26);
+            this.ReaderReferencesSetComboBox.Size = new System.Drawing.Size(271, 34);
             this.ReaderReferencesSetComboBox.TabIndex = 88;
             this.ReaderReferencesSetComboBox.SelectedIndexChanged += new System.EventHandler(this.ReaderReferencesSetComboBox_SelectedIndexChanged);
             // 
             // ReaderFolderTextBox
             // 
-            this.ReaderFolderTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ReaderFolderTextBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ReaderFolderTextBox.Location = new System.Drawing.Point(218, 20);
             this.ReaderFolderTextBox.Name = "ReaderFolderTextBox";
-            this.ReaderFolderTextBox.Size = new System.Drawing.Size(404, 27);
+            this.ReaderFolderTextBox.Size = new System.Drawing.Size(404, 34);
             this.ReaderFolderTextBox.TabIndex = 86;
             this.ReaderFolderTextBox.TextChanged += new System.EventHandler(this.ReaderFolderTextBox_TextChanged);
             // 
             // ReaderNamespaceTextBox
             // 
-            this.ReaderNamespaceTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ReaderNamespaceTextBox.Location = new System.Drawing.Point(218, 60);
+            this.ReaderNamespaceTextBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ReaderNamespaceTextBox.Location = new System.Drawing.Point(218, 64);
             this.ReaderNamespaceTextBox.Name = "ReaderNamespaceTextBox";
-            this.ReaderNamespaceTextBox.Size = new System.Drawing.Size(437, 27);
+            this.ReaderNamespaceTextBox.Size = new System.Drawing.Size(437, 34);
             this.ReaderNamespaceTextBox.TabIndex = 85;
             this.ReaderNamespaceTextBox.TextChanged += new System.EventHandler(this.ReaderNamespaceTextBox_TextChanged);
             // 
             // ReaderFolderLabel
             // 
-            this.ReaderFolderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ReaderFolderLabel.Location = new System.Drawing.Point(20, 24);
+            this.ReaderFolderLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ReaderFolderLabel.Location = new System.Drawing.Point(8, 26);
             this.ReaderFolderLabel.Name = "ReaderFolderLabel";
-            this.ReaderFolderLabel.Size = new System.Drawing.Size(200, 20);
+            this.ReaderFolderLabel.Size = new System.Drawing.Size(212, 24);
             this.ReaderFolderLabel.TabIndex = 84;
             this.ReaderFolderLabel.Text = "Reader Folder:";
             this.ReaderFolderLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // ReaderReferencesSetLabel
             // 
-            this.ReaderReferencesSetLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ReaderReferencesSetLabel.Location = new System.Drawing.Point(20, 104);
+            this.ReaderReferencesSetLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ReaderReferencesSetLabel.Location = new System.Drawing.Point(8, 114);
             this.ReaderReferencesSetLabel.Name = "ReaderReferencesSetLabel";
-            this.ReaderReferencesSetLabel.Size = new System.Drawing.Size(200, 20);
+            this.ReaderReferencesSetLabel.Size = new System.Drawing.Size(212, 24);
             this.ReaderReferencesSetLabel.TabIndex = 83;
             this.ReaderReferencesSetLabel.Text = "Reader Reference Set:";
             this.ReaderReferencesSetLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // ReaderNamespaceLabel
             // 
-            this.ReaderNamespaceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ReaderNamespaceLabel.Location = new System.Drawing.Point(20, 64);
+            this.ReaderNamespaceLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ReaderNamespaceLabel.Location = new System.Drawing.Point(8, 70);
             this.ReaderNamespaceLabel.Name = "ReaderNamespaceLabel";
-            this.ReaderNamespaceLabel.Size = new System.Drawing.Size(200, 20);
+            this.ReaderNamespaceLabel.Size = new System.Drawing.Size(212, 24);
             this.ReaderNamespaceLabel.TabIndex = 82;
             this.ReaderNamespaceLabel.Text = "Reader Namespace:";
             this.ReaderNamespaceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -126,15 +126,15 @@ namespace DataTierClient.Controls
             this.EditReaderReferencesSetButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.EditReaderReferencesSetButton.ButtonNumber = 0;
             this.EditReaderReferencesSetButton.ButtonText = "Edit";
-            this.EditReaderReferencesSetButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EditReaderReferencesSetButton.Location = new System.Drawing.Point(583, 99);
+            this.EditReaderReferencesSetButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EditReaderReferencesSetButton.Location = new System.Drawing.Point(583, 107);
             this.EditReaderReferencesSetButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.EditReaderReferencesSetButton.Name = "EditReaderReferencesSetButton";
             this.EditReaderReferencesSetButton.NotSelectedImage = global::DataTierClient.Properties.Resources.DeepGray;
             this.EditReaderReferencesSetButton.Selected = false;
             this.EditReaderReferencesSetButton.SelectedImage = global::DataTierClient.Properties.Resources.DeepBlue;
             this.EditReaderReferencesSetButton.ShowNotSelectedImageWhenDisabled = true;
-            this.EditReaderReferencesSetButton.Size = new System.Drawing.Size(72, 28);
+            this.EditReaderReferencesSetButton.Size = new System.Drawing.Size(72, 32);
             this.EditReaderReferencesSetButton.TabIndex = 96;
             // 
             // BrowseReaderFolderButton
@@ -143,15 +143,15 @@ namespace DataTierClient.Controls
             this.BrowseReaderFolderButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BrowseReaderFolderButton.ButtonNumber = 0;
             this.BrowseReaderFolderButton.ButtonText = "...";
-            this.BrowseReaderFolderButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BrowseReaderFolderButton.Location = new System.Drawing.Point(615, 19);
+            this.BrowseReaderFolderButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BrowseReaderFolderButton.Location = new System.Drawing.Point(615, 21);
             this.BrowseReaderFolderButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.BrowseReaderFolderButton.Name = "BrowseReaderFolderButton";
             this.BrowseReaderFolderButton.NotSelectedImage = null;
             this.BrowseReaderFolderButton.Selected = false;
             this.BrowseReaderFolderButton.SelectedImage = null;
             this.BrowseReaderFolderButton.ShowNotSelectedImageWhenDisabled = true;
-            this.BrowseReaderFolderButton.Size = new System.Drawing.Size(40, 28);
+            this.BrowseReaderFolderButton.Size = new System.Drawing.Size(40, 32);
             this.BrowseReaderFolderButton.TabIndex = 94;
             // 
             // ReaderEditor
@@ -181,3 +181,6 @@ namespace DataTierClient.Controls
     #endregion
 
 }
+
+
+

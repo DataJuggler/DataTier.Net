@@ -56,7 +56,7 @@ namespace DataTierClient.Forms
             this.EnumerationEditor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.EnumerationEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.EnumerationEditor.EditMode = false;
-            this.EnumerationEditor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EnumerationEditor.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EnumerationEditor.Location = new System.Drawing.Point(0, 0);
             this.EnumerationEditor.Name = "EnumerationEditor";
             this.EnumerationEditor.SelectedEnumeration = null;
@@ -87,3 +87,5 @@ namespace DataTierClient.Forms
     #endregion
 
 }
+
+

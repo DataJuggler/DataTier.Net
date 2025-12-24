@@ -63,63 +63,63 @@ namespace DataTierClient.Controls
             // 
             // StoredProcedureSQLFolderTextBox
             // 
-            this.StoredProcedureSQLFolderTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StoredProcedureSQLFolderTextBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StoredProcedureSQLFolderTextBox.Location = new System.Drawing.Point(218, 104);
             this.StoredProcedureSQLFolderTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.StoredProcedureSQLFolderTextBox.Name = "StoredProcedureSQLFolderTextBox";
-            this.StoredProcedureSQLFolderTextBox.Size = new System.Drawing.Size(404, 27);
+            this.StoredProcedureSQLFolderTextBox.Size = new System.Drawing.Size(404, 34);
             this.StoredProcedureSQLFolderTextBox.TabIndex = 122;
             this.StoredProcedureSQLFolderTextBox.TextChanged += new System.EventHandler(this.StoredProcedureSQLFolderTextBox_TextChanged);
             // 
             // StoredProcedureSQLFolderLabel
             // 
-            this.StoredProcedureSQLFolderLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StoredProcedureSQLFolderLabel.Location = new System.Drawing.Point(20, 107);
+            this.StoredProcedureSQLFolderLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StoredProcedureSQLFolderLabel.Location = new System.Drawing.Point(18, 111);
             this.StoredProcedureSQLFolderLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.StoredProcedureSQLFolderLabel.Name = "StoredProcedureSQLFolderLabel";
-            this.StoredProcedureSQLFolderLabel.Size = new System.Drawing.Size(200, 20);
+            this.StoredProcedureSQLFolderLabel.Size = new System.Drawing.Size(200, 24);
             this.StoredProcedureSQLFolderLabel.TabIndex = 121;
             this.StoredProcedureSQLFolderLabel.Text = "SQL Output Folder:";
             this.StoredProcedureSQLFolderLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // StoredProcedureFolderTextBox
             // 
-            this.StoredProcedureFolderTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StoredProcedureFolderTextBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StoredProcedureFolderTextBox.Location = new System.Drawing.Point(218, 20);
             this.StoredProcedureFolderTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.StoredProcedureFolderTextBox.Name = "StoredProcedureFolderTextBox";
-            this.StoredProcedureFolderTextBox.Size = new System.Drawing.Size(404, 27);
+            this.StoredProcedureFolderTextBox.Size = new System.Drawing.Size(404, 34);
             this.StoredProcedureFolderTextBox.TabIndex = 116;
             this.StoredProcedureFolderTextBox.TextChanged += new System.EventHandler(this.StoredProcedureFolderTextBox_TextChanged);
             // 
             // StoredProcedureNamespaceTextBox
             // 
-            this.StoredProcedureNamespaceTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StoredProcedureNamespaceTextBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StoredProcedureNamespaceTextBox.Location = new System.Drawing.Point(218, 62);
             this.StoredProcedureNamespaceTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.StoredProcedureNamespaceTextBox.Name = "StoredProcedureNamespaceTextBox";
-            this.StoredProcedureNamespaceTextBox.Size = new System.Drawing.Size(437, 27);
+            this.StoredProcedureNamespaceTextBox.Size = new System.Drawing.Size(437, 34);
             this.StoredProcedureNamespaceTextBox.TabIndex = 115;
             this.StoredProcedureNamespaceTextBox.TextChanged += new System.EventHandler(this.StoredProcedureNamespaceTextBox_TextChanged);
             // 
             // StoredProcedureFolderLabel
             // 
-            this.StoredProcedureFolderLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StoredProcedureFolderLabel.Location = new System.Drawing.Point(20, 23);
+            this.StoredProcedureFolderLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StoredProcedureFolderLabel.Location = new System.Drawing.Point(18, 27);
             this.StoredProcedureFolderLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.StoredProcedureFolderLabel.Name = "StoredProcedureFolderLabel";
-            this.StoredProcedureFolderLabel.Size = new System.Drawing.Size(200, 20);
+            this.StoredProcedureFolderLabel.Size = new System.Drawing.Size(200, 24);
             this.StoredProcedureFolderLabel.TabIndex = 114;
             this.StoredProcedureFolderLabel.Text = "Stored Proc Folder:";
             this.StoredProcedureFolderLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // StoredProcedureNamespaceLabel
             // 
-            this.StoredProcedureNamespaceLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StoredProcedureNamespaceLabel.Location = new System.Drawing.Point(20, 65);
+            this.StoredProcedureNamespaceLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StoredProcedureNamespaceLabel.Location = new System.Drawing.Point(18, 69);
             this.StoredProcedureNamespaceLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.StoredProcedureNamespaceLabel.Name = "StoredProcedureNamespaceLabel";
-            this.StoredProcedureNamespaceLabel.Size = new System.Drawing.Size(200, 20);
+            this.StoredProcedureNamespaceLabel.Size = new System.Drawing.Size(200, 24);
             this.StoredProcedureNamespaceLabel.TabIndex = 112;
             this.StoredProcedureNamespaceLabel.Text = "Proc Namespace:";
             this.StoredProcedureNamespaceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -130,15 +130,15 @@ namespace DataTierClient.Controls
             this.BrowseStoredProcedureSQLFolderButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BrowseStoredProcedureSQLFolderButton.ButtonNumber = 2;
             this.BrowseStoredProcedureSQLFolderButton.ButtonText = "...";
-            this.BrowseStoredProcedureSQLFolderButton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BrowseStoredProcedureSQLFolderButton.Location = new System.Drawing.Point(615, 103);
+            this.BrowseStoredProcedureSQLFolderButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BrowseStoredProcedureSQLFolderButton.Location = new System.Drawing.Point(615, 105);
             this.BrowseStoredProcedureSQLFolderButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.BrowseStoredProcedureSQLFolderButton.Name = "BrowseStoredProcedureSQLFolderButton";
             this.BrowseStoredProcedureSQLFolderButton.NotSelectedImage = null;
             this.BrowseStoredProcedureSQLFolderButton.Selected = false;
             this.BrowseStoredProcedureSQLFolderButton.SelectedImage = null;
             this.BrowseStoredProcedureSQLFolderButton.ShowNotSelectedImageWhenDisabled = true;
-            this.BrowseStoredProcedureSQLFolderButton.Size = new System.Drawing.Size(40, 28);
+            this.BrowseStoredProcedureSQLFolderButton.Size = new System.Drawing.Size(40, 32);
             this.BrowseStoredProcedureSQLFolderButton.TabIndex = 139;
             // 
             // BrowseStoredProcedureFolderButton
@@ -147,15 +147,15 @@ namespace DataTierClient.Controls
             this.BrowseStoredProcedureFolderButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BrowseStoredProcedureFolderButton.ButtonNumber = 1;
             this.BrowseStoredProcedureFolderButton.ButtonText = "...";
-            this.BrowseStoredProcedureFolderButton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BrowseStoredProcedureFolderButton.Location = new System.Drawing.Point(615, 19);
+            this.BrowseStoredProcedureFolderButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BrowseStoredProcedureFolderButton.Location = new System.Drawing.Point(615, 21);
             this.BrowseStoredProcedureFolderButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.BrowseStoredProcedureFolderButton.Name = "BrowseStoredProcedureFolderButton";
             this.BrowseStoredProcedureFolderButton.NotSelectedImage = null;
             this.BrowseStoredProcedureFolderButton.Selected = false;
             this.BrowseStoredProcedureFolderButton.SelectedImage = null;
             this.BrowseStoredProcedureFolderButton.ShowNotSelectedImageWhenDisabled = true;
-            this.BrowseStoredProcedureFolderButton.Size = new System.Drawing.Size(40, 28);
+            this.BrowseStoredProcedureFolderButton.Size = new System.Drawing.Size(40, 32);
             this.BrowseStoredProcedureFolderButton.TabIndex = 142;
             // 
             // StoredProcedureEditor
@@ -170,7 +170,7 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.StoredProcedureNamespaceTextBox);
             this.Controls.Add(this.StoredProcedureFolderLabel);
             this.Controls.Add(this.StoredProcedureNamespaceLabel);
-            this.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "StoredProcedureEditor";
             this.Size = new System.Drawing.Size(680, 320);
@@ -186,3 +186,7 @@ namespace DataTierClient.Controls
     #endregion
 
 }
+
+
+
+

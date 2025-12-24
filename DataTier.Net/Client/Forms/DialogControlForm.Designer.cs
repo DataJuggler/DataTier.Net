@@ -1,4 +1,4 @@
-﻿
+
 
 #region using statements
 
@@ -53,7 +53,7 @@ namespace DataTierClient.Forms
                 this.DialogControl.BackColor = System.Drawing.Color.Linen;
                 this.DialogControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
                 this.DialogControl.Dock = System.Windows.Forms.DockStyle.Fill;
-                this.DialogControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                this.DialogControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 this.DialogControl.Location = new System.Drawing.Point(0, 0);
                 this.DialogControl.Name = "DialogControl";
                 this.DialogControl.Size = new System.Drawing.Size(640, 248);
@@ -81,3 +81,5 @@ namespace DataTierClient.Forms
     #endregion
 
 }
+
+

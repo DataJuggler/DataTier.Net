@@ -53,7 +53,7 @@ namespace DataTierClient.Forms
             // 
             this.SelectSQLServerControl.BackColor = System.Drawing.Color.Linen;
             this.SelectSQLServerControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SelectSQLServerControl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SelectSQLServerControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SelectSQLServerControl.Loading = false;
             this.SelectSQLServerControl.Location = new System.Drawing.Point(0, 0);
             this.SelectSQLServerControl.Name = "SelectSQLServerControl";
@@ -83,3 +83,4 @@ namespace DataTierClient.Forms
     #endregion
     
 }
+
