@@ -307,7 +307,7 @@ namespace DataTierClient.Controls
                     ProjectFile writerFileBase = new ProjectFile(writerBaseFileName, DataManager.ProjectTypeEnum.DAC);
 
                     // only V2 Templates
-                    if (Project.Ta == 2)
+                    if (Project.TemplateVersion == 2)
                     {
                         // replace out 
                         controllerFile.ProjectType = DataManager.ProjectTypeEnum.DAC;                        

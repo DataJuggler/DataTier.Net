@@ -396,25 +396,67 @@ namespace DataTierClient.Controls
             public void OnSave()
             {
                 // if the SelectedReferencesSet exists
-                if(this.SelectedReferencesSet != null)
+                if ((HasSelectedReferencesSet) && (HasSelectedProject))
                 {   
-                    // if the SelectedProject.AllReferences exists
-                    if ((this.SelectedProject != null) && (this.SelectedProject.AllReferences != null))
+                    
+                    // Determine what to save by the ReferencesSetName
+                    switch (SelectedReferencesSet.ReferencesSetName)
                     {
-                        // get the index
-                        int index = this.SelectedProject.GetReferencesSetIndex(this.SelectedReferencesSet.ReferencesSetId);
-                        
-                        // if the item was found in the collection
-                        if(index >= 0)
-                        {
-                            // update this item
-                            this.SelectedProject.AllReferences[index] = this.SelectedReferencesSet;
-                        }
-                        else
-                        {
-                            // Add this ReferencesSet
-                            this.SelectedProject.AllReferences.Add(this.SelectedReferencesSet);
-                        }
+                        case "DataObjects":
+
+                            // Set the ObjectReferencesSet
+                            SelectedProject.ObjectReferencesSet = this.SelectedReferencesSet;
+
+                            // required
+                            break;
+
+                        case "StoredProcedures":
+
+                        // Set the StoredProcedureReferencesSet
+                        SelectedProject.StoredProcedureReferencesSet = this.SelectedReferencesSet;
+
+                        // required
+                        break;
+
+                    case "Readers":
+
+                        // Set the ReaderReferencesSet
+                        SelectedProject.ReaderReferencesSet = this.SelectedReferencesSet;
+
+                        // required
+                        break;
+
+                    case "Controllers":
+
+                        // Set the ControllerReferencesSet
+                        SelectedProject.ControllerReferencesSet = this.SelectedReferencesSet;
+
+                        // required
+                        break;
+
+                    case "DataOperations":
+
+                        // Set the DataOperationsReferencesSet
+                        SelectedProject.DataOperationsReferencesSet = this.SelectedReferencesSet;
+
+                        // required
+                        break;
+
+                    case "DataManager":
+
+                        // Set the DataManagerReferencesSet
+                        SelectedProject.DataManagerReferencesSet = this.SelectedReferencesSet;
+
+                        // required
+                        break;
+
+                    case "Writers":
+
+                        // Set the WriterReferencesSet
+                        SelectedProject.WriterReferencesSet = this.SelectedReferencesSet;
+
+                        // required
+                        break;
                     }
                     
                     // User Did Not Cancel
@@ -543,6 +585,23 @@ namespace DataTierClient.Controls
             }
             #endregion
             
+            #region HasSelectedProject
+            /// <summary>
+            /// This property returns true if this object has a 'SelectedProject'.
+            /// </summary>
+            public bool HasSelectedProject
+            {
+                get
+                {
+                    // initial value
+                    bool hasSelectedProject = (SelectedProject != null);
+
+                    // return value
+                    return hasSelectedProject;
+                }
+            }
+            #endregion
+            
             #region HasSelectedReferencesSet
             /// <summary>
             /// This property returns true if this object has a 'SelectedReferencesSet'.
@@ -634,6 +693,7 @@ namespace DataTierClient.Controls
         #endregion
 
         #endregion
+
     }
     #endregion
     

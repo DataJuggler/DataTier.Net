@@ -191,11 +191,6 @@ namespace DataTierClient.Xml.Writers
                     sb.Append(indentString2);
                     sb.Append("<TargetFramework>" + project.TargetFramework + "</TargetFramework>" + Environment.NewLine);
 
-                    // Write out the value for HasAllReferences
-
-                    sb.Append(indentString2);
-                    sb.Append("<HasAllReferences>" + project.HasAllReferences + "</HasAllReferences>" + Environment.NewLine);
-
                     // Write out the value for HasDatabases
 
                     sb.Append(indentString2);

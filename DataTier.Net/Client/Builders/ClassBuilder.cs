@@ -243,6 +243,9 @@ namespace DataTierClient.Builders
                 // if write classes
                 if (writeClasses)
                 {
+                    // Update the value
+                    DataManager.AddIGridValueInterface = currentProject.AddIGridValueInterface;
+
                     // Write WriteDataClasses
                     success = classWriter.WriteDataClasses(DataManager);
 
@@ -436,7 +439,7 @@ namespace DataTierClient.Builders
                 if (this.CurrentProject != null)
                 {
                     // Create DataManager
-                    this.DataManager = new DataManager(this.CurrentProject.ObjectFolder, this.CurrentProject.ProjectName, DataManager.ClassOutputLanguage.CSharp);
+                    this.DataManager = new DataManager(this.CurrentProject.ObjectFolder, this.CurrentProject.ProjectName, DataManager.ClassOutputLanguage.CSharp, this.CurrentProject.AddIGridValueInterface);
                     
                     // Set NameSpaceName
                     this.DataManager.NamespaceName = this.CurrentProject.ObjectNamespace;

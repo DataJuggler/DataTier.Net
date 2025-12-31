@@ -2,9 +2,9 @@
 
 #region using statements
 
-using DataJuggler.Net.Enumerations;
-using ObjectLibrary.Enumerations;
 using System;
+using ObjectLibrary.Enumerations;
+using DataJuggler.Net.Enumerations;
 
 #endregion
 
@@ -17,6 +17,7 @@ namespace ObjectLibrary.BusinessObjects
     {
 
         #region Private Variables
+        private bool addIGridValueInterface;
         private string controllerFolder;
         private string controllerNamespace;
         private int controllerReferencesSetId;
@@ -62,6 +63,21 @@ namespace ObjectLibrary.BusinessObjects
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 string comma = ",";
                 string singleQuote = "'";
+
+                // AddIGridValueInterface
+
+                // If AddIGridValueInterface is true
+                if (AddIGridValueInterface)
+                {
+                    sb.Append(1);
+                }
+                else
+                {
+                    sb.Append(0);
+                }
+
+                // Add a comma
+                sb.Append(comma);
 
                 // ControllerFolder
 
@@ -291,7 +307,7 @@ namespace ObjectLibrary.BusinessObjects
 
                 // TemplateVersion
 
-                sb.Append(Ta);
+                sb.Append(TemplateVersion);
 
                 // Set the return value
                 valuesList = sb.ToString();
@@ -311,7 +327,7 @@ namespace ObjectLibrary.BusinessObjects
                 string valuesList = CreateValuesList();
 
                 // Set the return Value
-                string insertSQL = "INSERT INTO [Project] (ControllerFolder,ControllerNamespace,ControllerReferencesSetId,DataManagerFolder,DataManagerNamespace,DataManagerReferencesSetId,DataOperationsFolder,DataOperationsNamespace,DataOperationsReferencesSetId,DataWriterFolder,DataWriterNamespace,DataWriterReferencesSetId,DateModified,ObjectFolder,ObjectNamespace,ObjectReferencesSetId,ProjectFolder,ProjectName,ReaderFolder,ReaderNamespace,ReaderReferencesSetId,StoredProcedureObjectFolder,StoredProcedureObjectNamespace,StoredProcedureReferencesSetId,StoredProcsFolder,TargetFramework,TemplateVersion) VALUES (" + valuesList + ") " + Environment.NewLine + "SELECT SCOPE_IDENTITY()" + Environment.NewLine;
+                string insertSQL = "INSERT INTO [Project] (AddIGridValueInterface,ControllerFolder,ControllerNamespace,ControllerReferencesSetId,DataManagerFolder,DataManagerNamespace,DataManagerReferencesSetId,DataOperationsFolder,DataOperationsNamespace,DataOperationsReferencesSetId,DataWriterFolder,DataWriterNamespace,DataWriterReferencesSetId,DateModified,ObjectFolder,ObjectNamespace,ObjectReferencesSetId,ProjectFolder,ProjectName,ReaderFolder,ReaderNamespace,ReaderReferencesSetId,StoredProcedureObjectFolder,StoredProcedureObjectNamespace,StoredProcedureReferencesSetId,StoredProcsFolder,TargetFramework,TemplateVersion) VALUES (" + valuesList + ") " + Environment.NewLine + "SELECT SCOPE_IDENTITY()" + Environment.NewLine;
 
                 // Return Value
                 return insertSQL;
@@ -330,6 +346,14 @@ namespace ObjectLibrary.BusinessObjects
                 // // Determine the action by the fieldName
                 switch (fieldName)
                 {
+                    case "AddIGridValueInterface":
+
+                        // set the value
+                        value = this.AddIGridValueInterface;
+
+                        // required
+                        break;
+
                     case "ControllerFolder":
 
                         // set the value
@@ -549,7 +573,7 @@ namespace ObjectLibrary.BusinessObjects
                     case "TemplateVersion":
 
                         // set the value
-                        value = this.Ta;
+                        value = this.TemplateVersion;
 
                         // required
                         break;
@@ -576,6 +600,20 @@ namespace ObjectLibrary.BusinessObjects
         #endregion
 
         #region Properties
+
+            #region bool AddIGridValueInterface
+            public bool AddIGridValueInterface
+            {
+                get
+                {
+                    return addIGridValueInterface;
+                }
+                set
+                {
+                    addIGridValueInterface = value;
+                }
+            }
+            #endregion
 
             #region string ControllerFolder
             public string ControllerFolder
@@ -952,7 +990,7 @@ namespace ObjectLibrary.BusinessObjects
             #endregion
 
             #region int TemplateVersion
-            public int Ta
+            public int TemplateVersion
             {
                 get
                 {

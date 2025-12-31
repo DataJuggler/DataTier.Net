@@ -66,7 +66,7 @@ namespace DataTierClient.Controls
             // 
             this.ControllerReferencesSetComboBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ControllerReferencesSetComboBox.FormattingEnabled = true;
-            this.ControllerReferencesSetComboBox.Location = new System.Drawing.Point(218, 100);
+            this.ControllerReferencesSetComboBox.Location = new System.Drawing.Point(222, 107);
             this.ControllerReferencesSetComboBox.Name = "ControllerReferencesSetComboBox";
             this.ControllerReferencesSetComboBox.Size = new System.Drawing.Size(271, 34);
             this.ControllerReferencesSetComboBox.TabIndex = 97;
@@ -75,7 +75,7 @@ namespace DataTierClient.Controls
             // ControllerFolderTextBox
             // 
             this.ControllerFolderTextBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ControllerFolderTextBox.Location = new System.Drawing.Point(218, 20);
+            this.ControllerFolderTextBox.Location = new System.Drawing.Point(222, 20);
             this.ControllerFolderTextBox.Name = "ControllerFolderTextBox";
             this.ControllerFolderTextBox.Size = new System.Drawing.Size(404, 34);
             this.ControllerFolderTextBox.TabIndex = 95;
@@ -84,7 +84,7 @@ namespace DataTierClient.Controls
             // ControllerNamespaceTextBox
             // 
             this.ControllerNamespaceTextBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ControllerNamespaceTextBox.Location = new System.Drawing.Point(218, 60);
+            this.ControllerNamespaceTextBox.Location = new System.Drawing.Point(222, 64);
             this.ControllerNamespaceTextBox.Name = "ControllerNamespaceTextBox";
             this.ControllerNamespaceTextBox.Size = new System.Drawing.Size(437, 34);
             this.ControllerNamespaceTextBox.TabIndex = 94;
@@ -93,9 +93,9 @@ namespace DataTierClient.Controls
             // ControllerFolderLabel
             // 
             this.ControllerFolderLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ControllerFolderLabel.Location = new System.Drawing.Point(20, 24);
+            this.ControllerFolderLabel.Location = new System.Drawing.Point(2, 24);
             this.ControllerFolderLabel.Name = "ControllerFolderLabel";
-            this.ControllerFolderLabel.Size = new System.Drawing.Size(200, 20);
+            this.ControllerFolderLabel.Size = new System.Drawing.Size(224, 24);
             this.ControllerFolderLabel.TabIndex = 93;
             this.ControllerFolderLabel.Text = "Controller Folder:";
             this.ControllerFolderLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -103,9 +103,9 @@ namespace DataTierClient.Controls
             // ControllerReferencesSetLabel
             // 
             this.ControllerReferencesSetLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ControllerReferencesSetLabel.Location = new System.Drawing.Point(20, 104);
+            this.ControllerReferencesSetLabel.Location = new System.Drawing.Point(2, 112);
             this.ControllerReferencesSetLabel.Name = "ControllerReferencesSetLabel";
-            this.ControllerReferencesSetLabel.Size = new System.Drawing.Size(200, 20);
+            this.ControllerReferencesSetLabel.Size = new System.Drawing.Size(224, 24);
             this.ControllerReferencesSetLabel.TabIndex = 92;
             this.ControllerReferencesSetLabel.Text = "Controller Ref Set:";
             this.ControllerReferencesSetLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -113,9 +113,9 @@ namespace DataTierClient.Controls
             // ControllerNamespaceLabel
             // 
             this.ControllerNamespaceLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ControllerNamespaceLabel.Location = new System.Drawing.Point(20, 64);
+            this.ControllerNamespaceLabel.Location = new System.Drawing.Point(2, 68);
             this.ControllerNamespaceLabel.Name = "ControllerNamespaceLabel";
-            this.ControllerNamespaceLabel.Size = new System.Drawing.Size(200, 20);
+            this.ControllerNamespaceLabel.Size = new System.Drawing.Size(224, 24);
             this.ControllerNamespaceLabel.TabIndex = 91;
             this.ControllerNamespaceLabel.Text = "Controller Namespace:";
             this.ControllerNamespaceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -127,7 +127,7 @@ namespace DataTierClient.Controls
             this.EditControllerReferencesSetButton.ButtonNumber = 0;
             this.EditControllerReferencesSetButton.ButtonText = "Edit";
             this.EditControllerReferencesSetButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EditControllerReferencesSetButton.Location = new System.Drawing.Point(583, 99);
+            this.EditControllerReferencesSetButton.Location = new System.Drawing.Point(587, 108);
             this.EditControllerReferencesSetButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.EditControllerReferencesSetButton.Name = "EditControllerReferencesSetButton";
             this.EditControllerReferencesSetButton.NotSelectedImage = global::DataTierClient.Properties.Resources.DeepGray;
@@ -144,14 +144,14 @@ namespace DataTierClient.Controls
             this.ControllerFolderBrowseButton.ButtonNumber = 0;
             this.ControllerFolderBrowseButton.ButtonText = "...";
             this.ControllerFolderBrowseButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ControllerFolderBrowseButton.Location = new System.Drawing.Point(615, 20);
+            this.ControllerFolderBrowseButton.Location = new System.Drawing.Point(619, 21);
             this.ControllerFolderBrowseButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ControllerFolderBrowseButton.Name = "ControllerFolderBrowseButton";
             this.ControllerFolderBrowseButton.NotSelectedImage = null;
             this.ControllerFolderBrowseButton.Selected = false;
             this.ControllerFolderBrowseButton.SelectedImage = null;
             this.ControllerFolderBrowseButton.ShowNotSelectedImageWhenDisabled = true;
-            this.ControllerFolderBrowseButton.Size = new System.Drawing.Size(40, 34);
+            this.ControllerFolderBrowseButton.Size = new System.Drawing.Size(40, 32);
             this.ControllerFolderBrowseButton.TabIndex = 100;
             // 
             // ControllerEditor

@@ -465,7 +465,7 @@ namespace DataTierClient.Controls
 
                 if (CurrentProject != null)
                 {
-                    if (CurrentProject.Ta == 2)
+                    if (CurrentProject.TemplateVersion == 2)
                     {
                         ALCBrowseButton.Visible = false;
                         ALCTextBox.Visible = false;
@@ -539,7 +539,7 @@ namespace DataTierClient.Controls
                     valid = ((hasALCProjectName) && (hasDACProjectName) && (hasObjectLibraryProjectName) && (hasFiles));
 
                     // if V2 templates
-                    if (CurrentProject.Ta == 2)
+                    if (CurrentProject.TemplateVersion == 2)
                     {
                         valid = ((hasDACProjectName) && (hasObjectLibraryProjectName) && (hasFiles));
                     }

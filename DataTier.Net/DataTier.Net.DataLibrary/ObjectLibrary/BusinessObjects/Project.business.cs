@@ -92,7 +92,7 @@ namespace ObjectLibrary.BusinessObjects
                     ObjectFolder = AppendToProjectFolder(@"ObjectLibrary\BusinessObjects");
 
                     // if the original 4 project template
-                    if (Ta == 1)
+                    if (TemplateVersion == 1)
                     {
                         // Set the Data Operations Folder
                         DataOperationsFolder = AppendToProjectFolder(@"DataAccessComponent\DataOperations");
@@ -159,12 +159,16 @@ namespace ObjectLibrary.BusinessObjects
                 // Create Object References
                 ObjectReferencesSet.References.Add(new ProjectReference("System"));
                 ObjectReferencesSet.References.Add(new ProjectReference("ObjectLibrary.Enumerations"));
-                
-                // Add this references set to All Refrences
-                AllReferences.Add(ObjectReferencesSet);
+
+                // If the value for the property this.AddIGridValueInterface is true
+                if (this.AddIGridValueInterface)
+                {
+                    // Add a reference for DataJuggler.NET.Data.Interfaces. 
+                    ObjectReferencesSet.References.Add(new ProjectReference("DataJuggler.NET.Data.Interfaces"));
+                }
                 
                 // if the OldVersion
-                if (Ta == 1)
+                if (TemplateVersion == 1)
                 {
                     // Set DataManagerNamespace - Going Forward defaults to Data
                     DataManagerNamespace = "DataAccessComponent.DataManager";
@@ -194,9 +198,6 @@ namespace ObjectLibrary.BusinessObjects
                 // Use Data
                 DataManagerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.Data.Readers"));
                 
-                // Add to AllReferences
-                AllReferences.Add(DataManagerReferencesSet);
-                
                 // Create DataOperationsReferencesSet
                 DataOperationsReferencesSet = new ReferencesSet("DataOperations");
                 
@@ -212,7 +213,7 @@ namespace ObjectLibrary.BusinessObjects
                 DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.UpdateProcedures"));
                 DataOperationsReferencesSet.References.Add(new ProjectReference("ObjectLibrary.BusinessObjects"));
                 
-                if (Ta == 1)
+                if (TemplateVersion == 1)
                 {
                     DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.DataManager"));
                     DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.DataManager.Writers"));
@@ -229,7 +230,7 @@ namespace ObjectLibrary.BusinessObjects
                 // Update, set the Id
                 ControllerReferencesSet.UpdateIdentity(ControllerReferencesSetId);
                 
-                if (Ta == 1)
+                if (TemplateVersion == 1)
                 {
                     // Set DataOperationNamespace
                     DataOperationsNamespace = "DataAccessComponent.DataOperations";
@@ -251,17 +252,12 @@ namespace ObjectLibrary.BusinessObjects
                     ControllerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.Data"));
                 }
                 
-                AllReferences.Add(DataOperationsReferencesSet);
-                
                 // Create Controller References
                 ControllerReferencesSet.References.Add(new ProjectReference("System"));
                 ControllerReferencesSet.References.Add(new ProjectReference("System.Collections.Generic"));
                 ControllerReferencesSet.References.Add(new ProjectReference("ObjectLibrary.BusinessObjects"));
                 
-                // Add this grou
-                AllReferences.Add(ControllerReferencesSet);
-                
-                if (Ta == 1)
+                if (TemplateVersion == 1)
                 {
                     // Set ReaderNamespace
                     ReaderNamespace = "DataAccessComponent.DataManager.Readers";
@@ -284,7 +280,6 @@ namespace ObjectLibrary.BusinessObjects
                 ReaderReferencesSet.References.Add(new ProjectReference("System.Data"));
                 ReaderReferencesSet.References.Add(new ProjectReference("ObjectLibrary.BusinessObjects"));
                 ReaderReferencesSet.References.Add(new ProjectReference("ObjectLibrary.Enumerations"));
-                AllReferences.Add(ReaderReferencesSet);
                 
                 // Set Writer Namespace
                 DataWriterNamespace = "DataAccessComponent.Data.Writers";
@@ -315,9 +310,6 @@ namespace ObjectLibrary.BusinessObjects
                     // All Dot Net Core projects
                     WriterReferencesSet.References.Add(new ProjectReference("System.Data.SqlClient"));
                 }
-                
-                // Add this references set
-                AllReferences.Add(WriterReferencesSet);
                 
                 // Set StoredProcedure Namespace
                 StoredProcedureObjectNamespace = "DataAccessComponent.StoredProcedureManager";
@@ -375,8 +367,7 @@ namespace ObjectLibrary.BusinessObjects
                 StoredProcedureReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.FetchProcedures"));
                 StoredProcedureReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.InsertProcedures"));
                 StoredProcedureReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.UpdateProcedures"));
-                AllReferences.Add(StoredProcedureReferencesSet);
-
+                
                 // if the existing References exist
                 if (hasExistingReferences)
                 {
@@ -463,44 +454,6 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
             
-            #region GetReferencesSetIndex(int referencesSetId)
-            /// <summary>
-            /// This method returns the References Set Index
-            /// </summary>
-            public int GetReferencesSetIndex(int referencesSetId)
-            {
-                // initial value
-                int index = -1;
-                
-                // local
-                int tempIndex = -1;
-                
-                // if the AllReferences exist
-                if (AllReferences != null)
-                {
-                    // Iterate the collection of ReferencesSet objects
-                    foreach (ReferencesSet referencesSet in AllReferences)
-                    {
-                        // Increment the value for tempIndex
-                        tempIndex++;
-                        
-                        // if this is the item being sought
-                        if (referencesSet.ReferencesSetId == referencesSetId)
-                        {
-                            // set the return value
-                            index = tempIndex;
-                            
-                            // break out of the loop
-                            break;
-                        }
-                    }
-                }
-                
-                // return value
-                return index;
-            }
-            #endregion            
-
             #region Init()
             /// <summary>
             /// Perform Initializations
@@ -509,9 +462,6 @@ namespace ObjectLibrary.BusinessObjects
             {
                 // Create Databases Collection
                 Databases = new List<DTNDatabase>();
-                
-                // Create AllReferences
-                AllReferences = new List<ReferencesSet>();
                 
                 // Create Enumerations
                 Enumerations = new List<Enumeration>();
@@ -549,15 +499,53 @@ namespace ObjectLibrary.BusinessObjects
             /// </summary>
             public void SetProjectIdOnReferences(int projectId)
             {
-                // If the AllReferences object exists
-                if (HasAllReferences)
+                // if this object has a ProjectReferencesSet
+                if (HasObjectReferencesSet)
                 {
-                    // Iterate the collection of ReferencesSet objects
-                    foreach (ReferencesSet referencesSet in AllReferences)
-                    {
-                        // set the projectId
-                        referencesSet.ProjectId = projectId;
-                    }
+                    // Set the ProjectId
+                    ObjectReferencesSet.ProjectId = projectId;
+                }
+
+                // StoredProcedureReferencesSet
+                if (HasStoredProcedureReferencesSet)
+                {
+                    // Set the ProjectId
+                    StoredProcedureReferencesSet.ProjectId = projectId;
+                }
+
+                // ReaderReferencesSet
+                if (HasReaderReferencesSet)
+                {
+                    // Set the ProjectId
+                    ReaderReferencesSet.ProjectId = projectId;
+                }
+
+                // ControllerReferencesSet
+                if (HasControllerReferencesSet)
+                {
+                    // Set the ProjectId
+                    ControllerReferencesSet.ProjectId = projectId;
+                }
+
+                // DataOperationsReferencesSet
+                if (HasDataOperationsReferencesSet)
+                {
+                    // Set the ProjectId
+                    DataOperationsReferencesSet.ProjectId = projectId;
+                }
+
+                // DataManagerReferencesSet
+                if (HasDataManagerReferencesSet)
+                {
+                    // Set the ProjectId
+                    DataManagerReferencesSet.ProjectId = projectId;
+                }
+
+                // WriterReferencesSet
+                if (HasWriterReferencesSet)
+                {
+                    // Set the ProjectId
+                    WriterReferencesSet.ProjectId = projectId;
                 }
             }
             #endregion
@@ -721,18 +709,7 @@ namespace ObjectLibrary.BusinessObjects
 
         #endregion
 
-        #region Properties
-
-            #region AllReferences
-            /// <summary>
-            /// This property gets or sets the value for 'AllReferences'.
-            /// </summary>
-            public List<ReferencesSet> AllReferences
-            {
-                get { return allReferences; }
-                set { allReferences = value; }
-            }
-            #endregion
+        #region Properties            
             
             #region ControllerReferencesSet
             /// <summary>
@@ -786,23 +763,6 @@ namespace ObjectLibrary.BusinessObjects
             {
                 get { return enumerations; }
                 set { enumerations = value; }
-            }
-            #endregion
-            
-            #region HasAllReferences
-            /// <summary>
-            /// This property returns true if this object has an 'AllReferences'.
-            /// </summary>
-            public bool HasAllReferences
-            {
-                get
-                {
-                    // initial value
-                    bool hasAllReferences = (AllReferences != null);
-
-                    // return value
-                    return hasAllReferences;
-                }
             }
             #endregion
             

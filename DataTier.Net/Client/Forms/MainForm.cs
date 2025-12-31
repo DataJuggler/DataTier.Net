@@ -337,7 +337,7 @@ namespace DataTierClient.Forms
                 string gatewayPath = Path.Combine(OpenProject.ProjectFolder, @"DataGateway\Gateway.cs");
 
                 // if the Template Version is 2
-                if (OpenProject.Ta == 2)
+                if (OpenProject.TemplateVersion == 2)
                 {
                     // V2 inside DataAccessComponent
                     gatewayPath = Path.Combine(OpenProject.ProjectFolder, @"DataAccessComponent\DataGateway\Gateway.cs");
@@ -1230,14 +1230,14 @@ namespace DataTierClient.Forms
             /// </summary>
             internal void ChooseProject()
             {
+                // All Projects must be reloaded in case a delete took place during the add
+                this.AllProjects = Gateway.LoadProjects();
+
                 // Create instance of chooser form
                 ProjectChooserForm chooserForm = new ProjectChooserForm(this.AllProjects);
 
                 // Show the form
                 chooserForm.ShowDialog();
-
-                // All Projects must be reloaded in case a delete took place during the add
-                this.AllProjects = Gateway.LoadProjects();
 
                 // if the user did not cancel
                 if (!chooserForm.UserCancelled)
@@ -2605,7 +2605,7 @@ namespace DataTierClient.Forms
                     string gatewayPath = Path.Combine(OpenProject.ProjectFolder, @"DataGateway\Gateway.cs");
 
                     // if the Template Version is 2
-                    if (OpenProject.Ta == 2)
+                    if (OpenProject.TemplateVersion == 2)
                     {
                         // V2 inside DataAccessComponent
                         gatewayPath = Path.Combine(OpenProject.ProjectFolder, @"DataAccessComponent\DataGateway\Gateway.cs");

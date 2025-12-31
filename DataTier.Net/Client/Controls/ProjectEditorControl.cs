@@ -11,6 +11,7 @@ using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using DataTierClient.ClientUtil;
+using System.Linq;
 using ObjectLibrary.Enumerations;
 using ObjectLibrary.BusinessObjects;
 using System.IO;
@@ -35,6 +36,7 @@ namespace DataTierClient.Controls
         private ActiveControlEnum prevControl;
         private bool showAutoFillHelp;
         private int attempts;
+        private bool loading;
 
         // Creates
         private const string CreateDataTierNet5 = "dotnet new DataTier.Net5.ProjectTemplates";        
@@ -52,7 +54,7 @@ namespace DataTierClient.Controls
         private const string InstallDataTierNet8 = "dotnet new install DataJuggler.DataTier.NET8.ProjectTemplates@8.0.0 --force";
         private const string InstallDataTierNet8V2 = "dotnet new install DataJuggler.DataTier.NET8.ProjectTemplatesV2@8.0.0 --force";
         private const string InstallDataTierNet9V2 = "dotnet new install DataJuggler.DataTier.Net9.ProjectTemplatesV2@9.10.7 --force";
-        private const string InstallDataTierNet10V2 = "dotnet new install DataJuggler.DataTier.Net10.ProjectTemplatesV2@10.0.4 --force";
+        private const string InstallDataTierNet10V2 = "dotnet new install DataJuggler.DataTier.Net10.ProjectTemplatesV2@10.0.5 --force";
         
         // Used to install the Project Templates on the ProjectEditorControl.cs
         private const int GraphWidth = 268;
@@ -73,6 +75,57 @@ namespace DataTierClient.Controls
         #endregion
         
         #region Events
+            
+            #region AddIGridValueHelpButton_Click(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when the 'AddIGridValueHelpButton' is clicked.
+            /// </summary>
+            private void AddIGridValueHelpButton_Click(object sender, EventArgs e)
+            {
+                // Show the user a message
+                MessageHelper.DisplayMessage("The IGridValueInterface is only needed if you are using the DataJuggler.Blazor.Components Grid.", "Option Explained");
+            }
+            #endregion
+            
+            #region AddIGridValueInterfaceCheckBox_CheckedChanged(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when I Grid Value Interface Check Box _ Checked Changed
+            /// </summary>
+            private void AddIGridValueInterfaceCheckBox_CheckedChanged(object sender, EventArgs e)
+            {  
+                // if the SelectedProject exists
+                if (this.HasSelectedProject)
+                {
+                    // Set the ProjectFolder
+                    this.SelectedProject.AddIGridValueInterface = this.AddIGridValueInterfaceCheckBox.Checked;
+
+                    // if true
+                    if (SelectedProject.AddIGridValueInterface)
+                    {
+                        // If the value for the property SelectedProject.HasObjectReferencesSet is true
+                        if (SelectedProject.HasObjectReferencesSet)
+                        {
+                            // find the reference
+                            ProjectReference reference = SelectedProject.ObjectReferencesSet.References.FirstOrDefault(x => x.ReferenceName == "DataJuggler.NET.Data.Interfaces");
+
+                            // If the reference object does not exist
+                            if (NullHelper.IsNull(reference))
+                            {
+                                reference = new ProjectReference();
+                                reference.ReferencesSetId = SelectedProject.ObjectReferencesSetId;
+                                reference.ReferenceName = "DataJuggler.NET.Data.Interfaces";
+
+                                // Add this reference
+                                SelectedProject.ObjectReferencesSet.References.Add(reference);
+                            }
+                        }
+                    }
+
+                    // Enable Controls
+                    UIEnable();
+                }
+            }
+            #endregion
             
             #region AutoFillChildFolderInfo_Click(object sender, EventArgs e)
             /// <summary>
@@ -186,7 +239,7 @@ namespace DataTierClient.Controls
                                 }
                                 else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net8)
                                 {
-                                    if (SelectedProject.Ta == 1)
+                                    if (SelectedProject.TemplateVersion == 1)
                                     {
                                         // Create .NET8
                                         startInfo.Arguments = "/C " + CreateDataTierNet8;
@@ -232,7 +285,7 @@ namespace DataTierClient.Controls
                                     solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net8.ClassLibrary.sln");
 
                                     // if version 2
-                                    if (SelectedProject.Ta == 2)
+                                    if (SelectedProject.TemplateVersion == 2)
                                     {
                                         // Change for V2 templates
                                         solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net8.ClassLibraryV2.sln");
@@ -386,7 +439,7 @@ namespace DataTierClient.Controls
                     // Show the helpForm
                     helpForm.ShowDialog();
                 }
-                else if (SelectedProject.Ta == 2)
+                else if (SelectedProject.TemplateVersion == 2)
                 {
                     // Create the helpForm
                     HelpForm3 helpForm3 = new HelpForm3();
@@ -417,7 +470,7 @@ namespace DataTierClient.Controls
                 if (HasSelectedProject)
                 {
                     // if this is the ProjectTypeControl
-                    if (TextHelper.IsEqual(control.Name, ProjectTypeControl.Name))
+                    if (TextHelper.IsEqual(control.Name, TargetFrameworkControl.Name))
                     {
                         // Get the previousValue
                         TargetFrameworkEnum previousTargetFramework = SelectedProject.TargetFramework;
@@ -507,10 +560,10 @@ namespace DataTierClient.Controls
                 }
 
                 // if the SelectedProject exists and is new, this must be changed
-                if ((HasSelectedProject) && (SelectedProject.Ta != templateVersion))
+                if ((HasSelectedProject) && (SelectedProject.TemplateVersion != templateVersion))
                 {
                     // Set the TemplateVersion
-                    SelectedProject.Ta = templateVersion;
+                    SelectedProject.TemplateVersion = templateVersion;
 
                     // As this changes, the default references need to be recreated.
                     SelectedProject.CreateDefaultReferences();
@@ -545,38 +598,48 @@ namespace DataTierClient.Controls
             /// </summary>
             public void DisplaySelectedProject()
             {
+                // Set to True
+                Loading = true;
+
                 // locals
                 string projectName = "";
                 string projectFolder = "";
                 bool projectTemplatesVersion2 = false;
-                int projectTypeIndex = ProjectTypeControl.FindItemIndexByValue("Net9");
+                int projectTypeIndex = TargetFrameworkControl.FindItemIndexByValue("Net10");
+                bool addIGridValueInterface = false;
                 
                 // if the SelectedProject Exists
                 if(this.SelectedProject != null)
                 {
+                    
                     // set values
+                    addIGridValueInterface = this.SelectedProject.AddIGridValueInterface;
                     projectName = this.SelectedProject.ProjectName;
                     projectFolder = this.SelectedProject.ProjectFolder;                    
-                    projectTemplatesVersion2 = (SelectedProject.Ta == 2);
-                    projectTypeIndex = ProjectTypeControl.FindItemIndexByValue(SelectedProject.TargetFramework.ToString());                    
+                    projectTemplatesVersion2 = (SelectedProject.TemplateVersion == 2);
+                    projectTypeIndex = TargetFrameworkControl.FindItemIndexByValue(SelectedProject.TargetFramework.ToString());                    
 
                     // if a new project
                     if (SelectedProject.IsNew)
                     {
                         // New projects should be version 2
-                        SelectedProject.Ta = 2;
+                        SelectedProject.TemplateVersion = 2;
                         projectTemplatesVersion2 = true;
                     }
                 }
                 
                 // dislay values now
+                AddIGridValueInterfaceCheckBox.Checked = addIGridValueInterface;
                 Version2CheckBox.Checked = projectTemplatesVersion2;
                 ProjectNameTextBox.Text = projectName;
                 ProjectFolderTextBox.Text = projectFolder;
-                ProjectTypeControl.SelectedIndex = projectTypeIndex;
+                TargetFrameworkControl.SelectedIndex = projectTypeIndex;
                                 
                 // Enable controls
                 UIEnable();
+
+                // Set to false
+                Loading = false;
             }
             #endregion
         
@@ -638,16 +701,16 @@ namespace DataTierClient.Controls
                 this.NextControl = ActiveControlEnum.DatabasesTab;
 
                 // Load the ProjectTypes combo box
-                ProjectTypeControl.LoadItems(typeof(TargetFrameworkEnum));
+                TargetFrameworkControl.LoadItems(typeof(TargetFrameworkEnum));
 
                 // Setup the listener
-                ProjectTypeControl.SelectedIndexListener = this;
+                TargetFrameworkControl.SelectedIndexListener = this;
 
                 // Set the SelectedIndex
-                ProjectTypeControl.SelectedIndex = ProjectTypeControl.FindItemIndexByValue("Net10");
+                TargetFrameworkControl.SelectedIndex = TargetFrameworkControl.FindItemIndexByValue("Net10");
 
                 // Should call UIEnable
-                OnSelectedIndexChanged(ProjectTypeControl, ProjectTypeControl.SelectedIndex, ProjectTypeControl.SelectedObject);
+                OnSelectedIndexChanged(TargetFrameworkControl, TargetFrameworkControl.SelectedIndex, TargetFrameworkControl.SelectedObject);
             }
             #endregion
 
@@ -662,8 +725,6 @@ namespace DataTierClient.Controls
 
                 // Increment the value for Attempts
                 Attempts++;
-
-                // Uninstall doesn't seem to work, or causes the install to fail. 
 
                 // Show this label for this part so the user knows something is happening
                 UninstallLabel.Visible = true;
@@ -715,7 +776,7 @@ namespace DataTierClient.Controls
                     {
                         // Dot Net 8 can be TemplateVersion 1 or 2
 
-                        if (SelectedProject.Ta == 1)
+                        if (SelectedProject.TemplateVersion == 1)
                         {
                             // .NET 8 Template Version 1
                             startInfo.Arguments = "/C " + InstallDataTierNet8;
@@ -837,11 +898,28 @@ namespace DataTierClient.Controls
                 {
                     // Show the CreateDotNet5Project control if DotNet5
                     CreateDotNetProject.Visible = SelectedProject.IsDotNetCore;
+
+                    if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net10)
+                    {
+                        // Show
+                        AddIGridValueInterfaceCheckBox.Visible = true;
+                        AddIGridValueHelpButton.Visible = true;
+                    }
+                    else
+                    {
+                        // Hide
+                        AddIGridValueInterfaceCheckBox.Visible = false;
+                        AddIGridValueHelpButton.Visible = false;
+                    }
                 }
                 else
                 {
                     // Do not show for .Net Framework projects
-                    CreateDotNetProject.Visible = false;                       
+                    CreateDotNetProject.Visible = false;
+                    
+                    // Hide
+                    AddIGridValueInterfaceCheckBox.Visible = false;
+                    AddIGridValueHelpButton.Visible = false;
                 }
 
                 // if the value for ShowAutoFillHelp is true
@@ -961,6 +1039,17 @@ namespace DataTierClient.Controls
             }
             #endregion
 
+            #region Loading
+            /// <summary>
+            /// This property gets or sets the value for 'Loading'.
+            /// </summary>
+            public bool Loading
+            {
+                get { return loading; }
+                set { loading = value; }
+            }
+            #endregion
+            
             #region NextControl
             /// <summary>
             /// The NextControl to move to.

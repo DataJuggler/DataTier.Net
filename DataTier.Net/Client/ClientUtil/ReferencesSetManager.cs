@@ -23,31 +23,73 @@ namespace DataTierClient.ClientUtil
     
         #region Static Methods
 
-            #region LoadReferencesSetComboBox(List<ReferencesSet> allReferences, ComboBox comboBox)
+            #region LoadReferencesSetComboBox(Project selectedProject, ComboBox comboBox)
             /// <summary>
             /// This method loads the combobox with all references set choices.
             /// </summary>
-            /// <param name="allReferences"></param>
+            /// <param name="selectedProject"></param>
             /// <param name="comboBox"></param>
-            public static void LoadReferencesSetComboBox(List<ReferencesSet> allReferences, ComboBox comboBox)
+            public static void LoadReferencesSetComboBox(Project selectedProject, ComboBox comboBox)
             {
-                // if allReferences and the combo box exist
-                if((allReferences != null) && (comboBox != null))
+                // if selectedProject and the combo box exist
+                if ((selectedProject != null) && (comboBox != null))
                 {
                     // Clear the combo box
                     comboBox.Items.Clear();
-                    
-                    // add each references set
-                    foreach(ReferencesSet reference in allReferences)
+
+                    // if this object has an ObjectReferencesSet
+                    if (selectedProject.HasObjectReferencesSet)
                     {
                         // Add this reference
-                        comboBox.Items.Add(reference);
+                        comboBox.Items.Add(selectedProject.ObjectReferencesSet);
                     }
-                    
+
+                    // StoredProcedureReferencesSet
+                    if (selectedProject.HasStoredProcedureReferencesSet)
+                    {
+                        // Add this reference
+                        comboBox.Items.Add(selectedProject.StoredProcedureReferencesSet);
+                    }
+
+                    // ReaderReferencesSet
+                    if (selectedProject.HasReaderReferencesSet)
+                    {
+                        // Add this reference
+                        comboBox.Items.Add(selectedProject.ReaderReferencesSet);
+                    }
+
+                    // ControllerReferencesSet
+                    if (selectedProject.HasControllerReferencesSet)
+                    {
+                        // Add this reference
+                        comboBox.Items.Add(selectedProject.ControllerReferencesSet);
+                    }
+
+                    // DataOperationsReferencesSet
+                    if (selectedProject.HasDataOperationsReferencesSet)
+                    {
+                        // Add this reference
+                        comboBox.Items.Add(selectedProject.DataOperationsReferencesSet);
+                    }
+
+                    // DataManagerReferencesSet
+                    if (selectedProject.HasDataManagerReferencesSet)
+                    {
+                        // Add this reference
+                        comboBox.Items.Add(selectedProject.DataManagerReferencesSet);
+                    }
+
+                    // WriterReferencesSet
+                    if (selectedProject.HasWriterReferencesSet)
+                    {
+                        // Add this reference
+                        comboBox.Items.Add(selectedProject.WriterReferencesSet);
+                    }
+
                     // refresh
                     comboBox.Refresh();
                 }
-            }    
+            }
             #endregion
 
             #region EditReferencesSet(ProjectReferences selectedReference, Project selectedProject)

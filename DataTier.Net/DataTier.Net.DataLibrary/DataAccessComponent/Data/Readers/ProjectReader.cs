@@ -2,12 +2,12 @@
 
 #region using statements
 
-using DataJuggler.Net.Enumerations;
-using ObjectLibrary.BusinessObjects;
-using ObjectLibrary.Enumerations;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using ObjectLibrary.BusinessObjects;
+using ObjectLibrary.Enumerations;
+using DataJuggler.Net.Enumerations;
 
 #endregion
 
@@ -37,38 +37,40 @@ namespace DataAccessComponent.Data.Readers
                 Project project = new Project();
 
                 // Create field Integers
-                int controllerFolderfield = 0;
-                int controllerNamespacefield = 1;
-                int controllerReferencesSetIdfield = 2;
-                int dataManagerFolderfield = 3;
-                int dataManagerNamespacefield = 4;
-                int dataManagerReferencesSetIdfield = 5;
-                int dataOperationsFolderfield = 6;
-                int dataOperationsNamespacefield = 7;
-                int dataOperationsReferencesSetIdfield = 8;
-                int dataWriterFolderfield = 9;
-                int dataWriterNamespacefield = 10;
-                int dataWriterReferencesSetIdfield = 11;
-                int dateModifiedfield = 12;
-                int objectFolderfield = 13;
-                int objectNamespacefield = 14;
-                int objectReferencesSetIdfield = 15;
-                int projectFolderfield = 16;
-                int projectIdfield = 17;
-                int projectNamefield = 18;
-                int readerFolderfield = 19;
-                int readerNamespacefield = 20;
-                int readerReferencesSetIdfield = 21;
-                int storedProcedureObjectFolderfield = 22;
-                int storedProcedureObjectNamespacefield = 23;
-                int storedProcedureReferencesSetIdfield = 24;
-                int storedProcsFolderfield = 25;
-                int targetFrameworkfield = 26;
-                int templateVersionfield = 27;
+                int addIGridValueInterfacefield = 0;
+                int controllerFolderfield = 1;
+                int controllerNamespacefield = 2;
+                int controllerReferencesSetIdfield = 3;
+                int dataManagerFolderfield = 4;
+                int dataManagerNamespacefield = 5;
+                int dataManagerReferencesSetIdfield = 6;
+                int dataOperationsFolderfield = 7;
+                int dataOperationsNamespacefield = 8;
+                int dataOperationsReferencesSetIdfield = 9;
+                int dataWriterFolderfield = 10;
+                int dataWriterNamespacefield = 11;
+                int dataWriterReferencesSetIdfield = 12;
+                int dateModifiedfield = 13;
+                int objectFolderfield = 14;
+                int objectNamespacefield = 15;
+                int objectReferencesSetIdfield = 16;
+                int projectFolderfield = 17;
+                int projectIdfield = 18;
+                int projectNamefield = 19;
+                int readerFolderfield = 20;
+                int readerNamespacefield = 21;
+                int readerReferencesSetIdfield = 22;
+                int storedProcedureObjectFolderfield = 23;
+                int storedProcedureObjectNamespacefield = 24;
+                int storedProcedureReferencesSetIdfield = 25;
+                int storedProcsFolderfield = 26;
+                int targetFrameworkfield = 27;
+                int templateVersionfield = 28;
 
                 try
                 {
                     // Load Each field
+                    project.AddIGridValueInterface = DataHelper.ParseBoolean(dataRow.ItemArray[addIGridValueInterfacefield], false);
                     project.ControllerFolder = DataHelper.ParseString(dataRow.ItemArray[controllerFolderfield]);
                     project.ControllerNamespace = DataHelper.ParseString(dataRow.ItemArray[controllerNamespacefield]);
                     project.ControllerReferencesSetId = DataHelper.ParseInteger(dataRow.ItemArray[controllerReferencesSetIdfield], 0);
@@ -96,7 +98,7 @@ namespace DataAccessComponent.Data.Readers
                     project.StoredProcedureReferencesSetId = DataHelper.ParseInteger(dataRow.ItemArray[storedProcedureReferencesSetIdfield], 0);
                     project.StoredProcsFolder = DataHelper.ParseString(dataRow.ItemArray[storedProcsFolderfield]);
                     project.TargetFramework = (TargetFrameworkEnum) DataHelper.ParseInteger(dataRow.ItemArray[targetFrameworkfield], 0);
-                    project.Ta = DataHelper.ParseInteger(dataRow.ItemArray[templateVersionfield], 0);
+                    project.TemplateVersion = DataHelper.ParseInteger(dataRow.ItemArray[templateVersionfield], 0);
                 }
                 catch
                 {

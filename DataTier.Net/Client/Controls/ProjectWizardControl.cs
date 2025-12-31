@@ -542,7 +542,7 @@ namespace DataTierClient.Controls
                     RequiredField storedProcNamespaceField = new RequiredField("StoredProcedureObjectNamespace", RequiredField.CreateMissingRequiredFieldMessage("Stored Procedure Object Namespace", SelectedProject.StoredProcedureObjectNamespace, false), SelectedProject, false);
 
                     // if V2 of Templates
-                    if (SelectedProject.Ta == 2)
+                    if (SelectedProject.TemplateVersion == 2)
                     {
                         string temp = SelectedProject.DataManagerFolder;
                     }

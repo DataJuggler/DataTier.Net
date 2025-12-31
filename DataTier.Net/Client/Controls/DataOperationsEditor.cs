@@ -167,7 +167,7 @@ namespace DataTierClient.Controls
                 if(this.SelectedProject != null)
                 {
                     // load the references set combo box with all references
-                    ReferencesSetManager.LoadReferencesSetComboBox(this.SelectedProject.AllReferences.ToList(), this.DataOperationsReferencesSetCombobox);
+                    ReferencesSetManager.LoadReferencesSetComboBox(this.SelectedProject, this.DataOperationsReferencesSetCombobox);
                 }
                 
                 // Enable Controls
@@ -210,7 +210,7 @@ namespace DataTierClient.Controls
                 if (refSet != null)
                 {
                     // Load the references combo 
-                    ReferencesSetManager.LoadReferencesSetComboBox(this.SelectedProject.AllReferences.ToList(), this.DataOperationsReferencesSetCombobox);
+                    ReferencesSetManager.LoadReferencesSetComboBox(this.SelectedProject, this.DataOperationsReferencesSetCombobox);
 
                     // Get the selected index
                     int index = this.DataOperationsReferencesSetCombobox.Items.IndexOf(refSet);

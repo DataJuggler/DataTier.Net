@@ -206,7 +206,7 @@ namespace DataTierClient.Controls
                 if (refSet != null)
                 {
                     // Load the references combo 
-                    ReferencesSetManager.LoadReferencesSetComboBox(this.SelectedProject.AllReferences.ToList(), this.WriterReferencesSetComboBox);
+                    ReferencesSetManager.LoadReferencesSetComboBox(this.SelectedProject, this.WriterReferencesSetComboBox);
 
                     // Get the selected index
                     int index = this.WriterReferencesSetComboBox.Items.IndexOf(refSet);

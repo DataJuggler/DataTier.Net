@@ -5,7 +5,7 @@
 	<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
     <TargetFramework>net10.0</TargetFramework>
     <PackageId>DataJuggler.DataTier.Net10.ObjectLibrary</PackageId>
-    <Version>10.0.4</Version>
+    <Version>10.0.5</Version>
     <Authors>DataJuggler</Authors>
     <Company>DataJuggler</Company>
     <Description>This is one of two projects that make up a DataTier.Net10 DataTier</Description>
@@ -20,7 +20,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DataJuggler.NET.Data" Version="10.0.1" />
+    <PackageReference Include="DataJuggler.NET.Data" Version="10.0.2" />
   </ItemGroup>
   
 </Project>

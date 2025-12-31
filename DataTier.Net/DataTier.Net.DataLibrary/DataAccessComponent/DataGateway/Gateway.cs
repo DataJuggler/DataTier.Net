@@ -1846,6 +1846,9 @@ namespace DataAccessComponent.DataGateway
             /// <param name="project"></param>
             public void LoadProjectReferencesForProject(ref Project project)
             {
+                // local
+                // List<ProjectReference> tempReferences = null;
+
                 // if the project exists
                 if(project != null)
                 {
@@ -1863,22 +1866,7 @@ namespace DataAccessComponent.DataGateway
 
                         // Create the default references
                         project.CreateDefaultReferences();
-                    }
-
-                    // Instanciate AllReferences
-                    project.AllReferences = new List<ReferencesSet>();
-                        
-                    // Add each ReferencesSet to project.AllReferences; 
-
-                    // This fixes a bug that a project that was opened
-                    // does not populate the ReferencesSet combo boxes.
-                    project.AllReferences.Add(project.ControllerReferencesSet);
-                    project.AllReferences.Add(project.DataManagerReferencesSet);
-                    project.AllReferences.Add(project.DataOperationsReferencesSet);
-                    project.AllReferences.Add(project.ObjectReferencesSet);
-                    project.AllReferences.Add(project.ReaderReferencesSet);
-                    project.AllReferences.Add(project.StoredProcedureReferencesSet);
-                    project.AllReferences.Add(project.WriterReferencesSet);
+                    }                    
                 }
             }
             #endregion

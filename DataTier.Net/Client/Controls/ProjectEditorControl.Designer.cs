@@ -65,9 +65,11 @@ namespace DataTierClient.Controls
             this.HelpButton = new System.Windows.Forms.Button();
             this.BrowseProjectFolderButton = new DataTierClient.Controls.TabButton();
             this.EnumerationsButton = new DataTierClient.Controls.TabButton();
-            this.ProjectTypeControl = new DataJuggler.Win.Controls.LabelComboBoxControl();
+            this.TargetFrameworkControl = new DataJuggler.Win.Controls.LabelComboBoxControl();
             this.Version2CheckBox = new System.Windows.Forms.CheckBox();
             this.UninstallLabel = new System.Windows.Forms.Label();
+            this.AddIGridValueHelpButton = new System.Windows.Forms.Button();
+            this.AddIGridValueInterfaceCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.AutoFillChildFolderInfo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -92,9 +94,9 @@ namespace DataTierClient.Controls
             // ProjectFolderLabel
             // 
             this.ProjectFolderLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ProjectFolderLabel.Location = new System.Drawing.Point(52, 67);
+            this.ProjectFolderLabel.Location = new System.Drawing.Point(50, 69);
             this.ProjectFolderLabel.Name = "ProjectFolderLabel";
-            this.ProjectFolderLabel.Size = new System.Drawing.Size(150, 20);
+            this.ProjectFolderLabel.Size = new System.Drawing.Size(150, 24);
             this.ProjectFolderLabel.TabIndex = 71;
             this.ProjectFolderLabel.Text = "Project Folder:";
             this.ProjectFolderLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -102,22 +104,21 @@ namespace DataTierClient.Controls
             // ProjectNameLabel
             // 
             this.ProjectNameLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ProjectNameLabel.Location = new System.Drawing.Point(52, 24);
+            this.ProjectNameLabel.Location = new System.Drawing.Point(50, 26);
             this.ProjectNameLabel.Name = "ProjectNameLabel";
-            this.ProjectNameLabel.Size = new System.Drawing.Size(150, 20);
+            this.ProjectNameLabel.Size = new System.Drawing.Size(150, 24);
             this.ProjectNameLabel.TabIndex = 70;
             this.ProjectNameLabel.Text = "Project Name:";
             this.ProjectNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // AutoFillChildFoldersCheckBox
             // 
-            this.AutoFillChildFoldersCheckBox.AutoSize = true;
             this.AutoFillChildFoldersCheckBox.Checked = true;
             this.AutoFillChildFoldersCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.AutoFillChildFoldersCheckBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AutoFillChildFoldersCheckBox.Location = new System.Drawing.Point(52, 152);
             this.AutoFillChildFoldersCheckBox.Name = "AutoFillChildFoldersCheckBox";
-            this.AutoFillChildFoldersCheckBox.Size = new System.Drawing.Size(228, 31);
+            this.AutoFillChildFoldersCheckBox.Size = new System.Drawing.Size(254, 31);
             this.AutoFillChildFoldersCheckBox.TabIndex = 77;
             this.AutoFillChildFoldersCheckBox.Text = "Auto Fill Child Folders";
             this.AutoFillChildFoldersCheckBox.UseVisualStyleBackColor = true;
@@ -166,7 +167,7 @@ namespace DataTierClient.Controls
             this.ShowAutoFillHelpButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ShowAutoFillHelpButton.FlatAppearance.BorderSize = 0;
             this.ShowAutoFillHelpButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ShowAutoFillHelpButton.Location = new System.Drawing.Point(277, 151);
+            this.ShowAutoFillHelpButton.Location = new System.Drawing.Point(302, 151);
             this.ShowAutoFillHelpButton.Name = "ShowAutoFillHelpButton";
             this.ShowAutoFillHelpButton.Size = new System.Drawing.Size(32, 32);
             this.ShowAutoFillHelpButton.TabIndex = 90;
@@ -214,7 +215,7 @@ namespace DataTierClient.Controls
             this.EnumerationsButton.ButtonNumber = 0;
             this.EnumerationsButton.ButtonText = "Enumerations";
             this.EnumerationsButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EnumerationsButton.Location = new System.Drawing.Point(430, 19);
+            this.EnumerationsButton.Location = new System.Drawing.Point(430, 21);
             this.EnumerationsButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.EnumerationsButton.Name = "EnumerationsButton";
             this.EnumerationsButton.NotSelectedImage = null;
@@ -224,30 +225,30 @@ namespace DataTierClient.Controls
             this.EnumerationsButton.Size = new System.Drawing.Size(153, 32);
             this.EnumerationsButton.TabIndex = 79;
             // 
-            // ProjectTypeControl
+            // TargetFrameworkControl
             // 
-            this.ProjectTypeControl.BackColor = System.Drawing.Color.Transparent;
-            this.ProjectTypeControl.ComboBoxLeftMargin = 1;
-            this.ProjectTypeControl.ComboBoxText = "";
-            this.ProjectTypeControl.ComoboBoxFont = null;
-            this.ProjectTypeControl.Editable = true;
-            this.ProjectTypeControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ProjectTypeControl.HideLabel = false;
-            this.ProjectTypeControl.LabelBottomMargin = 0;
-            this.ProjectTypeControl.LabelColor = System.Drawing.SystemColors.ControlText;
-            this.ProjectTypeControl.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ProjectTypeControl.LabelText = "Project Type:";
-            this.ProjectTypeControl.LabelTopMargin = 0;
-            this.ProjectTypeControl.LabelWidth = 140;
-            this.ProjectTypeControl.List = null;
-            this.ProjectTypeControl.Location = new System.Drawing.Point(90, 222);
-            this.ProjectTypeControl.Name = "ProjectTypeControl";
-            this.ProjectTypeControl.SelectedIndex = -1;
-            this.ProjectTypeControl.SelectedIndexListener = null;
-            this.ProjectTypeControl.Size = new System.Drawing.Size(360, 28);
-            this.ProjectTypeControl.Sorted = false;
-            this.ProjectTypeControl.Source = null;
-            this.ProjectTypeControl.TabIndex = 92;
+            this.TargetFrameworkControl.BackColor = System.Drawing.Color.Transparent;
+            this.TargetFrameworkControl.ComboBoxLeftMargin = 1;
+            this.TargetFrameworkControl.ComboBoxText = "";
+            this.TargetFrameworkControl.ComoboBoxFont = null;
+            this.TargetFrameworkControl.Editable = true;
+            this.TargetFrameworkControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TargetFrameworkControl.HideLabel = false;
+            this.TargetFrameworkControl.LabelBottomMargin = 0;
+            this.TargetFrameworkControl.LabelColor = System.Drawing.SystemColors.ControlText;
+            this.TargetFrameworkControl.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TargetFrameworkControl.LabelText = "Target Framework:";
+            this.TargetFrameworkControl.LabelTopMargin = 0;
+            this.TargetFrameworkControl.LabelWidth = 200;
+            this.TargetFrameworkControl.List = null;
+            this.TargetFrameworkControl.Location = new System.Drawing.Point(52, 238);
+            this.TargetFrameworkControl.Name = "TargetFrameworkControl";
+            this.TargetFrameworkControl.SelectedIndex = -1;
+            this.TargetFrameworkControl.SelectedIndexListener = null;
+            this.TargetFrameworkControl.Size = new System.Drawing.Size(428, 28);
+            this.TargetFrameworkControl.Sorted = false;
+            this.TargetFrameworkControl.Source = null;
+            this.TargetFrameworkControl.TabIndex = 92;
             // 
             // Version2CheckBox
             // 
@@ -276,14 +277,42 @@ namespace DataTierClient.Controls
             this.UninstallLabel.Text = "Uninstalling Previous Versions...";
             this.UninstallLabel.Visible = false;
             // 
+            // AddIGridValueHelpButton
+            // 
+            this.AddIGridValueHelpButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("AddIGridValueHelpButton.BackgroundImage")));
+            this.AddIGridValueHelpButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.AddIGridValueHelpButton.FlatAppearance.BorderSize = 0;
+            this.AddIGridValueHelpButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AddIGridValueHelpButton.Location = new System.Drawing.Point(302, 188);
+            this.AddIGridValueHelpButton.Name = "AddIGridValueHelpButton";
+            this.AddIGridValueHelpButton.Size = new System.Drawing.Size(32, 32);
+            this.AddIGridValueHelpButton.TabIndex = 96;
+            this.AddIGridValueHelpButton.UseVisualStyleBackColor = true;
+            this.AddIGridValueHelpButton.Click += new System.EventHandler(this.AddIGridValueHelpButton_Click);
+            this.AddIGridValueHelpButton.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.AddIGridValueHelpButton.MouseLeave += new System.EventHandler(this.Button_Leave);
+            // 
+            // AddIGridValueInterfaceCheckBox
+            // 
+            this.AddIGridValueInterfaceCheckBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddIGridValueInterfaceCheckBox.Location = new System.Drawing.Point(52, 189);
+            this.AddIGridValueInterfaceCheckBox.Name = "AddIGridValueInterfaceCheckBox";
+            this.AddIGridValueInterfaceCheckBox.Size = new System.Drawing.Size(254, 31);
+            this.AddIGridValueInterfaceCheckBox.TabIndex = 95;
+            this.AddIGridValueInterfaceCheckBox.Text = "Add IGridValueInterface";
+            this.AddIGridValueInterfaceCheckBox.UseVisualStyleBackColor = true;
+            this.AddIGridValueInterfaceCheckBox.CheckedChanged += new System.EventHandler(this.AddIGridValueInterfaceCheckBox_CheckedChanged);
+            // 
             // ProjectEditorControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.AddIGridValueHelpButton);
+            this.Controls.Add(this.AddIGridValueInterfaceCheckBox);
             this.Controls.Add(this.CreateDotNetProject);
             this.Controls.Add(this.UninstallLabel);
             this.Controls.Add(this.Version2CheckBox);
-            this.Controls.Add(this.ProjectTypeControl);
+            this.Controls.Add(this.TargetFrameworkControl);
             this.Controls.Add(this.AutoFillChildFolderInfo);
             this.Controls.Add(this.ShowAutoFillHelpButton);
             this.Controls.Add(this.Graph);
@@ -310,9 +339,11 @@ namespace DataTierClient.Controls
         private System.Windows.Forms.Label Graph;
         private System.Windows.Forms.Button ShowAutoFillHelpButton;
         private System.Windows.Forms.PictureBox AutoFillChildFolderInfo;
-        private DataJuggler.Win.Controls.LabelComboBoxControl ProjectTypeControl;
+        private DataJuggler.Win.Controls.LabelComboBoxControl TargetFrameworkControl;
         private System.Windows.Forms.CheckBox Version2CheckBox;
         private System.Windows.Forms.Label UninstallLabel;
+        private System.Windows.Forms.Button AddIGridValueHelpButton;
+        private System.Windows.Forms.CheckBox AddIGridValueInterfaceCheckBox;
     }
     #endregion
 

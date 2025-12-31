@@ -2,12 +2,12 @@
 
 #region using statements
 
+using System;
+using ObjectLibrary.BusinessObjects;
 using DataAccessComponent.StoredProcedureManager.DeleteProcedures;
 using DataAccessComponent.StoredProcedureManager.FetchProcedures;
 using DataAccessComponent.StoredProcedureManager.InsertProcedures;
 using DataAccessComponent.StoredProcedureManager.UpdateProcedures;
-using ObjectLibrary.BusinessObjects;
-using System;
 using System.Data;
 using System.Data.SqlClient;
 

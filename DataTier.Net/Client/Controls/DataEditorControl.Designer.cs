@@ -90,7 +90,7 @@ namespace DataTierClient.Controls
             // ExcludeTableLabel
             // 
             this.ExcludeTableLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExcludeTableLabel.Location = new System.Drawing.Point(24, 394);
+            this.ExcludeTableLabel.Location = new System.Drawing.Point(43, 394);
             this.ExcludeTableLabel.Name = "ExcludeTableLabel";
             this.ExcludeTableLabel.Size = new System.Drawing.Size(282, 29);
             this.ExcludeTableLabel.TabIndex = 2;
@@ -99,7 +99,7 @@ namespace DataTierClient.Controls
             // ExcludeFieldLabel
             // 
             this.ExcludeFieldLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExcludeFieldLabel.Location = new System.Drawing.Point(608, 394);
+            this.ExcludeFieldLabel.Location = new System.Drawing.Point(627, 394);
             this.ExcludeFieldLabel.Name = "ExcludeFieldLabel";
             this.ExcludeFieldLabel.Size = new System.Drawing.Size(282, 29);
             this.ExcludeFieldLabel.TabIndex = 4;
@@ -189,7 +189,7 @@ namespace DataTierClient.Controls
             this.CreateGridColumnsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CreateGridColumnsButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CreateGridColumnsButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.CreateGridColumnsButton.Location = new System.Drawing.Point(360, 333);
+            this.CreateGridColumnsButton.Location = new System.Drawing.Point(360, 346);
             this.CreateGridColumnsButton.Name = "CreateGridColumnsButton";
             this.CreateGridColumnsButton.Size = new System.Drawing.Size(232, 44);
             this.CreateGridColumnsButton.TabIndex = 108;
@@ -210,7 +210,7 @@ namespace DataTierClient.Controls
             this.ManageFieldSetsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ManageFieldSetsButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ManageFieldSetsButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.ManageFieldSetsButton.Location = new System.Drawing.Point(360, 162);
+            this.ManageFieldSetsButton.Location = new System.Drawing.Point(360, 187);
             this.ManageFieldSetsButton.Name = "ManageFieldSetsButton";
             this.ManageFieldSetsButton.Size = new System.Drawing.Size(232, 44);
             this.ManageFieldSetsButton.TabIndex = 103;
@@ -231,7 +231,7 @@ namespace DataTierClient.Controls
             this.ManageReadersButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ManageReadersButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ManageReadersButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.ManageReadersButton.Location = new System.Drawing.Point(360, 219);
+            this.ManageReadersButton.Location = new System.Drawing.Point(360, 240);
             this.ManageReadersButton.Name = "ManageReadersButton";
             this.ManageReadersButton.Size = new System.Drawing.Size(232, 44);
             this.ManageReadersButton.TabIndex = 102;
@@ -252,7 +252,7 @@ namespace DataTierClient.Controls
             this.ManageMethodButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ManageMethodButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ManageMethodButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.ManageMethodButton.Location = new System.Drawing.Point(360, 105);
+            this.ManageMethodButton.Location = new System.Drawing.Point(360, 134);
             this.ManageMethodButton.Name = "ManageMethodButton";
             this.ManageMethodButton.Size = new System.Drawing.Size(232, 44);
             this.ManageMethodButton.TabIndex = 101;
@@ -273,7 +273,7 @@ namespace DataTierClient.Controls
             this.CreateMethodButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CreateMethodButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CreateMethodButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.CreateMethodButton.Location = new System.Drawing.Point(360, 48);
+            this.CreateMethodButton.Location = new System.Drawing.Point(360, 81);
             this.CreateMethodButton.Name = "CreateMethodButton";
             this.CreateMethodButton.Size = new System.Drawing.Size(232, 44);
             this.CreateMethodButton.TabIndex = 100;
@@ -294,7 +294,7 @@ namespace DataTierClient.Controls
             this.RemoveTableButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.RemoveTableButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RemoveTableButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.RemoveTableButton.Location = new System.Drawing.Point(360, 276);
+            this.RemoveTableButton.Location = new System.Drawing.Point(360, 293);
             this.RemoveTableButton.Name = "RemoveTableButton";
             this.RemoveTableButton.Size = new System.Drawing.Size(232, 44);
             this.RemoveTableButton.TabIndex = 97;

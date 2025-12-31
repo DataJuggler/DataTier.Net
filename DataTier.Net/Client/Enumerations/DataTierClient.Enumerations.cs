@@ -47,6 +47,23 @@ namespace DataTierClient.Enumerations
 	}
 	#endregion
 
+    #region ReferencesSetTypeEnum : int
+    /// <summary>
+    /// This enumeration is used to remove the AllReferences collection, so each
+    /// ReferencesSet has a type and can be saved based on the type. 
+    /// </summary>
+    public enum ReferencesSetTypeEnum : int
+    {
+        DataObjects = 1,        
+        StoredProcedure = 2,
+        Reader = 3,
+        Controller = 4,
+        DataOperations = 5,
+        DataManager = 6,
+        Writer = 7
+    }
+    #endregion
+
     #region TrueFalseEnum
     /// <summary>
     /// This enum is used to load the ComboBox for Encrypt Value.

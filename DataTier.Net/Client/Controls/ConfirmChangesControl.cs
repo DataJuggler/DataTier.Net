@@ -2056,7 +2056,7 @@ namespace DataTierClient.Controls
                     string gatewayPath = @"DataGateway\Gateway.cs";
 
                     // if the Template Version is 2
-                    if (Project.Ta == 2)
+                    if (Project.TemplateVersion == 2)
                     {
                         // V2 inside DataAccessComponent
                         gatewayPath = @"DataAccessComponent\DataGateway\Gateway.cs";
@@ -2067,7 +2067,7 @@ namespace DataTierClient.Controls
                     string writerFile = @"DataAccessComponent\DataManager\Writers\" + MethodInfo.SelectedTable.ClassName + "Writer.cs";
 
                     // if Version 2
-                    if (Project.Ta == 2)
+                    if (Project.TemplateVersion == 2)
                     {
                         // Use the Data folder
                         writerFile = @"DataAccessComponent\Data\Writers\" + MethodInfo.SelectedTable.ClassName + "Writer.cs";
@@ -2441,7 +2441,7 @@ namespace DataTierClient.Controls
                 string gatewayFile = Path.Combine(ProjectFolder,  @"DataGateway\Gateway.cs");
 
                  // if version 2
-                if (Project.Ta == 2)
+                if (Project.TemplateVersion == 2)
                 {
                     // use the Data folder
                     gatewayFile = Path.Combine(ProjectFolder,  @"DataAccessComponent\DataGateway\Gateway.cs");
@@ -3033,7 +3033,7 @@ namespace DataTierClient.Controls
                     string baseWriterFile = Path.Combine(ProjectFolder,  @"DataAccessComponent\DataManager\Writers\", MethodInfo.SelectedTable.ClassName + "WriterBase.cs");
 
                     // if the new structure
-                    if (Project.Ta == 2)
+                    if (Project.TemplateVersion == 2)
                     {
                         // Change to Data folder
                         writerFile = Path.Combine(ProjectFolder,  @"DataAccessComponent\Data\Writers\", MethodInfo.SelectedTable.ClassName + "Writer.cs");
@@ -3370,7 +3370,7 @@ namespace DataTierClient.Controls
                     if (HasProject)
                     {
                         // set the return value
-                        templateVersion = Project.Ta;
+                        templateVersion = Project.TemplateVersion;
                     }
 
                     // return value
