@@ -17,7 +17,7 @@ namespace DataTierClient.Controls
         
         #region Private Variables
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.ComboBox DataOperationsReferencesSetCombobox;
+        private System.Windows.Forms.TextBox DataOperationsReferencesSetTextBox;
         private System.Windows.Forms.TextBox DataOperationsFolderTextBox;
         private System.Windows.Forms.TextBox DataOperationsNamespaceTextBox;
         private System.Windows.Forms.Label DataOperationsFolderLabel;
@@ -52,7 +52,7 @@ namespace DataTierClient.Controls
             private void InitializeComponent()
             {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataOperationsEditor));
-            this.DataOperationsReferencesSetCombobox = new System.Windows.Forms.ComboBox();
+            this.DataOperationsReferencesSetTextBox = new System.Windows.Forms.TextBox();
             this.DataOperationsFolderTextBox = new System.Windows.Forms.TextBox();
             this.DataOperationsNamespaceTextBox = new System.Windows.Forms.TextBox();
             this.DataOperationsFolderLabel = new System.Windows.Forms.Label();
@@ -62,15 +62,14 @@ namespace DataTierClient.Controls
             this.BrowseDataOperationsFolderButton = new DataTierClient.Controls.TabButton();
             this.SuspendLayout();
             // 
-            // DataOperationsReferencesSetCombobox
+            // DataOperationsReferencesSetTextBox
             // 
-            this.DataOperationsReferencesSetCombobox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DataOperationsReferencesSetCombobox.FormattingEnabled = true;
-            this.DataOperationsReferencesSetCombobox.Location = new System.Drawing.Point(222, 107);
-            this.DataOperationsReferencesSetCombobox.Name = "DataOperationsReferencesSetCombobox";
-            this.DataOperationsReferencesSetCombobox.Size = new System.Drawing.Size(271, 34);
-            this.DataOperationsReferencesSetCombobox.TabIndex = 106;
-            this.DataOperationsReferencesSetCombobox.SelectedIndexChanged += new System.EventHandler(this.DataOperationsReferencesSetCombobox_SelectedIndexChanged);
+            this.DataOperationsReferencesSetTextBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DataOperationsReferencesSetTextBox.Location = new System.Drawing.Point(222, 107);
+            this.DataOperationsReferencesSetTextBox.Name = "DataOperationsReferencesSetCombobox";
+            this.DataOperationsReferencesSetTextBox.Size = new System.Drawing.Size(271, 34);
+            this.DataOperationsReferencesSetTextBox.TabIndex = 106;
+            this.DataOperationsReferencesSetTextBox.ReadOnly = true;
             // 
             // DataOperationsFolderTextBox
             // 
@@ -162,7 +161,7 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.EditDataOperationsReferencesSet);
             this.Controls.Add(this.BrowseDataOperationsFolderButton);
             this.Controls.Add(this.DataOperationsFolderTextBox);
-            this.Controls.Add(this.DataOperationsReferencesSetCombobox);
+            this.Controls.Add(this.DataOperationsReferencesSetTextBox);
             this.Controls.Add(this.DataOperationsNamespaceTextBox);
             this.Controls.Add(this.DataOperationsFolderLabel);
             this.Controls.Add(this.DataOperationsReferencesSetLabel);
@@ -181,6 +180,3 @@ namespace DataTierClient.Controls
     #endregion
 
 }
-
-
-

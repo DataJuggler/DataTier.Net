@@ -98,39 +98,6 @@ namespace DataTierClient.Controls
             } 
             #endregion
 
-            #region ControllerReferencesSetComboBox_SelectedIndexChanged(object sender, EventArgs e)
-            /// <summary>
-            /// A selection was made in the ControllerReferencesSetComboBox.
-            /// </summary>
-            /// <param name="sender"></param>
-            /// <param name="e"></param>
-            private void ControllerReferencesSetComboBox_SelectedIndexChanged(object sender, EventArgs e)
-            {
-                // if the SelectedProject exists
-                if (this.SelectedProject != null)
-                {
-                    // Create the references set
-                    ReferencesSet refSet = this.ControllerReferencesSetComboBox.SelectedItem as ReferencesSet;
-
-                    // if the references set exists
-                    if (refSet != null)
-                    {
-                        // set the SelectedReferencesSet
-                        this.SelectedReferencesSet = refSet;
-                    
-                        // set the ReferencesSet
-                        this.SelectedProject.ControllerReferencesSet = refSet;
-                    
-                        // Set the DataOperationsReferencesSetID
-                        this.SelectedProject.ControllerReferencesSetId = refSet.ReferencesSetId;
-                    }
-
-                    // Enable Controls
-                    UIEnable();
-                } 
-            }
-            #endregion
-
             #region EditControllerReferencesSetButton_Click(object sender, EventArgs e)
             /// <summary>
             /// This event edits the controller refernces set.
@@ -143,7 +110,7 @@ namespace DataTierClient.Controls
                 ReferencesSet refSet = ReferencesSetManager.EditReferencesSet(this.SelectedReferencesSet, this.SelectedProject);
 
                 // Display selected references
-                DisplaySelectedReferences(refSet);
+                DisplaySelectedReferencesSet(refSet);
             }
             #endregion
 
@@ -165,13 +132,6 @@ namespace DataTierClient.Controls
 
                 // Set PrevControl
                 this.PrevControl = ActiveControlEnum.DataOperationsTab;
-
-                // if the selected project exist
-                if (this.SelectedProject != null)
-                {
-                    // load the references set combo box with all references
-                    ReferencesSetManager.LoadReferencesSetComboBox(this.SelectedProject, this.ControllerReferencesSetComboBox);
-                }
                 
                 // Enable Controls
                 UIEnable();
@@ -194,7 +154,7 @@ namespace DataTierClient.Controls
                     this.ControllerNamespaceTextBox.Text = this.SelectedProject.ControllerNamespace;
 
                     // display the object references set
-                    this.DisplaySelectedReferences(this.SelectedProject.ControllerReferencesSet);
+                    this.DisplaySelectedReferencesSet(this.SelectedProject.ControllerReferencesSet);
                 }
 
                 // Enable Controls
@@ -202,28 +162,21 @@ namespace DataTierClient.Controls
             }
             #endregion
 
-            #region DisplaySelectedReferences(List<ReferencesSet> refSet)
+            #region DisplaySelectedReferencesSet(List<ReferencesSet> refSet)
             /// <summary>
             /// This method displays the selected referencesSet
             /// </summary>
             /// <param name="refSet"></param>
-            private void DisplaySelectedReferences(ReferencesSet refSet)
+            private void DisplaySelectedReferencesSet(ReferencesSet refSet)
             {
                 // if refSet exists
                 if (refSet != null)
                 {
-                    // Load the references combo 
-                    ReferencesSetManager.LoadReferencesSetComboBox(this.SelectedProject, this.ControllerReferencesSetComboBox);
+                    // Store the Selected References Set
+                    this.SelectedReferencesSet = refSet;
 
-                    // Get the selected index
-                    int index = this.ControllerReferencesSetComboBox.Items.IndexOf(refSet);
-
-                    // if the index exists
-                    if (index >= 0)
-                    {
-                        // set the selected index
-                        this.ControllerReferencesSetComboBox.SelectedIndex = index;
-                    }
+                    // Display the ReferencesSetName
+                    this.ControllerReferencesSetTextBox.Text = refSet.ReferencesSetName;
                 }
             }
             #endregion

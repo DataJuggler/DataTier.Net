@@ -70,7 +70,7 @@ namespace DataTierClient.Controls
                 ReferencesSet refSet = ReferencesSetManager.EditReferencesSet(this.SelectedReferencesSet, this.SelectedProject);
 
                 // Display selected references
-                DisplaySelectedReferences(refSet); 
+                DisplaySelectedReferencesSet(refSet); 
             }
             #endregion
 
@@ -114,39 +114,6 @@ namespace DataTierClient.Controls
             } 
             #endregion
 
-            #region WriterReferencesSetComboBox_SelectedIndexChanged(object sender, EventArgs e)
-            /// <summary>
-            /// The Writer ReferencesSet has changed.
-            /// </summary>
-            /// <param name="sender"></param>
-            /// <param name="e"></param>
-            private void WriterReferencesSetComboBox_SelectedIndexChanged(object sender, EventArgs e)
-            {
-                // if the SelectedProject exists
-                if (this.SelectedProject != null)
-                {
-                    // Create the references set
-                    ReferencesSet refSet = this.WriterReferencesSetComboBox.SelectedItem as ReferencesSet;
-
-                    // if the references set exists
-                    if (refSet != null)
-                    {
-                        // set the SelectedReferencesSet
-                        this.SelectedReferencesSet = refSet;
-
-                        // set the ReferencesSet
-                        this.SelectedProject.WriterReferencesSet = refSet;
-
-                        // Set the ReaderReferencesSetID
-                        this.SelectedProject.DataWriterReferencesSetId = refSet.ReferencesSetId;
-                    }
-
-                    // Enable Controls
-                    UIEnable();
-                } 
-            }
-            #endregion
-            
         #endregion
 
         #region Methods
@@ -187,7 +154,7 @@ namespace DataTierClient.Controls
                     this.WriterNamespaceTextBox.Text = this.SelectedProject.DataWriterNamespace;
 
                     // display the object references set
-                    this.DisplaySelectedReferences(this.SelectedProject.WriterReferencesSet);
+                    this.DisplaySelectedReferencesSet(this.SelectedProject.WriterReferencesSet);
                 }
 
                 // Enable Controls
@@ -195,28 +162,21 @@ namespace DataTierClient.Controls
             }
             #endregion
 
-            #region DisplaySelectedReferences(ReferencesSet refSet)
+            #region DisplaySelectedReferencesSet(ReferencesSet refSet)
             /// <summary>
             /// This method displays the selected referencesSet
             /// </summary>
             /// <param name="refSet"></param>
-            private void DisplaySelectedReferences(ReferencesSet refSet)
+            private void DisplaySelectedReferencesSet(ReferencesSet refSet)
             {
                 // if refSet exists
                 if (refSet != null)
                 {
-                    // Load the references combo 
-                    ReferencesSetManager.LoadReferencesSetComboBox(this.SelectedProject, this.WriterReferencesSetComboBox);
+                    // Store the Selected References Set
+                    this.SelectedReferencesSet = refSet;
 
-                    // Get the selected index
-                    int index = this.WriterReferencesSetComboBox.Items.IndexOf(refSet);
-
-                    // if the index exists
-                    if (index >= 0)
-                    {
-                        // set the selected index
-                        this.WriterReferencesSetComboBox.SelectedIndex = index;
-                    }
+                    // Display the ReferencesSetName
+                    this.WriterReferencesSetTextBox.Text = refSet.ReferencesSetName;
                 }
             }
             #endregion

@@ -69,7 +69,7 @@ namespace DataTierClient.Controls
                 ReferencesSet refSet = ReferencesSetManager.EditReferencesSet(this.SelectedReferencesSet, this.SelectedProject);
 
                 // Display selected references
-                DisplaySelectedReferences(refSet);
+                DisplaySelectedReferencesSet(refSet);
             }
             #endregion
 
@@ -110,39 +110,6 @@ namespace DataTierClient.Controls
                     // Enable Controls
                     UIEnable();
                 }  
-            }
-            #endregion
-
-            #region ReaderReferencesSetComboBox_SelectedIndexChanged(object sender, EventArgs e)
-            /// <summary>
-            /// The ReaderReferencesSet has chagned.
-            /// </summary>
-            /// <param name="sender"></param>
-            /// <param name="e"></param>
-            private void ReaderReferencesSetComboBox_SelectedIndexChanged(object sender, EventArgs e)
-            {
-                // if the SelectedProject exists
-                if (this.SelectedProject != null)
-                {
-                    // Create the references set
-                    ReferencesSet refSet = this.ReaderReferencesSetComboBox.SelectedItem as ReferencesSet;
-
-                    // if the references set exists
-                    if (refSet != null)
-                    {
-                        // set the SelectedReferencesSet
-                        this.SelectedReferencesSet = refSet;
-
-                        // set the ReferencesSet
-                        this.SelectedProject.ReaderReferencesSet = refSet;
-                       
-                        // Set the ReaderReferencesSetID
-                        this.SelectedProject.ReaderReferencesSetId = refSet.ReferencesSetId;
-                    }
-
-                    // Enable Controls
-                    UIEnable();
-                } 
             }
             #endregion
         
@@ -186,7 +153,7 @@ namespace DataTierClient.Controls
                     this.ReaderNamespaceTextBox.Text = this.SelectedProject.ReaderNamespace;
 
                     // display the object references set
-                    this.DisplaySelectedReferences(this.SelectedProject.ReaderReferencesSet);
+                    this.DisplaySelectedReferencesSet(this.SelectedProject.ReaderReferencesSet);
                 }
 
                 // Enable Controls
@@ -194,28 +161,21 @@ namespace DataTierClient.Controls
             }
             #endregion
 
-            #region DisplaySelectedReferences(ReferencesSet refSet)
+            #region DisplaySelectedReferencesSet(ReferencesSet refSet)
             /// <summary>
             /// This method displays the selected referencesSet
             /// </summary>
             /// <param name="refSet"></param>
-            private void DisplaySelectedReferences(ReferencesSet refSet)
+            private void DisplaySelectedReferencesSet(ReferencesSet refSet)
             {
                 // if refSet exists
                 if (refSet != null)
                 {
-                    // Load the references combo 
-                    ReferencesSetManager.LoadReferencesSetComboBox(this.SelectedProject, this.ReaderReferencesSetComboBox);
+                    // Store the Selected References Set
+                    this.SelectedReferencesSet = refSet;
 
-                    // Get the selected index
-                    int index = this.ReaderReferencesSetComboBox.Items.IndexOf(refSet);
-
-                    // if the index exists
-                    if (index >= 0)
-                    {
-                        // set the selected index
-                        this.ReaderReferencesSetComboBox.SelectedIndex = index;
-                    }
+                    // Display the ReferencesSetName
+                    this.ReaderReferencesSetTextBox.Text = refSet.ReferencesSetName;
                 }
             }
             #endregion

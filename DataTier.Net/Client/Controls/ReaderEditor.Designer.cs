@@ -17,7 +17,7 @@ namespace DataTierClient.Controls
         
         #region Private Variables
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.ComboBox ReaderReferencesSetComboBox;
+        private System.Windows.Forms.TextBox ReaderReferencesSetTextBox;
         private System.Windows.Forms.TextBox ReaderFolderTextBox;
         private System.Windows.Forms.TextBox ReaderNamespaceTextBox;
         private System.Windows.Forms.Label ReaderFolderLabel;
@@ -52,7 +52,7 @@ namespace DataTierClient.Controls
             private void InitializeComponent()
             {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReaderEditor));
-            this.ReaderReferencesSetComboBox = new System.Windows.Forms.ComboBox();
+            this.ReaderReferencesSetTextBox = new System.Windows.Forms.TextBox();
             this.ReaderFolderTextBox = new System.Windows.Forms.TextBox();
             this.ReaderNamespaceTextBox = new System.Windows.Forms.TextBox();
             this.ReaderFolderLabel = new System.Windows.Forms.Label();
@@ -62,15 +62,14 @@ namespace DataTierClient.Controls
             this.BrowseReaderFolderButton = new DataTierClient.Controls.TabButton();
             this.SuspendLayout();
             // 
-            // ReaderReferencesSetComboBox
+            // ReaderReferencesSetTextBox
             // 
-            this.ReaderReferencesSetComboBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ReaderReferencesSetComboBox.FormattingEnabled = true;
-            this.ReaderReferencesSetComboBox.Location = new System.Drawing.Point(222, 107);
-            this.ReaderReferencesSetComboBox.Name = "ReaderReferencesSetComboBox";
-            this.ReaderReferencesSetComboBox.Size = new System.Drawing.Size(271, 34);
-            this.ReaderReferencesSetComboBox.TabIndex = 88;
-            this.ReaderReferencesSetComboBox.SelectedIndexChanged += new System.EventHandler(this.ReaderReferencesSetComboBox_SelectedIndexChanged);
+            this.ReaderReferencesSetTextBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ReaderReferencesSetTextBox.Location = new System.Drawing.Point(222, 107);
+            this.ReaderReferencesSetTextBox.Name = "ReaderReferencesSetComboBox";
+            this.ReaderReferencesSetTextBox.Size = new System.Drawing.Size(271, 34);
+            this.ReaderReferencesSetTextBox.TabIndex = 88;
+            this.ReaderReferencesSetTextBox.ReadOnly = true;
             // 
             // ReaderFolderTextBox
             // 
@@ -162,7 +161,7 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.EditReaderReferencesSetButton);
             this.Controls.Add(this.BrowseReaderFolderButton);
             this.Controls.Add(this.ReaderFolderTextBox);
-            this.Controls.Add(this.ReaderReferencesSetComboBox);
+            this.Controls.Add(this.ReaderReferencesSetTextBox);
             this.Controls.Add(this.ReaderNamespaceTextBox);
             this.Controls.Add(this.ReaderFolderLabel);
             this.Controls.Add(this.ReaderReferencesSetLabel);
@@ -181,6 +180,3 @@ namespace DataTierClient.Controls
     #endregion
 
 }
-
-
-

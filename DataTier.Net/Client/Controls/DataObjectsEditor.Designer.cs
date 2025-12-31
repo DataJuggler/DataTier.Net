@@ -15,7 +15,7 @@ namespace DataTierClient.Controls
         
         #region Private Variables
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.ComboBox ObjectReferencesComboBox;
+        private System.Windows.Forms.TextBox ObjectReferencesTextBox;
         private System.Windows.Forms.TextBox ObjectNamespaceTextBox;
         private System.Windows.Forms.TextBox ObjectFolderTextBox;
         private System.Windows.Forms.Label ObjectNamespaceLabel;
@@ -50,7 +50,7 @@ namespace DataTierClient.Controls
             private void InitializeComponent()
             {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataObjectsEditor));
-            this.ObjectReferencesComboBox = new System.Windows.Forms.ComboBox();
+            this.ObjectReferencesTextBox = new System.Windows.Forms.TextBox();
             this.ObjectNamespaceTextBox = new System.Windows.Forms.TextBox();
             this.ObjectFolderTextBox = new System.Windows.Forms.TextBox();
             this.ObjectNamespaceLabel = new System.Windows.Forms.Label();
@@ -60,15 +60,14 @@ namespace DataTierClient.Controls
             this.EditObjectReferencesButton = new DataTierClient.Controls.TabButton();
             this.SuspendLayout();
             // 
-            // ObjectReferencesComboBox
+            // ObjectReferencesTextBox
             // 
-            this.ObjectReferencesComboBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ObjectReferencesComboBox.FormattingEnabled = true;
-            this.ObjectReferencesComboBox.Location = new System.Drawing.Point(222, 107);
-            this.ObjectReferencesComboBox.Name = "ObjectReferencesComboBox";
-            this.ObjectReferencesComboBox.Size = new System.Drawing.Size(271, 34);
-            this.ObjectReferencesComboBox.TabIndex = 88;
-            this.ObjectReferencesComboBox.SelectedIndexChanged += new System.EventHandler(this.ObjectReferencesComboBox_SelectedIndexChanged);
+            this.ObjectReferencesTextBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ObjectReferencesTextBox.Location = new System.Drawing.Point(222, 107);
+            this.ObjectReferencesTextBox.Name = "ObjectReferencesComboBox";
+            this.ObjectReferencesTextBox.Size = new System.Drawing.Size(271, 34);
+            this.ObjectReferencesTextBox.TabIndex = 88;
+            this.ObjectReferencesTextBox.ReadOnly = true;
             // 
             // ObjectNamespaceTextBox
             // 
@@ -160,7 +159,7 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.EditObjectReferencesButton);
             this.Controls.Add(this.BrowseDataObjectsFolderButton);
             this.Controls.Add(this.ObjectFolderTextBox);
-            this.Controls.Add(this.ObjectReferencesComboBox);
+            this.Controls.Add(this.ObjectReferencesTextBox);
             this.Controls.Add(this.ObjectNamespaceTextBox);
             this.Controls.Add(this.ObjectNamespaceLabel);
             this.Controls.Add(this.ObjectReferencesLabel);
@@ -179,6 +178,3 @@ namespace DataTierClient.Controls
     #endregion
 
 }
-
-
-

@@ -97,39 +97,6 @@ namespace DataTierClient.Controls
             }
             #endregion
 
-            #region DataManagerReferencesSetComboBox_SelectedIndexChanged(object sender, EventArgs e)
-            /// <summary>
-            /// The selected references set has changed for a project.
-            /// </summary>
-            /// <param name="sender"></param>
-            /// <param name="e"></param>
-            private void DataManagerReferencesSetComboBox_SelectedIndexChanged(object sender, EventArgs e)
-            {
-                // if the SelectedProject exists
-                if (this.SelectedProject != null)
-                {
-                    // Create the references set
-                    ReferencesSet refSet = this.DataManagerReferencesSetComboBox.SelectedItem as ReferencesSet;
-
-                    // if the references set exists
-                    if (refSet != null)
-                    {
-                        // Set selected references set
-                        this.SelectedReferencesSet = refSet;
-
-                        // set ReferencesSet
-                        this.SelectedProject.DataManagerReferencesSet = refSet;
-
-                        // Set the ObjectReferencesSetID
-                        this.SelectedProject.DataManagerReferencesSetId = refSet.ReferencesSetId;
-                    }
-
-                    // Enable Controls
-                    UIEnable();
-                }
-            }
-            #endregion
-
             #region EditDataManagerReferencesSetButton_Click(object sender, EventArgs e)
             /// <summary>
             /// This method edits the selected references set.
@@ -142,7 +109,7 @@ namespace DataTierClient.Controls
                 ReferencesSet refSet = ReferencesSetManager.EditReferencesSet(this.SelectedReferencesSet, this.SelectedProject);
 
                 // Display selected references
-                DisplaySelectedReferences(refSet);
+                DisplaySelectedReferencesSet(refSet);
             }
             #endregion
 
@@ -186,7 +153,7 @@ namespace DataTierClient.Controls
                     this.DataManagerFolderTextBox.Text = this.SelectedProject.DataManagerFolder;
 
                     // display the object references set
-                    this.DisplaySelectedReferences(this.SelectedProject.DataManagerReferencesSet);
+                    this.DisplaySelectedReferencesSet(this.SelectedProject.DataManagerReferencesSet);
                 }
 
                 // Enable Controls
@@ -194,28 +161,21 @@ namespace DataTierClient.Controls
             }
             #endregion
 
-            #region DisplaySelectedReferences(ReferencesSet refSet)
+            #region DisplaySelectedReferencesSet(ReferencesSet refSet)
             /// <summary>
             /// This method displays the selected referencesSet
             /// </summary>
             /// <param name="refSet"></param>
-            private void DisplaySelectedReferences(ReferencesSet refSet)
+            private void DisplaySelectedReferencesSet(ReferencesSet refSet)
             {
                 // if refSet exists
                 if (refSet != null)
                 {
-                    // Load the references combo 
-                    ReferencesSetManager.LoadReferencesSetComboBox(this.SelectedProject, this.DataManagerReferencesSetComboBox);
+                    // Store the Selected References Set
+                    this.SelectedReferencesSet = refSet;
 
-                    // Get the selected index
-                    int index = this.DataManagerReferencesSetComboBox.Items.IndexOf(refSet);
-
-                    // if the index exists
-                    if (index >= 0)
-                    {
-                        // set the selected index
-                        this.DataManagerReferencesSetComboBox.SelectedIndex = index;
-                    }
+                    // Display the ReferencesSetName
+                    this.DataManagerReferencesSetTextBox.Text = refSet.ReferencesSetName;                    
                 }
             }
             #endregion

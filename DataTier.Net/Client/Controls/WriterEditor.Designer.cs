@@ -15,7 +15,7 @@ namespace DataTierClient.Controls
         
         #region Private Variables
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.ComboBox WriterReferencesSetComboBox;
+        private System.Windows.Forms.TextBox WriterReferencesSetTextBox;
         private System.Windows.Forms.TextBox WriterFolderTextBox;
         private System.Windows.Forms.TextBox WriterNamespaceTextBox;
         private System.Windows.Forms.Label WriterFolderLabel;
@@ -50,7 +50,7 @@ namespace DataTierClient.Controls
             private void InitializeComponent()
             {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WriterEditor));
-            this.WriterReferencesSetComboBox = new System.Windows.Forms.ComboBox();
+            this.WriterReferencesSetTextBox = new System.Windows.Forms.TextBox();
             this.WriterFolderTextBox = new System.Windows.Forms.TextBox();
             this.WriterNamespaceTextBox = new System.Windows.Forms.TextBox();
             this.WriterFolderLabel = new System.Windows.Forms.Label();
@@ -60,15 +60,14 @@ namespace DataTierClient.Controls
             this.BrowseWriterManagerFolderButton = new DataTierClient.Controls.TabButton();
             this.SuspendLayout();
             // 
-            // WriterReferencesSetComboBox
+            // WriterReferencesSetTextBox
             // 
-            this.WriterReferencesSetComboBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WriterReferencesSetComboBox.FormattingEnabled = true;
-            this.WriterReferencesSetComboBox.Location = new System.Drawing.Point(222, 107);
-            this.WriterReferencesSetComboBox.Name = "WriterReferencesSetComboBox";
-            this.WriterReferencesSetComboBox.Size = new System.Drawing.Size(271, 34);
-            this.WriterReferencesSetComboBox.TabIndex = 133;
-            this.WriterReferencesSetComboBox.SelectedIndexChanged += new System.EventHandler(this.WriterReferencesSetComboBox_SelectedIndexChanged);
+            this.WriterReferencesSetTextBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));            
+            this.WriterReferencesSetTextBox.Location = new System.Drawing.Point(222, 107);
+            this.WriterReferencesSetTextBox.Name = "WriterReferencesSetComboBox";
+            this.WriterReferencesSetTextBox.Size = new System.Drawing.Size(271, 34);
+            this.WriterReferencesSetTextBox.TabIndex = 133;
+            this.WriterReferencesSetTextBox.ReadOnly = true;
             // 
             // WriterFolderTextBox
             // 
@@ -159,7 +158,7 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.EditWriterReferencesSetButton);
             this.Controls.Add(this.BrowseWriterManagerFolderButton);
             this.Controls.Add(this.WriterFolderTextBox);
-            this.Controls.Add(this.WriterReferencesSetComboBox);
+            this.Controls.Add(this.WriterReferencesSetTextBox);
             this.Controls.Add(this.WriterNamespaceTextBox);
             this.Controls.Add(this.WriterFolderLabel);
             this.Controls.Add(this.WriterReferencesSetLabel);
@@ -178,6 +177,3 @@ namespace DataTierClient.Controls
     #endregion
 
 }
-
-
-
