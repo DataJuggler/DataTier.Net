@@ -1069,6 +1069,9 @@ namespace DataTierClient.Forms
                 
                 try
                 {
+                    // Make sure the required references are there
+                    this.OpenProject.ObjectReferencesSet.References = ReferencesSetManager.EnsureReferences(this.OpenProject);
+
                     // Create A ClassBuilder to build DataObjects
                     ClassBuilder builder = new ClassBuilder(false);
 

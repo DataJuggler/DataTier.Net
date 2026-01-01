@@ -63,6 +63,7 @@ namespace DataTierClient.Controls
             this.ReferencesSetNameTextBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ReferencesSetNameTextBox.Location = new System.Drawing.Point(222, 13);
             this.ReferencesSetNameTextBox.Name = "ReferencesSetNameTextBox";
+            this.ReferencesSetNameTextBox.ReadOnly = true;
             this.ReferencesSetNameTextBox.Size = new System.Drawing.Size(370, 34);
             this.ReferencesSetNameTextBox.TabIndex = 75;
             this.ReferencesSetNameTextBox.TextChanged += new System.EventHandler(this.ReferencesSetNameTextBox_TextChanged);

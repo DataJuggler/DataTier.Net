@@ -11,6 +11,7 @@ using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using DataTierClient.ClientUtil;
+using DataAccessComponent.Connection;
 using System.Linq;
 using ObjectLibrary.Enumerations;
 using ObjectLibrary.BusinessObjects;
@@ -94,32 +95,13 @@ namespace DataTierClient.Controls
             private void AddIGridValueInterfaceCheckBox_CheckedChanged(object sender, EventArgs e)
             {  
                 // if the SelectedProject exists
-                if (this.HasSelectedProject)
+                if ((this.HasSelectedProject) && (this.SelectedProject.HasObjectReferencesSet))
                 {
                     // Set the ProjectFolder
                     this.SelectedProject.AddIGridValueInterface = this.AddIGridValueInterfaceCheckBox.Checked;
 
-                    // if true
-                    if (SelectedProject.AddIGridValueInterface)
-                    {
-                        // If the value for the property SelectedProject.HasObjectReferencesSet is true
-                        if (SelectedProject.HasObjectReferencesSet)
-                        {
-                            // find the reference
-                            ProjectReference reference = SelectedProject.ObjectReferencesSet.References.FirstOrDefault(x => x.ReferenceName == "DataJuggler.NET.Data.Interfaces");
-
-                            // If the reference object does not exist
-                            if (NullHelper.IsNull(reference))
-                            {
-                                reference = new ProjectReference();
-                                reference.ReferencesSetId = SelectedProject.ObjectReferencesSetId;
-                                reference.ReferenceName = "DataJuggler.NET.Data.Interfaces";
-
-                                // Add this reference
-                                SelectedProject.ObjectReferencesSet.References.Add(reference);
-                            }
-                        }
-                    }
+                    // Make sure the required references are there
+                    this.SelectedProject.ObjectReferencesSet.References = ReferencesSetManager.EnsureReferences(this.SelectedProject);
 
                     // Enable Controls
                     UIEnable();

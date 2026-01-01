@@ -112,6 +112,96 @@ https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Roo
 
 # Major Fix! You Can Now Use Visual Studio 2022 or Visual Studio 2026 For Development! Thanks ChatGPT!
 
+1.1.2026 Version 6.1.0: Happy New Year! I completed a new feature Add IGridValueInterface. This is only used if 
+you are creating a project and using DataJuggler.Blazor.Components.Grid. A new Grid feature will be released soon
+that you can pass in a list of objects that implement IGridValueProvider and create the rows for you. This part needed
+to be completed first. To use this feature, edit your project and select Add select the IGridValueInterface checkbox.
+Your generated classed will then be created implementing the interface. The required interface reference is added for you.
+
+    using DataJuggler.NET.Data.Interfaces;
+
+And your class will implement the interface
+
+    public partial class RunLog : IGridValueProvider
+
+This is an example of the GetValue method that is code generated (from my Runner project). 
+The switch statement will have one case for each field in your table. Some fields taken out for brevity.
+
+    #region GetValue(string fieldName)
+    // <summary>
+    // This method returns the value for the fieldName given
+    // </summary>
+    public object GetValue(string fieldName)
+    {
+        // initial value
+        object value = "";
+        
+        // // Determine the action by the fieldName
+        switch (fieldName)
+        {  
+            case "EndTime":
+            
+            // set the value
+            value = this.EndTime;
+            
+            // required
+            break;
+            
+            case "Id":
+            
+            // set the value
+            value = this.Id;
+            
+            // required
+            break;
+            
+            case "Miles":
+            
+            // set the value
+            value = this.Miles;
+            
+            // required
+            break;
+            
+            case "Month":
+            
+            // set the value
+            value = this.Month;
+            
+            // required
+            break;
+            
+            case "Notes":
+            
+            // set the value
+            value = this.Notes;
+            
+            // required
+            break;
+            
+            case "StartTime":
+            
+            // set the value
+            value = this.StartTime;
+            
+            // required
+            break;
+            
+            case "Year":
+            
+            // set the value
+            value = this.Year;
+            
+            // required
+            break;
+            
+        }
+        
+        // return value
+        return value;
+    }
+    #endregion
+
 12.24.2025: I converted all the fonts in the app to Calibri, and increased the font sizes to either 14.25, 16 or 18. I am slightly visually impaired
 and I started working on this project when I was in my 30's and could see a lot better. ChatGPT wrote a cool script to find and replace all fonts
 in a WinForms projects. I had to manually check each control and form as many labels and buttons got smushed together. It looks better to me.

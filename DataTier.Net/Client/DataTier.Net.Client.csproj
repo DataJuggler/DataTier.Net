@@ -62,6 +62,9 @@
     <Reference Include="DataJuggler.Core.UltimateHelper, Version=1.9.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\DataJuggler.Core.UltimateHelper.1.9.3\lib\net48\DataJuggler.Core.UltimateHelper.dll</HintPath>
     </Reference>
+    <Reference Include="DataJuggler.Net, Version=6.9.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\DataJuggler.Net.6.9.3\lib\net48\DataJuggler.Net.dll</HintPath>
+    </Reference>
     <Reference Include="DataJuggler.Net.Cryptography, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\DataJuggler.Net.Cryptography.1.0.0\lib\net461\DataJuggler.Net.Cryptography.dll</HintPath>
     </Reference>
@@ -840,6 +843,7 @@
     <Compile Include="Enumerations\DataTierClient.Enumerations.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data Juggler.ico" />
     <Content Include="DataTier.Net.ico" />
     <None Include="Images\AutoFill Child Folders.png" />
     <Content Include="Images\OrderBy.png" />
@@ -910,10 +914,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\DataJuggler.Net\DataJuggler.Net.csproj">
-      <Project>{af3f5ec6-8494-4ca2-aac0-b1fa4f752ef5}</Project>
-      <Name>DataJuggler.Net</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\DataJuggler.Win.Controls\DataJuggler.Win.Controls.csproj">
       <Project>{70e97b98-9be2-4747-a3af-1c274ae401ce}</Project>
       <Name>DataJuggler.Win.Controls</Name>

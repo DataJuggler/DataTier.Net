@@ -1,12 +1,16 @@
 
 #region using statements
 
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using System.IO;
+using DataAccessComponent.Connection;
+using DataAccessComponent.DataGateway;
+using DataJuggler.Core.UltimateHelper;
 using DataTierClient.Forms;
 using ObjectLibrary.BusinessObjects;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.IO;
+using System.Windows.Forms;
 
 #endregion
 
@@ -62,6 +66,55 @@ namespace DataTierClient.ClientUtil
             }
             #endregion
              
+            #region EnsureReferences()
+            /// <summary>
+            /// returns a list of References
+            /// </summary>
+            public static List<ProjectReference> EnsureReferences(Project project)
+            {
+                // initial value
+                List<ProjectReference> references = null;
+
+                // If the project object exists
+                if (NullHelper.Exists(project))
+                {
+                    // if true
+                    if (project.AddIGridValueInterface)
+                    {
+                        // If the value for the property SelectedProject.HasObjectReferencesSet is true
+                        if (project.HasObjectReferencesSet)
+                        {
+                            // find the reference
+                            ProjectReference reference = project.ObjectReferencesSet.References.FirstOrDefault(x => x.ReferenceName == "DataJuggler.NET.Data.Interfaces");
+
+                            // If the reference object does not exist
+                            if (NullHelper.IsNull(reference))
+                            {
+                                reference = new ProjectReference();
+                                reference.ReferencesSetId = project.ObjectReferencesSetId;
+                                reference.ReferenceName = "DataJuggler.NET.Data.Interfaces";
+
+                                // Create a new instance of a 'Gateway' object.
+                                Gateway gateway = new Gateway(ConnectionConstants.Name);
+                                
+                                // Saving on the user's behalf, so they don't have to do anything.
+                                bool saved = gateway.SaveProjectReference(ref reference);
+
+                                // Add this reference
+                                project.ObjectReferencesSet.References.Add(reference);
+                            }
+
+                            // set the return value
+                            references = project.ObjectReferencesSet.References;
+                        }
+                    }
+                }
+
+                // return value
+                return references;
+            }
+            #endregion
+            
         #endregion
         
     }
