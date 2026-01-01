@@ -57,7 +57,7 @@ namespace DataTierClient.Forms
             this.DatabaseSelectorControl.Name = "DatabaseSelectorControl";
             this.DatabaseSelectorControl.SelectedDatabase = null;
             this.DatabaseSelectorControl.SelectedProject = null;
-            this.DatabaseSelectorControl.Size = new System.Drawing.Size(592, 440);
+            this.DatabaseSelectorControl.Size = new System.Drawing.Size(592, 549);
             this.DatabaseSelectorControl.TabIndex = 1;
             this.DatabaseSelectorControl.UserCancelled = true;
             // 
@@ -66,7 +66,7 @@ namespace DataTierClient.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.AliceBlue;
-            this.ClientSize = new System.Drawing.Size(592, 440);
+            this.ClientSize = new System.Drawing.Size(592, 549);
             this.Controls.Add(this.DatabaseSelectorControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DatabaseSelectorForm";

@@ -374,14 +374,18 @@ namespace DataTierClient.Builders
                 // Create New ReferencesSet
                 DataJuggler.Net.ReferencesSet refSet = new DataJuggler.Net.ReferencesSet(referencesSetName);
 
-                // Add Each References
-                foreach (ProjectReference refObject in refCol)
+                // if the referencesCollection exists
+                if (ListHelper.HasOneOrMoreItems(refCol))
                 {
-                    // Create New Reference
-                    Reference component = new Reference(refObject.ReferenceName, refObject.ReferencesId);
+                    // Add Each References
+                    foreach (ProjectReference refObject in refCol)
+                    {
+                        // Create New Reference
+                        Reference component = new Reference(refObject.ReferenceName, refObject.ReferencesId);
 
-                    // add this reference to the referencesSet
-                    refSet.Add(component);
+                        // add this reference to the referencesSet
+                        refSet.Add(component);
+                    }
                 }
 
                 // Return RefSet
@@ -443,6 +447,16 @@ namespace DataTierClient.Builders
                     
                     // Set NameSpaceName
                     this.DataManager.NamespaceName = this.CurrentProject.ObjectNamespace;
+
+                    // if the references are null
+                    if (NullHelper.IsNull(this.CurrentProject.ObjectReferencesSet.References))
+                    {
+                        // Create a new instance of a 'Gateway' object.
+                        Gateway gateway = new Gateway(ConnectionConstants.Name);
+
+                        // load the ProjectReferences
+                        gateway.LoadProjectReferencesForProject(ref currentProject);
+                    }
 
                     // Create References
                     this.DataManager.References = ConvertReferences(this.CurrentProject.ObjectReferencesSet.References, "Objects");

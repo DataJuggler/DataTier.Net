@@ -311,6 +311,9 @@ namespace DataTierClient.Controls
 
                             // save references
 							referencesSaved = gateway.SaveProjectReferences(ref selectedProject);
+
+                            // now load the references
+                            gateway.LoadProjectReferencesForProject(ref selectedProject);
                             
 							// If the references did not save
 							if ((!referencesSaved) && (error != null))
