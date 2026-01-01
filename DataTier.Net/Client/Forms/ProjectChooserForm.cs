@@ -190,7 +190,7 @@ namespace DataTierClient.Forms
 						if(dialogResult == DialogResult.Yes)
 						{	
 							// Delete the project
-							bool deleted = this.Gateway.DeleteProject(SelectedProject.ProjectId);
+							bool deleted = this.Gateway.DeleteProject(selectedProject.ProjectId);
 							
 							// if the project was deleted
 							if(deleted)
