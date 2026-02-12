@@ -20,6 +20,7 @@ using System.Drawing;
 using System.Text;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Linq;
 
 #endregion
 
@@ -399,10 +400,10 @@ namespace DataTierClient.Controls
                     DTNField field = null;
 
                     // if the SelectedTable.Fields exists and the selectedIndex is in range
-                    if ((this.HasSelectedTable) && (this.SelectedTable.HasFields) && (selectedIndex < this.SelectedTable.Fields.Count))
+                    if ((this.HasSelectedTable) && (this.SelectedTable.HasFields) && (selectedItem != null))
                     {
                         // get the Field at the SelectedIndex
-                        field = this.SelectedTable.Fields[selectedIndex];
+                        field = this.SelectedTable.Fields.FirstOrDefault(x => x.FieldName == selectedItem.ToString());
                     }
 
                     // If the field object exists
