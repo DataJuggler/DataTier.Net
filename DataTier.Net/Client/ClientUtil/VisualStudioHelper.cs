@@ -2,14 +2,18 @@
 
 #region using statements
 
+using DataJuggler.Core.UltimateHelper;
+using DataJuggler.Core.UltimateHelper.Objects;
 using DataJuggler.Net;
+using DataJuggler.Net.Enumerations;
 using DataTierClient.Objects;
 using EnvDTE;
-using System.Collections.Generic;
+using Microsoft.SqlServer.Server;
 using ObjectLibrary.BusinessObjects;
 using System;
-using DataJuggler.Core.UltimateHelper;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using static System.Net.WebRequestMethods;
 
 #endregion
@@ -25,6 +29,8 @@ namespace DataTierClient.ClientUtil
     internal class VisualStudioHelper
     {
        
+        
+
         #region Static Methods
 
             #region CheckIfFileExistsInProject(EnvDTE.Project project, ProjectFile projectFile)
@@ -234,11 +240,11 @@ namespace DataTierClient.ClientUtil
             } 
             #endregion
 
-            #region HandleUpdateProject(VisualStudioSolution visualStudioSolution, EnvDTE.Project project, List<ProjectFile> files, bool removalMode)
+            #region HandleUpdateProject(VisualStudioSolution visualStudioSolution, EnvDTE.Project project, List<ProjectFile> files, bool removalMode, TargetFrameworkEnum targetFramework)
             /// <summary>
             /// returns the Update Project
             /// </summary>
-            public static UpdateProjectResponse HandleUpdateProject(VisualStudioSolution visualStudioSolution, EnvDTE.Project project, List<ProjectFile> files, bool removalMode)
+            public static UpdateProjectResponse HandleUpdateProject(VisualStudioSolution visualStudioSolution, EnvDTE.Project project, List<ProjectFile> files, bool removalMode, TargetFrameworkEnum targetFramework)
             {
                 // initial value
                 UpdateProjectResponse response = new UpdateProjectResponse();
@@ -255,29 +261,14 @@ namespace DataTierClient.ClientUtil
                         if (removalMode)
                         {
                             // update the DataAccessComponent Project 
-                            response = RemoveFilesFromProject(project, files, DataManager.ProjectTypeEnum.ALC);
-                        }
-                        else
-                        {
-                            // update the DataAccessComponent Project 
-                            response = UpdateProject(project, files, DataManager.ProjectTypeEnum.ALC);
-                        }
-                    }
-                    // if this project name is the ApplicationLogicComponen project
-                    else if (project.Name == visualStudioSolution.DataAccessComponentProjectName)
-                    {
-                        // if removalMode
-                        if (removalMode)
-                        {
-                            // update the DataAccessComponent Project 
                             response = RemoveFilesFromProject(project, files, DataManager.ProjectTypeEnum.DAC);
                         }
                         else
                         {
                             // update the DataAccessComponent Project 
-                            response = UpdateProject(project, files, DataManager.ProjectTypeEnum.DAC);
+                            response = UpdateProject(project, files, DataManager.ProjectTypeEnum.DAC, targetFramework);
                         }
-                    }
+                    }                   
                     // if this project name is the ObjectLibrary project
                     else if (project.Name == visualStudioSolution.ObjectLibraryProjectName)
                     {  
@@ -290,7 +281,7 @@ namespace DataTierClient.ClientUtil
                         else
                         {
                             // update the DataAccessComponent Project 
-                            response = UpdateProject(project, files, DataManager.ProjectTypeEnum.ObjectLibrary);
+                            response = UpdateProject(project, files, DataManager.ProjectTypeEnum.ObjectLibrary, targetFramework);
                         }
                     }
                                     
@@ -513,79 +504,29 @@ namespace DataTierClient.ClientUtil
             }
             #endregion
             
-            #region UpdateProject(EnvDTE.Project project, IList<ProjectFile> files, DataManager.ProjectTypeEnum projectType)
+            #region UpdateProject(EnvDTE.Project project, IList<ProjectFile> files, DataManager.ProjectTypeEnum projectType, TargetFrameworkEnum targetFramework)
             /// <summary>
             /// This method updates the files for a project that are of the
             /// same project type.
             /// </summary>
             /// <param name="project"></param>
-            /// <param name="files"></param>
+            /// <param name="projectFiles"></param>
             /// <param name="projectTypeEnum"></param>
             /// <returns></returns>
-            private static UpdateProjectResponse UpdateProject(EnvDTE.Project project, List<ProjectFile> files, DataManager.ProjectTypeEnum projectType)
-            {
-                // initial value
-                UpdateProjectResponse response = new UpdateProjectResponse();
+            private static UpdateProjectResponse UpdateProject(EnvDTE.Project project, List<ProjectFile> projectFiles, DataManager.ProjectTypeEnum projectType, TargetFrameworkEnum targetFramework)
+            {   
+                // update the project files
+                UpdateProjectResponse response = ProjectHelper.UpdateProject(project, projectFiles, targetFramework, projectType);
 
                 // This is Add mode
                 response.RemoveMode = false;
-                    
-                // locals
-                bool abort = false;
-                
-                try
-                {
-                    // verify all objects exist
-                    if ((project != null) && (project.ProjectItems != null) && (files != null) && (files.Count > 0))
-                    {
-                        // iterate collection of ProjectFiles
-                        foreach (ProjectFile projectFile in files)
-                        {
-                            // reset
-                            abort = false;
-                            
-                            // if this file should go in this project
-                            if (projectFile.ProjectType == projectType)
-                            {
-                                try
-                                {
-                                    // check if the file already exists
-                                    abort = CheckIfFileExistsInProject(project.ProjectItems, projectFile);
-                                    
-                                    // if we should continue
-                                    if (!abort)
-                                    {
-                                        // This file is being attempted
-                                        response.FilesAttempted++;
-
-                                        // add this file Uncomment This
-                                        project.ProjectItems.AddFromFile(projectFile.FullFilePath);
-
-                                        // increment FilesAdded
-                                        response.FilesAdded++;
-                                    }
-                                }
-                                catch (Exception error)
-                                {
-                                    // for debugging only (for now)
-                                    response.Exceptions.Add(error);
-                                }
-                            }
-                        }
-                    }
-                }
-                catch (Exception error)
-                {
-                    // for debugging only (for now)
-                    response.Exceptions.Add(error);
-                }
                     
                 // return value
                 return response;
             }
             #endregion
 
-            #region UpdateSolution(VisualStudioSolution visualStudioSolution, string solutionFileName, List<ProjectFile> files, bool removalMode)
+            #region UpdateSolution(VisualStudioSolution visualStudioSolution, string solutionFileName, List<ProjectFile> files, bool removalMode, TargetFrameworkEnum targetFramework)
             /// <summary>
             /// This method updates your solution to include any new files
             /// that have been generated.
@@ -593,7 +534,7 @@ namespace DataTierClient.ClientUtil
             /// <param name="visualStudioSolution"></param>
             /// <param name="project"></param>
             /// <returns></returns>
-            internal static UpdateSolutionResponse UpdateSolution(VisualStudioSolution visualStudioSolution, string solutionFileName, List<ProjectFile> files, bool removalMode)
+            internal static UpdateSolutionResponse UpdateSolution(VisualStudioSolution visualStudioSolution, string solutionFileName, List<ProjectFile> files, bool removalMode, TargetFrameworkEnum targetFramework)
             {
                 // intial value
                 UpdateSolutionResponse response = new UpdateSolutionResponse();
@@ -624,7 +565,7 @@ namespace DataTierClient.ClientUtil
                             foreach (EnvDTE.Project project in solution.Projects)
                             {
                                 // Update the files in this project
-                                projectResponse = HandleUpdateProject(visualStudioSolution, project, files, removalMode);                                
+                                projectResponse = HandleUpdateProject(visualStudioSolution, project, files, removalMode, targetFramework);                                
 
                                 // Add this response
                                 response.ProjectResponses.Add(projectResponse);

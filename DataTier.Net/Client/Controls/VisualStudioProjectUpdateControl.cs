@@ -216,7 +216,7 @@ namespace DataTierClient.Controls
                     if ((!String.IsNullOrEmpty(fileName)) && (this.Files != null))
                     {
                         // update the solution
-                        response = VisualStudioHelper.UpdateSolution(this.VSSolution, fileName, this.Files.ToList(), removalMode);
+                        response = VisualStudioHelper.UpdateSolution(this.VSSolution, fileName, this.Files.ToList(), removalMode, currentProject.TargetFramework);
                     }
 
                     // If the ParentUpdateForm object exists

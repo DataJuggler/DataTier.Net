@@ -36,7 +36,7 @@ namespace DataTierClient.Builders
         /// <summary>
         /// Create a new instance of DataObjectReaderCreator
         /// </summary>
-        public DataObjectReaderCreator(List<DataTable> dataTablesArg, ReferencesSet objectReferencesArg, string rootDataObjectPathArg, string nameSpaceNameArg, ProjectFileManager fileManager, TargetFrameworkEnum targetFramework) : base(fileManager, false, false, targetFramework)
+        public DataObjectReaderCreator(List<DataTable> dataTablesArg, ReferencesSet objectReferencesArg, string rootDataObjectPathArg, string nameSpaceNameArg, ProjectFileManager fileManager, TargetFrameworkEnum targetFramework) : base(fileManager, false, false)
 		{   
 		    // Set Properties
 		    this.DataTables = dataTablesArg;

@@ -235,7 +235,7 @@ namespace DataTierClient.Builders
                 TargetFrameworkEnum targetFramework = (TargetFrameworkEnum) currentProject.TargetFramework;
                
                 // Create New ClassWriter Object
-                CSharpClassWriter classWriter = new CSharpClassWriter(fileManager, BusinessObjectPass, false, targetFramework);
+                CSharpClassWriter classWriter = new CSharpClassWriter(fileManager, BusinessObjectPass, false);
 
                 // Add Databases
                 AddDatabases(ref currentProject);

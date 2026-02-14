@@ -178,7 +178,7 @@ namespace DataTierClient.Controls
                     if ((HasSelectedProject) && (TextHelper.Exists(SelectedProject.ProjectFolder)))
                     {
                         // Test if there are any files in this directory
-                        List<string> files = FileHelper.GetFiles(SelectedProject.ProjectFolder, "", false);
+                        List<string> files = FileHelper.GetFiles(SelectedProject.ProjectFolder);
 
                         // If the files collection exists and has one or more items
                         if (ListHelper.HasOneOrMoreItems(files))

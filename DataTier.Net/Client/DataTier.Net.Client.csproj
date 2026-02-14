@@ -59,11 +59,11 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DataJuggler.Core.UltimateHelper, Version=1.9.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DataJuggler.Core.UltimateHelper.1.9.3\lib\net48\DataJuggler.Core.UltimateHelper.dll</HintPath>
+    <Reference Include="DataJuggler.Core.UltimateHelper, Version=1.9.12.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\DataJuggler.Core.UltimateHelper.1.9.12\lib\net48\DataJuggler.Core.UltimateHelper.dll</HintPath>
     </Reference>
-    <Reference Include="DataJuggler.Net, Version=6.9.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DataJuggler.Net.6.9.5\lib\net48\DataJuggler.Net.dll</HintPath>
+    <Reference Include="DataJuggler.Net, Version=6.9.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\DataJuggler.Net.6.9.9\lib\net48\DataJuggler.Net.dll</HintPath>
     </Reference>
     <Reference Include="DataJuggler.Net.Cryptography, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\DataJuggler.Net.Cryptography.1.0.0\lib\net461\DataJuggler.Net.Cryptography.dll</HintPath>
@@ -80,8 +80,8 @@
     <Reference Include="Konscious.Security.Cryptography.Blake2, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Konscious.Security.Cryptography.Blake2.1.1.1\lib\net46\Konscious.Security.Cryptography.Blake2.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=10.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.Bcl.AsyncInterfaces.10.0.1\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=10.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Bcl.AsyncInterfaces.10.0.3\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=13.100.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
@@ -128,8 +128,8 @@
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IO.Compression" />
-    <Reference Include="System.IO.Pipelines, Version=10.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.IO.Pipelines.10.0.1\lib\net462\System.IO.Pipelines.dll</HintPath>
+    <Reference Include="System.IO.Pipelines, Version=10.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.IO.Pipelines.10.0.3\lib\net462\System.IO.Pipelines.dll</HintPath>
     </Reference>
     <Reference Include="System.Memory, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Memory.4.6.3\lib\net462\System.Memory.dll</HintPath>
@@ -145,11 +145,11 @@
     </Reference>
     <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Text.Encodings.Web, Version=10.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Text.Encodings.Web.10.0.1\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    <Reference Include="System.Text.Encodings.Web, Version=10.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Text.Encodings.Web.10.0.3\lib\net462\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
-    <Reference Include="System.Text.Json, Version=10.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Text.Json.10.0.1\lib\net462\System.Text.Json.dll</HintPath>
+    <Reference Include="System.Text.Json, Version=10.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Text.Json.10.0.3\lib\net462\System.Text.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Threading.Tasks.Extensions.4.6.3\lib\net462\System.Threading.Tasks.Extensions.dll</HintPath>
@@ -184,6 +184,7 @@
     <Compile Include="ClientUtil\MessageFilter.cs" />
     <Compile Include="ClientUtil\DotNetCLIHelper.cs" />
     <Compile Include="ClientUtil\MessageHelper.cs" />
+    <Compile Include="ClientUtil\ProjectHelper.cs" />
     <Compile Include="ClientUtil\ReferencesSetManager.cs" />
     <Compile Include="ClientUtil\SerializationManager.cs" />
     <Compile Include="ClientUtil\SQLSMOHelper.cs" />

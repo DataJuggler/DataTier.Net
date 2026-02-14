@@ -149,13 +149,13 @@ namespace DataTierClient.Controls
             // WarningLabel
             // 
             this.WarningLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WarningLabel.ForeColor = System.Drawing.Color.Red;
+            this.WarningLabel.ForeColor = System.Drawing.Color.LightSlateGray;
             this.WarningLabel.Location = new System.Drawing.Point(53, 225);
             this.WarningLabel.Name = "WarningLabel";
             this.WarningLabel.Size = new System.Drawing.Size(548, 24);
             this.WarningLabel.TabIndex = 114;
-            this.WarningLabel.Text = "Warning: This may take several minutes or longer on large projects.";
-            this.WarningLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.WarningLabel.Text = "Your Project Files are Backed Up.\r\n\r\n";
+            this.WarningLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // CancelUpdateButton
             // 

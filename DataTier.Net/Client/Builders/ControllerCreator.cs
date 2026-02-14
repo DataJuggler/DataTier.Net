@@ -36,7 +36,7 @@ namespace DataTierClient.Builders
 		/// <summary>
         /// Create a new instance of a ControllerCreator object
         /// </summary>
-        public ControllerCreator(List<DataTable> dataTablesArg, DataJuggler.Net.ReferencesSet objectReferencesArg, string rootControllerPathArg, string projectNameArg, string nameSpaceNameArg, ProjectFileManager fileManager, TargetFrameworkEnum targetFramework, Project selectedProject) : base(fileManager, false, false, targetFramework)
+        public ControllerCreator(List<DataTable> dataTablesArg, DataJuggler.Net.ReferencesSet objectReferencesArg, string rootControllerPathArg, string projectNameArg, string nameSpaceNameArg, ProjectFileManager fileManager, TargetFrameworkEnum targetFramework, Project selectedProject) : base(fileManager, false, false)
 		{   
 		    // Store args
 		    DataTables = dataTablesArg;
@@ -257,23 +257,11 @@ namespace DataTierClient.Builders
                 // Write Open Bracket
                 WriteOpenBracket(true);
 
-                // Write Comment (plain English for non-programmers)
-                WriteComment("If the dataManager exists and has an ErrorHandler");
-
-                // Write if ((dataManager != null) && (dataManager.HasErrorHandler))
-                WriteLine("if ((dataManager != null) && (dataManager.HasErrorHandler))");
-
-                // Write Open Bracket
-                WriteOpenBracket(true);
-
                 // Write Comment (technical)
                 WriteComment("Log the error");
 
                 // Write LogError call
-                WriteLine("dataManager.ErrorHandler.LogError(methodName, objectName, error);");
-
-                // Write Close Bracket (if)
-                WriteCloseBracket(true);
+                WriteLine("ErrorHandler.LogError(methodName, objectName, error);");
 
                 // Write Close Bracket (catch)
                 WriteCloseBracket(true);
@@ -301,12 +289,6 @@ namespace DataTierClient.Builders
                 // Write blank line
                 WriteLine();
 
-                // Write Line To Log The Current Error
-                WriteComment("if the dataManager exists and the dataManager has an ErrorHandler");
-
-                // write line testing for dataManager.ErrorHandler exists
-                WriteLine("if (dataManager != null) && (dataManager.HasErrorHandler))");
-
                 // Write an open bracket 
                 WriteOpenBracket(true);
 
@@ -314,10 +296,7 @@ namespace DataTierClient.Builders
                 WriteComment("Log the error");
 
                 // Write Line ErrorHandler.LogError(methodName, objectName, error);
-                WriteLine("dataManager.ErrorHandler.LogError(methodName, objectName, error);");
-
-                // Write Close Bracket
-                WriteCloseBracket(true);
+                WriteLine("ErrorHandler.LogError(methodName, objectName, error);");
 
                 // Write Close Bracket
                 WriteCloseBracket(true);
