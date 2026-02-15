@@ -134,18 +134,10 @@ namespace DataTierClient.ClientUtil
                                         // add this project name to all projects.
                                         solution.AllSolutionProjects.Add(projectName);
                                         
-                                        // check the index of different names
-                                        alcIndex = projectName.IndexOf("DataAccessComponent");
+                                        // check the index of different names                                        
                                         dacIndex = projectName.IndexOf("DataAccessComponent");
                                         objectLibraryIndex = projectName.IndexOf("ObjectLibrary");
-                                            
-                                        // if the alcIndex was found
-                                        if (alcIndex >= 0)
-                                        {
-                                            // set the project name
-                                            solution.DataAccessComponentProjectName = projectName;
-                                        }
-
+                                        
                                         // if the dacIndex was found
                                         if (dacIndex >= 0)
                                         {

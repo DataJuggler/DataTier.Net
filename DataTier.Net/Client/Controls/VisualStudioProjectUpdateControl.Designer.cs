@@ -17,15 +17,12 @@ namespace DataTierClient.Controls
         private System.ComponentModel.IContainer components = null;
         private System.Windows.Forms.TextBox SolutionTextBox;
         private System.Windows.Forms.Label SolutionLabel;
-        private System.Windows.Forms.TextBox ALCTextBox;
-        private System.Windows.Forms.Label ALCLabel;
         private System.Windows.Forms.TextBox ObjectLibraryTextBox;
         private System.Windows.Forms.Label ObjectLibraryLabel;
         private System.Windows.Forms.Label DACLabel;
         private System.Windows.Forms.TextBox DACTextBox;
         private System.Windows.Forms.Label WarningLabel;
         private TabButton SolutionBrowseButton;
-        private TabButton ALCBrowseButton;
         private TabButton DACBrowseButton;
         private TabButton ObjectLibraryBrowseButton;
         private TabButton UpdateProjectButton;
@@ -59,8 +56,6 @@ namespace DataTierClient.Controls
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VisualStudioProjectUpdateControl));
             this.SolutionTextBox = new System.Windows.Forms.TextBox();
             this.SolutionLabel = new System.Windows.Forms.Label();
-            this.ALCTextBox = new System.Windows.Forms.TextBox();
-            this.ALCLabel = new System.Windows.Forms.Label();
             this.ObjectLibraryTextBox = new System.Windows.Forms.TextBox();
             this.ObjectLibraryLabel = new System.Windows.Forms.Label();
             this.DACLabel = new System.Windows.Forms.Label();
@@ -70,7 +65,6 @@ namespace DataTierClient.Controls
             this.UpdateProjectButton = new DataTierClient.Controls.TabButton();
             this.ObjectLibraryBrowseButton = new DataTierClient.Controls.TabButton();
             this.DACBrowseButton = new DataTierClient.Controls.TabButton();
-            this.ALCBrowseButton = new DataTierClient.Controls.TabButton();
             this.SolutionBrowseButton = new DataTierClient.Controls.TabButton();
             this.SuspendLayout();
             // 
@@ -92,28 +86,10 @@ namespace DataTierClient.Controls
             this.SolutionLabel.Text = "Solution File:";
             this.SolutionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // ALCTextBox
-            // 
-            this.ALCTextBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ALCTextBox.Location = new System.Drawing.Point(161, 74);
-            this.ALCTextBox.Name = "ALCTextBox";
-            this.ALCTextBox.Size = new System.Drawing.Size(440, 34);
-            this.ALCTextBox.TabIndex = 109;
-            // 
-            // ALCLabel
-            // 
-            this.ALCLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ALCLabel.Location = new System.Drawing.Point(21, 79);
-            this.ALCLabel.Name = "ALCLabel";
-            this.ALCLabel.Size = new System.Drawing.Size(140, 24);
-            this.ALCLabel.TabIndex = 108;
-            this.ALCLabel.Text = "ALC Project:";
-            this.ALCLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // ObjectLibraryTextBox
             // 
             this.ObjectLibraryTextBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ObjectLibraryTextBox.Location = new System.Drawing.Point(161, 178);
+            this.ObjectLibraryTextBox.Location = new System.Drawing.Point(161, 126);
             this.ObjectLibraryTextBox.Name = "ObjectLibraryTextBox";
             this.ObjectLibraryTextBox.Size = new System.Drawing.Size(440, 34);
             this.ObjectLibraryTextBox.TabIndex = 112;
@@ -121,7 +97,7 @@ namespace DataTierClient.Controls
             // ObjectLibraryLabel
             // 
             this.ObjectLibraryLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ObjectLibraryLabel.Location = new System.Drawing.Point(21, 183);
+            this.ObjectLibraryLabel.Location = new System.Drawing.Point(21, 131);
             this.ObjectLibraryLabel.Name = "ObjectLibraryLabel";
             this.ObjectLibraryLabel.Size = new System.Drawing.Size(140, 24);
             this.ObjectLibraryLabel.TabIndex = 111;
@@ -131,7 +107,7 @@ namespace DataTierClient.Controls
             // DACLabel
             // 
             this.DACLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DACLabel.Location = new System.Drawing.Point(19, 131);
+            this.DACLabel.Location = new System.Drawing.Point(19, 79);
             this.DACLabel.Name = "DACLabel";
             this.DACLabel.Size = new System.Drawing.Size(140, 24);
             this.DACLabel.TabIndex = 105;
@@ -141,7 +117,7 @@ namespace DataTierClient.Controls
             // DACTextBox
             // 
             this.DACTextBox.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DACTextBox.Location = new System.Drawing.Point(161, 126);
+            this.DACTextBox.Location = new System.Drawing.Point(161, 74);
             this.DACTextBox.Name = "DACTextBox";
             this.DACTextBox.Size = new System.Drawing.Size(440, 34);
             this.DACTextBox.TabIndex = 106;
@@ -150,7 +126,7 @@ namespace DataTierClient.Controls
             // 
             this.WarningLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.WarningLabel.ForeColor = System.Drawing.Color.LightSlateGray;
-            this.WarningLabel.Location = new System.Drawing.Point(53, 225);
+            this.WarningLabel.Location = new System.Drawing.Point(53, 173);
             this.WarningLabel.Name = "WarningLabel";
             this.WarningLabel.Size = new System.Drawing.Size(548, 24);
             this.WarningLabel.TabIndex = 114;
@@ -164,7 +140,7 @@ namespace DataTierClient.Controls
             this.CancelUpdateButton.ButtonNumber = 0;
             this.CancelUpdateButton.ButtonText = "Cancel";
             this.CancelUpdateButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CancelUpdateButton.Location = new System.Drawing.Point(576, 272);
+            this.CancelUpdateButton.Location = new System.Drawing.Point(576, 252);
             this.CancelUpdateButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.CancelUpdateButton.Name = "CancelUpdateButton";
             this.CancelUpdateButton.NotSelectedImage = null;
@@ -181,7 +157,7 @@ namespace DataTierClient.Controls
             this.UpdateProjectButton.ButtonNumber = 0;
             this.UpdateProjectButton.ButtonText = "Update Projects";
             this.UpdateProjectButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UpdateProjectButton.Location = new System.Drawing.Point(420, 272);
+            this.UpdateProjectButton.Location = new System.Drawing.Point(420, 252);
             this.UpdateProjectButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.UpdateProjectButton.Name = "UpdateProjectButton";
             this.UpdateProjectButton.NotSelectedImage = null;
@@ -198,7 +174,7 @@ namespace DataTierClient.Controls
             this.ObjectLibraryBrowseButton.ButtonNumber = 4;
             this.ObjectLibraryBrowseButton.ButtonText = "...";
             this.ObjectLibraryBrowseButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ObjectLibraryBrowseButton.Location = new System.Drawing.Point(600, 179);
+            this.ObjectLibraryBrowseButton.Location = new System.Drawing.Point(600, 127);
             this.ObjectLibraryBrowseButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ObjectLibraryBrowseButton.Name = "ObjectLibraryBrowseButton";
             this.ObjectLibraryBrowseButton.NotSelectedImage = null;
@@ -215,7 +191,7 @@ namespace DataTierClient.Controls
             this.DACBrowseButton.ButtonNumber = 3;
             this.DACBrowseButton.ButtonText = "...";
             this.DACBrowseButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DACBrowseButton.Location = new System.Drawing.Point(600, 127);
+            this.DACBrowseButton.Location = new System.Drawing.Point(600, 75);
             this.DACBrowseButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.DACBrowseButton.Name = "DACBrowseButton";
             this.DACBrowseButton.NotSelectedImage = null;
@@ -224,23 +200,6 @@ namespace DataTierClient.Controls
             this.DACBrowseButton.ShowNotSelectedImageWhenDisabled = true;
             this.DACBrowseButton.Size = new System.Drawing.Size(40, 32);
             this.DACBrowseButton.TabIndex = 117;
-            // 
-            // ALCBrowseButton
-            // 
-            this.ALCBrowseButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ALCBrowseButton.BackgroundImage")));
-            this.ALCBrowseButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ALCBrowseButton.ButtonNumber = 2;
-            this.ALCBrowseButton.ButtonText = "...";
-            this.ALCBrowseButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ALCBrowseButton.Location = new System.Drawing.Point(600, 75);
-            this.ALCBrowseButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.ALCBrowseButton.Name = "ALCBrowseButton";
-            this.ALCBrowseButton.NotSelectedImage = null;
-            this.ALCBrowseButton.Selected = false;
-            this.ALCBrowseButton.SelectedImage = null;
-            this.ALCBrowseButton.ShowNotSelectedImageWhenDisabled = true;
-            this.ALCBrowseButton.Size = new System.Drawing.Size(40, 32);
-            this.ALCBrowseButton.TabIndex = 116;
             // 
             // SolutionBrowseButton
             // 
@@ -268,19 +227,16 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.UpdateProjectButton);
             this.Controls.Add(this.ObjectLibraryBrowseButton);
             this.Controls.Add(this.DACBrowseButton);
-            this.Controls.Add(this.ALCBrowseButton);
             this.Controls.Add(this.SolutionBrowseButton);
             this.Controls.Add(this.WarningLabel);
             this.Controls.Add(this.ObjectLibraryTextBox);
             this.Controls.Add(this.ObjectLibraryLabel);
-            this.Controls.Add(this.ALCTextBox);
-            this.Controls.Add(this.ALCLabel);
             this.Controls.Add(this.DACTextBox);
             this.Controls.Add(this.DACLabel);
             this.Controls.Add(this.SolutionTextBox);
             this.Controls.Add(this.SolutionLabel);
             this.Name = "VisualStudioProjectUpdateControl";
-            this.Size = new System.Drawing.Size(680, 320);
+            this.Size = new System.Drawing.Size(680, 300);
             this.ResumeLayout(false);
             this.PerformLayout();
 

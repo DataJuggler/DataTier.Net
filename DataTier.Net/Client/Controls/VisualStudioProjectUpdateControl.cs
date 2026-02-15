@@ -54,23 +54,7 @@ namespace DataTierClient.Controls
         #endregion
 
         #region Events
-
-            #region ALCBrowseButton_Click(object sender, EventArgs e)
-            /// <summary>
-            /// This event is fired when theuser click the 'ALCBrowseButton'.
-            /// This is used to select the project in the solution if the
-            /// name of the project has been changed from the default
-            /// 'DataAccessComponent'.
-            /// </summary>
-            /// <param name="sender"></param>
-            /// <param name="e"></param>
-            private void ALCBrowseButton_Click(object sender, EventArgs e)
-            {
-                // select the project
-                SelectProject(this.ALCTextBox);
-            }
-            #endregion
-
+    
             #region CancelUpdateButton_Click(object sender, EventArgs e)
             /// <summary>
             /// This event cancels this update.
@@ -177,7 +161,8 @@ namespace DataTierClient.Controls
                     // create a message to show to the user
                     string message = "There was an error reading your solution. The error thrown was:" + Environment.NewLine + error.ToString();
                     string title = "Visual Studio Update Failure";
-                    MessageHelper.DisplayMessage(message, title);
+                    // MessageHelper.DisplayMessage(message, title);
+                    MessageBox.Show(message, title);
                 }
             }
             #endregion
@@ -320,22 +305,19 @@ namespace DataTierClient.Controls
             /// Display the visual solution.
             /// </summary>
             private void DisplayVSSolution()
-            {
-                string alcProjectName = "";
+            {   
                 string dacProjectName = "";
                 string objectLibraryProjectName = "";
                 
                 // if the VSSolution exists
                 if (this.HasVSSolution)
                 {
-                    // set the values to display
-                    alcProjectName = this.VSSolution.DataAccessComponentProjectName;
+                    // set the values to display                    
                     dacProjectName = this.VSSolution.DataAccessComponentProjectName;
                     objectLibraryProjectName = this.VSSolution.ObjectLibraryProjectName;
                 }
                 
-                // display values now
-                this.ALCTextBox.Text = alcProjectName;
+                // display values now                
                 this.DACTextBox.Text = dacProjectName;
                 this.ObjectLibraryTextBox.Text = objectLibraryProjectName;
                 
@@ -374,14 +356,6 @@ namespace DataTierClient.Controls
 
                                 // Browse for the solution
                                 SolutionBrowseButton_Click(this, null);
-
-                                // required
-                                break;
-
-                            case 2:
-
-                                // Browse for the ALC
-                                ALCBrowseButton_Click(this, null);
 
                                 // required
                                 break;
@@ -463,16 +437,6 @@ namespace DataTierClient.Controls
                 // set the current project
                 this.CurrentProject = currentProject;
 
-                if (CurrentProject != null)
-                {
-                    if (CurrentProject.TemplateVersion == 2)
-                    {
-                        ALCBrowseButton.Visible = false;
-                        ALCTextBox.Visible = false;
-                        ALCLabel.Visible = false;
-                    }
-                }
-                
                 // set the files
                 this.Files = files;
 
@@ -503,8 +467,7 @@ namespace DataTierClient.Controls
                 // enable the button if this is valid
                 this.UpdateProjectButton.Enabled = isValid;
                 
-                // enable the browse buttons if there are solution projects
-                this.ALCBrowseButton.Enabled = hasSolutionProjects;
+                // enable the browse buttons if there are solution projects                
                 this.DACBrowseButton.Enabled = hasSolutionProjects;
                 this.ObjectLibraryBrowseButton.Enabled = hasSolutionProjects;
             }
