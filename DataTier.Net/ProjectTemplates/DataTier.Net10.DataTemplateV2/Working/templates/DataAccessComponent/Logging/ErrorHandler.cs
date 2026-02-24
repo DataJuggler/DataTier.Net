@@ -24,18 +24,13 @@ namespace DataAccessComponent.Logging
     public class ErrorHandler
     {
         
-        #region Private Variables
-        private List<Exception> exceptions;
-        #endregion
-
         #region Constructor
         /// <summary>
         /// Create a new instance of an ErrorHandler object
         /// </summary>
         public ErrorHandler()
         {
-            // Create a new collection of 'Exception' objects.
-            Exceptions = new List<Exception>();
+            
         }
         #endregion
 
@@ -102,20 +97,13 @@ namespace DataAccessComponent.Logging
             /// <summary>
             /// method Log Error
             /// </summary>
-            public void LogError(CustomException exception)
+            public static void LogError(CustomException exception)
             {
                 try
                 {
                     // verify exception exists
                     if (exception != null)
                     {
-                        // if the value for HasExceptions is true
-                        if (HasExceptions)
-                        {
-                            // Add this error
-                            Exceptions.Add(exception);
-                        }
-
                         // Log the error to a file.
                         LogErrorToFile(exception);
 
@@ -134,7 +122,7 @@ namespace DataAccessComponent.Logging
             /// This class logs errors as they come in.
             /// </summary>
             /// <param name="error"></param>
-            public void LogError(string methodName, string objectName, object errorObject)
+            public static void LogError(string methodName, string objectName, object errorObject)
             {
                 // locals
                 CustomException exception = null;
@@ -173,7 +161,7 @@ namespace DataAccessComponent.Logging
             /// <summary>
             /// event is fired when Log Error As System Event
             /// </summary>
-            private void LogErrorAsSystemEvent(CustomException exception)
+            private static void LogErrorAsSystemEvent(CustomException exception)
             {
                 // set the eventLogResourceName
                 string eventLogResourceName = EnvironmentVariableHelper.GetEnvironmentVariableValue(ConnectionConstants.LogEventResourceName, EnvironmentVariableTarget.User);
@@ -202,10 +190,10 @@ namespace DataAccessComponent.Logging
             /// This method logs an error to a file.
             /// </summary>
             /// <param name="error"></param>
-            private void LogErrorToFile(CustomException error)
+            private static void LogErrorToFile(CustomException error)
             {
                 // if the Error exists and the Exceptions exist
-                if ((NullHelper.Exists(error)) && (HasExceptions))
+                if (NullHelper.Exists(error))
                 {
                     // local
                     StreamWriter writer = null;
@@ -243,38 +231,6 @@ namespace DataAccessComponent.Logging
                         // set writer to nothing
                         writer = null;
                     }
-                }
-            }
-            #endregion
-            
-        #endregion
-        
-        #region Properties
-            
-            #region Exceptions
-            /// <summary>
-            /// This property gets or sets the value for 'Exceptions'.
-            /// </summary>
-            public List<Exception> Exceptions
-            {
-                get { return exceptions; }
-                set { exceptions = value; }
-            }
-            #endregion
-            
-            #region HasExceptions
-            /// <summary>
-            /// This property returns true if this object has an 'Exceptions'.
-            /// </summary>
-            public bool HasExceptions
-            {
-                get
-                {
-                    // initial value
-                    bool hasExceptions = (Exceptions != null);
-
-                    // return value
-                    return hasExceptions;
                 }
             }
             #endregion

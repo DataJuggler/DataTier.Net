@@ -55,7 +55,7 @@ namespace DataTierClient.Controls
         private const string InstallDataTierNet8 = "dotnet new install DataJuggler.DataTier.NET8.ProjectTemplates@8.0.0 --force";
         private const string InstallDataTierNet8V2 = "dotnet new install DataJuggler.DataTier.NET8.ProjectTemplatesV2@8.0.0 --force";
         private const string InstallDataTierNet9V2 = "dotnet new install DataJuggler.DataTier.Net9.ProjectTemplatesV2@9.10.7 --force";
-        private const string InstallDataTierNet10V2 = "dotnet new install DataJuggler.DataTier.Net10.ProjectTemplatesV2@10.0.5 --force";
+        private const string InstallDataTierNet10V2 = "dotnet new install DataJuggler.DataTier.Net10.ProjectTemplatesV2@10.0.9 --force";
         
         // Used to install the Project Templates on the ProjectEditorControl.cs
         private const int GraphWidth = 268;

@@ -118,33 +118,6 @@ namespace DataAccessComponent.DataGateway
             }
             #endregion
 
-            #region GetLastException()
-            /// <summary>
-            /// This method returns the last Exception from the AppController if one exists.
-            /// Always test for null before refeferencing the Exception returned as it will be null 
-            /// if no errors were encountered.
-            /// </summary>
-            /// <returns></returns>
-            public Exception GetLastException()
-            {
-                // initial value
-                Exception exception = null;
-
-                // if the value for HasErrorHandler is true
-                if ((HasErrorHandler) && (ErrorHandler.HasExceptions))
-                {
-                    // return the Exception from the AppController
-                    exception = AppController.DataManager.ErrorHandler.Exceptions.LastOrDefault();
-
-                    // Set to null after the exception is retrieved so it does not return again
-                    AppController.Exception = null;
-                }
-
-                // return value
-                return exception;
-            }
-            #endregion
-
             #region Init()
             /// <summary>
             /// Perform Initializations for this object.

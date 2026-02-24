@@ -102,7 +102,7 @@ namespace DataAccessComponent.Controllers
                 catch (Exception exception)
                 {
                     // Log the error
-                    dataManager.ErrorHandler.LogError("TestDatabaseConnection", "ApplicationController", exception);
+                    ErrorHandler.LogError("TestDatabaseConnection", "ApplicationController", exception);
                 }
 
                 // return value

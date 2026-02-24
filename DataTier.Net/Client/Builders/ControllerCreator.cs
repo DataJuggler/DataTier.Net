@@ -289,16 +289,13 @@ namespace DataTierClient.Builders
                 // Write blank line
                 WriteLine();
 
-                // Write an open bracket 
-                WriteOpenBracket(true);
-
                 // Write a comment
                 WriteComment("Log the error");
 
                 // Write Line ErrorHandler.LogError(methodName, objectName, error);
                 WriteLine("ErrorHandler.LogError(methodName, objectName, error);");
 
-                // Write Close Bracket
+                // Write the Close for the catch
                 WriteCloseBracket(true);
             }
             #endregion

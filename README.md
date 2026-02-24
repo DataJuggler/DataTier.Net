@@ -110,6 +110,11 @@ https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Roo
 
 # Updates & News
 
+# Project Templates have been updated for .NET 10.
+
+I may have broken new projects of old .NET Framework / .NET Core projects, but .NET 10 project tempaltes have been updated.
+.NET 10 is recommended for new projects and the most tested going forward.
+
 # Major Fix! You Can Now Use Visual Studio 2022 or Visual Studio 2026 For Development! Thanks ChatGPT!
 
 1.1.2026 Version 6.1.0: Happy New Year! I completed a new feature Add IGridValueInterface. This is only used if 
