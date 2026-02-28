@@ -5,6 +5,7 @@ using DataAccessComponent.Connection;
 using DataAccessComponent.Controllers;
 using DataAccessComponent.Data;
 using DataAccessComponent.DataOperations;
+using DataJuggler.UltimateHelper;
 using System;
 using System.Collections.Generic;
 
@@ -115,7 +116,12 @@ namespace DataAccessComponent.DataBridge
                 }
                 catch (Exception error)
                 {
-                                  
+                    // if the dataManager.Exceptions exist
+                    if ((NullHelper.Exists(dataManager)) && (dataManager.HasExceptions))
+                    {
+                        // Add this item
+                        dataManager.Exceptions.Add(error);
+                    }
                 }
                 finally
                 {

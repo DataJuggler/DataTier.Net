@@ -110,6 +110,19 @@ https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Roo
 
 # Updates & News
 
+2.28.2026: Gateway.GetLastException is back. I found a new way to get all the exceptions. The project Templates have been updated
+where the Data Bridge Manager class now adds any Exceptions to DataManager.Exceptions. 
+
+To get to the last exception
+
+    // Get the last exception
+    Exception error = gateway.GetLastException();
+
+To get all exceptions
+
+    // Get all the exceptions
+    List<Exception> exceptions = gateway.AppController.DataManager.Exceptions;
+
 # Project Templates have been updated for .NET 10.
 
 I may have broken new projects of old .NET Framework / .NET Core projects, but .NET 10 project tempaltes have been updated.

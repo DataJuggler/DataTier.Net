@@ -118,6 +118,27 @@ namespace DataAccessComponent.DataGateway
             }
             #endregion
 
+            #region GetLastException()
+            /// <summary>
+            /// returns the Last Exception
+            /// </summary>
+            public Exception GetLastException()
+            {
+                // initial value
+                Exception lastException = null;
+
+                // if the value for HasDataManager is true and DataManager.HasExceptions is true
+                if ((HasDataManager) && (DataManager.HasExceptions))
+                {
+                    // set the return value
+                    lastException = DataManager.Exceptions.LastOrDefault();
+                }
+
+                // return value
+                return lastException;
+            }
+            #endregion
+
             #region Init()
             /// <summary>
             /// Perform Initializations for this object.
@@ -211,31 +232,6 @@ namespace DataAccessComponent.DataGateway
             }
             #endregion
 
-            #region ErrorHandler
-            /// <summary>
-            /// This read only property returns the value of ErrorHandler from the object DataManager.
-            /// </summary>
-            public ErrorHandler ErrorHandler
-            {
-
-                get
-                {
-                    // initial value
-                    ErrorHandler errorHandler = null;
-
-                    // if DataManager exists
-                    if (HasDataManager)
-                    {
-                        // set the return value
-                        errorHandler = DataManager.ErrorHandler;
-                    }
-
-                    // return value
-                    return errorHandler;
-                }
-            }
-            #endregion
-
             #region HasAppController
             /// <summary>
             /// This property returns true if this object has an 'AppController'.
@@ -283,23 +279,6 @@ namespace DataAccessComponent.DataGateway
 
                     // return value
                     return hasDataManager;
-                }
-            }
-            #endregion
-            
-            #region HasErrorHandler
-            /// <summary>
-            /// This property returns true if this object has an 'ErrorHandler'.
-            /// </summary>
-            public bool HasErrorHandler
-            {
-                get
-                {
-                    // initial value
-                    bool hasErrorHandler = (ErrorHandler != null);
-
-                    // return value
-                    return hasErrorHandler;
                 }
             }
             #endregion
