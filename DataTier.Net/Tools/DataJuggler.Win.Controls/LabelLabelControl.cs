@@ -123,26 +123,25 @@ namespace DataJuggler.Win.Controls
             
             #region LabelTextAlign
             /// <summary>
-            /// This property gets or sets the value for 'LabelTextAlign'.
+            /// Set the TextAlign for the label.
             /// </summary>
+            [Browsable(true)]
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
             public ContentAlignment LabelTextAlign
             {
-                get 
-                {
-                    // set the value
-                    labelTextAlign = this.Label.TextAlign;
-
-                    // return value
-                    return labelTextAlign;
-                }
+                get { return labelTextAlign; }
                 set 
-                {
+                {   
                     // set the value
-                    labelTextAlign = value;
-
-                    this.Label.TextAlign = value;
+                    labelTextAlign = value; 
+                    
+                    if ((this.Label != null) && (value != 0))
+                    {
+                        // set the value
+                        this.Label.TextAlign = value;
+                    }
                 }
-            }
+            } 
             #endregion
             
             #region LabelWidth
@@ -174,13 +173,20 @@ namespace DataJuggler.Win.Controls
             /// <summary>
             /// This property gets or sets the value for 'Text'.
             /// </summary>
-            [EditorBrowsable(EditorBrowsableState.Always), Browsable(true), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible), Bindable(true)]
+            [EditorBrowsable(EditorBrowsableState.Always), Browsable(true), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Bindable(true)]
             public override string Text
             {
                 get 
                 { 
                     // set the value
-                    text = this.ValueLabel.Text;
+                    text = "";
+                    
+                    // if the ValueLabel exists
+                    if (this.ValueLabel != null)
+                    {
+                        // set the return value
+                        text = this.ValueLabel.Text;
+                    }
 
                     // return value
                     return text; 
@@ -190,8 +196,12 @@ namespace DataJuggler.Win.Controls
                     // set the value
                     text = value;
 
-                    // Set the value on the control
-                    this.ValueLabel.Text = text;
+                    // if the ValueLabel exists
+                    if (this.ValueLabel != null)
+                    {
+                        // Set the value on the control
+                        this.ValueLabel.Text = text;
+                    }
                 }
             }
             #endregion
@@ -250,6 +260,8 @@ namespace DataJuggler.Win.Controls
             /// <summary>
             /// This property gets or sets the value for 'ValueLabelTextAlign'.
             /// </summary>
+            [Browsable(true)]
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
             public ContentAlignment ValueLabelTextAlign
             {
                 get

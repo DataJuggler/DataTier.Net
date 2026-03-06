@@ -35,7 +35,7 @@
             // Label
             // 
             this.Label.Dock = System.Windows.Forms.DockStyle.Left;
-            this.Label.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Label.Location = new System.Drawing.Point(0, 0);
             this.Label.Name = "Label";
             this.Label.Size = new System.Drawing.Size(140, 28);
@@ -46,7 +46,7 @@
             // ValueLabel
             // 
             this.ValueLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ValueLabel.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ValueLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ValueLabel.Location = new System.Drawing.Point(140, 0);
             this.ValueLabel.Name = "ValueLabel";
             this.ValueLabel.Size = new System.Drawing.Size(220, 28);
@@ -58,7 +58,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.ValueLabel);
             this.Controls.Add(this.Label);
-            this.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Verdana", 12F);
             this.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.Name = "LabelLabelControl";
             this.Size = new System.Drawing.Size(360, 28);

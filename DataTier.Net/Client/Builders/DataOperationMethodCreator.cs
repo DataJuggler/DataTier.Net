@@ -352,7 +352,7 @@ namespace DataTierClient.Builders
                 WriteComment("Initial Value");
 
                 // Write Line For Delete
-                WriteLine("PolymorphicObject returnObject = new PolymorphicObject();");
+                WriteLine("PolymorphicObject result = new PolymorphicObject();");
 
                 // Write Blank Line
                 WriteLine();
@@ -463,11 +463,11 @@ namespace DataTierClient.Builders
                 // Write blank line
                 WriteLine();
                 
-                // Write comment  Create returnObject.Boolean
-                WriteComment("Create returnObject.Boolean");
+                // Write comment  Create result.Boolean
+                WriteComment("Create result.Boolean");
                 
                 // get line to create return object
-                string createReturnObject = "returnObject.Boolean = new NullableBoolean();";
+                string createReturnObject = "result.Boolean = new NullableBoolean();";
 
                 // Write createReturnObject
                 WriteLine(createReturnObject);
@@ -484,11 +484,11 @@ namespace DataTierClient.Builders
                 // Write OpenBracket
                 WriteOpenBracket(true);
                 
-                // Write Comment Set returnObject.Boolean.Value to true
-                WriteComment("Set returnObject.Boolean.Value to true");
+                // Write Comment Set result.Boolean.Value to true
+                WriteComment("Set result.Boolean.Value to true");
                 
                 // now set the value to true
-                WriteLine("returnObject.Boolean.Value = NullableBooleanEnum.True;");
+                WriteLine("result.Boolean.Value = NullableBooleanEnum.True;");
                 
                 // Write Close Bracket
                 WriteCloseBracket(true);
@@ -499,11 +499,11 @@ namespace DataTierClient.Builders
                 // Write OpenBracket
                 WriteOpenBracket(true);
 
-                // Write Comment Set returnObject.Boolean.Value to false
-                WriteComment("Set returnObject.Boolean.Value to false");
+                // Write Comment Set result.Boolean.Value to false
+                WriteComment("Set result.Boolean.Value to false");
                 
                  // now set the value to false
-                WriteLine("returnObject.Boolean.Value = NullableBooleanEnum.False;");
+                WriteLine("result.Boolean.Value = NullableBooleanEnum.False;");
                 
                 // Write CloseBracket
                 WriteCloseBracket(true);
@@ -538,7 +538,7 @@ namespace DataTierClient.Builders
                 WriteComment("return value");
 
                 // Write return value;
-                WriteLine("return returnObject;");
+                WriteLine("return result;");
 
                 // Write Close Bracket
                 WriteCloseBracket(true);
@@ -592,7 +592,7 @@ namespace DataTierClient.Builders
                 WriteComment("Initial Value");
 
                 // Write Line For FetchAll
-                WriteLine("PolymorphicObject returnObject = new PolymorphicObject();");
+                WriteLine("PolymorphicObject result = new PolymorphicObject();");
 
                 // Write Blank Line
                 WriteLine();
@@ -726,11 +726,11 @@ namespace DataTierClient.Builders
                 // Write Open Bracket
                 WriteOpenBracket(true);
 
-                // Write comment set returnObject.ObjectValue
-                WriteComment("set returnObject.ObjectValue");
+                // Write comment set result.ObjectValue
+                WriteComment("set result.ObjectValue");
                 
                 // get line to set return object
-                WriteLine("returnObject.ObjectValue = " + dataObjectCollection + ";");
+                WriteLine("result.ObjectValue = " + dataObjectCollection + ";");
 
                 // Write CloseBracket
                 WriteCloseBracket(true);
@@ -762,7 +762,7 @@ namespace DataTierClient.Builders
                 WriteComment("return value");
 
                 // Write return value;
-                WriteLine("return returnObject;");
+                WriteLine("return result;");
 
                 // Write Close Bracket
                 WriteCloseBracket(true);
@@ -811,7 +811,7 @@ namespace DataTierClient.Builders
                 WriteComment("Initial Value");
 
                 // Write Line For Find
-                WriteLine("PolymorphicObject returnObject = new PolymorphicObject();");
+                WriteLine("PolymorphicObject result = new PolymorphicObject();");
 
                 // Write Blank Line
                 WriteLine();
@@ -942,11 +942,11 @@ namespace DataTierClient.Builders
                 // Write Open Bracket
                 WriteOpenBracket(true);
 
-                // Write comment set returnObject.ObjectValue
-                WriteComment("set returnObject.ObjectValue");
+                // Write comment set result.ObjectValue
+                WriteComment("set result.ObjectValue");
 
                 // get line to set return object
-                WriteLine("returnObject.ObjectValue = " + dataObject + ";");
+                WriteLine("result.ObjectValue = " + dataObject + ";");
 
                 // Write CloseBracket
                 WriteCloseBracket(true);
@@ -984,7 +984,7 @@ namespace DataTierClient.Builders
                 WriteComment("return value");
 
                 // Write return value;
-                WriteLine("return returnObject;");
+                WriteLine("return result;");
 
                 // Write Close Bracket
                 WriteCloseBracket(true);
@@ -1033,7 +1033,7 @@ namespace DataTierClient.Builders
                 WriteComment("Initial Value");
 
                 // Write Line For Insert
-                WriteLine("PolymorphicObject returnObject = new PolymorphicObject();");
+                WriteLine("PolymorphicObject result = new PolymorphicObject();");
 
                 // Write Blank Line
                 WriteLine();
@@ -1143,7 +1143,7 @@ namespace DataTierClient.Builders
                 WriteComment("Execute Insert Stored Procedure");
 
                 // get line to execute proc
-                string executeProc = "returnObject.IntegerValue = " + className + "Manager.Insert" + className + "(" + procName + ", dataConnector);";
+                string executeProc = "result.IntegerValue = " + className + "Manager.Insert" + className + "(" + procName + ", dataConnector);";
 
                 // Write line to execute proc
                 WriteLine(executeProc);
@@ -1184,7 +1184,7 @@ namespace DataTierClient.Builders
                 WriteComment("return value");
 
                 // Write return value;
-                WriteLine("return returnObject;");
+                WriteLine("return result;");
 
                 // Write Close Bracket
                 WriteCloseBracket(true);
@@ -1387,7 +1387,7 @@ namespace DataTierClient.Builders
                 WriteComment("Initial Value");
 
                 // Write Line For Update
-                WriteLine("PolymorphicObject returnObject = new PolymorphicObject();");
+                WriteLine("PolymorphicObject result = new PolymorphicObject();");
 
                 // Write Blank Line
                 WriteLine();
@@ -1505,11 +1505,11 @@ namespace DataTierClient.Builders
                 // Write blank line
                 WriteLine();
 
-                // Write comment  Create returnObject.Boolean
-                WriteComment("Create returnObject.Boolean");
+                // Write comment  Create result.Boolean
+                WriteComment("Create result.Boolean");
 
                 // get line to create return object
-                string createReturnObject = "returnObject.Boolean = new NullableBoolean();";
+                string createReturnObject = "result.Boolean = new NullableBoolean();";
 
                 // Write createReturnObject
                 WriteLine(createReturnObject);
@@ -1526,11 +1526,11 @@ namespace DataTierClient.Builders
                 // Write OpenBracket
                 WriteOpenBracket(true);
 
-                // Write Comment Set returnObject.Boolean.Value to true
-                WriteComment("Set returnObject.Boolean.Value to true");
+                // Write Comment Set result.Boolean.Value to true
+                WriteComment("Set result.Boolean.Value to true");
 
                 // now set the value to true
-                WriteLine("returnObject.Boolean.Value = NullableBooleanEnum.True;");
+                WriteLine("result.Boolean.Value = NullableBooleanEnum.True;");
 
                 // Write Close Bracket
                 WriteCloseBracket(true);
@@ -1541,11 +1541,11 @@ namespace DataTierClient.Builders
                 // Write OpenBracket
                 WriteOpenBracket(true);
 
-                // Write Comment Set returnObject.Boolean.Value to false
-                WriteComment("Set returnObject.Boolean.Value to false");
+                // Write Comment Set result.Boolean.Value to false
+                WriteComment("Set result.Boolean.Value to false");
 
                 // now set the value to false
-                WriteLine("returnObject.Boolean.Value = NullableBooleanEnum.False;");
+                WriteLine("result.Boolean.Value = NullableBooleanEnum.False;");
 
                 // Write CloseBracket
                 WriteCloseBracket(true);                
@@ -1583,7 +1583,7 @@ namespace DataTierClient.Builders
                 WriteComment("return value");
 
                 // Write return value;
-                WriteLine("return returnObject;");
+                WriteLine("return result;");
 
                 // Write Close Bracket
                 WriteCloseBracket(true);

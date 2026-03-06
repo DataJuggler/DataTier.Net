@@ -3,6 +3,7 @@
 #region using statements
 
 using System.Windows.Forms;
+using System.ComponentModel;
 using System.Drawing;
 using DataJuggler.Win.Controls.Interfaces;
 
@@ -25,6 +26,7 @@ namespace DataJuggler.Win.Controls
         private ContentAlignment labelTextAlign;
         private Font labelFont;
         private int checkBoxVerticalOffSet;
+        private int checkBoxHorizontalOffSet;
         private ICheckChangedListener checkChangedListener;
         #endregion
 
@@ -90,12 +92,16 @@ namespace DataJuggler.Win.Controls
             /// </summary>
             private void Init()
             {
-                // set the LabelTextAlign
+                // set the LabelTextAligna
                 this.LabelTextAlign = ContentAlignment.MiddleRight;
 
                 // Set Default height & width
                 this.LabelWidth = 140;
                 this.Width = 280;
+
+                // Initialize both to zero
+                this.CheckBoxHorizontalOffSet = 0;
+                this.CheckBoxVerticalOffSet = 0;
             }
             #endregion
 
@@ -132,6 +138,24 @@ namespace DataJuggler.Win.Controls
 
         #region Properties
             
+            #region CheckBoxHorizontalOffSet
+            /// <summary>
+            /// This property gets or sets the value for 'CheckBoxHorizontalOffSet'.
+            /// </summary>
+            public int CheckBoxHorizontalOffSet
+            {
+                get { return checkBoxHorizontalOffSet; }
+                set 
+                { 
+                    // set the value
+                    checkBoxHorizontalOffSet = value;
+
+                    // set the width of the LeftMarginPanel to move the CheckBox left or right as needed
+                    this.CheckBoxLeftMarginPanel.Width = value;
+                }
+            }
+            #endregion
+            
             #region CheckBoxVerticalOffSet
             /// <summary>
             /// This property gets or sets the value for 'CheckBoxVerticalOffSet'.
@@ -144,8 +168,8 @@ namespace DataJuggler.Win.Controls
                     // set the value
                     checkBoxVerticalOffSet = value; 
 
-                    // set the height of the MarginPanel to move the CheckBox down
-                    this.CheckBoxMarginPanel.Height = value;
+                    // set the height of the MarginPanel to move the CheckBox up or down
+                    this.CheckBoxTopMarginPanel.Height = value;
                 }
             }
             #endregion
@@ -190,6 +214,30 @@ namespace DataJuggler.Win.Controls
                 {
                     // Set the value for Checked
                     this.CheckBox.Checked = value;
+                }
+            }
+            #endregion
+
+            #region CreateParams
+            /// <summary>
+            /// This property here is what did the trick to reduce the flickering.
+            /// I also needed to make all of the controls Double Buffered, but
+            /// this was the final touch. It is a little slow when you switch tabs
+            /// but that is because the repainting is finishing before control is
+            /// returned.
+            /// </summary>
+            protected override CreateParams CreateParams
+            {
+                get
+                {
+                    // initial value
+                    CreateParams cp = base.CreateParams;
+
+                    // Apparently this interrupts Paint to finish before showing
+                    cp.ExStyle |= 0x02000000;
+
+                    // return value
+                    return cp;
                 }
             }
             #endregion
@@ -341,6 +389,8 @@ namespace DataJuggler.Win.Controls
             /// <summary>
             /// Set the TextAlign for the label.
             /// </summary>
+            [Browsable(true)]
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
             public ContentAlignment LabelTextAlign
             {
                 get { return labelTextAlign; }
@@ -349,7 +399,7 @@ namespace DataJuggler.Win.Controls
                     // set the value
                     labelTextAlign = value; 
                     
-                    if (this.Label != null)
+                    if ((this.Label != null) && (value != 0))
                     {
                         // set the value
                         this.Label.TextAlign = value;

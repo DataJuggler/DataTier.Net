@@ -18,13 +18,13 @@ namespace DataJuggler.Win.Controls.Interfaces
 
         #region Methods
 
-            #region OnSliderValueChanged(SliderControl slider, int sliderValue);
+            #region OnSliderValueChanged(TrackBar trackBar, int sliderValue);
             /// <summary>
             /// Subscribe to this method to be alerted when the value changes.
             /// </summary>
             /// <param name="control"></param>
             /// <param name="selectedIndex"></param>
-            void OnSliderValueChanged(SliderControl slider, int sliderValue);
+            void OnSliderValueChanged(TrackBar trackBar, int sliderValue);
             #endregion
 
         #endregion

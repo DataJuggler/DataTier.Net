@@ -284,7 +284,7 @@ namespace DataTierClient.Builders
                 WriteComment("Set inserted to false");
 
                 // Write the returnObjectName
-                WriteLine(returnObjectName + " = false;");
+                WriteLine(returnObjectName + ".Exceptions.Add(error);");
 
                 // Write blank line
                 WriteLine();
@@ -435,7 +435,7 @@ namespace DataTierClient.Builders
                 WriteLine("/// <returns>True if the delete is successful or false if not.</returns>");
                 
                 // Get classDeclaration
-                string classDeclaration = "public static bool Delete(" + dataType + " " + parameterName + ", DataManager dataManager)";
+                string classDeclaration = "public static PolymorphicObject Delete(" + dataType + " " + parameterName + ", DataManager dataManager)";
 
                 // Write classDeclaration
                 WriteLine(classDeclaration);
@@ -443,11 +443,11 @@ namespace DataTierClient.Builders
                 // Write Open Bracket
                 WriteOpenBracket(true);
 
-                // Write Comment // locals
-                WriteComment("locals");
+                // Write Comment // initial value
+                WriteComment("initial value");
 
-                // Write Line For Delete
-                WriteLine("bool deleted = false;");
+                // Write out the initial value
+                WriteLine("PolymorphicObject result = new PolymorphicObject();");
 
                 // Write Blank line
                 WriteLine();
@@ -513,43 +513,10 @@ namespace DataTierClient.Builders
                 WriteComment("Perform DataOperation");
 
                 // get performDataOperationLine
-                string performDataOperationLine = "PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, " + methodName + ", parameters, dataManager);";
+                string performDataOperationLine = "result = DataBridgeManager.PerformDataOperation(methodName, objectName, " + methodName + ", parameters, dataManager);";
 
                 // Write performDataOperationLine
                 WriteLine(performDataOperationLine);
-
-                // Write Blank Line
-                WriteLine();
-
-                // Write Comment
-                WriteComment("If return object exists");
-
-                // Write if (returnObject != null)
-                WriteLine("if (returnObject != null)");
-
-                // Write Open Bracket (
-                WriteOpenBracket(true);
-
-                // Write Comment Test For True                
-                WriteComment("Test For True");
-
-                // Write line to test for true
-                WriteLine("if (returnObject.Boolean.Value == NullableBooleanEnum.True)");
-
-                // Write Open Bracket
-                WriteOpenBracket(true);
-
-                // Write Comment Deleted
-                WriteComment("Set Deleted To True");
-
-                // Write line deleted = true;
-                WriteLine("deleted = true;");
-
-                // Write Close Bracket
-                WriteCloseBracket(true);
-
-                // Write Close Bracket
-                WriteCloseBracket(true);
 
                 // Write CloseBracket
                 WriteCloseBracket(true);
@@ -566,8 +533,8 @@ namespace DataTierClient.Builders
                 // Write Comment For Return Value
                 WriteComment("return value");
 
-                // Write return deleted;
-                WriteLine("return deleted;");
+                // Write return result;
+                WriteLine("return result;");
 
                 // Write Close Bracket
                 WriteCloseBracket(true);
@@ -920,8 +887,7 @@ namespace DataTierClient.Builders
             private void WriteInsertMethodIdentity(DataTable dataTable)
             {
                 // locals
-                string dataType = dataTable.ClassName;
-                string returnObjectName = "newIdentity";
+                string dataType = dataTable.ClassName;                
                 string delegateMethodName = "insertMethod";
                 string parameterName = CapitalizeFirstChar(dataType, true);
 
@@ -942,10 +908,10 @@ namespace DataTierClient.Builders
                 
                 // Write parameter and return value
                 WriteLine("/// <param name='" + parameterName + "'>The '" + dataType + "' object to insert.</param>");
-                WriteLine("/// <returns>The id (int) of the new  '" + dataType + "' object that was inserted.</returns>");
+                WriteLine("/// <returns>The a PolymorphicObject. This object contains an IntegerValue, which is the Identity value for the new '" + dataType + "' object that was inserted.</returns>");
 
                 // Get classDeclaration
-                string classDeclaration = "public static int Insert(" + dataType + " " + parameterName + ", DataManager dataManager)";
+                string classDeclaration = "public static PolymorphicObject Insert(" + dataType + " " + parameterName + ", DataManager dataManager)";
 
                 // Write classDeclaration
                 WriteLine(classDeclaration);
@@ -957,7 +923,7 @@ namespace DataTierClient.Builders
                 WriteComment("Initial values");
 
                 // Write Line For initial value
-                string initialValue = "int " + returnObjectName + " = -1;";
+                string initialValue = "PolymorphicObject result = new PolymorphicObject();";
 
                 // Write initialValue
                 WriteLine(initialValue);
@@ -997,6 +963,9 @@ namespace DataTierClient.Builders
 
                 // Write Open Bracket
                 WriteOpenBracket(true);
+
+                // Write a comment for the Create delegate
+                WriteComment("Create the delegate to perform the insert");
                 
                 // get line for delegate
                 string delegateLine = "ApplicationController.DataOperationMethod " + delegateMethodName + " = " + dataTable.ClassName + "Methods.Insert" + dataTable.ClassName + ";";
@@ -1023,39 +992,15 @@ namespace DataTierClient.Builders
                 WriteComment("Perform DataOperation");
 
                 // get performDataOperationLine
-                string performDataOperationLine = "PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, insertMethod , parameters, dataManager);";
+                string performDataOperationLine = "result = DataBridgeManager.PerformDataOperation(methodName, objectName, insertMethod , parameters, dataManager);";
 
                 // Write performDataOperationLine
                 WriteLine(performDataOperationLine);
 
-                // Write Blank Line
-                WriteLine();
-
-                // Write Comment
-                WriteComment("If return object exists");
-
-                // Write if (returnObject != null)
-                WriteLine("if (returnObject != null)");
-
-                // Write Open Bracket (
-                WriteOpenBracket(true);
-
-                // Write Comment Set Return Object
-                WriteComment("Set return value");
-
-                // Get Line To Set Return Value
-                string setReturnValue = returnObjectName + " = returnObject.IntegerValue;";
-
-                // Write setReturnValue
-                WriteLine(setReturnValue);
-
-                // Write CloseBracket
+                // Write Close Bracket
                 WriteCloseBracket(true);
 
-                // Write CloseBracket
-                WriteCloseBracket(true);
-                
-                // Write CloseBracket
+                // Write Close Bracket
                 WriteCloseBracket(true);
 
                 // Write the Catch part of TryCatch
@@ -1067,8 +1012,8 @@ namespace DataTierClient.Builders
                 // Write Comment For Return Value
                 WriteComment("return value");
 
-                // Write return deleted;
-                WriteLine("return " + returnObjectName + ";");
+                // Write line to return the value;
+                WriteLine("return result;");
 
                 // Write Close Bracket
                 WriteCloseBracket(true);
@@ -1090,7 +1035,6 @@ namespace DataTierClient.Builders
             {
                 // locals
                 string dataType = dataTable.ClassName;
-                string returnObjectName = "inserted";
                 string delegateMethodName = "insertMethod";
                 string parameterName = CapitalizeFirstChar(dataType, true);
 
@@ -1114,7 +1058,7 @@ namespace DataTierClient.Builders
                 WriteLine("/// <returns>True if successful or false if not.</returns>");
 
                 // Get classDeclaration                
-                string classDeclaration = "public static bool Insert(" + dataType + " " + parameterName + ", DataManager dataManager)";
+                string classDeclaration = "public static PolymorphicObject Insert(" + dataType + " " + parameterName + ", DataManager dataManager)";
 
                 // Write classDeclaration
                 WriteLine(classDeclaration);
@@ -1123,10 +1067,10 @@ namespace DataTierClient.Builders
                 WriteOpenBracket(true);
 
                 // Write Comment Initial value
-                WriteComment("Initial values");
+                WriteComment("Initial value");
 
                 // Write Line For initial value
-                string initialValue = "bool " + returnObjectName + " = false;";
+                string initialValue = "PolymorphicObject result = new PolymorphicObject();";
 
                 // Write initialValue
                 WriteLine(initialValue);
@@ -1161,7 +1105,7 @@ namespace DataTierClient.Builders
                 // Write Comment
                 WriteComment("If " + dataType + "exists");
 
-                // Write Line if Object != null)
+                // Write Line if (runLog != null) - example where runLog is the parameter name
                 WriteLine("if (" + CapitalizeFirstChar(dataType, true) + " != null)");
 
                 // Write Open Bracket
@@ -1192,19 +1136,10 @@ namespace DataTierClient.Builders
                 WriteComment("Perform DataOperation");
 
                 // get performDataOperationLine
-                string performDataOperationLine = "PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, insertMethod , parameters, dataManager);";
+                string performDataOperationLine = "result = DataBridgeManager.PerformDataOperation(methodName, objectName, insertMethod , parameters, dataManager);";
 
                 // Write performDataOperationLine
                 WriteLine(performDataOperationLine);
-
-                // Write Blank Line
-                WriteLine();
-
-                // Write a comment
-                WriteComment("Set the return value to true");
-
-                // Set the return value to true
-                WriteLine(returnObjectName + " = true;");
 
                 // Write CloseBracket
                 WriteCloseBracket(true);
@@ -1213,7 +1148,7 @@ namespace DataTierClient.Builders
                 WriteCloseBracket(true);
 
                 // Write the catch method for the inserted for a non-identity insert method
-                WriteCatchForInserted(returnObjectName);
+                WriteCatchForInserted("result");
 
                 // Write Blank Line
                 WriteLine();
@@ -1222,7 +1157,7 @@ namespace DataTierClient.Builders
                 WriteComment("return value");
 
                 // Write return deleted;
-                WriteLine("return " + returnObjectName + ";");
+                WriteLine("return result;");
 
                 // Write Close Bracket
                 WriteCloseBracket(true);
@@ -1336,7 +1271,7 @@ namespace DataTierClient.Builders
                 WriteLine("/// <returns>True if successful or false if not.</returns>");
                 
                 // Get classDeclaration
-                string classDeclaration = "public static bool Save(ref " + dataType + " " + parameterName + ", DataManager dataManager)";
+                string classDeclaration = "public static PolymorphicObject Save(ref " + dataType + " " + parameterName + ", DataManager dataManager)";
 
                 // Write classDeclaration
                 WriteLine(classDeclaration);
@@ -1348,7 +1283,7 @@ namespace DataTierClient.Builders
                 WriteComment("Initial value");
 
                 // Write Line For initial value
-                string initialValue = "bool " + returnObjectName + " = false;";
+                string initialValue = "PolymorphicObject result = new PolymorphicObject();";
 
                 // Write initialValue
                 WriteLine(initialValue);
@@ -1381,16 +1316,16 @@ namespace DataTierClient.Builders
                     WriteComment("Insert new " + dataType);
 
                     // Write line to insert new record
-                    WriteLine("int newIdentity = Insert(" + parameterName + ", dataManager);");
+                    WriteLine("result = Insert(" + parameterName + ", dataManager);");
 
                     // Write Blank Line
                     WriteLine();
 
-                    // Write Comment if insert was successful
-                    WriteComment("if insert was successful");
+                    // Write Comment if the insert was successful
+                    WriteComment("if the insert was successful");
                 
                     // Write line if newIdentiy > 0
-                    WriteLine("if (newIdentity > 0)");
+                    WriteLine("if (result.HasIntegerValue)");
                 
                     // Write Open Bracket {
                     WriteOpenBracket(true);
@@ -1399,16 +1334,10 @@ namespace DataTierClient.Builders
                     WriteComment("Update Identity");
                 
                     // Write line to update the Identity
-                    WriteLine(parameterName + ".UpdateIdentity(newIdentity);");
+                    WriteLine(parameterName + ".UpdateIdentity(result.IntegerValue);");
 
                     // Write Blank Line
                     WriteLine();
-
-                    // Set return value
-                    WriteComment("Set return value");
-
-                    // Write line saved = true
-                    WriteLine("saved = true;");
 
                     // Write }
                     WriteCloseBracket(true);
@@ -1422,11 +1351,11 @@ namespace DataTierClient.Builders
                     // Write {
                     WriteOpenBracket(true);
 
-                    // Write Comment Insert
+                    // Write Comment Update an existing object
                     WriteComment("Update " + dataType);
 
                     // Write line to insert new record
-                    WriteLine(returnObjectName + " = Update(" + parameterName + ", dataManager);");
+                    WriteLine("result  = Update(" + parameterName + ", dataManager);");
 
                     // Write }
                     WriteCloseBracket(true);
@@ -1473,7 +1402,7 @@ namespace DataTierClient.Builders
                     WriteComment("Perform the insert");
 
                     // now perform the insert
-                    WriteLine("saved = Insert(" + parameterName + ", dataManager);");
+                    WriteLine("result = Insert(" + parameterName + ", dataManager);");
 
                     // Write a close bracket
                     WriteCloseBracket(true);
@@ -1488,7 +1417,7 @@ namespace DataTierClient.Builders
                     WriteComment("Perform the update");
 
                     // now perform the insert
-                    WriteLine("saved = Update(" + parameterName + ", dataManager);");
+                    WriteLine("result = Update(" + parameterName + ", dataManager);");
 
                     // Write a close bracket
                     WriteCloseBracket(true);
@@ -1503,14 +1432,11 @@ namespace DataTierClient.Builders
                 // Write Comment Return Value
                 WriteComment("return value");
                 
-                // Write Return Value
-                WriteLine("return " + returnObjectName + ";");
-                
-                // Decrease Indent
-                Indent--;
+                // Write Return Value (result)
+                WriteLine("return result;");
                 
                 // Write }
-                WriteCloseBracket();
+                WriteCloseBracket(true);
                 
                 // Write EndRegion
                 EndRegion();
@@ -1553,7 +1479,7 @@ namespace DataTierClient.Builders
                 WriteLine("/// <returns>True if successful else false if not.</returns>");
 
                 // Get classDeclaration
-                string classDeclaration = "public static bool Update(" + dataType + " " + CapitalizeFirstChar(dataType, true) + ", DataManager dataManager)";
+                string classDeclaration = "public static PolymorphicObject Update(" + dataType + " " + CapitalizeFirstChar(dataType, true) + ", DataManager dataManager)";
 
                 // Write classDeclaration
                 WriteLine(classDeclaration);
@@ -1565,7 +1491,7 @@ namespace DataTierClient.Builders
                 WriteComment("Initial value");
 
                 // Write Line For initial value
-                string initialValue = "bool " + returnObjectName + " = false;";
+                string initialValue = "PolymorphicObject result = new PolymorphicObject();";
 
                 // Write initialValue
                 WriteLine(initialValue);
@@ -1628,31 +1554,10 @@ namespace DataTierClient.Builders
                 WriteComment("Perform DataOperation");
 
                 // get performDataOperationLine
-                string performDataOperationLine = "PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, updateMethod , parameters, dataManager);";
+                string performDataOperationLine = "result = DataBridgeManager.PerformDataOperation(methodName, objectName, updateMethod , parameters, dataManager);";
 
                 // Write performDataOperationLine
                 WriteLine(performDataOperationLine);
-
-                // Write Blank Line
-                WriteLine();
-
-                // Write Comment
-                WriteComment("If return object exists");
-
-                // Write if (returnObject != null)
-                WriteLine("if ((returnObject != null) && (returnObject.Boolean != null) && (returnObject.Boolean.Value == NullableBooleanEnum.True))");
-
-                // Write Open Bracket (
-                WriteOpenBracket(true);
-
-                // Write Comment Set Return Object
-                WriteComment("Set saved to true");
-
-                // Get Line To Set Return Value
-                WriteLine("saved = true;");
-
-                // Write Close Bracket
-                WriteCloseBracket(true);
 
                 // Write CloseBracket
                 WriteCloseBracket(true);
@@ -1670,7 +1575,7 @@ namespace DataTierClient.Builders
                 WriteComment("return value");
 
                 // Write return deleted;
-                WriteLine("return " + returnObjectName + ";");
+                WriteLine("return result;");
 
                 // Write Close Bracket
                 WriteCloseBracket(true);

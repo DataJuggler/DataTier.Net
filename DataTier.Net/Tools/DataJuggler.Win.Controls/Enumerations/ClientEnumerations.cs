@@ -24,54 +24,28 @@ namespace DataJuggler.Win.Controls.Enumerations
     }
     #endregion
 
-    #region CardTypeEnum : int
+    #region EditModeEnum
     /// <summary>
-    /// The types of credit cards accepted
+    /// This mode is used to determine what type of an Edit is taking place.
     /// </summary>
-    public enum CardTypeEnum
+    public enum EditModeEnum
     {
-        NotSet = 0,
-        Visa = 1,
-        MasterCard = 2,
-        AmericanExpress = 3
+        ReadOnly = 0,
+        Add = 1,
+        Edit = 2
     }
     #endregion
 
-    #region LocalTestType : int
+    #region ThemeEnum
     /// <summary>
-    /// This enum represents the types of LocalTest
+    /// This enumeration is for the type of theme to use.
+    /// For now there are only two choices, Blue and Dark.
     /// </summary>
-    public enum LocalTestType : int 
+    public enum ThemeEnum : int
     {
-        NewLocalTest = 0,
-        OpenLocalTest = 1
+        Dark = 0,
+        Blue = 1
     }
     #endregion
 
-    #region ObjectTypeEnum : int
-    /// <summary>
-    /// You must create an ObjectID for any type of object you wish to edit.
-    /// </summary>
-    public enum ObjectTypeEnum : int
-    {
-        NotSet = 0,
-        Product = 1,
-        License = 2
-    } 
-    #endregion
-    
-    #region UseCaseTypeEnum
-    /// <summary>
-    /// Determine the type of use case to use
-    /// </summary>
-    public enum UseCaseTypeEnum : int
-    {
-        NotSet = 0,
-        EditProduct = 1,
-        EditProductList = 2,
-        EditLicense = 3,
-        EditLicenseList = 4
-    } 
-    #endregion
-    
 }

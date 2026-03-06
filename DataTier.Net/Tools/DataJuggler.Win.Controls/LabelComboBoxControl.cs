@@ -6,8 +6,8 @@ using DataJuggler.Win.Controls.Interfaces;
 using DataJuggler.Win.Controls.Objects;
 using DataJuggler.Win.Controls.Util;
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -39,6 +39,7 @@ namespace DataJuggler.Win.Controls
         private int labelTopMargin;
         private int labelBottomMargin;
         private int comboBoxLeftMargin;
+        private bool hideLabel;
         #endregion
 
         #region Constructor
@@ -343,8 +344,16 @@ namespace DataJuggler.Win.Controls
                     // iterate the items
                     foreach (Item item in items)
                     {
-                        // add this item
-                        this.ComboBox.Items.Add(item);
+                        try
+                        {
+                            // add this item
+                            this.ComboBox.Items.Add(item);
+                        }
+                        catch (Exception error)
+                        {
+                            // for debugging only
+                            string err = error.ToString();
+                        }
                     }
                 }
             }
@@ -481,6 +490,30 @@ namespace DataJuggler.Win.Controls
             }
             #endregion
 
+            #region CreateParams
+            /// <summary>
+            /// This property here is what did the trick to reduce the flickering.
+            /// I also needed to make all of the controls Double Buffered, but
+            /// this was the final touch. It is a little slow when you switch tabs
+            /// but that is because the repainting is finishing before control is
+            /// returned.
+            /// </summary>
+            protected override CreateParams CreateParams
+            {
+                get
+                {
+                    // initial value
+                    CreateParams cp = base.CreateParams;
+
+                    // Apparently this interrupts Paint to finish before showing
+                    cp.ExStyle |= 0x02000000;
+
+                    // return value
+                    return cp;
+                }
+            }
+            #endregion
+
             #region Editable
             /// <summary>
             /// When this is true the LabelTextBox is enabled.
@@ -598,6 +631,24 @@ namespace DataJuggler.Win.Controls
             }
             #endregion
             
+            #region HideLabel
+            /// <summary>
+            /// This property gets or sets the value for 'HideLabel'.
+            /// </summary>
+            public bool HideLabel
+            {
+                get { return hideLabel; }
+                set 
+                {
+                    // set the value
+                    hideLabel = value;
+
+                    // Show or hide the label based upon the value of hideLabel
+                    Label.Visible = !hideLabel;
+                }
+            }
+            #endregion
+            
             #region Items
             /// <summary>
             /// This property gets or sets the value for 'Items'.
@@ -711,6 +762,8 @@ namespace DataJuggler.Win.Controls
             /// <summary>
             /// Set the TextAlign for the label.
             /// </summary>
+            [Browsable(true)]
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
             public ContentAlignment LabelTextAlign
             {
                 get { return labelTextAlign; }
@@ -719,7 +772,7 @@ namespace DataJuggler.Win.Controls
                     // set the value
                     labelTextAlign = value; 
                     
-                    if (this.Label != null)
+                    if ((this.Label != null) && (value != 0))
                     {
                         // set the value
                         this.Label.TextAlign = value;

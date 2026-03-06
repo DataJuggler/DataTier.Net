@@ -34,6 +34,7 @@ namespace DataAccessComponent.DataOperations
         private string text;
         private string name;
         private object objectValue;
+        private Exception exception;
         #endregion
 
         #region Constructor
@@ -90,6 +91,85 @@ namespace DataAccessComponent.DataOperations
             }
             #endregion
 
+            #region Exception
+            /// <summary>
+            /// This property gets or sets the value for 'Exception'.
+            /// </summary>
+            public Exception Exception
+            {
+                get { return exception; }
+                set { exception = value; }
+            }
+            #endregion
+            
+            #region HasBoolean
+            /// <summary>
+            /// This property returns true if this object has a 'Boolean'.
+            /// </summary>
+            public bool HasBoolean
+            {
+                get
+                {
+                    // initial value
+                    bool hasBoolean = (Boolean != null);
+
+                    // return value
+                    return hasBoolean;
+                }
+            }
+            #endregion
+            
+            #region HasException
+            /// <summary>
+            /// This property returns true if this object has an 'Exception'.
+            /// </summary>
+            public bool HasException
+            {
+                get
+                {
+                    // initial value
+                    bool hasException = (Exception != null);
+
+                    // return value
+                    return hasException;
+                }
+            }
+            #endregion
+            
+            #region HasIntegerValue
+            /// <summary>
+            /// This property returns true if the 'IntegerValue' is set.
+            /// </summary>
+            public bool HasIntegerValue
+            {
+                get
+                {
+                    // initial value
+                    bool hasIntegerValue = (IntegerValue > 0);
+
+                    // return value
+                    return hasIntegerValue;
+                }
+            }
+            #endregion
+            
+            #region HasObjectValue
+            /// <summary>
+            /// This property returns true if this object has an 'ObjectValue'.
+            /// </summary>
+            public bool HasObjectValue
+            {
+                get
+                {
+                    // initial value
+                    bool hasObjectValue = (ObjectValue != null);
+
+                    // return value
+                    return hasObjectValue;
+                }
+            }
+            #endregion
+            
             #region IntegerValue
             /// <summary>
             /// The return value from a DataOperation

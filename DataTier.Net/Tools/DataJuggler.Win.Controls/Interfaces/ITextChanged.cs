@@ -18,13 +18,13 @@ namespace DataJuggler.Win.Controls.Interfaces
 
         #region Methods
 
-            #region OnTextChanged(LabelTextBoxControl sender, string text);
+            #region OnTextChanged(Control sender, string text);
             /// <summary>
             /// The Selected has changed.
             /// </summary>
             /// <param name="control"></param>
             /// <param name="selectedIndex"></param>
-            void OnTextChanged(LabelTextBoxControl sender, string text);
+            void OnTextChanged(Control sender, string text);
             #endregion
 
         #endregion

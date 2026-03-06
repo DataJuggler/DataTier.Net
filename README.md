@@ -110,6 +110,10 @@ https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Roo
 
 # Updates & News
 
+3.6.2026: Major update under the hood. The Delete, Insert, and Update methods in the Controllers now return a Polymorphic object, instead
+of just bool or int. This allows for an Exception in the Data Bridge Manager to be returns all the way to the Gateway. The project templates were
+also updated. I am testing now if this breaks any existing projects and that everything still saves as expected. 
+
 2.28.2026: Gateway.GetLastException is back. I found a new way to get all the exceptions. The project Templates have been updated
 where the Data Bridge Manager class now adds any Exceptions to DataManager.Exceptions. 
 
