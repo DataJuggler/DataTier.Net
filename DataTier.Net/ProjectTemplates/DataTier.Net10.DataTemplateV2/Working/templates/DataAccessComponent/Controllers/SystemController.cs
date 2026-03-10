@@ -48,7 +48,7 @@ namespace DataAccessComponent.Controllers
         internal static bool TestDatabaseConnection(DataManager dataManager)
         {
             // initial value
-            bool connected = false;
+            PolymorphicObject result = new PolymorphicObject();
 
             // locals
             string methodName = "TestDatabaseConnection";
@@ -63,22 +63,19 @@ namespace DataAccessComponent.Controllers
                 List<PolymorphicObject> parameters = null;
 
                 // Perform DataOperation
-                PolymorphicObject connectedObject = DataBridgeManager.PerformDataOperation(methodName, objectName, testDataConnection, parameters, dataManager);
-
-                // If method returned "true" value.
-                if (connectedObject.Boolean.Value == NullableBooleanEnum.True)
-                {
-                    // set connected to true.
-                    connected = true;
-                }
+                result = DataBridgeManager.PerformDataOperation(methodName, objectName, testDataConnection, parameters, dataManager);
             }
             catch (Exception error)
             {  
+                //. set the text
+                result.Text = error.Message;
 
+                // set the exception
+                result.Exception = error;
             }
 
             // return value
-            return connected;
+            return result.Success;
         }
         #endregion
 

@@ -2,16 +2,16 @@
 
 #region using statements
 
-using DataAccessComponent.Data;
-using DataAccessComponent.Data.Writers;
-using DataAccessComponent.DataBridge;
+using System;
+using System.Collections.Generic;
 using DataAccessComponent.StoredProcedureManager.DeleteProcedures;
 using DataAccessComponent.StoredProcedureManager.FetchProcedures;
 using DataAccessComponent.StoredProcedureManager.InsertProcedures;
 using DataAccessComponent.StoredProcedureManager.UpdateProcedures;
 using ObjectLibrary.BusinessObjects;
-using System;
-using System.Collections.Generic;
+using DataAccessComponent.Data.Writers;
+using DataAccessComponent.Data;
+using DataAccessComponent.DataBridge;
 
 #endregion
 
@@ -37,7 +37,7 @@ namespace DataAccessComponent.DataOperations
             internal static PolymorphicObject DeleteReferencesSet(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
-                PolymorphicObject returnObject = new PolymorphicObject();
+                PolymorphicObject result = new PolymorphicObject();
 
                 // If the data connection is connected
                 if ((dataConnector != null) && (dataConnector.Connected == true))
@@ -65,22 +65,8 @@ namespace DataAccessComponent.DataOperations
                     if(deleteReferencesSetProc != null)
                     {
                         // Execute Delete Stored Procedure
-                        bool deleted = ReferencesSetManager.DeleteReferencesSet(deleteReferencesSetProc, dataConnector);
+                        result.Success = ReferencesSetManager.DeleteReferencesSet(deleteReferencesSetProc, dataConnector);
 
-                        // Create returnObject.Boolean
-                        returnObject.Boolean = new NullableBoolean();
-
-                        // If delete was successful
-                        if(deleted)
-                        {
-                            // Set returnObject.Boolean.Value to true
-                            returnObject.Boolean.Value = NullableBooleanEnum.True;
-                        }
-                        else
-                        {
-                            // Set returnObject.Boolean.Value to false
-                            returnObject.Boolean.Value = NullableBooleanEnum.False;
-                        }
                     }
                 }
                 else
@@ -90,7 +76,7 @@ namespace DataAccessComponent.DataOperations
                 }
 
                 // return value
-                return returnObject;
+                return result;
             }
             #endregion
 
@@ -103,7 +89,7 @@ namespace DataAccessComponent.DataOperations
             internal static PolymorphicObject FetchAll(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
-                PolymorphicObject returnObject = new PolymorphicObject();
+                PolymorphicObject result = new PolymorphicObject();
 
                 // locals
                 List<ReferencesSet> referencesSetListCollection =  null;
@@ -138,8 +124,8 @@ namespace DataAccessComponent.DataOperations
                     // if dataObjectCollection exists
                     if(referencesSetListCollection != null)
                     {
-                        // set returnObject.ObjectValue
-                        returnObject.ObjectValue = referencesSetListCollection;
+                        // set result.ObjectValue
+                        result.ObjectValue = referencesSetListCollection;
                     }
                 }
                 else
@@ -149,7 +135,7 @@ namespace DataAccessComponent.DataOperations
                 }
 
                 // return value
-                return returnObject;
+                return result;
             }
             #endregion
 
@@ -162,7 +148,7 @@ namespace DataAccessComponent.DataOperations
             internal static PolymorphicObject FindReferencesSet(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
-                PolymorphicObject returnObject = new PolymorphicObject();
+                PolymorphicObject result = new PolymorphicObject();
 
                 // locals
                 ReferencesSet referencesSet = null;
@@ -197,8 +183,8 @@ namespace DataAccessComponent.DataOperations
                             // if dataObject exists
                             if(referencesSet != null)
                             {
-                                // set returnObject.ObjectValue
-                                returnObject.ObjectValue = referencesSet;
+                                // set result.ObjectValue
+                                result.ObjectValue = referencesSet;
                             }
                         }
                     }
@@ -210,7 +196,7 @@ namespace DataAccessComponent.DataOperations
                 }
 
                 // return value
-                return returnObject;
+                return result;
             }
             #endregion
 
@@ -223,7 +209,7 @@ namespace DataAccessComponent.DataOperations
             internal static PolymorphicObject InsertReferencesSet(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
-                PolymorphicObject returnObject = new PolymorphicObject();
+                PolymorphicObject result = new PolymorphicObject();
 
                 // locals
                 ReferencesSet referencesSet = null;
@@ -253,7 +239,10 @@ namespace DataAccessComponent.DataOperations
                         if(insertReferencesSetProc != null)
                         {
                             // Execute Insert Stored Procedure
-                            returnObject.IntegerValue = ReferencesSetManager.InsertReferencesSet(insertReferencesSetProc, dataConnector);
+                            result.IntegerValue = ReferencesSetManager.InsertReferencesSet(insertReferencesSetProc, dataConnector);
+
+                            // Set the value for Sucess based on if the Insert was Successful
+                            result.Success = result.HasIntegerValue;
                         }
 
                     }
@@ -265,7 +254,7 @@ namespace DataAccessComponent.DataOperations
                 }
 
                 // return value
-                return returnObject;
+                return result;
             }
             #endregion
 
@@ -274,11 +263,11 @@ namespace DataAccessComponent.DataOperations
             /// This method updates a 'ReferencesSet' object.
             /// </summary>
             /// <param name='List<PolymorphicObject>'>The 'ReferencesSet' to update.
-            /// <returns>A PolymorphicObject object with a value.
+            /// <returns>A PolymorphicObject object.
             internal static PolymorphicObject UpdateReferencesSet(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
-                PolymorphicObject returnObject = new PolymorphicObject();
+                PolymorphicObject result = new PolymorphicObject();
 
                 // locals
                 ReferencesSet referencesSet = null;
@@ -308,22 +297,7 @@ namespace DataAccessComponent.DataOperations
                         if(updateReferencesSetProc != null)
                         {
                             // Execute Update Stored Procedure
-                            bool saved = ReferencesSetManager.UpdateReferencesSet(updateReferencesSetProc, dataConnector);
-
-                            // Create returnObject.Boolean
-                            returnObject.Boolean = new NullableBoolean();
-
-                            // If save was successful
-                            if(saved)
-                            {
-                                // Set returnObject.Boolean.Value to true
-                                returnObject.Boolean.Value = NullableBooleanEnum.True;
-                            }
-                            else
-                            {
-                                // Set returnObject.Boolean.Value to false
-                                returnObject.Boolean.Value = NullableBooleanEnum.False;
-                            }
+                            result.Success = ReferencesSetManager.UpdateReferencesSet(updateReferencesSetProc, dataConnector);
                         }
                         else
                         {
@@ -334,7 +308,7 @@ namespace DataAccessComponent.DataOperations
                 }
 
                 // return value
-                return returnObject;
+                return result;
             }
             #endregion
 

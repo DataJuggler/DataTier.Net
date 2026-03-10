@@ -455,58 +455,10 @@ namespace DataTierClient.Builders
                 WriteComment("Execute Delete Stored Procedure");
                 
                 // get line to execute proc
-                string executeProc = "bool deleted = " + className + "Manager.Delete" + className + "(" + procName + ", dataConnector);";
+                string executeProc = "result.Success = " + className + "Manager.Delete" + className + "(" + procName + ", dataConnector);";
                 
                 // Write line to execute proc
                 WriteLine(executeProc);
-                
-                // Write blank line
-                WriteLine();
-                
-                // Write comment  Create result.Boolean
-                WriteComment("Create result.Boolean");
-                
-                // get line to create return object
-                string createReturnObject = "result.Boolean = new NullableBoolean();";
-
-                // Write createReturnObject
-                WriteLine(createReturnObject);
-                
-                // Write Blank line
-                WriteLine();
-                
-                // Write comment if delete was successful
-                WriteComment("If delete was successful");
-                
-                // Write line to test if deleted
-                WriteLine("if(deleted)");
-                
-                // Write OpenBracket
-                WriteOpenBracket(true);
-                
-                // Write Comment Set result.Boolean.Value to true
-                WriteComment("Set result.Boolean.Value to true");
-                
-                // now set the value to true
-                WriteLine("result.Boolean.Value = NullableBooleanEnum.True;");
-                
-                // Write Close Bracket
-                WriteCloseBracket(true);
-                
-                // Write else
-                WriteLine("else");
-                
-                // Write OpenBracket
-                WriteOpenBracket(true);
-
-                // Write Comment Set result.Boolean.Value to false
-                WriteComment("Set result.Boolean.Value to false");
-                
-                 // now set the value to false
-                WriteLine("result.Boolean.Value = NullableBooleanEnum.False;");
-                
-                // Write CloseBracket
-                WriteCloseBracket(true);
                 
                 // Write CloseBracket
                 WriteCloseBracket(true);
@@ -526,6 +478,8 @@ namespace DataTierClient.Builders
                 // now raise the error
                 // get exception text
                 string exceptionText = CreateExceptionText();
+
+                // Write the throw new Exception text
                 WriteLine(exceptionText);
                 
                 // WriteCloseBracket
@@ -1148,6 +1102,21 @@ namespace DataTierClient.Builders
                 // Write line to execute proc
                 WriteLine(executeProc);
 
+                // Write a blank line
+                WriteLine();
+
+                // Write an open bracket {
+                WriteOpenBracket(true);
+
+                // Write a comment for the setting of Success
+                WriteComment("Set Success to true if result.IntegerValue is greater than zero");
+
+                // Set Success to true if the IntegerValue is set
+                WriteLine("result.Success = result.HasIntegerValue;");
+
+                // Write Close Bracket }
+                WriteCloseBracket(true);
+
                 // Write Close Bracket
                 WriteCloseBracket(true);
                 
@@ -1497,58 +1466,10 @@ namespace DataTierClient.Builders
                 WriteComment("Execute Update Stored Procedure");
 
                 // get line to execute proc
-                string executeProc = "bool saved = " + className + "Manager.Update" + className + "(" + procName + ", dataConnector);";
+                string executeProc = "result.Success = " + className + "Manager.Update" + className + "(" + procName + ", dataConnector);";
 
                 // Write line to execute proc
-                WriteLine(executeProc);
-
-                // Write blank line
-                WriteLine();
-
-                // Write comment  Create result.Boolean
-                WriteComment("Create result.Boolean");
-
-                // get line to create return object
-                string createReturnObject = "result.Boolean = new NullableBoolean();";
-
-                // Write createReturnObject
-                WriteLine(createReturnObject);
-
-                // Write Blank line
-                WriteLine();
-
-                // Write comment if deleted was successful
-                WriteComment("If save was successful");
-
-                // Write line to test if saved
-                WriteLine("if(saved)");
-
-                // Write OpenBracket
-                WriteOpenBracket(true);
-
-                // Write Comment Set result.Boolean.Value to true
-                WriteComment("Set result.Boolean.Value to true");
-
-                // now set the value to true
-                WriteLine("result.Boolean.Value = NullableBooleanEnum.True;");
-
-                // Write Close Bracket
-                WriteCloseBracket(true);
-
-                // Write else
-                WriteLine("else");
-
-                // Write OpenBracket
-                WriteOpenBracket(true);
-
-                // Write Comment Set result.Boolean.Value to false
-                WriteComment("Set result.Boolean.Value to false");
-
-                // now set the value to false
-                WriteLine("result.Boolean.Value = NullableBooleanEnum.False;");
-
-                // Write CloseBracket
-                WriteCloseBracket(true);                
+                WriteLine(executeProc);  
 
                 // Write CloseBracket
                 WriteCloseBracket(true);

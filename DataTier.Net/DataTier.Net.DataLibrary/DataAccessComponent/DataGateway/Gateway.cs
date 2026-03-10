@@ -59,7 +59,7 @@ namespace DataAccessComponent.DataGateway
             public bool DeleteAdmin(int adminId, Admin tempAdmin = null)
             {
                 // initial value
-                bool deleted = false;
+                PolymorphicObject result = new PolymorphicObject();
         
                 // if the AppController exists
                 if (HasAppController)
@@ -79,11 +79,11 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    deleted = AdminController.Delete(tempAdmin, DataManager);
+                    result = AdminController.Delete(tempAdmin, DataManager);
                 }
         
                 // return value
-                return deleted;
+                return result.Success;
             }
             #endregion
         
@@ -96,7 +96,7 @@ namespace DataAccessComponent.DataGateway
             public bool DeleteCustomReader(int customReaderId, CustomReader tempCustomReader = null)
             {
                 // initial value
-                bool deleted = false;
+                PolymorphicObject result = new PolymorphicObject();
         
                 // if the AppController exists
                 if (HasAppController)
@@ -116,11 +116,11 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    deleted = CustomReaderController.Delete(tempCustomReader, DataManager);
+                    result = CustomReaderController.Delete(tempCustomReader, DataManager);
                 }
         
                 // return value
-                return deleted;
+                return result.Success;
             }
             #endregion
         
@@ -133,7 +133,7 @@ namespace DataAccessComponent.DataGateway
             public bool DeleteDTNDatabase(int databaseId, DTNDatabase tempDTNDatabase = null)
             {
                 // initial value
-                bool deleted = false;
+                PolymorphicObject result = new PolymorphicObject();
         
                 // if the AppController exists
                 if (HasAppController)
@@ -153,11 +153,11 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    deleted = DTNDatabaseController.Delete(tempDTNDatabase, DataManager);
+                    result = DTNDatabaseController.Delete(tempDTNDatabase, DataManager);
                 }
         
                 // return value
-                return deleted;
+                return result.Success;
             }
             #endregion
         
@@ -170,7 +170,7 @@ namespace DataAccessComponent.DataGateway
             public bool DeleteDTNField(int fieldId, DTNField tempDTNField = null)
             {
                 // initial value
-                bool deleted = false;
+                PolymorphicObject result = new PolymorphicObject();
         
                 // if the AppController exists
                 if (HasAppController)
@@ -190,11 +190,11 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    deleted = DTNFieldController.Delete(tempDTNField, DataManager);
+                    result = DTNFieldController.Delete(tempDTNField, DataManager);
                 }
         
                 // return value
-                return deleted;
+                return result.Success;
             }
             #endregion
         
@@ -207,7 +207,7 @@ namespace DataAccessComponent.DataGateway
             public bool DeleteDTNProcedure(int procedureId, DTNProcedure tempDTNProcedure = null)
             {
                 // initial value
-                bool deleted = false;
+                PolymorphicObject result = new PolymorphicObject();
         
                 // if the AppController exists
                 if (HasAppController)
@@ -227,11 +227,11 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    deleted = DTNProcedureController.Delete(tempDTNProcedure, DataManager);
+                    result = DTNProcedureController.Delete(tempDTNProcedure, DataManager);
                 }
         
                 // return value
-                return deleted;
+                return result.Success;
             }
             #endregion
         
@@ -244,7 +244,7 @@ namespace DataAccessComponent.DataGateway
             public bool DeleteDTNTable(int tableId, DTNTable tempDTNTable = null)
             {
                 // initial value
-                bool deleted = false;
+                PolymorphicObject result = new PolymorphicObject();
         
                 // if the AppController exists
                 if (HasAppController)
@@ -264,11 +264,11 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    deleted = DTNTableController.Delete(tempDTNTable, DataManager);
+                    result = DTNTableController.Delete(tempDTNTable, DataManager);
                 }
         
                 // return value
-                return deleted;
+                return result.Success;
             }
             #endregion
         
@@ -281,7 +281,7 @@ namespace DataAccessComponent.DataGateway
             public bool DeleteEnumeration(int enumerationId, Enumeration tempEnumeration = null)
             {
                 // initial value
-                bool deleted = false;
+                PolymorphicObject result = new PolymorphicObject();
         
                 // if the AppController exists
                 if (HasAppController)
@@ -301,11 +301,11 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    deleted = EnumerationController.Delete(tempEnumeration, DataManager);
+                    result = EnumerationController.Delete(tempEnumeration, DataManager);
                 }
         
                 // return value
-                return deleted;
+                return result.Success;
             }
             #endregion
         
@@ -318,7 +318,7 @@ namespace DataAccessComponent.DataGateway
             public bool DeleteFieldSet(int fieldSetId, FieldSet tempFieldSet = null)
             {
                 // initial value
-                bool deleted = false;
+                PolymorphicObject result = new PolymorphicObject();
         
                 // if the AppController exists
                 if (HasAppController)
@@ -338,11 +338,11 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    deleted = FieldSetController.Delete(tempFieldSet, DataManager);
+                    result = FieldSetController.Delete(tempFieldSet, DataManager);
                 }
         
                 // return value
-                return deleted;
+                return result.Success;
             }
             #endregion
         
@@ -355,7 +355,7 @@ namespace DataAccessComponent.DataGateway
             public bool DeleteFieldSetField(int fieldSetFieldId, FieldSetField tempFieldSetField = null)
             {
                 // initial value
-                bool deleted = false;
+                PolymorphicObject result = new PolymorphicObject();
         
                 // if the AppController exists
                 if (HasAppController)
@@ -375,11 +375,11 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    deleted = FieldSetFieldController.Delete(tempFieldSetField, DataManager);
+                    result = FieldSetFieldController.Delete(tempFieldSetField, DataManager);
                 }
         
                 // return value
-                return deleted;
+                return result.Success;
             }
             #endregion
         
@@ -418,7 +418,7 @@ namespace DataAccessComponent.DataGateway
             public bool DeleteMethod(int methodId, Method tempMethod = null)
             {
                 // initial value
-                bool deleted = false;
+                PolymorphicObject result = new PolymorphicObject();
         
                 // if the AppController exists
                 if (HasAppController)
@@ -438,11 +438,11 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    deleted = MethodController.Delete(tempMethod, DataManager);
+                    result = MethodController.Delete(tempMethod, DataManager);
                 }
         
                 // return value
-                return deleted;
+                return result.Success;
             }
             #endregion
         
@@ -455,7 +455,7 @@ namespace DataAccessComponent.DataGateway
             public bool DeleteProject(int projectId, Project tempProject = null)
             {
                 // initial value
-                bool deleted = false;
+                PolymorphicObject result = new PolymorphicObject();
         
                 // if the AppController exists
                 if (HasAppController)
@@ -475,11 +475,11 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    deleted = ProjectController.Delete(tempProject, DataManager);
+                    result = ProjectController.Delete(tempProject, DataManager);
                 }
         
                 // return value
-                return deleted;
+                return result.Success;
             }
             #endregion
         
@@ -492,7 +492,7 @@ namespace DataAccessComponent.DataGateway
             public bool DeleteProjectReference(int referencesId, ProjectReference tempProjectReference = null)
             {
                 // initial value
-                bool deleted = false;
+                PolymorphicObject result = new PolymorphicObject();
         
                 // if the AppController exists
                 if (HasAppController)
@@ -512,11 +512,11 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    deleted = ProjectReferenceController.Delete(tempProjectReference, DataManager);
+                    result = ProjectReferenceController.Delete(tempProjectReference, DataManager);
                 }
         
                 // return value
-                return deleted;
+                return result.Success;
             }
             #endregion
         
@@ -529,7 +529,7 @@ namespace DataAccessComponent.DataGateway
             public bool DeleteReferencesSet(int referencesSetId, ReferencesSet tempReferencesSet = null)
             {
                 // initial value
-                bool deleted = false;
+                PolymorphicObject result = new PolymorphicObject();
         
                 // if the AppController exists
                 if (HasAppController)
@@ -549,11 +549,11 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    deleted = ReferencesSetController.Delete(tempReferencesSet, DataManager);
+                    result = ReferencesSetController.Delete(tempReferencesSet, DataManager);
                 }
         
                 // return value
-                return deleted;
+                return result.Success;
             }
             #endregion
         
@@ -1269,28 +1269,22 @@ namespace DataAccessComponent.DataGateway
 
             #region GetLastException()
             /// <summary>
-            /// This method returns the last Exception from the AppController if one exists.
-            /// Always test for null before refeferencing the Exception returned as it will be null 
-            /// if no errors were encountered.
+            /// returns the Last Exception
             /// </summary>
-            /// <returns></returns>
             public Exception GetLastException()
             {
                 // initial value
-                Exception exception = null;
+                Exception lastException = null;
 
-                // if the value for HasErrorHandler is true
-                if ((HasErrorHandler) && (ErrorHandler.HasExceptions))
+                // if the value for HasDataManager is true and DataManager.HasExceptions is true
+                if ((HasDataManager) && (DataManager.HasExceptions))
                 {
-                    // return the Exception from the AppController
-                    exception = AppController.DataManager.ErrorHandler.Exceptions.LastOrDefault();
-
-                    // Set to null after the exception is retrieved so it does not return again
-                    AppController.Exception = null;
+                    // set the return value
+                    lastException = DataManager.Exceptions.LastOrDefault();
                 }
 
                 // return value
-                return exception;
+                return lastException;
             }
             #endregion
 
@@ -1989,17 +1983,17 @@ namespace DataAccessComponent.DataGateway
             public bool SaveAdmin(ref Admin admin)
             {
                 // initial value
-                bool saved = false;
+                PolymorphicObject result = new PolymorphicObject();
 
                 // if the AppController exists
                 if (HasAppController)
                 {
                     // perform the save
-                    saved = AdminController.Save(ref admin, DataManager);
+                    result = AdminController.Save(ref admin, DataManager);
                 }
 
                 // return value
-                return saved;
+                return result.Success;
             }
             #endregion
 
@@ -2011,17 +2005,17 @@ namespace DataAccessComponent.DataGateway
             public bool SaveCustomReader(ref CustomReader customReader)
             {
                 // initial value
-                bool saved = false;
+                PolymorphicObject result = new PolymorphicObject();
 
                 // if the AppController exists
                 if (HasAppController)
                 {
                     // perform the save
-                    saved = CustomReaderController.Save(ref customReader, DataManager);
+                    result = CustomReaderController.Save(ref customReader, DataManager);
                 }
 
                 // return value
-                return saved;
+                return result.Success;
             }
             #endregion
 
@@ -2033,17 +2027,17 @@ namespace DataAccessComponent.DataGateway
             public bool SaveDTNDatabase(ref DTNDatabase dTNDatabase)
             {
                 // initial value
-                bool saved = false;
+                PolymorphicObject result = new PolymorphicObject();
 
                 // if the AppController exists
                 if (HasAppController)
                 {
                     // perform the save
-                    saved = DTNDatabaseController.Save(ref dTNDatabase, DataManager);
+                    result = DTNDatabaseController.Save(ref dTNDatabase, DataManager);
                 }
 
                 // return value
-                return saved;
+                return result.Success;
             }
             #endregion
 
@@ -2055,17 +2049,17 @@ namespace DataAccessComponent.DataGateway
             public bool SaveDTNField(ref DTNField dTNField)
             {
                 // initial value
-                bool saved = false;
+                PolymorphicObject result = new PolymorphicObject();
 
                 // if the AppController exists
                 if (HasAppController)
                 {
                     // perform the save
-                    saved = DTNFieldController.Save(ref dTNField, DataManager);
+                    result = DTNFieldController.Save(ref dTNField, DataManager);
                 }
 
                 // return value
-                return saved;
+                return result.Success;
             }
             #endregion
 
@@ -2077,17 +2071,17 @@ namespace DataAccessComponent.DataGateway
             public bool SaveDTNProcedure(ref DTNProcedure dTNProcedure)
             {
                 // initial value
-                bool saved = false;
+                PolymorphicObject result = new PolymorphicObject();
 
                 // if the AppController exists
                 if (HasAppController)
                 {
                     // perform the save
-                    saved = DTNProcedureController.Save(ref dTNProcedure, DataManager);
+                    result = DTNProcedureController.Save(ref dTNProcedure, DataManager);
                 }
 
                 // return value
-                return saved;
+                return result.Success;
             }
             #endregion
 
@@ -2099,17 +2093,17 @@ namespace DataAccessComponent.DataGateway
             public bool SaveDTNTable(ref DTNTable dTNTable)
             {
                 // initial value
-                bool saved = false;
+                PolymorphicObject result = new PolymorphicObject();
 
                 // if the AppController exists
                 if (HasAppController)
                 {
                     // perform the save
-                    saved = DTNTableController.Save(ref dTNTable, DataManager);
+                    result = DTNTableController.Save(ref dTNTable, DataManager);
                 }
 
                 // return value
-                return saved;
+                return result.Success;
             }
             #endregion
 
@@ -2121,17 +2115,17 @@ namespace DataAccessComponent.DataGateway
             public bool SaveEnumeration(ref Enumeration enumeration)
             {
                 // initial value
-                bool saved = false;
+                PolymorphicObject result = new PolymorphicObject();
 
                 // if the AppController exists
                 if (HasAppController)
                 {
                     // perform the save
-                    saved = EnumerationController.Save(ref enumeration, DataManager);
+                    result = EnumerationController.Save(ref enumeration, DataManager);
                 }
 
                 // return value
-                return saved;
+                return result.Success;
             }
             #endregion
 
@@ -2143,17 +2137,17 @@ namespace DataAccessComponent.DataGateway
             public bool SaveFieldSet(ref FieldSet fieldSet)
             {
                 // initial value
-                bool saved = false;
+                PolymorphicObject result = new PolymorphicObject();
 
                 // if the AppController exists
                 if (HasAppController)
                 {
                     // perform the save
-                    saved = FieldSetController.Save(ref fieldSet, DataManager);
+                    result = FieldSetController.Save(ref fieldSet, DataManager);
                 }
 
                 // return value
-                return saved;
+                return result.Success;
             }
             #endregion
 
@@ -2165,17 +2159,17 @@ namespace DataAccessComponent.DataGateway
             public bool SaveFieldSetField(ref FieldSetField fieldSetField)
             {
                 // initial value
-                bool saved = false;
+                PolymorphicObject result = new PolymorphicObject();
 
                 // if the AppController exists
                 if (HasAppController)
                 {
                     // perform the save
-                    saved = FieldSetFieldController.Save(ref fieldSetField, DataManager);
+                    result = FieldSetFieldController.Save(ref fieldSetField, DataManager);
                 }
 
                 // return value
-                return saved;
+                return result.Success;
             }
             #endregion
 
@@ -2187,17 +2181,17 @@ namespace DataAccessComponent.DataGateway
             public bool SaveMethod(ref Method method)
             {
                 // initial value
-                bool saved = false;
+                PolymorphicObject result = new PolymorphicObject();
 
                 // if the AppController exists
                 if (HasAppController)
                 {
                     // perform the save
-                    saved = MethodController.Save(ref method, DataManager);
+                    result = MethodController.Save(ref method, DataManager);
                 }
 
                 // return value
-                return saved;
+                return result.Success;
             }
             #endregion
 
@@ -2209,17 +2203,17 @@ namespace DataAccessComponent.DataGateway
             public bool SaveProject(ref Project project)
             {
                 // initial value
-                bool saved = false;
+                PolymorphicObject result = new PolymorphicObject();
 
                 // if the AppController exists
                 if (HasAppController)
                 {
                     // perform the save
-                    saved = ProjectController.Save(ref project, DataManager);
+                    result = ProjectController.Save(ref project, DataManager);
                 }
 
                 // return value
-                return saved;
+                return result.Success;
             }
             #endregion
 
@@ -2231,17 +2225,17 @@ namespace DataAccessComponent.DataGateway
             public bool SaveProjectReference(ref ProjectReference projectReference)
             {
                 // initial value
-                bool saved = false;
+                PolymorphicObject result = new PolymorphicObject();
 
                 // if the AppController exists
                 if (HasAppController)
                 {
                     // perform the save
-                    saved = ProjectReferenceController.Save(ref projectReference, DataManager);
+                    result = ProjectReferenceController.Save(ref projectReference, DataManager);
                 }
 
                 // return value
-                return saved;
+                return result.Success;
             }
             #endregion
 
@@ -2392,17 +2386,17 @@ namespace DataAccessComponent.DataGateway
             public bool SaveReferencesSet(ref ReferencesSet referencesSet)
             {
                 // initial value
-                bool saved = false;
+                PolymorphicObject result = new PolymorphicObject();
 
                 // if the AppController exists
                 if (HasAppController)
                 {
                     // perform the save
-                    saved = ReferencesSetController.Save(ref referencesSet, DataManager);
+                    result = ReferencesSetController.Save(ref referencesSet, DataManager);
                 }
 
                 // return value
-                return saved;
+                return result.Success;
             }
             #endregion
 
@@ -2415,7 +2409,7 @@ namespace DataAccessComponent.DataGateway
             public bool SaveReferencesSet(ref ReferencesSet referencesSet, bool saveChildren)
             {
                 // initial value
-                bool saved = false;
+                PolymorphicObject result = new PolymorphicObject();
                     
                 // if referencesSet exists
                 if (referencesSet != null)
@@ -2424,10 +2418,10 @@ namespace DataAccessComponent.DataGateway
                     ApplicationController appController = new ApplicationController();
 
                     // save the database
-                    saved = ReferencesSetController.Save(ref referencesSet, DataManager);
+                    result = ReferencesSetController.Save(ref referencesSet, DataManager);
                         
                     // if saved
-                    if ((saved) && (saveChildren))
+                    if ((result.Success) && (saveChildren))
                     {
                         // Save Project References
                         if(referencesSet.References != null)
@@ -2441,13 +2435,13 @@ namespace DataAccessComponent.DataGateway
                             List<ProjectReference> references = referencesSet.References;
 
                             // perfrom save
-                            saved = SaveProjectReferences(ref references, referencesSet.ReferencesSetId);
+                            result.Success = SaveProjectReferences(ref references, referencesSet.ReferencesSetId);
                         }
                     }
                 }
 
                 // return value
-                return saved;
+                return result.Success;
             }
             #endregion
 
@@ -2549,7 +2543,7 @@ namespace DataAccessComponent.DataGateway
                     if (HasDataManager)
                     {
                         // set the return value
-                        errorHandler = DataManager.ErrorHandler;
+                        errorHandler = ErrorHandler;
                     }
 
                     // return value

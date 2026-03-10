@@ -2,16 +2,16 @@
 
 #region using statements
 
-using DataAccessComponent.Data;
-using DataAccessComponent.Data.Writers;
-using DataAccessComponent.DataBridge;
+using System;
+using System.Collections.Generic;
 using DataAccessComponent.StoredProcedureManager.DeleteProcedures;
 using DataAccessComponent.StoredProcedureManager.FetchProcedures;
 using DataAccessComponent.StoredProcedureManager.InsertProcedures;
 using DataAccessComponent.StoredProcedureManager.UpdateProcedures;
 using ObjectLibrary.BusinessObjects;
-using System;
-using System.Collections.Generic;
+using DataAccessComponent.Data.Writers;
+using DataAccessComponent.Data;
+using DataAccessComponent.DataBridge;
 
 #endregion
 
@@ -37,7 +37,7 @@ namespace DataAccessComponent.DataOperations
             internal static PolymorphicObject DeleteEnumeration(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
-                PolymorphicObject returnObject = new PolymorphicObject();
+                PolymorphicObject result = new PolymorphicObject();
 
                 // If the data connection is connected
                 if ((dataConnector != null) && (dataConnector.Connected == true))
@@ -65,22 +65,8 @@ namespace DataAccessComponent.DataOperations
                     if(deleteEnumerationProc != null)
                     {
                         // Execute Delete Stored Procedure
-                        bool deleted = EnumerationManager.DeleteEnumeration(deleteEnumerationProc, dataConnector);
+                        result.Success = EnumerationManager.DeleteEnumeration(deleteEnumerationProc, dataConnector);
 
-                        // Create returnObject.Boolean
-                        returnObject.Boolean = new NullableBoolean();
-
-                        // If delete was successful
-                        if(deleted)
-                        {
-                            // Set returnObject.Boolean.Value to true
-                            returnObject.Boolean.Value = NullableBooleanEnum.True;
-                        }
-                        else
-                        {
-                            // Set returnObject.Boolean.Value to false
-                            returnObject.Boolean.Value = NullableBooleanEnum.False;
-                        }
                     }
                 }
                 else
@@ -90,7 +76,7 @@ namespace DataAccessComponent.DataOperations
                 }
 
                 // return value
-                return returnObject;
+                return result;
             }
             #endregion
 
@@ -103,7 +89,7 @@ namespace DataAccessComponent.DataOperations
             internal static PolymorphicObject FetchAll(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
-                PolymorphicObject returnObject = new PolymorphicObject();
+                PolymorphicObject result = new PolymorphicObject();
 
                 // locals
                 List<Enumeration> enumerationListCollection =  null;
@@ -138,8 +124,8 @@ namespace DataAccessComponent.DataOperations
                     // if dataObjectCollection exists
                     if(enumerationListCollection != null)
                     {
-                        // set returnObject.ObjectValue
-                        returnObject.ObjectValue = enumerationListCollection;
+                        // set result.ObjectValue
+                        result.ObjectValue = enumerationListCollection;
                     }
                 }
                 else
@@ -149,7 +135,7 @@ namespace DataAccessComponent.DataOperations
                 }
 
                 // return value
-                return returnObject;
+                return result;
             }
             #endregion
 
@@ -162,7 +148,7 @@ namespace DataAccessComponent.DataOperations
             internal static PolymorphicObject FindEnumeration(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
-                PolymorphicObject returnObject = new PolymorphicObject();
+                PolymorphicObject result = new PolymorphicObject();
 
                 // locals
                 Enumeration enumeration = null;
@@ -197,8 +183,8 @@ namespace DataAccessComponent.DataOperations
                             // if dataObject exists
                             if(enumeration != null)
                             {
-                                // set returnObject.ObjectValue
-                                returnObject.ObjectValue = enumeration;
+                                // set result.ObjectValue
+                                result.ObjectValue = enumeration;
                             }
                         }
                     }
@@ -210,7 +196,7 @@ namespace DataAccessComponent.DataOperations
                 }
 
                 // return value
-                return returnObject;
+                return result;
             }
             #endregion
 
@@ -223,7 +209,7 @@ namespace DataAccessComponent.DataOperations
             internal static PolymorphicObject InsertEnumeration(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
-                PolymorphicObject returnObject = new PolymorphicObject();
+                PolymorphicObject result = new PolymorphicObject();
 
                 // locals
                 Enumeration enumeration = null;
@@ -253,9 +239,11 @@ namespace DataAccessComponent.DataOperations
                         if(insertEnumerationProc != null)
                         {
                             // Execute Insert Stored Procedure
-                            returnObject.IntegerValue = EnumerationManager.InsertEnumeration(insertEnumerationProc, dataConnector);
-                        }
+                            result.IntegerValue = EnumerationManager.InsertEnumeration(insertEnumerationProc, dataConnector);
 
+                            // Set the value for Sucess based on if the Insert was Successful
+                            result.Success = result.HasIntegerValue;
+                        }
                     }
                     else
                     {
@@ -265,7 +253,7 @@ namespace DataAccessComponent.DataOperations
                 }
 
                 // return value
-                return returnObject;
+                return result;
             }
             #endregion
 
@@ -274,11 +262,11 @@ namespace DataAccessComponent.DataOperations
             /// This method updates a 'Enumeration' object.
             /// </summary>
             /// <param name='List<PolymorphicObject>'>The 'Enumeration' to update.
-            /// <returns>A PolymorphicObject object with a value.
+            /// <returns>A PolymorphicObject object.
             internal static PolymorphicObject UpdateEnumeration(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
-                PolymorphicObject returnObject = new PolymorphicObject();
+                PolymorphicObject result = new PolymorphicObject();
 
                 // locals
                 Enumeration enumeration = null;
@@ -308,22 +296,7 @@ namespace DataAccessComponent.DataOperations
                         if(updateEnumerationProc != null)
                         {
                             // Execute Update Stored Procedure
-                            bool saved = EnumerationManager.UpdateEnumeration(updateEnumerationProc, dataConnector);
-
-                            // Create returnObject.Boolean
-                            returnObject.Boolean = new NullableBoolean();
-
-                            // If save was successful
-                            if(saved)
-                            {
-                                // Set returnObject.Boolean.Value to true
-                                returnObject.Boolean.Value = NullableBooleanEnum.True;
-                            }
-                            else
-                            {
-                                // Set returnObject.Boolean.Value to false
-                                returnObject.Boolean.Value = NullableBooleanEnum.False;
-                            }
+                            result.Success = EnumerationManager.UpdateEnumeration(updateEnumerationProc, dataConnector);
                         }
                         else
                         {
@@ -334,7 +307,7 @@ namespace DataAccessComponent.DataOperations
                 }
 
                 // return value
-                return returnObject;
+                return result;
             }
             #endregion
 

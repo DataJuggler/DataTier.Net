@@ -30,6 +30,7 @@ namespace DataAccessComponent.Data
         private DataConnector dataConnector;
         private ErrorHandler errorHandler;
         private string connectionName;
+        private List<Exception> exceptions;
         #endregion
 
         #region Constructor
@@ -56,10 +57,10 @@ namespace DataAccessComponent.Data
             private void Init()
             {
                 // Create New DataConnector
-                this.DataConnector = new DataConnector();
+                DataConnector = new DataConnector();
 
                 // Create the ErrorHandler
-                this.ErrorHandler = new ErrorHandler();
+                Exceptions = new List<Exception>();
             }
             #endregion
 
@@ -83,30 +84,30 @@ namespace DataAccessComponent.Data
             }
             #endregion
 
-            #region ErrorHandler
+            #region Exceptions
             /// <summary>
-            /// This property gets or sets the value for 'ErrorHandler'.
+            /// This property gets or sets the value for 'Exceptions'.
             /// </summary>
-            public ErrorHandler ErrorHandler
+            public List<Exception> Exceptions
             {
-                get { return errorHandler; }
-                set { errorHandler = value; }
+                get { return exceptions; }
+                set { exceptions = value; }
             }
             #endregion
             
-            #region HasErrorHandler
+            #region HasExceptions
             /// <summary>
-            /// This property returns true if this object has an 'ErrorHandler'.
+            /// This property returns true if this object has an 'Exceptions'.
             /// </summary>
-            public bool HasErrorHandler
+            public bool HasExceptions
             {
                 get
                 {
                     // initial value
-                    bool hasErrorHandler = (ErrorHandler != null);
+                    bool hasExceptions = (Exceptions != null);
 
                     // return value
-                    return hasErrorHandler;
+                    return hasExceptions;
                 }
             }
             #endregion

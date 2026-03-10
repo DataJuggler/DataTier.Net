@@ -28,7 +28,6 @@ namespace DataAccessComponent.DataBridge
         #region Private Variables        
         private DataManager dataManager;        
         private AuthenticationManager loginManager;
-        private Exception exception;
         private string connectionName;
         #endregion
 
@@ -171,18 +170,6 @@ namespace DataAccessComponent.DataBridge
             {
                 get { return dataManager; }
                 set { dataManager = value; }
-            }
-            #endregion
-
-            #region Exception
-            /// <summary>
-            /// The last exception that occurred (if any) from executing
-            /// a data operation.
-            /// </summary>
-            public Exception Exception
-            {
-                get { return exception; }
-                set { exception = value; }
             }
             #endregion
 

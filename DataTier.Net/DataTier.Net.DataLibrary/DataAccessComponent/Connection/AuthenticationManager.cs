@@ -66,7 +66,7 @@ namespace DataAccessComponent.Connection
                 catch (Exception error)
                 {
                     // Log this error
-                    dataManager.ErrorHandler.LogError(methodName, objectName, error);                    
+                    ErrorHandler.LogError(methodName, objectName, error);                    
                 }
 
                 // return value

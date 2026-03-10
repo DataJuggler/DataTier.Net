@@ -62,13 +62,7 @@ namespace DataAccessComponent.DataOperations
             public PolymorphicObject ExecuteNonQuery(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // initial value
-                PolymorphicObject returnValue = new PolymorphicObject();
-
-                // Set to false
-                returnValue.Boolean = new NullableBoolean(false);
-
-                // locals
-                bool executed = false;
+                PolymorphicObject result = new PolymorphicObject();
 
                 try
                 {
@@ -88,10 +82,7 @@ namespace DataAccessComponent.DataOperations
                         if (!String.IsNullOrEmpty(storedProcedure.ProcedureName))
                         {
                             // Perform an update
-                            executed = DataHelper.UpdateRecord(storedProcedure, dataConnector);
-
-                            // set the return value
-                            returnValue.Boolean = new NullableBoolean(executed);
+                            result.Success = DataHelper.UpdateRecord(storedProcedure, dataConnector);
                         }
                     }
                     else
@@ -102,21 +93,15 @@ namespace DataAccessComponent.DataOperations
                 }
                 catch (Exception error)
                 {
-                    // for debugging only
-                    string err = error.ToString();
-
-                    // Set the text of the 
-                    returnValue.Name = "Error";
-
                     // Set the text for the returnValue
-                    returnValue.Text = err;
+                    result.Text = error.ToString();
 
                     // set the return value
-                    returnValue.ObjectValue = error;
+                    result.Exception = error;
                 }
 
                 // return value
-                return returnValue;
+                return result;
             }
             #endregion
 
@@ -191,16 +176,13 @@ namespace DataAccessComponent.DataOperations
             internal static PolymorphicObject TestDataConnection(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
-                PolymorphicObject returnObject = new PolymorphicObject();
-
-                // Create returnObject.Boolean
-                returnObject.Boolean = new NullableBoolean();
+                PolymorphicObject result = new PolymorphicObject();
 
                 // If the data connection is connected
                 if ((dataConnector != null) && (dataConnector.Connected == true))
                 {
                     // Set Boolean To True
-                    returnObject.Boolean.Value = NullableBooleanEnum.True;
+                    result.Success = true;
                 }
                 else
                 {
@@ -209,7 +191,7 @@ namespace DataAccessComponent.DataOperations
                 }
 
                 // return value
-                return returnObject;
+                return result;
             }
             #endregion
 

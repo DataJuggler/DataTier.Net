@@ -354,16 +354,14 @@ namespace DataTierClient.Builders
                         TextLine methodDeclarationLine = new TextLine("            public bool " + methodName);
                         TextLine openBracket = new TextLine("            {");
                         TextLine initialValueComment = new TextLine("                // initial value");
-                        TextLine initialValue = new TextLine("                bool deleted = false;");
-                        TextLine blankLine = new TextLine("        ");
-                        TextLine localComment = new TextLine("                // local");
-                        TextLine localVariable = new TextLine("                PolymorphicObject result = new PolymorphicObject();");
+                        TextLine initialValue = new TextLine("                PolymorphicObject result = new PolymorphicObject();");
+                        TextLine blankLine = new TextLine("        ");                        
                         TextLine validationTestComment = new TextLine("                // if the AppController exists");
                         TextLine validationTest = new TextLine("                if (HasAppController)");
                         TextLine openBracket2 = new TextLine("                {");
                         TextLine openBracket3 = new TextLine("                    {");
                         TextLine returnValueComment = new TextLine("                // return value");
-                        TextLine returnValue = new TextLine("                return deleted;");
+                        TextLine returnValue = new TextLine("                return result.Success;");
                         TextLine closeBracket = new TextLine("            }");
                         TextLine closeBracket2 = new TextLine("                }");
                         TextLine closeBracket3 = new TextLine("                    }");
@@ -377,11 +375,7 @@ namespace DataTierClient.Builders
                         TextLine setPrimaryKeyComment = new TextLine("                        // set the primary key");
                         TextLine setPrimaryKey = new TextLine("                        temp" + dataTable.ClassName + ".UpdateIdentity(" + variableName + ");");
                         TextLine performDeleteComment = new TextLine("                    // perform the delete");
-                        TextLine performDelete = new TextLine("                    result = " + dataTable.Name + "Controller.Delete(temp" + dataTable.ClassName + ", DataManager);");
-                        TextLine checkResultComment = new TextLine("                    // if result.Boolean exists");
-                        TextLine checkResult = new TextLine("                    if ((result != null) && (result.HasBoolean))");
-                        TextLine setReturnValueComment = new TextLine("                        // Set the return value");
-                        TextLine setReturnValue = new TextLine("                        deleted = (result.Boolean.Value == DataBridge.NullableBooleanEnum.True);");
+                        TextLine performDelete = new TextLine("                    result = " + dataTable.Name + "Controller.Delete(temp" + dataTable.ClassName + ", DataManager);");                        
 
                         // if this is an integer or an Identity column
                         if ((dataTable.PrimaryKey.DataType == DataManager.DataTypeEnum.Autonumber) || (dataTable.PrimaryKey.DataType == DataManager.DataTypeEnum.Integer))
@@ -457,18 +451,6 @@ namespace DataTierClient.Builders
 
                         // insert a line
                         lines.Insert(insertIndex, blankLine);
-
-                        // increment
-                        insertIndex++;
-
-                        // insert a line for the comment // local
-                        lines.Insert(insertIndex, localComment);
-
-                        // increment
-                        insertIndex++;
-
-                        // insert a line for the PolyMorphicObject result = new PolyMorphicObject();
-                        lines.Insert(insertIndex, localVariable);
 
                         // increment
                         insertIndex++;
@@ -584,7 +566,7 @@ namespace DataTierClient.Builders
                         // insert a line
                         lines.Insert(insertIndex, blankLine);
 
-                        // write the primary key comment
+                        // write the perform delete
                         lines.Insert(insertIndex, performDeleteComment);
 
                         // increment
@@ -592,50 +574,6 @@ namespace DataTierClient.Builders
 
                         // insert a line
                         lines.Insert(insertIndex, performDelete);
-
-                        // Update 3.6.2026 - Now that Delete resurns a PolyMorhpicObject we have to get the result to set the return valule
-
-                        // increment
-                        insertIndex++;
-
-                        // insert a line
-                        lines.Insert(insertIndex, blankLine);
-
-                        // increment
-                        insertIndex++;
-
-                        // write the comment if (result.Boolean exists
-                        lines.Insert(insertIndex, checkResultComment);
-
-                        // increment
-                        insertIndex++;
-
-                        // write the line if ((result != null) && (result.HasBoolean))
-                        lines.Insert(insertIndex, checkResult);
-
-                        // increment
-                        insertIndex++;
-
-                        // write the line if ((result != null) && (result.HasBoolean))
-                        lines.Insert(insertIndex, openBracket3);
-
-                        // increment
-                        insertIndex++;
-
-                        // Write comment // Set return value
-                        lines.Insert(insertIndex, setReturnValueComment);
-
-                        // increment
-                        insertIndex++;
-
-                        // Write the set return value: deleted = (result.Boolean.Value == DataBridge.NullableBooleanEnum.True);
-                        lines.Insert(insertIndex, setReturnValue);
-
-                        // increment
-                        insertIndex++;
-
-                        // write the close bracket
-                        lines.Insert(insertIndex, closeBracket3);
 
                         // increment
                         insertIndex++;
@@ -1314,10 +1252,8 @@ namespace DataTierClient.Builders
                             TextLine methodDeclarationLine = new TextLine("            public bool "+ methodName);
                             TextLine openBracket = new TextLine("            {");
                             TextLine initialValueComment = new TextLine("                // initial value");
-                            TextLine initialValue = new TextLine("                bool saved = false;");
+                            TextLine initialValue = new TextLine("                PolymorphicObject result = new PolymorphicObject();");
                             TextLine blankLine = new TextLine();
-                            TextLine localComment = new TextLine("                // local");
-                            TextLine result = new TextLine("                PolymorphicObject result = null;");
                             TextLine validationTestComment = new TextLine("                // if the AppController exists");
                             TextLine validationTest = new TextLine("                if (HasAppController)");
                             TextLine openBracket2 = new TextLine("                {");
@@ -1327,13 +1263,9 @@ namespace DataTierClient.Builders
                             TextLine closeBracket3 = new TextLine("                    }");
                             TextLine endRegion = new TextLine("            #endregion");
                             TextLine performSaveComment = new TextLine("                    // perform the save");
-                            TextLine performSave = new TextLine("                    result = " + dataTable.Name + "Controller.Save(ref " + objectName + ", DataManager);");
-                            TextLine checkResultComment = new TextLine("                    // if result.Boolean exists");
-                            TextLine checkResult = new TextLine("                    if ((result != null) && (result.HasBoolean))");
-                            TextLine setReturnValueComment = new TextLine("                        // Set the return value");
-                            TextLine setReturnValue = new TextLine("                        saved = (result.Boolean.Value == DataBridge.NullableBooleanEnum.True);");
+                            TextLine performSave = new TextLine("                    result = " + dataTable.Name + "Controller.Save(ref " + objectName + ", DataManager);");                            
                             TextLine returnValueComment = new TextLine("                // return value");
-                            TextLine returnValue = new TextLine("                return saved;");
+                            TextLine returnValue = new TextLine("                return result.Success;");
 
                             // insert a line
                             lines.Insert(insertIndex, beginregion);
@@ -1395,24 +1327,6 @@ namespace DataTierClient.Builders
                             // increment
                             insertIndex++;
 
-                            // add the comment for // local
-                            lines.Insert(insertIndex, localComment);
-
-                            // increment
-                            insertIndex++;
-
-                            // add the declaration for the result value
-                            lines.Insert(insertIndex, result);
-
-                            // increment
-                            insertIndex++;
-
-                            // insert a line
-                            lines.Insert(insertIndex, blankLine);
-
-                            // increment
-                            insertIndex++;
-
                             // insert a line
                             lines.Insert(insertIndex, validationTestComment);
 
@@ -1439,50 +1353,6 @@ namespace DataTierClient.Builders
 
                             // insert a line
                             lines.Insert(insertIndex, performSave);
-
-                            // Update 3.6.2026 - Now that Save resurns a PolyMorhpicObject we have to get the result to set the return valule
-
-                            // increment
-                            insertIndex++;
-
-                            // insert a line
-                            lines.Insert(insertIndex, blankLine);
-
-                            // increment
-                            insertIndex++;
-
-                            // write the comment if (result.Boolean exists
-                            lines.Insert(insertIndex, checkResultComment);
-
-                            // increment
-                            insertIndex++;
-
-                            // write the line if ((result != null) && (result.HasBoolean))
-                            lines.Insert(insertIndex, checkResult);
-
-                            // increment
-                            insertIndex++;
-
-                            // write the line if ((result != null) && (result.HasBoolean))
-                            lines.Insert(insertIndex, openBracket3);
-
-                            // increment
-                            insertIndex++;
-
-                            // Write comment // Set return value
-                            lines.Insert(insertIndex, setReturnValueComment);
-
-                            // increment
-                            insertIndex++;
-
-                            // Write the set return value: deleted = (result.Boolean.Value == DataBridge.NullableBooleanEnum.True);
-                            lines.Insert(insertIndex, setReturnValue);
-
-                            // increment
-                            insertIndex++;
-
-                            // write the close bracket
-                            lines.Insert(insertIndex, closeBracket3);
 
                             // increment
                             insertIndex++;

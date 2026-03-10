@@ -6,11 +6,9 @@ using DataAccessComponent.Connection;
 using DataAccessComponent.Data;
 using DataAccessComponent.DataBridge;
 using DataAccessComponent.DataOperations;
-using DataAccessComponent.Logging;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Security.AccessControl;
+using DataAccessComponent.Logging;
 
 #endregion
 
@@ -103,12 +101,8 @@ namespace DataAccessComponent.Controllers
                 }
                 catch (Exception exception)
                 {
-                    // if the dataManager exists and has an ErrorHandler
-                    if ((dataManager != null) && (dataManager.HasErrorHandler))
-                    {
-                        // Log the error
-                        dataManager.ErrorHandler.LogError("TestDatabaseConnection", "ApplicationController", exception);
-                    }
+                    // Log the error
+                    ErrorHandler.LogError("TestDatabaseConnection", "ApplicationController", exception);
                 }
 
                 // return value
@@ -217,36 +211,6 @@ namespace DataAccessComponent.Controllers
 
                     // return value
                     return dataManager;
-                }
-            }
-            #endregion
-
-            #region Exception
-            /// <summary>
-            /// The last exception from the App Controller when executing
-            /// a data operation.
-            /// </summary>
-            public Exception Exception
-            {
-                get
-                {
-                    // initial value
-                    if (exception == null)
-                    {
-                        // Set the exception
-                        exception = DataBridge.Exception;
-                    }
-
-                    // return value
-                    return exception;
-                }
-                set
-                {
-                    // set the value
-                    exception = value;
-
-                    // Set the Databride exception
-                    DataBridge.Exception = value;
                 }
             }
             #endregion

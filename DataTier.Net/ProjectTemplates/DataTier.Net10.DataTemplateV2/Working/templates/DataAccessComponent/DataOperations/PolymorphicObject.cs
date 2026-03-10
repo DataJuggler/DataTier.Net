@@ -28,7 +28,7 @@ namespace DataAccessComponent.DataOperations
     {
 
         #region Private Variables
-        private NullableBoolean boolean;
+        private bool success;
         private DataSet dataSet;
         private int integerValue;
         private string text;
@@ -68,18 +68,6 @@ namespace DataAccessComponent.DataOperations
 
         #region Properties
 
-            #region Boolean
-            /// <summary>
-            /// This property represents a nullable boolean, with 
-            /// values for true, false, & null.
-            /// </summary>
-            public NullableBoolean Boolean
-            {
-                get { return boolean; }
-                set { boolean = value; }
-            }
-            #endregion
-
             #region DataSet
             /// <summary>
             /// This property holds a DataSet if needed.
@@ -99,23 +87,6 @@ namespace DataAccessComponent.DataOperations
             {
                 get { return exception; }
                 set { exception = value; }
-            }
-            #endregion
-            
-            #region HasBoolean
-            /// <summary>
-            /// This property returns true if this object has a 'Boolean'.
-            /// </summary>
-            public bool HasBoolean
-            {
-                get
-                {
-                    // initial value
-                    bool hasBoolean = (Boolean != null);
-
-                    // return value
-                    return hasBoolean;
-                }
             }
             #endregion
             
@@ -204,6 +175,17 @@ namespace DataAccessComponent.DataOperations
             }
             #endregion
 
+            #region Success
+            /// <summary>
+            /// This property gets or sets the value for 'Success'.
+            /// </summary>
+            public bool Success
+            {
+                get { return success; }
+                set { success = value; }
+            }
+            #endregion
+            
             #region Text
             /// <summary>
             /// The string text value if this object's value is a string

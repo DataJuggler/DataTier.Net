@@ -2,13 +2,13 @@
 
 #region using statements
 
-using DataAccessComponent.Data;
-using DataAccessComponent.DataBridge;
-using DataAccessComponent.DataOperations;
-using DataAccessComponent.Logging;
-using ObjectLibrary.BusinessObjects;
 using System;
 using System.Collections.Generic;
+using ObjectLibrary.BusinessObjects;
+using DataAccessComponent.Logging;
+using DataAccessComponent.DataOperations;
+using DataAccessComponent.DataBridge;
+using DataAccessComponent.Data;
 
 #endregion
 
@@ -59,10 +59,10 @@ namespace DataAccessComponent.Controllers
             /// </summary>
             /// <param name='dtnfield'>The 'DTNField' to delete.</param>
             /// <returns>True if the delete is successful or false if not.</returns>
-            public static bool Delete(DTNField tempDTNField, DataManager dataManager)
+            public static PolymorphicObject Delete(DTNField tempDTNField, DataManager dataManager)
             {
-                // locals
-                bool deleted = false;
+                // initial value
+                PolymorphicObject result = new PolymorphicObject();
 
                 // Get information for calling 'DataBridgeManager.PerformDataOperation' method.
                 string methodName = "DeleteDTNField";
@@ -80,32 +80,17 @@ namespace DataAccessComponent.Controllers
                         List<PolymorphicObject> parameters = CreateDTNFieldParameter(tempDTNField);
 
                         // Perform DataOperation
-                        PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, deleteDTNFieldMethod, parameters, dataManager);
-
-                        // If return object exists
-                        if (returnObject != null)
-                        {
-                            // Test For True
-                            if (returnObject.Boolean.Value == NullableBooleanEnum.True)
-                            {
-                                // Set Deleted To True
-                                deleted = true;
-                            }
-                        }
+                        result = DataBridgeManager.PerformDataOperation(methodName, objectName, deleteDTNFieldMethod, parameters, dataManager);
                     }
                 }
                 catch (Exception error)
                 {
                     // Log the error
-                    if ((dataManager != null) && (dataManager.HasErrorHandler))
-                    {
-                        // Call ErrorHandler.LogError
-                        dataManager.ErrorHandler.LogError(methodName, objectName, error);
-                    }
+                    ErrorHandler.LogError(methodName, objectName, error);
                 }
 
                 // return value
-                return deleted;
+                return result;
             }
             #endregion
 
@@ -146,11 +131,7 @@ namespace DataAccessComponent.Controllers
                 catch (Exception error)
                 {
                     // Log the error
-                    if ((dataManager != null) && (dataManager.HasErrorHandler))
-                    {
-                        // Call ErrorHandler.LogError
-                        dataManager.ErrorHandler.LogError(methodName, objectName, error);
-                    }
+                    ErrorHandler.LogError(methodName, objectName, error);
                 }
 
                 // return value
@@ -200,11 +181,7 @@ namespace DataAccessComponent.Controllers
                 catch (Exception error)
                 {
                     // Log the error
-                    if ((dataManager != null) && (dataManager.HasErrorHandler))
-                    {
-                        // Call ErrorHandler.LogError
-                        dataManager.ErrorHandler.LogError(methodName, objectName, error);
-                    }
+                    ErrorHandler.LogError(methodName, objectName, error);
                 }
 
                 // return value
@@ -219,11 +196,11 @@ namespace DataAccessComponent.Controllers
             /// procedure 'DTNField_Insert'.</param>
             /// </summary>
             /// <param name='dTNField'>The 'DTNField' object to insert.</param>
-            /// <returns>The id (int) of the new  'DTNField' object that was inserted.</returns>
-            public static int Insert(DTNField dTNField, DataManager dataManager)
+            /// <returns>The a PolymorphicObject. This object contains an IntegerValue, which is the Identity value for the new 'DTNField' object that was inserted.</returns>
+            public static PolymorphicObject Insert(DTNField dTNField, DataManager dataManager)
             {
                 // Initial values
-                int newIdentity = -1;
+                PolymorphicObject result = new PolymorphicObject();
 
                 // Get information for calling 'DataBridgeManager.PerformDataOperation' method.
                 string methodName = "Insert";
@@ -234,34 +211,24 @@ namespace DataAccessComponent.Controllers
                     // If DTNFieldexists
                     if (dTNField != null)
                     {
+                        // Create the delegate to perform the insert
                         ApplicationController.DataOperationMethod insertMethod = DTNFieldMethods.InsertDTNField;
 
                         // Create parameters for this method
                         List<PolymorphicObject> parameters = CreateDTNFieldParameter(dTNField);
 
                         // Perform DataOperation
-                        PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, insertMethod , parameters, dataManager);
-
-                        // If return object exists
-                        if (returnObject != null)
-                        {
-                            // Set return value
-                            newIdentity = returnObject.IntegerValue;
-                        }
+                        result = DataBridgeManager.PerformDataOperation(methodName, objectName, insertMethod , parameters, dataManager);
                     }
                 }
                 catch (Exception error)
                 {
                     // Log the error
-                    if ((dataManager != null) && (dataManager.HasErrorHandler))
-                    {
-                        // Call ErrorHandler.LogError
-                        dataManager.ErrorHandler.LogError(methodName, objectName, error);
-                    }
+                    ErrorHandler.LogError(methodName, objectName, error);
                 }
 
                 // return value
-                return newIdentity;
+                return result;
             }
             #endregion
 
@@ -272,10 +239,10 @@ namespace DataAccessComponent.Controllers
             /// </summary>
             /// <param name='dTNField'>The 'DTNField' object to save.</param>
             /// <returns>True if successful or false if not.</returns>
-            public static bool Save(ref DTNField dTNField, DataManager dataManager)
+            public static PolymorphicObject Save(ref DTNField dTNField, DataManager dataManager)
             {
                 // Initial value
-                bool saved = false;
+                PolymorphicObject result = new PolymorphicObject();
 
                 // If the dTNField exists.
                 if (dTNField != null)
@@ -284,27 +251,25 @@ namespace DataAccessComponent.Controllers
                     if (dTNField.IsNew)
                     {
                         // Insert new DTNField
-                        int newIdentity = Insert(dTNField, dataManager);
+                        result = Insert(dTNField, dataManager);
 
-                        // if insert was successful
-                        if (newIdentity > 0)
+                        // if the insert was successful
+                        if (result.HasIntegerValue)
                         {
                             // Update Identity
-                            dTNField.UpdateIdentity(newIdentity);
+                            dTNField.UpdateIdentity(result.IntegerValue);
 
-                            // Set return value
-                            saved = true;
                         }
                     }
                     else
                     {
                         // Update DTNField
-                        saved = Update(dTNField, dataManager);
+                        result  = Update(dTNField, dataManager);
                     }
                 }
 
                 // return value
-                return saved;
+                return result;
             }
             #endregion
 
@@ -316,10 +281,10 @@ namespace DataAccessComponent.Controllers
             /// </summary>
             /// <param name='dTNField'>The 'DTNField' object to update.</param>
             /// <returns>True if successful else false if not.</returns>
-            public static bool Update(DTNField dTNField, DataManager dataManager)
+            public static PolymorphicObject Update(DTNField dTNField, DataManager dataManager)
             {
                 // Initial value
-                bool saved = false;
+                PolymorphicObject result = new PolymorphicObject();
 
                 // Get information for calling 'DataBridgeManager.PerformDataOperation' method.
                 string methodName = "Update";
@@ -335,28 +300,17 @@ namespace DataAccessComponent.Controllers
                         // Create parameters for this method
                         List<PolymorphicObject> parameters = CreateDTNFieldParameter(dTNField);
                         // Perform DataOperation
-                        PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, updateMethod , parameters, dataManager);
-
-                        // If return object exists
-                        if ((returnObject != null) && (returnObject.Boolean != null) && (returnObject.Boolean.Value == NullableBooleanEnum.True))
-                        {
-                            // Set saved to true
-                            saved = true;
-                        }
+                        result = DataBridgeManager.PerformDataOperation(methodName, objectName, updateMethod , parameters, dataManager);
                     }
                 }
                 catch (Exception error)
                 {
                     // Log the error
-                    if ((dataManager != null) && (dataManager.HasErrorHandler))
-                    {
-                        // Call ErrorHandler.LogError
-                        dataManager.ErrorHandler.LogError(methodName, objectName, error);
-                    }
+                    ErrorHandler.LogError(methodName, objectName, error);
                 }
 
                 // return value
-                return saved;
+                return result;
             }
             #endregion
 

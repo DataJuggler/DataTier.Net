@@ -216,7 +216,7 @@ namespace ObjectLibrary.BusinessObjects
                 if (TemplateVersion == 1)
                 {
                     DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.DataManager"));
-                    DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.DataManager.Writers"));
+                    DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.Data.Writers"));
                 }
                 else
                 {
@@ -260,7 +260,7 @@ namespace ObjectLibrary.BusinessObjects
                 if (TemplateVersion == 1)
                 {
                     // Set ReaderNamespace
-                    ReaderNamespace = "DataAccessComponent.DataManager.Readers";
+                    ReaderNamespace = "DataAccessComponent.Data.Readers";
                 }
                 else
                 {
@@ -1032,37 +1032,37 @@ namespace ObjectLibrary.BusinessObjects
                         }
 
                         // DataOperations
-                        if (!ListHelper.HasOneOrMoreItems(DataOperationsReferencesSet.References))
+                        else if (!ListHelper.HasOneOrMoreItems(DataOperationsReferencesSet.References))
                         {
                             validReferences = false;
                         }
 
                         // Object
-                        if (!ListHelper.HasOneOrMoreItems(ObjectReferencesSet.References))
+                        else if (!ListHelper.HasOneOrMoreItems(ObjectReferencesSet.References))
                         {
                             validReferences = false;
                         }
 
                         // Reader
-                        if (!ListHelper.HasOneOrMoreItems(ReaderReferencesSet.References))
+                        else if (!ListHelper.HasOneOrMoreItems(ReaderReferencesSet.References))
                         {
                             validReferences = false;
                         }
 
                         // StoredProcedure
-                        if (!ListHelper.HasOneOrMoreItems(StoredProcedureReferencesSet.References))
+                        else if (!ListHelper.HasOneOrMoreItems(StoredProcedureReferencesSet.References))
                         {
                             validReferences = false;
                         }
 
                         // Writer
-                        if (!ListHelper.HasOneOrMoreItems(WriterReferencesSet.References))
+                        else if (!ListHelper.HasOneOrMoreItems(WriterReferencesSet.References))
                         {
                             validReferences = false;
                         }
 
                         // DataManager
-                        if (!ListHelper.HasOneOrMoreItems(DataManagerReferencesSet.References))
+                        else if (!ListHelper.HasOneOrMoreItems(DataManagerReferencesSet.References))
                         {
                             validReferences = false;
                         }

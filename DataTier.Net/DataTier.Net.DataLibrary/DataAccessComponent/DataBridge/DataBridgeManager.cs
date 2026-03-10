@@ -5,6 +5,7 @@ using DataAccessComponent.Connection;
 using DataAccessComponent.Controllers;
 using DataAccessComponent.Data;
 using DataAccessComponent.DataOperations;
+using DataJuggler.Core.UltimateHelper;
 using System;
 using System.Collections.Generic;
 
@@ -27,7 +28,6 @@ namespace DataAccessComponent.DataBridge
         #region Private Variables        
         private DataManager dataManager;        
         private AuthenticationManager loginManager;
-        private Exception exception;
         private string connectionName;
         #endregion
 
@@ -90,7 +90,7 @@ namespace DataAccessComponent.DataBridge
             internal static PolymorphicObject PerformDataOperation(string methodName, string objectName, ApplicationController.DataOperationMethod dataMethod, List<PolymorphicObject> parameters, DataManager dataManager)
             {
                 // Initial Value
-                PolymorphicObject returnObject = null;
+                PolymorphicObject result = new PolymorphicObject();
 
                 try
                 {
@@ -104,7 +104,7 @@ namespace DataAccessComponent.DataBridge
                         if (dataMethod != null)
                         {
                             // Invoke Method
-                            returnObject = dataMethod(parameters, dataManager.DataConnector);
+                            result = dataMethod(parameters, dataManager.DataConnector);
                         }
                     }
                     else
@@ -113,9 +113,14 @@ namespace DataAccessComponent.DataBridge
                         throw new Exception("The database connection is not available.");
                     }
                 }
-                catch
+                catch (Exception error)
                 {
-                                  
+                    // if the dataManager.Exceptions exist
+                    if ((NullHelper.Exists(dataManager)) && (dataManager.HasExceptions))
+                    {
+                        // Add this item
+                        dataManager.Exceptions.Add(error);
+                    }
                 }
                 finally
                 {
@@ -124,7 +129,7 @@ namespace DataAccessComponent.DataBridge
                 }
 
                 // return value
-                return returnObject;
+                return result;
             }
             #endregion
 
@@ -165,18 +170,6 @@ namespace DataAccessComponent.DataBridge
             {
                 get { return dataManager; }
                 set { dataManager = value; }
-            }
-            #endregion
-
-            #region Exception
-            /// <summary>
-            /// The last exception that occurred (if any) from executing
-            /// a data operation.
-            /// </summary>
-            public Exception Exception
-            {
-                get { return exception; }
-                set { exception = value; }
             }
             #endregion
 

@@ -2,13 +2,13 @@
 
 #region using statements
 
-using DataAccessComponent.Data;
-using DataAccessComponent.DataBridge;
-using DataAccessComponent.DataOperations;
-using DataAccessComponent.Logging;
-using ObjectLibrary.BusinessObjects;
 using System;
 using System.Collections.Generic;
+using ObjectLibrary.BusinessObjects;
+using DataAccessComponent.Logging;
+using DataAccessComponent.DataOperations;
+using DataAccessComponent.DataBridge;
+using DataAccessComponent.Data;
 
 #endregion
 
@@ -88,11 +88,7 @@ namespace DataAccessComponent.Controllers
                 catch (Exception error)
                 {
                     // Log the error
-                    if ((dataManager != null) && (dataManager.HasErrorHandler))
-                    {
-                        // Call ErrorHandler.LogError
-                        dataManager.ErrorHandler.LogError(methodName, objectName, error);
-                    }
+                    ErrorHandler.LogError(methodName, objectName, error);
                 }
 
                 // return value

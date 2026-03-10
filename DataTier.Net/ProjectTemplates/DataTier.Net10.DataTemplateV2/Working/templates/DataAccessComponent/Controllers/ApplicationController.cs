@@ -215,36 +215,6 @@ namespace DataAccessComponent.Controllers
             }
             #endregion
 
-            #region Exception
-            /// <summary>
-            /// The last exception from the App Controller when executing
-            /// a data operation.
-            /// </summary>
-            public Exception Exception
-            {
-                get
-                {
-                    // initial value
-                    if (exception == null)
-                    {
-                        // Set the exception
-                        exception = DataBridge.Exception;
-                    }
-
-                    // return value
-                    return exception;
-                }
-                set
-                {
-                    // set the value
-                    exception = value;
-
-                    // Set the Databride exception
-                    DataBridge.Exception = value;
-                }
-            }
-            #endregion
-
             #region HasConnectionName
             /// <summary>
             /// This property returns true if the 'ConnectionName' exists.

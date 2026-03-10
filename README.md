@@ -110,6 +110,14 @@ https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Roo
 
 # Updates & News
 
+3.9.2026: I finished the Major update. I got rid of a class I created 15 years ago called NullableBoolean. I am not sure if Visual Studio already
+support bool?, which personally I don't like. What this means I broke all of my existsing projects. I won't break anything again (I hope),
+but this was needed. result.Success is so much easier to code generate. I am working on a converter. Also, all the older versions are 
+broken I'm sure because the templates don't match the new output. I made a decision to only support .NET 10 for now. If I get some time
+I will rebuild some of the old templates to match the new format. The reason for the change was errors are easy to get to from the data bridge
+all the way to the client. Before that was impossible, which meant errors were trapped and not caught and no sign it didn't work for tables
+that are not identity insert. Sorry for breaking things, but to move forward sometimes you have to.
+
 3.6.2026: Major update under the hood. The Delete, Insert, and Update methods in the Controllers now return a Polymorphic object, instead
 of just bool or int. This allows for an Exception in the Data Bridge Manager to be returns all the way to the Gateway. The project templates were
 also updated. I am testing now if this breaks any existing projects and that everything still saves as expected. 

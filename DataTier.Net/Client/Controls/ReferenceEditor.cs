@@ -9,6 +9,7 @@ using DataTierClient.Controls.Interfaces;
 using DataAccessComponent.Connection;
 using DataAccessComponent.DataGateway;
 using System.ComponentModel;
+using DataJuggler.Core.UltimateHelper;
 
 #endregion
 
@@ -197,7 +198,15 @@ namespace DataTierClient.Controls
                     }
                     else
                     {
-                        string exception = gateway.GetLastException().ToString();
+                        // Why didn't this save
+                        Exception exception = gateway.GetLastException();
+
+                        // if the Exception exists
+                        if (NullHelper.Exists(exception))
+                        {
+                            // for debugging only
+                            string error = exception.Message;
+                        }
                     }
                 }
             }
