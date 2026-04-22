@@ -2,16 +2,16 @@
 
 #region using statements
 
-using System;
-using System.Collections.Generic;
+using DataAccessComponent.Data;
+using DataAccessComponent.Data.Writers;
+using DataAccessComponent.DataBridge;
 using DataAccessComponent.StoredProcedureManager.DeleteProcedures;
 using DataAccessComponent.StoredProcedureManager.FetchProcedures;
 using DataAccessComponent.StoredProcedureManager.InsertProcedures;
 using DataAccessComponent.StoredProcedureManager.UpdateProcedures;
 using ObjectLibrary.BusinessObjects;
-using DataAccessComponent.Data.Writers;
-using DataAccessComponent.Data;
-using DataAccessComponent.DataBridge;
+using System;
+using System.Collections.Generic;
 
 #endregion
 
@@ -37,7 +37,7 @@ namespace DataAccessComponent.DataOperations
             internal static PolymorphicObject DeleteDTNField(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
-                PolymorphicObject result = new PolymorphicObject();
+                PolymorphicObject returnObject = new PolymorphicObject();
 
                 // If the data connection is connected
                 if ((dataConnector != null) && (dataConnector.Connected == true))
@@ -65,8 +65,22 @@ namespace DataAccessComponent.DataOperations
                     if(deleteDTNFieldProc != null)
                     {
                         // Execute Delete Stored Procedure
-                        result.Success = DTNFieldManager.DeleteDTNField(deleteDTNFieldProc, dataConnector);
+                        bool deleted = DTNFieldManager.DeleteDTNField(deleteDTNFieldProc, dataConnector);
 
+                        // Create returnObject.Boolean
+                        returnObject.Boolean = new NullableBoolean();
+
+                        // If delete was successful
+                        if(deleted)
+                        {
+                            // Set returnObject.Boolean.Value to true
+                            returnObject.Boolean.Value = NullableBooleanEnum.True;
+                        }
+                        else
+                        {
+                            // Set returnObject.Boolean.Value to false
+                            returnObject.Boolean.Value = NullableBooleanEnum.False;
+                        }
                     }
                 }
                 else
@@ -76,7 +90,7 @@ namespace DataAccessComponent.DataOperations
                 }
 
                 // return value
-                return result;
+                return returnObject;
             }
             #endregion
 
@@ -89,7 +103,7 @@ namespace DataAccessComponent.DataOperations
             internal static PolymorphicObject FetchAll(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
-                PolymorphicObject result = new PolymorphicObject();
+                PolymorphicObject returnObject = new PolymorphicObject();
 
                 // locals
                 List<DTNField> dTNFieldListCollection =  null;
@@ -124,8 +138,8 @@ namespace DataAccessComponent.DataOperations
                     // if dataObjectCollection exists
                     if(dTNFieldListCollection != null)
                     {
-                        // set result.ObjectValue
-                        result.ObjectValue = dTNFieldListCollection;
+                        // set returnObject.ObjectValue
+                        returnObject.ObjectValue = dTNFieldListCollection;
                     }
                 }
                 else
@@ -135,7 +149,7 @@ namespace DataAccessComponent.DataOperations
                 }
 
                 // return value
-                return result;
+                return returnObject;
             }
             #endregion
 
@@ -148,7 +162,7 @@ namespace DataAccessComponent.DataOperations
             internal static PolymorphicObject FindDTNField(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
-                PolymorphicObject result = new PolymorphicObject();
+                PolymorphicObject returnObject = new PolymorphicObject();
 
                 // locals
                 DTNField dTNField = null;
@@ -183,8 +197,8 @@ namespace DataAccessComponent.DataOperations
                             // if dataObject exists
                             if(dTNField != null)
                             {
-                                // set result.ObjectValue
-                                result.ObjectValue = dTNField;
+                                // set returnObject.ObjectValue
+                                returnObject.ObjectValue = dTNField;
                             }
                         }
                     }
@@ -196,7 +210,7 @@ namespace DataAccessComponent.DataOperations
                 }
 
                 // return value
-                return result;
+                return returnObject;
             }
             #endregion
 
@@ -209,7 +223,7 @@ namespace DataAccessComponent.DataOperations
             internal static PolymorphicObject InsertDTNField(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
-                PolymorphicObject result = new PolymorphicObject();
+                PolymorphicObject returnObject = new PolymorphicObject();
 
                 // locals
                 DTNField dTNField = null;
@@ -239,10 +253,7 @@ namespace DataAccessComponent.DataOperations
                         if(insertDTNFieldProc != null)
                         {
                             // Execute Insert Stored Procedure
-                            result.IntegerValue = DTNFieldManager.InsertDTNField(insertDTNFieldProc, dataConnector);
-
-                            // Set the value for Sucess based on if the Insert was Successful
-                            result.Success = result.HasIntegerValue;
+                            returnObject.IntegerValue = DTNFieldManager.InsertDTNField(insertDTNFieldProc, dataConnector);
                         }
 
                     }
@@ -254,7 +265,7 @@ namespace DataAccessComponent.DataOperations
                 }
 
                 // return value
-                return result;
+                return returnObject;
             }
             #endregion
 
@@ -263,11 +274,11 @@ namespace DataAccessComponent.DataOperations
             /// This method updates a 'DTNField' object.
             /// </summary>
             /// <param name='List<PolymorphicObject>'>The 'DTNField' to update.
-            /// <returns>A PolymorphicObject object.
+            /// <returns>A PolymorphicObject object with a value.
             internal static PolymorphicObject UpdateDTNField(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
-                PolymorphicObject result = new PolymorphicObject();
+                PolymorphicObject returnObject = new PolymorphicObject();
 
                 // locals
                 DTNField dTNField = null;
@@ -297,7 +308,22 @@ namespace DataAccessComponent.DataOperations
                         if(updateDTNFieldProc != null)
                         {
                             // Execute Update Stored Procedure
-                            result.Success = DTNFieldManager.UpdateDTNField(updateDTNFieldProc, dataConnector);
+                            bool saved = DTNFieldManager.UpdateDTNField(updateDTNFieldProc, dataConnector);
+
+                            // Create returnObject.Boolean
+                            returnObject.Boolean = new NullableBoolean();
+
+                            // If save was successful
+                            if(saved)
+                            {
+                                // Set returnObject.Boolean.Value to true
+                                returnObject.Boolean.Value = NullableBooleanEnum.True;
+                            }
+                            else
+                            {
+                                // Set returnObject.Boolean.Value to false
+                                returnObject.Boolean.Value = NullableBooleanEnum.False;
+                            }
                         }
                         else
                         {
@@ -308,7 +334,7 @@ namespace DataAccessComponent.DataOperations
                 }
 
                 // return value
-                return result;
+                return returnObject;
             }
             #endregion
 

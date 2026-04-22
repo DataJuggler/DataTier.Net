@@ -28,7 +28,6 @@ namespace DataAccessComponent.Data
 
         #region Private Variables
         private DataConnector dataConnector;
-        private ErrorHandler errorHandler;
         private string connectionName;
         private List<Exception> exceptions;
         #endregion

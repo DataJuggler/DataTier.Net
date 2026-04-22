@@ -27,9 +27,6 @@ namespace DataAccessComponent.DataOperations
     public class SystemMethods
     {
 
-        #region Private Variables
-        #endregion
-
         #region Constructor
         /// <summary>
         /// Creates a new instance of a 'SystemMethods' object.
@@ -62,7 +59,13 @@ namespace DataAccessComponent.DataOperations
             public PolymorphicObject ExecuteNonQuery(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // initial value
-                PolymorphicObject result = new PolymorphicObject();
+                PolymorphicObject returnValue = new PolymorphicObject();
+
+                // Set to false
+                returnValue.Boolean = new NullableBoolean(false);
+
+                // locals
+                bool executed = false;
 
                 try
                 {
@@ -82,7 +85,10 @@ namespace DataAccessComponent.DataOperations
                         if (!String.IsNullOrEmpty(storedProcedure.ProcedureName))
                         {
                             // Perform an update
-                            result.Success = DataHelper.UpdateRecord(storedProcedure, dataConnector);
+                            executed = DataHelper.UpdateRecord(storedProcedure, dataConnector);
+
+                            // set the return value
+                            returnValue.Boolean = new NullableBoolean(executed);
                         }
                     }
                     else
@@ -93,15 +99,21 @@ namespace DataAccessComponent.DataOperations
                 }
                 catch (Exception error)
                 {
+                    // for debugging only
+                    string err = error.ToString();
+
+                    // Set the text of the 
+                    returnValue.Name = "Error";
+
                     // Set the text for the returnValue
-                    result.Text = error.ToString();
+                    returnValue.Text = err;
 
                     // set the return value
-                    result.Exception = error;
+                    returnValue.ObjectValue = error;
                 }
 
                 // return value
-                return result;
+                return returnValue;
             }
             #endregion
 
@@ -194,10 +206,6 @@ namespace DataAccessComponent.DataOperations
                 return result;
             }
             #endregion
-
-        #endregion
-
-        #region Properties
 
         #endregion
 

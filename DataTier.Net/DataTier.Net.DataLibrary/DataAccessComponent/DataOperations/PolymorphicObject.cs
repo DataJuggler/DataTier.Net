@@ -29,12 +29,14 @@ namespace DataAccessComponent.DataOperations
 
         #region Private Variables
         private bool success;
+        private NullableBoolean boolean;
         private DataSet dataSet;
         private int integerValue;
         private string text;
         private string name;
         private object objectValue;
-        private Exception exception;
+        private bool aborted;
+        private string abortedReason;
         #endregion
 
         #region Constructor
@@ -68,6 +70,40 @@ namespace DataAccessComponent.DataOperations
 
         #region Properties
 
+            #region Aborted
+            /// <summary>
+            /// This property gets or sets the value for 'Aborted'.
+            /// </summary>
+            public bool Aborted
+            {
+                get { return aborted; }
+                set { aborted = value; }
+            }
+            #endregion
+            
+            #region AbortedReason
+            /// <summary>
+            /// This property gets or sets the value for 'AbortedReason'.
+            /// </summary>
+            public string AbortedReason
+            {
+                get { return abortedReason; }
+                set { abortedReason = value; }
+            }
+            #endregion
+            
+            #region Boolean
+            /// <summary>
+            /// This property represents a nullable boolean, with 
+            /// values for true, false, & null.
+            /// </summary>
+            public NullableBoolean Boolean
+            {
+                get { return boolean; }
+                set { boolean = value; }
+            }
+            #endregion
+
             #region DataSet
             /// <summary>
             /// This property holds a DataSet if needed.
@@ -79,68 +115,6 @@ namespace DataAccessComponent.DataOperations
             }
             #endregion
 
-            #region Exception
-            /// <summary>
-            /// This property gets or sets the value for 'Exception'.
-            /// </summary>
-            public Exception Exception
-            {
-                get { return exception; }
-                set { exception = value; }
-            }
-            #endregion
-            
-            #region HasException
-            /// <summary>
-            /// This property returns true if this object has an 'Exception'.
-            /// </summary>
-            public bool HasException
-            {
-                get
-                {
-                    // initial value
-                    bool hasException = (Exception != null);
-
-                    // return value
-                    return hasException;
-                }
-            }
-            #endregion
-            
-            #region HasIntegerValue
-            /// <summary>
-            /// This property returns true if the 'IntegerValue' is set.
-            /// </summary>
-            public bool HasIntegerValue
-            {
-                get
-                {
-                    // initial value
-                    bool hasIntegerValue = (IntegerValue > 0);
-
-                    // return value
-                    return hasIntegerValue;
-                }
-            }
-            #endregion
-            
-            #region HasObjectValue
-            /// <summary>
-            /// This property returns true if this object has an 'ObjectValue'.
-            /// </summary>
-            public bool HasObjectValue
-            {
-                get
-                {
-                    // initial value
-                    bool hasObjectValue = (ObjectValue != null);
-
-                    // return value
-                    return hasObjectValue;
-                }
-            }
-            #endregion
-            
             #region IntegerValue
             /// <summary>
             /// The return value from a DataOperation

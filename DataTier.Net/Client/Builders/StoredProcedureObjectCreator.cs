@@ -9,6 +9,7 @@ using DataJuggler.Net;
 using System.Text;
 using System.IO;
 using DataJuggler.Net.Enumerations;
+using DataAccessComponent.DataOperations;
 
 #endregion
 
@@ -27,6 +28,7 @@ namespace DataTierClient.Builders
         private string rootStoredProceduresPath;
         private string nameSpaceName;
         private ReferencesSet objectReferences;
+        private DataTable selectedTable;
         #endregion
 
 		#region Constructor
@@ -40,6 +42,21 @@ namespace DataTierClient.Builders
 		    this.NameSpaceName = nameSpaceNameArg;
             this.RootStoredProceduresPath = rootStoredProceduresPathArg;
 		    this.ObjectReferences = objectReferencesArg;
+		}
+		#endregion
+
+        #region Constructor
+		/// <summary>
+        /// Create a new instance of ControllerManagerCreator
+        /// </summary>
+        public StoredProcedureObjectCreator(DataTable selectedTableArg, ReferencesSet objectReferencesArg, string rootStoredProceduresPathArg, string nameSpaceNameArg, ProjectFileManager fileManagerArg, TargetFrameworkEnum targetFramework) : base(fileManagerArg, false, false, targetFramework)
+		{   
+		    // Set Properties
+		    this.SelectedTable = selectedTableArg;
+            this.ObjectReferences = objectReferencesArg;		    
+            this.RootStoredProceduresPath = rootStoredProceduresPathArg;		    
+            this.NameSpaceName = nameSpaceNameArg;
+            this.FileManager = fileManagerArg;
 		}
 		#endregion
 
@@ -177,13 +194,19 @@ namespace DataTierClient.Builders
             /// for a DataTable.
             /// </summary>
             /// <param name="dataTable"></param>
-            private void CreateFindProc(DataTable dataTable)
+            internal PolymorphicObject CreateFindProc(DataTable dataTable)
             {
+                // initial value
+                PolymorphicObject result = null;
+
                 // procType
                 StoredProcedureTypes procType = StoredProcedureTypes.Find;
 
                 // Create StroredProcedure
-                CreateStoredProcedure(dataTable, procType);
+                result = CreateStoredProcedure(dataTable, procType);
+
+                // return value
+                return result;
             }
             #endregion
 
@@ -208,91 +231,103 @@ namespace DataTierClient.Builders
             /// </summary>
             /// <param name="dataTable"></param>
             /// <param name="procType"></param>
-            private void CreateStoredProcedure(DataTable dataTable, StoredProcedureTypes procType)
+            private PolymorphicObject CreateStoredProcedure(DataTable dataTable, StoredProcedureTypes procType)
             {
-                // Indent = 0
-                Indent = 0;
+                // initial value
+                PolymorphicObject result = new PolymorphicObject();
+
+                // If the dataTable object exists
+                if (NullHelper.Exists(dataTable))
+                {
+                    // Indent = 0
+                    Indent = 0;
             
-                // Create file name for a delete
-                string fileName = CreateFileName(dataTable, procType);
+                    // Create file name for a delete
+                    string fileName = CreateFileName(dataTable, procType);
 
-                // if there is an _ in file name replace it.
-                fileName = fileName.Replace("_", "");
+                    // if there is an _ in file name replace it.
+                    fileName = fileName.Replace("_", "");
                 
-                // Create file
-                CreateFile(fileName, DataManager.ProjectTypeEnum.DAC);
+                    // Create file
+                    CreateFile(fileName, DataManager.ProjectTypeEnum.DAC);
 
-                // Update 12.23.2020: Stored procedures do not need any using statements
+                    // Update 12.23.2020: Stored procedures do not need any using statements
                 
-                // Write 2 Blank Lines
-                WriteLine();
-                WriteLine();
+                    // Write 2 Blank Lines
+                    WriteLine();
+                    WriteLine();
 
-                // Write NameSpace
-                StringBuilder sb = new StringBuilder("namespace ");
-                sb.Append(this.NameSpaceName);
+                    // Write NameSpace
+                    StringBuilder sb = new StringBuilder("namespace ");
+                    sb.Append(this.NameSpaceName);
                 
-                // get prod folder
-                string procFolder = GetProcFolder(procType, true, false);
-                sb.Append(procFolder);
+                    // get prod folder
+                    string procFolder = GetProcFolder(procType, true, false);
+                    sb.Append(procFolder);
                 
-                string nameSpace = sb.ToString();
-                WriteLine(nameSpace);
+                    string nameSpace = sb.ToString();
+                    WriteLine(nameSpace);
 
-                // Write Open Brack
-                WriteOpenBracket(true);
+                    // Write Open Brack
+                    WriteOpenBracket(true);
 
-                // Write Blank Line
-                WriteLine();
+                    // Write Blank Line
+                    WriteLine();
 
-                // Get ClassName
-                string className = GetClassName(dataTable, procType);
+                    // Get ClassName
+                    string className = GetClassName(dataTable, procType);
 
-                // Write Region for this reader
-                BeginRegion("class " + className);
+                    // Write Region for this reader
+                    BeginRegion("class " + className);
 
-                // Write Object Reader Summary
-                WriteClassSummary(dataTable, procType);
+                    // Write Object Reader Summary
+                    WriteClassSummary(dataTable, procType);
 
-                // get class line
-                string classLine = "public class " + className + " : StoredProcedure";
+                    // get class line
+                    string classLine = "public class " + className + " : StoredProcedure";
 
-                // Write class line
-                WriteLine(classLine);
+                    // Write class line
+                    WriteLine(classLine);
 
-                // Write Open Bracket
-                WriteOpenBracket(true);
+                    // Write Open Bracket
+                    WriteOpenBracket(true);
 
-                // Write Blank Line
-                WriteLine();
+                    // Write Blank Line
+                    WriteLine();
 
-                // Write Private Variables
-                WritePrivateVariables(dataTable);
+                    // Write Private Variables
+                    WritePrivateVariables(dataTable);
 
-                // Write Constructor
-                WriteConstructor(dataTable, procType);
+                    // Write Constructor
+                    WriteConstructor(dataTable, procType);
 
-                // Write Methods
-                WriteMethods(dataTable, procType);
+                    // Write Methods
+                    WriteMethods(dataTable, procType);
 
-                // Write Properties
-                WriteProperties(dataTable, procType);
+                    // Write Properties
+                    WriteProperties(dataTable, procType);
 
-                // write Close Bracket
-                WriteCloseBracket(true);
+                    // write Close Bracket
+                    WriteCloseBracket(true);
 
-                // Write endregion
-                EndRegion();
+                    // Write endregion
+                    EndRegion();
                 
-                // Write Blank Line
-                WriteLine();
+                    // Write Blank Line
+                    WriteLine();
 
-                // write Close Bracket
-                WriteCloseBracket(true);
+                    // write Close Bracket
+                    WriteCloseBracket(true);
 
-                // Close This File
-                this.Writer.Close();
-               
+                    // Close This File
+                    this.Writer.Close();
+
+                    // For now
+                    result.Success = true;
+                }
+
+                // return value
+                return result;
             } 
             #endregion
 
@@ -682,7 +717,7 @@ namespace DataTierClient.Builders
 
                 // Write Blank Line After Properties Region
                 WriteLine();
-            } 
+            }
             #endregion
         
         #endregion			
@@ -698,6 +733,23 @@ namespace DataTierClient.Builders
                 get { return dataTables; }
                 set { dataTables = value; }
             }  
+            #endregion
+
+            #region HasSelectedTable
+            /// <summary>
+            /// This property returns true if this object has a 'SelectedTable'.
+            /// </summary>
+            public bool HasSelectedTable
+            {
+                get
+                {
+                    // initial value
+                    bool hasSelectedTable = (SelectedTable != null);
+
+                    // return value
+                    return hasSelectedTable;
+                }
+            }
             #endregion
 
             #region NameSpaceName
@@ -731,6 +783,17 @@ namespace DataTierClient.Builders
                 get { return rootStoredProceduresPath; }
                 set { rootStoredProceduresPath = value; }
             } 
+            #endregion
+
+            #region SelectedTable
+            /// <summary>
+            /// This property gets or sets the value for 'SelectedTable'.
+            /// </summary>
+            public DataTable SelectedTable
+            {
+                get { return selectedTable; }
+                set { selectedTable = value; }
+            }
             #endregion
     		
 		#endregion

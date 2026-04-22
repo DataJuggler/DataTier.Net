@@ -32,6 +32,257 @@ namespace ObjectLibrary.BusinessObjects
 
         #region Methods
 
+            #region CreateValuesList
+            // <summary>
+            // This method creates the ValuesList for an Insert SQL Statement.'
+            // </summary>
+            public string CreateValuesList()
+            {
+                // initial value
+                string valuesList = "";
+
+                // locals
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                string comma = ",";
+                string singleQuote = "'";
+
+                // ClassFileName
+
+                sb.Append(singleQuote);
+                sb.Append(ClassFileName);
+                sb.Append(singleQuote);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // ClassName
+
+                sb.Append(singleQuote);
+                sb.Append(ClassName);
+                sb.Append(singleQuote);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // DatabaseId
+
+                sb.Append(DatabaseId);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // Exclude
+
+                // If Exclude is true
+                if (Exclude)
+                {
+                    sb.Append(1);
+                }
+                else
+                {
+                    sb.Append(0);
+                }
+
+                // Add a comma
+                sb.Append(comma);
+
+                // Excluded
+
+                // If Excluded is true
+                if (Excluded)
+                {
+                    sb.Append(1);
+                }
+                else
+                {
+                    sb.Append(0);
+                }
+
+                // Add a comma
+                sb.Append(comma);
+
+                // IsView
+
+                // If IsView is true
+                if (IsView)
+                {
+                    sb.Append(1);
+                }
+                else
+                {
+                    sb.Append(0);
+                }
+
+                // Add a comma
+                sb.Append(comma);
+
+                // ProjectId
+
+                sb.Append(ProjectId);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // Scope
+
+                sb.Append(Scope);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // Serializable
+
+                // If Serializable is true
+                if (Serializable)
+                {
+                    sb.Append(1);
+                }
+                else
+                {
+                    sb.Append(0);
+                }
+
+                // Add a comma
+                sb.Append(comma);
+
+                // TableName
+
+                sb.Append(singleQuote);
+                sb.Append(TableName);
+                sb.Append(singleQuote);
+
+                // Set the return value
+                valuesList = sb.ToString();
+
+                // Return Value
+                return valuesList;
+            }
+            #endregion
+
+            #region GenerateInsertSQL
+            // <summary>
+            // This method generates a SQL Insert statement for ah object loaded.'
+            // </summary>
+            public string GenerateInsertSQL()
+            {
+                // local
+                string valuesList = CreateValuesList();
+
+                // Set the return Value
+                string insertSQL = "INSERT INTO [DTNTable] (ClassFileName,ClassName,DatabaseId,Exclude,Excluded,IsView,ProjectId,Scope,Serializable,TableName) VALUES (" + valuesList + ") " + Environment.NewLine + "SELECT SCOPE_IDENTITY()" + Environment.NewLine;
+
+                // Return Value
+                return insertSQL;
+            }
+            #endregion
+
+            #region GetValue(string fieldName)
+            // <summary>
+            // This method returns the value for the fieldName given
+            // </summary>
+            public object GetValue(string fieldName)
+            {
+                // initial value
+                object value = "";
+
+                // // Determine the action by the fieldName
+                switch (fieldName)
+                {
+                    case "ClassFileName":
+
+                        // set the value
+                        value = this.ClassFileName;
+
+                        // required
+                        break;
+
+                    case "ClassName":
+
+                        // set the value
+                        value = this.ClassName;
+
+                        // required
+                        break;
+
+                    case "DatabaseId":
+
+                        // set the value
+                        value = this.DatabaseId;
+
+                        // required
+                        break;
+
+                    case "Exclude":
+
+                        // set the value
+                        value = this.Exclude;
+
+                        // required
+                        break;
+
+                    case "Excluded":
+
+                        // set the value
+                        value = this.Excluded;
+
+                        // required
+                        break;
+
+                    case "IsView":
+
+                        // set the value
+                        value = this.IsView;
+
+                        // required
+                        break;
+
+                    case "ProjectId":
+
+                        // set the value
+                        value = this.ProjectId;
+
+                        // required
+                        break;
+
+                    case "Scope":
+
+                        // set the value
+                        value = this.Scope;
+
+                        // required
+                        break;
+
+                    case "Serializable":
+
+                        // set the value
+                        value = this.Serializable;
+
+                        // required
+                        break;
+
+                    case "TableId":
+
+                        // set the value
+                        value = this.TableId;
+
+                        // required
+                        break;
+
+                    case "TableName":
+
+                        // set the value
+                        value = this.TableName;
+
+                        // required
+                        break;
+
+                }
+
+                // return value
+                return value;
+            }
+            #endregion
+
             #region UpdateIdentity(int id)
             // <summary>
             // This method provides a 'setter'

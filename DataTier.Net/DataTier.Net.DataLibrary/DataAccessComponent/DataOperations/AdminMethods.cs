@@ -2,16 +2,16 @@
 
 #region using statements
 
-using System;
-using System.Collections.Generic;
+using DataAccessComponent.Data;
+using DataAccessComponent.Data.Writers;
+using DataAccessComponent.DataBridge;
 using DataAccessComponent.StoredProcedureManager.DeleteProcedures;
 using DataAccessComponent.StoredProcedureManager.FetchProcedures;
 using DataAccessComponent.StoredProcedureManager.InsertProcedures;
 using DataAccessComponent.StoredProcedureManager.UpdateProcedures;
 using ObjectLibrary.BusinessObjects;
-using DataAccessComponent.Data.Writers;
-using DataAccessComponent.Data;
-using DataAccessComponent.DataBridge;
+using System;
+using System.Collections.Generic;
 
 #endregion
 
@@ -37,7 +37,7 @@ namespace DataAccessComponent.DataOperations
             internal static PolymorphicObject DeleteAdmin(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
-                PolymorphicObject result = new PolymorphicObject();
+                PolymorphicObject returnObject = new PolymorphicObject();
 
                 // If the data connection is connected
                 if ((dataConnector != null) && (dataConnector.Connected == true))
@@ -65,8 +65,22 @@ namespace DataAccessComponent.DataOperations
                     if(deleteAdminProc != null)
                     {
                         // Execute Delete Stored Procedure
-                        result.Success = AdminManager.DeleteAdmin(deleteAdminProc, dataConnector);
+                        bool deleted = AdminManager.DeleteAdmin(deleteAdminProc, dataConnector);
 
+                        // Create returnObject.Boolean
+                        returnObject.Boolean = new NullableBoolean();
+
+                        // If delete was successful
+                        if(deleted)
+                        {
+                            // Set returnObject.Boolean.Value to true
+                            returnObject.Boolean.Value = NullableBooleanEnum.True;
+                        }
+                        else
+                        {
+                            // Set returnObject.Boolean.Value to false
+                            returnObject.Boolean.Value = NullableBooleanEnum.False;
+                        }
                     }
                 }
                 else
@@ -76,7 +90,7 @@ namespace DataAccessComponent.DataOperations
                 }
 
                 // return value
-                return result;
+                return returnObject;
             }
             #endregion
 
@@ -89,7 +103,7 @@ namespace DataAccessComponent.DataOperations
             internal static PolymorphicObject FetchAll(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
-                PolymorphicObject result = new PolymorphicObject();
+                PolymorphicObject returnObject = new PolymorphicObject();
 
                 // locals
                 List<Admin> adminListCollection =  null;
@@ -124,8 +138,8 @@ namespace DataAccessComponent.DataOperations
                     // if dataObjectCollection exists
                     if(adminListCollection != null)
                     {
-                        // set result.ObjectValue
-                        result.ObjectValue = adminListCollection;
+                        // set returnObject.ObjectValue
+                        returnObject.ObjectValue = adminListCollection;
                     }
                 }
                 else
@@ -135,7 +149,7 @@ namespace DataAccessComponent.DataOperations
                 }
 
                 // return value
-                return result;
+                return returnObject;
             }
             #endregion
 
@@ -148,7 +162,7 @@ namespace DataAccessComponent.DataOperations
             internal static PolymorphicObject FindAdmin(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
-                PolymorphicObject result = new PolymorphicObject();
+                PolymorphicObject returnObject = new PolymorphicObject();
 
                 // locals
                 Admin admin = null;
@@ -183,8 +197,8 @@ namespace DataAccessComponent.DataOperations
                             // if dataObject exists
                             if(admin != null)
                             {
-                                // set result.ObjectValue
-                                result.ObjectValue = admin;
+                                // set returnObject.ObjectValue
+                                returnObject.ObjectValue = admin;
                             }
                         }
                     }
@@ -196,7 +210,7 @@ namespace DataAccessComponent.DataOperations
                 }
 
                 // return value
-                return result;
+                return returnObject;
             }
             #endregion
 
@@ -209,7 +223,7 @@ namespace DataAccessComponent.DataOperations
             internal static PolymorphicObject InsertAdmin(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
-                PolymorphicObject result = new PolymorphicObject();
+                PolymorphicObject returnObject = new PolymorphicObject();
 
                 // locals
                 Admin admin = null;
@@ -239,10 +253,7 @@ namespace DataAccessComponent.DataOperations
                         if(insertAdminProc != null)
                         {
                             // Execute Insert Stored Procedure
-                            result.IntegerValue = AdminManager.InsertAdmin(insertAdminProc, dataConnector);
-
-                            // Set the value for Sucess based on if the Insert was Successful
-                            result.Success = result.HasIntegerValue;
+                            returnObject.IntegerValue = AdminManager.InsertAdmin(insertAdminProc, dataConnector);
                         }
 
                     }
@@ -254,7 +265,7 @@ namespace DataAccessComponent.DataOperations
                 }
 
                 // return value
-                return result;
+                return returnObject;
             }
             #endregion
 
@@ -263,11 +274,11 @@ namespace DataAccessComponent.DataOperations
             /// This method updates a 'Admin' object.
             /// </summary>
             /// <param name='List<PolymorphicObject>'>The 'Admin' to update.
-            /// <returns>A PolymorphicObject object.
+            /// <returns>A PolymorphicObject object with a value.
             internal static PolymorphicObject UpdateAdmin(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
-                PolymorphicObject result = new PolymorphicObject();
+                PolymorphicObject returnObject = new PolymorphicObject();
 
                 // locals
                 Admin admin = null;
@@ -297,7 +308,22 @@ namespace DataAccessComponent.DataOperations
                         if(updateAdminProc != null)
                         {
                             // Execute Update Stored Procedure
-                            result.Success = AdminManager.UpdateAdmin(updateAdminProc, dataConnector);
+                            bool saved = AdminManager.UpdateAdmin(updateAdminProc, dataConnector);
+
+                            // Create returnObject.Boolean
+                            returnObject.Boolean = new NullableBoolean();
+
+                            // If save was successful
+                            if(saved)
+                            {
+                                // Set returnObject.Boolean.Value to true
+                                returnObject.Boolean.Value = NullableBooleanEnum.True;
+                            }
+                            else
+                            {
+                                // Set returnObject.Boolean.Value to false
+                                returnObject.Boolean.Value = NullableBooleanEnum.False;
+                            }
                         }
                         else
                         {
@@ -308,7 +334,7 @@ namespace DataAccessComponent.DataOperations
                 }
 
                 // return value
-                return result;
+                return returnObject;
             }
             #endregion
 

@@ -2,13 +2,13 @@
 
 #region using statements
 
+using DataAccessComponent.Data;
+using DataAccessComponent.DataBridge;
+using DataAccessComponent.DataOperations;
+using DataAccessComponent.Logging;
+using ObjectLibrary.BusinessObjects;
 using System;
 using System.Collections.Generic;
-using ObjectLibrary.BusinessObjects;
-using DataAccessComponent.Logging;
-using DataAccessComponent.DataOperations;
-using DataAccessComponent.DataBridge;
-using DataAccessComponent.Data;
 
 #endregion
 
@@ -59,10 +59,10 @@ namespace DataAccessComponent.Controllers
             /// </summary>
             /// <param name='customreader'>The 'CustomReader' to delete.</param>
             /// <returns>True if the delete is successful or false if not.</returns>
-            public static PolymorphicObject Delete(CustomReader tempCustomReader, DataManager dataManager)
+            public static bool Delete(CustomReader tempCustomReader, DataManager dataManager)
             {
-                // initial value
-                PolymorphicObject result = new PolymorphicObject();
+                // locals
+                bool deleted = false;
 
                 // Get information for calling 'DataBridgeManager.PerformDataOperation' method.
                 string methodName = "DeleteCustomReader";
@@ -80,7 +80,18 @@ namespace DataAccessComponent.Controllers
                         List<PolymorphicObject> parameters = CreateCustomReaderParameter(tempCustomReader);
 
                         // Perform DataOperation
-                        result = DataBridgeManager.PerformDataOperation(methodName, objectName, deleteCustomReaderMethod, parameters, dataManager);
+                        PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, deleteCustomReaderMethod, parameters, dataManager);
+
+                        // If return object exists
+                        if (returnObject != null)
+                        {
+                            // Test For True
+                            if (returnObject.Boolean.Value == NullableBooleanEnum.True)
+                            {
+                                // Set Deleted To True
+                                deleted = true;
+                            }
+                        }
                     }
                 }
                 catch (Exception error)
@@ -90,7 +101,7 @@ namespace DataAccessComponent.Controllers
                 }
 
                 // return value
-                return result;
+                return deleted;
             }
             #endregion
 
@@ -196,11 +207,11 @@ namespace DataAccessComponent.Controllers
             /// procedure 'CustomReader_Insert'.</param>
             /// </summary>
             /// <param name='customReader'>The 'CustomReader' object to insert.</param>
-            /// <returns>The a PolymorphicObject. This object contains an IntegerValue, which is the Identity value for the new 'CustomReader' object that was inserted.</returns>
-            public static PolymorphicObject Insert(CustomReader customReader, DataManager dataManager)
+            /// <returns>The id (int) of the new  'CustomReader' object that was inserted.</returns>
+            public static int Insert(CustomReader customReader, DataManager dataManager)
             {
                 // Initial values
-                PolymorphicObject result = new PolymorphicObject();
+                int newIdentity = -1;
 
                 // Get information for calling 'DataBridgeManager.PerformDataOperation' method.
                 string methodName = "Insert";
@@ -211,14 +222,20 @@ namespace DataAccessComponent.Controllers
                     // If CustomReaderexists
                     if (customReader != null)
                     {
-                        // Create the delegate to perform the insert
                         ApplicationController.DataOperationMethod insertMethod = CustomReaderMethods.InsertCustomReader;
 
                         // Create parameters for this method
                         List<PolymorphicObject> parameters = CreateCustomReaderParameter(customReader);
 
                         // Perform DataOperation
-                        result = DataBridgeManager.PerformDataOperation(methodName, objectName, insertMethod , parameters, dataManager);
+                        PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, insertMethod , parameters, dataManager);
+
+                        // If return object exists
+                        if (returnObject != null)
+                        {
+                            // Set return value
+                            newIdentity = returnObject.IntegerValue;
+                        }
                     }
                 }
                 catch (Exception error)
@@ -228,7 +245,7 @@ namespace DataAccessComponent.Controllers
                 }
 
                 // return value
-                return result;
+                return newIdentity;
             }
             #endregion
 
@@ -239,10 +256,10 @@ namespace DataAccessComponent.Controllers
             /// </summary>
             /// <param name='customReader'>The 'CustomReader' object to save.</param>
             /// <returns>True if successful or false if not.</returns>
-            public static PolymorphicObject Save(ref CustomReader customReader, DataManager dataManager)
+            public static bool Save(ref CustomReader customReader, DataManager dataManager)
             {
                 // Initial value
-                PolymorphicObject result = new PolymorphicObject();
+                bool saved = false;
 
                 // If the customReader exists.
                 if (customReader != null)
@@ -251,25 +268,27 @@ namespace DataAccessComponent.Controllers
                     if (customReader.IsNew)
                     {
                         // Insert new CustomReader
-                        result = Insert(customReader, dataManager);
+                        int newIdentity = Insert(customReader, dataManager);
 
-                        // if the insert was successful
-                        if (result.HasIntegerValue)
+                        // if insert was successful
+                        if (newIdentity > 0)
                         {
                             // Update Identity
-                            customReader.UpdateIdentity(result.IntegerValue);
+                            customReader.UpdateIdentity(newIdentity);
 
+                            // Set return value
+                            saved = true;
                         }
                     }
                     else
                     {
                         // Update CustomReader
-                        result  = Update(customReader, dataManager);
+                        saved = Update(customReader, dataManager);
                     }
                 }
 
                 // return value
-                return result;
+                return saved;
             }
             #endregion
 
@@ -281,10 +300,10 @@ namespace DataAccessComponent.Controllers
             /// </summary>
             /// <param name='customReader'>The 'CustomReader' object to update.</param>
             /// <returns>True if successful else false if not.</returns>
-            public static PolymorphicObject Update(CustomReader customReader, DataManager dataManager)
+            public static bool Update(CustomReader customReader, DataManager dataManager)
             {
                 // Initial value
-                PolymorphicObject result = new PolymorphicObject();
+                bool saved = false;
 
                 // Get information for calling 'DataBridgeManager.PerformDataOperation' method.
                 string methodName = "Update";
@@ -300,7 +319,14 @@ namespace DataAccessComponent.Controllers
                         // Create parameters for this method
                         List<PolymorphicObject> parameters = CreateCustomReaderParameter(customReader);
                         // Perform DataOperation
-                        result = DataBridgeManager.PerformDataOperation(methodName, objectName, updateMethod , parameters, dataManager);
+                        PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, updateMethod , parameters, dataManager);
+
+                        // If return object exists
+                        if ((returnObject != null) && (returnObject.Boolean != null) && (returnObject.Boolean.Value == NullableBooleanEnum.True))
+                        {
+                            // Set saved to true
+                            saved = true;
+                        }
                     }
                 }
                 catch (Exception error)
@@ -310,7 +336,7 @@ namespace DataAccessComponent.Controllers
                 }
 
                 // return value
-                return result;
+                return saved;
             }
             #endregion
 

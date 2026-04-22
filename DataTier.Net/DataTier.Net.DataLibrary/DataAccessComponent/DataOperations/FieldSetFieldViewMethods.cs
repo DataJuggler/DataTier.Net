@@ -2,16 +2,16 @@
 
 #region using statements
 
-using System;
-using System.Collections.Generic;
+using DataAccessComponent.Data;
+using DataAccessComponent.Data.Writers;
+using DataAccessComponent.DataBridge;
 using DataAccessComponent.StoredProcedureManager.DeleteProcedures;
 using DataAccessComponent.StoredProcedureManager.FetchProcedures;
 using DataAccessComponent.StoredProcedureManager.InsertProcedures;
 using DataAccessComponent.StoredProcedureManager.UpdateProcedures;
 using ObjectLibrary.BusinessObjects;
-using DataAccessComponent.Data.Writers;
-using DataAccessComponent.Data;
-using DataAccessComponent.DataBridge;
+using System;
+using System.Collections.Generic;
 
 #endregion
 
@@ -37,7 +37,7 @@ namespace DataAccessComponent.DataOperations
             internal static PolymorphicObject FetchAll(List<PolymorphicObject> parameters, DataConnector dataConnector)
             {
                 // Initial Value
-                PolymorphicObject result = new PolymorphicObject();
+                PolymorphicObject returnObject = new PolymorphicObject();
 
                 // locals
                 List<FieldSetFieldView> fieldSetFieldViewListCollection =  null;
@@ -72,8 +72,8 @@ namespace DataAccessComponent.DataOperations
                     // if dataObjectCollection exists
                     if(fieldSetFieldViewListCollection != null)
                     {
-                        // set result.ObjectValue
-                        result.ObjectValue = fieldSetFieldViewListCollection;
+                        // set returnObject.ObjectValue
+                        returnObject.ObjectValue = fieldSetFieldViewListCollection;
                     }
                 }
                 else
@@ -83,7 +83,7 @@ namespace DataAccessComponent.DataOperations
                 }
 
                 // return value
-                return result;
+                return returnObject;
             }
             #endregion
 

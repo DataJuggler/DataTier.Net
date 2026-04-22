@@ -29,6 +29,200 @@ namespace ObjectLibrary.BusinessObjects
 
         #region Methods
 
+            #region CreateValuesList
+            // <summary>
+            // This method creates the ValuesList for an Insert SQL Statement.'
+            // </summary>
+            public string CreateValuesList()
+            {
+                // initial value
+                string valuesList = "";
+
+                // locals
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                string comma = ",";
+                string singleQuote = "'";
+
+                // DatabaseId
+
+                sb.Append(DatabaseId);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // Name
+
+                sb.Append(singleQuote);
+                sb.Append(Name);
+                sb.Append(singleQuote);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // OrderByMode
+
+                // If OrderByMode is true
+                if (OrderByMode)
+                {
+                    sb.Append(1);
+                }
+                else
+                {
+                    sb.Append(0);
+                }
+
+                // Add a comma
+                sb.Append(comma);
+
+                // ParameterMode
+
+                // If ParameterMode is true
+                if (ParameterMode)
+                {
+                    sb.Append(1);
+                }
+                else
+                {
+                    sb.Append(0);
+                }
+
+                // Add a comma
+                sb.Append(comma);
+
+                // ProjectId
+
+                sb.Append(ProjectId);
+
+                // Add a comma
+                sb.Append(comma);
+
+                // ReaderMode
+
+                // If ReaderMode is true
+                if (ReaderMode)
+                {
+                    sb.Append(1);
+                }
+                else
+                {
+                    sb.Append(0);
+                }
+
+                // Add a comma
+                sb.Append(comma);
+
+                // TableId
+
+                sb.Append(TableId);
+
+                // Set the return value
+                valuesList = sb.ToString();
+
+                // Return Value
+                return valuesList;
+            }
+            #endregion
+
+            #region GenerateInsertSQL
+            // <summary>
+            // This method generates a SQL Insert statement for ah object loaded.'
+            // </summary>
+            public string GenerateInsertSQL()
+            {
+                // local
+                string valuesList = CreateValuesList();
+
+                // Set the return Value
+                string insertSQL = "INSERT INTO [FieldSet] (DatabaseId,Name,OrderByMode,ParameterMode,ProjectId,ReaderMode,TableId) VALUES (" + valuesList + ") " + Environment.NewLine + "SELECT SCOPE_IDENTITY()" + Environment.NewLine;
+
+                // Return Value
+                return insertSQL;
+            }
+            #endregion
+
+            #region GetValue(string fieldName)
+            // <summary>
+            // This method returns the value for the fieldName given
+            // </summary>
+            public object GetValue(string fieldName)
+            {
+                // initial value
+                object value = "";
+
+                // // Determine the action by the fieldName
+                switch (fieldName)
+                {
+                    case "DatabaseId":
+
+                        // set the value
+                        value = this.DatabaseId;
+
+                        // required
+                        break;
+
+                    case "FieldSetId":
+
+                        // set the value
+                        value = this.FieldSetId;
+
+                        // required
+                        break;
+
+                    case "Name":
+
+                        // set the value
+                        value = this.Name;
+
+                        // required
+                        break;
+
+                    case "OrderByMode":
+
+                        // set the value
+                        value = this.OrderByMode;
+
+                        // required
+                        break;
+
+                    case "ParameterMode":
+
+                        // set the value
+                        value = this.ParameterMode;
+
+                        // required
+                        break;
+
+                    case "ProjectId":
+
+                        // set the value
+                        value = this.ProjectId;
+
+                        // required
+                        break;
+
+                    case "ReaderMode":
+
+                        // set the value
+                        value = this.ReaderMode;
+
+                        // required
+                        break;
+
+                    case "TableId":
+
+                        // set the value
+                        value = this.TableId;
+
+                        // required
+                        break;
+
+                }
+
+                // return value
+                return value;
+            }
+            #endregion
+
             #region UpdateIdentity(int id)
             // <summary>
             // This method provides a 'setter'

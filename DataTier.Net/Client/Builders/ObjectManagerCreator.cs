@@ -2,15 +2,17 @@
 
 #region using statements
 
+using DataAccessComponent.DataOperations;
 using DataJuggler.Core.UltimateHelper;
 using DataJuggler.Core.UltimateHelper.Objects;
-using System;
 using DataJuggler.Net;
-using System.Text;
-using System.IO;
-using System.Collections.Generic;
-using DataTierClient.ClientUtil;
 using DataJuggler.Net.Enumerations;
+using DataTierClient.ClientUtil;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
 
 #endregion
 
@@ -29,6 +31,7 @@ namespace DataTierClient.Builders
         private string rootDataManagerPath;
         private string nameSpaceName;
         private ReferencesSet objectReferences;
+        private DataTable selectedDataTable;
         #endregion
 
 		#region Constructor
@@ -39,6 +42,20 @@ namespace DataTierClient.Builders
 		{   
 		    // Set Properties
 		    this.DataTables = dataTablesArg;
+		    this.NameSpaceName = nameSpaceNameArg;
+            this.RootDataManagerPath = rootDataManagerPathArg;
+		    this.ObjectReferences = objectReferencesArg;
+		}
+		#endregion
+
+        #region Constructor
+		/// <summary>
+        /// Create a new instance of ControllerManagerCreator
+        /// </summary>
+        public ObjectManagerCreator(DataTable selectDataTableArg, ReferencesSet objectReferencesArg, string rootDataManagerPathArg, string nameSpaceNameArg, ProjectFileManager fileManager, TargetFrameworkEnum targetFramework) : base(fileManager, false, false, targetFramework)
+		{   
+		    // Set Properties
+		    this.SelectedDataTable = selectDataTableArg;
 		    this.NameSpaceName = nameSpaceNameArg;
             this.RootDataManagerPath = rootDataManagerPathArg;
 		    this.ObjectReferences = objectReferencesArg;
@@ -742,6 +759,45 @@ namespace DataTierClient.Builders
             }
             #endregion
 
+            #region FindInsertIndexForFindMethod(List<TextLine> lines)
+            /// <summary>
+            /// returns the Insert Index For Find Method
+            /// </summary>
+            public int FindInsertIndexForFindMethod(List<TextLine> lines)
+            {
+                // initial value
+                int insertIndex = -1;
+
+                // If the lines collection exists and has one or more items
+                if (ListHelper.HasOneOrMoreItems(lines))
+                {
+                    // find the index of the load
+                    // get the fetch all
+                    string fetchAllProcName = "#region FetchAll";
+
+                    // find the Index
+                    int index = lines.FindIndex(x => x.Text.Contains(fetchAllProcName));
+
+                    // if the index was found
+                    if (index >= 0)
+                    {
+                        // Start searching at 'index + 1'
+                        int endRegionIndex = lines.FindIndex(index + 1, x => x.Text.Contains("#endregion"));
+
+                        // If the value for endRegionIndex is greater than zero
+                        if (endRegionIndex > 0)
+                        {
+                            // Set the value for 2
+                            insertIndex = endRegionIndex + 2;
+                        }
+                    }
+                }
+
+                // return value
+                return insertIndex;
+            }
+            #endregion
+            
             #region GetStringVariableLine(string variableName, string variableValue)
             /// <summary>
             /// /// <summary>
@@ -792,6 +848,198 @@ namespace DataTierClient.Builders
             }
             #endregion
 
+            #region InsertFindMethod(DataTable dataTable, List<TextLine> lines)
+            /// <summary>
+            /// returns the Find Method
+            /// </summary>
+            internal PolymorphicObject InsertFindMethod(DataTable dataTable, List<TextLine> lines)
+            {
+                // initial value
+                PolymorphicObject result = new PolymorphicObject();
+
+                // Go into TextWriterMode
+                TextWriterMode = true;
+                TextWriter = new StringBuilder();
+                Indent = 3;
+
+                // We have to check if this already been created, then abort
+                string regionName = "#region Find" + dataTable.ClassName;
+                bool abort = lines.Any(x => x.Text.Contains(regionName));
+
+                // if abort
+                if (abort)
+                {
+                    // result.Success
+                    result.Success = true;
+                    result.Text = "The Find Method already exists in the " + dataTable.ClassName + "Manager. class";
+                }
+                else
+                {
+                    // set the index
+                    int index = FindInsertIndexForFindMethod(lines);
+
+                    // if the index was found
+                    if (index >= 0)
+                   {
+                        // get dataType variable
+                        string dataType = dataTable.ClassName;
+                        string dataObject = this.CapitalizeFirstChar(dataType, true);
+
+                        // get a variable for className
+                        string className = dataTable.ClassName;
+                
+                        // set queryType
+                        string queryType = "procedure";
+                
+                        // get procName & procType
+                        string procName = "find" + className + "Proc";
+                        string procType = "Find" + className + "StoredProcedure";
+
+                        // Begin Region 
+                        BeginRegion("Find" + className + "()");
+
+                        // Write FetchAll Summary
+                        WriteLine("/// <summary>");
+                        WriteLine("/// This method finds a  '" + dataType + "' object.");
+                        WriteLine("/// This method uses the '" + dataTable.ClassName + "_Find' " + queryType + ".");
+                        WriteLine("/// </summary>");
+                        WriteLine("/// <returns>A '" + dataType + "' object.</returns>");
+                        WriteLine("/// </summary>");
+
+                        // get class declaration line
+                        string classLine = "public static " + dataType + " Find" + className + "(" + procType +" " +  procName + ", DataConnector databaseConnector)";
+
+                        // Write class line
+                        WriteLine(classLine);
+
+                        // Write Open Bracket
+                        WriteOpenBracket(true);
+
+                        // Write Comment Initial Value
+                        WriteComment("Initial Value");
+
+                        // Write line to set initial value
+                        string initialValue = dataType + " " + dataObject + " = null;";
+                        WriteLine(initialValue);
+
+                        // Write Blank Line
+                        WriteLine();
+
+                        // Write Comment  Verify database connection is connected
+                        WriteComment("Verify database connection is connected");
+
+                        // get line to test connection
+                        string ifConnected = "if ((databaseConnector != null) && (databaseConnector.Connected))";
+
+                        // Write ifConnected
+                        WriteLine(ifConnected);
+
+                        // Write Open Bracket
+                        WriteOpenBracket(true);
+
+                        // Write Comment First Get Dataset
+                        WriteComment("First Get Dataset");
+
+                        // get line to get data set
+                        string dataSetName = this.CapitalizeFirstChar(className, true) + "DataSet";
+                        string dataSetLine = "DataSet " + dataSetName + " = DataHelper.LoadDataSet(" + procName + ", databaseConnector);";
+
+                        // Write set dataSetLine
+                        WriteLine(dataSetLine);
+
+                        // Write Blank Line
+                        WriteLine();
+
+                        // Write Comment Verify DataSet Exists
+                        WriteComment("Verify DataSet Exists");
+
+                        // line to test if DataSet exists
+                        string ifDataSetExists = "if(" + dataSetName + " != null)";
+                        WriteLine(ifDataSetExists);
+
+                        // Write Open Bracket
+                        WriteOpenBracket(true);
+
+                        // Write Comment Get DataTable From DataSet
+                        WriteComment("Get DataTable From DataSet");
+
+                        // get line to get first table out of data set
+                        string dataRowLine = "DataRow row = DataHelper.ReturnFirstRow(" + dataSetName + ");";
+                        WriteLine(dataRowLine);
+
+                        // Write Blank Line
+                        WriteLine();
+
+                        // Write Comment if row exists
+                        WriteComment("if row exists");
+
+                        // now write line to test if row exists
+                        WriteLine("if(row != null)");
+
+                        // Write Open Bracket
+                        WriteOpenBracket(true);
+
+                        // Write Comment Load Collection
+                        WriteComment("Load " + dataType);
+
+                        // get reader name
+                        string readerName = dataTable.ClassName + "Reader";
+
+                        // get line to load object
+                        string loadObject = dataObject + " = " + readerName + ".Load(row);";
+
+                        // Write load Object
+                        WriteLine(loadObject);
+
+                        // Write Close Bracket
+                        WriteCloseBracket(true);
+
+                        // WRite Close Bracket
+                        WriteCloseBracket(true);
+
+                        // Write Close Bracket
+                        WriteCloseBracket(true);
+
+                        // Write Blank Line
+                        WriteLine();
+
+                        // Write Comment Return Value
+                        WriteComment("return value");
+
+                        // Write Return Value
+                        WriteLine("return " + dataObject + ";");
+
+                        // Write Close Bracket
+                        WriteCloseBracket(true);
+
+                        // Write EndRegion for DeleteMethod
+                        EndRegion();
+
+                        // Write Blank Line
+                        WriteLine();
+
+                        // Get the text
+                        string methodText = this.TextWriter.ToString();
+
+                        // now get the textLines
+                        List<TextLine> methodLines = TextHelper.GetTextLines(methodText);
+
+                        // Insert the lines
+                        lines.InsertRange(index, methodLines);
+
+                        // Set to true
+                        result.Success = true;
+
+                        // Set the text
+                        result.Text = "Find method was added to the Data Manager";
+                    }
+                }
+
+                // return value
+                return result;
+            }
+            #endregion
+            
             #region WriteClassSummary(DataTable dataTable)
             /// <summary>
             /// This method writes the summary for the data object manager.
@@ -1067,7 +1315,7 @@ namespace DataTierClient.Builders
 
                 // Write Blank Line After Properties Region
                 WriteLine();
-            } 
+            }           
             #endregion
         
         #endregion			
@@ -1083,6 +1331,23 @@ namespace DataTierClient.Builders
                 get { return dataTables; }
                 set { dataTables = value; }
             }  
+            #endregion
+
+            #region HasSelectedDataTable
+            /// <summary>
+            /// This property returns true if this object has a 'SelectedDataTable'.
+            /// </summary>
+            public bool HasSelectedDataTable
+            {
+                get
+                {
+                    // initial value
+                    bool hasSelectedDataTable = (SelectedDataTable != null);
+
+                    // return value
+                    return hasSelectedDataTable;
+                }
+            }
             #endregion
 
             #region NameSpaceName
@@ -1116,6 +1381,17 @@ namespace DataTierClient.Builders
                 get { return rootDataManagerPath; }
                 set { rootDataManagerPath = value; }
             } 
+            #endregion
+
+            #region SelectedDataTable
+            /// <summary>
+            /// This property gets or sets the value for 'SelectedDataTable'.
+            /// </summary>
+            public DataTable SelectedDataTable
+            {
+                get { return selectedDataTable; }
+                set { selectedDataTable = value; }
+            }
             #endregion
     		
 		#endregion

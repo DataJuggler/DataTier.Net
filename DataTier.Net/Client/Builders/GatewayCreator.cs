@@ -33,6 +33,7 @@ namespace DataTierClient.Builders
         private string gatewayPath;
         private string nameSpaceName;
         private ReferencesSet objectReferences;
+        private DataTable selectedTable;
         #endregion
 
         #region Constructor
@@ -47,6 +48,20 @@ namespace DataTierClient.Builders
 		    NameSpaceName = nameSpaceNameArg;
 		    GatewayPath = gatewayPathArg;
 		    ObjectReferences = objectReferencesArg;
+		}
+		#endregion
+
+        #region Constructor
+		/// <summary>
+        /// Create a new instance of GatewayCreator
+        /// </summary>
+        public GatewayCreator(DataTable selectedTableArg, string gatewayPathArg, string projectNameArg, string nameSpaceNameArg, ProjectFileManager fileManager, TargetFrameworkEnum targetFramework) : base(fileManager, false, false, targetFramework)
+		{   
+		    // Set Properties
+		    SelectedTable = selectedTableArg;
+		    ProjectName = projectNameArg;
+		    NameSpaceName = nameSpaceNameArg;
+		    GatewayPath = gatewayPathArg;		    
 		}
 		#endregion
 
@@ -619,7 +634,7 @@ namespace DataTierClient.Builders
             /// <summary>
             /// This method writes out the Find Method
             /// </summary>
-            private void WriteFindMethod(DataTable dataTable, List<TextLine> lines)
+            internal void WriteFindMethod(DataTable dataTable, List<TextLine> lines)
             {
                 try
                 {
@@ -688,16 +703,20 @@ namespace DataTierClient.Builders
                             TextLine returnValueComment = new TextLine("                // return value");
                             TextLine returnValue = new TextLine("                return " + objectName + ";");
 
-                            // if this is an integer or identity column
-                            if ((dataTable.PrimaryKey.DataType == DataManager.DataTypeEnum.Autonumber) || (dataTable.PrimaryKey.DataType == DataManager.DataTypeEnum.Integer))
+                            // if this is not a view
+                            if (!dataTable.IsView)
                             {
-                                // create the line that tests if the primary key is set
-                                ifPrimaryKeyIsSet = new TextLine("                    if (" + variableName + " > 0)");
-                            }
-                            else
-                            {
-                                // create the line that tests if the primary key is set
-                                ifPrimaryKeyIsSet = new TextLine("                    if (!String.IsNullOrEmpty(" + variableName + "))");
+                                // if this is an integer or identity column
+                                if ((dataTable.PrimaryKey.DataType == DataManager.DataTypeEnum.Autonumber) || (dataTable.PrimaryKey.DataType == DataManager.DataTypeEnum.Integer))
+                                {
+                                    // create the line that tests if the primary key is set
+                                    ifPrimaryKeyIsSet = new TextLine("                    if (" + variableName + " > 0)");
+                                }
+                                else
+                                {
+                                    // create the line that tests if the primary key is set
+                                    ifPrimaryKeyIsSet = new TextLine("                    if (!String.IsNullOrEmpty(" + variableName + "))");
+                                }
                             }
 
                             // insert a line
@@ -823,56 +842,54 @@ namespace DataTierClient.Builders
                             // insert a line
                             lines.Insert(insertIndex, blankLine);
 
-                            // increment
-                            insertIndex++;
+                            // if not a view
+                            if (!dataTable.IsView)
+                            {
+                                // increment
+                                insertIndex++;
 
-                            // write the primary key comment
-                            lines.Insert(insertIndex, ifPrimaryKeyIsSetComment);
+                                // write the primary key comment
+                                lines.Insert(insertIndex, ifPrimaryKeyIsSetComment);
 
-                            // increment
-                            insertIndex++;
+                                // increment
+                                insertIndex++;
 
-                            // write the primary key comment
-                            lines.Insert(insertIndex, ifPrimaryKeyIsSet);
+                                // write the primary key comment
+                                lines.Insert(insertIndex, ifPrimaryKeyIsSet);
 
-                            // increment
-                            insertIndex++;
+                                // increment
+                                insertIndex++;
 
-                            // insert a line
-                            lines.Insert(insertIndex, openBracket3);
+                                // insert a line
+                                lines.Insert(insertIndex, openBracket3);
 
-                            // increment
-                            insertIndex++;
+                                // increment
+                                insertIndex++;
 
-                            // write the primary key comment
-                            lines.Insert(insertIndex, setPrimaryKeyComment);
+                                // write the primary key comment
+                                lines.Insert(insertIndex, setPrimaryKeyComment);
 
-                            // increment
-                            insertIndex++;
+                                // increment
+                                insertIndex++;
 
-                            // insert a line
-                            lines.Insert(insertIndex, setPrimaryKey);
+                                // insert a line
+                                lines.Insert(insertIndex, setPrimaryKey);
 
-                            // increment
-                            insertIndex++;
+                                // increment
+                                insertIndex++;
 
-                            // insert a line
-                            lines.Insert(insertIndex, closeBracket3);
+                                // insert a line
+                                lines.Insert(insertIndex, closeBracket3);
 
-                            // increment
-                            insertIndex++;
+                                // increment
+                                insertIndex++;
 
-                            // insert a line
-                            lines.Insert(insertIndex, blankLine);
+                                // insert a line
+                                lines.Insert(insertIndex, blankLine);
 
-                            // increment
-                            insertIndex++;
-
-                            // insert a line
-                            lines.Insert(insertIndex, blankLine);
-
-                            // write the primary key comment
-                            lines.Insert(insertIndex, performFindComment);
+                                // increment
+                                insertIndex++;
+                            }
 
                             // increment
                             insertIndex++;
@@ -934,9 +951,9 @@ namespace DataTierClient.Builders
             
             #region WriteGatewayFile(List<TextLine> lines)
             /// <summary>
-            /// This method returns a list of Gateway File
+            /// This method writes out the Gateway File
             /// </summary>
-            private void WriteGatewayFile(List<TextLine> lines)
+            internal void WriteGatewayFile(List<TextLine> lines)
             {
                 // locals
                 int counter = 0;
@@ -1033,7 +1050,7 @@ namespace DataTierClient.Builders
                     string documentText = sb.ToString();
 
                     // append all the text to the file
-                    File.AppendAllText(GatewayPath, documentText);
+                    File.WriteAllText(GatewayPath, documentText);
                 }
             }
             #endregion
@@ -1449,6 +1466,23 @@ namespace DataTierClient.Builders
             }
             #endregion
             
+            #region HasSelectedTable
+            /// <summary>
+            /// This property returns true if this object has a 'SelectedTable'.
+            /// </summary>
+            public bool HasSelectedTable
+            {
+                get
+                {
+                    // initial value
+                    bool hasSelectedTable = (SelectedTable != null);
+
+                    // return value
+                    return hasSelectedTable;
+                }
+            }
+            #endregion
+            
             #region NameSpaceName
             /// <summary>
             /// The namespace to use for this project.
@@ -1484,6 +1518,17 @@ namespace DataTierClient.Builders
             }
             #endregion
 
+            #region SelectedTable
+            /// <summary>
+            /// This property gets or sets the value for 'SelectedTable'.
+            /// </summary>
+            public DataTable SelectedTable
+            {
+                get { return selectedTable; }
+                set { selectedTable = value; }
+            }
+            #endregion
+            
 		#endregion
 
     }

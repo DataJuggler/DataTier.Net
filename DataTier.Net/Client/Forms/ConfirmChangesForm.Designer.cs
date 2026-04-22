@@ -44,34 +44,42 @@ namespace DataTierClient.Forms
             /// </summary>
             private void InitializeComponent()
             {
-                System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfirmChangesForm));
-                this.ConfirmChangesControl = new DataTierClient.Controls.ConfirmChangesControl();
-                this.SuspendLayout();
-                // 
-                // ConfirmChangesControl
-                // 
-                this.ConfirmChangesControl.BackColor = System.Drawing.Color.Linen;
-                this.ConfirmChangesControl.Dock = System.Windows.Forms.DockStyle.Fill;
-                this.ConfirmChangesControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                this.ConfirmChangesControl.Loading = false;
-                this.ConfirmChangesControl.Location = new System.Drawing.Point(0, 0);
-                this.ConfirmChangesControl.Name = "ConfirmChangesControl";
-                this.ConfirmChangesControl.Size = new System.Drawing.Size(960, 568);
-                this.ConfirmChangesControl.TabIndex = 0;
-                this.ConfirmChangesControl.UserCancelled = true;
-                // 
-                // ConfirmChangesForm
-                // 
-                this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-                this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-                this.ClientSize = new System.Drawing.Size(1080, 600);
-                this.Controls.Add(this.ConfirmChangesControl);
-                this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-                this.Name = "ConfirmChangesForm";
-                this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-                this.Text = "Confirm Code Changes";
-                this.ResumeLayout(false);
-                
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfirmChangesForm));
+            this.ConfirmChangesControl = new DataTierClient.Controls.ConfirmChangesControl();
+            this.SuspendLayout();
+            // 
+            // ConfirmChangesControl
+            // 
+            this.ConfirmChangesControl.AbortDataManagerInsert = false;
+            this.ConfirmChangesControl.AbortGatewayInsert = false;
+            this.ConfirmChangesControl.AbortPrivateVariableInsert = false;
+            this.ConfirmChangesControl.AbortPropertyInsert = false;
+            this.ConfirmChangesControl.AbortWriterInsert = false;
+            this.ConfirmChangesControl.BackColor = System.Drawing.Color.Linen;
+            this.ConfirmChangesControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ConfirmChangesControl.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ConfirmChangesControl.Loading = false;
+            this.ConfirmChangesControl.Location = new System.Drawing.Point(0, 0);
+            this.ConfirmChangesControl.MethodInfo = null;
+            this.ConfirmChangesControl.Name = "ConfirmChangesControl";
+            this.ConfirmChangesControl.Project = null;
+            this.ConfirmChangesControl.ProjectFileManager = null;
+            this.ConfirmChangesControl.Size = new System.Drawing.Size(1280, 780);
+            this.ConfirmChangesControl.TabIndex = 0;
+            this.ConfirmChangesControl.UserCancelled = true;
+            // 
+            // ConfirmChangesForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1280, 780);
+            this.Controls.Add(this.ConfirmChangesControl);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "ConfirmChangesForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Confirm Code Changes";
+            this.ResumeLayout(false);
+
             }
             #endregion
             

@@ -2,14 +2,17 @@
 
 #region using statements
 
+using DataAccessComponent.DataOperations;
 using DataJuggler.Core.UltimateHelper;
+using DataJuggler.Core.UltimateHelper.Objects;
 using DataJuggler.Net;
 using DataJuggler.Net.Enumerations;
+using ObjectLibrary.BusinessObjects;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using ObjectLibrary.BusinessObjects;
+using static System.Windows.Forms.LinkLabel;
 
 #endregion
 
@@ -25,6 +28,7 @@ namespace DataTierClient.Builders
 
 		#region Private Variables
         private List<DataTable> dataTables;
+        private DataTable selectedTable;
         private string projectName;
         private string rootControllerPath;
         private string nameSpaceName;
@@ -44,6 +48,18 @@ namespace DataTierClient.Builders
 		    NameSpaceName = nameSpaceNameArg;
 		    RootControllerPath = rootControllerPathArg;
 		    ObjectReferences = objectReferencesArg;
+            SelectedProject = selectedProject;
+		}
+		#endregion
+
+        #region Constructor
+		/// <summary>
+        /// Create a new instance of a ControllerCreator object
+        /// </summary>
+        public ControllerCreator(DataTable selectedTableArg, ProjectFileManager fileManager, TargetFrameworkEnum targetFramework, Project selectedProject) : base(fileManager, false, false)
+		{   
+		    // Store args
+		    SelectedTable = selectedTableArg;
             SelectedProject = selectedProject;
 		}
 		#endregion
@@ -206,6 +222,45 @@ namespace DataTierClient.Builders
             }
             #endregion
 
+            #region FindInsertIndex(DataTable dataTable, List<TextLine> lines)
+            /// <summary>
+            /// returns the Insert Index
+            /// </summary>
+            public int FindInsertIndex(DataTable dataTable, List<TextLine> lines)
+            {
+                // initial value
+                int insertIndex = -1;
+
+                // If the lines collection exists and has one or more items
+                if (ListHelper.HasOneOrMoreItems(lines))
+                {
+                    // find the index of the load
+                    // get the fetch all
+                    string fetchAllProcName = "public static List<" + dataTable + "> FetchAll";
+
+                    // find the Index
+                    int index = lines.FindIndex(x => x.Text.Contains(fetchAllProcName));
+
+                    // if the index was found
+                    if (index >= 0)
+                    {
+                        // Start searching at 'index + 1'
+                        int endRegionIndex = lines.FindIndex(index + 1, x => x.Text.Contains("#endregion"));
+
+                        // If the value for endRegionIndex is greater than zero
+                        if (endRegionIndex > 0)
+                        {
+                            // Set the value for 2
+                            insertIndex = endRegionIndex + 2;
+                        }
+                    }
+                }
+
+                // return value
+                return insertIndex;
+            }
+            #endregion
+            
             #region GetStringVariableLine(string variableName, string variableValue)
             /// <summary>
             /// /// <summary>
@@ -245,11 +300,221 @@ namespace DataTierClient.Builders
             } 
             #endregion
 
-            #region WriteCatch()
+            #region InsertFindMethod(DataTable dataTable, List<TextLine> textLines))
             /// <summary>
-            /// Writes a standard catch (Exception error) block with guarded error logging.
+            /// This method inserts a Find method.
             /// </summary>
-            private void WriteCatch()
+            /// <param name="dataTable"></param>
+            internal PolymorphicObject InsertFindMethod(DataTable dataTable, List<TextLine> lines)
+            {
+                // initial value
+                PolymorphicObject result = new PolymorphicObject();
+
+                // locals
+                string dataType = dataTable.ClassName;
+                string returnObjectName = CapitalizeFirstChar(dataType, true);
+                string parameterName = "temp" + dataType;
+                string delegateMethodName = "findMethod";
+
+                // get the insertIndex for the FindMethod
+                int index = FindInsertIndex(dataTable, lines);
+
+                // If the lines collection exists and has one or more items
+                if (index > 0)
+                {
+                    // Set TextwriterMode to true
+                    this.TextWriterMode = true;
+                    this.TextWriter = new StringBuilder();
+                    this.Indent = 3;
+
+                    // BeginRegion  #region Find(
+                    BeginRegion("Find(" + dataType + " temp" + dataType + ", DataManager dataManager)");
+
+                    // Write Summary
+                    WriteLine("/// <summary>");
+                    WriteLine("/// Finds a '" + dataTable.ClassName + "' object by the primary key.");
+                    WriteLine("/// This method used the DataBridgeManager to execute the 'Find' using the");
+                
+                    // local
+                    string query = "procedure";
+                
+                    WriteLine("/// " + query + " '" + dataTable.ClassName + "_Find'</param>");
+                    WriteLine("/// </summary>");
+                    WriteLine("/// <param name='" + parameterName + "'>A temporary " + dataType + " for passing values.</param>");
+                    WriteLine("/// <returns>A '" + dataType + "' object if found else a null '" + dataType + "'.</returns>");
+
+                    // Get classDeclaration
+                    string classDeclaration = "public static " + dataType + " Find(" + dataType + " " + parameterName + ", DataManager dataManager)";
+
+                    // Write classDeclaration
+                    WriteLine(classDeclaration);
+
+                    // Write Open Bracket
+                    WriteOpenBracket(true);
+
+                    // Write Comment Initial value
+                    WriteComment("Initial values");
+               
+                    // Write Line For initial value
+                    string initialValue = dataType + " " + returnObjectName + " = null;";
+
+                    // Write initialValue
+                    WriteLine(initialValue);
+
+                    // Write Blank line
+                    WriteLine();
+
+                    // Write Comment Get information for calling 'DataBridgeManager.PerformDataOperation' method.
+                    WriteComment("Get information for calling 'DataBridgeManager.PerformDataOperation' method.");
+
+                    // get methodName
+                    string methodNameLine = GetStringVariableLine("methodName", "Find");
+
+                    // Write MethodName
+                    WriteLine(methodNameLine);
+
+                    // get objectName
+                    string objectNameLine = GetStringVariableLine("objectName", "DataAccessComponent.Controllers");
+
+                    // Write objectName
+                    WriteLine(objectNameLine);
+
+                    // Write Blank Line
+                    WriteLine();
+
+                    // Write try
+                    WriteLine("try");
+
+                    // Write Open Bracket
+                    WriteOpenBracket(true);
+                
+                    // Write Comment if data object exists
+                    WriteComment("If object exists");
+
+                    // Write Line if paramObject != null)
+                    WriteLine("if (" + parameterName + " != null)");
+
+                    // Write Open Bracket
+                    WriteOpenBracket(true);
+
+                    // Write Comment Create DataOperation
+                    WriteComment("Create DataOperation");
+                
+                    // get line for delegate
+                    string delegateLine = "ApplicationController.DataOperationMethod " + delegateMethodName + " = " + dataTable.ClassName + "Methods.Find" + dataTable.ClassName + ";";
+
+                    // Write delegateLine
+                    WriteLine(delegateLine);
+
+                    // Write Blank Line
+                    WriteLine();
+
+                    // Write Comment Create parameters for this method
+                    WriteComment("Create parameters for this method");
+
+                    // get line to create parameters
+                    string createParameterLine = "List<PolymorphicObject> parameters = Create" + dataTable.ClassName + "Parameter(" + parameterName + ");";
+
+                    // Write createParameterLine
+                    WriteLine(createParameterLine);
+                
+                    // Write Blank Line
+                    WriteLine();
+
+                    // Write Comment  Perform DataOperation
+                    WriteComment("Perform DataOperation");
+
+                    // get performDataOperationLine
+                    string performDataOperationLine = "PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, findMethod , parameters, dataManager);";
+
+                    // Write performDataOperationLine
+                    WriteLine(performDataOperationLine);
+
+                    // Write Blank Line
+                    WriteLine();
+
+                    // Write Comment
+                    WriteComment("If return object exists");
+
+                    // Write if (returnObject != null)
+                    WriteLine("if ((returnObject != null) && (returnObject.ObjectValue as " + dataType + " != null))");
+
+                    // Write Open Bracket (
+                    WriteOpenBracket(true);
+
+                    // Write Comment Get ReturnObject
+                    WriteComment("Get ReturnObject");
+
+                    // line to get data object from return object.
+                    string returnObjectLine = returnObjectName + " = (" + dataType + ") returnObject.ObjectValue;";
+                
+                    // Write dataObjectLine
+                    WriteLine(returnObjectLine);
+
+                    // Write Close Bracket
+                    WriteCloseBracket(true);
+
+                    // Write CloseBracket
+                    WriteCloseBracket(true);
+
+                    // Write CloseBracket
+                    WriteCloseBracket(true);
+
+                    // Write the Catch part of TryCatch
+                    WriteCatchSimple();
+
+                    // Write Blank Line
+                    WriteLine();
+
+                    // Write Comment For Return Value
+                    WriteComment("return value");
+
+                    // Write return deleted;
+                    WriteLine("return " + returnObjectName + ";");
+
+                    // Write Close Bracket
+                    WriteCloseBracket(true);
+
+                    // Write EndRegion
+                    EndRegion();
+
+                    // Write Blank Line
+                    WriteLine();
+                    
+                    // Get the text
+                    string methodText = this.TextWriter.ToString();
+
+                    // now get the textLines
+                    List<TextLine> methodLines = TextHelper.GetTextLines(methodText);
+
+                    // Insert the lines
+                    lines.InsertRange(index, methodLines);
+
+                    // Set to true
+                    result.Success = true;
+
+                    // Set the text
+                    result.Text = "Find method was added to the Controller";
+                }
+                else
+                {
+                    // failure
+                    result.Success = false;
+
+                    // Set the text
+                    result.Text = "Failed to find the Index to insert the Find Method into Controller";
+                }
+
+                // return value
+                return result;
+            }
+            #endregion
+
+            #region WriteCatchSimple()
+            /// <summary>
+            /// Writes a standard catch (Exception error) block with error logging.
+            /// </summary>
+            private void WriteCatchSimple()
             {
                 // Write catch (Exception error)
                 WriteLine("catch (Exception error)");
@@ -267,12 +532,12 @@ namespace DataTierClient.Builders
                 WriteCloseBracket(true);
             }
             #endregion
-          
-            #region WriteCatchForInserted(string returnObjectName)
+
+            #region WriteCatchAndStoreError(string returnObjectName)
             /// <summary>
             /// Write Catch For Inserted
             /// </summary>
-            public void WriteCatchForInserted(string returnObjectName)
+            public void WriteCatchAndStoreError(string returnObjectName)
             {
                 // Write catch (Exception error)
                 WriteLine("catch (Exception error)");
@@ -280,11 +545,11 @@ namespace DataTierClient.Builders
                 // Write Open Bracket
                 WriteOpenBracket(true);
 
-                // Set to false
-                WriteComment("Set inserted to false");
+                // Write a comment to store the Exception
+                WriteComment("Store the Error");
 
                 // Write the returnObjectName
-                WriteLine(returnObjectName + ".Exceptions.Add(error);");
+                WriteLine(returnObjectName + ".Exception = error;");
 
                 // Write blank line
                 WriteLine();
@@ -432,7 +697,7 @@ namespace DataTierClient.Builders
                 WriteLine("/// <param name='" + dataType.ToLower() + "'>The '" + dataType + "' to delete.</param>");
                 
                 // Write returns
-                WriteLine("/// <returns>True if the delete is successful or false if not.</returns>");
+                WriteLine("/// <returns>The result of the Delete</returns>");
                 
                 // Get classDeclaration
                 string classDeclaration = "public static PolymorphicObject Delete(" + dataType + " " + parameterName + ", DataManager dataManager)";
@@ -525,7 +790,7 @@ namespace DataTierClient.Builders
                 WriteCloseBracket(true);
 
                 // Write the Catch part of TryCatch
-                WriteCatch();
+                WriteCatchAndStoreError("result");
 
                 // Write Blank Line
                 WriteLine();
@@ -687,7 +952,7 @@ namespace DataTierClient.Builders
                     WriteCloseBracket(true);
 
                     // Write the Catch part of TryCatch
-                    WriteCatch();
+                    WriteCatchSimple();
 
                     // Write Blank Line
                     WriteLine();
@@ -857,7 +1122,7 @@ namespace DataTierClient.Builders
                 WriteCloseBracket(true);
 
                 // Write the Catch part of TryCatch
-                WriteCatch();
+                WriteCatchSimple();
 
                 // Write Blank Line
                 WriteLine();
@@ -1004,7 +1269,7 @@ namespace DataTierClient.Builders
                 WriteCloseBracket(true);
 
                 // Write the Catch part of TryCatch
-                WriteCatch();
+                WriteCatchAndStoreError("result");
 
                 // Write Blank Line
                 WriteLine();
@@ -1148,7 +1413,7 @@ namespace DataTierClient.Builders
                 WriteCloseBracket(true);
 
                 // Write the catch method for the inserted for a non-identity insert method
-                WriteCatchForInserted("result");
+                WriteCatchAndStoreError("result");
 
                 // Write Blank Line
                 WriteLine();
@@ -1455,7 +1720,7 @@ namespace DataTierClient.Builders
             {
                 // get dataType
                 string dataType = dataTable.ClassName;
-                string returnObjectName = "saved";
+                string returnObjectName = "result";
                 string delegateMethodName = "updateMethod";
                 string parameterName = CapitalizeFirstChar(dataType, true);
 
@@ -1566,7 +1831,7 @@ namespace DataTierClient.Builders
                 WriteCloseBracket(true);
 
                 // Write the Catch part of TryCatch
-                WriteCatch();
+                WriteCatchAndStoreError(returnObjectName);
 
                 // Write Blank Line
                 WriteLine();
@@ -1600,6 +1865,23 @@ namespace DataTierClient.Builders
             }  
             #endregion
 
+            #region HasSelectedTable
+            /// <summary>
+            /// This property returns true if this object has a 'SelectedTable'.
+            /// </summary>
+            public bool HasSelectedTable
+            {
+                get
+                {
+                    // initial value
+                    bool hasSelectedTable = (SelectedTable != null);
+
+                    // return value
+                    return hasSelectedTable;
+                }
+            }
+            #endregion
+            
             #region NameSpaceName
             /// <summary>
             /// The namespace to use for this project.
@@ -1657,6 +1939,17 @@ namespace DataTierClient.Builders
             } 
             #endregion
     		
+            #region SelectedTable
+            /// <summary>
+            /// This property gets or sets the value for 'SelectedTable'.
+            /// </summary>
+            public DataTable SelectedTable
+            {
+                get { return selectedTable; }
+                set { selectedTable = value; }
+            }
+            #endregion
+            
 		#endregion
 
 	}

@@ -786,6 +786,62 @@ namespace DataTierClient.ClientUtil
                 return newCodeLines;
             }
             #endregion
+
+            #region RemoveConsecutiveBlankLines(List<CodeLine> codeLines, int maxBlankLinesAllowed)
+            /// <summary>
+            /// This method returns a list of Consecutive Blank Lines
+            /// </summary>
+            /// <param name="codeLines"></param>
+            /// <param name="maxBlankLinesAllowed">The maximum number of allowed blank lines.</param>
+            /// With this method, if maxBlankLinesAllowed equals 2 for example, than the first two consecutive blank lines
+            /// are copies and any subsequent blank lines are ignored until the next non blank line is encountered.
+            /// This cleans up extra blank lines left from the Template files up near the using statements and sometimes
+            /// the code generation adds a blank line after a blank line, and this is an easy way to fix code generation formatting errors.
+            public static List<TextLine> RemoveConsecutiveBlankLines(List<TextLine> codeLines, int maxBlankLinesAllowed)
+            {
+                // initial value
+                List<TextLine> newCodeLines = null;
+
+                // local
+                int blankCount = 0;
+
+                // If the codeLines collection exists and has one or more items
+                if (ListHelper.HasOneOrMoreItems(codeLines))
+                {
+                    // Create a new collection of 'CodeLine' objects.
+                    newCodeLines = new List<TextLine>();
+
+                    // Iterate the collection of CodeLine objects
+                    foreach (TextLine codeLine in codeLines)
+                    {
+                        // if this is a blank line
+                        if (!TextHelper.Exists(codeLine.Text.Trim()))
+                        {
+                            // Increment the value for blankCount
+                            blankCount++;
+
+                            // if this item is up to or before the maximum allowed consecutive blank lines
+                            if (blankCount <= maxBlankLinesAllowed)
+                            {
+                                // Add this line
+                                newCodeLines.Add(codeLine);
+                            }
+                        }
+                        else
+                        {
+                            // reset the value for blankCount
+                            blankCount = 0;
+
+                            // Add this line
+                            newCodeLines.Add(codeLine);
+                        }
+                    }
+                }
+                
+                // return value
+                return newCodeLines;
+            }
+            #endregion
             
             #region RemoveDoubleBlankLines(string)
             /// <summary>

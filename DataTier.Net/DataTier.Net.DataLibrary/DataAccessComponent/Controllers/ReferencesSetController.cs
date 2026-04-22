@@ -2,13 +2,13 @@
 
 #region using statements
 
+using DataAccessComponent.Data;
+using DataAccessComponent.DataBridge;
+using DataAccessComponent.DataOperations;
+using DataAccessComponent.Logging;
+using ObjectLibrary.BusinessObjects;
 using System;
 using System.Collections.Generic;
-using ObjectLibrary.BusinessObjects;
-using DataAccessComponent.Logging;
-using DataAccessComponent.DataOperations;
-using DataAccessComponent.DataBridge;
-using DataAccessComponent.Data;
 
 #endregion
 
@@ -59,10 +59,10 @@ namespace DataAccessComponent.Controllers
             /// </summary>
             /// <param name='referencesset'>The 'ReferencesSet' to delete.</param>
             /// <returns>True if the delete is successful or false if not.</returns>
-            public static PolymorphicObject Delete(ReferencesSet tempReferencesSet, DataManager dataManager)
+            public static bool Delete(ReferencesSet tempReferencesSet, DataManager dataManager)
             {
-                // initial value
-                PolymorphicObject result = new PolymorphicObject();
+                // locals
+                bool deleted = false;
 
                 // Get information for calling 'DataBridgeManager.PerformDataOperation' method.
                 string methodName = "DeleteReferencesSet";
@@ -80,17 +80,28 @@ namespace DataAccessComponent.Controllers
                         List<PolymorphicObject> parameters = CreateReferencesSetParameter(tempReferencesSet);
 
                         // Perform DataOperation
-                        result = DataBridgeManager.PerformDataOperation(methodName, objectName, deleteReferencesSetMethod, parameters, dataManager);
+                        PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, deleteReferencesSetMethod, parameters, dataManager);
+
+                        // If return object exists
+                        if (returnObject != null)
+                        {
+                            // Test For True
+                            if (returnObject.Boolean.Value == NullableBooleanEnum.True)
+                            {
+                                // Set Deleted To True
+                                deleted = true;
+                            }
+                        }
                     }
                 }
                 catch (Exception error)
                 {
-                    // Log the error
+                   // Log the error
                     ErrorHandler.LogError(methodName, objectName, error);
                 }
 
                 // return value
-                return result;
+                return deleted;
             }
             #endregion
 
@@ -196,11 +207,11 @@ namespace DataAccessComponent.Controllers
             /// procedure 'ReferencesSet_Insert'.</param>
             /// </summary>
             /// <param name='referencesSet'>The 'ReferencesSet' object to insert.</param>
-            /// <returns>The a PolymorphicObject. This object contains an IntegerValue, which is the Identity value for the new 'ReferencesSet' object that was inserted.</returns>
-            public static PolymorphicObject Insert(ReferencesSet referencesSet, DataManager dataManager)
+            /// <returns>The id (int) of the new  'ReferencesSet' object that was inserted.</returns>
+            public static int Insert(ReferencesSet referencesSet, DataManager dataManager)
             {
                 // Initial values
-                PolymorphicObject result = new PolymorphicObject();
+                int newIdentity = -1;
 
                 // Get information for calling 'DataBridgeManager.PerformDataOperation' method.
                 string methodName = "Insert";
@@ -211,24 +222,30 @@ namespace DataAccessComponent.Controllers
                     // If ReferencesSetexists
                     if (referencesSet != null)
                     {
-                        // Create the delegate to perform the insert
                         ApplicationController.DataOperationMethod insertMethod = ReferencesSetMethods.InsertReferencesSet;
 
                         // Create parameters for this method
                         List<PolymorphicObject> parameters = CreateReferencesSetParameter(referencesSet);
 
                         // Perform DataOperation
-                        result = DataBridgeManager.PerformDataOperation(methodName, objectName, insertMethod , parameters, dataManager);
+                        PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, insertMethod , parameters, dataManager);
+
+                        // If return object exists
+                        if (returnObject != null)
+                        {
+                            // Set return value
+                            newIdentity = returnObject.IntegerValue;
+                        }
                     }
                 }
                 catch (Exception error)
                 {
-                    // Log the error
+                    // log the error
                     ErrorHandler.LogError(methodName, objectName, error);
                 }
 
                 // return value
-                return result;
+                return newIdentity;
             }
             #endregion
 
@@ -239,10 +256,10 @@ namespace DataAccessComponent.Controllers
             /// </summary>
             /// <param name='referencesSet'>The 'ReferencesSet' object to save.</param>
             /// <returns>True if successful or false if not.</returns>
-            public static PolymorphicObject Save(ref ReferencesSet referencesSet, DataManager dataManager)
+            public static bool Save(ref ReferencesSet referencesSet, DataManager dataManager)
             {
                 // Initial value
-                PolymorphicObject result = new PolymorphicObject();
+                bool saved = false;
 
                 // If the referencesSet exists.
                 if (referencesSet != null)
@@ -251,25 +268,27 @@ namespace DataAccessComponent.Controllers
                     if (referencesSet.IsNew)
                     {
                         // Insert new ReferencesSet
-                        result = Insert(referencesSet, dataManager);
+                        int newIdentity = Insert(referencesSet, dataManager);
 
-                        // if the insert was successful
-                        if (result.HasIntegerValue)
+                        // if insert was successful
+                        if (newIdentity > 0)
                         {
                             // Update Identity
-                            referencesSet.UpdateIdentity(result.IntegerValue);
+                            referencesSet.UpdateIdentity(newIdentity);
 
+                            // Set return value
+                            saved = true;
                         }
                     }
                     else
                     {
                         // Update ReferencesSet
-                        result  = Update(referencesSet, dataManager);
+                        saved = Update(referencesSet, dataManager);
                     }
                 }
 
                 // return value
-                return result;
+                return saved;
             }
             #endregion
 
@@ -281,10 +300,10 @@ namespace DataAccessComponent.Controllers
             /// </summary>
             /// <param name='referencesSet'>The 'ReferencesSet' object to update.</param>
             /// <returns>True if successful else false if not.</returns>
-            public static PolymorphicObject Update(ReferencesSet referencesSet, DataManager dataManager)
+            public static bool Update(ReferencesSet referencesSet, DataManager dataManager)
             {
                 // Initial value
-                PolymorphicObject result = new PolymorphicObject();
+                bool saved = false;
 
                 // Get information for calling 'DataBridgeManager.PerformDataOperation' method.
                 string methodName = "Update";
@@ -299,19 +318,25 @@ namespace DataAccessComponent.Controllers
 
                         // Create parameters for this method
                         List<PolymorphicObject> parameters = CreateReferencesSetParameter(referencesSet);
-
                         // Perform DataOperation
-                        result = DataBridgeManager.PerformDataOperation(methodName, objectName, updateMethod , parameters, dataManager);
+                        PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, updateMethod , parameters, dataManager);
+
+                        // If return object exists
+                        if ((returnObject != null) && (returnObject.Boolean != null) && (returnObject.Boolean.Value == NullableBooleanEnum.True))
+                        {
+                            // Set saved to true
+                            saved = true;
+                        }
                     }
                 }
                 catch (Exception error)
                 {
-                    // Log the error
+                    // log the error
                     ErrorHandler.LogError(methodName, objectName, error);
                 }
 
                 // return value
-                return result;
+                return saved;
             }
             #endregion
 

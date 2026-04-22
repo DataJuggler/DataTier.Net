@@ -83,6 +83,7 @@ namespace DataTierClient.Controls
             this.TablesListBox.Location = new System.Drawing.Point(24, 36);
             this.TablesListBox.Name = "TablesListBox";
             this.TablesListBox.Size = new System.Drawing.Size(320, 352);
+            this.TablesListBox.Sorted = true;
             this.TablesListBox.TabIndex = 0;
             this.TablesListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.TablesListBox_ItemCheck);
             this.TablesListBox.SelectedIndexChanged += new System.EventHandler(this.TablesListBox_SelectedIndexChanged);
@@ -112,6 +113,7 @@ namespace DataTierClient.Controls
             this.FieldsListBox.Location = new System.Drawing.Point(608, 36);
             this.FieldsListBox.Name = "FieldsListBox";
             this.FieldsListBox.Size = new System.Drawing.Size(320, 352);
+            this.FieldsListBox.Sorted = true;
             this.FieldsListBox.TabIndex = 3;
             this.FieldsListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.FieldsListBox_ItemCheck);
             // 

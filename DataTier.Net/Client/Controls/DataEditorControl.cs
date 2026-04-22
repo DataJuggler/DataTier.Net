@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using DataJuggler.Net.Enumerations;
+using System.Linq;
 
 #endregion
 
@@ -135,23 +136,24 @@ namespace DataTierClient.Controls
             {
                 // do not check during loading
                 if (!Loading)
-                {
-                    // get the tableName
-                    int index = e.Index;
-                    
+                {   
                     // if the index is in range
-                    if ((this.HasSelectedTable) && (this.SelectedTable.HasFields) && (index < this.SelectedTable.Fields.Count))
+                    if ((this.HasSelectedTable) && (this.SelectedTable.HasFields) && (FieldsListBox.SelectedItem != null))
                     {
-                        // if not checked
-                        if (e.NewValue == CheckState.Unchecked)
+                        // if select item is a field
+                        if (FieldsListBox.SelectedItem is DTNField field)
                         {
-                            // Set Exclude to true 
-                            this.SelectedTable.Fields[index].Exclude = true;
-                        }
-                        else
-                        {
-                            // Set Exclude to true 
-                            this.SelectedTable.Fields[index].Exclude = false;
+                            // if not checked
+                            if (e.NewValue == CheckState.Unchecked)
+                            {
+                                // Set Exclude to true 
+                                field.Exclude = true;
+                            }
+                            else
+                            {
+                                // Set Exclude to false 
+                                field.Exclude = false;
+                            }
                         }
                     }
                     
@@ -497,11 +499,11 @@ namespace DataTierClient.Controls
             /// </summary>
             private void TablesListBox_SelectedIndexChanged(object sender, EventArgs e)
             {
-                // if the Tables collection existrs and the SelectedIndex is in range
-                if ((this.HasTables) && (this.TablesListBox.SelectedIndex >= 0) && (this.TablesListBox.SelectedIndex < this.Tables.Count))
+                // if the Tables collection existrs and the SelectedItem is in range
+                if ((this.HasTables) && (TablesListBox.SelectedItem != null))
                 {
                     // set the table
-                    DTNTable table = this.Tables[this.TablesListBox.SelectedIndex];
+                    DTNTable table = this.Tables.FirstOrDefault(x => x.TableName == TablesListBox.SelectedItem.ToString());
 
                     // Set Loading to true
                     Loading = true;

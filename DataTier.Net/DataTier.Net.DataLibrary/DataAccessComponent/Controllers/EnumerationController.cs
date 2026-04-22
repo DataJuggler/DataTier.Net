@@ -2,13 +2,13 @@
 
 #region using statements
 
+using DataAccessComponent.Data;
+using DataAccessComponent.DataBridge;
+using DataAccessComponent.DataOperations;
+using DataAccessComponent.Logging;
+using ObjectLibrary.BusinessObjects;
 using System;
 using System.Collections.Generic;
-using ObjectLibrary.BusinessObjects;
-using DataAccessComponent.Logging;
-using DataAccessComponent.DataOperations;
-using DataAccessComponent.DataBridge;
-using DataAccessComponent.Data;
 
 #endregion
 
@@ -59,10 +59,10 @@ namespace DataAccessComponent.Controllers
             /// </summary>
             /// <param name='enumeration'>The 'Enumeration' to delete.</param>
             /// <returns>True if the delete is successful or false if not.</returns>
-            public static PolymorphicObject Delete(Enumeration tempEnumeration, DataManager dataManager)
+            public static bool Delete(Enumeration tempEnumeration, DataManager dataManager)
             {
-                // initial value
-                PolymorphicObject result = new PolymorphicObject();
+                // locals
+                bool deleted = false;
 
                 // Get information for calling 'DataBridgeManager.PerformDataOperation' method.
                 string methodName = "DeleteEnumeration";
@@ -80,7 +80,18 @@ namespace DataAccessComponent.Controllers
                         List<PolymorphicObject> parameters = CreateEnumerationParameter(tempEnumeration);
 
                         // Perform DataOperation
-                        result = DataBridgeManager.PerformDataOperation(methodName, objectName, deleteEnumerationMethod, parameters, dataManager);
+                        PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, deleteEnumerationMethod, parameters, dataManager);
+
+                        // If return object exists
+                        if (returnObject != null)
+                        {
+                            // Test For True
+                            if (returnObject.Boolean.Value == NullableBooleanEnum.True)
+                            {
+                                // Set Deleted To True
+                                deleted = true;
+                            }
+                        }
                     }
                 }
                 catch (Exception error)
@@ -90,7 +101,7 @@ namespace DataAccessComponent.Controllers
                 }
 
                 // return value
-                return result;
+                return deleted;
             }
             #endregion
 
@@ -196,11 +207,11 @@ namespace DataAccessComponent.Controllers
             /// procedure 'Enumeration_Insert'.</param>
             /// </summary>
             /// <param name='enumeration'>The 'Enumeration' object to insert.</param>
-            /// <returns>The a PolymorphicObject. This object contains an IntegerValue, which is the Identity value for the new 'Enumeration' object that was inserted.</returns>
-            public static PolymorphicObject Insert(Enumeration enumeration, DataManager dataManager)
+            /// <returns>The id (int) of the new  'Enumeration' object that was inserted.</returns>
+            public static int Insert(Enumeration enumeration, DataManager dataManager)
             {
                 // Initial values
-                PolymorphicObject result = new PolymorphicObject();
+                int newIdentity = -1;
 
                 // Get information for calling 'DataBridgeManager.PerformDataOperation' method.
                 string methodName = "Insert";
@@ -211,14 +222,20 @@ namespace DataAccessComponent.Controllers
                     // If Enumerationexists
                     if (enumeration != null)
                     {
-                        // Create the delegate to perform the insert
                         ApplicationController.DataOperationMethod insertMethod = EnumerationMethods.InsertEnumeration;
 
                         // Create parameters for this method
                         List<PolymorphicObject> parameters = CreateEnumerationParameter(enumeration);
 
                         // Perform DataOperation
-                        result = DataBridgeManager.PerformDataOperation(methodName, objectName, insertMethod , parameters, dataManager);
+                        PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, insertMethod , parameters, dataManager);
+
+                        // If return object exists
+                        if (returnObject != null)
+                        {
+                            // Set return value
+                            newIdentity = returnObject.IntegerValue;
+                        }
                     }
                 }
                 catch (Exception error)
@@ -228,7 +245,7 @@ namespace DataAccessComponent.Controllers
                 }
 
                 // return value
-                return result;
+                return newIdentity;
             }
             #endregion
 
@@ -239,10 +256,10 @@ namespace DataAccessComponent.Controllers
             /// </summary>
             /// <param name='enumeration'>The 'Enumeration' object to save.</param>
             /// <returns>True if successful or false if not.</returns>
-            public static PolymorphicObject Save(ref Enumeration enumeration, DataManager dataManager)
+            public static bool Save(ref Enumeration enumeration, DataManager dataManager)
             {
                 // Initial value
-                PolymorphicObject result = new PolymorphicObject();
+                bool saved = false;
 
                 // If the enumeration exists.
                 if (enumeration != null)
@@ -251,25 +268,27 @@ namespace DataAccessComponent.Controllers
                     if (enumeration.IsNew)
                     {
                         // Insert new Enumeration
-                        result = Insert(enumeration, dataManager);
+                        int newIdentity = Insert(enumeration, dataManager);
 
-                        // if the insert was successful
-                        if (result.HasIntegerValue)
+                        // if insert was successful
+                        if (newIdentity > 0)
                         {
                             // Update Identity
-                            enumeration.UpdateIdentity(result.IntegerValue);
+                            enumeration.UpdateIdentity(newIdentity);
 
+                            // Set return value
+                            saved = true;
                         }
                     }
                     else
                     {
                         // Update Enumeration
-                        result  = Update(enumeration, dataManager);
+                        saved = Update(enumeration, dataManager);
                     }
                 }
 
                 // return value
-                return result;
+                return saved;
             }
             #endregion
 
@@ -281,10 +300,10 @@ namespace DataAccessComponent.Controllers
             /// </summary>
             /// <param name='enumeration'>The 'Enumeration' object to update.</param>
             /// <returns>True if successful else false if not.</returns>
-            public static PolymorphicObject Update(Enumeration enumeration, DataManager dataManager)
+            public static bool Update(Enumeration enumeration, DataManager dataManager)
             {
                 // Initial value
-                PolymorphicObject result = new PolymorphicObject();
+                bool saved = false;
 
                 // Get information for calling 'DataBridgeManager.PerformDataOperation' method.
                 string methodName = "Update";
@@ -300,7 +319,14 @@ namespace DataAccessComponent.Controllers
                         // Create parameters for this method
                         List<PolymorphicObject> parameters = CreateEnumerationParameter(enumeration);
                         // Perform DataOperation
-                        result = DataBridgeManager.PerformDataOperation(methodName, objectName, updateMethod , parameters, dataManager);
+                        PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, updateMethod , parameters, dataManager);
+
+                        // If return object exists
+                        if ((returnObject != null) && (returnObject.Boolean != null) && (returnObject.Boolean.Value == NullableBooleanEnum.True))
+                        {
+                            // Set saved to true
+                            saved = true;
+                        }
                     }
                 }
                 catch (Exception error)
@@ -310,7 +336,7 @@ namespace DataAccessComponent.Controllers
                 }
 
                 // return value
-                return result;
+                return saved;
             }
             #endregion
 

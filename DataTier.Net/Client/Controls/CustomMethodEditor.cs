@@ -191,7 +191,7 @@ namespace DataTierClient.Controls
                     // Determine the action by the selectedIndex
                     switch (selectedIndex)
                     {
-                        case 0:
+                        case 1:
 
                             // Load
 
@@ -209,7 +209,31 @@ namespace DataTierClient.Controls
                         
                             // required
                             break;
+
+                        case 0:
+
+                            // Find
+
+                            // Enable the single field control
+                            this.ParameterFieldControl.Editable = true;
+
+                            // Disable the multiple fields control
+                            this.ParameterFieldSetControl.Editable = false;
+                        
+                            // Set the Text for the MethodName (it can be changed by the user if desired)
+                            this.MethodNameControl.Text = "Find" + this.SelectedTable.TableName + "By";
+                        
+                            // Set the ProcedureName Text root
+                            this.ProcedureNameControl.Text = this.SelectedTable.TableName + "_" + "FindBy";
+
+                             // Set to editable in case Delete was previously selected
+                            this.UpdateOnBuildCheckbox.Checked = true;
+                            this.UpdateOnBuildCheckbox.Editable = true;
+                        
+                            // required
+                            break;
                     }
+
                 }
                 else
                 {
@@ -420,7 +444,7 @@ namespace DataTierClient.Controls
                         this.SelectedField = field;
 
                         // If the SelectedField exists and the Field is the PrimaryKey for this table
-                        if ((this.HasSelectedField) && (this.SelectedField.PrimaryKey))
+                        if ((this.HasSelectedField) && (this.SelectedField.PrimaryKey) && (!SelectedTable.IsView))
                         {
                             // get the users response
                             response = GetConfirmationToCreatePrimaryKeyProcedure();
@@ -1329,7 +1353,7 @@ namespace DataTierClient.Controls
                     {
                         // Remove the Delete By, Find By and Update By
                         MethodTypeControl.Items.RemoveAt(3);
-                        MethodTypeControl.Items.RemoveAt(1);
+                        // MethodTypeControl.Items.RemoveAt(1);
                         MethodTypeControl.Items.RemoveAt(0);
 
                         // Set the value for the property 'ViewMode' to true

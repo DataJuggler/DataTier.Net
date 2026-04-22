@@ -2,24 +2,26 @@
 
 #region using statements
 
+using DataAccessComponent.Connection;
 using DataAccessComponent.DataGateway;
-using DataJuggler.Net;
+using DataAccessComponent.DataOperations;
 using DataJuggler.Core.UltimateHelper;
 using DataJuggler.Core.UltimateHelper.Objects;
+using DataJuggler.Net;
+using DataJuggler.Net.Enumerations;
 using DataTierClient.Builders;
 using DataTierClient.ClientUtil;
 using DataTierClient.Controls.Interfaces;
 using DataTierClient.Forms;
 using DataTierClient.Objects;
 using ObjectLibrary.BusinessObjects;
-using DataAccessComponent.Connection;
 using ObjectLibrary.Enumerations;
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
-using DataJuggler.Net.Enumerations;
+using ReferencesSet = ObjectLibrary.BusinessObjects.ReferencesSet;
 
 #endregion
 
@@ -122,271 +124,43 @@ namespace DataTierClient.Controls
             /// </summary>
             private void ConfirmUpdateButton_Click(object sender, EventArgs e)
             {
+                // locals
+                PolymorphicObject updateDataObjectResult = null;
+                PolymorphicObject updateDataWriterResult = null;
+                PolymorphicObject updateDataManagerResult = null;
+                PolymorphicObject createCustomReaderResult = null;
+                PolymorphicObject updateGatewayResult = null;
+                PolymorphicObject updateFindForfViewResult = null;
+                PolymorphicObject saveMethodToDatabaseResult = null;
+
                 try
                 {
                     // if the ProjectFolder exists and the MethodInfo exists and the MethodInfo.SelectedTable exists
                     if ((this.HasProjectFolder) && (this.HasMethodInfo) && (this.MethodInfo.HasSelectedTable))
                     {
-                        // Clear ListBox
-					    this.StatusListBox.Items.Clear();
+                        // Clear the ListBox and a column header
+                        SetupListBox();
 
-					    // Add a column header
-					    AddColumnHeader();
+                        // Add required properties and private variable to the DataObject
+                        updateDataObjectResult = HandleUpdateDataObject();
 
-                        // Get the displayText
-                        string displayText = "Updating Data Object...";
+                        // Handle update the Find Method for a view (Controllers, Data Operations, Data Writers)
+                        updateFindForfViewResult = HandleUpdateFindByForView();
 
-                        // Display Message
-                        ListViewItem listItem = CreateStatusMessage(displayText);               
+                        // Update the DataWriter
+                        updateDataWriterResult = HandleUpdateDataWriter();
 
-                        // update the data object
-                        bool dataObjectUpdated = UpdateDataObject();
+                        // Update the DataManager (for custom reader if use custom reader is true)
+                        updateDataManagerResult = HandleUpdateDataManager();
 
-                        // if Aborted 
-                        if (AbortDataObjectInsert)
-                        {
-                            // change the text
-                            listItem.Text += " Property " + MethodInfo.PropertyName + " already exists. ";
-                        }
+                        // Create a Custom Reader if Use Custom Reader is true
+                        createCustomReaderResult = HandleCreateCustomReader();
 
-                        // Update the status 
-                        UpdateStatus(listItem, dataObjectUpdated);
+                        // Handle updating the Gateway
+                        updateGatewayResult = HandleUpdateGateway();
 
-                        // change the displayText
-                        displayText = "Updating Data Writer...";
-
-                         // Display Message
-                        listItem = CreateStatusMessage(displayText);               
-
-                        // update the data object
-                        bool writerUpdated = UpdateWriter();
-
-                        // if the value for AbortWriterInsert is true
-                        if (AbortWriterInsert)
-                        {
-                            // change the text
-                            listItem.Text += " The class " + MethodInfo.SelectedTable.ClassName + "Writer has already been updated. ";
-                        }
-
-                        // Update the status 
-                        UpdateStatus(listItem, writerUpdated);
-
-                        // if UseCustomReader is true && the CustomReader exist
-                        if ((MethodInfo.UseCustomReader) && (MethodInfo.HasCustomReader))
-                        {
-                            // get the name of the data manager
-                            string dataManager = MethodInfo.SelectedTable.ClassName + "Manager";
-
-                            // change the displayText
-                            displayText = "Updating " + dataManager + " to use custom reader " + MethodInfo.CustomReader.ReaderName + ".";
-
-                             // Display Message
-                            listItem = CreateStatusMessage(displayText);               
-
-                            // update the data object
-                            bool dataManagerUpdated = UpdateDataManager();
-
-                            // if the value for AbortWriterInsert is true
-                            if (abortDataManagerInsert)
-                            {
-                                // change the text
-                                listItem.Text += MethodInfo.SelectedTable.ClassName + "Manager already handles this custom reader. ";
-
-                                // Update the status 
-                                UpdateStatus(listItem, true);
-                            }
-                            else
-                            {
-                                // Update the status 
-                                UpdateStatus(listItem, dataManagerUpdated);
-                            }
-                        }
-
-                        // if MethodInfo.CustomReader.FieldSet.Fields exists (pseudo code is such a great language)
-                        if ((MethodInfo.UseCustomReader) && (MethodInfo.HasCustomReader) && (MethodInfo.CustomReader.HasFieldSet) && (MethodInfo.CustomReader.FieldSet.HasFields))
-                        {
-                            // change the displayText
-                            displayText = "Creating custom reader " + MethodInfo.CustomReader.ReaderName + "...";
-
-                            // Display Message
-                            listItem = CreateStatusMessage(displayText);
-
-                            // was a customReaderCreated
-                            bool customReaderCreated = CreateCustomReader();
-
-                            // Update the status 
-                            UpdateStatus(listItem, customReaderCreated);
-                        }
-
-                        // change the displayText
-                        displayText = "Updating Gateway...";
-
-                         // Display Message
-                        listItem = CreateStatusMessage(displayText);               
-
-                        // update the data object
-                        bool gatewayUpdated = UpdateGateway();
-
-                        // if the insert was aborted
-                        if (AbortGatewayInsert)
-                        {
-                            // Append a message
-                            listItem.Text += " The method '" + MethodInfo.MethodName + "' already exists. ";
-                        }
-
-                        // Update the status 
-                        UpdateStatus(listItem, gatewayUpdated);
-
-                        // if all 3 files were updated
-                        if (dataObjectUpdated && writerUpdated)
-                        {
-                            // now we need to insert a method into the methods table
-
-                            // Update 1.21.2019 : To prevent duplicate methods with the same name from being created, 
-                            //              now the method is attempted to be found, and if found the existing method
-                            //              is updated instead of creating a duplicate.
-
-                             // Create a new instance of a 'Gateway' object.
-                            Gateway gateway = new Gateway(ConnectionConstants.Name);
-
-                            // local
-                            Method method = null;
-
-                            // if the MethodId is set, use that
-                            if (MethodInfo.MethodId > 0)
-                            {
-                                // use the MethodId
-                                method = gateway.FindMethod(MethodInfo.MethodId);
-                            }
-                            else
-                            {
-                                // Find By Name
-                                method = gateway.FindMethodByName(MethodInfo.MethodName);
-                            }
-                            
-                            // if the method object does not exist
-                            if (NullHelper.IsNull(method))
-                            {
-                                // Create a new instance of a 'Method' object.
-                                method = new Method();
-                            }
-
-                            // set the properties for the method
-                            method.Active = true;
-                            method.MethodType = MethodInfo.MethodType;
-                            method.Name = MethodInfo.MethodName;
-                            
-                            // if the ParameterField exists
-                            if (MethodInfo.HasParameterField)
-                            {
-                                // set the ParameterFieldId
-                                method.ParameterFieldId = MethodInfo.ParameterField.FieldId;
-                            }
-                            else if (MethodInfo.HasParameterFieldSet)
-                            {
-                                // set the ParameterFieldSetId
-                                method.ParametersFieldSetId = MethodInfo.ParameterFieldSet.FieldSetId;
-                            }
-                        
-                            // set the properties
-                            method.ParameterType = MethodInfo.ParameterType;
-                            method.OrderByType = MethodInfo.OrderByType;
-                            method.ProcedureName = MethodInfo.ProcedureName;
-                            method.PropertyName = MethodInfo.PropertyName;
-                            method.ProjectId = MethodInfo.SelectedTable.ProjectId;
-                            method.TableId = MethodInfo.SelectedTable.TableId;
-                            method.UpdateProcedureOnBuild = MethodInfo.UpdateOnBuild;
-                            method.Parameters = MethodInfo.Parameters;
-                            method.TopRows = MethodInfo.TopRows;
-                            method.UseCustomWhere = MethodInfo.UseCustomWhere;
-                            
-                            // if UseCustomWhere is true
-                            if (method.UseCustomWhere)
-                            {
-                                // Use the Same WhereText
-                                method.WhereText = MethodInfo.WhereText;
-                            }
-                            else
-                            {
-                                // Use Empty String
-                                method.WhereText = "";
-                            }
-
-                            // if UseCustomReader is true and the CustomReader exists and the CustomReader.Id is set
-                            if ((MethodInfo.UseCustomReader) && (MethodInfo.HasCustomReader) && (!MethodInfo.CustomReader.IsNew))
-                            {
-                                // set the properties for a CustomReader
-                                method.UseCustomReader = MethodInfo.UseCustomReader;
-                                method.CustomReaderId = MethodInfo.CustomReader.CustomReaderId;
-                            }
-                            else
-                            {
-                                // set the properties to NOT use a custom reader
-                                method.UseCustomReader = false;
-                                method.CustomReaderId = 0;
-                            }
-
-                            // if the OrderByField exists
-                            if (MethodInfo.HasOrderByField)
-                            {
-                                // set the OrderByFieldId
-                                method.OrderByFieldId = MethodInfo.OrderByField.FieldId;
-                                method.OrderByDescending = MethodInfo.OrderByDescending;
-
-                                // Erase FieldSetId
-                                method.OrderByFieldSetId = 0;
-                            }
-                            else if (MethodInfo.HasOrderByFieldSet)
-                            {
-                                // erase OrderByFieldId & Descending
-                                method.OrderByFieldId = 0;
-                                method.OrderByDescending = false;
-
-                                // set the OrderByFieldSetId
-                                method.OrderByFieldSetId = MethodInfo.OrderByFieldSet.FieldSetId;
-                            }
-                            else
-                            {
-                                // erase OrderByFieldId & Descending
-                                method.OrderByFieldId = 0;
-                                method.OrderByDescending = false;
-
-                                 // Erase FieldSetId
-                                method.OrderByFieldSetId = 0;
-                            }
-
-                            // save the method
-                            bool saved = gateway.SaveMethod(ref method);
-
-                            // if the value for saved is true
-                            if (saved)
-                            {
-                                // if the MethodInfo exists
-                                if (HasMethodInfo)
-                                {
-                                    // This was causing a bug on the NewStoredProcedureEditorControl.
-                                    MethodInfo.MethodId = method.MethodId;
-                                }
-
-                                // Enable the Next button
-                                this.SaveCancelControl.EnableSaveButton(true);
-                            }
-                            else
-                            {
-                                // for debugging only
-                                Exception exception = gateway.GetLastException();
-
-                                // If the exception object exists
-                                if (NullHelper.Exists(exception))
-                                {
-                                    // for debugging only
-                                    string err = exception.ToString();
-                                }
-
-                                // show the user an error
-                                MessageHelper.DisplayMessage("An unexpected error occurred saving this method.", "Database Save Failed");
-                            }
-                        }
+                        // Save the method to the database
+                        saveMethodToDatabaseResult = HandleSaveMethodToDatabase(updateDataObjectResult, updateDataWriterResult);
                     }
                 }
                 catch (Exception error)
@@ -415,6 +189,320 @@ namespace DataTierClient.Controls
             } 
             #endregion
 
+            #region AddFindMethodForViewToDataWriter(DataTable selectedDataTable, ProjectFileManager fileManager)
+            /// <summary>
+            /// returns the Find Method For View To Data Writer
+            /// </summary>
+            public PolymorphicObject AddFindMethodForViewToDataWriter(DataTable selectedDataTable, ProjectFileManager fileManager)
+            {
+                // initial value
+                PolymorphicObject result = new PolymorphicObject();
+
+                 // Create a Controller
+                if (NullHelper.Exists(selectedDataTable))
+                {
+                    // create the DataWriterCreator
+                    DataWriterCreator creator = new DataWriterCreator(selectedDataTable, Project.DataWriterFolder, Project.DataWriterNamespace, fileManager, Project.TargetFramework);;
+
+                    // get the path to the Writer
+                    string path = Path.Combine(Project.DataWriterFolder, MethodInfo.SelectedTable.ClassName + "Writer.cs");
+                        
+                    // get the lines
+                    List<TextLine> lines = TextHelper.GetTextLinesFromFile(path);
+
+                    // locals
+                    string className = MethodInfo.SelectedTable.ClassName;
+                    string variableName = TextHelper.CapitalizeFirstChar(MethodInfo.SelectedTable.ClassName, true);
+
+                    // create the findMethod
+                    string findMethod = "public static " + className + "Find" + className + "StoredProcedure(" + className + " " + variableName + ")";
+
+                    // if any of the lines already contain this method
+                    if (lines.Any(x => x.Text.Contains(findMethod)))
+                    {
+                        // Set to true
+                        result.Aborted = true;
+
+                        // Set the reason
+                        result.AbortedReason = "Find Method Alreadys Exists";
+
+                        // Already exists counts as True
+                        result.Success = true;
+                    }
+                    else
+                    {
+                        // Write out the FindMethod
+                        creator.InsertFindStoredProcedureMethod(selectedDataTable, lines);
+
+                        // delete the existing controller
+                        File.Delete(path);
+
+                        // get the documentText
+                        string documentText = TextHelper.ExportTextLines(lines);
+
+                        // write out the updated controlller
+                        File.WriteAllText(path, documentText);
+
+                        // Set Success to true
+                        result.Success = true;
+
+                        // Set the result
+                        result.Text = "The Find method was added to the " + selectedDataTable.ClassName + "Writer.";
+                    }
+                }
+                else
+                {
+                    // DataTable does not exist
+                    result.Aborted = true;
+
+                    // set the reason it fails
+                    result.AbortedReason = "The DataWriter does not exist";
+                }
+
+                // return value
+                return result;
+            }
+            #endregion
+            
+            #region AddFindMethodToController(DataTable selectedDataTable, ProjectFileManager fileManager)
+            /// <summary>
+            /// Add Find Method To Controller
+            /// </summary>
+            public PolymorphicObject AddFindMethodToController(DataTable selectedDataTable, ProjectFileManager fileManager)
+            {
+                // initial value
+                PolymorphicObject result = new PolymorphicObject();
+
+                // locals
+                int countBefore = 0;
+                int countAfter = 0;
+
+                // Create a Controller
+                if (NullHelper.Exists(selectedDataTable))
+                {
+                    // create the controller creator
+                    ControllerCreator controllerCreator = new ControllerCreator(selectedDataTable, fileManager, Project.TargetFramework, Project);;
+
+                    // get the path to the Controller
+                    string path = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\Controllers", MethodInfo.SelectedTable.ClassName + "Controller.cs");
+                        
+                    // get the lines
+                    List<TextLine> lines = TextHelper.GetTextLinesFromFile(path);
+
+                    // create the findMethod
+                    string findMethod = "public static [DataType] Find([DataType] temp[DataType], DataManager dataManager)".Replace("[DataType]", selectedDataTable.ClassName);
+
+                    // if any of the lines already contain this method
+                    if (lines.Any(x => x.Text.Contains(findMethod)))
+                    {
+                        // Set to true
+                        result.Aborted = true;
+
+                        // Set the reason
+                        result.AbortedReason = "Find Method Alreadys Exists";
+
+                        // Already exists counts as True
+                        result.Success = true;
+                    }
+                    else
+                    {
+                        // set the number of lines before
+                        countBefore = lines.Count;
+
+                        // Write out the FindMethod
+                        result = controllerCreator.InsertFindMethod(selectedDataTable, lines);
+
+                        // Get the new count
+                        countAfter = lines.Count;
+
+                        // only delete the file if new lines were added
+                        if ((result.Success) && (countAfter > countBefore))
+                        {
+                            // delete the existing controller
+                            File.Delete(path);
+
+                            // get the documentText
+                            string documentText = TextHelper.ExportTextLines(lines);
+
+                            // write out the updated controlller
+                            File.WriteAllText(path, documentText);
+
+                            // Set Success to true
+                            result.Success = true;
+
+                            // Set the result
+                            result.Text = "The Find method was added to the " + selectedDataTable.ClassName + "Controller.";
+                        }
+                    }
+                }
+                else
+                {
+                    // DataTable does not exist
+                    result.Aborted = true;
+
+                    // set the reason it fails
+                    result.AbortedReason = "The DataTable does not exist";
+                }
+
+                // return value
+                return result;
+            }
+            #endregion
+            
+            #region AddFindMethodToDataManager(DataTable selectedDataTable, ProjectFileManager fileManager)
+            /// <summary>
+            /// Adds a Find Method To Data Manager
+            /// </summary>
+            public PolymorphicObject AddFindMethodToDataManager(DataTable selectedDataTable, ProjectFileManager fileManager)
+            {
+                // initial value
+                PolymorphicObject result = new PolymorphicObject();
+
+                // locals
+                int countBefore = 0;
+                int countAfter = 0;
+
+                // if the selectedDataTable exists
+                if (NullHelper.Exists(selectedDataTable))
+                {
+                    // get the fileName
+                    string fileName = selectedDataTable.ClassName + "Manager.cs";
+
+                    // get the file name
+                    string path = Path.Combine(Project.DataManagerFolder, fileName);
+
+                    // get the textLines
+                    List<TextLine> lines = TextHelper.GetTextLinesFromFile(path);
+
+                    // If the lines collection exists and has one or more items
+                    if (ListHelper.HasOneOrMoreItems(lines))
+                    {
+                        // get the count of lines before
+                        countBefore = lines.Count;
+
+                         // Create ClassBuilder
+                        ClassBuilder classBuilder = new ClassBuilder(false);
+                        
+                        // load references
+                        List<ProjectReference> references = this.Project.DataManagerReferencesSet.References;
+                        DataJuggler.Net.ReferencesSet convertedReferences = classBuilder.ConvertReferences(references, "DataManager");
+
+                        // create the DataOperationMethodCreator
+                        ObjectManagerCreator creator = new ObjectManagerCreator(selectedDataTable, convertedReferences, Project.DataManagerFolder, Project.DataManagerNamespace, fileManager, Project.TargetFramework);
+
+                        // Insert the Find Method
+                        result = creator.InsertFindMethod(selectedDataTable, lines);
+
+                        // now set the count for countAfter
+                        countAfter = lines.Count;
+
+                        // only continue if success and new lines were added
+                        if ((result.Success) && (countAfter > countBefore))
+                        {
+                            // delete the existing controller
+                            File.Delete(path);
+
+                            // Fixing duplicate blank lines problem
+                            lines = CodeLineHelper.RemoveConsecutiveBlankLines(lines, 1);
+
+                            // get the documentText
+                            string documentText = TextHelper.ExportTextLines(lines);
+
+                            // write out the updated controlller
+                            File.WriteAllText(path, documentText);
+
+                            // Set the result
+                            result.Text = "The Find method was added to the " + selectedDataTable.ClassName + "Writer.";
+                        }
+                    }
+                }
+
+                // return value
+                return result;
+            }
+            #endregion
+            
+            #region AddFindMethodToDataOperations()
+            /// <summary>
+            /// returns the Find Method To Data Operations
+            /// </summary>
+            public PolymorphicObject AddFindMethodToDataOperations(DataTable selectedDataTable, ProjectFileManager fileManager)
+            {
+                // initial value
+                PolymorphicObject result = new PolymorphicObject();
+
+                // locals
+                int countBefore = 0;
+                int countAfter = 0;
+
+                // if the selectedDataTable exists
+                if (NullHelper.Exists(selectedDataTable))
+                {
+                    // get the fileName
+                    string fileName = selectedDataTable.ClassName + "Methods.cs";
+
+                    // get the file name
+                    string path = Path.Combine(Project.DataOperationsFolder, fileName);
+
+                    // get the textLines
+                    List<TextLine> lines = TextHelper.GetTextLinesFromFile(path);
+
+                    // If the lines collection exists and has one or more items
+                    if (ListHelper.HasOneOrMoreItems(lines))
+                    {
+                        // get the count of lines before
+                        countBefore = lines.Count;
+
+                         // Create ClassBuilder
+                        ClassBuilder classBuilder = new ClassBuilder(false);
+                        
+                        // load references
+                        List<ProjectReference> references = this.Project.DataOperationsReferencesSet.References;
+                        DataJuggler.Net.ReferencesSet convertedReferences = classBuilder.ConvertReferences(references, "ObjectReaders");
+
+                        // create the DataOperationMethodCreator
+                        DataOperationMethodCreator creator = new DataOperationMethodCreator(selectedDataTable, convertedReferences, Project.DataOperationsFolder, Project.DataOperationsNamespace, fileManager, Project.TargetFramework);
+
+                        // Insert the Find Method
+                        result = creator.InsertFindMethod(selectedDataTable, lines);
+
+                        // set the after count
+                        countAfter = lines.Count;
+
+                        // if success and new lines were added
+                        if ((result.Success) && (countAfter > countBefore))
+                        {
+                            // delete the existing controller
+                            File.Delete(path);
+
+                            // fixing duplicate blank lines
+                            lines = CodeLineHelper.RemoveConsecutiveBlankLines(lines, 1);
+
+                            // get the documentText
+                            string documentText = TextHelper.ExportTextLines(lines);
+
+                            // write out the updated controlller
+                            File.WriteAllText(path, documentText);
+
+                            // Set Success to true
+                            result.Success = true;
+
+                            // Set the result
+                            result.Text = "The Find method was added to the " + selectedDataTable.ClassName + "Methods.";
+                        }
+                        else if (result.Success)
+                        {
+                            // Set the text
+                            result.Text = "The Find method already exists in " + selectedDataTable.ClassName + "Methods.";
+                        }
+                    }
+                }
+
+                // return value
+                return result;
+            }
+            #endregion
+            
             #region BuildObjectReader(ref Exception error)
             /// <summary>
             /// This method builds the Object Readers
@@ -518,6 +606,78 @@ namespace DataTierClient.Controls
                 
                 // return value
                 return listItem;
+            }
+            #endregion
+            
+            #region CreateStoredProcedureObject(DataTable selectedDataTable, ProjectFileManager fileManager)
+            /// <summary>
+            /// Create Stored Procedure Object
+            /// </summary>
+            public PolymorphicObject CreateStoredProcedureObject(DataTable selectedDataTable, ProjectFileManager fileManager)
+            {
+                // initial value
+                PolymorphicObject result = null;
+
+                // if the selectedDataTable exists
+                if (NullHelper.Exists(selectedDataTable))
+                {
+                    // We must check if the File exists for the stored procedure
+                    string storedProcedureFileName = Path.Combine(Project.StoredProcedureObjectFolder, "FetchProcedures");
+
+                    // get the fileName (without the path)
+                    string storedProcedureName = new FileInfo(storedProcedureFileName).Name;
+
+                    // if the file does not exist
+                    if (!File.Exists(storedProcedureFileName))
+                    {
+                        // Create A ClassBuilder to get database schema
+                        ClassBuilder classBuilder = new ClassBuilder(false);
+
+                        // load references
+                        List<ProjectReference> references = this.Project.StoredProcedureReferencesSet.References;
+                        DataJuggler.Net.ReferencesSet convertedReferences = classBuilder.ConvertReferences(references, "StoredProcedureObjects");
+
+                        // set namespace and project namew
+                        string rootStoredProceduresPath = this.Project.StoredProcedureObjectFolder;
+
+                        // set namespace
+                        string nameSpace = this.Project.StoredProcedureObjectNamespace;
+
+                        // set the TargetFramework
+                        TargetFrameworkEnum targetFramework = (TargetFrameworkEnum) this.Project.TargetFramework;
+
+                        // Create 
+                        StoredProcedureObjectCreator creator = new StoredProcedureObjectCreator(selectedDataTable, convertedReferences, rootStoredProceduresPath, nameSpace, fileManager, targetFramework);
+
+                        // Create the FindProc
+                        result = creator.CreateFindProc(selectedDataTable);
+
+                        // set the Text for success
+                        result.Text = "The stored procedure '" + storedProcedureName + "' was created successfully.";
+                    }
+                    else
+                    {
+                        // Create a new instance of a 'result' object.
+                        result = new PolymorphicObject();
+
+                         // Set to true
+                        result.Success = true;
+
+                        // The file already exists
+                        result.Aborted = true;
+
+                        // set the Text
+                        result.AbortedReason = "The stored procedure '" + storedProcedureName + "' already exists";
+                    }
+                }
+                else
+                {
+                    // Set to false
+                    result.Success = false;
+                }
+
+                // return value
+                return result;
             }
             #endregion
             
@@ -737,6 +897,120 @@ namespace DataTierClient.Controls
             }
             #endregion
             
+            #region HandleAddFindMethodToController(DataTable selectedDataTable, ProjectFileManager fileManager)
+            /// <summary>
+            /// returns the Add Find Method To Controller
+            /// </summary>
+            public PolymorphicObject HandleAddFindMethodToController(DataTable selectedDataTable, ProjectFileManager fileManager)
+            {
+                // initial value
+                PolymorphicObject result = null;
+
+                // change the displayText
+                string displayText = "Adding the Find method To The Controller...";
+
+                // Display Message
+                ListViewItem listItem = CreateStatusMessage(displayText);
+
+                // update the Controller and add a FindMethod
+                result = AddFindMethodToController(selectedDataTable, fileManager);
+
+                // if the insert was aborted
+                if (result.Aborted)
+                {
+                    // Append a message
+                    listItem.Text += result.AbortedReason;
+                }
+                else
+                {
+                    // Append a message
+                    listItem.Text += result.Text;
+                }
+
+                // Update the status 
+                UpdateStatus(listItem, result.Success);
+
+                // return value
+                return result;
+            }
+            #endregion
+            
+            #region HandleAddFindMethodToDataManagerForView(DataTable selectedDataTable, ProjectFileManager fileManager)
+            /// <summary>
+            /// returns the Add Find Method To Data Manager For View
+            /// </summary>
+            public PolymorphicObject HandleAddFindMethodToDataManagerForView(DataTable selectedDataTable, ProjectFileManager fileManager)
+            {
+                // initial value
+                PolymorphicObject result = null;
+
+                // change the displayText
+                string displayText = "Adding the Find method To The Data Manager...";
+
+                // Display Message
+                ListViewItem listItem = CreateStatusMessage(displayText);
+
+                // update the Controller and add a FindMethod
+                result = AddFindMethodToDataManager(selectedDataTable, fileManager);
+
+                // if the insert was aborted
+                if (result.Aborted)
+                {
+                    // Append a message
+                    listItem.Text += result.AbortedReason;
+                }
+                else
+                {
+                    // Append a message
+                    listItem.Text += result.Text;
+                }
+
+                // Update the status 
+                UpdateStatus(listItem, result.Success);
+
+                // return value
+                return result;
+            }
+            #endregion
+            
+            #region HandleAddFindMethodToDataOperations(DataTable selectedDataTable, ProjectFileManager fileManager)
+            /// <summary>
+            /// returns the Add Find Method To Data Operations
+            /// </summary>
+            public PolymorphicObject HandleAddFindMethodToDataOperations(DataTable selectedDataTable, ProjectFileManager fileManager)
+            {
+                // initial value
+                PolymorphicObject result = null;
+
+                // change the displayText
+                string displayText = "Adding Find Method To " + MethodInfo.SelectedTable.ClassName + "Methods...";
+
+                // Display Message
+                ListViewItem listItem = CreateStatusMessage(displayText);               
+
+                // update the data object
+                result = AddFindMethodToDataOperations(selectedDataTable, fileManager);
+
+                // if the insert was aborted
+                if (result.Aborted)
+                {
+                    // Append a message
+                    listItem.Text += result.AbortedReason;
+                }
+                else
+                {
+                    // Append a message
+                    listItem.Text += result.Text;
+                }
+
+                // Update the status 
+                UpdateStatus(listItem, result.Success);
+
+                // return value
+                return result;
+            }
+            #endregion
+            
             #region HandleChangeProcedureName(ref List<CodeLine> method, int spaces, string indent, string indent2, string variableName, int insertIndex, string storedProcedureVariableName, string openBracket, string closeBracket, bool useElfIf)
             /// <summary>
             /// This method Handle Change Procedure Name
@@ -858,7 +1132,7 @@ namespace DataTierClient.Controls
             
             #region HandleCopyAndModifyMethod(ref List<CodeLine> method, string storedProcedureVariableName)
             /// <summary>
-            /// This method Handle Modify Method
+            /// This method Handle Modify Method for a Data Writer
             /// </summary>
             public void HandleCopyAndModifyMethod(ref List<CodeLine> method, string storedProcedureVariableName)
             {
@@ -953,7 +1227,7 @@ namespace DataTierClient.Controls
                             closeBracket = indent + "}";
                             
                             // get 4 extra spaces
-                            indent2 = TextHelper.Indent(spaces + 8);
+                            indent2 = TextHelper.Indent(spaces + 4);
 
                             // Write out the test to change the procedureName                            
                             createParametersIndex = HandleChangeProcedureName(ref method, spaces, indent, indent2, variableName, createParametersIndex, storedProcedureVariableName, openBracket, closeBracket, false);
@@ -1261,7 +1535,7 @@ namespace DataTierClient.Controls
             
             #region HandleCopyAndModifyMethodCall(ref List<CodeLine> codeLines, string baseWriterFile, string writerMethodName, string storedProcedureVariableName, string writerFile, bool isOverridesMessagePresent)
             /// <summary>
-            /// This method Handle Copy And Modify Method Call
+            /// This method Handle Copy And Modify Method Call for a Data Writer
             /// </summary>
             public void HandleCopyAndModifyMethodCall(ref List<CodeLine> codeLines, string baseWriterFile, string writerMethodName, string storedProcedureVariableName, string writerFile, bool isOverridesMessagePresent)
             {
@@ -1328,6 +1602,74 @@ namespace DataTierClient.Controls
                         }
                     }
                 }
+            }
+            #endregion
+            
+            #region HandleCreateCustomReader()
+            /// <summary>
+            /// returns the Create Custom Reader
+            /// </summary>
+            public PolymorphicObject HandleCreateCustomReader()
+            {
+                // initial value
+                PolymorphicObject result = null;
+
+                // if MethodInfo.CustomReader.FieldSet.Fields exists (pseudo code is such a great language)
+                if ((MethodInfo.UseCustomReader) && (MethodInfo.HasCustomReader) && (MethodInfo.CustomReader.HasFieldSet) && (MethodInfo.CustomReader.FieldSet.HasFields))
+                {
+                    // change the displayText
+                    string displayText = "Creating custom reader " + MethodInfo.CustomReader.ReaderName + "...";
+
+                    // Display Message
+                    ListViewItem listItem = CreateStatusMessage(displayText);
+
+                    // was a customReaderCreated
+                    result.Success = CreateCustomReader();
+
+                    // Update the status 
+                    UpdateStatus(listItem, result.Success);
+                }
+
+                // return value
+                return result;
+            }
+            #endregion
+            
+            #region HandleCreateStoredProcedureForFindMethodForView(DataTable selectedDataTable, ProjectFileManager fileManager)
+            /// <summary>
+            /// returns the Create Stored Procedure For Find Method For View
+            /// </summary>
+            public PolymorphicObject HandleCreateStoredProcedureForFindMethodForView(DataTable selectedDataTable, ProjectFileManager fileManager)
+            {
+                // initial value
+                PolymorphicObject result = null;
+
+                // change the displayText
+                string displayText = "Creating Stored Procedure Object...";
+
+                // Display Message
+                ListViewItem listItem = CreateStatusMessage(displayText);         
+
+                // update the data object
+                result = CreateStoredProcedureObject(selectedDataTable, fileManager);
+
+                // if the insert was aborted
+                if (result.Aborted)
+                {
+                    // Append a message
+                    listItem.Text += result.AbortedReason;
+                }
+                else
+                {
+                    // Append a message
+                    listItem.Text += result.Text;
+                }
+
+                // Update the status 
+                UpdateStatus(listItem, result.Success);
+
+                // return value
+                return result;
             }
             #endregion
             
@@ -1654,6 +1996,364 @@ namespace DataTierClient.Controls
             }
             #endregion
             
+            #region HandleSaveMethodToDatabase()
+            /// <summary>
+            /// returns the Save Method To Database
+            /// </summary>
+            public PolymorphicObject HandleSaveMethodToDatabase(PolymorphicObject updateDataObjectResult, PolymorphicObject updateDataWriterResult)
+            {
+                // initial value
+                PolymorphicObject result = null;
+
+                // if the data object and the data writer were both updated
+                if (updateDataObjectResult.Success && updateDataWriterResult.Success)
+                {
+                    // now we need to insert a method into the methods table
+
+                    // Update 1.21.2019 : To prevent duplicate methods with the same name from being created, 
+                    //              now the method is attempted to be found, and if found the existing method
+                    //              is updated instead of creating a duplicate.
+
+                        // Create a new instance of a 'Gateway' object.
+                    Gateway gateway = new Gateway(ConnectionConstants.Name);
+
+                    // local
+                    Method method = null;
+
+                    // if the MethodId is set, use that
+                    if (MethodInfo.MethodId > 0)
+                    {
+                        // use the MethodId
+                        method = gateway.FindMethod(MethodInfo.MethodId);
+                    }
+                    else
+                    {
+                        // Find By Name
+                        method = gateway.FindMethodByName(MethodInfo.MethodName);
+                    }
+                            
+                    // if the method object does not exist
+                    if (NullHelper.IsNull(method))
+                    {
+                        // Create a new instance of a 'Method' object.
+                        method = new Method();
+                    }
+
+                    // set the properties for the method
+                    method.Active = true;
+                    method.MethodType = MethodInfo.MethodType;
+                    method.Name = MethodInfo.MethodName;
+                            
+                    // if the ParameterField exists
+                    if (MethodInfo.HasParameterField)
+                    {
+                        // set the ParameterFieldId
+                        method.ParameterFieldId = MethodInfo.ParameterField.FieldId;
+                    }
+                    else if (MethodInfo.HasParameterFieldSet)
+                    {
+                        // set the ParameterFieldSetId
+                        method.ParametersFieldSetId = MethodInfo.ParameterFieldSet.FieldSetId;
+                    }
+                        
+                    // set the properties
+                    method.ParameterType = MethodInfo.ParameterType;
+                    method.OrderByType = MethodInfo.OrderByType;
+                    method.ProcedureName = MethodInfo.ProcedureName;
+                    method.PropertyName = MethodInfo.PropertyName;
+                    method.ProjectId = MethodInfo.SelectedTable.ProjectId;
+                    method.TableId = MethodInfo.SelectedTable.TableId;
+                    method.UpdateProcedureOnBuild = MethodInfo.UpdateOnBuild;
+                    method.Parameters = MethodInfo.Parameters;
+                    method.TopRows = MethodInfo.TopRows;
+                    method.UseCustomWhere = MethodInfo.UseCustomWhere;
+                            
+                    // if UseCustomWhere is true
+                    if (method.UseCustomWhere)
+                    {
+                        // Use the Same WhereText
+                        method.WhereText = MethodInfo.WhereText;
+                    }
+                    else
+                    {
+                        // Use Empty String
+                        method.WhereText = "";
+                    }
+
+                    // if UseCustomReader is true and the CustomReader exists and the CustomReader.Id is set
+                    if ((MethodInfo.UseCustomReader) && (MethodInfo.HasCustomReader) && (!MethodInfo.CustomReader.IsNew))
+                    {
+                        // set the properties for a CustomReader
+                        method.UseCustomReader = MethodInfo.UseCustomReader;
+                        method.CustomReaderId = MethodInfo.CustomReader.CustomReaderId;
+                    }
+                    else
+                    {
+                        // set the properties to NOT use a custom reader
+                        method.UseCustomReader = false;
+                        method.CustomReaderId = 0;
+                    }
+
+                    // if the OrderByField exists
+                    if (MethodInfo.HasOrderByField)
+                    {
+                        // set the OrderByFieldId
+                        method.OrderByFieldId = MethodInfo.OrderByField.FieldId;
+                        method.OrderByDescending = MethodInfo.OrderByDescending;
+
+                        // Erase FieldSetId
+                        method.OrderByFieldSetId = 0;
+                    }
+                    else if (MethodInfo.HasOrderByFieldSet)
+                    {
+                        // erase OrderByFieldId & Descending
+                        method.OrderByFieldId = 0;
+                        method.OrderByDescending = false;
+
+                        // set the OrderByFieldSetId
+                        method.OrderByFieldSetId = MethodInfo.OrderByFieldSet.FieldSetId;
+                    }
+                    else
+                    {
+                        // erase OrderByFieldId & Descending
+                        method.OrderByFieldId = 0;
+                        method.OrderByDescending = false;
+
+                            // Erase FieldSetId
+                        method.OrderByFieldSetId = 0;
+                    }
+
+                    // save the method
+                    bool saved = gateway.SaveMethod(ref method);
+
+                    // if the value for saved is true
+                    if (saved)
+                    {
+                        // if the MethodInfo exists
+                        if (HasMethodInfo)
+                        {
+                            // This was causing a bug on the NewStoredProcedureEditorControl.
+                            MethodInfo.MethodId = method.MethodId;
+                        }
+
+                        // Enable the Next button
+                        this.SaveCancelControl.EnableSaveButton(true);
+                    }
+                    else
+                    {
+                        // for debugging only
+                        Exception exception = gateway.GetLastException();
+
+                        // If the exception object exists
+                        if (NullHelper.Exists(exception))
+                        {
+                            // for debugging only
+                            string err = exception.ToString();
+                        }
+
+                        // show the user an error
+                        MessageHelper.DisplayMessage("An unexpected error occurred saving this method.", "Database Save Failed");
+                    }
+                }
+
+                // return value
+                return result;
+            }
+            #endregion
+            
+            #region HandleUpdateDataManager()
+            /// <summary>
+            /// returns the Update Data Manager
+            /// </summary>
+            public PolymorphicObject HandleUpdateDataManager()
+            {
+                // initial value
+                PolymorphicObject result = new PolymorphicObject();
+
+                // if UseCustomReader is true && the CustomReader exist
+                if ((MethodInfo.UseCustomReader) && (MethodInfo.HasCustomReader))
+                {
+                    // get the name of the data manager
+                    string dataManager = MethodInfo.SelectedTable.ClassName + "Manager";
+
+                    // change the displayText
+                    string displayText = "Updating " + dataManager + " to use custom reader " + MethodInfo.CustomReader.ReaderName + ".";
+
+                    // Display Message
+                    ListViewItem listItem = CreateStatusMessage(displayText);               
+
+                    // update the data object
+                    result.Success = UpdateDataManager();
+
+                    // if the value for AbortWriterInsert is true
+                    if (abortDataManagerInsert)
+                    {
+                        // change the text
+                        listItem.Text += MethodInfo.SelectedTable.ClassName + "Manager already handles this custom reader. ";
+
+                        // Update the status 
+                        UpdateStatus(listItem, true);
+                    }
+                    else
+                    {
+                        // Update the status 
+                        UpdateStatus(listItem, result.Success);
+                    }
+                }
+
+                // return value
+                return result;
+            }
+            #endregion
+            
+            #region HandleUpdateDataObject()
+            /// <summary>
+            /// returns the Update Data Object
+            /// </summary>
+            public PolymorphicObject HandleUpdateDataObject()
+            {
+                // initial value
+                PolymorphicObject result = new PolymorphicObject();
+
+                // Get the displayText
+                string displayText = "Updating Data Object...";
+
+                // Display Message
+                ListViewItem listItem = CreateStatusMessage(displayText);               
+
+                // update the data object
+                result.Success = UpdateDataObject();
+
+                // if Aborted 
+                if (AbortDataObjectInsert)
+                {
+                    // change the text
+                    listItem.Text += " Property " + MethodInfo.PropertyName + " already exists. ";
+                }
+
+                // Update the status 
+                UpdateStatus(listItem, result.Success);
+
+                // return value
+                return result;
+            }
+            #endregion
+            
+            #region HandleUpdateDataWriter()
+            /// <summary>
+            /// returns the Update Data Writer
+            /// </summary>
+            public PolymorphicObject HandleUpdateDataWriter()
+            {
+                // initial value
+                PolymorphicObject result = new PolymorphicObject();
+
+                // change the displayText
+                string displayText = "Updating Data Writer...";
+
+                // Display Message
+                ListViewItem listItem = CreateStatusMessage(displayText);               
+
+                // update the data object
+                result.Success = UpdateWriter();
+
+                // if the value for AbortWriterInsert is true
+                if (AbortWriterInsert)
+                {
+                    // change the text
+                    listItem.Text += " The class " + MethodInfo.SelectedTable.ClassName + "Writer has already been updated. ";
+                }
+
+                // Update the status 
+                UpdateStatus(listItem, result.Success);
+
+                // return value
+                return result;
+            }
+            #endregion
+            
+            #region HandleUpdateFindByForView()
+            /// <summary>
+            /// returns the Update Find By For View
+            /// </summary>
+            public PolymorphicObject HandleUpdateFindByForView()
+            {
+                // initial value
+                PolymorphicObject result = new PolymorphicObject();
+
+                // sub results
+                PolymorphicObject updatedFindMethodToController = null;
+                PolymorphicObject createdStoredProcedureResult = null;
+                PolymorphicObject updateFindMethodsForDataOperations = null;
+                PolymorphicObject addFindMethodToDataWriterResult = null;
+                PolymorphicObject addFindMethodToDataManagerResult = null;
+
+                //. if this is a View and we are adding a FindBy
+                if ((MethodInfo.SelectedTable.IsView) && (MethodInfo.MethodType == MethodTypeEnum.Find_By))
+                {
+                    // get the selectedDataTable
+                    DataTable selectedDataTable = DataConverter.ConvertDataTable(MethodInfo.SelectedTable, Project);
+
+                    // create a fileManager
+                    ProjectFileManager fileManager = new ProjectFileManager();
+
+                    // Handle Adding Find Mehod to the DataManager
+                    addFindMethodToDataManagerResult = HandleAddFindMethodToDataManagerForView(selectedDataTable, fileManager);
+
+                    // Add the Find Method to the Controller since this is a view, it wasn't created on bild
+                    updatedFindMethodToController = HandleAddFindMethodToController(selectedDataTable, fileManager);
+
+                    // Create the Stored Procedure for Find By For A View
+                    createdStoredProcedureResult = HandleCreateStoredProcedureForFindMethodForView(selectedDataTable, fileManager);
+
+                    // Add the Find Method to Data Operations
+                    updateFindMethodsForDataOperations = HandleAddFindMethodToDataOperations(selectedDataTable, fileManager);
+
+                    // Insert the Find method into the DataWriter (Views don't get this added automatically on build)
+                    addFindMethodToDataWriterResult = AddFindMethodForViewToDataWriter(selectedDataTable, fileManager);
+
+                    // set the result to true if all 4 were 
+                    result.Success = (updatedFindMethodToController.Success && createdStoredProcedureResult.Success && updateFindMethodsForDataOperations.Success && addFindMethodToDataWriterResult.Success);
+                }
+
+                // return value
+                return result;
+            }
+            #endregion
+            
+            #region HandleUpdateGateway()
+            /// <summary>
+            /// returns the Update Gateway
+            /// </summary>
+            public PolymorphicObject HandleUpdateGateway()
+            {
+                // initial value
+                PolymorphicObject result = new PolymorphicObject();
+
+                // change the displayText
+                string displayText = "Updating Gateway...";
+
+                // Display Message
+                ListViewItem listItem = CreateStatusMessage(displayText);               
+
+                // update the data object
+                result.Success = UpdateGateway();
+
+                // if the insert was aborted
+                if (AbortGatewayInsert)
+                {
+                    // Append a message
+                    listItem.Text += " The method '" + MethodInfo.MethodName + "' already exists. ";
+                }
+
+                // Update the status 
+                UpdateStatus(listItem, result.Success);
+
+                // return value
+                return result;
+            }
+            #endregion
+            
             #region HandleUpdateMethod(ref List<CodeLine> codeLines, string writerMethodName, string storedProcedureVariableName)
             /// <summary>
             /// This method Handle Update Method
@@ -1687,99 +2387,71 @@ namespace DataTierClient.Controls
                 {
                     // the method has been modified. We only have to add an If statement to it
                     insertIndex = CodeLineHelper.GetIndex(method, "else", true);
-            
-                    // set the codeLine
-                    codeLine = method[insertIndex];
 
-                    // get the spacesCount
-                    spaces = TextHelper.GetSpacesCount(codeLine.Text);
-                            
-                    // set the indent to use
-                    indent = TextHelper.Indent(spaces);
-
-                    // get 4 extra spaces
-                    indent2 = TextHelper.Indent(spaces + 4);
-
-                    // set the open and close brackets
-                    openBracket = indent + "{";
-                    closeBracket = indent + "}";
-
-                    // get the changeProcedureNameText
-                    string changeProcedureNameText = GetChangeProcedureNameText(indent2, storedProcedureVariableName, MethodInfo.ProcedureName);
-
-                    // test if this line is already written
-                    index = CodeLineHelper.GetIndex(method, changeProcedureNameText, true);
-
-                    // AbortWriterInsert if the index was found
-                    AbortWriterInsert = (index > -1);
-
-                    // if not abort
-                    if (!AbortWriterInsert)
+                    // if this is a view the insert index is different
+                    if (methodInfo.SelectedTable.IsView)
                     {
-                        // Add the new method
-                        HandleChangeProcedureName(ref method, spaces, indent, indent2, variableName, insertIndex, storedProcedureVariableName, openBracket, closeBracket, true);
+                        // get the procedureName
+                        string procedureName = "find" + methodInfo.SelectedTable.ClassName + "StoredProcedure = new Find" + methodInfo.SelectedTable.ClassName + "StoredProcedure();";
 
-                        // create a subset of codeLines
-                        List<CodeLine> subSet = new List<CodeLine>();
+                        // find the insertIndex
+                        insertIndex = CodeLineHelper.GetIndex(method, procedureName);
 
-                        // iterate the method
-                        foreach(CodeLine temp in method)
+                        // if the index was found
+                        if (insertIndex >= 0)
                         {
-                            // if this one of the new lines created
-                            if ((temp.HasTag) && (temp.Tag == variableName))
-                            {
-                                // add this line
-                                subSet.Add(temp);
-                            }
+                            // Have to add one line if a view
+                            insertIndex++;
                         }
-
-                        // get the insertIndex
-                        insertIndex = CodeLineHelper.GetIndex(codeLines, codeLine.Id);
-
-                        // get the insertIndex of the new line
-                        CodeLineHelper.InsertCodeLines(ref codeLines, subSet, insertIndex);
-
-                        // fixing space above the else line
-                        
-                        // Find the index of Else again
-                        insertIndex = CodeLineHelper.GetIndex(method, "else", true);
-
-                        // if the value for insertIndex is greater than 1
-                        if (insertIndex > 1)
-                        {
-                            // if the line above the else is a blank line, remove it.
-                            if (codeLines[insertIndex - 1].IsBlankLine)
-                            {
-                                // remove the blank line above the else statement
-                                codeLines.RemoveAt(insertIndex - 1);
-                            }
-                        }
-
-                        // Write out the file text 
-                        CodeLineHelper.WriteFileText(codeLines, writerFile, true);
                     }
-                }
-                else if (MethodInfo.MethodType == MethodTypeEnum.Load_By)
-                {
-                    // get the index of the last open bracket at the most indented level
-                    insertIndex = CodeLineHelper.GetLastMostIndentedCloseBracketIndex(method);
-
-                    // if the index was found
+            
+                    // if the insertIndex as found
                     if (insertIndex >= 0)
-                    {
-                        // get the index
+                    {   
+                        // set the codeLine
                         codeLine = method[insertIndex];
 
-                        // get the id
-                        lineId = codeLine.Id;
-
-                        // get the spaces count
+                        // get the spacesCount
                         spaces = TextHelper.GetSpacesCount(codeLine.Text);
 
-                        // indent this many spaces
+                        // if this is a view the insert index is different
+                        if (methodInfo.SelectedTable.IsView)
+                        {
+                             // create a blankLine
+                            CodeLine blankLine = new CodeLine();
+
+                            // do not add a blank line if it already exists
+                            if (!method[insertIndex].IsBlankLine)
+                            {
+                                // needs to increase by 4
+                                spaces = spaces + 4;
+
+                                // Set the indent text
+                                blankLine.Text = TextHelper.Indent(spaces * 4);
+
+                                // Add the tag so this line gets copied
+                                blankLine.Tag = variableName;
+
+                                // Insert the blank line
+                                method.Insert(insertIndex, blankLine);
+                            }
+                            else
+                            {
+                                // get the spaces count from the line below
+                                spaces = TextHelper.GetSpacesCount(method[insertIndex - 1].Text);
+                            }
+
+                            // increase insertIndex again
+                            insertIndex++; 
+                            
+                            // set the codeLine
+                            codeLine = method[insertIndex];
+                        }
+                            
+                        // set the indent to use
                         indent = TextHelper.Indent(spaces);
 
-                            // get 4 extra spaces
+                        // get 4 extra spaces
                         indent2 = TextHelper.Indent(spaces + 4);
 
                         // set the open and close brackets
@@ -1798,8 +2470,31 @@ namespace DataTierClient.Controls
                         // if not abort
                         if (!AbortWriterInsert)
                         {
+                            // One last issue related to Find's for Views. Making it worse with two conditions. The code for Use Else here
+                            // was always true because this was code already copied and modified. Views piggy backed on the same code, 
+                            // so slightly different. We have to determine if this is the first custom find or not
+                            bool useElseIf = !methodInfo.SelectedTable.IsView;
+
+                            // if a view, we have to check on number of lines
+                            if (methodInfo.SelectedTable.IsView)
+                            {
+                                // guess, verifying now
+                                useElseIf = method.Count > 27;
+
+                                // if the value for useElseIf is true
+                                if (useElseIf)
+                                {
+                                    // set the number of methods added
+                                    int customMethodsAdded = (method.Count - 27) / 9;
+                                    insertIndex += customMethodsAdded * 9;
+
+                                    // set the codeLine
+                                    codeLine = method[insertIndex];
+                                }
+                            }
+
                             // Add the new method
-                            HandleChangeProcedureName(ref method, spaces, indent, indent2, variableName, insertIndex + 1, storedProcedureVariableName, openBracket, closeBracket, true);
+                            HandleChangeProcedureName(ref method, spaces, indent, indent2, variableName, insertIndex, storedProcedureVariableName, openBracket, closeBracket, useElseIf);
 
                             // create a subset of codeLines
                             List<CodeLine> subSet = new List<CodeLine>();
@@ -1815,26 +2510,109 @@ namespace DataTierClient.Controls
                                 }
                             }
 
-                            // get the insertIndex
-                            insertIndex = CodeLineHelper.GetIndex(codeLines, lineId);
+                            // reset insertIndex - seems to be needed
+                            insertIndex = CodeLineHelper.GetIndex(codeLines, codeLine.Id);
 
                             // get the insertIndex of the new line
-                            CodeLineHelper.InsertCodeLines(ref codeLines, subSet, insertIndex + 1);
+                            CodeLineHelper.InsertCodeLines(ref codeLines, subSet, insertIndex);
+
+                            // fixing space above the else line
+                        
+                            // Find the index of Else again
+                            int tempIndex = CodeLineHelper.GetIndex(method, "else", true);
+
+                            // if the value for tempIndex is greater than 1
+                            if (tempIndex > 1)
+                            {
+                                // if the line above the else is a blank line, remove it.
+                                if (codeLines[tempIndex - 1].IsBlankLine)
+                                {
+                                    // remove the blank line above the else statement
+                                    codeLines.RemoveAt(tempIndex - 1);
+                                }
+                            }
 
                             // Write out the file text 
                             CodeLineHelper.WriteFileText(codeLines, writerFile, true);
                         }
                     }
-                    else if (MethodInfo.MethodType == MethodTypeEnum.Update)
+                    else if (MethodInfo.MethodType == MethodTypeEnum.Load_By)
                     {
-                        // get the changeProcedureNameText
-                        string changeProcedureNameText = GetChangeProcedureNameText(indent2, storedProcedureVariableName, MethodInfo.ProcedureName);
+                        // get the index of the last open bracket at the most indented level
+                        insertIndex = CodeLineHelper.GetLastMostIndentedCloseBracketIndex(method);
 
-                        // test if this line is already written
-                        index = CodeLineHelper.GetIndex(method, changeProcedureNameText, true);
+                        // if the index was found
+                        if (insertIndex >= 0)
+                        {
+                            // get the index
+                            codeLine = method[insertIndex];
 
-                        // AbortWriterInsert if the index was found
-                        AbortWriterInsert = (index > -1);
+                            // get the id
+                            lineId = codeLine.Id;
+
+                            // get the spaces count
+                            spaces = TextHelper.GetSpacesCount(codeLine.Text);
+
+                            // indent this many spaces
+                            indent = TextHelper.Indent(spaces);
+
+                                // get 4 extra spaces
+                            indent2 = TextHelper.Indent(spaces + 4);
+
+                            // set the open and close brackets
+                            openBracket = indent + "{";
+                            closeBracket = indent + "}";
+
+                            // get the changeProcedureNameText
+                            string changeProcedureNameText = GetChangeProcedureNameText(indent2, storedProcedureVariableName, MethodInfo.ProcedureName);
+
+                            // test if this line is already written
+                            index = CodeLineHelper.GetIndex(method, changeProcedureNameText, true);
+
+                            // AbortWriterInsert if the index was found
+                            AbortWriterInsert = (index > -1);
+
+                            // if not abort
+                            if (!AbortWriterInsert)
+                            {
+                                // Add the new method
+                                HandleChangeProcedureName(ref method, spaces, indent, indent2, variableName, insertIndex + 1, storedProcedureVariableName, openBracket, closeBracket, true);
+
+                                // create a subset of codeLines
+                                List<CodeLine> subSet = new List<CodeLine>();
+
+                                // iterate the method
+                                foreach(CodeLine temp in method)
+                                {
+                                    // if this one of the new lines created
+                                    if ((temp.HasTag) && (temp.Tag == variableName))
+                                    {
+                                        // add this line
+                                        subSet.Add(temp);
+                                    }
+                                }
+
+                                // get the insertIndex
+                                insertIndex = CodeLineHelper.GetIndex(codeLines, lineId);
+
+                                // get the insertIndex of the new line
+                                CodeLineHelper.InsertCodeLines(ref codeLines, subSet, insertIndex + 1);
+
+                                // Write out the file text 
+                                CodeLineHelper.WriteFileText(codeLines, writerFile, true);
+                            }
+                        }
+                        else if (MethodInfo.MethodType == MethodTypeEnum.Update)
+                        {
+                            // get the changeProcedureNameText
+                            string changeProcedureNameText = GetChangeProcedureNameText(indent2, storedProcedureVariableName, MethodInfo.ProcedureName);
+
+                            // test if this line is already written
+                            index = CodeLineHelper.GetIndex(method, changeProcedureNameText, true);
+
+                            // AbortWriterInsert if the index was found
+                            AbortWriterInsert = (index > -1);
+                        }
                     }
                 }
             }
@@ -2105,6 +2883,35 @@ namespace DataTierClient.Controls
                     this.CodeItemsListBox.Items.Add(updateText3, true);
                     this.CodeItemsListBox.Items.Add(updateText4, true);
 
+                    // if the SelectedTable is a view and this is a FindBy procedure
+                    if ((MethodInfo.HasSelectedTable) && (MethodInfo.SelectedTable.IsView) && (MethodInfo.MethodType == MethodTypeEnum.Find_By))
+                    {
+                        // Write the GenericFind
+                        string findViewName = "Find" + methodInfo.SelectedTable.TableName;
+                        string tempVariableName = "temp" + methodInfo.SelectedTable.ClassName;
+
+                        // get UpdateText5
+                        string updateText5 = gatewayPath + " - add method: " + findViewName + "(0, " + tempVariableName + ")";
+
+                        // Add this task
+                        this.CodeItemsListBox.Items.Add(updateText5, true);
+
+                        // A Stored Procedure object must be created
+                        string storedProcedureFetchFolder  = Path.Combine(project.ProjectFolder, @"DataAccessComponent\StoredProcedureManager\FetchProcedures");
+                        string procedureName = "Find" + methodInfo.SelectedTable.TableName;
+                        string storedProcedureFile = Path.Combine(storedProcedureFetchFolder, procedureName);
+                        string updateText6 = "Add File " + storedProcedureFile;
+
+                        // Add this task
+                        this.CodeItemsListBox.Items.Add(updateText6, true);
+
+                        // Add this for the Data Operations
+                        string updateText7 = "Adding method Find to the file " + MethodInfo.SelectedTable.ClassName + "Methods";
+
+                        // Add this task
+                        this.CodeItemsListBox.Items.Add(updateText7, true);
+                    }
+
                     // if the MethodInfo object exists
                     if ((MethodInfo.UseCustomReader) && (MethodInfo.HasCustomReader))
                     {
@@ -2155,6 +2962,20 @@ namespace DataTierClient.Controls
             }
             #endregion
 
+            #region SetupListBox()
+            /// <summary>
+            /// Clears the ListBox and adds a column header
+            /// </summary>
+            public void SetupListBox()
+            {
+                // Clear ListBox
+				this.StatusListBox.Items.Clear();
+
+				// Add a column header
+				AddColumnHeader();
+            }
+            #endregion
+            
             #region UpdateDataManager()
             /// <summary>
             /// This method Updates the Data Manager
@@ -2909,6 +3730,27 @@ namespace DataTierClient.Controls
 
                         // Write out the codeLines
                         CodeLineHelper.WriteFileText(codeLines, gatewayFile, true);
+
+                        // Create a new instance of a 'ProjectFileManager' object.
+                        ProjectFileManager projectFileManager = new ProjectFileManager();
+
+                        // we need to convert the table from DTNTable to a DataTable
+                        DataTable selectedTable = DataConverter.ConvertDataTable(MethodInfo.SelectedTable, Project);
+
+                        // Create a GatewayCreator
+                        GatewayCreator gatewayCreator = new GatewayCreator(selectedTable, gatewayFile, Project.ProjectName, "DataAccessComponent.DataGateway", projectFileManager, Project.TargetFramework);
+
+                        // get the TextLines
+                        List<TextLine> textLines = TextHelper.GetTextLinesFromFile(gatewayFile);
+
+                        // for debugging only
+                        int count = textLines.Count;
+                        
+                        // Insert the Method
+                        gatewayCreator.WriteFindMethod(selectedTable, textLines);
+
+                        // Write out the Lines
+                        gatewayCreator.WriteGatewayFile(textLines);
 
                         // the gateway file was updated
                         updated = true;                        

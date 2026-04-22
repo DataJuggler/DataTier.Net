@@ -59,7 +59,7 @@ namespace DataAccessComponent.DataGateway
             public bool DeleteAdmin(int adminId, Admin tempAdmin = null)
             {
                 // initial value
-                PolymorphicObject result = new PolymorphicObject();
+                bool deleted = false;
         
                 // if the AppController exists
                 if (HasAppController)
@@ -79,11 +79,11 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    result = AdminController.Delete(tempAdmin, DataManager);
+                    deleted = AdminController.Delete(tempAdmin, DataManager);
                 }
         
                 // return value
-                return result.Success;
+                return deleted;
             }
             #endregion
         
@@ -96,7 +96,7 @@ namespace DataAccessComponent.DataGateway
             public bool DeleteCustomReader(int customReaderId, CustomReader tempCustomReader = null)
             {
                 // initial value
-                PolymorphicObject result = new PolymorphicObject();
+                bool deleted = false;
         
                 // if the AppController exists
                 if (HasAppController)
@@ -116,11 +116,11 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    result = CustomReaderController.Delete(tempCustomReader, DataManager);
+                    deleted = CustomReaderController.Delete(tempCustomReader, DataManager);
                 }
         
                 // return value
-                return result.Success;
+                return deleted;
             }
             #endregion
         
@@ -133,7 +133,7 @@ namespace DataAccessComponent.DataGateway
             public bool DeleteDTNDatabase(int databaseId, DTNDatabase tempDTNDatabase = null)
             {
                 // initial value
-                PolymorphicObject result = new PolymorphicObject();
+                bool deleted = false;
         
                 // if the AppController exists
                 if (HasAppController)
@@ -153,11 +153,11 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    result = DTNDatabaseController.Delete(tempDTNDatabase, DataManager);
+                    deleted = DTNDatabaseController.Delete(tempDTNDatabase, DataManager);
                 }
         
                 // return value
-                return result.Success;
+                return deleted;
             }
             #endregion
         
@@ -170,7 +170,7 @@ namespace DataAccessComponent.DataGateway
             public bool DeleteDTNField(int fieldId, DTNField tempDTNField = null)
             {
                 // initial value
-                PolymorphicObject result = new PolymorphicObject();
+                bool deleted = false;
         
                 // if the AppController exists
                 if (HasAppController)
@@ -190,11 +190,11 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    result = DTNFieldController.Delete(tempDTNField, DataManager);
+                    deleted = DTNFieldController.Delete(tempDTNField, DataManager);
                 }
         
                 // return value
-                return result.Success;
+                return deleted;
             }
             #endregion
         
@@ -207,7 +207,7 @@ namespace DataAccessComponent.DataGateway
             public bool DeleteDTNProcedure(int procedureId, DTNProcedure tempDTNProcedure = null)
             {
                 // initial value
-                PolymorphicObject result = new PolymorphicObject();
+                bool deleted = false;
         
                 // if the AppController exists
                 if (HasAppController)
@@ -227,11 +227,11 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    result = DTNProcedureController.Delete(tempDTNProcedure, DataManager);
+                    deleted = DTNProcedureController.Delete(tempDTNProcedure, DataManager);
                 }
         
                 // return value
-                return result.Success;
+                return deleted;
             }
             #endregion
         
@@ -244,7 +244,7 @@ namespace DataAccessComponent.DataGateway
             public bool DeleteDTNTable(int tableId, DTNTable tempDTNTable = null)
             {
                 // initial value
-                PolymorphicObject result = new PolymorphicObject();
+                bool deleted = false;
         
                 // if the AppController exists
                 if (HasAppController)
@@ -264,11 +264,11 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    result = DTNTableController.Delete(tempDTNTable, DataManager);
+                    deleted = DTNTableController.Delete(tempDTNTable, DataManager);
                 }
         
                 // return value
-                return result.Success;
+                return deleted;
             }
             #endregion
         
@@ -281,7 +281,7 @@ namespace DataAccessComponent.DataGateway
             public bool DeleteEnumeration(int enumerationId, Enumeration tempEnumeration = null)
             {
                 // initial value
-                PolymorphicObject result = new PolymorphicObject();
+                bool deleted = false;
         
                 // if the AppController exists
                 if (HasAppController)
@@ -301,11 +301,11 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    result = EnumerationController.Delete(tempEnumeration, DataManager);
+                    deleted = EnumerationController.Delete(tempEnumeration, DataManager);
                 }
         
                 // return value
-                return result.Success;
+                return deleted;
             }
             #endregion
         
@@ -318,7 +318,7 @@ namespace DataAccessComponent.DataGateway
             public bool DeleteFieldSet(int fieldSetId, FieldSet tempFieldSet = null)
             {
                 // initial value
-                PolymorphicObject result = new PolymorphicObject();
+                bool deleted = false;
         
                 // if the AppController exists
                 if (HasAppController)
@@ -338,11 +338,11 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    result = FieldSetController.Delete(tempFieldSet, DataManager);
+                    deleted = FieldSetController.Delete(tempFieldSet, DataManager);
                 }
         
                 // return value
-                return result.Success;
+                return deleted;
             }
             #endregion
         
@@ -355,7 +355,7 @@ namespace DataAccessComponent.DataGateway
             public bool DeleteFieldSetField(int fieldSetFieldId, FieldSetField tempFieldSetField = null)
             {
                 // initial value
-                PolymorphicObject result = new PolymorphicObject();
+                bool deleted = false;
         
                 // if the AppController exists
                 if (HasAppController)
@@ -375,11 +375,11 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    result = FieldSetFieldController.Delete(tempFieldSetField, DataManager);
+                    deleted = FieldSetFieldController.Delete(tempFieldSetField, DataManager);
                 }
         
                 // return value
-                return result.Success;
+                return deleted;
             }
             #endregion
         
@@ -418,7 +418,7 @@ namespace DataAccessComponent.DataGateway
             public bool DeleteMethod(int methodId, Method tempMethod = null)
             {
                 // initial value
-                PolymorphicObject result = new PolymorphicObject();
+                bool deleted = false;
         
                 // if the AppController exists
                 if (HasAppController)
@@ -438,11 +438,11 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    result = MethodController.Delete(tempMethod, DataManager);
+                    deleted = MethodController.Delete(tempMethod, DataManager);
                 }
         
                 // return value
-                return result.Success;
+                return deleted;
             }
             #endregion
         
@@ -455,7 +455,7 @@ namespace DataAccessComponent.DataGateway
             public bool DeleteProject(int projectId, Project tempProject = null)
             {
                 // initial value
-                PolymorphicObject result = new PolymorphicObject();
+                bool deleted = false;
         
                 // if the AppController exists
                 if (HasAppController)
@@ -475,11 +475,11 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    result = ProjectController.Delete(tempProject, DataManager);
+                    deleted = ProjectController.Delete(tempProject, DataManager);
                 }
         
                 // return value
-                return result.Success;
+                return deleted;
             }
             #endregion
         
@@ -492,7 +492,7 @@ namespace DataAccessComponent.DataGateway
             public bool DeleteProjectReference(int referencesId, ProjectReference tempProjectReference = null)
             {
                 // initial value
-                PolymorphicObject result = new PolymorphicObject();
+                bool deleted = false;
         
                 // if the AppController exists
                 if (HasAppController)
@@ -512,11 +512,11 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    result = ProjectReferenceController.Delete(tempProjectReference, DataManager);
+                    deleted = ProjectReferenceController.Delete(tempProjectReference, DataManager);
                 }
         
                 // return value
-                return result.Success;
+                return deleted;
             }
             #endregion
         
@@ -529,7 +529,7 @@ namespace DataAccessComponent.DataGateway
             public bool DeleteReferencesSet(int referencesSetId, ReferencesSet tempReferencesSet = null)
             {
                 // initial value
-                PolymorphicObject result = new PolymorphicObject();
+                bool deleted = false;
         
                 // if the AppController exists
                 if (HasAppController)
@@ -549,11 +549,11 @@ namespace DataAccessComponent.DataGateway
                     }
         
                     // perform the delete
-                    result = ReferencesSetController.Delete(tempReferencesSet, DataManager);
+                    deleted = ReferencesSetController.Delete(tempReferencesSet, DataManager);
                 }
         
                 // return value
-                return result.Success;
+                return deleted;
             }
             #endregion
         
@@ -1138,6 +1138,13 @@ namespace DataAccessComponent.DataGateway
 
                     // perform the find
                     referencesSet = ReferencesSetController.Find(tempReferencesSet, DataManager);
+
+                    // If the referencesSet object exists
+                    if (referencesSet != null)
+                    {
+                        // Load References For This ReferencesSet
+                        referencesSet.References = LoadProjectReferencesForReferencesSetId(referencesSet.ReferencesSetId);
+                    }
                 }
 
                 // return value
@@ -1262,22 +1269,28 @@ namespace DataAccessComponent.DataGateway
 
             #region GetLastException()
             /// <summary>
-            /// returns the Last Exception
+            /// This method returns the last Exception from the AppController if one exists.
+            /// Always test for null before refeferencing the Exception returned as it will be null 
+            /// if no errors were encountered.
             /// </summary>
+            /// <returns></returns>
             public Exception GetLastException()
             {
                 // initial value
-                Exception lastException = null;
+                Exception exception = null;
 
-                // if the value for HasDataManager is true and DataManager.HasExceptions is true
-                if ((HasDataManager) && (DataManager.HasExceptions))
+                // if the value for HasErrorHandler is true
+                if ((HasErrorHandler) && (ErrorHandler.HasExceptions))
                 {
-                    // set the return value
-                    lastException = DataManager.Exceptions.LastOrDefault();
+                    // return the Exception from the AppController
+                    exception = AppController.ErrorHandler.Exceptions.LastOrDefault();
+
+                    // Set to null after the exception is retrieved so it does not return again
+                    AppController.Exception = null;
                 }
 
                 // return value
-                return lastException;
+                return exception;
             }
             #endregion
 
@@ -1833,9 +1846,6 @@ namespace DataAccessComponent.DataGateway
             /// <param name="project"></param>
             public void LoadProjectReferencesForProject(ref Project project)
             {
-                // local
-                // List<ProjectReference> tempReferences = null;
-
                 // if the project exists
                 if(project != null)
                 {
@@ -1853,7 +1863,22 @@ namespace DataAccessComponent.DataGateway
 
                         // Create the default references
                         project.CreateDefaultReferences();
-                    }                    
+                    }
+
+                    // Instanciate AllReferences
+                    project.AllReferences = new List<ReferencesSet>();
+                        
+                    // Add each ReferencesSet to project.AllReferences; 
+
+                    // This fixes a bug that a project that was opened
+                    // does not populate the ReferencesSet combo boxes.
+                    project.AllReferences.Add(project.ControllerReferencesSet);
+                    project.AllReferences.Add(project.DataManagerReferencesSet);
+                    project.AllReferences.Add(project.DataOperationsReferencesSet);
+                    project.AllReferences.Add(project.ObjectReferencesSet);
+                    project.AllReferences.Add(project.ReaderReferencesSet);
+                    project.AllReferences.Add(project.StoredProcedureReferencesSet);
+                    project.AllReferences.Add(project.WriterReferencesSet);
                 }
             }
             #endregion
@@ -1965,6 +1990,476 @@ namespace DataAccessComponent.DataGateway
 
                 // return value
                 return referencesSets;
+            }
+            #endregion
+
+            #region SaveAdmin(ref Admin admin)
+            /// <summary>
+            /// This method is used to save 'Admin' objects.
+            /// </summary>
+            /// <param name="admin">The Admin to save.</param>
+            public bool SaveAdmin(ref Admin admin)
+            {
+                // initial value
+                bool saved = false;
+
+                // if the AppController exists
+                if (HasAppController)
+                {
+                    // perform the save
+                    saved = AdminController.Save(ref admin, DataManager);
+                }
+
+                // return value
+                return saved;
+            }
+            #endregion
+
+            #region SaveCustomReader(ref CustomReader customReader)
+            /// <summary>
+            /// This method is used to save 'CustomReader' objects.
+            /// </summary>
+            /// <param name="customReader">The CustomReader to save.</param>
+            public bool SaveCustomReader(ref CustomReader customReader)
+            {
+                // initial value
+                bool saved = false;
+
+                // if the AppController exists
+                if (HasAppController)
+                {
+                    // perform the save
+                    saved = CustomReaderController.Save(ref customReader, DataManager);
+                }
+
+                // return value
+                return saved;
+            }
+            #endregion
+
+            #region SaveDTNDatabase(ref DTNDatabase dTNDatabase)
+            /// <summary>
+            /// This method is used to save 'DTNDatabase' objects.
+            /// </summary>
+            /// <param name="dTNDatabase">The DTNDatabase to save.</param>
+            public bool SaveDTNDatabase(ref DTNDatabase dTNDatabase)
+            {
+                // initial value
+                bool saved = false;
+
+                // if the AppController exists
+                if (HasAppController)
+                {
+                    // perform the save
+                    saved = DTNDatabaseController.Save(ref dTNDatabase, DataManager);
+                }
+
+                // return value
+                return saved;
+            }
+            #endregion
+
+            #region SaveDTNField(ref DTNField dTNField)
+            /// <summary>
+            /// This method is used to save 'DTNField' objects.
+            /// </summary>
+            /// <param name="dTNField">The DTNField to save.</param>
+            public bool SaveDTNField(ref DTNField dTNField)
+            {
+                // initial value
+                bool saved = false;
+
+                // if the AppController exists
+                if (HasAppController)
+                {
+                    // perform the save
+                    saved = DTNFieldController.Save(ref dTNField, DataManager);
+                }
+
+                // return value
+                return saved;
+            }
+            #endregion
+
+            #region SaveDTNProcedure(ref DTNProcedure dTNProcedure)
+            /// <summary>
+            /// This method is used to save 'DTNProcedure' objects.
+            /// </summary>
+            /// <param name="dTNProcedure">The DTNProcedure to save.</param>
+            public bool SaveDTNProcedure(ref DTNProcedure dTNProcedure)
+            {
+                // initial value
+                bool saved = false;
+
+                // if the AppController exists
+                if (HasAppController)
+                {
+                    // perform the save
+                    saved = DTNProcedureController.Save(ref dTNProcedure, DataManager);
+                }
+
+                // return value
+                return saved;
+            }
+            #endregion
+
+            #region SaveDTNTable(ref DTNTable dTNTable)
+            /// <summary>
+            /// This method is used to save 'DTNTable' objects.
+            /// </summary>
+            /// <param name="dTNTable">The DTNTable to save.</param>
+            public bool SaveDTNTable(ref DTNTable dTNTable)
+            {
+                // initial value
+                bool saved = false;
+
+                // if the AppController exists
+                if (HasAppController)
+                {
+                    // perform the save
+                    saved = DTNTableController.Save(ref dTNTable, DataManager);
+                }
+
+                // return value
+                return saved;
+            }
+            #endregion
+
+            #region SaveEnumeration(ref Enumeration enumeration)
+            /// <summary>
+            /// This method is used to save 'Enumeration' objects.
+            /// </summary>
+            /// <param name="enumeration">The Enumeration to save.</param>
+            public bool SaveEnumeration(ref Enumeration enumeration)
+            {
+                // initial value
+                bool saved = false;
+
+                // if the AppController exists
+                if (HasAppController)
+                {
+                    // perform the save
+                    saved = EnumerationController.Save(ref enumeration, DataManager);
+                }
+
+                // return value
+                return saved;
+            }
+            #endregion
+
+            #region SaveFieldSet(ref FieldSet fieldSet)
+            /// <summary>
+            /// This method is used to save 'FieldSet' objects.
+            /// </summary>
+            /// <param name="fieldSet">The FieldSet to save.</param>
+            public bool SaveFieldSet(ref FieldSet fieldSet)
+            {
+                // initial value
+                bool saved = false;
+
+                // if the AppController exists
+                if (HasAppController)
+                {
+                    // perform the save
+                    saved = FieldSetController.Save(ref fieldSet, DataManager);
+                }
+
+                // return value
+                return saved;
+            }
+            #endregion
+
+            #region SaveFieldSetField(ref FieldSetField fieldSetField)
+            /// <summary>
+            /// This method is used to save 'FieldSetField' objects.
+            /// </summary>
+            /// <param name="fieldSetField">The FieldSetField to save.</param>
+            public bool SaveFieldSetField(ref FieldSetField fieldSetField)
+            {
+                // initial value
+                bool saved = false;
+
+                // if the AppController exists
+                if (HasAppController)
+                {
+                    // perform the save
+                    saved = FieldSetFieldController.Save(ref fieldSetField, DataManager);
+                }
+
+                // return value
+                return saved;
+            }
+            #endregion
+
+            #region SaveMethod(ref Method method)
+            /// <summary>
+            /// This method is used to save 'Method' objects.
+            /// </summary>
+            /// <param name="method">The Method to save.</param>
+            public bool SaveMethod(ref Method method)
+            {
+                // initial value
+                bool saved = false;
+
+                // if the AppController exists
+                if (HasAppController)
+                {
+                    // perform the save
+                    saved = MethodController.Save(ref method, DataManager);
+                }
+
+                // return value
+                return saved;
+            }
+            #endregion
+
+            #region SaveProject(ref Project project)
+            /// <summary>
+            /// This method is used to save 'Project' objects.
+            /// </summary>
+            /// <param name="project">The Project to save.</param>
+            public bool SaveProject(ref Project project)
+            {
+                // initial value
+                bool saved = false;
+
+                // if the AppController exists
+                if (HasAppController)
+                {
+                    // perform the save
+                    saved = ProjectController.Save(ref project, DataManager);
+                }
+
+                // return value
+                return saved;
+            }
+            #endregion
+
+            #region SaveProjectReference(ref ProjectReference projectReference)
+            /// <summary>
+            /// This method is used to save 'ProjectReference' objects.
+            /// </summary>
+            /// <param name="projectReference">The ProjectReference to save.</param>
+            public bool SaveProjectReference(ref ProjectReference projectReference)
+            {
+                // initial value
+                bool saved = false;
+
+                // if the AppController exists
+                if (HasAppController)
+                {
+                    // perform the save
+                    saved = ProjectReferenceController.Save(ref projectReference, DataManager);
+                }
+
+                // return value
+                return saved;
+            }
+            #endregion
+
+            #region SaveProjectReferences(ref Project project)
+            /// <summary>
+            /// This method saves the project references.
+            /// </summary>
+            /// <param name="project"></param>
+            /// <returns></returns>
+            public bool SaveProjectReferences(ref Project project)
+            {
+                // initial value
+                bool saved = false;
+                    
+                // locals
+                bool controllerReferencesSetSaved = false;
+                bool dataManagerReferencesSetSaved = false;
+                bool dataOperationsReferencesSetSaved = false;
+                bool objectReferencesSetSaved = false;
+                bool readerReferencesSetSaved = false;
+                bool storedProcedureReferencesSetSaved = false;
+                bool writerReferencesSetSaved = false;
+                    
+                // if project exists
+                if ((project != null) && (project.ValidReferences))
+                {  
+                    // Create AppController
+                    ApplicationController appController = new ApplicationController();
+
+                    // set each  references set
+                    ReferencesSet controllerReferencesSet = project.ControllerReferencesSet;
+                    ReferencesSet dataManagerReferencesSet = project.DataManagerReferencesSet;
+                    ReferencesSet objectReferencesSet = project.ObjectReferencesSet;
+                    ReferencesSet dataOperationsReferencesSet = project.DataOperationsReferencesSet;
+                    ReferencesSet readerReferencesSet = project.ReaderReferencesSet;                    
+                    ReferencesSet storedProcedureReferencesSet = project.StoredProcedureReferencesSet;
+                    ReferencesSet writerReferencesSet = project.WriterReferencesSet;
+
+                    // Save each ReferencesSet
+                    controllerReferencesSetSaved = SaveReferencesSet(ref controllerReferencesSet, true);
+                    dataManagerReferencesSetSaved = SaveReferencesSet(ref dataManagerReferencesSet, true);
+                    dataOperationsReferencesSetSaved = SaveReferencesSet(ref dataOperationsReferencesSet, true);
+                    objectReferencesSetSaved = SaveReferencesSet(ref objectReferencesSet, true);
+                    readerReferencesSetSaved = SaveReferencesSet(ref readerReferencesSet, true);
+                    storedProcedureReferencesSetSaved = SaveReferencesSet(ref storedProcedureReferencesSet, true);
+                    writerReferencesSetSaved = SaveReferencesSet(ref writerReferencesSet, true);
+        
+                    // if all saves succeeded
+                    if ((controllerReferencesSetSaved) && (dataManagerReferencesSetSaved) && (dataOperationsReferencesSetSaved) && (objectReferencesSetSaved) && (readerReferencesSetSaved) && (storedProcedureReferencesSetSaved) && (writerReferencesSetSaved))
+                    {
+                        // Now update each object
+                        project.ControllerReferencesSet = controllerReferencesSet;
+                        project.DataManagerReferencesSet = dataManagerReferencesSet;
+                        project.ObjectReferencesSet = objectReferencesSet;
+                        project.DataOperationsReferencesSet = dataOperationsReferencesSet;
+                        project.ReaderReferencesSet = readerReferencesSet;
+                        project.StoredProcedureReferencesSet = storedProcedureReferencesSet;
+                        project.WriterReferencesSet = writerReferencesSet;
+
+                        // Update ID's for Project object
+                        project.ControllerReferencesSetId = project.ControllerReferencesSet.ReferencesSetId;
+                        project.DataManagerReferencesSetId = project.DataManagerReferencesSet.ReferencesSetId;
+                        project.DataOperationsReferencesSetId = project.DataOperationsReferencesSet.ReferencesSetId;
+                        project.ObjectReferencesSetId = project.ObjectReferencesSet.ReferencesSetId;
+                        project.ReaderReferencesSetId = project.ReaderReferencesSet.ReferencesSetId;
+                        project.StoredProcedureReferencesSetId = project.StoredProcedureReferencesSet.ReferencesSetId;
+                        project.DataWriterReferencesSetId = project.WriterReferencesSet.ReferencesSetId;
+                                
+                        // Save the project again (without the child objects).
+                        saved = SaveProject(ref project);
+                    }
+                }
+                    
+                // return value
+                return saved;
+            }  
+            #endregion
+
+            #region SaveProjectReferences(ref List<ProjectReference> references, int referencesSetId)
+            /// <summary>
+            /// This method saves a list of ProjectReference objects.
+            /// </summary>
+            /// <param name="references"></param>
+            /// <returns></returns>
+            public bool SaveProjectReferences(ref List<ProjectReference> references, int referencesSetId)
+            {
+                // initial value
+                bool saved = false;
+
+                // locals
+                bool tempSaved = true;
+                
+                // Load the projectReferences for this referencesSetId
+                List<ProjectReference> projectReferences = LoadProjectReferencesForReferencesSetId(referencesSetId);
+                
+                // if project exists
+                if (references != null)
+                {
+                    // set saved to true
+                    saved = true;
+
+                    // Loop through each database
+                    for (int x = 0; x < references.Count; x++)
+                    {
+                        // get a local database
+                        ProjectReference projectReference = references[x];
+
+                        // Why is this one not saved
+                        if (projectReference.IsNew)
+                        {
+                            // If the projectReferences collection exists and has one or more items
+                            if (ListHelper.HasOneOrMoreItems(projectReferences))
+                            {
+                                // Find the missing reference
+                                ProjectReference missingReference = projectReferences.FirstOrDefault(a => a.ReferenceName == projectReference.ReferenceName);
+
+                                // If the missingReference object exists
+                                if (NullHelper.Exists(missingReference))
+                                {
+                                    // Update the Id
+                                    projectReference.UpdateIdentity(missingReference.ReferencesId);
+                                }
+                            }
+                        }
+
+                        // Save this database
+                        tempSaved = SaveProjectReference(ref projectReference);
+
+                        // if save failed
+                        if (!tempSaved)
+                        {
+                            // saved 
+                            saved = false;
+                        }
+                    }
+                }
+
+                // return value
+                return saved;
+            }
+            #endregion
+
+            #region SaveReferencesSet(ref ReferencesSet referencesSet)
+            /// <summary>
+            /// This method is used to save 'ReferencesSet' objects.
+            /// </summary>
+            /// <param name="referencesSet">The ReferencesSet to save.</param>
+            public bool SaveReferencesSet(ref ReferencesSet referencesSet)
+            {
+                // initial value
+                bool saved = false;
+
+                // if the AppController exists
+                if (HasAppController)
+                {
+                    // perform the save
+                    saved = ReferencesSetController.Save(ref referencesSet, DataManager);
+                }
+
+                // return value
+                return saved;
+            }
+            #endregion
+
+            #region SaveReferencesSet(ref ReferencesSet referencesSet, bool saveChildren)
+            /// <summary>
+            /// This method saves a ReferencesSet
+            /// </summary>
+            /// <param name="referencesSet"></param>
+            /// <returns></returns>
+            public bool SaveReferencesSet(ref ReferencesSet referencesSet, bool saveChildren)
+            {
+                // initial value
+                bool saved = false;
+                    
+                // if referencesSet exists
+                if (referencesSet != null)
+                {
+                    // Create AppController
+                    ApplicationController appController = new ApplicationController();
+
+                    // save the database
+                    saved = ReferencesSetController.Save(ref referencesSet, DataManager);
+                        
+                    // if saved
+                    if ((saved) && (saveChildren))
+                    {
+                        // Save Project References
+                        if(referencesSet.References != null)
+                        {
+                            // Set references set id
+                            referencesSet.SetReferencesSetId(referencesSet.ReferencesSetId);
+    
+                            // save project references
+
+                            // get a local copy
+                            List<ProjectReference> references = referencesSet.References;
+
+                            // perfrom save
+                            saved = SaveProjectReferences(ref references, referencesSet.ReferencesSetId);
+                        }
+                    }
+                }
+
+                // return value
+                return saved;
             }
             #endregion
 

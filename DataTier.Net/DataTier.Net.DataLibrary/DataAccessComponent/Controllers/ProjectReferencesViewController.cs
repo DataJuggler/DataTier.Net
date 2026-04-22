@@ -2,13 +2,13 @@
 
 #region using statements
 
+using DataAccessComponent.Data;
+using DataAccessComponent.DataBridge;
+using DataAccessComponent.DataOperations;
+using DataAccessComponent.Logging;
+using ObjectLibrary.BusinessObjects;
 using System;
 using System.Collections.Generic;
-using ObjectLibrary.BusinessObjects;
-using DataAccessComponent.Logging;
-using DataAccessComponent.DataOperations;
-using DataAccessComponent.DataBridge;
-using DataAccessComponent.Data;
 
 #endregion
 

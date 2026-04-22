@@ -80,9 +80,9 @@ namespace DataTierClient.Controls
             // 
             this.SaveCancelControl.BackColor = System.Drawing.Color.Transparent;
             this.SaveCancelControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.SaveCancelControl.Location = new System.Drawing.Point(0, 552);
+            this.SaveCancelControl.Location = new System.Drawing.Point(0, 672);
             this.SaveCancelControl.Name = "SaveCancelControl";
-            this.SaveCancelControl.Size = new System.Drawing.Size(1080, 48);
+            this.SaveCancelControl.Size = new System.Drawing.Size(1280, 48);
             this.SaveCancelControl.TabIndex = 0;
             // 
             // ProjectFolderLabel
@@ -90,7 +90,7 @@ namespace DataTierClient.Controls
             this.ProjectFolderLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.ProjectFolderLabel.Location = new System.Drawing.Point(0, 0);
             this.ProjectFolderLabel.Name = "ProjectFolderLabel";
-            this.ProjectFolderLabel.Size = new System.Drawing.Size(1080, 24);
+            this.ProjectFolderLabel.Size = new System.Drawing.Size(1280, 24);
             this.ProjectFolderLabel.TabIndex = 8;
             this.ProjectFolderLabel.Text = "Project Folder:";
             this.ProjectFolderLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -104,7 +104,7 @@ namespace DataTierClient.Controls
             this.ProjectPathInfoLabel.ForeColor = System.Drawing.Color.MidnightBlue;
             this.ProjectPathInfoLabel.Location = new System.Drawing.Point(0, 24);
             this.ProjectPathInfoLabel.Name = "ProjectPathInfoLabel";
-            this.ProjectPathInfoLabel.Size = new System.Drawing.Size(1080, 24);
+            this.ProjectPathInfoLabel.Size = new System.Drawing.Size(1280, 24);
             this.ProjectPathInfoLabel.TabIndex = 10;
             this.ProjectPathInfoLabel.Text = "All paths are relative to the project folder.";
             this.ProjectPathInfoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -114,9 +114,9 @@ namespace DataTierClient.Controls
             // SeperatorPanel
             // 
             this.SeperatorPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.SeperatorPanel.Location = new System.Drawing.Point(0, 536);
+            this.SeperatorPanel.Location = new System.Drawing.Point(0, 656);
             this.SeperatorPanel.Name = "SeperatorPanel";
-            this.SeperatorPanel.Size = new System.Drawing.Size(1080, 16);
+            this.SeperatorPanel.Size = new System.Drawing.Size(1280, 16);
             this.SeperatorPanel.TabIndex = 7;
             // 
             // CodeItemsListBox
@@ -128,7 +128,7 @@ namespace DataTierClient.Controls
             this.CodeItemsListBox.FormattingEnabled = true;
             this.CodeItemsListBox.Location = new System.Drawing.Point(0, 48);
             this.CodeItemsListBox.Name = "CodeItemsListBox";
-            this.CodeItemsListBox.Size = new System.Drawing.Size(1080, 149);
+            this.CodeItemsListBox.Size = new System.Drawing.Size(1280, 207);
             this.CodeItemsListBox.TabIndex = 20;
             // 
             // ConfirmUpdateButton
@@ -141,7 +141,7 @@ namespace DataTierClient.Controls
             this.ConfirmUpdateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ConfirmUpdateButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ConfirmUpdateButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.ConfirmUpdateButton.Location = new System.Drawing.Point(448, 208);
+            this.ConfirmUpdateButton.Location = new System.Drawing.Point(548, 268);
             this.ConfirmUpdateButton.Name = "ConfirmUpdateButton";
             this.ConfirmUpdateButton.Size = new System.Drawing.Size(184, 44);
             this.ConfirmUpdateButton.TabIndex = 97;
@@ -159,9 +159,9 @@ namespace DataTierClient.Controls
             this.MainPanel.Controls.Add(this.RightMarginPanel);
             this.MainPanel.Controls.Add(this.LeftMarginPanel);
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.MainPanel.Location = new System.Drawing.Point(0, 256);
+            this.MainPanel.Location = new System.Drawing.Point(0, 328);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(1080, 280);
+            this.MainPanel.Size = new System.Drawing.Size(1280, 328);
             this.MainPanel.TabIndex = 98;
             // 
             // StatusListBox
@@ -173,7 +173,7 @@ namespace DataTierClient.Controls
             this.StatusListBox.HideSelection = false;
             this.StatusListBox.Location = new System.Drawing.Point(16, 24);
             this.StatusListBox.Name = "StatusListBox";
-            this.StatusListBox.Size = new System.Drawing.Size(1048, 172);
+            this.StatusListBox.Size = new System.Drawing.Size(1248, 272);
             this.StatusListBox.SmallImageList = this.Images;
             this.StatusListBox.TabIndex = 60;
             this.StatusListBox.UseCompatibleStateImageBehavior = false;
@@ -189,9 +189,9 @@ namespace DataTierClient.Controls
             // SeperatorPanel2
             // 
             this.SeperatorPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.SeperatorPanel2.Location = new System.Drawing.Point(16, 196);
+            this.SeperatorPanel2.Location = new System.Drawing.Point(16, 296);
             this.SeperatorPanel2.Name = "SeperatorPanel2";
-            this.SeperatorPanel2.Size = new System.Drawing.Size(1048, 84);
+            this.SeperatorPanel2.Size = new System.Drawing.Size(1248, 32);
             this.SeperatorPanel2.TabIndex = 59;
             // 
             // label2
@@ -199,7 +199,7 @@ namespace DataTierClient.Controls
             this.label2.Dock = System.Windows.Forms.DockStyle.Top;
             this.label2.Location = new System.Drawing.Point(16, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(1048, 24);
+            this.label2.Size = new System.Drawing.Size(1248, 24);
             this.label2.TabIndex = 22;
             this.label2.Text = "Status:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -207,9 +207,9 @@ namespace DataTierClient.Controls
             // RightMarginPanel
             // 
             this.RightMarginPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.RightMarginPanel.Location = new System.Drawing.Point(1064, 0);
+            this.RightMarginPanel.Location = new System.Drawing.Point(1264, 0);
             this.RightMarginPanel.Name = "RightMarginPanel";
-            this.RightMarginPanel.Size = new System.Drawing.Size(16, 280);
+            this.RightMarginPanel.Size = new System.Drawing.Size(16, 328);
             this.RightMarginPanel.TabIndex = 9;
             // 
             // LeftMarginPanel
@@ -217,7 +217,7 @@ namespace DataTierClient.Controls
             this.LeftMarginPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.LeftMarginPanel.Location = new System.Drawing.Point(0, 0);
             this.LeftMarginPanel.Name = "LeftMarginPanel";
-            this.LeftMarginPanel.Size = new System.Drawing.Size(16, 280);
+            this.LeftMarginPanel.Size = new System.Drawing.Size(16, 328);
             this.LeftMarginPanel.TabIndex = 8;
             // 
             // ConfirmChangesControl
@@ -233,7 +233,7 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.SaveCancelControl);
             this.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "ConfirmChangesControl";
-            this.Size = new System.Drawing.Size(1080, 600);
+            this.Size = new System.Drawing.Size(1280, 720);
             this.MainPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 

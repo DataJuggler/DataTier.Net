@@ -28,6 +28,7 @@ namespace DataAccessComponent.DataBridge
         #region Private Variables        
         private DataManager dataManager;        
         private AuthenticationManager loginManager;
+        private Exception exception;
         private string connectionName;
         #endregion
 
@@ -90,7 +91,7 @@ namespace DataAccessComponent.DataBridge
             internal static PolymorphicObject PerformDataOperation(string methodName, string objectName, ApplicationController.DataOperationMethod dataMethod, List<PolymorphicObject> parameters, DataManager dataManager)
             {
                 // Initial Value
-                PolymorphicObject result = new PolymorphicObject();
+                PolymorphicObject returnObject = null;
 
                 try
                 {
@@ -104,7 +105,7 @@ namespace DataAccessComponent.DataBridge
                         if (dataMethod != null)
                         {
                             // Invoke Method
-                            result = dataMethod(parameters, dataManager.DataConnector);
+                            returnObject = dataMethod(parameters, dataManager.DataConnector);
                         }
                     }
                     else
@@ -129,7 +130,7 @@ namespace DataAccessComponent.DataBridge
                 }
 
                 // return value
-                return result;
+                return returnObject;
             }
             #endregion
 
@@ -170,6 +171,18 @@ namespace DataAccessComponent.DataBridge
             {
                 get { return dataManager; }
                 set { dataManager = value; }
+            }
+            #endregion
+
+            #region Exception
+            /// <summary>
+            /// The last exception that occurred (if any) from executing
+            /// a data operation.
+            /// </summary>
+            public Exception Exception
+            {
+                get { return exception; }
+                set { exception = value; }
             }
             #endregion
 

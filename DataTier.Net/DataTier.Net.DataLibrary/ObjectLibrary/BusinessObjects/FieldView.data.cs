@@ -28,6 +28,81 @@ namespace ObjectLibrary.BusinessObjects
 
         #region Methods
 
+            #region GetValue(string fieldName)
+            // <summary>
+            // This method returns the value for the fieldName given
+            // </summary>
+            public object GetValue(string fieldName)
+            {
+                // initial value
+                object value = "";
+
+                // // Determine the action by the fieldName
+                switch (fieldName)
+                {
+                    case "DataType":
+
+                        // set the value
+                        value = this.DataType;
+
+                        // required
+                        break;
+
+                    case "Exclude":
+
+                        // set the value
+                        value = this.Exclude;
+
+                        // required
+                        break;
+
+                    case "FieldName":
+
+                        // set the value
+                        value = this.FieldName;
+
+                        // required
+                        break;
+
+                    case "IsNullable":
+
+                        // set the value
+                        value = this.IsNullable;
+
+                        // required
+                        break;
+
+                    case "ProjectId":
+
+                        // set the value
+                        value = this.ProjectId;
+
+                        // required
+                        break;
+
+                    case "TableId":
+
+                        // set the value
+                        value = this.TableId;
+
+                        // required
+                        break;
+
+                    case "TableName":
+
+                        // set the value
+                        value = this.TableName;
+
+                        // required
+                        break;
+
+                }
+
+                // return value
+                return value;
+            }
+            #endregion
+
 
         #endregion
 

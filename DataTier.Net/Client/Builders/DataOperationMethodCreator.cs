@@ -9,6 +9,9 @@ using DataJuggler.Net;
 using System.Text;
 using System.IO;
 using DataJuggler.Net.Enumerations;
+using DataJuggler.Core.UltimateHelper.Objects;
+using DataAccessComponent.DataOperations;
+using System.Linq;
 
 #endregion
 
@@ -27,6 +30,7 @@ namespace DataTierClient.Builders
         private string rootDataOperationsPath;
         private string nameSpaceName;
         private ReferencesSet objectReferences;
+        private DataTable selectedDataTable;
         #endregion
 
 		#region Constructor
@@ -37,6 +41,20 @@ namespace DataTierClient.Builders
 		{   
 		    // Set Properties
 		    this.DataTables = dataTablesArg;
+		    this.NameSpaceName = nameSpaceNameArg;
+            this.rootDataOperationsPath = rootDataOperationsPathArg;
+		    this.ObjectReferences = objectReferencesArg;
+		}
+		#endregion
+
+        #region Constructor
+		/// <summary>
+        /// Create a new instance of DataOperationMethodCreator
+        /// </summary>
+        public DataOperationMethodCreator(DataTable selectedDataTablesArg, ReferencesSet objectReferencesArg, string rootDataOperationsPathArg, string nameSpaceNameArg, ProjectFileManager fileManager, TargetFrameworkEnum targetFramework) : base(fileManager, false, false, targetFramework)
+		{   
+		    // Set Properties
+		    this.SelectedDataTable = selectedDataTablesArg;
 		    this.NameSpaceName = nameSpaceNameArg;
             this.rootDataOperationsPath = rootDataOperationsPathArg;
 		    this.ObjectReferences = objectReferencesArg;
@@ -220,6 +238,45 @@ namespace DataTierClient.Builders
             }
             #endregion
 
+            #region FindInsertIndex(DataTable dataTable, List<TextLine> lines)
+            /// <summary>
+            /// returns the Insert Index
+            /// </summary>
+            public int FindInsertIndex(DataTable dataTable, List<TextLine> lines)
+            {
+                // initial value
+                int insertIndex = -1;
+
+                // If the lines collection exists and has one or more items
+                if (ListHelper.HasOneOrMoreItems(lines))
+                {
+                    // find the index of the load
+                    // get the fetch all
+                    string fetchAllProcName = "internal static PolymorphicObject FetchAll";
+
+                    // find the Index
+                    int index = lines.FindIndex(x => x.Text.Contains(fetchAllProcName));
+
+                    // if the index was found
+                    if (index >= 0)
+                    {
+                        // Start searching at 'index + 1'
+                        int endRegionIndex = lines.FindIndex(index + 1, x => x.Text.Contains("#endregion"));
+
+                        // If the value for endRegionIndex is greater than zero
+                        if (endRegionIndex > 0)
+                        {
+                            // Set the value for 2
+                            insertIndex = endRegionIndex + 2;
+                        }
+                    }
+                }
+
+                // return value
+                return insertIndex;
+            }
+            #endregion
+
             #region GetStringVariableLine(string variableName, string variableValue)
             /// <summary>
             /// /// <summary>
@@ -257,6 +314,278 @@ namespace DataTierClient.Builders
                 // return value
                 return sb.ToString();
             } 
+            #endregion
+
+            #region WriteFindMethod(DataTable dataTable, List<TextLine> lines)
+            /// <summary>
+            /// This method writes the Find method.
+            /// </summary>
+            /// <param name="dataTable"></param>
+            internal PolymorphicObject InsertFindMethod(DataTable dataTable, List<TextLine> lines)
+            {
+                // initial value
+                PolymorphicObject result = new PolymorphicObject();
+
+                // Go into TextWriter mode
+                this.TextWriterMode = true;
+                this.TextWriter = new StringBuilder();
+                this.Indent = 3;
+
+                // we must check to see if this already exists
+                string regionName = "#region Find" + dataTable.ClassName;
+                bool abort = lines.Any(x => x.Text.Contains(regionName));
+
+                // if abort is true
+                if (abort)
+                {
+                    // this does exist
+                    result.Success = true;
+                }
+                else
+                {
+                     // get the insertIndex for the FindMethod                 
+                    int index = FindInsertIndex(dataTable, lines);
+
+                    // if the index was found
+                    if (index > 0)
+                    {
+                        // locals
+                        string className = dataTable.ClassName;
+                        string dataType = dataTable.ClassName;
+                        string dataObject = this.CapitalizeFirstChar(dataType, true);
+                        string procName = "find" + dataType + "Proc";
+
+                        // BeginRegion  #region Find(<DataType> dataType>
+                        BeginRegion("Find" + className + "(" + className + ")");
+
+                        // Write Summary
+                        WriteLine("/// <summary>");
+                        WriteLine("/// This method finds a '" + dataTable.ClassName + "' object.");
+                        WriteLine("/// </summary>");
+                        WriteLine("/// <param name='List<PolymorphicObject>'>The '" + dataTable.ClassName + "' to delete.");
+                        WriteLine("/// <returns>A PolymorphicObject object with a Boolean value.");
+
+                        // Get classDeclaration
+                        string classDeclaration = "internal static PolymorphicObject Find" + dataTable.ClassName + "(List<PolymorphicObject> parameters, DataConnector dataConnector)";
+
+                        // Write classDeclaration
+                        WriteLine(classDeclaration);
+
+                        // Write Open Bracket
+                        WriteOpenBracket(true);
+
+                        // Write Comment Initial Value
+                        WriteComment("Initial Value");
+
+                        // Write Line For Find
+                        WriteLine("PolymorphicObject result = new PolymorphicObject();");
+
+                        // Write Blank Line
+                        WriteLine();
+                
+                        // variables for logging an error if it occurs
+                        WriteComment("locals");
+                
+                        // Create dataObject
+                        string dataObjectLine = dataType + " " + dataObject + " = null;";
+                
+                        // Write dataObjectLine
+                        WriteLine(dataObjectLine);
+                
+                        // Write Blank Line
+                        WriteLine();
+
+                        // Write Comment If the data connection is connected
+                        WriteComment("If the data connection is connected");
+
+                        // Get line to test for data connection
+                        string ifDataConnected = "if ((dataConnector != null) && (dataConnector.Connected == true))";
+
+                        // Write ifDataConnected
+                        WriteLine(ifDataConnected);
+
+                        // Write Open Bracket
+                        WriteOpenBracket(true);
+
+                        // Write Comment Create Find StoredProcedure
+                        WriteComment("Create Find StoredProcedure");
+
+                        // Create Find Stored Procedure
+                        string storedProcedureDeclaration = "Find" + dataTable.ClassName + "StoredProcedure " + procName + " = null;";
+
+                        // Write deleteProc
+                        WriteLine(storedProcedureDeclaration);
+
+                        // Write Blank Line
+                        WriteLine();
+
+                        // Write Comment verify the first parameters is a(n) '"<Object>'.
+                        WriteComment("verify the first parameters is a '" + dataTable.ClassName + "'.");
+
+                        // get verify line
+                        string verifyParameter = "if (parameters[0].ObjectValue as " + dataTable.ClassName + " != null)";
+
+                        // write verifyParameter
+                        WriteLine(verifyParameter);
+
+                        // Write Open Bracket
+                        WriteOpenBracket(true);
+
+                        // Write Comment Create Parameter
+                        WriteComment("Get " + dataType + "Parameter");
+
+                        // create data object from parameters[0]
+                        string paramVariable = "param" + dataType;
+                        string setObjectParameter = dataType + " " + paramVariable + " = (" + dataType + ") parameters[0].ObjectValue;";
+
+                        // Write setObjectParameter
+                        WriteLine(setObjectParameter);
+
+                        // Write Blank Line
+                        WriteLine();
+
+                        // Write Comment verify data object exists
+                        WriteComment("verify " + paramVariable + " exists");
+
+                        // get line to verify data object exists
+                        string ifExists = "if(" + paramVariable + " != null)";
+
+                        // Write ifExists line
+                        WriteLine(ifExists);
+
+                        // Write Open Bracket
+                        WriteOpenBracket(true);
+
+                        // Write Comments For Creating Proc
+                        WriteComment("Now create find" + className + "Proc from " + className + "Writer");
+                        WriteComment("The DataWriter converts the '" + dataType + "'");
+                        WriteComment("to the SqlParameter[] array needed to find a '" + dataType + "'.");
+
+                        // Create Proc
+                        string procLine = procName + " = " + dataTable.ClassName + "Writer.CreateFind" + dataTable.ClassName + "StoredProcedure(" + paramVariable + ");";
+
+                        // Write procLine
+                        WriteLine(procLine);
+
+                        // Write Close Bracket
+                        WriteCloseBracket(true);
+
+                        // Write Blank Line
+                        WriteLine();
+
+                        // Write Comment Verify proc exists
+                        WriteComment("Verify " + procName + " exists");
+
+                        // get line for if procedure exists
+                        string ifProcExists = "if(" + procName + " != null)";
+
+                        // Write ifProcExists
+                        WriteLine(ifProcExists);
+
+                        // Write Open Bracket
+                        WriteOpenBracket(true);
+
+                        // Write Comment  Execute Find Stored Procedure
+                        WriteComment("Execute Find Stored Procedure");
+
+                        // get line to create return object
+                        string createReturnObject = dataObject + " = " + dataTable.ClassName + "Manager.Find" + className + "(" + procName + ", dataConnector);";
+
+                        // Write createReturnObject
+                        WriteLine(createReturnObject);
+
+                        // Write Blank Line
+                        WriteLine();
+
+                        // Write Comment if dataObject exists
+                        WriteComment("if dataObject exists");
+
+                        // get line to test if dataObject exists
+                        string ifObjectExists = "if(" + dataObject + " != null)";
+
+                        // Write ifObjectExists
+                        WriteLine(ifObjectExists);
+
+                        // Write Open Bracket
+                        WriteOpenBracket(true);
+
+                        // Write comment set result.ObjectValue
+                        WriteComment("set result.ObjectValue");
+
+                        // get line to set return object
+                        WriteLine("result.ObjectValue = " + dataObject + ";");
+
+                        // Write CloseBracket
+                        WriteCloseBracket(true);
+                
+                        // Write CloseBracket
+                        WriteCloseBracket(true);
+
+                        // Write CloseBracket
+                        WriteCloseBracket(true);
+
+                        // Write else
+                        WriteLine("else");
+
+                        // Write Open Bracket
+                        WriteOpenBracket(true);
+
+                        // Raise Error DataConnect Not Available
+                        WriteComment("Raise Error Data Connection Not Available");
+
+                        // now raise the error
+                        // get exception text
+                        string exceptionText = CreateExceptionText();
+                        WriteLine(exceptionText);
+
+                        // WriteCloseBracket
+                        WriteCloseBracket(true);
+
+                        // WriteCloseBracket
+                        WriteCloseBracket(true);
+                
+                        // Write Blank Line
+                        WriteLine();
+
+                        // Write Comment For Return Value
+                        WriteComment("return value");
+
+                        // Write return value;
+                        WriteLine("return result;");
+
+                        // Write Close Bracket
+                        WriteCloseBracket(true);
+
+                        // Wrie EndRegion
+                        EndRegion();
+
+                        // Write Blank Line
+                        WriteLine();
+
+                        // Get the text
+                        string methodText = this.TextWriter.ToString();
+
+                        // now get the textLines
+                        List<TextLine> methodLines = TextHelper.GetTextLines(methodText);
+
+                        // Insert the lines
+                        lines.InsertRange(index, methodLines);
+
+                        // Set to true for now
+                        result.Success = true;
+                    }
+                    else
+                    {
+                        // Set failure and reasons
+                        result.Aborted = true;
+                        result.AbortedReason = "The insert index could not be found for InsertFindMethod in the DataOperationMethodCreator";
+                        result.Success = false;                    
+                    }
+                }
+
+                // return value
+                return result;
+            }
             #endregion
 
             #region WriteClassSummary(DataTable dataTable)
@@ -1317,7 +1646,7 @@ namespace DataTierClient.Builders
 
                 // Write Blank Line After Properties Region
                 WriteLine();
-            } 
+            }
             #endregion
 
             #region WriteUpdateMethod(DataTable dataTable)
@@ -1532,6 +1861,23 @@ namespace DataTierClient.Builders
             }  
             #endregion
 
+            #region HasSelectedDataTable
+            /// <summary>
+            /// This property returns true if this object has a 'SelectedDataTable'.
+            /// </summary>
+            public bool HasSelectedDataTable
+            {
+                get
+                {
+                    // initial value
+                    bool hasSelectedDataTable = (SelectedDataTable != null);
+
+                    // return value
+                    return hasSelectedDataTable;
+                }
+            }
+            #endregion
+
             #region NameSpaceName
             /// <summary>
             /// The namespace to use for this project.
@@ -1563,6 +1909,17 @@ namespace DataTierClient.Builders
                 get { return rootDataOperationsPath; }
                 set { rootDataOperationsPath = value; }
             } 
+            #endregion
+
+            #region SelectedDataTable
+            /// <summary>
+            /// This property gets or sets the value for 'SelectedDataTable'.
+            /// </summary>
+            public DataTable SelectedDataTable
+            {
+                get { return selectedDataTable; }
+                set { selectedDataTable = value; }
+            }
             #endregion
     		
 		#endregion

@@ -42,6 +42,193 @@ namespace ObjectLibrary.BusinessObjects
 
         #region Methods
 
+            #region GetValue(string fieldName)
+            // <summary>
+            // This method returns the value for the fieldName given
+            // </summary>
+            public object GetValue(string fieldName)
+            {
+                // initial value
+                object value = "";
+
+                // // Determine the action by the fieldName
+                switch (fieldName)
+                {
+                    case "DatabaseId":
+
+                        // set the value
+                        value = this.DatabaseId;
+
+                        // required
+                        break;
+
+                    case "DataType":
+
+                        // set the value
+                        value = this.DataType;
+
+                        // required
+                        break;
+
+                    case "DecimalPlaces":
+
+                        // set the value
+                        value = this.DecimalPlaces;
+
+                        // required
+                        break;
+
+                    case "DefaultValue":
+
+                        // set the value
+                        value = this.DefaultValue;
+
+                        // required
+                        break;
+
+                    case "EnumDataTypeName":
+
+                        // set the value
+                        value = this.EnumDataTypeName;
+
+                        // required
+                        break;
+
+                    case "FieldId":
+
+                        // set the value
+                        value = this.FieldId;
+
+                        // required
+                        break;
+
+                    case "FieldName":
+
+                        // set the value
+                        value = this.FieldName;
+
+                        // required
+                        break;
+
+                    case "FieldOrdinal":
+
+                        // set the value
+                        value = this.FieldOrdinal;
+
+                        // required
+                        break;
+
+                    case "FieldSetFieldId":
+
+                        // set the value
+                        value = this.FieldSetFieldId;
+
+                        // required
+                        break;
+
+                    case "FieldSetId":
+
+                        // set the value
+                        value = this.FieldSetId;
+
+                        // required
+                        break;
+
+                    case "FieldSetName":
+
+                        // set the value
+                        value = this.FieldSetName;
+
+                        // required
+                        break;
+
+                    case "FieldSize":
+
+                        // set the value
+                        value = this.FieldSize;
+
+                        // required
+                        break;
+
+                    case "IsEnumeration":
+
+                        // set the value
+                        value = this.IsEnumeration;
+
+                        // required
+                        break;
+
+                    case "IsNullable":
+
+                        // set the value
+                        value = this.IsNullable;
+
+                        // required
+                        break;
+
+                    case "OrderByDescending":
+
+                        // set the value
+                        value = this.OrderByDescending;
+
+                        // required
+                        break;
+
+                    case "ParameterMode":
+
+                        // set the value
+                        value = this.ParameterMode;
+
+                        // required
+                        break;
+
+                    case "PrimaryKey":
+
+                        // set the value
+                        value = this.PrimaryKey;
+
+                        // required
+                        break;
+
+                    case "ProjectId":
+
+                        // set the value
+                        value = this.ProjectId;
+
+                        // required
+                        break;
+
+                    case "Required":
+
+                        // set the value
+                        value = this.Required;
+
+                        // required
+                        break;
+
+                    case "Scope":
+
+                        // set the value
+                        value = this.Scope;
+
+                        // required
+                        break;
+
+                    case "TableId":
+
+                        // set the value
+                        value = this.TableId;
+
+                        // required
+                        break;
+
+                }
+
+                // return value
+                return value;
+            }
+            #endregion
+
 
         #endregion
 

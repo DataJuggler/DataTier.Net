@@ -2,13 +2,13 @@
 
 #region using statements
 
+using DataAccessComponent.Data;
+using DataAccessComponent.DataBridge;
+using DataAccessComponent.DataOperations;
+using DataAccessComponent.Logging;
+using ObjectLibrary.BusinessObjects;
 using System;
 using System.Collections.Generic;
-using ObjectLibrary.BusinessObjects;
-using DataAccessComponent.Logging;
-using DataAccessComponent.DataOperations;
-using DataAccessComponent.DataBridge;
-using DataAccessComponent.Data;
 
 #endregion
 
@@ -59,10 +59,10 @@ namespace DataAccessComponent.Controllers
             /// </summary>
             /// <param name='projectreference'>The 'ProjectReference' to delete.</param>
             /// <returns>True if the delete is successful or false if not.</returns>
-            public static PolymorphicObject Delete(ProjectReference tempProjectReference, DataManager dataManager)
+            public static bool Delete(ProjectReference tempProjectReference, DataManager dataManager)
             {
-                // initial value
-                PolymorphicObject result = new PolymorphicObject();
+                // locals
+                bool deleted = false;
 
                 // Get information for calling 'DataBridgeManager.PerformDataOperation' method.
                 string methodName = "DeleteProjectReference";
@@ -80,7 +80,18 @@ namespace DataAccessComponent.Controllers
                         List<PolymorphicObject> parameters = CreateProjectReferenceParameter(tempProjectReference);
 
                         // Perform DataOperation
-                        result = DataBridgeManager.PerformDataOperation(methodName, objectName, deleteProjectReferenceMethod, parameters, dataManager);
+                        PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, deleteProjectReferenceMethod, parameters, dataManager);
+
+                        // If return object exists
+                        if (returnObject != null)
+                        {
+                            // Test For True
+                            if (returnObject.Boolean.Value == NullableBooleanEnum.True)
+                            {
+                                // Set Deleted To True
+                                deleted = true;
+                            }
+                        }
                     }
                 }
                 catch (Exception error)
@@ -90,7 +101,7 @@ namespace DataAccessComponent.Controllers
                 }
 
                 // return value
-                return result;
+                return deleted;
             }
             #endregion
 
@@ -196,11 +207,11 @@ namespace DataAccessComponent.Controllers
             /// procedure 'ProjectReference_Insert'.</param>
             /// </summary>
             /// <param name='projectReference'>The 'ProjectReference' object to insert.</param>
-            /// <returns>The a PolymorphicObject. This object contains an IntegerValue, which is the Identity value for the new 'ProjectReference' object that was inserted.</returns>
-            public static PolymorphicObject Insert(ProjectReference projectReference, DataManager dataManager)
+            /// <returns>The id (int) of the new  'ProjectReference' object that was inserted.</returns>
+            public static int Insert(ProjectReference projectReference, DataManager dataManager)
             {
                 // Initial values
-                PolymorphicObject result = new PolymorphicObject();
+                int newIdentity = -1;
 
                 // Get information for calling 'DataBridgeManager.PerformDataOperation' method.
                 string methodName = "Insert";
@@ -211,14 +222,20 @@ namespace DataAccessComponent.Controllers
                     // If ProjectReferenceexists
                     if (projectReference != null)
                     {
-                        // Create the delegate to perform the insert
                         ApplicationController.DataOperationMethod insertMethod = ProjectReferenceMethods.InsertProjectReference;
 
                         // Create parameters for this method
                         List<PolymorphicObject> parameters = CreateProjectReferenceParameter(projectReference);
 
                         // Perform DataOperation
-                        result = DataBridgeManager.PerformDataOperation(methodName, objectName, insertMethod , parameters, dataManager);
+                        PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, insertMethod , parameters, dataManager);
+
+                        // If return object exists
+                        if (returnObject != null)
+                        {
+                            // Set return value
+                            newIdentity = returnObject.IntegerValue;
+                        }
                     }
                 }
                 catch (Exception error)
@@ -228,7 +245,7 @@ namespace DataAccessComponent.Controllers
                 }
 
                 // return value
-                return result;
+                return newIdentity;
             }
             #endregion
 
@@ -239,10 +256,10 @@ namespace DataAccessComponent.Controllers
             /// </summary>
             /// <param name='projectReference'>The 'ProjectReference' object to save.</param>
             /// <returns>True if successful or false if not.</returns>
-            public static PolymorphicObject Save(ref ProjectReference projectReference, DataManager dataManager)
+            public static bool Save(ref ProjectReference projectReference, DataManager dataManager)
             {
                 // Initial value
-                PolymorphicObject result = new PolymorphicObject();
+                bool saved = false;
 
                 // If the projectReference exists.
                 if (projectReference != null)
@@ -251,25 +268,27 @@ namespace DataAccessComponent.Controllers
                     if (projectReference.IsNew)
                     {
                         // Insert new ProjectReference
-                        result = Insert(projectReference, dataManager);
+                        int newIdentity = Insert(projectReference, dataManager);
 
-                        // if the insert was successful
-                        if (result.HasIntegerValue)
+                        // if insert was successful
+                        if (newIdentity > 0)
                         {
                             // Update Identity
-                            projectReference.UpdateIdentity(result.IntegerValue);
+                            projectReference.UpdateIdentity(newIdentity);
 
+                            // Set return value
+                            saved = true;
                         }
                     }
                     else
                     {
                         // Update ProjectReference
-                        result  = Update(projectReference, dataManager);
+                        saved = Update(projectReference, dataManager);
                     }
                 }
 
                 // return value
-                return result;
+                return saved;
             }
             #endregion
 
@@ -281,10 +300,10 @@ namespace DataAccessComponent.Controllers
             /// </summary>
             /// <param name='projectReference'>The 'ProjectReference' object to update.</param>
             /// <returns>True if successful else false if not.</returns>
-            public static PolymorphicObject Update(ProjectReference projectReference, DataManager dataManager)
+            public static bool Update(ProjectReference projectReference, DataManager dataManager)
             {
                 // Initial value
-                PolymorphicObject result = new PolymorphicObject();
+                bool saved = false;
 
                 // Get information for calling 'DataBridgeManager.PerformDataOperation' method.
                 string methodName = "Update";
@@ -299,9 +318,15 @@ namespace DataAccessComponent.Controllers
 
                         // Create parameters for this method
                         List<PolymorphicObject> parameters = CreateProjectReferenceParameter(projectReference);
-
                         // Perform DataOperation
-                        result = DataBridgeManager.PerformDataOperation(methodName, objectName, updateMethod , parameters, dataManager);
+                        PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, updateMethod , parameters, dataManager);
+
+                        // If return object exists
+                        if ((returnObject != null) && (returnObject.Boolean != null) && (returnObject.Boolean.Value == NullableBooleanEnum.True))
+                        {
+                            // Set saved to true
+                            saved = true;
+                        }
                     }
                 }
                 catch (Exception error)
@@ -311,7 +336,7 @@ namespace DataAccessComponent.Controllers
                 }
 
                 // return value
-                return result;
+                return saved;
             }
             #endregion
 

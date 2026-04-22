@@ -6,9 +6,11 @@ using DataAccessComponent.Connection;
 using DataAccessComponent.Data;
 using DataAccessComponent.DataBridge;
 using DataAccessComponent.DataOperations;
+using DataAccessComponent.Logging;
 using System;
 using System.Collections.Generic;
-using DataAccessComponent.Logging;
+using System.Reflection;
+using System.Security.AccessControl;
 
 #endregion
 
@@ -30,7 +32,6 @@ namespace DataAccessComponent.Controllers
         private AuthenticationManager loginManager;        
         private SystemController systemController;
         private DataBridgeManager dataBridge;
-        private Exception exception;
         private string connectionName;
         #endregion
 
@@ -101,6 +102,9 @@ namespace DataAccessComponent.Controllers
                 }
                 catch (Exception exception)
                 {
+                    // set the exception
+                    error = exception;
+
                     // Log the error
                     ErrorHandler.LogError("TestDatabaseConnection", "ApplicationController", exception);
                 }
