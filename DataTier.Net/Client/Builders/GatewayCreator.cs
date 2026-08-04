@@ -630,17 +630,20 @@ namespace DataTierClient.Builders
             }
             #endregion
             
-            #region WriteFindMethod(DataTable dataTable, List<TextLine> lines)
+            #region WriteFindMethod(DataTable dataTable, List<TextLine> linesArg)
             /// <summary>
             /// This method writes out the Find Method
             /// </summary>
-            internal void WriteFindMethod(DataTable dataTable, List<TextLine> lines)
+            internal void WriteFindMethod(DataTable dataTable, List<TextLine> linesArg)
             {
                 try
                 {
-                    // if the dataTable exists and the lines collection exists
-                    if ((dataTable != null) && (ListHelper.HasOneOrMoreItems(lines)))
+                    // if the dataTable exists and the linesArg collection exists
+                    if ((dataTable != null) && (ListHelper.HasOneOrMoreItems(linesArg)))
                     {
+                        // create the smarTList
+                        SmartList lines = new SmartList(linesArg);
+
                         // locals
                         string variableName = TextHelper.CapitalizeFirstChar(dataTable.PrimaryKey.FieldName, true);
                         string objectName = TextHelper.CapitalizeFirstChar(dataTable.ClassName, true);
@@ -661,7 +664,7 @@ namespace DataTierClient.Builders
                         }
 
                         // find the insertIndex
-                        int insertIndex = FindMethodInsertIndex(methodName, lines);
+                        int insertIndex = FindMethodInsertIndex(methodName, linesArg);
 
                         // locals
                         string param1String = "            /// <param name=\"" + variableName + "\">Find the " + dataTable.ClassName + " with this " + variableName + "</param>";
@@ -720,225 +723,123 @@ namespace DataTierClient.Builders
                             }
 
                             // insert a line
-                            lines.Insert(insertIndex, beginregion);
-
-                            // increment
-                            insertIndex++;
+                            insertIndex = lines.Insert(insertIndex, beginregion);
 
                             // insert a line
-                            lines.Insert(insertIndex, summary);
-
-                            // increment
-                            insertIndex++;
+                            insertIndex = lines.Insert(insertIndex, summary);
 
                             // insert a line
-                            lines.Insert(insertIndex, summaryDescription);
-
-                            // increment
-                            insertIndex++;
+                            insertIndex = lines.Insert(insertIndex, summaryDescription);
 
                             // insert a line
-                            lines.Insert(insertIndex, endSummary);
-
-                            // increment
-                            insertIndex++;
+                            insertIndex = lines.Insert(insertIndex, endSummary);
 
                             // insert a line
-                            lines.Insert(insertIndex, param1);
-
-                            // increment
-                            insertIndex++;
+                            insertIndex = lines.Insert(insertIndex, param1);
 
                             // insert a line
-                            lines.Insert(insertIndex, param2);
-
-                            // increment
-                            insertIndex++;
+                            insertIndex = lines.Insert(insertIndex, param2);
 
                             // insert a line
-                            lines.Insert(insertIndex, methodDeclarationLine);
-
-                            // increment
-                            insertIndex++;
+                            insertIndex = lines.Insert(insertIndex, methodDeclarationLine);
 
                             // insert a line
-                            lines.Insert(insertIndex, openBracket);
-
-                            // increment
-                            insertIndex++;
+                            insertIndex = lines.Insert(insertIndex, openBracket);
 
                             // insert a line
-                            lines.Insert(insertIndex, initialValueComment);
-
-                            // increment
-                            insertIndex++;
+                            insertIndex = lines.Insert(insertIndex, initialValueComment);
 
                             // insert a line
-                            lines.Insert(insertIndex, initialValue);
-
-                            // increment
-                            insertIndex++;
+                            insertIndex = lines.Insert(insertIndex, initialValue);
 
                             // insert a line
-                            lines.Insert(insertIndex, blankLine);
-
-                            // increment
-                            insertIndex++;
+                            insertIndex = lines.Insert(insertIndex, blankLine);
 
                             // insert a line
-                            lines.Insert(insertIndex, validationTestComment);
-
-                            // increment
-                            insertIndex++;
+                            insertIndex = lines.Insert(insertIndex, validationTestComment);
 
                             // insert a line
-                            lines.Insert(insertIndex, validationTest);
-
-                            // increment
-                            insertIndex++;
+                            insertIndex = lines.Insert(insertIndex, validationTest);
 
                             // insert a line
-                            lines.Insert(insertIndex, openBracket2);
-
-                            // increment
-                            insertIndex++;
+                            insertIndex = lines.Insert(insertIndex, openBracket2);
 
                             // insert a line
-                            lines.Insert(insertIndex, ifTempObjectDoesNotExistComment);
-
-                            // increment
-                            insertIndex++;
+                            insertIndex = lines.Insert(insertIndex, ifTempObjectDoesNotExistComment);
 
                             // insert a line
-                            lines.Insert(insertIndex, ifTempObjectDoesNotExist);
-
-                            // increment
-                            insertIndex++;
+                            insertIndex = lines.Insert(insertIndex, ifTempObjectDoesNotExist);
 
                             // insert a line
-                            lines.Insert(insertIndex, openBracket3);
-
-                            // increment
-                            insertIndex++;
+                            insertIndex = lines.Insert(insertIndex, openBracket3);
 
                             // insert a line
-                            lines.Insert(insertIndex, createTempObjectComment);
-
-                            // increment
-                            insertIndex++;
+                            insertIndex = lines.Insert(insertIndex, createTempObjectComment);
 
                             // insert a line
-                            lines.Insert(insertIndex, createTempObject);
-
-                            // increment
-                            insertIndex++;
+                            insertIndex = lines.Insert(insertIndex, createTempObject);
 
                             // insert a line
-                            lines.Insert(insertIndex, closeBracket3);
-
-                            // increment
-                            insertIndex++;
+                            insertIndex = lines.Insert(insertIndex, closeBracket3);
 
                             // insert a line
-                            lines.Insert(insertIndex, blankLine);
+                            insertIndex = lines.Insert(insertIndex, blankLine);
 
                             // if not a view
                             if (!dataTable.IsView)
                             {
-                                // increment
-                                insertIndex++;
+                                // write the primary key comment
+                                insertIndex = lines.Insert(insertIndex, ifPrimaryKeyIsSetComment);
 
                                 // write the primary key comment
-                                lines.Insert(insertIndex, ifPrimaryKeyIsSetComment);
+                                insertIndex = lines.Insert(insertIndex, ifPrimaryKeyIsSet);
 
-                                // increment
-                                insertIndex++;
+                                // insert a line
+                                insertIndex = lines.Insert(insertIndex, openBracket3);
 
                                 // write the primary key comment
-                                lines.Insert(insertIndex, ifPrimaryKeyIsSet);
-
-                                // increment
-                                insertIndex++;
+                                insertIndex = lines.Insert(insertIndex, setPrimaryKeyComment);
 
                                 // insert a line
-                                lines.Insert(insertIndex, openBracket3);
-
-                                // increment
-                                insertIndex++;
-
-                                // write the primary key comment
-                                lines.Insert(insertIndex, setPrimaryKeyComment);
-
-                                // increment
-                                insertIndex++;
+                                insertIndex = lines.Insert(insertIndex, setPrimaryKey);
 
                                 // insert a line
-                                lines.Insert(insertIndex, setPrimaryKey);
-
-                                // increment
-                                insertIndex++;
+                                insertIndex = lines.Insert(insertIndex, closeBracket3);
 
                                 // insert a line
-                                lines.Insert(insertIndex, closeBracket3);
-
-                                // increment
-                                insertIndex++;
-
-                                // insert a line
-                                lines.Insert(insertIndex, blankLine);
-
-                                // increment
-                                insertIndex++;
+                                insertIndex = lines.Insert(insertIndex, blankLine);
                             }
 
-                            // increment
-                            insertIndex++;
+                            // insert a comment
+                            insertIndex = lines.Insert(insertIndex, performFindComment);
 
                             // insert a line
-                            lines.Insert(insertIndex, performFind);
-
-                            // increment
-                            insertIndex++;
+                            insertIndex = lines.Insert(insertIndex, performFind);
 
                             // insert a line
-                            lines.Insert(insertIndex, closeBracket2);
-
-                            // increment
-                            insertIndex++;
+                            insertIndex = lines.Insert(insertIndex, closeBracket2);
 
                             // insert a line
-                            lines.Insert(insertIndex, blankLine);
-
-                            // increment
-                            insertIndex++;
+                            insertIndex = lines.Insert(insertIndex, blankLine);
 
                             // insert a line
-                            lines.Insert(insertIndex, returnValueComment);
-
-                            // increment
-                            insertIndex++;
+                            insertIndex = lines.Insert(insertIndex, returnValueComment);
 
                             // insert a line
-                            lines.Insert(insertIndex, returnValue);
-
-                            // increment
-                            insertIndex++;
+                            insertIndex = lines.Insert(insertIndex, returnValue);
 
                             // insert a line
-                            lines.Insert(insertIndex, closeBracket);
-
-                            // increment
-                            insertIndex++;
+                            insertIndex = lines.Insert(insertIndex, closeBracket);
 
                             // insert a line
-                            lines.Insert(insertIndex, endRegion);
-
-                            // increment
-                            insertIndex++;
+                            insertIndex = lines.Insert(insertIndex, endRegion);
 
                             // insert a line
-                            lines.Insert(insertIndex, blankLine);
+                            insertIndex = lines.Insert(insertIndex, blankLine);
                         }
+
+                        // now set the lines
+                        linesArg = lines.Lines;
                     }
                 }
                 catch (Exception error)

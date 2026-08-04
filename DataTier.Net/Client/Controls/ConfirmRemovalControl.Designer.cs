@@ -71,9 +71,9 @@ namespace DataTierClient.Controls
             // 
             this.SaveCancelControl.BackColor = System.Drawing.Color.Transparent;
             this.SaveCancelControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.SaveCancelControl.Location = new System.Drawing.Point(0, 552);
+            this.SaveCancelControl.Location = new System.Drawing.Point(0, 592);
             this.SaveCancelControl.Name = "SaveCancelControl";
-            this.SaveCancelControl.Size = new System.Drawing.Size(960, 48);
+            this.SaveCancelControl.Size = new System.Drawing.Size(1420, 48);
             this.SaveCancelControl.TabIndex = 0;
             // 
             // ProjectFolderLabel
@@ -81,7 +81,7 @@ namespace DataTierClient.Controls
             this.ProjectFolderLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.ProjectFolderLabel.Location = new System.Drawing.Point(0, 0);
             this.ProjectFolderLabel.Name = "ProjectFolderLabel";
-            this.ProjectFolderLabel.Size = new System.Drawing.Size(960, 24);
+            this.ProjectFolderLabel.Size = new System.Drawing.Size(1420, 24);
             this.ProjectFolderLabel.TabIndex = 8;
             this.ProjectFolderLabel.Text = "Project Folder:";
             this.ProjectFolderLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -95,7 +95,7 @@ namespace DataTierClient.Controls
             this.label1.ForeColor = System.Drawing.Color.MidnightBlue;
             this.label1.Location = new System.Drawing.Point(0, 24);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(960, 24);
+            this.label1.Size = new System.Drawing.Size(1420, 24);
             this.label1.TabIndex = 10;
             this.label1.Text = "All paths are relative to the project folder.";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -105,9 +105,9 @@ namespace DataTierClient.Controls
             // SeperatorPanel2
             // 
             this.SeperatorPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.SeperatorPanel2.Location = new System.Drawing.Point(0, 536);
+            this.SeperatorPanel2.Location = new System.Drawing.Point(0, 576);
             this.SeperatorPanel2.Name = "SeperatorPanel2";
-            this.SeperatorPanel2.Size = new System.Drawing.Size(960, 16);
+            this.SeperatorPanel2.Size = new System.Drawing.Size(1420, 16);
             this.SeperatorPanel2.TabIndex = 7;
             // 
             // SeperatorPanel
@@ -117,7 +117,7 @@ namespace DataTierClient.Controls
             this.SeperatorPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.SeperatorPanel.Location = new System.Drawing.Point(0, 48);
             this.SeperatorPanel.Name = "SeperatorPanel";
-            this.SeperatorPanel.Size = new System.Drawing.Size(960, 32);
+            this.SeperatorPanel.Size = new System.Drawing.Size(1420, 32);
             this.SeperatorPanel.TabIndex = 15;
             // 
             // DeleteFilesCheckBox
@@ -144,9 +144,9 @@ namespace DataTierClient.Controls
             // InfoLabel
             // 
             this.InfoLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.InfoLabel.Location = new System.Drawing.Point(0, 508);
+            this.InfoLabel.Location = new System.Drawing.Point(0, 548);
             this.InfoLabel.Name = "InfoLabel";
-            this.InfoLabel.Size = new System.Drawing.Size(960, 28);
+            this.InfoLabel.Size = new System.Drawing.Size(1420, 28);
             this.InfoLabel.TabIndex = 19;
             this.InfoLabel.Text = "Uncheck any items you do not wish to remove.";
             this.InfoLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -155,10 +155,12 @@ namespace DataTierClient.Controls
             // 
             this.CodeItemsListBox.CheckOnClick = true;
             this.CodeItemsListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CodeItemsListBox.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CodeItemsListBox.FormattingEnabled = true;
+            this.CodeItemsListBox.HorizontalScrollbar = true;
             this.CodeItemsListBox.Location = new System.Drawing.Point(0, 80);
             this.CodeItemsListBox.Name = "CodeItemsListBox";
-            this.CodeItemsListBox.Size = new System.Drawing.Size(960, 428);
+            this.CodeItemsListBox.Size = new System.Drawing.Size(1420, 468);
             this.CodeItemsListBox.TabIndex = 20;
             // 
             // ConfirmRemovalControl
@@ -174,7 +176,7 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.SaveCancelControl);
             this.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "ConfirmRemovalControl";
-            this.Size = new System.Drawing.Size(960, 600);
+            this.Size = new System.Drawing.Size(1420, 640);
             this.SeperatorPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 

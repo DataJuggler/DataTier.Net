@@ -252,6 +252,9 @@ namespace DataTierClient.Forms
                         // Save the database schema
                         bool saved = SaveChangesSet(changesSet);
                     }
+
+                    // Renable controls
+                    UIEnable();
                 }
             }
             #endregion

@@ -12,6 +12,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.IO;
+using System.Drawing;
 using System.Windows.Forms;
 
 #endregion
@@ -108,6 +109,7 @@ namespace DataTierClient.Controls
             {
                 // Default to the user did cancel
                 this.UserCancelled = true;
+                this.CodeItemsListBox.Font = new Font("Calibri", 13f);
             }
             #endregion
             

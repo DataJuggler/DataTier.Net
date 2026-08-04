@@ -15,6 +15,7 @@ using DataTierClient.Objects;
 using ObjectLibrary.BusinessObjects;
 using ObjectLibrary.Enumerations;
 using System;
+using System.Drawing;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
@@ -468,22 +469,19 @@ namespace DataTierClient.Controls
             {
                 // do not check during loading
                 if (!Loading)
-                {
-                    // get the tableName
-                    int index = e.Index;
-                    
+                {  
                     // if the index is in range
-                    if ((this.HasTables) && (index < Tables.Count))
+                    if (HasSelectedTable)
                     {
                         if (e.NewValue == CheckState.Unchecked)
                         {
-                            // Set Exclude to true 
-                            this.Tables[index].Exclude = true;
+                            // it's now unchecked, so Exclude
+                            this.SelectedTable.Exclude = true;
                         }
                         else
                         {
-                            // Set Exclude to true 
-                            this.Tables[index].Exclude = false;
+                            // it's now checked, so set to false
+                            this.SelectedTable.Exclude = false;
                         }
                     }
                     
@@ -593,16 +591,24 @@ namespace DataTierClient.Controls
             public void DisplayFields()
             {
                 // Clear
-                this.FieldsListBox.Items.Clear();
+                this.FieldsListBox.Items.Clear();                 
+                SelectedTableTextBox.Text = String.Empty;
                 
-                // if the SelectedTable.Fields exists
-                if ((this.HasSelectedTable) && (this.SelectedTable.HasFields))
+                // if the value for HasSelectedTable is true
+                if (HasSelectedTable)
                 {
-                    // iterate the fields
-                    foreach (DTNField field in this.SelectedTable.Fields)
+                    // Display the text box
+                    SelectedTableTextBox.Text = SelectedTable.TableName;
+
+                     // if the SelectedTable.Fields exists
+                    if (this.SelectedTable.HasFields)
                     {
-                        // Add this field
-                        this.FieldsListBox.Items.Add(field, !field.Exclude);
+                        // iterate the fields
+                        foreach (DTNField field in this.SelectedTable.Fields)
+                        {
+                            // Add this field
+                            this.FieldsListBox.Items.Add(field, !field.Exclude);
+                        }
                     }
                 }
             }
@@ -862,6 +868,7 @@ namespace DataTierClient.Controls
                 {
                     // Display the Name
                     SelectedTableTextBox.Text = SelectedTable.TableName;
+                    SelectedTableTextBox.ForeColor = Color.Black;
                     
                     // Show the buttons
                     RemoveTableButton.Visible = true;
@@ -871,9 +878,23 @@ namespace DataTierClient.Controls
                     ManageMethodButton.Visible = true;
                     CreateGridColumnsButton.Visible = true;
                 }
+                else if ((HasSelectedTable) && (SelectedTable.Exclude))
+                {
+                     // Display the Name
+                    SelectedTableTextBox.Text = SelectedTable.TableName;
+                    SelectedTableTextBox.ForeColor = Color.Gray;
+                    
+                    // Hide this buttons                    
+                    RemoveTableButton.Visible = false;
+                    CreateMethodButton.Visible = false;
+                    ManageReadersButton.Visible = false;
+                    ManageFieldSetsButton.Visible = false;
+                    ManageMethodButton.Visible = false; 
+                    CreateGridColumnsButton.Visible = false;
+                }
                 else
                 {
-                    // Erase the Name
+                     // Display the Name
                     SelectedTableTextBox.Text = String.Empty;
                     
                     // Hide this buttons                    

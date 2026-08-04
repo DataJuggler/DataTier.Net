@@ -110,6 +110,13 @@ https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Roo
 
 # Updates & News
 
+8.4.2026: I fixed a bug that WriteFindMethod of the GatewayCreator.cs was adding an extra region due to insert index was getting
+messed up. I created a SmartList that increments the index for me and it worked! With only 1 table the Gateway would compile,
+but with multiple tables the regions could mess up insert indexes. 
+
+8.1.2026: I fixed the data editor where a deactivated table wasn't displaying the table name. Also some Microsoft NuGet packages were 
+updated. 
+
 3.9.2026: I finished the Major update. I got rid of a class I created 15 years ago called NullableBoolean. I am not sure if Visual Studio already
 support bool?, which personally I don't like. What this means I broke all of my existsing projects. I won't break anything again (I hope),
 but this was needed. result.Success is so much easier to code generate. I am working on a converter. Also, all the older versions are 
