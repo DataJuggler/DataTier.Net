@@ -62,6 +62,7 @@ namespace DataTierClient.Controls
             /// </summary>
             private void InitializeComponent()
             {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SQLDatabaseEditor));
             this.SerializableCheckBox = new System.Windows.Forms.CheckBox();
             this.SerializableLabel = new System.Windows.Forms.Label();
@@ -80,8 +81,12 @@ namespace DataTierClient.Controls
             this.EncryptValueComboBox = new DataJuggler.Win.Controls.LabelComboBoxControl();
             this.IncludeEncryptCheckBox = new DataJuggler.Win.Controls.LabelCheckBoxControl();
             this.InfoLabel = new System.Windows.Forms.Label();
+            this.TestConnectionButton = new System.Windows.Forms.Button();
+            this.ConnectionResultImage = new System.Windows.Forms.PictureBox();
+            this.StatusTimer = new System.Windows.Forms.Timer(this.components);
             this.BrowseDatabaseButton = new DataTierClient.Controls.TabButton();
             this.BrowseServerButton = new DataTierClient.Controls.TabButton();
+            ((System.ComponentModel.ISupportInitialize)(this.ConnectionResultImage)).BeginInit();
             this.SuspendLayout();
             // 
             // SerializableCheckBox
@@ -97,7 +102,7 @@ namespace DataTierClient.Controls
             // SerializableLabel
             // 
             this.SerializableLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SerializableLabel.Location = new System.Drawing.Point(28, 430);
+            this.SerializableLabel.Location = new System.Drawing.Point(28, 434);
             this.SerializableLabel.Name = "SerializableLabel";
             this.SerializableLabel.Size = new System.Drawing.Size(124, 20);
             this.SerializableLabel.TabIndex = 92;
@@ -281,6 +286,41 @@ namespace DataTierClient.Controls
             this.InfoLabel.Text = "Microsoft.Data.SqlClient requires Encrypt=False if your database is not encrypted" +
     ". Leave this checked if you are targeting .NET Core.\r\n\r\n";
             // 
+            // TestConnectionButton
+            // 
+            this.TestConnectionButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
+            this.TestConnectionButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.TestConnectionButton.FlatAppearance.BorderSize = 0;
+            this.TestConnectionButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.TestConnectionButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.TestConnectionButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.TestConnectionButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TestConnectionButton.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.TestConnectionButton.Location = new System.Drawing.Point(194, 434);
+            this.TestConnectionButton.Name = "TestConnectionButton";
+            this.TestConnectionButton.Size = new System.Drawing.Size(193, 44);
+            this.TestConnectionButton.TabIndex = 106;
+            this.TestConnectionButton.Text = "Test Connection";
+            this.TestConnectionButton.UseVisualStyleBackColor = true;
+            this.TestConnectionButton.Click += new System.EventHandler(this.TestConnectionButton_Click);
+            this.TestConnectionButton.MouseEnter += new System.EventHandler(this.TestConnectionButton_MouseEnter);
+            this.TestConnectionButton.MouseLeave += new System.EventHandler(this.TestConnectionButton_MouseLeave);
+            // 
+            // ConnectionResultImage
+            // 
+            this.ConnectionResultImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ConnectionResultImage.Location = new System.Drawing.Point(493, 434);
+            this.ConnectionResultImage.Name = "ConnectionResultImage";
+            this.ConnectionResultImage.Size = new System.Drawing.Size(48, 48);
+            this.ConnectionResultImage.TabIndex = 107;
+            this.ConnectionResultImage.TabStop = false;
+            this.ConnectionResultImage.Visible = false;
+            // 
+            // StatusTimer
+            // 
+            this.StatusTimer.Interval = 3000;
+            this.StatusTimer.Tick += new System.EventHandler(this.StatusTimer_Tick);
+            // 
             // BrowseDatabaseButton
             // 
             this.BrowseDatabaseButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BrowseDatabaseButton.BackgroundImage")));
@@ -298,6 +338,7 @@ namespace DataTierClient.Controls
             this.BrowseDatabaseButton.Size = new System.Drawing.Size(40, 32);
             this.BrowseDatabaseButton.TabIndex = 102;
             this.BrowseDatabaseButton.TabStop = false;
+            this.BrowseDatabaseButton.Click += new System.EventHandler(this.BrowseDatabaseButton_Click);
             // 
             // BrowseServerButton
             // 
@@ -321,6 +362,8 @@ namespace DataTierClient.Controls
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Linen;
+            this.Controls.Add(this.ConnectionResultImage);
+            this.Controls.Add(this.TestConnectionButton);
             this.Controls.Add(this.EncryptValueComboBox);
             this.Controls.Add(this.IncludeEncryptCheckBox);
             this.Controls.Add(this.InfoLabel);
@@ -341,15 +384,19 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.UserIDLabel);
             this.Controls.Add(this.ServerLabel);
             this.Name = "SQLDatabaseEditor";
-            this.Size = new System.Drawing.Size(560, 471);
+            this.Size = new System.Drawing.Size(560, 502);
+            ((System.ComponentModel.ISupportInitialize)(this.ConnectionResultImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
             }
-            #endregion
-            
         #endregion
-        
+
+        #endregion
+
+        private System.Windows.Forms.Button TestConnectionButton;
+        private System.Windows.Forms.PictureBox ConnectionResultImage;
+        private System.Windows.Forms.Timer StatusTimer;
     }
     #endregion
 

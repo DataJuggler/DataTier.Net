@@ -110,6 +110,27 @@ https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Roo
 
 # Updates & News
 
+8.14.2026: A bunch of Microsoft NuGet packages were updated, and System.Data.SqlClient was completely removed. This only affects
+legacy projects like my day job project. Everything has been replaced with Microsoft.Data.SqlClient.
+
+A couple of changes were made to the Databases tab of the Project Wizard Control. The connection string is now populated last.
+A connection string is built as the database name, server name or user name and password change. The Display Selected Object method
+now populates Connection String Text Box last in case you want to paste in a connection string. I needed to this to connect to
+some cloud databases for my job. Also connection string field size was increased from 255 to 512.
+
+Existing users
+
+    Alter Table DTNDatabase
+    Alter Column ConnectionString nvarchar(512) null
+
+Also, these stored procedures were updated with the new length
+
+DTNDatabase_Insert
+DTNDatabase_Update
+
+The SQL Script DataTier.Net.Database.Schema.sql in the folder DataTier.Net\DataTier.Net\Database\ was updated to include
+the new ConnectionString length of 512 characters.
+
 8.4.2026: I fixed a bug that WriteFindMethod of the GatewayCreator.cs was adding an extra region due to insert index was getting
 messed up. I created a SmartList that increments the index for me and it worked! With only 1 table the Gateway would compile,
 but with multiple tables the regions could mess up insert indexes. 

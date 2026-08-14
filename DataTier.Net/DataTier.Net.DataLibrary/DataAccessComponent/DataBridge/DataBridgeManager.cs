@@ -122,6 +122,9 @@ namespace DataAccessComponent.DataBridge
                         // Add this item
                         dataManager.Exceptions.Add(error);
                     }
+
+                    // return the error
+                    returnObject.Error = error;
                 }
                 finally
                 {

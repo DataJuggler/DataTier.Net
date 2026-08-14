@@ -12,6 +12,8 @@ using ObjectLibrary.Enumerations;
 using DataTierClient.Controls.Interfaces;
 using DataJuggler.Win.Controls;
 using DataJuggler.Win.Controls.Interfaces;
+using DataJuggler.Net;
+using DataJuggler.Core.UltimateHelper;
 
 #endregion
 
@@ -147,7 +149,7 @@ namespace DataTierClient.Controls
             /// <param name="sender"></param>
             /// <param name="e"></param>
             private void ServerTextBox_TextChanged(object sender, EventArgs e)
-            {
+            {  
                 // Build ConnectionString
                 string buildConnectionString = BuildConnectionString();
             }
@@ -200,6 +202,106 @@ namespace DataTierClient.Controls
             }
             #endregion
 
+            #region StatusTimer_Tick(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when Status Timer _ Tick
+            /// </summary>
+            private void StatusTimer_Tick(object sender, EventArgs e)
+            {
+                // only run once
+                StatusTimer.Enabled = false;
+
+                // hide
+                ConnectionResultImage.Visible = false;
+            }
+            #endregion
+            
+            #region TestConnectionButton_Click(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when the 'TestConnectionButton' is clicked.
+            /// </summary>
+            private void TestConnectionButton_Click(object sender, EventArgs e)
+            {
+                try
+                {
+                    // set the connectionTest
+                    bool connectionTest = false;
+                    
+                    // Set the connectionString
+                    string connectionString = this.ConnectionStringTextBox.Text;
+                    
+                    // test for a connectionString 
+                    bool hasConnectionString = (!String.IsNullOrEmpty(connectionString));
+                    
+                    // if a connection string has been established
+                    if (hasConnectionString)
+                    {
+                        // set the dataConnector
+                        SQLDatabaseConnector dataConnector = new SQLDatabaseConnector();
+                        
+                        // set the connection string
+                        dataConnector.ConnectionString = connectionString;
+                        
+                        // Test the connection
+                        connectionTest = SQLDatabaseTester.TestDatabaseConnection(dataConnector);
+                        
+                        // if the connection test passed
+                        if (connectionTest)
+                        {
+                            // Show Success
+                            this.ConnectionResultImage.BackgroundImage = Properties.Resources.Success;
+                        }
+                        else
+                        {   
+                            // Show Success
+                            this.ConnectionResultImage.BackgroundImage = Properties.Resources.Failure;
+                        }
+
+                        // show the image
+                        this.ConnectionResultImage.Visible = true;
+
+                        // Start the timer
+                        StatusTimer.Start();
+                    }
+                    else
+                    {
+                        // Show a warning message
+                        MessageBox.Show("You must build or enter a connection string.", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                catch (Exception error)
+                {
+                    // for debugging only
+                    DebugHelper.WriteDebugError("TestDatabaseConnection_Click", this.Name, error);
+                    
+                    // Show a success message
+                    MessageBox.Show("A connection to the database could not be estalished.", "Connection Test Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            #endregion
+            
+            #region TestConnectionButton_MouseEnter(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when Test Connection Button _ Mouse Enter
+            /// </summary>
+            private void TestConnectionButton_MouseEnter(object sender, EventArgs e)
+            {
+                // Change the cursor to a hand
+                Cursor = Cursors.Hand;
+            }
+            #endregion
+            
+            #region TestConnectionButton_MouseLeave(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when Test Connection Button _ Mouse Leave
+            /// </summary>
+            private void TestConnectionButton_MouseLeave(object sender, EventArgs e)
+            {
+                // Change the cursor back to the default pointer
+                Cursor = Cursors.Default;
+            }
+            #endregion
+            
             #region WindowsRadioButton_CheckedChanged(object sender, EventArgs e)
             /// <summary>
             /// Windows Authentication Is Selected
@@ -248,9 +350,20 @@ namespace DataTierClient.Controls
                         // turn on the hourglass
                         this.ParentForm.Cursor = Cursors.WaitCursor;
                     }
-                    
-                    // Get Databases
-                    SQLSMOHelper.GetDatabases(serverName, this.DatabasesComboBox);
+
+                    if (AuthenticationType == SQLAuthenticationTypeEnum.SQLServerAuthentication)
+                    {
+                        // SQL Server Auth must pass in the already built connection string
+                        string connectionString =  ConnectionStringTextBox.Text;
+
+                        // Get Databases using WinForms
+                        SQLSMOHelper.GetDatabases(serverName, this.DatabasesComboBox, connectionString);
+                    }
+                    else
+                    {
+                        // Get Databases using WinForms
+                        SQLSMOHelper.GetDatabases(serverName, this.DatabasesComboBox);
+                    }
                 }
                 catch (Exception error)
                 {
@@ -490,7 +603,6 @@ namespace DataTierClient.Controls
                 this.SQLUserNameTextBox.Text = userID;
                 this.PasswordTextBox.Text = password;
                 this.DatabasesComboBox.Text = databaseName;
-                this.ConnectionStringTextBox.Text = connectionString;
                 
                 // if use Windows
                 if(windowsAuthentication)
@@ -506,6 +618,9 @@ namespace DataTierClient.Controls
                 
                 // set Serializable
                 this.SerializableCheckBox.Checked = serializable;
+
+                // Connection String must be set last
+                this.ConnectionStringTextBox.Text = connectionString;
 
                 // Refresh 
                 this.Refresh();
@@ -722,9 +837,10 @@ namespace DataTierClient.Controls
                     return selectedDatabase;
                 }
             }
-            #endregion
+        #endregion
 
         #endregion
+
     }
     #endregion
     

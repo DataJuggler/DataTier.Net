@@ -9,7 +9,7 @@ using DataJuggler.Core.UltimateHelper;
 using ObjectLibrary.BusinessObjects;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Linq;
 
 #endregion
@@ -2449,10 +2449,10 @@ namespace DataAccessComponent.DataGateway
             /// <summary>
             /// returns the Database Connection
             /// </summary>
-            public bool TestDatabaseConnection(ref Exception error)
+            public PolymorphicObject TestDatabaseConnection(ref Exception error)
             {
                 // initial value
-                bool connected = false;
+                PolymorphicObject result = null;
 
                 // If the this object does not have a HasAppController property
                 if (!this.HasAppController)
@@ -2469,10 +2469,10 @@ namespace DataAccessComponent.DataGateway
                 }
 
                 // perform the test
-                connected = this.AppController.TestDatabaseConnection(ref error, this.DataManager);
+                result = this.AppController.TestDatabaseConnection(ref error, this.DataManager);
 
                 // return value
-                return connected;
+                return result;
             }
             #endregion
             

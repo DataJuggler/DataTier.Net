@@ -9,7 +9,7 @@ using DataJuggler.Core.UltimateHelper;
 using ObjectLibrary.BusinessObjects;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Linq;
 
 #endregion
@@ -1269,28 +1269,22 @@ namespace DataAccessComponent.DataGateway
 
             #region GetLastException()
             /// <summary>
-            /// This method returns the last Exception from the AppController if one exists.
-            /// Always test for null before refeferencing the Exception returned as it will be null 
-            /// if no errors were encountered.
+            /// returns the Last Exception
             /// </summary>
-            /// <returns></returns>
             public Exception GetLastException()
             {
                 // initial value
-                Exception exception = null;
+                Exception lastException = null;
 
-                // if the value for HasErrorHandler is true
-                if ((HasErrorHandler) && (ErrorHandler.HasExceptions))
+                // if the value for HasDataManager is true and DataManager.HasExceptions is true
+                if ((HasDataManager) && (DataManager.HasExceptions))
                 {
-                    // return the Exception from the AppController
-                    exception = AppController.ErrorHandler.Exceptions.LastOrDefault();
-
-                    // Set to null after the exception is retrieved so it does not return again
-                    AppController.Exception = null;
+                    // set the return value
+                    lastException = DataManager.Exceptions.LastOrDefault();
                 }
 
                 // return value
-                return exception;
+                return lastException;
             }
             #endregion
 
@@ -1846,6 +1840,9 @@ namespace DataAccessComponent.DataGateway
             /// <param name="project"></param>
             public void LoadProjectReferencesForProject(ref Project project)
             {
+                // local
+                // List<ProjectReference> tempReferences = null;
+
                 // if the project exists
                 if(project != null)
                 {
@@ -1863,22 +1860,7 @@ namespace DataAccessComponent.DataGateway
 
                         // Create the default references
                         project.CreateDefaultReferences();
-                    }
-
-                    // Instanciate AllReferences
-                    project.AllReferences = new List<ReferencesSet>();
-                        
-                    // Add each ReferencesSet to project.AllReferences; 
-
-                    // This fixes a bug that a project that was opened
-                    // does not populate the ReferencesSet combo boxes.
-                    project.AllReferences.Add(project.ControllerReferencesSet);
-                    project.AllReferences.Add(project.DataManagerReferencesSet);
-                    project.AllReferences.Add(project.DataOperationsReferencesSet);
-                    project.AllReferences.Add(project.ObjectReferencesSet);
-                    project.AllReferences.Add(project.ReaderReferencesSet);
-                    project.AllReferences.Add(project.StoredProcedureReferencesSet);
-                    project.AllReferences.Add(project.WriterReferencesSet);
+                    }                    
                 }
             }
             #endregion

@@ -4,9 +4,12 @@
 
 using System;
 using Microsoft.SqlServer.Management.Smo;
+using Microsoft.Data.SqlClient;
+using Microsoft.SqlServer.Management.Common;
 using System.Data;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using DataJuggler.Core.UltimateHelper;
 
 #endregion
 
@@ -23,15 +26,16 @@ namespace DataTierClient.ClientUtil
     public class SQLSMOHelper
     {
 
-        #region GetDatabases(string serverName, ComboBox comboBox)
+        #region GetDatabases(string serverName, ComboBox comboBox, string connectionString = "")
         /// <summary>
         /// This method gets a list of databases for the selected server.
         /// </summary>
         /// <returns></returns>
-        public static void GetDatabases(string serverName, ComboBox comboBox)
+        public static void GetDatabases(string serverName, ComboBox comboBox, string connectionString = "")
         {
-            // local
+            // locals
             string databaseName = "";
+            Server server = null;
 
             try
             {
@@ -44,8 +48,21 @@ namespace DataTierClient.ClientUtil
                     // Referesh
                     comboBox.Refresh();
                 
-                    // get the local server first
-                    Server server = new Server(serverName);
+                    // If the connectionString string exists
+                    if (TextHelper.Exists(connectionString))
+                    {
+                        // e.g. "Server=myServer;Database=master;User Id=myUser;Password=myPass;"
+                        SqlConnection sqlConn = new SqlConnection(connectionString);
+                        ServerConnection serverConnection = new ServerConnection(sqlConn);
+
+                        // connect
+                        server = new Server(serverConnection);
+                    }
+                    else
+                    {
+                         // get the local server first
+                        server = new Server(serverName);
+                    }
 
                     // loop through each database
                     foreach(Database database in server.Databases)
@@ -75,7 +92,7 @@ namespace DataTierClient.ClientUtil
             }
         }
         #endregion
-        
+
         #region GetSQLServers()
         /// <summary>
         /// This method gets a list of all available SQLServers.

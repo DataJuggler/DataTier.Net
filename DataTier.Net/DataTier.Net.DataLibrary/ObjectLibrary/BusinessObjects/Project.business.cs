@@ -299,17 +299,8 @@ namespace ObjectLibrary.BusinessObjects
                 WriterReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.UpdateProcedures"));
                 WriterReferencesSet.References.Add(new ProjectReference("System.Data"));
                 
-                // if .NET6, .NET7, .NET8, .NET9 or .NET10
-                if ((int) TargetFramework > 5)
-                {
-                    // Switch to Microsoft
-                    WriterReferencesSet.References.Add(new ProjectReference("Microsoft.Data.SqlClient"));
-                }
-                else
-                {
-                    // All Dot Net Core projects
-                    WriterReferencesSet.References.Add(new ProjectReference("System.Data.SqlClient"));
-                }
+                // Update 8.13.2026: Going forward everything is using Microsoft.Data.SqlClient, 
+                WriterReferencesSet.References.Add(new ProjectReference("Microsoft.Data.SqlClient"));
                 
                 // Set StoredProcedure Namespace
                 StoredProcedureObjectNamespace = "DataAccessComponent.StoredProcedureManager";
@@ -567,7 +558,7 @@ namespace ObjectLibrary.BusinessObjects
             #region UpdateReferences(TargetFrameworkEnum previousFramework)
             /// <summary>
             /// This method updates the Stored Procedure References Set with the correct version of .NET Frameowork.
-            /// Also, if greater than .NET 5, you must use Microsoft.Data.SqlClient, not System.Data.SqlClient
+            /// 8.13.2026: From now everything will use Microsoft.Data.SqlClient (instead of System. Data.SqlClient
             /// </summary>
             public void UpdateReferences(TargetFrameworkEnum previousFramework)
             {
@@ -575,54 +566,26 @@ namespace ObjectLibrary.BusinessObjects
                 int index = -1;
                 
                 // *********************************************************************
-                // ***********   System.Data.SqlClient and Microsoft.Data.SqlClient    ************
+                // **************   Everything is now Microsoft.Data.SqlClient    ***************
                 // *********************************************************************
                 
-                // if .NET 6, .NET 7, .NET 8, .NET9 or .NET10
-                if (((int) TargetFramework > 5) && (WriterReferencesSet != null))
+                // find the index of System.Data.SqlClient
+                index = FindReferenceIndex(WriterReferencesSet.References, "System.Data.SqlClient");
+                    
+                // if the index was found
+                if (index >= 0)
                 {
-                    // find the index of System.Data.SqlClient
-                    index = FindReferenceIndex(WriterReferencesSet.References, "System.Data.SqlClient");
-                    
-                    // if the index was found
-                    if (index >= 0)
-                    {
-                        // remove this item
-                        WriterReferencesSet.References.RemoveAt(index);
+                    // remove this item
+                    WriterReferencesSet.References.RemoveAt(index);
                         
-                        // now find this index
-                        index = FindReferenceIndex(WriterReferencesSet.References, "Microsoft.Data.SqlClient");
-                        
-                        // only add if not already there
-                        if (index < 0)
-                        {
-                            // Switch to Microsoft
-                            WriterReferencesSet.References.Add(new ProjectReference("Microsoft.Data.SqlClient"));
-                        }
-                    }
-                }
-                else
-                {
-                    // .NET5 / .NETFramework
-                    
-                    // find the index of Microsoft.Data.SqlClient
-                    index = FindReferenceIndex(WriterReferencesSet.References, "Microsoft.Data.SqlClient");
-                    
-                    // if the index was found
-                    if (index >= 0)
-                    {
-                        // remove this item
-                        WriterReferencesSet.References.RemoveAt(index);
-                    }
-                    
                     // now find this index
-                    index = FindReferenceIndex(WriterReferencesSet.References, "System.Data.SqlClient");
-                    
+                    index = FindReferenceIndex(WriterReferencesSet.References, "Microsoft.Data.SqlClient");
+                        
                     // only add if not already there
                     if (index < 0)
                     {
-                        // I think .NET5 and .NETFramework both need  Will answer this question soon.
-                        WriterReferencesSet.References.Add(new ProjectReference("System.Data.SqlClient"));
+                        // Switch to Microsoft
+                        WriterReferencesSet.References.Add(new ProjectReference("Microsoft.Data.SqlClient"));
                     }
                 }
                 

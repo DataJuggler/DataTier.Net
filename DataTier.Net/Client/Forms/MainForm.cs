@@ -5,6 +5,7 @@
 using DataAccessComponent.Connection;
 using DataAccessComponent.Controllers;
 using DataAccessComponent.DataGateway;
+using DataAccessComponent.DataOperations;
 using DataJuggler.Core.UltimateHelper;
 using DataJuggler.Core.UltimateHelper.Objects;
 using DataJuggler.Net;
@@ -1879,12 +1880,22 @@ namespace DataTierClient.Forms
                 // Create the buttonManager
                 ButtonManager = new ButtonManager();
 
+                // test the database connection
+                PolymorphicObject result = TestDatabaseConnection();
+
                 // Test the database connection, if this fails, it will run setup again
-                SetupComplete = TestDatabaseConnection();
+                SetupComplete = result.Success;
                
                 // If the Setup is not complete, show the Setup Form
                 if (!SetupComplete)
                 {
+                    // test only maybe
+                    if (result.HasError)
+                    {
+                        // test only
+                        MessageBoxHelper.ShowMessage(result.Error.ToString(), "Database Connection Error");
+                    }
+
                     // run the setup
                     userCancelledSetup = RunSetup();
 
@@ -1900,10 +1911,10 @@ namespace DataTierClient.Forms
                 if (SetupComplete)
                 {
                     // Connect To The Local Database
-                    bool connected = TestDatabaseConnection();
+                    result = TestDatabaseConnection();
                 
                     // If not connected 
-                    if(!connected)
+                    if(!result.Success)
                     {  
                         // set message
                         string message = "A connection to the database could not be established.";
@@ -2499,10 +2510,10 @@ namespace DataTierClient.Forms
             /// <summary>
             /// This method tests the database connection.
             /// </summary>
-            internal bool TestDatabaseConnection()
+            internal PolymorphicObject TestDatabaseConnection()
             {
                 // initial value
-                bool success = false;
+                PolymorphicObject result = new PolymorphicObject();
             
                 // Create App Controller
                 this.Gateway = new Gateway(ConnectionConstants.Name);
@@ -2523,10 +2534,10 @@ namespace DataTierClient.Forms
                 Exception error = null;
                 
                 // execute method
-                success = Gateway.TestDatabaseConnection(ref error);
+                result = Gateway.TestDatabaseConnection(ref error);
 
                 // if not connected
-                if (!success)
+                if (!result.Success)
                 {
                     // Show a failure message
                     displayText = "Test Database Connection... Failed. ";
@@ -2539,13 +2550,13 @@ namespace DataTierClient.Forms
                 listItem.Tag = error;
 
                 // now update the list item with success or failure
-                UpdateStatus(listItem, success);
+                UpdateStatus(listItem, result.Success);
 
                 // Create Status Message
                 CreateStatusMessage("Test Complete.");
                 
                 // return value
-                return success;
+                return result;
             } 
             #endregion
             
@@ -2600,6 +2611,7 @@ namespace DataTierClient.Forms
                 {
                     // Update for DataTier.Net v1
                     ManageDataButton.Enabled = false;
+                    ManageDataButton.ForeColor = Color.DarkGray;
                     ButtonManager.HandleButtonImage(ManageDataButton, false);
                     StoredProcedureSQLButton.Visible = false;
                 }

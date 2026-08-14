@@ -86,31 +86,31 @@ namespace DataAccessComponent.Controllers
             }
             #endregion
 
-            #region bool TestDatabaseConnection(ref Exception error, DataManager dataManager)
+            #region TestDatabaseConnection(ref Exception error, DataManager dataManager)
             /// <summary>
             /// Connect to the database
             /// </summary>
-            public bool TestDatabaseConnection(ref Exception error, DataManager dataManager)
+            public PolymorphicObject TestDatabaseConnection(ref Exception error, DataManager dataManager)
             {
                 // Initial value
-                ConnectionTested = false;
+                PolymorphicObject result = null;
 
                 try
                 {
                     // Test Data Connection
-                    ConnectionTested = SystemController.TestDatabaseConnection(dataManager);
+                    result = SystemController.TestDatabaseConnection(dataManager);
                 }
                 catch (Exception exception)
                 {
                     // set the exception
-                    error = exception;
+                    result.Error = exception;
 
                     // Log the error
                     ErrorHandler.LogError("TestDatabaseConnection", "ApplicationController", exception);
                 }
 
                 // return value
-                return ConnectionTested;
+                return result;
             }
             #endregion
 

@@ -46,7 +46,7 @@ namespace DataAccessComponent.Controllers
         /// <summary>
         /// Tests the connection to the database
         /// </summary>
-        internal static bool TestDatabaseConnection(DataManager dataManager)
+        internal static PolymorphicObject TestDatabaseConnection(DataManager dataManager)
         {
             // initial value
             PolymorphicObject result = new PolymorphicObject();
@@ -68,12 +68,15 @@ namespace DataAccessComponent.Controllers
             }
             catch (Exception error)
             {  
+                // store the error
+                result.Error = error;    
+
                 // for debugging only
                 DebugHelper.WriteDebugError("TestDatabaseConnection", "SystemController", error);
             }
 
             // return value
-            return result.Success;
+            return result;
         }
         #endregion
 

@@ -136,7 +136,7 @@ namespace DataTierClient.Controls
                     if ((InstallProcedureMethod == InstallProcedureMethodEnum.Install) && (this.HasOpenProject))
                     {
                         // create the SqlConnection
-                        System.Data.SqlClient.SqlConnection connection = new System.Data.SqlClient.SqlConnection();
+                        Microsoft.Data.SqlClient.SqlConnection connection = new Microsoft.Data.SqlClient.SqlConnection();
 
                         // set the index
                         int index = this.ProcedureTextBox.Text.ToLower().IndexOf("-- check if the procedure already exists");

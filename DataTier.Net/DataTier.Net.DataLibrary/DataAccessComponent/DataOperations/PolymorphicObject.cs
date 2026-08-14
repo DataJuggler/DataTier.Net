@@ -37,6 +37,7 @@ namespace DataAccessComponent.DataOperations
         private object objectValue;
         private bool aborted;
         private string abortedReason;
+        private Exception error;
         #endregion
 
         #region Constructor
@@ -115,6 +116,34 @@ namespace DataAccessComponent.DataOperations
             }
             #endregion
 
+            #region Error
+            /// <summary>
+            /// This property gets or sets the value for 'Error'.
+            /// </summary>
+            public Exception Error
+            {
+                get { return error; }
+                set { error = value; }
+            }
+            #endregion
+            
+            #region HasError
+            /// <summary>
+            /// This property returns true if this object has an 'Error'.
+            /// </summary>
+            public bool HasError
+            {
+                get
+                {
+                    // initial value
+                    bool hasError = (Error != null);
+
+                    // return value
+                    return hasError;
+                }
+            }
+            #endregion
+            
             #region IntegerValue
             /// <summary>
             /// The return value from a DataOperation
