@@ -126,8 +126,10 @@ Open the database in SSMS. Select the DataTier.NET.Database and the following qu
     GatewayPath = '(Paste in the path to your Gateway file)'        -- Update your path here before running
     Go
 
-The reason for the updates is when adding two DataTier.NET data tiers to a project, you need them to be uniquely named.
-Sorry if this breaks anyone, but hardcoded paths and name are bad. After 15 years it's time to change them.
+The reason for the update is when adding two DataTier.NET data tiers to a project, you need them to be uniquely named.
+There is a new Gateway Editor in the Project Wizard. This defaults to DataAccessComponent\DataGateway\Gateway.cs, but you can
+now change the name of the Gateway file. Sorry if this breaks anyone, but hardcoded paths and name are bad. 
+After 15 years it's time to change them.
 
 If you have a lot of projects to update, there is a fine in the SQL Scripts folder of this repo:
 
