@@ -91,7 +91,7 @@ namespace DataAccessComponent.DataBridge
             internal static PolymorphicObject PerformDataOperation(string methodName, string objectName, ApplicationController.DataOperationMethod dataMethod, List<PolymorphicObject> parameters, DataManager dataManager)
             {
                 // Initial Value
-                PolymorphicObject returnObject = null;
+                PolymorphicObject returnObject = new PolymorphicObject();
 
                 try
                 {

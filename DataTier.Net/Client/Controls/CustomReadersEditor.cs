@@ -178,7 +178,7 @@ namespace DataTierClient.Controls
                             Exception exception = gateway.GetLastException();
 
                             // Show the user a warning the save failed
-                            MessageHelper.DisplayMessage("An error occurred saving your Custom Reader. Debug the issue in the OnSave event.", "Save Failed");
+                            MessageHelper.DisplayMessage("An error occurred saving your Custom Reader. Debug the issue in the OnSave event.", "Save Failed", exception);
                         }
                     }
                 }

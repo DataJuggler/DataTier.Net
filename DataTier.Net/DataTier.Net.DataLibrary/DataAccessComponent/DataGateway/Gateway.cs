@@ -1907,7 +1907,7 @@ namespace DataAccessComponent.DataGateway
                     project.ObjectReferencesSet = FindReferencesSet(project.ObjectReferencesSetId);
                     project.ReaderReferencesSet = FindReferencesSet(project.ReaderReferencesSetId);
                     project.StoredProcedureReferencesSet = FindReferencesSet(project.StoredProcedureReferencesSetId);
-                    project.WriterReferencesSet = FindReferencesSet(project.DataWriterReferencesSetId);                    
+                    project.WriterReferencesSet = FindReferencesSet(project.DataWriterReferencesSetId);                                        
                 }
             }
             #endregion
@@ -2258,6 +2258,7 @@ namespace DataAccessComponent.DataGateway
                 bool readerReferencesSetSaved = false;
                 bool storedProcedureReferencesSetSaved = false;
                 bool writerReferencesSetSaved = false;
+                bool gatewayReferencesSaved = false;
                     
                 // if project exists
                 if ((project != null) && (project.ValidReferences))
@@ -2273,7 +2274,7 @@ namespace DataAccessComponent.DataGateway
                     ReferencesSet readerReferencesSet = project.ReaderReferencesSet;                    
                     ReferencesSet storedProcedureReferencesSet = project.StoredProcedureReferencesSet;
                     ReferencesSet writerReferencesSet = project.WriterReferencesSet;
-
+                    
                     // Save each ReferencesSet
                     controllerReferencesSetSaved = SaveReferencesSet(ref controllerReferencesSet, true);
                     dataManagerReferencesSetSaved = SaveReferencesSet(ref dataManagerReferencesSet, true);
@@ -2282,7 +2283,7 @@ namespace DataAccessComponent.DataGateway
                     readerReferencesSetSaved = SaveReferencesSet(ref readerReferencesSet, true);
                     storedProcedureReferencesSetSaved = SaveReferencesSet(ref storedProcedureReferencesSet, true);
                     writerReferencesSetSaved = SaveReferencesSet(ref writerReferencesSet, true);
-        
+                    
                     // if all saves succeeded
                     if ((controllerReferencesSetSaved) && (dataManagerReferencesSetSaved) && (dataOperationsReferencesSetSaved) && (objectReferencesSetSaved) && (readerReferencesSetSaved) && (storedProcedureReferencesSetSaved) && (writerReferencesSetSaved))
                     {
@@ -2294,7 +2295,7 @@ namespace DataAccessComponent.DataGateway
                         project.ReaderReferencesSet = readerReferencesSet;
                         project.StoredProcedureReferencesSet = storedProcedureReferencesSet;
                         project.WriterReferencesSet = writerReferencesSet;
-
+                        
                         // Update ID's for Project object
                         project.ControllerReferencesSetId = project.ControllerReferencesSet.ReferencesSetId;
                         project.DataManagerReferencesSetId = project.DataManagerReferencesSet.ReferencesSetId;

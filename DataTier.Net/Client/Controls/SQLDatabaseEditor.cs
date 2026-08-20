@@ -408,7 +408,7 @@ namespace DataTierClient.Controls
                     string err = error.ToString();
 
                     // Show a message to the user
-                    MessageHelper.DisplayMessage("An error occurred detecting SQL Servers on your network", "SQL Servers Unavailable");
+                    MessageHelper.DisplayMessage("An error occurred detecting SQL Servers on your network", "SQL Servers Unavailable", error);
                 }
                 finally
                 {

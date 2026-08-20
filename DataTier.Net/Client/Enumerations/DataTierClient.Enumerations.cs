@@ -18,7 +18,8 @@ namespace DataTierClient.Enumerations
         WritersTab = 6,
         ControllersTab = 7,
         DataOperationsTab = 8,
-        DataManagerTab = 9
+        DataManagerTab = 9,
+        GatewayTab = 10
     }
     #endregion
 

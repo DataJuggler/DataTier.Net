@@ -282,7 +282,7 @@ namespace DataTierClient.Forms
                     DebugHelper.WriteDebugError("InstallConnectionString_Click", "ConnectionStringBuilderForm", error);
 
                     // Show user a message
-                    MessageHelper.DisplayMessage("An error occurred updating your configuration: " + error.ToString(), "Update Config Error");
+                    MessageHelper.DisplayMessage("An error occurred updating your configuration: " + error.ToString(), "Update Config Error", error);
                 }
             }
             #endregion

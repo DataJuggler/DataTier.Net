@@ -31,6 +31,8 @@ namespace ObjectLibrary.BusinessObjects
         private string dataWriterNamespace;
         private int dataWriterReferencesSetId;
         private DateTime dateModified;
+        private string gatewayNamespace;
+        private string gatewayPath;
         private string objectFolder;
         private string objectNamespace;
         private int objectReferencesSetId;
@@ -258,6 +260,34 @@ namespace ObjectLibrary.BusinessObjects
                 set
                 {
                     dateModified = value;
+                }
+            }
+            #endregion
+
+            #region string GatewayNamespace
+            public string GatewayNamespace
+            {
+                get
+                {
+                    return gatewayNamespace;
+                }
+                set
+                {
+                    gatewayNamespace = value;
+                }
+            }
+            #endregion
+
+            #region string GatewayPath
+            public string GatewayPath
+            {
+                get
+                {
+                    return gatewayPath;
+                }
+                set
+                {
+                    gatewayPath = value;
                 }
             }
             #endregion

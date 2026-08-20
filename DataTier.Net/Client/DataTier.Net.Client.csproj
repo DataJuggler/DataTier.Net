@@ -369,6 +369,12 @@
     <Compile Include="Controls\DataManagerEditor.Designer.cs">
       <DependentUpon>DataManagerEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GatewayEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\GatewayEditor.Designer.cs">
+      <DependentUpon>GatewayEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DataObjectsEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -770,6 +776,10 @@
     <EmbeddedResource Include="Controls\DataManagerEditor.resx">
       <SubType>Designer</SubType>
       <DependentUpon>DataManagerEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\GatewayEditor.resx">
+      <DependentUpon>GatewayEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DataObjectsEditor.resx">
       <SubType>Designer</SubType>

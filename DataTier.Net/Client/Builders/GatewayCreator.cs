@@ -40,14 +40,13 @@ namespace DataTierClient.Builders
 		/// <summary>
         /// Create a new instance of GatewayCreator
         /// </summary>
-        public GatewayCreator(List<DataTable> dataTablesArg, ReferencesSet objectReferencesArg, string gatewayPathArg, string projectNameArg, string nameSpaceNameArg, ProjectFileManager fileManager, TargetFrameworkEnum targetFramework) : base(fileManager, false, false, targetFramework)
+        public GatewayCreator(List<DataTable> dataTablesArg, string gatewayPathArg, string projectNameArg, string nameSpaceNameArg, ProjectFileManager fileManager, TargetFrameworkEnum targetFramework) : base(fileManager, false, false, targetFramework)
 		{   
 		    // Set Properties
 		    DataTables = dataTablesArg;
 		    ProjectName = projectNameArg;
 		    NameSpaceName = nameSpaceNameArg;
-		    GatewayPath = gatewayPathArg;
-		    ObjectReferences = objectReferencesArg;
+		    GatewayPath = gatewayPathArg;		    
 		}
 		#endregion
 

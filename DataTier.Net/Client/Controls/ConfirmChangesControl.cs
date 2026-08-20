@@ -169,7 +169,7 @@ namespace DataTierClient.Controls
                     string err = error.ToString();
 
                     // Show the user a message
-                    MessageHelper.DisplayMessage("An error occurred updating your projects. Debug the error in the event ConfirmUpdate_Click", "Update Failed");
+                    MessageHelper.DisplayMessage("An error occurred updating your projects. Debug the error in the event ConfirmUpdate_Click", "Update Failed", error);
                 }
             }
             #endregion
@@ -3259,7 +3259,7 @@ namespace DataTierClient.Controls
                 bool updated = false;
 
                 // get the gatewayFile
-                string gatewayFile = Path.Combine(ProjectFolder,  @"DataGateway\Gateway.cs");
+                string gatewayFile = Project.GatewayPath;
 
                  // if version 2
                 if (Project.TemplateVersion == 2)

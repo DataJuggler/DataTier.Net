@@ -110,6 +110,31 @@ https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Roo
 
 # Updates & News
 
+Update 8.20.2026: Today I modified the DataTier.NET Database. If you have existing project, to update your database.
+Open the database in SSMS. Select the DataTier.NET.Database and the following query
+
+    Alter Table Project
+    Add GatewayNamespace nvarchar(100) null,
+    Go
+
+    Alter Table Project
+    Add GatewayPath nvarchar(255) null,
+    Go
+
+    Update Project
+    Set GatewayNamespace = 'DataGateway',
+    GatewayPath = '(Paste in the path to your Gateway file)'        -- Update your path here before running
+    Go
+
+The reason for the updates is when adding two DataTier.NET data tiers to a project, you need them to be uniquely named.
+Sorry if this breaks anyone, but hardcoded paths and name are bad. After 15 years it's time to change them.
+
+If you have a lot of projects to update, there is a fine in the SQL Scripts folder of this repo:
+
+If you have a lot of projects, this script should update them or set them to NULL if the project path can't be found
+C:\Projects\GitHub\DataTier.Net\DataTier.Net\Database\SQL Scripts\UpdateGatewayPath.sql
+
+
 8.14.2026: A bunch of Microsoft NuGet packages were updated, and System.Data.SqlClient was completely removed. This only affects
 legacy projects like my day job project. Everything has been replaced with Microsoft.Data.SqlClient.
 

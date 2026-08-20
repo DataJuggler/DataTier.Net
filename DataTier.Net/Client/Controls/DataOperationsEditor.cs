@@ -45,14 +45,13 @@ namespace DataTierClient.Controls
         
         #region Events
 
-            #region BrowseDataOperationsFolderButton_Click(object sender, EventArgs e)
+            #region BrowseGatewayFolderButton_Click(object sender, EventArgs e)
             /// <summary>
-            /// This event is used to browse for the Data Operations
-            /// folder.
+            /// This event is used to browse for the Gateway folder.
             /// </summary>
             /// <param name="sender"></param>
             /// <param name="e"></param>
-            private void BrowseDataOperationsFolderButton_Click(object sender, EventArgs e)
+            private void BrowseGatewayFolderButton_Click(object sender, EventArgs e)
             {
                 // Browse for the folder
                 DialogHelper.ChooseFolder(this.DataOperationsFolderTextBox, this.ProjectFolder);    
@@ -195,7 +194,7 @@ namespace DataTierClient.Controls
                     case "...":
 
                         // call the BrowseObjectFolderButton_Click event
-                        BrowseDataOperationsFolderButton_Click(this, null);
+                        BrowseGatewayFolderButton_Click(this, null);
 
                         // required
                         break;

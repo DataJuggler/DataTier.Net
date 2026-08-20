@@ -285,7 +285,7 @@ namespace DataTierClient.Controls
                     string deleteProcFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\StoredProcedureManager\DeleteProcedures", "Delete" + this.SelectedTable.TableName + "StoredProcedure.cs");
                     string fetchAllProcFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\StoredProcedureManager\FetchProcedures", "FetchAll" + PluralWordHelper.GetPluralName(this.SelectedTable.TableName, false) + "StoredProcedure.cs");
                     string findProcFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\StoredProcedureManager\FetchProcedures", "Find" + this.SelectedTable.TableName + "StoredProcedure.cs");
-                    string gatewayFileName = Path.Combine(Project.ProjectFolder, @"DataGateway", "Gateway.cs");
+                    string gatewayFileName = Project.GatewayPath;
                     string insertProcFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\StoredProcedureManager\InsertProcedures", "Insert" + this.SelectedTable.TableName + "StoredProcedure.cs");
                     string methodsFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\DataOperations", this.SelectedTable.TableName + "Methods.cs");
                     string readerFileName = Path.Combine(Project.ProjectFolder, @"DataAccessComponent\Data\Readers", this.SelectedTable.TableName + "Reader.cs");

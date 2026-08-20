@@ -135,7 +135,7 @@ namespace DataTierClient.ClientUtil
             catch (Exception error)
             {
                 // Show user error
-                MessageHelper.DisplayMessage("An error occurred serializing an object. The error is: " + Environment.NewLine + error.ToString(), "Serialization Error");
+                MessageHelper.DisplayMessage("An error occurred serializing an object. The error is: " + Environment.NewLine + error.ToString(), "Serialization Error", error);
             }
             
             // return value

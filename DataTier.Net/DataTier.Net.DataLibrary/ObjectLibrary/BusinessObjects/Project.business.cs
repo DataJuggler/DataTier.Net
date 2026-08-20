@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using DataJuggler.Core.UltimateHelper;
+using System.IO;
 
 #endregion
 
@@ -127,6 +128,9 @@ namespace ObjectLibrary.BusinessObjects
                         
                         // Set the Controllers Folder
                         ControllerFolder = AppendToProjectFolder(@"DataAccessComponent\Controllers");
+
+                        // Set the Gateway Path
+                        GatewayPath = AppendToProjectFolder(@"DataAccessComponent\DataGateway\Gateway.cs");
                     }
                     
                     // Set the StoredProcedureFolder
@@ -301,7 +305,18 @@ namespace ObjectLibrary.BusinessObjects
                 
                 // Update 8.13.2026: Going forward everything is using Microsoft.Data.SqlClient, 
                 WriterReferencesSet.References.Add(new ProjectReference("Microsoft.Data.SqlClient"));
-                
+
+                // Set the Gateway Namespace
+                GatewayNamespace = "DataAccessComponent.DataGateway";
+
+                // If the ProjectFolder text has been set
+                if (TextHelper.Exists(ProjectFolder))
+                {
+                    // Set the GatewayPath
+                    string gatewayFile = @"DataAccessComponent\DataGateway\Gateway.cs";
+                    GatewayPath = Path.Combine(ProjectFolder, gatewayFile);
+                }
+
                 // Set StoredProcedure Namespace
                 StoredProcedureObjectNamespace = "DataAccessComponent.StoredProcedureManager";
                 

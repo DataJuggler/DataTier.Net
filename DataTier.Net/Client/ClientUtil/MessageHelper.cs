@@ -5,6 +5,7 @@
 using DataTierClient.Forms;
 using System.Media;
 using DataJuggler.Core.UltimateHelper;
+using System;
 
 #endregion
 
@@ -27,7 +28,7 @@ namespace DataTierClient.ClientUtil
             /// <summary>
             /// method Display Message
             /// </summary>
-            public static void DisplayMessage(string messageText, string title)
+            public static void DisplayMessage(string messageText, string title, Exception error = null)
             {
                 string playSoundSetting = ConfigurationHelper.ReadAppSetting("PlaySound");
                 bool playSound = BooleanHelper.ParseBoolean(playSoundSetting, false, false);
@@ -44,7 +45,7 @@ namespace DataTierClient.ClientUtil
                 DisplayMessageForm form = new DisplayMessageForm();
                 
                 // Setup Form and Control
-                form.SetMessageText(messageText);
+                form.Setup(messageText, error);
                 form.Text = title;
 
                 // Show the Form

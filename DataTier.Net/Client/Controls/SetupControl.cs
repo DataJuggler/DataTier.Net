@@ -156,7 +156,7 @@ namespace DataTierClient.Controls
                         DebugHelper.WriteDebugError("InstallDatabaseSchemaButton_Click", this.Name, error);  
 
                         // Show a message
-                        MessageHelper.DisplayMessage("An error occurred launching SQL Server Management Studio", "Error Launching SSMS");
+                        MessageHelper.DisplayMessage("An error occurred launching SQL Server Management Studio", "Error Launching SSMS", error);
                     }
                 }
                 else

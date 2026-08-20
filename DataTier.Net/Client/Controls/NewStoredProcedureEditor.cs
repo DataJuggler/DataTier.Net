@@ -212,7 +212,7 @@ namespace DataTierClient.Controls
                     DebugHelper.WriteDebugError("ProcedureButton_Click", "NewStoredProcedureEditor", error);
 
                     // Show a message
-                    MessageHelper.DisplayMessage("An error occurred installing your stored procedure", "Install Error");
+                    MessageHelper.DisplayMessage("An error occurred installing your stored procedure", "Install Error", error);
                 }
             }
             #endregion

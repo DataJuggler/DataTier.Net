@@ -146,7 +146,7 @@ namespace DataTierClient.Controls
                 this.NextControl = ActiveControlEnum.NotSet;
 
                 // Set PrevControl
-                this.PrevControl = ActiveControlEnum.WritersTab;
+                this.PrevControl = ActiveControlEnum.GatewayTab;
                 
                 // Enable Controls
                 UIEnable();

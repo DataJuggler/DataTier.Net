@@ -140,6 +140,14 @@ namespace DataTierClient.Controls
 
                         // required
                         break;  
+
+                     case ActiveControlEnum.GatewayTab:
+
+                        // set selected control
+                        SelectedControl = GatewayEditor;
+
+                        // required
+                        break;  
                 }
                 
                 // if a selected control has been set
@@ -232,6 +240,21 @@ namespace DataTierClient.Controls
             }
             #endregion
 
+            #region MoveNext()
+            /// <summary>
+            /// This method moves the ActiveControl to the Next control.
+            /// </summary>
+            internal void MoveNext()
+            {
+                // if the SelectedControl exists
+                if(SelectedControl != null)
+                {
+                    // Move to the next control
+                    ButtonSelected(SelectedControl.NextControl);
+                }   
+            }
+            #endregion
+
             #region MovePrev()
             /// <summary>
             /// This method moves the ActiveControl to the 
@@ -247,21 +270,6 @@ namespace DataTierClient.Controls
                 }      
             }
             #endregion 
-
-            #region MoveNext()
-            /// <summary>
-            /// This method moves the ActiveControl to the Next control.
-            /// </summary>
-            internal void MoveNext()
-            {
-                // if the SelectedControl exists
-                if(SelectedControl != null)
-                {
-                    // Move to the next control
-                    ButtonSelected(SelectedControl.NextControl);
-                }   
-            }
-            #endregion
 
             #region SaveAndClose()
             /// <summary>
@@ -362,7 +370,7 @@ namespace DataTierClient.Controls
                         }
 
                         // Inform user of error
-                        MessageHelper.DisplayMessage(message, title);
+                        MessageHelper.DisplayMessage(message, title, error);
                     }
 
                     // Close this form

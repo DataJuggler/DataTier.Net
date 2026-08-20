@@ -1,14 +1,14 @@
 
+
 #region using statements
 
-using DataJuggler.Core.UltimateHelper;
-using DataTierClient.Controls.Interfaces;
 using DataTierClient.Enumerations;
+using DataTierClient.ClientUtil;
+using DataTierClient.Controls.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 using ObjectLibrary.BusinessObjects;
-using DataTierClient.ClientUtil;
 using System.Linq;
 
 #endregion
@@ -16,24 +16,23 @@ using System.Linq;
 namespace DataTierClient.Controls
 {
 
-    #region class WriterEditor : UserControl, IWizardControl, ITabButtonParent
+    #region class GatewayEditor : UserControl, IWizardControl, ITabButtonParent
     /// <summary>
     /// This class edits the basic information for a project.
     /// </summary>
-    public partial class WriterEditor : UserControl, IWizardControl, ITabButtonParent
+    public partial class GatewayEditor : UserControl, IWizardControl, ITabButtonParent
     {
 
         #region Private Variables
         private ActiveControlEnum nextControl;
         private ActiveControlEnum prevControl;
-        private ReferencesSet selectedReferencesSet;
         #endregion
 
         #region Constructor
         /// <summary>
-        /// Create a new instance of a WriterControl.
+        /// Create a new instance of a GatewayEditor.
         /// </summary>
-        public WriterEditor()
+        public GatewayEditor()
         {
             // Create Controls
             InitializeComponent();
@@ -45,72 +44,56 @@ namespace DataTierClient.Controls
         
         #region Events
 
-            #region BrowseWriterFolderButton_Click(object sender, EventArgs e)
+            #region BrowseGatewayFolderButton_Click(object sender, EventArgs e)
             /// <summary>
-            /// Browse for the writer folder.
+            /// This event browses for the Gateway folder
             /// </summary>
             /// <param name="sender"></param>
             /// <param name="e"></param>
-            private void BrowseWriterFolderButton_Click(object sender, EventArgs e)
+            private void BrowseGatewayFolderButton_Click(object sender, EventArgs e)
             {
                 // Browse for the folder
-                DataJuggler.Core.UltimateHelper.DialogHelper.ChooseFolder(this.WriterFolderTextBox, this.ProjectFolder);  
+                DialogHelper.ChooseFolder(this.GatewayFolderTextBox, this.ProjectFolder); 
             }
             #endregion
 
-            #region EditWriterReferencesSetButton_Click(object sender, EventArgs e)
+            #region GatewayFolderTextBox_TextChanged(object sender, EventArgs e)
             /// <summary>
-            /// Edit the WriterReferencesSet.
+            /// The Gateway folder has changed.
             /// </summary>
             /// <param name="sender"></param>
             /// <param name="e"></param>
-            private void EditWriterReferencesSetButton_Click(object sender, EventArgs e)
-            {
-                // Edit the references set
-                ReferencesSet refSet = ReferencesSetManager.EditReferencesSet(this.SelectedReferencesSet, this.SelectedProject);
-
-                // Display selected references
-                DisplaySelectedReferencesSet(refSet); 
-            }
-            #endregion
-
-            #region WriterFolderTextBox_TextChanged(object sender, EventArgs e)
-            /// <summary>
-            /// The WriterFolder has changed.
-            /// </summary>
-            /// <param name="sender"></param>
-            /// <param name="e"></param>
-            private void WriterFolderTextBox_TextChanged(object sender, EventArgs e)
+            private void GatewayFolderTextBox_TextChanged(object sender, EventArgs e)
             {
                 // if the SelectedProject exists
                 if (this.SelectedProject != null)
                 {
-                    // Set the Folder
-                    this.SelectedProject.DataWriterFolder = this.WriterFolderTextBox.Text;
+                    // Set the DataObjectsFolder
+                    this.SelectedProject.GatewayPath = this.GatewayFolderTextBox.Text.ToString();
 
                     // Enable Controls
                     UIEnable();
-                }  
+                }     
             }
             #endregion
 
-            #region WriterNamespaceTextBox_TextChanged(object sender, EventArgs e)
+            #region ObjectNamespaceTextBox_TextChanged(object sender, EventArgs e)
             /// <summary>
-            /// The Writer Namespace has changed.
+            /// The object namespace has chagned.
             /// </summary>
             /// <param name="sender"></param>
             /// <param name="e"></param>
-            private void WriterNamespaceTextBox_TextChanged(object sender, EventArgs e)
+            private void GatewayNamespaceTextBox_TextChanged(object sender, EventArgs e)
             {
                 // if the SelectedProject exists
                 if (this.SelectedProject != null)
                 {
-                    // Set the Namespace
-                    this.SelectedProject.DataWriterNamespace = this.WriterNamespaceTextBox.Text;
+                    // Set the ObjectNamespace
+                    this.SelectedProject.GatewayNamespace = this.GatewayNamespaceTextBox.Text.ToString();
 
                     // Enable Controls
                     UIEnable();
-                }  
+                }           
             } 
             #endregion
 
@@ -126,12 +109,12 @@ namespace DataTierClient.Controls
             {
                 // Set Dock To Fill
                 this.Dock = DockStyle.Fill;
-
+                
                 // Set Next Control
-                this.NextControl = ActiveControlEnum.GatewayTab;
-
+                this.NextControl = ActiveControlEnum.StoredProceduresTab;
+                
                 // Set PrevControl
-                this.PrevControl = ActiveControlEnum.ReadersTab;
+                this.PrevControl = ActiveControlEnum.WritersTab;
                 
                 // Enable Controls
                 UIEnable();
@@ -145,39 +128,17 @@ namespace DataTierClient.Controls
             public void DisplaySelectedProject()
             {
                 // if the selected project exists
-                if (this.HasSelectedProject)
+                if(this.HasSelectedProject)
                 {
-                    // display the folder
-                    this.WriterFolderTextBox.Text = this.SelectedProject.DataWriterFolder;
-
-                    // display the namespace
-                    this.WriterNamespaceTextBox.Text = this.SelectedProject.DataWriterNamespace;
-
-                    // display the object references set
-                    this.DisplaySelectedReferencesSet(this.SelectedProject.WriterReferencesSet);
+                    // display the object folder
+                    this.GatewayFolderTextBox.Text = this.SelectedProject.GatewayPath;
+                    
+                    // display the object namespace
+                    this.GatewayNamespaceTextBox.Text = this.SelectedProject.GatewayNamespace;
                 }
-
+                
                 // Enable Controls
                 UIEnable();
-            }
-            #endregion
-
-            #region DisplaySelectedReferencesSet(ReferencesSet refSet)
-            /// <summary>
-            /// This method displays the selected referencesSet
-            /// </summary>
-            /// <param name="refSet"></param>
-            private void DisplaySelectedReferencesSet(ReferencesSet refSet)
-            {
-                // if refSet exists
-                if (refSet != null)
-                {
-                    // Store the Selected References Set
-                    this.SelectedReferencesSet = refSet;
-
-                    // Display the ReferencesSetName
-                    this.WriterReferencesSetTextBox.Text = refSet.ReferencesSetName;
-                }
             }
             #endregion
 
@@ -193,16 +154,8 @@ namespace DataTierClient.Controls
                 {
                     case "...":
 
-                        // call the BrowseWriterFolderButton_Click event
-                        BrowseWriterFolderButton_Click(this, null);
-
-                        // required
-                        break;
-
-                    case "Edit":
-
-                        // Call the EditWriterReferencesSetButton_Click event
-                        EditWriterReferencesSetButton_Click(this, null);
+                        // call the BrowseObjectFolderButton_Click event
+                        BrowseGatewayFolderButton_Click(this, null);
 
                         // required
                         break;
@@ -222,9 +175,6 @@ namespace DataTierClient.Controls
                     // Enable Controls on the project wizard
                     this.ParentProjectWizard.UIEnable();
                 }
-
-                // Enable the Edit button
-                this.EditWriterReferencesSetButton.Enabled = (this.SelectedReferencesSet != null);
             }
             #endregion
 
@@ -298,15 +248,13 @@ namespace DataTierClient.Controls
             /// <summary>
             /// The NextControl to move to.
             /// </summary>
-            [Browsable(false)]
-            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
             public ActiveControlEnum NextControl
             {
                 get { return nextControl; }
                 set { nextControl = value; }
             }
             #endregion
-
+          
             #region ParentProjectWizard
             /// <summary>
             /// The parent ProjectWizardControl that this object 
@@ -339,15 +287,41 @@ namespace DataTierClient.Controls
             /// <summary>
             /// The previous control to move to.
             /// </summary>
-            [Browsable(false)]
-            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
             public ActiveControlEnum PrevControl
             {
                 get { return prevControl; }
                 set { prevControl = value; }
             }
             #endregion  
+            
+            #region SelectedProject
+            /// <summary>
+            /// This property is the selected Project
+            /// being created or edited.
+            /// </summary>
+            [Browsable(false)]
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+            public Project SelectedProject
+            {
+                get
+                {
+                    // initial value
+                    Project selectedProject = null;
 
+                    // does this object have a ParentProjectWizard
+                    if (this.HasParentProjectWizard)
+                    {
+                        // Get the selected object from the ParentProjectWizard.
+                        selectedProject = this.ParentProjectWizard.SelectedProject;
+                    }
+
+                    // return value
+                    return selectedProject;
+                }
+            }
+            #endregion      
+            
             #region ProjectFolder
             /// <summary>
             /// Get the ProjectFolder from the
@@ -370,42 +344,6 @@ namespace DataTierClient.Controls
                     // return value
                     return projectFolder;
                 }
-            }
-            #endregion
-
-            #region SelectedProject
-            /// <summary>
-            /// This property is the selected Project
-            /// being created or edited.
-            /// </summary>
-            public Project SelectedProject
-            {
-                get
-                {
-                    // initial value
-                    Project selectedProject = null;
-
-                    // does this object have a ParentProjectWizard
-                    if (this.HasParentProjectWizard)
-                    {
-                        // Get the selected object from the ParentProjectWizard.
-                        selectedProject = this.ParentProjectWizard.SelectedProject;
-                    }
-
-                    // return value
-                    return selectedProject;
-                }
-            }
-            #endregion
-
-            #region SelectedReferencesSet
-            /// <summary>
-            /// The selected references set being edited.
-            /// </summary>
-            public ReferencesSet SelectedReferencesSet
-            {
-                get { return selectedReferencesSet; }
-                set { selectedReferencesSet = value; }
             }
             #endregion
 

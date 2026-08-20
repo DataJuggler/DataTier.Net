@@ -51,21 +51,23 @@ namespace DataAccessComponent.Data.Readers
                 int dataWriterNamespacefield = 11;
                 int dataWriterReferencesSetIdfield = 12;
                 int dateModifiedfield = 13;
-                int objectFolderfield = 14;
-                int objectNamespacefield = 15;
-                int objectReferencesSetIdfield = 16;
-                int projectFolderfield = 17;
-                int projectIdfield = 18;
-                int projectNamefield = 19;
-                int readerFolderfield = 20;
-                int readerNamespacefield = 21;
-                int readerReferencesSetIdfield = 22;
-                int storedProcedureObjectFolderfield = 23;
-                int storedProcedureObjectNamespacefield = 24;
-                int storedProcedureReferencesSetIdfield = 25;
-                int storedProcsFolderfield = 26;
-                int targetFrameworkfield = 27;
-                int templateVersionfield = 28;
+                int gatewayNamespacefield = 14;
+                int gatewayPathfield = 15;
+                int objectFolderfield = 16;
+                int objectNamespacefield = 17;
+                int objectReferencesSetIdfield = 18;
+                int projectFolderfield = 19;
+                int projectIdfield = 20;
+                int projectNamefield = 21;
+                int readerFolderfield = 22;
+                int readerNamespacefield = 23;
+                int readerReferencesSetIdfield = 24;
+                int storedProcedureObjectFolderfield = 25;
+                int storedProcedureObjectNamespacefield = 26;
+                int storedProcedureReferencesSetIdfield = 27;
+                int storedProcsFolderfield = 28;
+                int targetFrameworkfield = 29;
+                int templateVersionfield = 30;
 
                 try
                 {
@@ -84,6 +86,8 @@ namespace DataAccessComponent.Data.Readers
                     project.DataWriterNamespace = DataHelper.ParseString(dataRow.ItemArray[dataWriterNamespacefield]);
                     project.DataWriterReferencesSetId = DataHelper.ParseInteger(dataRow.ItemArray[dataWriterReferencesSetIdfield], 0);
                     project.DateModified = DataHelper.ParseDate(dataRow.ItemArray[dateModifiedfield]);
+                    project.GatewayNamespace = DataHelper.ParseString(dataRow.ItemArray[gatewayNamespacefield]);
+                    project.GatewayPath = DataHelper.ParseString(dataRow.ItemArray[gatewayPathfield]);
                     project.ObjectFolder = DataHelper.ParseString(dataRow.ItemArray[objectFolderfield]);
                     project.ObjectNamespace = DataHelper.ParseString(dataRow.ItemArray[objectNamespacefield]);
                     project.ObjectReferencesSetId = DataHelper.ParseInteger(dataRow.ItemArray[objectReferencesSetIdfield], 0);

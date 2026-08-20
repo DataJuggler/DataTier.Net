@@ -17,23 +17,25 @@ namespace DataTierClient.Controls
         
         #region Private Variables
         private System.ComponentModel.IContainer components = null;
-        private WizardStatusControl WizardStatusControl;
-        private WizardControlPanel WizardControlPanel;
-        private System.Windows.Forms.Panel MainPanel;
-        private DatabasesEditor DatabasesEditor;
         private ControllerEditor ControllerEditor;
-        private DataOperationsEditor DataOperationsEditor;
+        private DatabasesEditor DatabasesEditor;
         private DataManagerEditor DataManagerEditor;
         private DataObjectsEditor DataObjectsEditor;
-        private WriterEditor WriterEditor;
+        private DataOperationsEditor DataOperationsEditor;
+        private ProjectEditorControl ProjectEditor;
         private ReaderEditor ReaderEditor;
         private StoredProcedureEditor StoredProcedureEditor;
+        private System.Windows.Forms.Panel MainPanel;
+        private WizardControlPanel WizardControlPanel;
+        private WizardStatusControl WizardStatusControl;
+        private GatewayEditor GatewayEditor;
+        private WriterEditor WriterEditor;
         #endregion
         
         #region Methods
             
             #region Dispose(bool disposing)
-            /// <summary> 
+            /// <summary>
             /// Clean up any resources being used.
             /// </summary>
             /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -48,8 +50,8 @@ namespace DataTierClient.Controls
             #endregion
             
             #region InitializeComponent()
-            /// <summary> 
-            /// Required method for Designer support - do not modify 
+            /// <summary>
+            /// Required method for Designer support - do not modify
             /// the contents of this method with the code editor.
             /// </summary>
             private void InitializeComponent()
@@ -57,6 +59,7 @@ namespace DataTierClient.Controls
             this.MainPanel = new System.Windows.Forms.Panel();
             this.ProjectEditor = new DataTierClient.Controls.ProjectEditorControl();
             this.StoredProcedureEditor = new DataTierClient.Controls.StoredProcedureEditor();
+            this.GatewayEditor = new DataTierClient.Controls.GatewayEditor();
             this.WriterEditor = new DataTierClient.Controls.WriterEditor();
             this.ControllerEditor = new DataTierClient.Controls.ControllerEditor();
             this.DataOperationsEditor = new DataTierClient.Controls.DataOperationsEditor();
@@ -73,6 +76,7 @@ namespace DataTierClient.Controls
             // 
             this.MainPanel.Controls.Add(this.ProjectEditor);
             this.MainPanel.Controls.Add(this.StoredProcedureEditor);
+            this.MainPanel.Controls.Add(this.GatewayEditor);
             this.MainPanel.Controls.Add(this.WriterEditor);
             this.MainPanel.Controls.Add(this.ControllerEditor);
             this.MainPanel.Controls.Add(this.DataOperationsEditor);
@@ -83,7 +87,7 @@ namespace DataTierClient.Controls
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPanel.Location = new System.Drawing.Point(180, 0);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(672, 308);
+            this.MainPanel.Size = new System.Drawing.Size(672, 346);
             this.MainPanel.TabIndex = 2;
             // 
             // ProjectEditor
@@ -92,12 +96,13 @@ namespace DataTierClient.Controls
             this.ProjectEditor.BackColor = System.Drawing.Color.Transparent;
             this.ProjectEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ProjectEditor.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProjectEditor.Loading = false;
             this.ProjectEditor.Location = new System.Drawing.Point(0, 0);
             this.ProjectEditor.Name = "ProjectEditor";
             this.ProjectEditor.NextControl = DataTierClient.Enumerations.ActiveControlEnum.DatabasesTab;
             this.ProjectEditor.PrevControl = DataTierClient.Enumerations.ActiveControlEnum.NotSet;
             this.ProjectEditor.ShowAutoFillHelp = false;
-            this.ProjectEditor.Size = new System.Drawing.Size(655, 308);
+            this.ProjectEditor.Size = new System.Drawing.Size(655, 346);
             this.ProjectEditor.TabIndex = 12;
             // 
             // StoredProcedureEditor
@@ -111,8 +116,19 @@ namespace DataTierClient.Controls
             this.StoredProcedureEditor.NextControl = DataTierClient.Enumerations.ActiveControlEnum.NotSet;
             this.StoredProcedureEditor.PrevControl = DataTierClient.Enumerations.ActiveControlEnum.WritersTab;
             this.StoredProcedureEditor.SelectedReferencesSet = null;
-            this.StoredProcedureEditor.Size = new System.Drawing.Size(655, 308);
+            this.StoredProcedureEditor.Size = new System.Drawing.Size(655, 346);
             this.StoredProcedureEditor.TabIndex = 11;
+            // 
+            // GatewayEditor
+            // 
+            this.GatewayEditor.BackColor = System.Drawing.Color.Transparent;
+            this.GatewayEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.GatewayEditor.Location = new System.Drawing.Point(0, 0);
+            this.GatewayEditor.Name = "GatewayEditor";
+            this.GatewayEditor.NextControl = DataTierClient.Enumerations.ActiveControlEnum.StoredProceduresTab;
+            this.GatewayEditor.PrevControl = DataTierClient.Enumerations.ActiveControlEnum.WritersTab;
+            this.GatewayEditor.Size = new System.Drawing.Size(655, 346);
+            this.GatewayEditor.TabIndex = 9;
             // 
             // WriterEditor
             // 
@@ -121,7 +137,7 @@ namespace DataTierClient.Controls
             this.WriterEditor.Location = new System.Drawing.Point(0, 0);
             this.WriterEditor.Name = "WriterEditor";
             this.WriterEditor.SelectedReferencesSet = null;
-            this.WriterEditor.Size = new System.Drawing.Size(655, 308);
+            this.WriterEditor.Size = new System.Drawing.Size(655, 346);
             this.WriterEditor.TabIndex = 9;
             // 
             // ControllerEditor
@@ -130,7 +146,7 @@ namespace DataTierClient.Controls
             this.ControllerEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ControllerEditor.Location = new System.Drawing.Point(0, 0);
             this.ControllerEditor.Name = "ControllerEditor";
-            this.ControllerEditor.Size = new System.Drawing.Size(655, 308);
+            this.ControllerEditor.Size = new System.Drawing.Size(655, 346);
             this.ControllerEditor.TabIndex = 7;
             // 
             // DataOperationsEditor
@@ -140,7 +156,7 @@ namespace DataTierClient.Controls
             this.DataOperationsEditor.Location = new System.Drawing.Point(0, 0);
             this.DataOperationsEditor.Name = "DataOperationsEditor";
             this.DataOperationsEditor.SelectedReferencesSet = null;
-            this.DataOperationsEditor.Size = new System.Drawing.Size(655, 308);
+            this.DataOperationsEditor.Size = new System.Drawing.Size(655, 346);
             this.DataOperationsEditor.TabIndex = 6;
             // 
             // DataManagerEditor
@@ -150,7 +166,7 @@ namespace DataTierClient.Controls
             this.DataManagerEditor.Location = new System.Drawing.Point(0, 0);
             this.DataManagerEditor.Name = "DataManagerEditor";
             this.DataManagerEditor.SelectedReferencesSet = null;
-            this.DataManagerEditor.Size = new System.Drawing.Size(655, 308);
+            this.DataManagerEditor.Size = new System.Drawing.Size(655, 346);
             this.DataManagerEditor.TabIndex = 5;
             // 
             // DataObjectsEditor
@@ -161,7 +177,7 @@ namespace DataTierClient.Controls
             this.DataObjectsEditor.Name = "DataObjectsEditor";
             this.DataObjectsEditor.NextControl = DataTierClient.Enumerations.ActiveControlEnum.DataManagerTab;
             this.DataObjectsEditor.PrevControl = DataTierClient.Enumerations.ActiveControlEnum.DatabasesTab;
-            this.DataObjectsEditor.Size = new System.Drawing.Size(17, 308);
+            this.DataObjectsEditor.Size = new System.Drawing.Size(17, 346);
             this.DataObjectsEditor.TabIndex = 4;
             // 
             // ReaderEditor
@@ -173,7 +189,7 @@ namespace DataTierClient.Controls
             this.ReaderEditor.NextControl = DataTierClient.Enumerations.ActiveControlEnum.WritersTab;
             this.ReaderEditor.PrevControl = DataTierClient.Enumerations.ActiveControlEnum.ControllersTab;
             this.ReaderEditor.SelectedReferencesSet = null;
-            this.ReaderEditor.Size = new System.Drawing.Size(672, 308);
+            this.ReaderEditor.Size = new System.Drawing.Size(672, 346);
             this.ReaderEditor.TabIndex = 8;
             // 
             // DatabasesEditor
@@ -185,7 +201,7 @@ namespace DataTierClient.Controls
             this.DatabasesEditor.NextControl = DataTierClient.Enumerations.ActiveControlEnum.DataObjectsTab;
             this.DatabasesEditor.PrevControl = DataTierClient.Enumerations.ActiveControlEnum.ProjectsTab;
             this.DatabasesEditor.SelectedDatabase = null;
-            this.DatabasesEditor.Size = new System.Drawing.Size(672, 308);
+            this.DatabasesEditor.Size = new System.Drawing.Size(672, 346);
             this.DatabasesEditor.TabIndex = 2;
             // 
             // WizardControlPanel
@@ -194,7 +210,7 @@ namespace DataTierClient.Controls
             this.WizardControlPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.WizardControlPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.WizardControlPanel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WizardControlPanel.Location = new System.Drawing.Point(180, 308);
+            this.WizardControlPanel.Location = new System.Drawing.Point(180, 346);
             this.WizardControlPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.WizardControlPanel.Name = "WizardControlPanel";
             this.WizardControlPanel.Size = new System.Drawing.Size(672, 52);
@@ -208,7 +224,7 @@ namespace DataTierClient.Controls
             this.WizardStatusControl.Location = new System.Drawing.Point(0, 0);
             this.WizardStatusControl.Name = "WizardStatusControl";
             this.WizardStatusControl.SelectedButton = null;
-            this.WizardStatusControl.Size = new System.Drawing.Size(180, 360);
+            this.WizardStatusControl.Size = new System.Drawing.Size(180, 398);
             this.WizardStatusControl.TabIndex = 0;
             // 
             // ProjectWizardControl
@@ -220,20 +236,16 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.WizardControlPanel);
             this.Controls.Add(this.WizardStatusControl);
             this.Name = "ProjectWizardControl";
-            this.Size = new System.Drawing.Size(852, 360);
+            this.Size = new System.Drawing.Size(852, 398);
             this.MainPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
             }
+            #endregion
+            
         #endregion
-
-        #endregion
-
-        private ProjectEditorControl ProjectEditor;
+        
     }
     #endregion
 
 }
-
-
-

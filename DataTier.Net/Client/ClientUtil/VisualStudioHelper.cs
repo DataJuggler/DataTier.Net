@@ -172,7 +172,7 @@ namespace DataTierClient.ClientUtil
                     string title = "Error Reading Project";
 
                     // show the message to the user
-                    MessageHelper.DisplayMessage("An error occurred while reading your project file.", title);
+                    MessageHelper.DisplayMessage("An error occurred while reading your project file.", title, error);
                 }
                 finally
                 {

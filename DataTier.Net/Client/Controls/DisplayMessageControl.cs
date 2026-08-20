@@ -26,6 +26,7 @@ namespace DataTierClient.Controls
         
         #region Private Variables
         private string messageText;
+        private Exception error;
         #endregion
         
         #region Constructor
@@ -41,6 +42,41 @@ namespace DataTierClient.Controls
         
         #region Events
             
+            #region CopyDetailsButton_Click(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when the 'CopyDetailsButton' is clicked.
+            /// </summary>
+            private void CopyDetailsButton_Click(object sender, EventArgs e)
+            {
+                // if the value for HasError is true
+                if (HasError)
+                {
+                    // Copy the message
+                    Clipboard.SetText(Error.ToString());
+
+                    // Show the Copied Icon
+                    CopiedIcon.Visible = true;
+
+                    // Start the timer
+                    CopyTimer.Start();
+                }
+            }
+            #endregion
+            
+            #region CopyTimer_Tick(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when Copy Timer _ Tick
+            /// </summary>
+            private void CopyTimer_Tick(object sender, EventArgs e)
+            {
+                // only run once
+                CopyTimer.Stop();
+
+                // Hide
+                CopiedIcon.Visible = false;
+            }
+            #endregion
+            
             #region DisplayMessageControl_Resize(object sender, EventArgs e)
             /// <summary>
             /// event is fired when Display Message Control _ Resize
@@ -49,6 +85,9 @@ namespace DataTierClient.Controls
             {
                 // Set the width
                 ButtonLeftMarginPanel.Width = (MessageLabel.Width - (OKButton.Width / 2)) / 2;
+
+                // Set the Left of the DisplayMessageControl
+                CopyDetailsButton.Left = ButtonLeftMarginPanel.Width + OKButton.Width + 32;
             }
             #endregion
             
@@ -88,11 +127,58 @@ namespace DataTierClient.Controls
                 Cursor = Cursors.Default;
             }
             #endregion
+
+        #endregion
+
+        #region Methods
+
+            #region Setup(string messageText, Exception exception)
+            /// <summary>
+            /// method returns the
+            /// </summary>
+            public void Setup(string messageText, Exception exception)
+            {
+                // store the args
+                this.MessageText = messageText;
+                this.Error = exception;
+
+                // Show the CopyDetails button if an error exists
+                CopyDetailsButton.Visible = HasError;
+            }
+            #endregion
             
         #endregion
 
         #region Properties
-        
+
+            #region Error
+            /// <summary>
+            /// This property gets or sets the value for 'Error'.
+            /// </summary>
+            public Exception Error
+            {
+                get { return error; }
+                set { error = value; }
+            }
+            #endregion
+            
+            #region HasError
+            /// <summary>
+            /// This property returns true if this object has an 'Error'.
+            /// </summary>
+            public bool HasError
+            {
+                get
+                {
+                    // initial value
+                    bool hasError = (Error != null);
+
+                    // return value
+                    return hasError;
+                }
+            }
+            #endregion
+            
             #region MessageText
             /// <summary>
             /// This property gets or sets the value for 'MessageText'.

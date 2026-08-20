@@ -441,7 +441,7 @@ namespace DataTierClient.Forms
                         }
                         
                         // Inform user of error
-                        MessageHelper.DisplayMessage(errorMessage, "Error");
+                        MessageHelper.DisplayMessage(errorMessage, "Error", error);
                     }
                 }
             } 
@@ -974,20 +974,17 @@ namespace DataTierClient.Forms
                         // Create ClassBuilder
                         ClassBuilder classBuilder = new ClassBuilder(false);
 
-                        // load references
-                        List<ProjectReference> references = this.OpenProject.WriterReferencesSet.References;
-                        DataJuggler.Net.ReferencesSet convertedReferences = classBuilder.ConvertReferences(references, "Writers");
 
-                        // Get namespace and project namew
-                        string nameSpace = OpenProject.DataWriterNamespace;
+                        // Get namespace and project namesw
+                        string nameSpace = OpenProject.GatewayNamespace;
                         string projectName = OpenProject.ProjectName;
-                        string gatewayPath = FindGatewayPath(OpenProject.ProjectFolder);
+                        string gatewayPath = OpenProject.GatewayPath;
 
                         // 12.19.2021
                         TargetFrameworkEnum targetFramework = (TargetFrameworkEnum) OpenProject.TargetFramework;
 
                         // create the writer
-                        GatewayCreator writer = new GatewayCreator(DataTables, convertedReferences, gatewayPath, projectName, nameSpace, this.FileManager, targetFramework);
+                        GatewayCreator writer = new GatewayCreator(DataTables, gatewayPath, projectName, nameSpace, this.FileManager, targetFramework);
 
                         // Write Classes
                         writer.CreateGatewayMethods();
@@ -1506,48 +1503,56 @@ namespace DataTierClient.Forms
                 // initial value
                 Project project = null;
 
-                // Create instance of ProjectWizardForm.
-                ProjectWizardForm wizardForm = new ProjectWizardForm();
-
-                // set wizardForm
-                Project newProject = new Project();
-
-                // New projects must create default references
-                newProject.CreateDefaultReferences();
-
-                // Setup Wizartd Form
-                wizardForm.ProjectWizardControl.Setup(newProject, ActiveControlEnum.ProjectsTab, this);
-
-                // set the images
-                wizardForm.ProjectWizardControl.SetImages(this.SelectedImage, this.NotSelectedImage);
-
-                // Setup WizardForm
-                wizardForm.ShowDialog();
-
-                // set project.
-                project = wizardForm.ProjectWizardControl.SelectedProject;
-
-                // if the project exists and it is not new (meaning the project was saved.)
-                if ((project != null) && (!project.IsNew))
+                try
                 {
-                    // All Projects must be reloaded at this point
-                    this.AllProjects = Gateway.LoadProjects();
+                    // Create instance of ProjectWizardForm.
+                    ProjectWizardForm wizardForm = new ProjectWizardForm();
 
-                    // Set the open project
-                    this.OpenProject = project;
+                    // set wizardForm
+                    Project newProject = new Project();
 
-                    // Load and Save the database schema, so tables or fields can be excluded before the first build
-                    LoadAndSaveDatabaseSchema();
+                    // New projects must create default references
+                    newProject.CreateDefaultReferences();
 
-                    // Set the open project again (this time child objects will load since the schema has been saved)
-                    this.OpenProject = project;
+                    // Setup Wizartd Form
+                    wizardForm.ProjectWizardControl.Setup(newProject, ActiveControlEnum.ProjectsTab, this);
 
-                    // Display Selected Project
-                    this.DisplaySelectedProject(project);
-                }
+                    // set the images
+                    wizardForm.ProjectWizardControl.SetImages(this.SelectedImage, this.NotSelectedImage);
+
+                    // Setup WizardForm
+                    wizardForm.ShowDialog();
+
+                    // set project.
+                    project = wizardForm.ProjectWizardControl.SelectedProject;
+
+                    // if the project exists and it is not new (meaning the project was saved.)
+                    if ((project != null) && (!project.IsNew))
+                    {
+                        // All Projects must be reloaded at this point
+                        this.AllProjects = Gateway.LoadProjects();
+
+                        // Set the open project
+                        this.OpenProject = project;
+
+                        // Load and Save the database schema, so tables or fields can be excluded before the first build
+                        LoadAndSaveDatabaseSchema();
+
+                        // Set the open project again (this time child objects will load since the schema has been saved)
+                        this.OpenProject = project;
+
+                        // Display Selected Project
+                        this.DisplaySelectedProject(project);
+                    }
                 
-                // Enable Controls
-                UIEnable();
+                    // Enable Controls
+                    UIEnable();
+                }
+                catch (Exception error)
+                {
+                    // for debugging only for now
+                    DebugHelper.WriteDebugError("CreateNewProject", "MainForm.cs", error);
+                }
 
                 // return value
                 return project;
@@ -1729,7 +1734,7 @@ namespace DataTierClient.Forms
                                 FileInfo fileInfo = new FileInfo(file);
 
                                 // if this is the Gateway
-                                if (TextHelper.IsEqual(fileInfo.Name, "Gateway.cs"))
+                                if (fileInfo.Name.Contains("Gateway.cs") && !fileInfo.Name.Contains("cs.backup"))
                                 {
                                     // set the return value
                                     gatewayPath = file;

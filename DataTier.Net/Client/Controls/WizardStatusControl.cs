@@ -132,6 +132,21 @@ namespace DataTierClient.Controls
             }
             #endregion
 
+            #region GatewayTab_Click(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when the 'GatewayTab' is clicked.
+            /// </summary>
+            private void GatewayTab_Click(object sender, EventArgs e)
+            {
+                // if this object has a ParentProjectWizard
+                if (this.HasParentProjectWizard)
+                {
+                    // Notify parent that this button was selected.
+                    this.ParentProjectWizard.ButtonSelected(ActiveControlEnum.GatewayTab);
+                }
+            }
+            #endregion
+            
             #region ProjectsTab_Click(object sender, EventArgs e)
             /// <summary>
             /// This event is fired when the ProjectsTab button
@@ -295,6 +310,14 @@ namespace DataTierClient.Controls
 
                         // Call the event
                         WritersTab_Click(this, new EventArgs());
+
+                        // required
+                        break;
+
+                    case "Gateway":
+
+                        // Call the event
+                        GatewayTab_Click(this, new EventArgs());
 
                         // required
                         break;
@@ -504,11 +527,10 @@ namespace DataTierClient.Controls
             {
                 get { return selectedButton; }
                 set { selectedButton = value; }
-            } 
-            #endregion
-        
+            }
         #endregion
-        
+
+        #endregion
     }
     #endregion
     

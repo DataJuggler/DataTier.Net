@@ -3,6 +3,7 @@
 #region using statements
 
 using System.Windows.Forms;
+using System;
 
 #endregion
 
@@ -51,16 +52,16 @@ namespace DataTierClient.Forms
 
         #region Methods
 
-            #region SetMessageText()
+            #region SetMessageText(string messageText, Exception error)
             /// <summary>
             /// Set Message Text
             /// </summary>
-            public void SetMessageText(string text)
+            public void Setup(string messageText, Exception error)
             {
                 // Set the text
-                DisplayMessageControl.MessageText = text;
+                DisplayMessageControl.Setup(messageText, error);
             }
-        #endregion
+            #endregion
 
         #endregion
 

@@ -32,7 +32,6 @@ namespace DataTierClient.Controls
         private System.Windows.Forms.Panel Filler8;
         private TabButton WritersTab;
         private System.Windows.Forms.Panel Filler9;
-        private TabButton StoredProceduresTab;
         private System.Windows.Forms.Panel MainPanel;
         #endregion
         
@@ -70,7 +69,6 @@ namespace DataTierClient.Controls
             this.Filler8 = new System.Windows.Forms.Panel();
             this.Filler9 = new System.Windows.Forms.Panel();
             this.MainPanel = new System.Windows.Forms.Panel();
-            this.StoredProceduresTab = new DataTierClient.Controls.TabButton();
             this.WritersTab = new DataTierClient.Controls.TabButton();
             this.ReadersTab = new DataTierClient.Controls.TabButton();
             this.ControllersTab = new DataTierClient.Controls.TabButton();
@@ -79,6 +77,10 @@ namespace DataTierClient.Controls
             this.DataObjectsTab = new DataTierClient.Controls.TabButton();
             this.DatabasesTab = new DataTierClient.Controls.TabButton();
             this.ProjectsTab = new DataTierClient.Controls.TabButton();
+            this.GatewayTab = new DataTierClient.Controls.TabButton();
+            this.StoredProceduresTab = new DataTierClient.Controls.TabButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.MainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // Filler1
@@ -156,30 +158,14 @@ namespace DataTierClient.Controls
             // MainPanel
             // 
             this.MainPanel.BackColor = System.Drawing.Color.Transparent;
+            this.MainPanel.Controls.Add(this.StoredProceduresTab);
+            this.MainPanel.Controls.Add(this.panel1);
+            this.MainPanel.Controls.Add(this.GatewayTab);
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainPanel.Location = new System.Drawing.Point(0, 344);
+            this.MainPanel.Location = new System.Drawing.Point(0, 312);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(172, 26);
+            this.MainPanel.Size = new System.Drawing.Size(172, 96);
             this.MainPanel.TabIndex = 46;
-            // 
-            // StoredProceduresTab
-            // 
-            this.StoredProceduresTab.BackgroundImage = global::DataTierClient.Properties.Resources.DeepGray;
-            this.StoredProceduresTab.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.StoredProceduresTab.ButtonNumber = 0;
-            this.StoredProceduresTab.ButtonText = "Stored Procedures";
-            this.StoredProceduresTab.Dock = System.Windows.Forms.DockStyle.Top;
-            this.StoredProceduresTab.Font = new System.Drawing.Font("Calibri", 15F);
-            this.StoredProceduresTab.Location = new System.Drawing.Point(0, 312);
-            this.StoredProceduresTab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.StoredProceduresTab.Name = "StoredProceduresTab";
-            this.StoredProceduresTab.NotSelectedImage = null;
-            this.StoredProceduresTab.Selected = false;
-            this.StoredProceduresTab.SelectedImage = null;
-            this.StoredProceduresTab.ShowNotSelectedImageWhenDisabled = false;
-            this.StoredProceduresTab.Size = new System.Drawing.Size(172, 32);
-            this.StoredProceduresTab.TabIndex = 45;
-            this.StoredProceduresTab.Click += new System.EventHandler(this.StoredProceduresTab_Click);
             // 
             // WritersTab
             // 
@@ -333,6 +319,52 @@ namespace DataTierClient.Controls
             this.ProjectsTab.TabIndex = 18;
             this.ProjectsTab.Click += new System.EventHandler(this.ProjectsTab_Click);
             // 
+            // GatewayTab
+            // 
+            this.GatewayTab.BackgroundImage = global::DataTierClient.Properties.Resources.DeepGray;
+            this.GatewayTab.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.GatewayTab.ButtonNumber = 0;
+            this.GatewayTab.ButtonText = "Gateway";
+            this.GatewayTab.Dock = System.Windows.Forms.DockStyle.Top;
+            this.GatewayTab.Font = new System.Drawing.Font("Calibri", 15F);
+            this.GatewayTab.Location = new System.Drawing.Point(0, 0);
+            this.GatewayTab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.GatewayTab.Name = "GatewayTab";
+            this.GatewayTab.NotSelectedImage = null;
+            this.GatewayTab.Selected = false;
+            this.GatewayTab.SelectedImage = null;
+            this.GatewayTab.ShowNotSelectedImageWhenDisabled = false;
+            this.GatewayTab.Size = new System.Drawing.Size(172, 32);
+            this.GatewayTab.TabIndex = 26;
+            this.GatewayTab.Click += new System.EventHandler(this.GatewayTab_Click);
+            // 
+            // StoredProceduresTab
+            // 
+            this.StoredProceduresTab.BackgroundImage = global::DataTierClient.Properties.Resources.DeepGray;
+            this.StoredProceduresTab.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.StoredProceduresTab.ButtonNumber = 0;
+            this.StoredProceduresTab.ButtonText = "Stored Procedures";
+            this.StoredProceduresTab.Dock = System.Windows.Forms.DockStyle.Top;
+            this.StoredProceduresTab.Font = new System.Drawing.Font("Calibri", 15F);
+            this.StoredProceduresTab.Location = new System.Drawing.Point(0, 38);
+            this.StoredProceduresTab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.StoredProceduresTab.Name = "StoredProceduresTab";
+            this.StoredProceduresTab.NotSelectedImage = null;
+            this.StoredProceduresTab.Selected = false;
+            this.StoredProceduresTab.SelectedImage = null;
+            this.StoredProceduresTab.ShowNotSelectedImageWhenDisabled = false;
+            this.StoredProceduresTab.Size = new System.Drawing.Size(172, 32);
+            this.StoredProceduresTab.TabIndex = 47;
+            this.StoredProceduresTab.Click += new System.EventHandler(this.StoredProceduresTab_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 32);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(172, 6);
+            this.panel1.TabIndex = 46;
+            // 
             // WizardStatusControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -340,7 +372,6 @@ namespace DataTierClient.Controls
             this.BackColor = System.Drawing.Color.White;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.MainPanel);
-            this.Controls.Add(this.StoredProceduresTab);
             this.Controls.Add(this.Filler9);
             this.Controls.Add(this.WritersTab);
             this.Controls.Add(this.Filler8);
@@ -359,14 +390,18 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.ProjectsTab);
             this.Controls.Add(this.Filler1);
             this.Name = "WizardStatusControl";
-            this.Size = new System.Drawing.Size(172, 370);
+            this.Size = new System.Drawing.Size(172, 408);
+            this.MainPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
             }
-            #endregion
-            
         #endregion
-        
+
+        #endregion
+
+        private TabButton GatewayTab;
+        private TabButton StoredProceduresTab;
+        private System.Windows.Forms.Panel panel1;
     }
     #endregion
 
