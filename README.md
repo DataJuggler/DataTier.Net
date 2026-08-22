@@ -110,6 +110,9 @@ https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Roo
 
 # Updates & News
 
+Update 8.22.2026: I fixed a bug that when Custom Methods are written when you build the fields were not in alphabetical order.
+The readers have the fields in alphabetical order so this was really bad. 
+
 Update 8.20.2026: Today I modified the DataTier.NET Database. If you have existing project, to update your database.
 Open the database in SSMS. Select the DataTier.NET.Database and the following query
 
@@ -135,7 +138,6 @@ If you have a lot of projects to update, there is a fine in the SQL Scripts fold
 
 If you have a lot of projects, this script should update them or set them to NULL if the project path can't be found
 C:\Projects\GitHub\DataTier.Net\DataTier.Net\Database\SQL Scripts\UpdateGatewayPath.sql
-
 
 8.14.2026: A bunch of Microsoft NuGet packages were updated, and System.Data.SqlClient was completely removed. This only affects
 legacy projects like my day job project. Everything has been replaced with Microsoft.Data.SqlClient.

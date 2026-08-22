@@ -1384,7 +1384,9 @@ namespace DataTierClient.Forms
                             if (NullHelper.Exists(table))
                             {
                                 // now load the fields for this table
-                                table.Fields = gateway.LoadDTNFieldsForTableId(method.TableId);
+
+                                // 8.22.2026 Ordering the fields by FieldName so the SelectList stays in order.
+                                table.Fields = gateway.LoadDTNFieldsForTableId(method.TableId).OrderBy(x => x.FieldName).ToList();
 
                                 // Convert the table
                                 dataTable = DataConverter.ConvertDataTable(table, this.OpenProject);
