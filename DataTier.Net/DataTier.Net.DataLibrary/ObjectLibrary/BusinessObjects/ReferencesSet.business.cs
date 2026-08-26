@@ -211,7 +211,18 @@ namespace ObjectLibrary.BusinessObjects
             public List<ProjectReference> References
             {
                 get { return references; }
-                set { references = value; }
+                set 
+                {
+                    if (value != null)
+                    {
+                        references = value;
+                    }
+                    else
+                    {
+                        // breakpoint only - but do not allow null to be set.
+                        references = new List<ProjectReference>();
+                    }
+                }
             } 
             #endregion
 

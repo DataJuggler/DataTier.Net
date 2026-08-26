@@ -52,8 +52,8 @@ namespace DataTierClient.Controls
             /// <param name="e"></param>
             private void BrowseGatewayFolderButton_Click(object sender, EventArgs e)
             {
-                // Browse for the folder
-                DialogHelper.ChooseFolder(this.GatewayFolderTextBox, this.ProjectFolder); 
+                // Browse for the Gateway.cs file in case they need to change it. 
+                DialogHelper.ChooseGatewayFile(this.GatewayFolderTextBox); 
             }
             #endregion
 

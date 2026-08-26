@@ -75,6 +75,32 @@ namespace DataTierClient.ClientUtil
             }
             #endregion
 
+            #region ChooseGatewayFile(TextBox textBox)
+            /// <summary>
+            /// This method browses for a Gateway.cs file and sets
+            /// the resulted file as the text box text.
+            /// </summary>
+            /// <param name="textBox"></param>
+            internal static void ChooseGatewayFile(TextBox textBox)
+            {
+                // open fileDialog
+                OpenFileDialog fileBrowser = new OpenFileDialog();
+
+                // Add extension
+                fileBrowser.Filter = "C# Source Files (*.cs)|*.cs";
+
+                // Show fileBrowser
+                fileBrowser.ShowDialog();
+
+                // if the text box exists
+                if (textBox != null)
+                {
+                    // Set text on text box
+                    textBox.Text = fileBrowser.FileName;
+                }
+            } 
+            #endregion
+
             #region ChooseSolutionFile(TextBox textBox)
             /// <summary>
             /// This method browses for a solution file and sets

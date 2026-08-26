@@ -143,6 +143,14 @@ namespace DataTierClient.Controls
                             // Set image to selected
                             this.BackgroundImage = this.SelectedImage;
                         }
+                        else
+                        {
+                            // test only
+                            if (ButtonText == "Gateway")
+                            {
+                                this.BackgroundImage = global::DataTierClient.Properties.Resources.DeepBlue;
+                            }
+                        }
                     }
                     else
                     {
@@ -151,6 +159,12 @@ namespace DataTierClient.Controls
                         {
                             // Set image to not selected
                             this.BackgroundImage = this.NotSelectedImage;
+                        }
+                        // test only
+                        else if (ButtonText == "Gateway")
+                        {
+                            // Set the BackgroundImage
+                            this.BackgroundImage = global::DataTierClient.Properties.Resources.DeepGray;
                         }
                     }
                 }
@@ -172,9 +186,20 @@ namespace DataTierClient.Controls
                 // set the properties
                 this.SelectedImage = selectedImage;
                 this.NotSelectedImage = notSelectedImage;
-            } 
+            }
+        #endregion
+
+            #region ToString()
+            /// <summary>
+            /// method returns the String
+            /// </summary>
+            public override string ToString()
+            {
+                // return the ButtonText - helps with debugging
+                return ButtonText;
+            }
             #endregion
-        
+            
         #endregion
         
         #region Properties

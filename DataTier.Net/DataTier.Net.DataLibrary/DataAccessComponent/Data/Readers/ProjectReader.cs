@@ -38,41 +38,43 @@ namespace DataAccessComponent.Data.Readers
 
                 // Create field Integers
                 int addIGridValueInterfacefield = 0;
-                int controllerFolderfield = 1;
-                int controllerNamespacefield = 2;
-                int controllerReferencesSetIdfield = 3;
-                int dataManagerFolderfield = 4;
-                int dataManagerNamespacefield = 5;
-                int dataManagerReferencesSetIdfield = 6;
-                int dataOperationsFolderfield = 7;
-                int dataOperationsNamespacefield = 8;
-                int dataOperationsReferencesSetIdfield = 9;
-                int dataWriterFolderfield = 10;
-                int dataWriterNamespacefield = 11;
-                int dataWriterReferencesSetIdfield = 12;
-                int dateModifiedfield = 13;
-                int gatewayNamespacefield = 14;
-                int gatewayPathfield = 15;
-                int objectFolderfield = 16;
-                int objectNamespacefield = 17;
-                int objectReferencesSetIdfield = 18;
-                int projectFolderfield = 19;
-                int projectIdfield = 20;
-                int projectNamefield = 21;
-                int readerFolderfield = 22;
-                int readerNamespacefield = 23;
-                int readerReferencesSetIdfield = 24;
-                int storedProcedureObjectFolderfield = 25;
-                int storedProcedureObjectNamespacefield = 26;
-                int storedProcedureReferencesSetIdfield = 27;
-                int storedProcsFolderfield = 28;
-                int targetFrameworkfield = 29;
-                int templateVersionfield = 30;
+                int autoFillPathsfield = 1;
+                int controllerFolderfield = 2;
+                int controllerNamespacefield = 3;
+                int controllerReferencesSetIdfield = 4;
+                int dataManagerFolderfield = 5;
+                int dataManagerNamespacefield = 6;
+                int dataManagerReferencesSetIdfield = 7;
+                int dataOperationsFolderfield = 8;
+                int dataOperationsNamespacefield = 9;
+                int dataOperationsReferencesSetIdfield = 10;
+                int dataWriterFolderfield = 11;
+                int dataWriterNamespacefield = 12;
+                int dataWriterReferencesSetIdfield = 13;
+                int dateModifiedfield = 14;
+                int gatewayNamespacefield = 15;
+                int gatewayPathfield = 16;
+                int objectFolderfield = 17;
+                int objectNamespacefield = 18;
+                int objectReferencesSetIdfield = 19;
+                int projectFolderfield = 20;
+                int projectIdfield = 21;
+                int projectNamefield = 22;
+                int readerFolderfield = 23;
+                int readerNamespacefield = 24;
+                int readerReferencesSetIdfield = 25;
+                int storedProcedureObjectFolderfield = 26;
+                int storedProcedureObjectNamespacefield = 27;
+                int storedProcedureReferencesSetIdfield = 28;
+                int storedProcsFolderfield = 29;
+                int targetFrameworkfield = 30;
+                int templateVersionfield = 31;
 
                 try
                 {
                     // Load Each field
                     project.AddIGridValueInterface = DataHelper.ParseBoolean(dataRow.ItemArray[addIGridValueInterfacefield], false);
+                    project.AutoFillPaths = DataHelper.ParseBoolean(dataRow.ItemArray[autoFillPathsfield], false);
                     project.ControllerFolder = DataHelper.ParseString(dataRow.ItemArray[controllerFolderfield]);
                     project.ControllerNamespace = DataHelper.ParseString(dataRow.ItemArray[controllerNamespacefield]);
                     project.ControllerReferencesSetId = DataHelper.ParseInteger(dataRow.ItemArray[controllerReferencesSetIdfield], 0);

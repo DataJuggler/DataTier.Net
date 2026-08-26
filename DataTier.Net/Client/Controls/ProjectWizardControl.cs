@@ -161,7 +161,7 @@ namespace DataTierClient.Controls
                     Control control = SelectedControl as Control;
                     
                     // if the control exists
-                    if(control != null)
+                    if (control != null)
                     {
                         // set this control to visible
                         control.Visible = true;    
@@ -299,6 +299,11 @@ namespace DataTierClient.Controls
                     if (SelectedProject != null)
                     {
                         // Set the current directory back
+                        if ((SelectedProject.IsNew) && (!SelectedProject.ValidReferences))
+                        {
+                            // Create the DefaultReferences
+                            SelectedProject.CreateDefaultReferences();
+                        }
 
                         // Save the selected proejct
                         saved = gateway.SaveProject(ref selectedProject);
@@ -320,15 +325,15 @@ namespace DataTierClient.Controls
                             // save references
 							referencesSaved = gateway.SaveProjectReferences(ref selectedProject);
 
-                            // now load the references
-                            gateway.LoadProjectReferencesForProject(ref selectedProject);
-                            
-							// If the references did not save
-							if ((!referencesSaved) && (error != null))
+                            // If the references did not save
+							if (!referencesSaved)
 							{
 								// Set the exception
 								error = gateway.GetLastException();
 							}
+
+                            // now load the references
+                            gateway.LoadProjectReferencesForProject(ref selectedProject);						
 
 							// if child objects saved
 							if ((!databasesSaved) || (!referencesSaved))
@@ -552,12 +557,6 @@ namespace DataTierClient.Controls
                     RequiredField storedProcFolderField = new RequiredField("StoredProcedureObjectFolder", RequiredField.CreateMissingRequiredFieldMessage("Stored Procedure Object Folder", SelectedProject.StoredProcedureObjectFolder, true), SelectedProject, true);
                     RequiredField storedProcNamespaceField = new RequiredField("StoredProcedureObjectNamespace", RequiredField.CreateMissingRequiredFieldMessage("Stored Procedure Object Namespace", SelectedProject.StoredProcedureObjectNamespace, false), SelectedProject, false);
 
-                    // if V2 of Templates
-                    if (SelectedProject.TemplateVersion == 2)
-                    {
-                        string temp = SelectedProject.DataManagerFolder;
-                    }
-                    
                     // Add Required Fields
                     
                     // Add Project Fields

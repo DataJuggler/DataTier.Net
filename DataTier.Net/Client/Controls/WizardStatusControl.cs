@@ -437,6 +437,14 @@ namespace DataTierClient.Controls
 
                         // required
                         break;
+
+                    case ActiveControlEnum.GatewayTab:
+
+                        // set tabButton
+                        tabButton = this.GatewayTab;
+
+                        // required
+                        break;
                 }
                 
                 // set the tabButton
@@ -464,6 +472,13 @@ namespace DataTierClient.Controls
                 {
                     if (control is TabButton tabControl)
                     {
+                        // for debugging only
+                        if (tabButton.ButtonText == "Gateway")
+                        {
+                            // break point only
+                            tabButton.ButtonText = "Gateway";
+                        }
+
                         // if this is the selected control
                         tabControl.Selected = (tabControl.ButtonText == tabButton.ButtonText);
                         

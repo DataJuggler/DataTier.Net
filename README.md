@@ -110,6 +110,10 @@ https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Roo
 
 # Updates & News
 
+Update 8.26.2026: I fixed a bug where a new project didn't have valid references (by recreating them). 
+
+Update 8.24.2026: I fixed a bug where the Gateway.cs file could be not found in the Confirm Changes Control. 
+
 Update 8.22.2026: I fixed a bug that when Custom Methods are written when you build the fields were not in alphabetical order.
 The readers have the fields in alphabetical order so this was really bad. 
 

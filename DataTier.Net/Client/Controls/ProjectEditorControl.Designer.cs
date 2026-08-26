@@ -122,6 +122,7 @@ namespace DataTierClient.Controls
             this.AutoFillChildFoldersCheckBox.TabIndex = 77;
             this.AutoFillChildFoldersCheckBox.Text = "Auto Fill Child Folders";
             this.AutoFillChildFoldersCheckBox.UseVisualStyleBackColor = true;
+            this.AutoFillChildFoldersCheckBox.CheckedChanged += new System.EventHandler(this.AutoFillChildFoldersCheckBox_CheckedChanged);
             // 
             // CreateDotNetProject
             // 

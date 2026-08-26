@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using DataAccessComponent.Reflection;
 using ObjectLibrary.BusinessObjects;
+using DataJuggler.Core.UltimateHelper;
 
 #endregion
 
@@ -91,8 +92,8 @@ namespace DataAccessComponent.ClientValidation
                                     // Test if the folder exists
                                     string folderPath = fieldPair.FieldValue.ToString();
                                     
-                                    // if the folderPath string exists
-                                    if ((!String.IsNullOrEmpty(folderPath)) && (Directory.Exists(folderPath)))
+                                    // if the folderPath string exists                                    
+                                    if ((TextHelper.Exists(folderPath)) && (Directory.Exists(folderPath)))
                                     {
                                         // this is a valid field
                                         validField = true;
@@ -101,7 +102,7 @@ namespace DataAccessComponent.ClientValidation
                                 else if(field.DataType == FieldDataTypeEnum.String)
                                 {
                                     // if FieldValue
-                                    if(!String.IsNullOrEmpty(fieldPair.FieldValue.ToString()))
+                                    if(TextHelper.Exists(fieldPair.FieldValue.ToString()))
                                     {   
                                         // This is not a missing field
                                         validField = true;
@@ -114,7 +115,7 @@ namespace DataAccessComponent.ClientValidation
                                 }
                             }
                                      
-                            // break out of inner foreach loop (as not valid)
+                            // break out of inner foreach loop
                             break;
                         }
                      }

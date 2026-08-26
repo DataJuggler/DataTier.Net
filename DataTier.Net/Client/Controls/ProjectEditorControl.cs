@@ -120,6 +120,27 @@ namespace DataTierClient.Controls
             }
             #endregion
             
+            #region AutoFillChildFoldersCheckBox_CheckedChanged(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when Auto Fill Child Folders Check Box _ Checked Changed
+            /// </summary>
+            private void AutoFillChildFoldersCheckBox_CheckedChanged(object sender, EventArgs e)
+            {
+                 // if the SelectedProject exists
+                if (this.HasSelectedProject)
+                {
+                    // Set the ProjectFolder
+                    this.SelectedProject.AutoFillPaths = this.AutoFillChildFoldersCheckBox.Checked;
+
+                    // Make sure the required references are there
+                    this.SelectedProject.ObjectReferencesSet.References = ReferencesSetManager.EnsureReferences(this.SelectedProject);
+
+                    // Enable Controls
+                    UIEnable();
+                }
+            }
+            #endregion
+            
             #region BrowseProjectFolderButton_Click(object sender, EventArgs e)
             /// <summary>
             /// This event chooses the ProjectFolder.
@@ -586,6 +607,7 @@ namespace DataTierClient.Controls
                 bool projectTemplatesVersion2 = false;
                 int projectTypeIndex = TargetFrameworkControl.FindItemIndexByValue("Net10");
                 bool addIGridValueInterface = false;
+                bool autoFillPaths = false;
                 
                 // if the SelectedProject Exists
                 if(this.SelectedProject != null)
@@ -593,6 +615,7 @@ namespace DataTierClient.Controls
                     
                     // set values
                     addIGridValueInterface = this.SelectedProject.AddIGridValueInterface;
+                    autoFillPaths = this.SelectedProject.AutoFillPaths;
                     projectName = this.SelectedProject.ProjectName;
                     projectFolder = this.SelectedProject.ProjectFolder;                    
                     projectTemplatesVersion2 = (SelectedProject.TemplateVersion == 2);
@@ -609,6 +632,7 @@ namespace DataTierClient.Controls
                 
                 // dislay values now
                 AddIGridValueInterfaceCheckBox.Checked = addIGridValueInterface;
+                AutoFillChildFoldersCheckBox.Checked = autoFillPaths;
                 Version2CheckBox.Checked = projectTemplatesVersion2;
                 ProjectNameTextBox.Text = projectName;
                 ProjectFolderTextBox.Text = projectFolder;
@@ -1141,7 +1165,6 @@ namespace DataTierClient.Controls
         #endregion
 
         #endregion
-
     }
     #endregion
     

@@ -1844,7 +1844,7 @@ namespace DataAccessComponent.DataGateway
                 // List<ProjectReference> tempReferences = null;
 
                 // if the project exists
-                if(project != null)
+                if ((project != null) && (!project.IsNew))
                 {
                     // Load the ReferenceSets for ths project
                     LoadProjectReferencesSets(ref project);
@@ -1900,14 +1900,54 @@ namespace DataAccessComponent.DataGateway
                 // If the project object exists
                 if (NullHelper.Exists(project))
                 {
-                    // Load ReferencesSets
-                    project.ControllerReferencesSet = FindReferencesSet(project.ControllerReferencesSetId);
-                    project.DataManagerReferencesSet = FindReferencesSet(project.DataManagerReferencesSetId);
-                    project.DataOperationsReferencesSet = FindReferencesSet(project.DataOperationsReferencesSetId);
-                    project.ObjectReferencesSet = FindReferencesSet(project.ObjectReferencesSetId);
-                    project.ReaderReferencesSet = FindReferencesSet(project.ReaderReferencesSetId);
-                    project.StoredProcedureReferencesSet = FindReferencesSet(project.StoredProcedureReferencesSetId);
-                    project.WriterReferencesSet = FindReferencesSet(project.DataWriterReferencesSetId);                                        
+                    // if the ControllerReferencesSetId is set
+                    if (project.ControllerReferencesSetId > 0)
+                    {
+                        // Load ReferencesSets
+                        project.ControllerReferencesSet = FindReferencesSet(project.ControllerReferencesSetId);
+                    }
+
+                    // if the DataManagerReferencesSetId is set
+                    if (project.DataManagerReferencesSetId > 0)
+                    {
+                        // Attempt to find this ReferencesSet
+                        project.DataManagerReferencesSet = FindReferencesSet(project.DataManagerReferencesSetId);
+                    }
+
+                    // If the DataOperationsReferencesSetId is set
+                    if (project.DataOperationsReferencesSetId > 0)
+                    {
+                        // Attempt to find this ReferencesSet
+                        project.DataOperationsReferencesSet = FindReferencesSet(project.DataOperationsReferencesSetId);
+                    }
+
+                    // if the ObjectReferencesSetId is set
+                    if (project.ObjectReferencesSetId > 0)
+                    {
+                        // Attempt to find this ReferencesSet
+                        project.ObjectReferencesSet = FindReferencesSet(project.ObjectReferencesSetId);
+                    }
+
+                    // if the ReaderReferencesSetId is set
+                    if (project.ReaderReferencesSetId > 0)
+                    {
+                        // Attempt to find this ReferencesSet
+                        project.ReaderReferencesSet = FindReferencesSet(project.ReaderReferencesSetId);
+                    }
+
+                    // if the StoredProcedureReferencesSetId
+                    if (project.StoredProcedureReferencesSetId > 0)
+                    {
+                        // Attempt to find this ReferencesSet
+                        project.StoredProcedureReferencesSet = FindReferencesSet(project.StoredProcedureReferencesSetId);
+                    }
+
+                    // if the DataWriterReferencesSetId
+                    if (project.DataWriterReferencesSetId > 0)
+                    {
+                        // Attempt to find this ReferencesSet
+                        project.WriterReferencesSet = FindReferencesSet(project.DataWriterReferencesSetId);
+                    }                          
                 }
             }
             #endregion
@@ -2258,7 +2298,6 @@ namespace DataAccessComponent.DataGateway
                 bool readerReferencesSetSaved = false;
                 bool storedProcedureReferencesSetSaved = false;
                 bool writerReferencesSetSaved = false;
-                bool gatewayReferencesSaved = false;
                     
                 // if project exists
                 if ((project != null) && (project.ValidReferences))

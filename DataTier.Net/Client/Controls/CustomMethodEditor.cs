@@ -1217,7 +1217,7 @@ namespace DataTierClient.Controls
                 this.EditReadersButton.SelectedImage = Properties.Resources.DeepBlue;
                 this.EditOrderByFieldSetsButton.SelectedImage = Properties.Resources.DeepBlue;
                 this.EditOrderByFieldSetsButton.NotSelectedImage = Properties.Resources.DeepGray;
-
+                
                 // Disable both buttons, and force the change
                 this.EditReadersButton.Enabled = true;
                 this.EditParametersSetButton.Enabled = true;

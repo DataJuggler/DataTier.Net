@@ -3259,13 +3259,21 @@ namespace DataTierClient.Controls
                 bool updated = false;
 
                 // get the gatewayFile
-                string gatewayFile = Project.GatewayPath;
+                string gatewayFile = "";
 
-                 // if version 2
-                if (Project.TemplateVersion == 2)
+                if (FileHelper.Exists(project.GatewayPath))
                 {
-                    // use the Data folder
-                    gatewayFile = Path.Combine(ProjectFolder,  @"DataAccessComponent\DataGateway\Gateway.cs");
+                    // get the gatewayFile
+                    gatewayFile = Project.GatewayPath;   
+                }
+                else
+                {
+                     // if TemplateVersion 2 (1 is set in the constructor)
+                    if (Project.TemplateVersion == 2)
+                    {
+                        // use the Data folder
+                        gatewayFile = Path.Combine(ProjectFolder,  @"DataAccessComponent\DataGateway\Gateway.cs");
+                    }
                 }
 
                 // local

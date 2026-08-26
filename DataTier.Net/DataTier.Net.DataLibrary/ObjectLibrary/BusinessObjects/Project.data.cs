@@ -18,6 +18,7 @@ namespace ObjectLibrary.BusinessObjects
 
         #region Private Variables
         private bool addIGridValueInterface;
+        private bool autoFillPaths;
         private string controllerFolder;
         private string controllerNamespace;
         private int controllerReferencesSetId;
@@ -78,6 +79,20 @@ namespace ObjectLibrary.BusinessObjects
                 set
                 {
                     addIGridValueInterface = value;
+                }
+            }
+            #endregion
+
+            #region bool AutoFillPaths
+            public bool AutoFillPaths
+            {
+                get
+                {
+                    return autoFillPaths;
+                }
+                set
+                {
+                    autoFillPaths = value;
                 }
             }
             #endregion

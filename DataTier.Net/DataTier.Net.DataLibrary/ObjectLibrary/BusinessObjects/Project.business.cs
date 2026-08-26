@@ -113,6 +113,9 @@ namespace ObjectLibrary.BusinessObjects
                     else
                     {
                         // new V2 2 project template
+
+                        // local
+                        
                         
                         // Set the Data Operations Folder
                         DataOperationsFolder = AppendToProjectFolder(@"DataAccessComponent\DataOperations");
@@ -128,6 +131,7 @@ namespace ObjectLibrary.BusinessObjects
                         
                         // Set the Controllers Folder
                         ControllerFolder = AppendToProjectFolder(@"DataAccessComponent\Controllers");
+
 
                         // Set the Gateway Path
                         GatewayPath = AppendToProjectFolder(@"DataAccessComponent\DataGateway\Gateway.cs");
@@ -381,6 +385,13 @@ namespace ObjectLibrary.BusinessObjects
                     // to the user that the references had to be recreated
                     ReferencesRecreated = true;
                 }
+
+                // are the references valid now? having an issue - for debugging only
+                if (!this.ValidReferences)
+                {
+                    // for debugging only
+                    DebugHelper.WriteDebugError("CreateDefaultReferences", "Project.bussines.cs", null);
+                }
             }
             #endregion
             
@@ -469,6 +480,9 @@ namespace ObjectLibrary.BusinessObjects
                 // Create Databases Collection
                 Databases = new List<DTNDatabase>();
                 
+                // Default to true
+                this.AutoFillPaths = true;
+
                 // Create Enumerations
                 Enumerations = new List<Enumeration>();
                 
@@ -938,7 +952,35 @@ namespace ObjectLibrary.BusinessObjects
             public ReferencesSet ObjectReferencesSet
             {
                 get { return objectReferencesSet; }
-                set { objectReferencesSet = value; }
+                set 
+                {
+                    // if Value isn't null
+                    if (value != null)
+                    {
+                        // set the objectRefrencesSEt
+                        objectReferencesSet = value;
+                    }
+                    else
+                    {
+                        // this should never be null. Trying to solve why this is being set to null
+
+                        // recrete the list
+                        objectReferencesSet = new ReferencesSet();
+
+                        // Set ObjectNamespace
+                        ObjectNamespace = "ObjectLibrary.BusinessObjects";
+                
+                        // Create ObjectReferencesSet
+                        ObjectReferencesSet = new ReferencesSet("DataObjects");
+                
+                        // Update to fix existing projects
+                        ObjectReferencesSet.UpdateIdentity(ObjectReferencesSetId);
+
+                         // Create Object References
+                        ObjectReferencesSet.References.Add(new ProjectReference("System"));
+                        ObjectReferencesSet.References.Add(new ProjectReference("ObjectLibrary.Enumerations"));
+                    }
+                }
             }
             #endregion
             
