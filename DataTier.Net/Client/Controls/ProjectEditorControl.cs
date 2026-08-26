@@ -98,7 +98,7 @@ namespace DataTierClient.Controls
                     this.SelectedProject.AddIGridValueInterface = this.AddIGridValueInterfaceCheckBox.Checked;
 
                     // Make sure the required references are there
-                    this.SelectedProject.ObjectReferencesSet.References = ReferencesSetManager.EnsureReferences(this.SelectedProject);
+                    this.SelectedProject.ObjectReferencesSet.SetReferences(ReferencesSetManager.EnsureReferences(this.SelectedProject));
 
                     // Enable Controls
                     UIEnable();
@@ -131,9 +131,6 @@ namespace DataTierClient.Controls
                 {
                     // Set the ProjectFolder
                     this.SelectedProject.AutoFillPaths = this.AutoFillChildFoldersCheckBox.Checked;
-
-                    // Make sure the required references are there
-                    this.SelectedProject.ObjectReferencesSet.References = ReferencesSetManager.EnsureReferences(this.SelectedProject);
 
                     // Enable Controls
                     UIEnable();

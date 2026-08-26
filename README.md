@@ -111,6 +111,8 @@ https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Roo
 # Updates & News
 
 Update 8.26.2026: I fixed a bug where a new project didn't have valid references (by recreating them). 
+Also the ReferencesSet.References was switched to an ObservableCollection, and the method EnsureReferences was fixed. 
+The EnsureReferences was actually what ensured it didn't work. Fun, Funner, Funnest code is when your fix is the culrpit. 
 
 Update 8.24.2026: I fixed a bug where the Gateway.cs file could be not found in the Confirm Changes Control. 
 

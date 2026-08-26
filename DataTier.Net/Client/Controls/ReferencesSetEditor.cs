@@ -309,11 +309,20 @@ namespace DataTierClient.Controls
                     // Clear the text box
                     this.ReferencesSetNameTextBox.Text = this.SelectedReferencesSet.ReferencesSetName;
                     
-                    // loop through each reference
-                    foreach (ProjectReference reference in this.SelectedReferencesSet.References)
+                    // If the this.SelectedReferencesSet.References collection exists and has one or more items
+                    if (ListHelper.HasOneOrMoreItems(this.SelectedReferencesSet.References))
                     {
-                        // Add this reference
-                        this.ReferencesListBox.Items.Add(reference);
+                        // loop through each reference
+                        foreach (ProjectReference reference in this.SelectedReferencesSet.References)
+                        {
+                            // Add this reference
+                            this.ReferencesListBox.Items.Add(reference);
+                        }
+                    }
+                    else
+                    {
+                        // where is this coming from = breakpoint only
+                        int x = 0;
                     }
                 }
 

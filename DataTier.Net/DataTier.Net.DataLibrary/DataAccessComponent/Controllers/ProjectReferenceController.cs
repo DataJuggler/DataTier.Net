@@ -9,6 +9,7 @@ using DataAccessComponent.Logging;
 using ObjectLibrary.BusinessObjects;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 #endregion
 
@@ -112,10 +113,10 @@ namespace DataAccessComponent.Controllers
             /// procedure 'ProjectReference_FetchAll'.</summary>
             /// <param name='tempProjectReference'>A temporary ProjectReference for passing values.</param>
             /// <returns>A collection of 'ProjectReference' objects.</returns>
-            public static List<ProjectReference> FetchAll(ProjectReference tempProjectReference, DataManager dataManager)
+            public static ObservableCollection<ProjectReference> FetchAll(ProjectReference tempProjectReference, DataManager dataManager)
             {
                 // Initial value
-                List<ProjectReference> projectReferenceList = null;
+                ObservableCollection<ProjectReference> projectReferenceList = null;
 
                 // Get information for calling 'DataBridgeManager.PerformDataOperation' method.
                 string methodName = "FetchAll";
@@ -133,10 +134,10 @@ namespace DataAccessComponent.Controllers
                     PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, fetchAllMethod , parameters, dataManager);
 
                     // If return object exists
-                    if ((returnObject != null) && (returnObject.ObjectValue as List<ProjectReference> != null))
+                    if ((returnObject != null) && (returnObject.ObjectValue as ObservableCollection<ProjectReference> != null))
                     {
                         // Create Collection From ReturnObject.ObjectValue
-                        projectReferenceList = (List<ProjectReference>) returnObject.ObjectValue;
+                        projectReferenceList = (ObservableCollection<ProjectReference>) returnObject.ObjectValue;
                     }
                 }
                 catch (Exception error)

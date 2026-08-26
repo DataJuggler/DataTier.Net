@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System.Linq;
+using System.Collections.ObjectModel;
 
 #endregion
 
@@ -1142,8 +1143,11 @@ namespace DataAccessComponent.DataGateway
                     // If the referencesSet object exists
                     if (referencesSet != null)
                     {
+                        // load the references
+                        ObservableCollection<ProjectReference> references = LoadProjectReferencesForReferencesSetId(referencesSet.ReferencesSetId);
+
                         // Load References For This ReferencesSet
-                        referencesSet.References = LoadProjectReferencesForReferencesSetId(referencesSet.ReferencesSetId);
+                        referencesSet.SetReferences(references);
                     }
                 }
 
@@ -1816,10 +1820,10 @@ namespace DataAccessComponent.DataGateway
             /// <summary>
             /// This method loads a collection of 'ProjectReference' objects.
             /// </summary>
-            public List<ProjectReference> LoadProjectReferences(ProjectReference tempProjectReference = null)
+            public ObservableCollection<ProjectReference> LoadProjectReferences(ProjectReference tempProjectReference = null)
             {
                 // initial value
-                List<ProjectReference> projectReferences = null;
+                ObservableCollection<ProjectReference> projectReferences = null;
 
                 // if the AppController exists
                 if (HasAppController)
@@ -1841,7 +1845,7 @@ namespace DataAccessComponent.DataGateway
             public void LoadProjectReferencesForProject(ref Project project)
             {
                 // local
-                // List<ProjectReference> tempReferences = null;
+                // ObservableCollection<ProjectReference> tempReferences = null;
 
                 // if the project exists
                 if ((project != null) && (!project.IsNew))
@@ -1869,10 +1873,10 @@ namespace DataAccessComponent.DataGateway
             /// <summary>
             /// This method is used to load 'ProjectReference' objects for the ReferencesSetId given.
             /// </summary>
-            public List<ProjectReference> LoadProjectReferencesForReferencesSetId(int referencesSetId)
+            public ObservableCollection<ProjectReference> LoadProjectReferencesForReferencesSetId(int referencesSetId)
             {
                 // initial value
-                List<ProjectReference> projectReferences = null;
+                ObservableCollection<ProjectReference> projectReferences = null;
                 
                 // Create a temp ProjectReference object
                 ProjectReference tempProjectReference = new ProjectReference();
@@ -2354,13 +2358,13 @@ namespace DataAccessComponent.DataGateway
             }  
             #endregion
 
-            #region SaveProjectReferences(ref List<ProjectReference> references, int referencesSetId)
+            #region SaveProjectReferences(ref ObservableCollection<ProjectReference> references, int referencesSetId)
             /// <summary>
-            /// This method saves a list of ProjectReference objects.
+            /// This method saves an ObservableCollection list of ProjectReference objects.
             /// </summary>
             /// <param name="references"></param>
             /// <returns></returns>
-            public bool SaveProjectReferences(ref List<ProjectReference> references, int referencesSetId)
+            public bool SaveProjectReferences(ref ObservableCollection<ProjectReference> references, int referencesSetId)
             {
                 // initial value
                 bool saved = false;
@@ -2369,7 +2373,7 @@ namespace DataAccessComponent.DataGateway
                 bool tempSaved = true;
                 
                 // Load the projectReferences for this referencesSetId
-                List<ProjectReference> projectReferences = LoadProjectReferencesForReferencesSetId(referencesSetId);
+                ObservableCollection<ProjectReference> projectReferences = LoadProjectReferencesForReferencesSetId(referencesSetId);
                 
                 // if project exists
                 if (references != null)
@@ -2472,7 +2476,7 @@ namespace DataAccessComponent.DataGateway
                             // save project references
 
                             // get a local copy
-                            List<ProjectReference> references = referencesSet.References;
+                            ObservableCollection<ProjectReference> references = referencesSet.References;
 
                             // perfrom save
                             saved = SaveProjectReferences(ref references, referencesSet.ReferencesSetId);

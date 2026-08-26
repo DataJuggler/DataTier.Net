@@ -5,6 +5,7 @@
 using DataJuggler.Net.Enumerations;
 using ObjectLibrary.Enumerations;
 using System;
+using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Text;
 using DataJuggler.Core.UltimateHelper;
@@ -395,11 +396,24 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
             
-            #region FindReferenceIndex(List<ProjectReference> references, string name)
+            #region CreateObjectLibraryDefaultReferences()
+            /// <summary>
+            /// Create Object Library Default References
+            /// </summary>
+            public void CreateObjectLibraryDefaultReferences()
+            {
+                // this should never be null. Trying to solve why this is being set to null
+
+                // recreate the references
+                this.ObjectReferencesSet.CreateObjectLibraryDefaultReferences();
+            }
+            #endregion
+            
+            #region FindReferenceIndex(ObservableCollection<ProjectReference> references, string name)
             /// <summary>
             /// returns the Reference Index
             /// </summary>
-            public int FindReferenceIndex(List<ProjectReference> references, string name)
+            public int FindReferenceIndex(ObservableCollection<ProjectReference> references, string name)
             {
                 // initial value
                 int index = -1;
@@ -959,26 +973,24 @@ namespace ObjectLibrary.BusinessObjects
                     {
                         // set the objectRefrencesSEt
                         objectReferencesSet = value;
+                    } 
+                    else if (!ListHelper.HasOneOrMoreItems(value.References))
+                    {
+                        // recreate them
+
+                        // Create the default references
+                        CreateObjectLibraryDefaultReferences();
                     }
                     else
                     {
-                        // this should never be null. Trying to solve why this is being set to null
-
-                        // recrete the list
-                        objectReferencesSet = new ReferencesSet();
-
-                        // Set ObjectNamespace
-                        ObjectNamespace = "ObjectLibrary.BusinessObjects";
-                
-                        // Create ObjectReferencesSet
+                        // show never happen
                         ObjectReferencesSet = new ReferencesSet("DataObjects");
-                
-                        // Update to fix existing projects
-                        ObjectReferencesSet.UpdateIdentity(ObjectReferencesSetId);
 
-                         // Create Object References
-                        ObjectReferencesSet.References.Add(new ProjectReference("System"));
-                        ObjectReferencesSet.References.Add(new ProjectReference("ObjectLibrary.Enumerations"));
+                        // Update the Id
+                        ObjectReferencesSet.UpdateIdentity(this.ObjectReferencesSetId);                        
+
+                        // Create the default references
+                        CreateObjectLibraryDefaultReferences();
                     }
                 }
             }

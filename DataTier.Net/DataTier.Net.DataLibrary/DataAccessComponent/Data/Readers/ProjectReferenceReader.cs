@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using ObjectLibrary.BusinessObjects;
+using System.Collections.ObjectModel;
 using ObjectLibrary.Enumerations;
 using DataJuggler.Net.Enumerations;
 
@@ -64,10 +65,10 @@ namespace DataAccessComponent.Data.Readers
             /// </summary>
             /// <param name='dataTable'>The 'DataTable.Rows' to load from.</param>
             /// <returns>A ProjectReference Collection.</returns>
-            public static List<ProjectReference> LoadCollection(DataTable dataTable)
+            public static ObservableCollection<ProjectReference> LoadCollection(DataTable dataTable)
             {
                 // Initial Value
-                List<ProjectReference> projectReferences = new List<ProjectReference>();
+                ObservableCollection<ProjectReference> projectReferences = new ObservableCollection<ProjectReference>();
 
                 try
                 {

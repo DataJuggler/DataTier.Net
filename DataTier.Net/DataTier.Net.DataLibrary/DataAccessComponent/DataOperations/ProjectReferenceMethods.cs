@@ -11,6 +11,7 @@ using DataAccessComponent.StoredProcedureManager.InsertProcedures;
 using DataAccessComponent.StoredProcedureManager.UpdateProcedures;
 using ObjectLibrary.BusinessObjects;
 using System;
+using System.Collections.ObjectModel;
 using System.Collections.Generic;
 
 #endregion
@@ -106,7 +107,7 @@ namespace DataAccessComponent.DataOperations
                 PolymorphicObject returnObject = new PolymorphicObject();
 
                 // locals
-                List<ProjectReference> projectReferenceListCollection =  null;
+                ObservableCollection<ProjectReference> projectReferenceListCollection =  null;
 
                 // Create FetchAll StoredProcedure
                 FetchAllProjectReferencesStoredProcedure fetchAllProc = null;

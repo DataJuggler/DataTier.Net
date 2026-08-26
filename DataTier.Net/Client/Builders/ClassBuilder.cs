@@ -15,6 +15,7 @@ using DataAccessComponent.Connection;
 using System.Text;
 using DataTierClient.ClientUtil;
 using DataJuggler.Net.Enumerations;
+using System.Collections.ObjectModel;
 
 #endregion
 
@@ -368,8 +369,8 @@ namespace DataTierClient.Builders
             } 
             #endregion
 
-            #region ReferencesSet ConvertReferences(List<ProjectReference> refCol, string referencesSetName)
-            public DataJuggler.Net.ReferencesSet ConvertReferences(List<ProjectReference> refCol, string referencesSetName)
+            #region ReferencesSet ConvertReferences(ObservableCollection<ProjectReference> refCol, string referencesSetName)
+            public DataJuggler.Net.ReferencesSet ConvertReferences(ObservableCollection<ProjectReference> refCol, string referencesSetName)
             {
                 // Create New ReferencesSet
                 DataJuggler.Net.ReferencesSet refSet = new DataJuggler.Net.ReferencesSet(referencesSetName);

@@ -207,6 +207,10 @@ namespace DataTierClient.Controls
                             // for debugging only
                             string error = exception.Message;
                         }
+
+                        DisplayMessageControl displayMessage = new DisplayMessageControl();
+                        displayMessage.MessageText = "Save Failed";
+                        displayMessage.Show();
                     }
                 }
             }

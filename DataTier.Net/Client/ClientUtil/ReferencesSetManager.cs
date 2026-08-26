@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System.Windows.Forms;
+using System.Collections.ObjectModel;
 
 #endregion
 
@@ -68,16 +69,28 @@ namespace DataTierClient.ClientUtil
              
             #region EnsureReferences()
             /// <summary>
-            /// returns a list of References
+            /// returns am ObservableCollection list of References
             /// </summary>
-            public static List<ProjectReference> EnsureReferences(Project project)
+            public static ObservableCollection<ProjectReference> EnsureReferences(Project project)
             {
                 // initial value
-                List<ProjectReference> references = null;
+                ObservableCollection<ProjectReference> references = null;
 
                 // If the project object exists
                 if (NullHelper.Exists(project))
                 {
+                    if (project.ObjectReferencesSet == null)
+                    {
+                        // recreate
+                        project.ObjectReferencesSet = new ReferencesSet();
+
+                        // Create the DefaultReferences
+                        project.ObjectReferencesSet.CreateObjectLibraryDefaultReferences();
+                    }
+
+                    // get the references
+                    references = project.ObjectReferencesSet.References;
+
                     // if true
                     if (project.AddIGridValueInterface)
                     {
