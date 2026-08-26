@@ -371,9 +371,6 @@ namespace DataTierClient.Controls
                     // Create a new instance of a 'ConfirmRemovalForm' object.
                     ConfirmRemovalForm confirmRemovalForm = new ConfirmRemovalForm();
 
-                    // test only
-                    IList<ProjectFile> tempFiles = projectFileManager.ActiveFiles;
-                    
                     // Setup the Control
                     confirmRemovalForm.Setup(projectFileManager, this.Project.ProjectFolder);
                     

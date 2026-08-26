@@ -255,9 +255,6 @@ namespace DataTierClient.ClientUtil
                     // Sort the methodInformation by the EndIndex descending
                     gatewayInfo.MethodInformation =  gatewayInfo.MethodInformation.OrderByDescending(x => x.EndIndex).ToList();
 
-                    // test only take this out
-                    // int methodCount = 0;
-
                     // Iterate the collection of MethodInfo objects
                     foreach (GatewayMethodInfo methodInfo in gatewayInfo.MethodInformation)
                     {
@@ -269,15 +266,6 @@ namespace DataTierClient.ClientUtil
 
                         // remove the range of lines
                         gatewayInfo.TextLines.RemoveRange(methodInfo.StartIndex - 1, count);
-
-                        // test only take this out
-                        // string tempCode = TextHelper.ExportTextLines(gatewayInfo.TextLines);
-
-                        // get a temp path to write out this tempCode
-                        // string path = @"C:\Temp\TempGateway" + methodCount + ".cs";
-
-                        // Write the fileText
-                        // File.AppendAllText(path, tempCode);
                     }
 
                     // Now delete the original file

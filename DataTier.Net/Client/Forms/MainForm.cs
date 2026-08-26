@@ -1896,13 +1896,6 @@ namespace DataTierClient.Forms
                 // If the Setup is not complete, show the Setup Form
                 if (!SetupComplete)
                 {
-                    // test only maybe
-                    if (result.HasError)
-                    {
-                        // test only
-                        MessageBoxHelper.ShowMessage(result.Error.ToString(), "Database Connection Error");
-                    }
-
                     // run the setup
                     userCancelledSetup = RunSetup();
 

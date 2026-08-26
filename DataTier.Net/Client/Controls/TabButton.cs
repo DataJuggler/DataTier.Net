@@ -145,9 +145,10 @@ namespace DataTierClient.Controls
                         }
                         else
                         {
-                            // test only
+                            // Make sure the Gateway aopears in blue if selected
                             if (ButtonText == "Gateway")
                             {
+                                // set to blue
                                 this.BackgroundImage = global::DataTierClient.Properties.Resources.DeepBlue;
                             }
                         }
@@ -160,7 +161,7 @@ namespace DataTierClient.Controls
                             // Set image to not selected
                             this.BackgroundImage = this.NotSelectedImage;
                         }
-                        // test only
+                        // Make sure the Gateway aopears in gray if not selected
                         else if (ButtonText == "Gateway")
                         {
                             // Set the BackgroundImage
