@@ -110,6 +110,44 @@ https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Roo
 
 # Updates & News
 
+Update 8.29.2026: Some new code I wrote last week has a flaw.
+
+See if you can spot the flaw:
+
+    set
+    {
+        // if Value isn't null
+        if (value != null)
+        {
+            // set the objectRefrencesSEt
+            objectReferencesSet = value;
+        }
+        else if (!ListHelper.HasOneOrMoreItems(value.References))
+        {
+            // recreate them
+            
+            // Create the default references
+            CreateObjectLibraryDefaultReferences();
+        }        
+
+value is null above and I referred to value.References. I moved the code into the value != null block.
+
+    // if Value isn't null
+    if (value != null)
+    {
+        // set the objectRefrencesSEt
+        objectReferencesSet = value;
+        
+        // if there are one or more references
+        if (!ListHelper.HasOneOrMoreItems(value.References))
+        {
+            // recreate them
+            
+            // Create the default references
+            CreateObjectLibraryDefaultReferences();
+        }
+    }
+
 Update 8.26.2026: I fixed a bug where a new project didn't have valid references (by recreating them). 
 Also the ReferencesSet.References was switched to an ObservableCollection, and the method EnsureReferences was fixed. 
 The EnsureReferences was actually what ensured it didn't work. Fun, Funner, Funnest code is when your fix is the culrpit. 

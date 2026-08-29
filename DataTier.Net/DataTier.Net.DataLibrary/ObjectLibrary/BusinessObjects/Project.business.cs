@@ -973,13 +973,15 @@ namespace ObjectLibrary.BusinessObjects
                     {
                         // set the objectRefrencesSEt
                         objectReferencesSet = value;
-                    } 
-                    else if (!ListHelper.HasOneOrMoreItems(value.References))
-                    {
-                        // recreate them
 
-                        // Create the default references
-                        CreateObjectLibraryDefaultReferences();
+                        // if there are one or more references
+                        if (!ListHelper.HasOneOrMoreItems(value.References))
+                        {
+                            // recreate them
+
+                            // Create the default references
+                            CreateObjectLibraryDefaultReferences();
+                        }
                     }
                     else
                     {
