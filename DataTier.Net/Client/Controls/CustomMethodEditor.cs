@@ -1353,7 +1353,6 @@ namespace DataTierClient.Controls
                     {
                         // Remove the Delete By, Find By and Update By
                         MethodTypeControl.Items.RemoveAt(3);
-                        // MethodTypeControl.Items.RemoveAt(1);
                         MethodTypeControl.Items.RemoveAt(0);
 
                         // Set the value for the property 'ViewMode' to true
