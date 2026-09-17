@@ -590,14 +590,14 @@ namespace DataTierClient.Controls
                             // If Find By is the Method Type
                             if (MethodInfo.MethodType == MethodTypeEnum.Find_By) 
                             {
-                                // create a find procedure
-                                writer.CreateFindProc(table, false, MethodInfo.ProcedureName, parameters, MethodInfo.CustomReader, orderByField, orderByFieldSet);
+                                // create a find procedure                                
+                                writer.CreateFindProc(table, false, MethodInfo.ProcedureName, parameters, MethodInfo.CustomReader, orderByField, orderByFieldSet, MethodInfo.OrderByDescending, MethodInfo.TopRows, MethodInfo.UseCustomWhere, MethodInfo.WhereText);
                             }
                             // if Load By is the Method Type
                             else if (MethodInfo.MethodType == MethodTypeEnum.Load_By) 
                             {
-                                // create a find procedure
-                                writer.CreateFindProc(table, true, MethodInfo.ProcedureName, parameters, MethodInfo.CustomReader, orderByField, orderByFieldSet);
+                                // create a FetchAll procedure
+                                writer.CreateFindProc(table, true, MethodInfo.ProcedureName, parameters, MethodInfo.CustomReader, orderByField, orderByFieldSet, MethodInfo.OrderByDescending, MethodInfo.TopRows, MethodInfo.UseCustomWhere, MethodInfo.WhereText);
                             }
                             else if (MethodInfo.MethodType == MethodTypeEnum.Update)
                             {

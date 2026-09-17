@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System.Linq;
+using System.Collections.ObjectModel;
 
 #endregion
 
@@ -1142,8 +1143,11 @@ namespace DataAccessComponent.DataGateway
                     // If the referencesSet object exists
                     if (referencesSet != null)
                     {
+                        // load the references
+                        List<ProjectReference> references = LoadProjectReferencesForReferencesSetId(referencesSet.ReferencesSetId);
+
                         // Load References For This ReferencesSet
-                        referencesSet.References = LoadProjectReferencesForReferencesSetId(referencesSet.ReferencesSetId);
+                        referencesSet.SetReferences(references);
                     }
                 }
 
@@ -1816,10 +1820,10 @@ namespace DataAccessComponent.DataGateway
             /// <summary>
             /// This method loads a collection of 'ProjectReference' objects.
             /// </summary>
-            public ObservableCollection<ProjectReference> LoadProjectReferences(ProjectReference tempProjectReference = null)
+            public List<ProjectReference> LoadProjectReferences(ProjectReference tempProjectReference = null)
             {
                 // initial value
-                ObservableCollection<ProjectReference> projectReferences = null;
+                List<ProjectReference> projectReferences = null;
 
                 // if the AppController exists
                 if (HasAppController)
@@ -1841,10 +1845,10 @@ namespace DataAccessComponent.DataGateway
             public void LoadProjectReferencesForProject(ref Project project)
             {
                 // local
-                // ObservableCollection<ProjectReference> tempReferences = null;
+                // List<ProjectReference> tempReferences = null;
 
                 // if the project exists
-                if(project != null)
+                if ((project != null) && (!project.IsNew))
                 {
                     // Load the ReferenceSets for ths project
                     LoadProjectReferencesSets(ref project);
@@ -1869,10 +1873,10 @@ namespace DataAccessComponent.DataGateway
             /// <summary>
             /// This method is used to load 'ProjectReference' objects for the ReferencesSetId given.
             /// </summary>
-            public ObservableCollection<ProjectReference> LoadProjectReferencesForReferencesSetId(int referencesSetId)
+            public List<ProjectReference> LoadProjectReferencesForReferencesSetId(int referencesSetId)
             {
                 // initial value
-                ObservableCollection<ProjectReference> projectReferences = null;
+                List<ProjectReference> projectReferences = null;
                 
                 // Create a temp ProjectReference object
                 ProjectReference tempProjectReference = new ProjectReference();
@@ -1900,14 +1904,54 @@ namespace DataAccessComponent.DataGateway
                 // If the project object exists
                 if (NullHelper.Exists(project))
                 {
-                    // Load ReferencesSets
-                    project.ControllerReferencesSet = FindReferencesSet(project.ControllerReferencesSetId);
-                    project.DataManagerReferencesSet = FindReferencesSet(project.DataManagerReferencesSetId);
-                    project.DataOperationsReferencesSet = FindReferencesSet(project.DataOperationsReferencesSetId);
-                    project.ObjectReferencesSet = FindReferencesSet(project.ObjectReferencesSetId);
-                    project.ReaderReferencesSet = FindReferencesSet(project.ReaderReferencesSetId);
-                    project.StoredProcedureReferencesSet = FindReferencesSet(project.StoredProcedureReferencesSetId);
-                    project.WriterReferencesSet = FindReferencesSet(project.DataWriterReferencesSetId);                                        
+                    // if the ControllerReferencesSetId is set
+                    if (project.ControllerReferencesSetId > 0)
+                    {
+                        // Load ReferencesSets
+                        project.ControllerReferencesSet = FindReferencesSet(project.ControllerReferencesSetId);
+                    }
+
+                    // if the DataManagerReferencesSetId is set
+                    if (project.DataManagerReferencesSetId > 0)
+                    {
+                        // Attempt to find this ReferencesSet
+                        project.DataManagerReferencesSet = FindReferencesSet(project.DataManagerReferencesSetId);
+                    }
+
+                    // If the DataOperationsReferencesSetId is set
+                    if (project.DataOperationsReferencesSetId > 0)
+                    {
+                        // Attempt to find this ReferencesSet
+                        project.DataOperationsReferencesSet = FindReferencesSet(project.DataOperationsReferencesSetId);
+                    }
+
+                    // if the ObjectReferencesSetId is set
+                    if (project.ObjectReferencesSetId > 0)
+                    {
+                        // Attempt to find this ReferencesSet
+                        project.ObjectReferencesSet = FindReferencesSet(project.ObjectReferencesSetId);
+                    }
+
+                    // if the ReaderReferencesSetId is set
+                    if (project.ReaderReferencesSetId > 0)
+                    {
+                        // Attempt to find this ReferencesSet
+                        project.ReaderReferencesSet = FindReferencesSet(project.ReaderReferencesSetId);
+                    }
+
+                    // if the StoredProcedureReferencesSetId
+                    if (project.StoredProcedureReferencesSetId > 0)
+                    {
+                        // Attempt to find this ReferencesSet
+                        project.StoredProcedureReferencesSet = FindReferencesSet(project.StoredProcedureReferencesSetId);
+                    }
+
+                    // if the DataWriterReferencesSetId
+                    if (project.DataWriterReferencesSetId > 0)
+                    {
+                        // Attempt to find this ReferencesSet
+                        project.WriterReferencesSet = FindReferencesSet(project.DataWriterReferencesSetId);
+                    }                          
                 }
             }
             #endregion
@@ -2258,7 +2302,6 @@ namespace DataAccessComponent.DataGateway
                 bool readerReferencesSetSaved = false;
                 bool storedProcedureReferencesSetSaved = false;
                 bool writerReferencesSetSaved = false;
-                bool gatewayReferencesSaved = false;
                     
                 // if project exists
                 if ((project != null) && (project.ValidReferences))
@@ -2315,13 +2358,13 @@ namespace DataAccessComponent.DataGateway
             }  
             #endregion
 
-            #region SaveProjectReferences(ref ObservableCollection<ProjectReference> references, int referencesSetId)
+            #region SaveProjectReferences(ref List<ProjectReference> references, int referencesSetId)
             /// <summary>
-            /// This method saves a list of ProjectReference objects.
+            /// This method saves an List list of ProjectReference objects.
             /// </summary>
             /// <param name="references"></param>
             /// <returns></returns>
-            public bool SaveProjectReferences(ref ObservableCollection<ProjectReference> references, int referencesSetId)
+            public bool SaveProjectReferences(ref List<ProjectReference> references, int referencesSetId)
             {
                 // initial value
                 bool saved = false;
@@ -2330,7 +2373,7 @@ namespace DataAccessComponent.DataGateway
                 bool tempSaved = true;
                 
                 // Load the projectReferences for this referencesSetId
-                ObservableCollection<ProjectReference> projectReferences = LoadProjectReferencesForReferencesSetId(referencesSetId);
+                List<ProjectReference> projectReferences = LoadProjectReferencesForReferencesSetId(referencesSetId);
                 
                 // if project exists
                 if (references != null)
@@ -2433,7 +2476,7 @@ namespace DataAccessComponent.DataGateway
                             // save project references
 
                             // get a local copy
-                            ObservableCollection<ProjectReference> references = referencesSet.References;
+                            List<ProjectReference> references = referencesSet.References;
 
                             // perfrom save
                             saved = SaveProjectReferences(ref references, referencesSet.ReferencesSetId);

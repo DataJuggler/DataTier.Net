@@ -107,7 +107,7 @@ namespace DataAccessComponent.DataOperations
                 PolymorphicObject returnObject = new PolymorphicObject();
 
                 // locals
-                ObservableCollection<ProjectReference> projectReferenceListCollection =  null;
+                List<ProjectReference> projectReferenceListCollection =  null;
 
                 // Create FetchAll StoredProcedure
                 FetchAllProjectReferencesStoredProcedure fetchAllProc = null;

@@ -409,11 +409,11 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
             
-            #region FindReferenceIndex(ObservableCollection<ProjectReference> references, string name)
+            #region FindReferenceIndex(List<ProjectReference> references, string name)
             /// <summary>
             /// returns the Reference Index
             /// </summary>
-            public int FindReferenceIndex(ObservableCollection<ProjectReference> references, string name)
+            public int FindReferenceIndex(List<ProjectReference> references, string name)
             {
                 // initial value
                 int index = -1;

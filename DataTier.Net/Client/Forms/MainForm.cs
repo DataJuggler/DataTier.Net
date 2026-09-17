@@ -788,7 +788,7 @@ namespace DataTierClient.Forms
                     ClassBuilder classBuilder = new ClassBuilder(false);
 
                     // load references
-                    ObservableCollection<ProjectReference> references = this.OpenProject.ControllerReferencesSet.References;
+                    List<ProjectReference> references = this.OpenProject.ControllerReferencesSet.References;
                     DataJuggler.Net.ReferencesSet convertedReferences = classBuilder.ConvertReferences(references, "Controllers");
 
                     // Get namespace and project namew
@@ -837,7 +837,7 @@ namespace DataTierClient.Forms
                     ClassBuilder classBuilder = new ClassBuilder(false);
 
                     // load references
-                    ObservableCollection<ProjectReference> references = this.OpenProject.DataManagerReferencesSet.References;
+                    List<ProjectReference> references = this.OpenProject.DataManagerReferencesSet.References;
                     DataJuggler.Net.ReferencesSet convertedReferences = classBuilder.ConvertReferences(references, "DataManagers");
 
                     // Set rootDataManagerPath
@@ -887,7 +887,7 @@ namespace DataTierClient.Forms
                     ClassBuilder classBuilder = new ClassBuilder(false);
 
                     // load references
-                    ObservableCollection<ProjectReference> references = this.OpenProject.DataOperationsReferencesSet.References;
+                    List<ProjectReference> references = this.OpenProject.DataOperationsReferencesSet.References;
                     DataJuggler.Net.ReferencesSet convertedReferences = classBuilder.ConvertReferences(references, "DataOperations");
 
                     // Get namespace and project namew
@@ -941,7 +941,7 @@ namespace DataTierClient.Forms
                         TargetFrameworkEnum targetFramework = OpenProject.TargetFramework;
 
                         // load references
-                        ObservableCollection<ProjectReference> references = this.OpenProject.WriterReferencesSet.References;
+                        List<ProjectReference> references = this.OpenProject.WriterReferencesSet.References;
                         DataJuggler.Net.ReferencesSet convertedReferences = classBuilder.ConvertReferences(references, "Writers");
 
                         // Get namespace and project namew
@@ -1040,7 +1040,7 @@ namespace DataTierClient.Forms
                         ClassBuilder classBuilder = new ClassBuilder(false);
                         
                         // load references
-                        ObservableCollection<ProjectReference> references = this.OpenProject.ReaderReferencesSet.References;
+                        List<ProjectReference> references = this.OpenProject.ReaderReferencesSet.References;
                         DataJuggler.Net.ReferencesSet convertedReferences = classBuilder.ConvertReferences(references, "ObjectReaders");
                         
                         // 12.19.2021
@@ -1178,7 +1178,7 @@ namespace DataTierClient.Forms
                     ClassBuilder classBuilder = new ClassBuilder(false);
 
                     // load references
-                    ObservableCollection<ProjectReference> references = this.OpenProject.StoredProcedureReferencesSet.References;
+                    List<ProjectReference> references = this.OpenProject.StoredProcedureReferencesSet.References;
                     DataJuggler.Net.ReferencesSet convertedReferences = classBuilder.ConvertReferences(references, "StoredProcedureObjects");
 
                     // set namespace and project namew

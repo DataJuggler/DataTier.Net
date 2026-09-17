@@ -22,7 +22,7 @@ namespace ObjectLibrary.BusinessObjects
         
         #region Private Variables
         private bool fetchAllForProjectId;
-        private ObservableCollection<ProjectReference> references;
+        private List<ProjectReference> references;
         private bool loading;
         #endregion
         
@@ -92,7 +92,7 @@ namespace ObjectLibrary.BusinessObjects
                 newReferencesSet.ReferencesSetName = this.ReferencesSetName;
 
                 // Recreate the references
-                newReferencesSet.References = new ObservableCollection<ProjectReference>();
+                newReferencesSet.References = new List<ProjectReference>();
 
                 // If the References object exists
                 if (this.HasReferences)
@@ -127,10 +127,7 @@ namespace ObjectLibrary.BusinessObjects
                 // this should never be null. Trying to solve why this is being set to null
 
                 // recreate the references
-                this.References = new ObservableCollection<ProjectReference>();
-
-                // Rewire up the event
-                this.References.CollectionChanged += References_CollectionChanged;
+                this.References = new List<ProjectReference>();
 
                 // Turn this on
                 this.Loading = true;
@@ -189,10 +186,7 @@ namespace ObjectLibrary.BusinessObjects
             private void Init()
             {
                 // create the References collection
-                this.References = new ObservableCollection<ProjectReference>();
-
-                // Wire up the event listener
-                this.References.CollectionChanged += References_CollectionChanged;
+                this.References = new List<ProjectReference>();
             }
             #endregion
             
@@ -200,17 +194,10 @@ namespace ObjectLibrary.BusinessObjects
             /// <summary>
             /// Set References
             /// </summary>
-            public void SetReferences(ObservableCollection<ProjectReference> references)
+            public void SetReferences(List<ProjectReference> references)
             {
                 // Set the references
                 this.References = references;
-
-                // if the value for HasReferences is true
-                if (HasReferences)
-                {
-                    // rewire up the event
-                    this.References.CollectionChanged += this.References_CollectionChanged;
-                }
             }
             #endregion
             
@@ -291,7 +278,7 @@ namespace ObjectLibrary.BusinessObjects
             /// <summary>
             /// This is a collection of References for this ReferencesSet.
             /// </summary>
-            public ObservableCollection<ProjectReference> References
+            public List<ProjectReference> References
             {
                 get { return references; }
                 private set

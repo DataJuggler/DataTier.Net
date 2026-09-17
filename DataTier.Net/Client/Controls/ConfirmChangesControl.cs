@@ -385,7 +385,7 @@ namespace DataTierClient.Controls
                         ClassBuilder classBuilder = new ClassBuilder(false);
                         
                         // load references
-                        ObservableCollection<ProjectReference> references = this.Project.DataManagerReferencesSet.References;
+                        List<ProjectReference> references = this.Project.DataManagerReferencesSet.References;
                         DataJuggler.Net.ReferencesSet convertedReferences = classBuilder.ConvertReferences(references, "DataManager");
 
                         // create the DataOperationMethodCreator
@@ -458,7 +458,7 @@ namespace DataTierClient.Controls
                         ClassBuilder classBuilder = new ClassBuilder(false);
                         
                         // load references
-                        ObservableCollection<ProjectReference> references = this.Project.DataOperationsReferencesSet.References;
+                        List<ProjectReference> references = this.Project.DataOperationsReferencesSet.References;
                         DataJuggler.Net.ReferencesSet convertedReferences = classBuilder.ConvertReferences(references, "ObjectReaders");
 
                         // create the DataOperationMethodCreator
@@ -522,7 +522,7 @@ namespace DataTierClient.Controls
                         ClassBuilder classBuilder = new ClassBuilder(false);
                         
                         // load references
-                        ObservableCollection<ProjectReference> references = this.Project.ReaderReferencesSet.References;
+                        List<ProjectReference> references = this.Project.ReaderReferencesSet.References;
                         DataJuggler.Net.ReferencesSet convertedReferences = classBuilder.ConvertReferences(references, "ObjectReaders");
 
                         // convert the DTNTable to DataJuggler.Net.DataTable
@@ -635,7 +635,7 @@ namespace DataTierClient.Controls
                         ClassBuilder classBuilder = new ClassBuilder(false);
 
                         // load references
-                        ObservableCollection<ProjectReference> references = this.Project.StoredProcedureReferencesSet.References;
+                        List<ProjectReference> references = this.Project.StoredProcedureReferencesSet.References;
                         DataJuggler.Net.ReferencesSet convertedReferences = classBuilder.ConvertReferences(references, "StoredProcedureObjects");
 
                         // set namespace and project namew

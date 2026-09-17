@@ -110,6 +110,9 @@ https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Roo
 
 # Updates & News
 
+9.17.2026: I fixed a bug the Custom Method Editors have been ignoring Top Rows and Custom Where Clause. 
+This affects Find & Fetch All methods. 
+
 Update 8.29.2026: Some new code I wrote last week has a flaw.
 
 See if you can spot the flaw:

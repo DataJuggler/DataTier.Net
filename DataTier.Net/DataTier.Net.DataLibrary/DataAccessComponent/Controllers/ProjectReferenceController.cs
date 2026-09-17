@@ -113,10 +113,10 @@ namespace DataAccessComponent.Controllers
             /// procedure 'ProjectReference_FetchAll'.</summary>
             /// <param name='tempProjectReference'>A temporary ProjectReference for passing values.</param>
             /// <returns>A collection of 'ProjectReference' objects.</returns>
-            public static ObservableCollection<ProjectReference> FetchAll(ProjectReference tempProjectReference, DataManager dataManager)
+            public static List<ProjectReference> FetchAll(ProjectReference tempProjectReference, DataManager dataManager)
             {
                 // Initial value
-                ObservableCollection<ProjectReference> projectReferenceList = null;
+                List<ProjectReference> projectReferenceList = null;
 
                 // Get information for calling 'DataBridgeManager.PerformDataOperation' method.
                 string methodName = "FetchAll";
@@ -133,11 +133,11 @@ namespace DataAccessComponent.Controllers
                     // Perform DataOperation
                     PolymorphicObject returnObject = DataBridgeManager.PerformDataOperation(methodName, objectName, fetchAllMethod , parameters, dataManager);
 
-                    // If return object exists
-                    if ((returnObject != null) && (returnObject.ObjectValue as ObservableCollection<ProjectReference> != null))
+                     // If return object exists
+                    if ((returnObject != null) && (returnObject.ObjectValue as List<ProjectReference> != null))
                     {
                         // Create Collection From ReturnObject.ObjectValue
-                        projectReferenceList = (ObservableCollection<ProjectReference>) returnObject.ObjectValue;
+                        projectReferenceList = (List<ProjectReference>) returnObject.ObjectValue;
                     }
                 }
                 catch (Exception error)

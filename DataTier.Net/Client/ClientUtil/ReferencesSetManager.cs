@@ -69,12 +69,12 @@ namespace DataTierClient.ClientUtil
              
             #region EnsureReferences()
             /// <summary>
-            /// returns am ObservableCollection list of References
+            /// returns am List list of References
             /// </summary>
-            public static ObservableCollection<ProjectReference> EnsureReferences(Project project)
+            public static List<ProjectReference> EnsureReferences(Project project)
             {
                 // initial value
-                ObservableCollection<ProjectReference> references = null;
+                List<ProjectReference> references = null;
 
                 // If the project object exists
                 if (NullHelper.Exists(project))

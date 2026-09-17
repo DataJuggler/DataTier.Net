@@ -17,6 +17,10 @@ namespace DataTierClient.Controls
         
         #region Private Variables
         private System.ComponentModel.IContainer components = null;
+        private TabButton EditOrderByFieldSetsButton;
+        private TabButton EditParametersSetButton;
+        private TabButton EditReadersButton;
+        private SaveCancelControl SaveCancelControl;
         private DataJuggler.Win.Controls.LabelTextBoxControl SelectedTableControl;
         private DataJuggler.Win.Controls.LabelComboBoxControl MethodTypeControl;
         private DataJuggler.Win.Controls.LabelTextBoxControl MethodNameControl;
@@ -26,24 +30,23 @@ namespace DataTierClient.Controls
         private DataJuggler.Win.Controls.LabelComboBoxControl ParameterFieldControl;
         private DataJuggler.Win.Controls.LabelCheckBoxControl UseCustomReaderCheckBox;
         private DataJuggler.Win.Controls.LabelComboBoxControl CustomReaderControl;
-        private TabButton EditReadersButton;
-        private TabButton EditParametersSetButton;
-        private SaveCancelControl SaveCancelControl;
         private DataJuggler.Win.Controls.LabelComboBoxControl ParameterFieldSetControl;
         private DataJuggler.Win.Controls.LabelTextBoxControl PropertyNameControl;
         private DataJuggler.Win.Controls.LabelCheckBoxControl UpdateOnBuildCheckbox;
-        private System.Windows.Forms.PictureBox IsViewIcon;
-        private System.Windows.Forms.ToolTip ToolTip;
         private DataJuggler.Win.Controls.LabelComboBoxControl OrderByFieldSetControl;
-        private TabButton EditOrderByFieldSetsButton;
         private DataJuggler.Win.Controls.LabelComboBoxControl OrderByTypeControl;
         private DataJuggler.Win.Controls.LabelComboBoxControl OrderByFieldControl;
+        private DataJuggler.Win.Controls.LabelCheckBoxControl DescendingCheckBox;
+        private DataJuggler.Win.Controls.LabelTextBoxControl TopRowsControl;
+        private DataJuggler.Win.Controls.LabelCheckBoxControl CustomWhereCheckBox;
+        private System.Windows.Forms.PictureBox IsViewIcon;
+        private System.Windows.Forms.ToolTip ToolTip;
         #endregion
         
         #region Methods
             
             #region Dispose(bool disposing)
-            /// <summary> 
+            /// <summary>
             /// Clean up any resources being used.
             /// </summary>
             /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -58,8 +61,8 @@ namespace DataTierClient.Controls
             #endregion
             
             #region InitializeComponent()
-            /// <summary> 
-            /// Required method for Designer support - do not modify 
+            /// <summary>
+            /// Required method for Designer support - do not modify
             /// the contents of this method with the code editor.
             /// </summary>
             private void InitializeComponent()
@@ -113,7 +116,7 @@ namespace DataTierClient.Controls
             this.CustomReaderControl.Name = "CustomReaderControl";
             this.CustomReaderControl.SelectedIndex = -1;
             this.CustomReaderControl.SelectedIndexListener = null;
-            this.CustomReaderControl.Size = new System.Drawing.Size(620, 28);
+            this.CustomReaderControl.Size = new System.Drawing.Size(796, 28);
             this.CustomReaderControl.Sorted = true;
             this.CustomReaderControl.Source = null;
             this.CustomReaderControl.TabIndex = 11;
@@ -123,7 +126,7 @@ namespace DataTierClient.Controls
             // 
             this.UseCustomReaderCheckBox.BackColor = System.Drawing.Color.Transparent;
             this.UseCustomReaderCheckBox.CheckBoxHorizontalOffSet = 0;
-            this.UseCustomReaderCheckBox.CheckBoxVerticalOffSet = 3;
+            this.UseCustomReaderCheckBox.CheckBoxVerticalOffSet = 4;
             this.UseCustomReaderCheckBox.CheckChangedListener = null;
             this.UseCustomReaderCheckBox.Checked = false;
             this.UseCustomReaderCheckBox.Editable = true;
@@ -157,7 +160,7 @@ namespace DataTierClient.Controls
             this.ParameterFieldControl.Name = "ParameterFieldControl";
             this.ParameterFieldControl.SelectedIndex = -1;
             this.ParameterFieldControl.SelectedIndexListener = null;
-            this.ParameterFieldControl.Size = new System.Drawing.Size(620, 28);
+            this.ParameterFieldControl.Size = new System.Drawing.Size(796, 28);
             this.ParameterFieldControl.Sorted = true;
             this.ParameterFieldControl.Source = null;
             this.ParameterFieldControl.TabIndex = 3;
@@ -183,7 +186,7 @@ namespace DataTierClient.Controls
             this.ParameterTypeControl.Name = "ParameterTypeControl";
             this.ParameterTypeControl.SelectedIndex = -1;
             this.ParameterTypeControl.SelectedIndexListener = null;
-            this.ParameterTypeControl.Size = new System.Drawing.Size(620, 28);
+            this.ParameterTypeControl.Size = new System.Drawing.Size(796, 28);
             this.ParameterTypeControl.Sorted = true;
             this.ParameterTypeControl.Source = null;
             this.ParameterTypeControl.TabIndex = 2;
@@ -207,7 +210,7 @@ namespace DataTierClient.Controls
             this.ProcedureNameControl.OnTextChangedListener = null;
             this.ProcedureNameControl.PasswordMode = false;
             this.ProcedureNameControl.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.ProcedureNameControl.Size = new System.Drawing.Size(620, 28);
+            this.ProcedureNameControl.Size = new System.Drawing.Size(796, 28);
             this.ProcedureNameControl.TabIndex = 6;
             this.ProcedureNameControl.TextBoxBottomMargin = 0;
             this.ProcedureNameControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
@@ -234,7 +237,7 @@ namespace DataTierClient.Controls
             this.ParametersControl.OnTextChangedListener = null;
             this.ParametersControl.PasswordMode = false;
             this.ParametersControl.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.ParametersControl.Size = new System.Drawing.Size(620, 28);
+            this.ParametersControl.Size = new System.Drawing.Size(796, 28);
             this.ParametersControl.TabIndex = 7;
             this.ParametersControl.TextBoxBottomMargin = 0;
             this.ParametersControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
@@ -261,7 +264,7 @@ namespace DataTierClient.Controls
             this.MethodNameControl.OnTextChangedListener = null;
             this.MethodNameControl.PasswordMode = false;
             this.MethodNameControl.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.MethodNameControl.Size = new System.Drawing.Size(620, 28);
+            this.MethodNameControl.Size = new System.Drawing.Size(796, 28);
             this.MethodNameControl.TabIndex = 5;
             this.MethodNameControl.TextBoxBottomMargin = 0;
             this.MethodNameControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
@@ -289,7 +292,7 @@ namespace DataTierClient.Controls
             this.MethodTypeControl.Name = "MethodTypeControl";
             this.MethodTypeControl.SelectedIndex = -1;
             this.MethodTypeControl.SelectedIndexListener = null;
-            this.MethodTypeControl.Size = new System.Drawing.Size(620, 28);
+            this.MethodTypeControl.Size = new System.Drawing.Size(796, 28);
             this.MethodTypeControl.Sorted = true;
             this.MethodTypeControl.Source = null;
             this.MethodTypeControl.TabIndex = 1;
@@ -313,7 +316,7 @@ namespace DataTierClient.Controls
             this.SelectedTableControl.OnTextChangedListener = null;
             this.SelectedTableControl.PasswordMode = false;
             this.SelectedTableControl.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.SelectedTableControl.Size = new System.Drawing.Size(620, 28);
+            this.SelectedTableControl.Size = new System.Drawing.Size(796, 28);
             this.SelectedTableControl.TabIndex = 0;
             this.SelectedTableControl.TextBoxBottomMargin = 0;
             this.SelectedTableControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
@@ -342,7 +345,7 @@ namespace DataTierClient.Controls
             this.ParameterFieldSetControl.Name = "ParameterFieldSetControl";
             this.ParameterFieldSetControl.SelectedIndex = -1;
             this.ParameterFieldSetControl.SelectedIndexListener = null;
-            this.ParameterFieldSetControl.Size = new System.Drawing.Size(620, 28);
+            this.ParameterFieldSetControl.Size = new System.Drawing.Size(796, 28);
             this.ParameterFieldSetControl.Sorted = true;
             this.ParameterFieldSetControl.Source = null;
             this.ParameterFieldSetControl.TabIndex = 4;
@@ -355,7 +358,7 @@ namespace DataTierClient.Controls
             this.SaveCancelControl.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.SaveCancelControl.Location = new System.Drawing.Point(0, 592);
             this.SaveCancelControl.Name = "SaveCancelControl";
-            this.SaveCancelControl.Size = new System.Drawing.Size(720, 48);
+            this.SaveCancelControl.Size = new System.Drawing.Size(880, 48);
             this.SaveCancelControl.TabIndex = 13;
             // 
             // PropertyNameControl
@@ -377,7 +380,7 @@ namespace DataTierClient.Controls
             this.PropertyNameControl.OnTextChangedListener = null;
             this.PropertyNameControl.PasswordMode = false;
             this.PropertyNameControl.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.PropertyNameControl.Size = new System.Drawing.Size(620, 28);
+            this.PropertyNameControl.Size = new System.Drawing.Size(796, 28);
             this.PropertyNameControl.TabIndex = 8;
             this.PropertyNameControl.TextBoxBottomMargin = 0;
             this.PropertyNameControl.TextBoxDisabledColor = System.Drawing.Color.LightGray;
@@ -389,7 +392,7 @@ namespace DataTierClient.Controls
             // 
             this.UpdateOnBuildCheckbox.BackColor = System.Drawing.Color.Transparent;
             this.UpdateOnBuildCheckbox.CheckBoxHorizontalOffSet = 0;
-            this.UpdateOnBuildCheckbox.CheckBoxVerticalOffSet = 3;
+            this.UpdateOnBuildCheckbox.CheckBoxVerticalOffSet = 4;
             this.UpdateOnBuildCheckbox.CheckChangedListener = null;
             this.UpdateOnBuildCheckbox.Checked = true;
             this.UpdateOnBuildCheckbox.Editable = true;
@@ -407,7 +410,7 @@ namespace DataTierClient.Controls
             // 
             this.IsViewIcon.BackgroundImage = global::DataTierClient.Properties.Resources.V;
             this.IsViewIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.IsViewIcon.Location = new System.Drawing.Point(647, 10);
+            this.IsViewIcon.Location = new System.Drawing.Point(816, 10);
             this.IsViewIcon.Name = "IsViewIcon";
             this.IsViewIcon.Size = new System.Drawing.Size(48, 48);
             this.IsViewIcon.TabIndex = 1000;
@@ -424,7 +427,7 @@ namespace DataTierClient.Controls
             this.EditParametersSetButton.ButtonText = "...";
             this.EditParametersSetButton.Enabled = false;
             this.EditParametersSetButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EditParametersSetButton.Location = new System.Drawing.Point(640, 140);
+            this.EditParametersSetButton.Location = new System.Drawing.Point(817, 140);
             this.EditParametersSetButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.EditParametersSetButton.Name = "EditParametersSetButton";
             this.EditParametersSetButton.NotSelectedImage = null;
@@ -444,7 +447,7 @@ namespace DataTierClient.Controls
             this.EditReadersButton.ButtonText = "...";
             this.EditReadersButton.Enabled = false;
             this.EditReadersButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EditReadersButton.Location = new System.Drawing.Point(640, 419);
+            this.EditReadersButton.Location = new System.Drawing.Point(817, 419);
             this.EditReadersButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.EditReadersButton.Name = "EditReadersButton";
             this.EditReadersButton.NotSelectedImage = null;
@@ -490,7 +493,7 @@ namespace DataTierClient.Controls
             this.EditOrderByFieldSetsButton.ButtonText = "...";
             this.EditOrderByFieldSetsButton.Enabled = false;
             this.EditOrderByFieldSetsButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EditOrderByFieldSetsButton.Location = new System.Drawing.Point(640, 499);
+            this.EditOrderByFieldSetsButton.Location = new System.Drawing.Point(817, 499);
             this.EditOrderByFieldSetsButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.EditOrderByFieldSetsButton.Name = "EditOrderByFieldSetsButton";
             this.EditOrderByFieldSetsButton.NotSelectedImage = null;
@@ -522,7 +525,7 @@ namespace DataTierClient.Controls
             this.OrderByTypeControl.Name = "OrderByTypeControl";
             this.OrderByTypeControl.SelectedIndex = -1;
             this.OrderByTypeControl.SelectedIndexListener = null;
-            this.OrderByTypeControl.Size = new System.Drawing.Size(620, 28);
+            this.OrderByTypeControl.Size = new System.Drawing.Size(796, 28);
             this.OrderByTypeControl.Sorted = true;
             this.OrderByTypeControl.Source = null;
             this.OrderByTypeControl.TabIndex = 12;
@@ -547,7 +550,7 @@ namespace DataTierClient.Controls
             this.OrderByFieldControl.Name = "OrderByFieldControl";
             this.OrderByFieldControl.SelectedIndex = -1;
             this.OrderByFieldControl.SelectedIndexListener = null;
-            this.OrderByFieldControl.Size = new System.Drawing.Size(620, 28);
+            this.OrderByFieldControl.Size = new System.Drawing.Size(796, 28);
             this.OrderByFieldControl.Sorted = true;
             this.OrderByFieldControl.Source = null;
             this.OrderByFieldControl.TabIndex = 14;
@@ -584,7 +587,7 @@ namespace DataTierClient.Controls
             this.TopRowsControl.LabelText = "Select Top Rows:";
             this.TopRowsControl.LabelTopMargin = 2;
             this.TopRowsControl.LabelWidth = 188;
-            this.TopRowsControl.Location = new System.Drawing.Point(316, 380);
+            this.TopRowsControl.Location = new System.Drawing.Point(488, 380);
             this.TopRowsControl.MultiLine = false;
             this.TopRowsControl.Name = "TopRowsControl";
             this.TopRowsControl.OnTextChangedListener = null;
@@ -611,7 +614,7 @@ namespace DataTierClient.Controls
             this.CustomWhereCheckBox.LabelFont = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomWhereCheckBox.LabelText = "Custom Where:";
             this.CustomWhereCheckBox.LabelWidth = 188;
-            this.CustomWhereCheckBox.Location = new System.Drawing.Point(437, 340);
+            this.CustomWhereCheckBox.Location = new System.Drawing.Point(488, 340);
             this.CustomWhereCheckBox.Name = "CustomWhereCheckBox";
             this.CustomWhereCheckBox.Size = new System.Drawing.Size(207, 28);
             this.CustomWhereCheckBox.TabIndex = 1006;
@@ -645,22 +648,16 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.OrderByFieldSetControl);
             this.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "CustomMethodEditor";
-            this.Size = new System.Drawing.Size(720, 640);
+            this.Size = new System.Drawing.Size(880, 640);
             ((System.ComponentModel.ISupportInitialize)(this.IsViewIcon)).EndInit();
             this.ResumeLayout(false);
 
             }
+            #endregion
+            
         #endregion
-
-        #endregion
-
-        private DataJuggler.Win.Controls.LabelCheckBoxControl DescendingCheckBox;
-        private DataJuggler.Win.Controls.LabelTextBoxControl TopRowsControl;
-        private DataJuggler.Win.Controls.LabelCheckBoxControl CustomWhereCheckBox;
+        
     }
     #endregion
 
 }
-
-
-

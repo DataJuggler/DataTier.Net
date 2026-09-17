@@ -48,7 +48,7 @@ namespace DataAccessComponent.Data.Writers
                         fetchAllProjectReferencesStoredProcedure.ProcedureName = "ProjectReference_FetchAllForReferencesSetId";
                         
                         // Create the @ReferencesSetId parameter
-                        fetchAllProjectReferencesStoredProcedure.Parameters = SqlParameterHelper.CreateSqlParameters("@referencesSetId", projectReference.ReferencesSetId);
+                        fetchAllProjectReferencesStoredProcedure.Parameters = SqlParameterHelper.CreateSqlParameters("@ReferencesSetId", projectReference.ReferencesSetId);
                     }
                 }
                 

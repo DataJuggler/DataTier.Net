@@ -24,7 +24,7 @@ using System.Windows.Forms;
 namespace DataTierClient.Controls
 {
 
-    #region class CustomMethodsEditor
+    #region class CustomMethodsEditor : UserControl, ITabButtonParent
     /// <summary>
     /// This control is used to edit the Custom Methods for a project
     /// </summary>
@@ -50,7 +50,7 @@ namespace DataTierClient.Controls
         #endregion
 
         #region Events
-
+            
             #region MethodsListBox_MouseDoubleClick(object sender, MouseEventArgs e)
             /// <summary>
             /// event is fired when Methods List Box _ Mouse Double Click

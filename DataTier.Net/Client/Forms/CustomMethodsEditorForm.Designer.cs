@@ -59,17 +59,18 @@ namespace DataTierClient.Forms
             this.CustomMethodsEditor.Name = "CustomMethodsEditor";
             this.CustomMethodsEditor.SelectedMethod = null;
             this.CustomMethodsEditor.SelectedTable = null;
-            this.CustomMethodsEditor.Size = new System.Drawing.Size(420, 240);
+            this.CustomMethodsEditor.Size = new System.Drawing.Size(640, 380);
             this.CustomMethodsEditor.TabIndex = 0;
             // 
             // CustomMethodsEditorForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(420, 240);
+            this.ClientSize = new System.Drawing.Size(640, 380);
             this.Controls.Add(this.CustomMethodsEditor);
             this.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(656, 419);
             this.Name = "CustomMethodsEditorForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit Custom Methods";
@@ -84,5 +85,3 @@ namespace DataTierClient.Forms
     #endregion
 
 }
-
-

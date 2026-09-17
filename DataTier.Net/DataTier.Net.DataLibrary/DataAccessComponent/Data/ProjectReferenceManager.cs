@@ -72,15 +72,15 @@ namespace DataAccessComponent.Data
 
             #region FetchAllProjectReferences()
             /// <summary>
-            /// This method fetches a  'ObservableCollection<ProjectReference>' object.
+            /// This method fetches a  'List<ProjectReference>' object.
             /// This method uses the 'ProjectReferences_FetchAll' procedure.
             /// </summary>
-            /// <returns>A 'ObservableCollection<ProjectReference>'</returns>
+            /// <returns>A 'List<ProjectReference>'</returns>
             /// </summary>
-            public static ObservableCollection<ProjectReference> FetchAllProjectReferences(FetchAllProjectReferencesStoredProcedure fetchAllProjectReferencesProc, DataConnector databaseConnector)
+            public static List<ProjectReference> FetchAllProjectReferences(FetchAllProjectReferencesStoredProcedure fetchAllProjectReferencesProc, DataConnector databaseConnector)
             {
                 // Initial Value
-                ObservableCollection<ProjectReference> projectReferenceCollection = null;
+                List<ProjectReference> projectReferenceCollection = null;
 
                 // Verify database connection is connected
                 if ((databaseConnector != null) && (databaseConnector.Connected))

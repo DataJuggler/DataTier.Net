@@ -10,7 +10,7 @@ namespace DataTierClient.Forms
 
     #region class CustomMethodEditorForm
     /// <summary>
-    /// This form is used to host the CustomMethodEditor control. 
+    /// This form is used to host the CustomMethodEditor control.
     /// </summary>
     partial class CustomMethodEditorForm
     {
@@ -55,7 +55,7 @@ namespace DataTierClient.Forms
             this.CustomMethodEditor.Location = new System.Drawing.Point(0, 0);
             this.CustomMethodEditor.MethodInfo = null;
             this.CustomMethodEditor.Name = "CustomMethodEditor";
-            this.CustomMethodEditor.Size = new System.Drawing.Size(720, 610);
+            this.CustomMethodEditor.Size = new System.Drawing.Size(880, 640);
             this.CustomMethodEditor.TabIndex = 0;
             this.CustomMethodEditor.UserCancelled = true;
             this.CustomMethodEditor.ViewMode = false;
@@ -63,7 +63,7 @@ namespace DataTierClient.Forms
             // CustomMethodEditorForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(720, 610);
+            this.ClientSize = new System.Drawing.Size(880, 640);
             this.Controls.Add(this.CustomMethodEditor);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -82,5 +82,3 @@ namespace DataTierClient.Forms
     #endregion
 
 }
-
-
