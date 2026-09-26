@@ -1165,7 +1165,7 @@ namespace DataAccessComponent.DataGateway
                 // If the project object exists
                 if (NullHelper.Exists(project))
                 {
-                    // Load
+                    // Load ReferencesSet for this Project
                     ReferencesSet tempSet = new ReferencesSet();
 
                     // Set the value for the property 'FetchAllForProjectId' to true
@@ -1862,8 +1862,18 @@ namespace DataAccessComponent.DataGateway
                         // Load the ReferenceSets for ths project
                         LoadProjectReferencesSets(ref project);
 
-                        // Create the default references
-                        project.CreateDefaultReferences();
+                        // if still not valid
+                        if (!project.ValidReferences)
+                        {
+                            // Create the default references
+                            project.CreateDefaultReferences();
+
+                            // They were recreated
+                            project.ReferencesRecreated = true;
+
+                            // Save the project references
+                            SaveProjectReferences(ref project);
+                        }
                     }                    
                 }
             }

@@ -10,7 +10,7 @@
 
 * New - If you target .NET 10 you will need Visual Studio 2026 for your client project.
 Technically Visual Studio 2019 still works for older frameworks (.NET 5 - .NET 7), but 
-.NET 8 - .NET 10 are recommended for new projects.<br/>
+.NET 10 is recommended for new projects.<br/>
 
 # Running The Project
 
@@ -110,8 +110,11 @@ https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Roo
 
 # Updates & News
 
+9.26.2026: 
+
 9.17.2026: I fixed a bug the Custom Method Editors have been ignoring Top Rows and Custom Where Clause. 
-This affects Find & Fetch All methods. 
+This affects Find & Fetch All methods. Fixed another bug where if references were we created, the ProjectId is set.
+Also the database was updated, if anyone needs an update script let me know by creating an issue.
 
 Update 8.29.2026: Some new code I wrote last week has a flaw.
 

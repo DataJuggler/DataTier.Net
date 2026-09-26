@@ -48,7 +48,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DataJuggler.Core.UltimateHelper, Version=1.9.12.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DataJuggler.Core.UltimateHelper.1.9.12\lib\net48\DataJuggler.Core.UltimateHelper.dll</HintPath>
+      <HintPath>..\..\..\packages\DataJuggler.Core.UltimateHelper.1.9.14\lib\net48\DataJuggler.Core.UltimateHelper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

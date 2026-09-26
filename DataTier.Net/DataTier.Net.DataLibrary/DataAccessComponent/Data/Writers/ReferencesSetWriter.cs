@@ -27,9 +27,37 @@ namespace DataAccessComponent.Data.Writers
 
         #region Static Methods
 
-            // *******************************************
-            // Write any overrides or custom methods here.
-            // *******************************************
+            #region CreateFetchAllReferencesSetsStoredProcedure(ReferencesSet referencesSet)
+            /// <summary>
+            /// This method creates an instance of a
+            /// 'FetchAllReferencesSetsStoredProcedure' object and
+            /// creates the sql parameter[] array needed
+            /// to execute the procedure 'ReferencesSet_FetchAll'.
+            /// </summary>
+            /// <returns>An instance of a(n) 'FetchAllReferencesSetsStoredProcedure' object.</returns>
+            public static new FetchAllReferencesSetsStoredProcedure CreateFetchAllReferencesSetsStoredProcedure(ReferencesSet referencesSet)
+            {
+                // Initial value
+                FetchAllReferencesSetsStoredProcedure fetchAllReferencesSetsStoredProcedure = new FetchAllReferencesSetsStoredProcedure();
+
+                // If the referencesSet object exists
+                if (referencesSet != null)
+                {
+                    // if FetchAllForProjectId is true
+                    if (referencesSet.FetchAllForProjectId)
+                    {
+                        // Change the procedure name
+                        fetchAllReferencesSetsStoredProcedure.ProcedureName = "ReferencesSet_FetchAllForProjectId";
+
+                        // Create the @projectId parameter
+                        fetchAllReferencesSetsStoredProcedure.Parameters = SqlParameterHelper.CreateSqlParameters("@projectId", referencesSet.ProjectId);
+                    }
+                }
+
+                // return value
+                return fetchAllReferencesSetsStoredProcedure;
+            }
+            #endregion
 
         #endregion
 

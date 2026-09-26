@@ -158,10 +158,13 @@ namespace ObjectLibrary.BusinessObjects
 
                 // Set ObjectNamespace
                 ObjectNamespace = "ObjectLibrary.BusinessObjects";
-                
+    
                 // Create ObjectReferencesSet
                 ObjectReferencesSet = new ReferencesSet("DataObjects");
-                
+
+                // Set the ProjectId
+                ObjectReferencesSet.ProjectId = this.ProjectId;
+    
                 // Update to fix existing projects
                 ObjectReferencesSet.UpdateIdentity(ObjectReferencesSetId);
 
@@ -175,7 +178,7 @@ namespace ObjectLibrary.BusinessObjects
                     // Add a reference for DataJuggler.NET.Data.Interfaces. 
                     ObjectReferencesSet.References.Add(new ProjectReference("DataJuggler.NET.Data.Interfaces"));
                 }
-                
+    
                 // if the OldVersion
                 if (TemplateVersion == 1)
                 {
@@ -187,13 +190,16 @@ namespace ObjectLibrary.BusinessObjects
                     // Set DataManagerNamespace - Going Forward defaults to Data
                     DataManagerNamespace = "DataAccessComponent.Data";
                 }
-                
+    
                 // Create DataManagerReferencesSet
                 DataManagerReferencesSet = new ReferencesSet("DataManager");
 
+                // Set the ProjectId
+                DataManagerReferencesSet.ProjectId = this.ProjectId;
+
                 // Update 1.26.2025 - Preserving Id
                 DataManagerReferencesSet.UpdateIdentity(DataManagerReferencesSetId);
-                
+    
                 // Create DataManager References
                 DataManagerReferencesSet.References.Add(new ProjectReference("System"));
                 DataManagerReferencesSet.References.Add(new ProjectReference("System.Collections.Generic"));
@@ -203,16 +209,19 @@ namespace ObjectLibrary.BusinessObjects
                 DataManagerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.InsertProcedures"));
                 DataManagerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.UpdateProcedures"));
                 DataManagerReferencesSet.References.Add(new ProjectReference("ObjectLibrary.BusinessObjects"));
-                
+    
                 // Use Data
                 DataManagerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.Data.Readers"));
-                
+    
                 // Create DataOperationsReferencesSet
                 DataOperationsReferencesSet = new ReferencesSet("DataOperations");
-                
+
+                // Set the ProjectId
+                DataOperationsReferencesSet.ProjectId = this.ProjectId;
+    
                 // Update 1.26.2025 - Preserving Id
                 DataOperationsReferencesSet.UpdateIdentity(DataOperationsReferencesSetId);
-                
+    
                 // Create DataOperation References
                 DataOperationsReferencesSet.References.Add(new ProjectReference("System"));
                 DataOperationsReferencesSet.References.Add(new ProjectReference("System.Collections.Generic"));
@@ -221,7 +230,7 @@ namespace ObjectLibrary.BusinessObjects
                 DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.InsertProcedures"));
                 DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.UpdateProcedures"));
                 DataOperationsReferencesSet.References.Add(new ProjectReference("ObjectLibrary.BusinessObjects"));
-                
+    
                 if (TemplateVersion == 1)
                 {
                     DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.DataManager"));
@@ -232,13 +241,16 @@ namespace ObjectLibrary.BusinessObjects
                     DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.Data"));
                     DataOperationsReferencesSet.References.Add(new ProjectReference("DataAccessComponent.Data.Writers"));
                 }
-                
+    
                 // Create ControllerReferencesSet
                 ControllerReferencesSet = new ReferencesSet("Controllers");
 
+                // Set the ProjectId
+                ControllerReferencesSet.ProjectId = this.ProjectId;
+
                 // Update, set the Id
                 ControllerReferencesSet.UpdateIdentity(ControllerReferencesSetId);
-                
+    
                 if (TemplateVersion == 1)
                 {
                     // Set DataOperationNamespace
@@ -260,12 +272,12 @@ namespace ObjectLibrary.BusinessObjects
                     ControllerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.DataBridge"));
                     ControllerReferencesSet.References.Add(new ProjectReference("DataAccessComponent.Data"));
                 }
-                
+    
                 // Create Controller References
                 ControllerReferencesSet.References.Add(new ProjectReference("System"));
                 ControllerReferencesSet.References.Add(new ProjectReference("System.Collections.Generic"));
                 ControllerReferencesSet.References.Add(new ProjectReference("ObjectLibrary.BusinessObjects"));
-                
+    
                 if (TemplateVersion == 1)
                 {
                     // Set ReaderNamespace
@@ -276,29 +288,35 @@ namespace ObjectLibrary.BusinessObjects
                     // Set ReaderNamespace
                     ReaderNamespace = "DataAccessComponent.Data.Readers";
                 }
-                
+    
                 // Add Reader References
                 ReaderReferencesSet = new ReferencesSet("Readers");
 
+                // Set the ProjectId
+                ReaderReferencesSet.ProjectId = this.ProjectId;
+
                 // Update - Preserve Id
                 ReaderReferencesSet.UpdateIdentity(ReaderReferencesSetId);
-                
+    
                 // Set Reader References
                 ReaderReferencesSet.References.Add(new ProjectReference("System"));
                 ReaderReferencesSet.References.Add(new ProjectReference("System.Collections.Generic"));
                 ReaderReferencesSet.References.Add(new ProjectReference("System.Data"));
                 ReaderReferencesSet.References.Add(new ProjectReference("ObjectLibrary.BusinessObjects"));
                 ReaderReferencesSet.References.Add(new ProjectReference("ObjectLibrary.Enumerations"));
-                
+    
                 // Set Writer Namespace
                 DataWriterNamespace = "DataAccessComponent.Data.Writers";
-                
+    
                 // Add Writer References
                 WriterReferencesSet = new ReferencesSet("Writers");
 
+                // Set the ProjectId
+                WriterReferencesSet.ProjectId = this.ProjectId;
+
                 // Update Preserve Id
                 WriterReferencesSet.UpdateIdentity(DataWriterReferencesSetId);
-                
+    
                 // Set Writer References
                 WriterReferencesSet.References.Add(new ProjectReference("System"));
                 WriterReferencesSet.References.Add(new ProjectReference("ObjectLibrary.BusinessObjects"));
@@ -307,7 +325,7 @@ namespace ObjectLibrary.BusinessObjects
                 WriterReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.InsertProcedures"));
                 WriterReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.UpdateProcedures"));
                 WriterReferencesSet.References.Add(new ProjectReference("System.Data"));
-                
+    
                 // Update 8.13.2026: Going forward everything is using Microsoft.Data.SqlClient, 
                 WriterReferencesSet.References.Add(new ProjectReference("Microsoft.Data.SqlClient"));
 
@@ -324,16 +342,19 @@ namespace ObjectLibrary.BusinessObjects
 
                 // Set StoredProcedure Namespace
                 StoredProcedureObjectNamespace = "DataAccessComponent.StoredProcedureManager";
-                
+    
                 // Stored Procedure References
                 StoredProcedureReferencesSet = new ReferencesSet("StoredProcedures");
 
+                // Set the ProjectId
+                StoredProcedureReferencesSet.ProjectId = this.ProjectId;
+
                 // Update the Id
                 StoredProcedureReferencesSet.UpdateIdentity(StoredProcedureReferencesSetId);
-                
+    
                 // Set Stored Procedure References
                 StoredProcedureReferencesSet.References.Add(new ProjectReference("System"));
-                
+    
                 // If .NET10
                 if (TargetFramework == TargetFrameworkEnum.Net10)
                 {
@@ -373,12 +394,13 @@ namespace ObjectLibrary.BusinessObjects
                     // .NETFramework
                     StoredProcedureReferencesSet.References.Add(new ProjectReference("DataJuggler.Net"));
                 }
-                
+    
+                 // continue StoredProcedureReferencesSet
                 StoredProcedureReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.DeleteProcedures"));
                 StoredProcedureReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.FetchProcedures"));
                 StoredProcedureReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.InsertProcedures"));
                 StoredProcedureReferencesSet.References.Add(new ProjectReference("DataAccessComponent.StoredProcedureManager.UpdateProcedures"));
-                
+    
                 // if the existing References exist
                 if (hasExistingReferences)
                 {
