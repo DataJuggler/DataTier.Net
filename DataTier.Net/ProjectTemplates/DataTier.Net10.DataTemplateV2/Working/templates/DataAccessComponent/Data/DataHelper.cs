@@ -4,7 +4,7 @@
 using System;
 using System.Data;
 using DataAccessComponent.StoredProcedureManager;
-using DataJuggler.NET.Data.Sql;
+using DataJuggler.Net.Sql;
 
 #endregion
 
@@ -30,7 +30,7 @@ namespace DataAccessComponent.Data
 
         #region Methods
 
-        #region deleteRecord(StoredProcedure storedProcedure)
+        #region DeleteRecord(StoredProcedure storedProcedure)
         /// <summary>
         /// This method uses the Microsoft.ApplicationBlocks.Data 
         /// Method to delete an existing record by executing
@@ -162,59 +162,47 @@ namespace DataAccessComponent.Data
         }
         #endregion
 
-        #region ParseGuid(object dataRowFieldValue)
+        #region ParseDecimal(object dataRowFieldValue, decimal defaultValue)
         /// <summary>
         /// This method parses the dataRowFieldValue passed in 
-        /// into a Guid value.
+        /// into a decimal value. decimal, numeric and money columns
+        /// are returned by SqlClient as a Decimal.
         /// </summary>
-        /// <param name="?"></param>
+        /// <param name="dataRowFieldValue"></param>
+        /// <param name="defaultValue"></param>
         /// <returns></returns>
-        public static Guid ParseGuid(object dataRowFieldValue)
+        public static decimal ParseDecimal(object dataRowFieldValue, decimal defaultValue)
         {
             // initial value
-            Guid guidValue = Guid.Empty;
+            decimal decimalValue = defaultValue;
 
             try
             {
-                // test for the is a Guid
-                if (dataRowFieldValue is Guid dataRowFieldValueGuid)
+                // if dataRowFieldValue is a Decimal (the normal case, no conversion needed)
+                if (dataRowFieldValue is Decimal decimalFieldValue)
                 {
-                    // Parse guidValue
-                    guidValue = dataRowFieldValueGuid;
+                    // set the value
+                    decimalValue = decimalFieldValue;
+                }
+                else if (dataRowFieldValue is Double doubleFieldValue)
+                {
+                    // convert to a decimal
+                    decimalValue = (Decimal) doubleFieldValue;
+                }
+                else if (dataRowFieldValue is Int32 integerFieldValue)
+                {
+                    // convert to a decimal
+                    decimalValue = (Decimal) integerFieldValue;
                 }
             }
             catch
             {
+                // set to default value
+                decimalValue = defaultValue;
             }
 
             // return value
-            return guidValue;
-        }
-        #endregion
-
-        #region ParseString(object dataRowFieldValue)
-        /// <summary>
-        /// This method parses the dataRowFieldValue passed in 
-        /// into a string value.
-        /// </summary>
-        /// <param name="?"></param>
-        /// <returns></returns>
-        public static string ParseString(object dataRowFieldValue)
-        {
-            // initial value
-            string stringValue = null;
-
-            try
-            {
-                // Parse stringValue
-                stringValue = dataRowFieldValue.ToString().Trim();
-            }
-            catch
-            {
-            }
-
-            // return value
-            return stringValue;
+            return decimalValue;
         }
         #endregion
 
@@ -260,6 +248,36 @@ namespace DataAccessComponent.Data
         }
         #endregion
 
+        #region ParseGuid(object dataRowFieldValue)
+        /// <summary>
+        /// This method parses the dataRowFieldValue passed in 
+        /// into a Guid value.
+        /// </summary>
+        /// <param name="?"></param>
+        /// <returns></returns>
+        public static Guid ParseGuid(object dataRowFieldValue)
+        {
+            // initial value
+            Guid guidValue = Guid.Empty;
+
+            try
+            {
+                // test for the is a Guid
+                if (dataRowFieldValue is Guid dataRowFieldValueGuid)
+                {
+                    // Parse guidValue
+                    guidValue = dataRowFieldValueGuid;
+                }
+            }
+            catch
+            {
+            }
+
+            // return value
+            return guidValue;
+        }
+        #endregion
+
         #region ParseInteger(object dataRowFieldValue, int defaultValue)
         /// <summary>
         /// This method parses the dataRowFieldValue passed in 
@@ -292,6 +310,70 @@ namespace DataAccessComponent.Data
 
             // return value
             return integerValue;
+        }
+        #endregion
+
+        #region ParseLong(object dataRowFieldValue, long defaultValue)
+        /// <summary>
+        /// This method parses the dataRowFieldValue passed in 
+        /// into a long value. bigint columns are returned by SqlClient as an Int64.
+        /// </summary>
+        /// <param name="dataRowFieldValue"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
+        public static long ParseLong(object dataRowFieldValue, long defaultValue)
+        {
+            // initial value
+            long longValue = defaultValue;
+
+            try
+            {
+                // if dataRowFieldValue is an Int64 (the normal case for bigint)
+                if (dataRowFieldValue is Int64 longFieldValue)
+                {
+                    // set the value
+                    longValue = longFieldValue;
+                }
+                else if (dataRowFieldValue is Int32 integerFieldValue)
+                {
+                    // an int always fits in a long
+                    longValue = integerFieldValue;
+                }
+            }
+            catch
+            {
+                // set to default value
+                longValue = defaultValue;
+            }
+
+            // return value
+            return longValue;
+        }
+        #endregion
+
+        #region ParseString(object dataRowFieldValue)
+        /// <summary>
+        /// This method parses the dataRowFieldValue passed in 
+        /// into a string value.
+        /// </summary>
+        /// <param name="?"></param>
+        /// <returns></returns>
+        public static string ParseString(object dataRowFieldValue)
+        {
+            // initial value
+            string stringValue = null;
+
+            try
+            {
+                // Parse stringValue
+                stringValue = dataRowFieldValue.ToString().Trim();
+            }
+            catch
+            {
+            }
+
+            // return value
+            return stringValue;
         }
         #endregion
 

@@ -110,6 +110,10 @@ https://github.com/DataJuggler/DataTier.Net/blob/master/DataTier.Net/Class%20Roo
 
 # Updates & News
 
+10.11.2026: DataTier.NET was updated to version 6.6.0. Major changes as more SQL DataTypes are now supported. DateTime2, BigInit and others 
+are now supported. Decimals and Money are now Decimals in C#. This could break some existing projects. 
+Untested, but Binary and Image fields are now supported. Will test this as soon as I can.
+
 9.26.2026: 
 
 9.17.2026: I fixed a bug the Custom Method Editors have been ignoring Top Rows and Custom Where Clause. 

@@ -1568,8 +1568,20 @@ namespace DataTier.Net.StoredProcedureGenerator
 
                     case DataManager.DataTypeEnum.DateTime:
 
-                        // Set DataType
+                        // Set DataType (default)
                         dataTypeString = "datetime";
+
+                        // if this is a datetime2 column
+                        if (TextHelper.IsEqual(field.DBDataType, "datetime2"))
+                        {
+                            // include the precision, e.g. datetime2(0)
+                            dataTypeString = "datetime2(" + field.Precision.ToString() + ")";
+                        }
+                        else if ((TextHelper.IsEqual(field.DBDataType, "smalldatetime")) || (TextHelper.IsEqual(field.DBDataType, "date")))
+                        {
+                            // these have no size, so use the column type as is
+                            dataTypeString = field.DBDataType;
+                        }
 
                         // required
                         break;
