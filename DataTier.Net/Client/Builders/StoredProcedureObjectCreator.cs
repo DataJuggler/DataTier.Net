@@ -80,29 +80,52 @@ namespace DataTierClient.Builders
                         // If the data table is a view
                         if (dataTable.IsView)
                         {
-                            // Create FetchAllProc
-                            CreateFetchAllProc(dataTable);
+                            // if FetchAll is not excluded for this view
+                            if (!dataTable.ExcludeFetchAll)
+                            {
+                                // Create FetchAllProc
+                                CreateFetchAllProc(dataTable);
+                            }
                         }
                         else
                         {
-                            
-                            // Create FetchAllProc
-                            CreateFetchAllProc(dataTable);
+                            // if FetchAll is not excluded for this table
+                            if (!dataTable.ExcludeFetchAll)
+                            {
+                                // Create FetchAllProc
+                                CreateFetchAllProc(dataTable);
+                            }
 
-                            // Create InsertProc
-                            CreateInsertProc(dataTable);
+                            // if Insert is not excluded for this table
+                            if (!dataTable.ExcludeInsert)
+                            {
+                                // Create InsertProc
+                                CreateInsertProc(dataTable);
+                            }
 
                             // if the table has a primary key
                             if (dataTable.HasPrimaryKey)
                             {
-                                // Create FindProc
-                                CreateFindProc(dataTable);
-                                
-                                // Create Delete Proc
-                                CreateDeleteProc(dataTable);
-                                
-                                // Create UpdateProc
-                                CreateUpdateProc(dataTable);
+                                // if Find is not excluded for this table
+                                if (!dataTable.ExcludeFind)
+                                {
+                                    // Create FindProc
+                                    CreateFindProc(dataTable);
+                                }
+
+                                // if Delete is not excluded for this table
+                                if (!dataTable.ExcludeDelete)
+                                {
+                                    // Create Delete Proc
+                                    CreateDeleteProc(dataTable);
+                                }
+
+                                // if Update is not excluded for this table
+                                if (!dataTable.ExcludeUpdate)
+                                {
+                                    // Create UpdateProc
+                                    CreateUpdateProc(dataTable);
+                                }
                             }
                         }
                     }

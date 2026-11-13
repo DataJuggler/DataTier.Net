@@ -2,20 +2,17 @@
 
 #region using statements
 
+using DataAccessComponent.Connection;
 using DataAccessComponent.DataGateway;
 using DataJuggler.Core.UltimateHelper;
+using DataJuggler.Net;
+using DataJuggler.Net.Enumerations;
+using DataTierClient.ClientUtil;
+using ObjectLibrary.BusinessObjects;
 using System;
 using System.Collections.Generic;
-using DataJuggler.Net;
-using ObjectLibrary.BusinessObjects;
-using ObjectLibrary.Enumerations;
 using System.Linq;
-using System.Windows.Forms;
-using DataAccessComponent.Connection;
 using System.Text;
-using DataTierClient.ClientUtil;
-using DataJuggler.Net.Enumerations;
-using System.Collections.ObjectModel;
 
 #endregion
 
@@ -73,6 +70,7 @@ namespace DataTierClient.Builders
                 Database database = null;
                 List<Enumeration> enumerations = null;
                 List<DTNDatabase> databases = null;
+                Gateway gateway = new Gateway(ConnectionConstants.Name);
 
                 // If the currentProject object exists
                 if (NullHelper.Exists(currentProject))
@@ -130,6 +128,20 @@ namespace DataTierClient.Builders
                                     // If the dataTable object exists
                                     if (NullHelper.Exists(dataTable))
                                     {
+                                        // New feature, 10.17.2026: Searching for a record for this table fo BuildExcludes
+                                        BuildExcludes excludes = gateway.FindBuildExcludesByTableId(dataTable.TableId);
+
+                                        // If the excludes object exists
+                                        if (NullHelper.Exists(excludes))
+                                        {
+                                            // copy any excludes
+                                            dataTable.ExcludeDelete = excludes.ExcludeDelete;
+                                            dataTable.ExcludeFetchAll = excludes.ExcludeFetchAll;
+                                            dataTable.ExcludeFind = excludes.ExcludeFind;
+                                            dataTable.ExcludeInsert = excludes.ExcludeInsert;
+                                            dataTable.ExcludeUpdate = excludes.ExcludeUpdate;
+                                        }
+
                                         // Store the tableId in dataTable so a save performs an update and not a duplicate insert
                                         dataTable.TableId = table.TableId;
 
@@ -449,12 +461,12 @@ namespace DataTierClient.Builders
                     // Set NameSpaceName
                     this.DataManager.NamespaceName = this.CurrentProject.ObjectNamespace;
 
+                    // Create a new instance of a 'Gateway' object.
+                    Gateway gateway = new Gateway(ConnectionConstants.Name);
+
                     // if the references are null
                     if (NullHelper.IsNull(this.CurrentProject.ObjectReferencesSet.References))
                     {
-                        // Create a new instance of a 'Gateway' object.
-                        Gateway gateway = new Gateway(ConnectionConstants.Name);
-
                         // load the ProjectReferences
                         gateway.LoadProjectReferencesForProject(ref currentProject);
                     }

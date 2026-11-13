@@ -90,24 +90,66 @@ namespace DataTierClient.Builders
                         // iterate the DataTables
                         foreach (DataTable dataTable in DataTables)
                         {
-                            // Update 12.19.2012: if there is a primary key & not a view 
+                            // Update 12.19.2012: if there is a primary key & not a view
                             if ((dataTable.HasPrimaryKey) && (!dataTable.IsView))
                             {
-                                // write the Delete method
-                                WriteDeleteMethod(dataTable, lines);
+                                // if Delete is not excluded for this table
+                                if (!dataTable.ExcludeDelete)
+                                {
+                                    // write the Delete method
+                                    WriteDeleteMethod(dataTable, lines);
+                                }
 
-                                // write the Find method
-                                WriteFindMethod(dataTable, lines);
+                                // if Find is not excluded for this table
+                                if (!dataTable.ExcludeFind)
+                                {
+                                    // write the Find method
+                                    WriteFindMethod(dataTable, lines);
+                                }
                             }
-                            
-                            // Always write the load method
-                            WriteLoadMethod(dataTable, lines);
 
-                            // Update 12.19.2012: if there is a primary key & not a view 
-                            if ((dataTable.HasPrimaryKey) && (!dataTable.IsView))
+                            // if FetchAll is not excluded for this table
+                            if (!dataTable.ExcludeFetchAll)
                             {
-                                // write the Save method
-                                WriteSaveMethod(dataTable, lines);
+                                // write the load method
+                                WriteLoadMethod(dataTable, lines);
+                            }
+
+                            // if this is not a view (tables without a primary key get an Insert only Save)
+                            if (!dataTable.IsView)
+                            {
+                                // locals
+                                bool writeSave = false;
+
+                                // if this table does not have a primary key
+                                if (!dataTable.HasPrimaryKey)
+                                {
+                                    // Without a primary key, Save can only Insert
+                                    writeSave = (!dataTable.ExcludeInsert);
+                                }
+                                // if this is an Identity column for the primary key
+                                else if (dataTable.PrimaryKey.DataType == DataManager.DataTypeEnum.Autonumber)
+                                {
+                                    // Save uses IsNew, so write Save if either Insert or Update is included
+                                    writeSave = ((!dataTable.ExcludeInsert) || (!dataTable.ExcludeUpdate));
+                                }
+                                else if (dataTable.ExcludeFind)
+                                {
+                                    // Without Find, new objects cannot be detected, so Save can only Update
+                                    writeSave = (!dataTable.ExcludeUpdate);
+                                }
+                                else
+                                {
+                                    // Save uses Find, so write Save if either Insert or Update is included
+                                    writeSave = ((!dataTable.ExcludeInsert) || (!dataTable.ExcludeUpdate));
+                                }
+
+                                // if the Save method should be written (this must match the ControllerCreator)
+                                if (writeSave)
+                                {
+                                    // write the Save method
+                                    WriteSaveMethod(dataTable, lines);
+                                }
                             }
                         }
 

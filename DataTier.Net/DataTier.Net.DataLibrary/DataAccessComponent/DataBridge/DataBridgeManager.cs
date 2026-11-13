@@ -124,7 +124,7 @@ namespace DataAccessComponent.DataBridge
                     }
 
                     // return the error
-                    returnObject.Error = error;
+                    returnObject.Exception = error;
                 }
                 finally
                 {

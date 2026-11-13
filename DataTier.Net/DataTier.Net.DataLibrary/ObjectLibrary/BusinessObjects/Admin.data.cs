@@ -21,8 +21,9 @@ namespace ObjectLibrary.BusinessObjects
         private bool checkForUpdates;
         private string codeVersion;
         private string gitCommit;
-        private DateTime lastUpdated;
+        private DateTime? lastUpdated;
         private string schemaHash;
+        private bool useNullableDates;
         #endregion
 
         #region Methods
@@ -95,8 +96,8 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
 
-            #region DateTime LastUpdated
-            public DateTime LastUpdated
+            #region DateTime? LastUpdated
+            public DateTime? LastUpdated
             {
                 get
                 {
@@ -119,6 +120,20 @@ namespace ObjectLibrary.BusinessObjects
                 set
                 {
                     schemaHash = value;
+                }
+            }
+            #endregion
+
+            #region bool UseNullableDates
+            public bool UseNullableDates
+            {
+                get
+                {
+                    return useNullableDates;
+                }
+                set
+                {
+                    useNullableDates = value;
                 }
             }
             #endregion

@@ -43,6 +43,7 @@ namespace DataAccessComponent.Data.Readers
                 int gitCommitfield = 3;
                 int lastUpdatedfield = 4;
                 int schemaHashfield = 5;
+                int useNullableDatesfield = 6;
 
                 try
                 {
@@ -53,6 +54,7 @@ namespace DataAccessComponent.Data.Readers
                     admin.GitCommit = DataHelper.ParseString(dataRow.ItemArray[gitCommitfield]);
                     admin.LastUpdated = DataHelper.ParseDate(dataRow.ItemArray[lastUpdatedfield]);
                     admin.SchemaHash = DataHelper.ParseString(dataRow.ItemArray[schemaHashfield]);
+                    admin.UseNullableDates = DataHelper.ParseBoolean(dataRow.ItemArray[useNullableDatesfield], false);
                 }
                 catch
                 {

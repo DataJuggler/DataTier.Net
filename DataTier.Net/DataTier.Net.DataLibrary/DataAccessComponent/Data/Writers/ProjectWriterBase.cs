@@ -211,10 +211,10 @@ namespace DataAccessComponent.Data.Writers
                     param = new SqlParameter("@DateModified", SqlDbType.DateTime);
 
                     // If project.DateModified does not exist.
-                    if (project.DateModified.Year < 1900)
+                    if ((project.DateModified == null) || (project.DateModified.Value.Year <= 1900))
                     {
                         // Set the value to null
-                        param.Value = null;
+                        param.Value = DBNull.Value;
                     }
                     else
                     {
@@ -461,10 +461,10 @@ namespace DataAccessComponent.Data.Writers
                     param = new SqlParameter("@DateModified", SqlDbType.DateTime);
 
                     // If project.DateModified does not exist.
-                    if (project.DateModified.Year < 1900)
+                    if ((project.DateModified == null) || (project.DateModified.Value.Year <= 1900))
                     {
                         // Set the value to null
-                        param.Value = null;
+                        param.Value = DBNull.Value;
                     }
                     else
                     {

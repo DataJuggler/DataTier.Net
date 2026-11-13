@@ -761,34 +761,69 @@ namespace DataTierClient.Builders
 
             #region FindInsertIndexForFindMethod(List<TextLine> lines)
             /// <summary>
-            /// returns the Insert Index For Find Method
+            /// returns the Insert Index For Find Method. The Find method goes after the
+            /// FetchAll method. If FetchAll is not in the file (excluded), the Find method goes
+            /// after the Delete method, and if Delete is not in the file either, the Find method
+            /// goes directly after the '#region Methods' line.
             /// </summary>
             public int FindInsertIndexForFindMethod(List<TextLine> lines)
             {
                 // initial value
                 int insertIndex = -1;
 
+                // locals
+                int index = -1;
+                int endRegionIndex = -1;
+                int methodsRegionIndex = -1;
+
                 // If the lines collection exists and has one or more items
                 if (ListHelper.HasOneOrMoreItems(lines))
                 {
-                    // find the index of the load
-                    // get the fetch all
-                    string fetchAllProcName = "#region FetchAll";
+                    // find the FetchAll method
+                    index = lines.FindIndex(x => x.Text.Contains("#region FetchAll"));
 
-                    // find the Index
-                    int index = lines.FindIndex(x => x.Text.Contains(fetchAllProcName));
-
-                    // if the index was found
+                    // if the FetchAll method was found
                     if (index >= 0)
                     {
                         // Start searching at 'index + 1'
-                        int endRegionIndex = lines.FindIndex(index + 1, x => x.Text.Contains("#endregion"));
+                        endRegionIndex = lines.FindIndex(index + 1, x => x.Text.Contains("#endregion"));
 
                         // If the value for endRegionIndex is greater than zero
                         if (endRegionIndex > 0)
                         {
-                            // Set the value for 2
+                            // FetchAll is followed by a blank line, so skip it
                             insertIndex = endRegionIndex + 2;
+                        }
+                    }
+                    else
+                    {
+                        // FetchAll is excluded, so find the Delete method
+                        index = lines.FindIndex(x => x.Text.Contains("#region Delete"));
+
+                        // if the Delete method was found
+                        if (index >= 0)
+                        {
+                            // Start searching at 'index + 1'
+                            endRegionIndex = lines.FindIndex(index + 1, x => x.Text.Contains("#endregion"));
+
+                            // If the value for endRegionIndex is greater than zero
+                            if (endRegionIndex > 0)
+                            {
+                                // Delete is not followed by a blank line, so insert directly after it
+                                insertIndex = endRegionIndex + 1;
+                            }
+                        }
+                        else
+                        {
+                            // Delete is excluded too, so find the Methods region
+                            methodsRegionIndex = lines.FindIndex(x => x.Text.Trim() == "#region Methods");
+
+                            // if the Methods region was found
+                            if (methodsRegionIndex >= 0)
+                            {
+                                // insert directly after the '#region Methods' line
+                                insertIndex = methodsRegionIndex + 1;
+                            }
                         }
                     }
                 }
@@ -1167,18 +1202,22 @@ namespace DataTierClient.Builders
                     // Increase Indent
                     Indent++;
 
-                    // if the data table has a primary key and is not a view
-                    if ((dataTable.HasPrimaryKey) && (!dataTable.IsView))
+                    // if the data table has a primary key, is not a view and Delete is not excluded
+                    if ((dataTable.HasPrimaryKey) && (!dataTable.IsView) && (!dataTable.ExcludeDelete))
                     {
                         // Create The DeleteMethod
                         CreateDeleteMethod(dataTable);
                     }
 
-                    // Create FetchAllMethod
-                    CreateFetchAllMethod(dataTable);
+                    // if FetchAll is not excluded for this table
+                    if (!dataTable.ExcludeFetchAll)
+                    {
+                        // Create FetchAllMethod
+                        CreateFetchAllMethod(dataTable);
+                    }
 
-                    // if the data table has a primary key and is not a view
-                    if ((dataTable.HasPrimaryKey) && (!dataTable.IsView))
+                    // if the data table has a primary key, is not a view and Find is not excluded
+                    if ((dataTable.HasPrimaryKey) && (!dataTable.IsView) && (!dataTable.ExcludeFind))
                     {
                         // Create FindMethod
                         CreateFindMethod(dataTable);
@@ -1187,15 +1226,15 @@ namespace DataTierClient.Builders
                     // Write The Init method
                     WriteInitMethod(dataTable);
 
-                    // if the data table has a primary key and is not a view
-                    if (!dataTable.IsView)
+                    // if the data table is not a view and Insert is not excluded
+                    if ((!dataTable.IsView) && (!dataTable.ExcludeInsert))
                     {
                         // Create InsertMethod
                         CreateInsertMethod(dataTable);
                     }
 
-                    // if the data table has a primary key and is not a view
-                    if ((dataTable.HasPrimaryKey) && (!dataTable.IsView))
+                    // if the data table has a primary key, is not a view and Update is not excluded
+                    if ((dataTable.HasPrimaryKey) && (!dataTable.IsView) && (!dataTable.ExcludeUpdate))
                     {
                         // Create Update Method
                         CreateUpdateMethod(dataTable);

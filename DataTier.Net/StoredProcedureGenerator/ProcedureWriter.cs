@@ -1093,29 +1093,53 @@ namespace DataTier.Net.StoredProcedureGenerator
                     // Only create the InsertProc if this table is not a view
                     if (dataTable.IsView)
                     {
-                        // Create FetchAllProc
-                        CreateFindProc(dataTable, true);
+                        // if FetchAll is not excluded for this view
+                        if (!dataTable.ExcludeFetchAll)
+                        {
+                            // Create FetchAllProc
+                            CreateFindProc(dataTable, true);
+                        }
                     }
                     else
                     {
-                        // Create Insert Proc      
-                        CreateInsertProc(dataTable);
+                        // if Insert is not excluded for this table
+                        if (!dataTable.ExcludeInsert)
+                        {
+                            // Create Insert Proc
+                            CreateInsertProc(dataTable);
+                        }
 
                         // if this table has a primary key
                         if (dataTable.HasPrimaryKey)
                         {
-                            // Create Update Proc
-                            CreateUpdateProc(dataTable);
+                            // if Update is not excluded for this table
+                            if (!dataTable.ExcludeUpdate)
+                            {
+                                // Create Update Proc
+                                CreateUpdateProc(dataTable);
+                            }
 
-                            // Create FindProc
-                            CreateFindProc(dataTable, false);
+                            // if Find is not excluded for this table
+                            if (!dataTable.ExcludeFind)
+                            {
+                                // Create FindProc
+                                CreateFindProc(dataTable, false);
+                            }
 
-                            // Create Delete Proc
-                            CreateDeleteProc(dataTable);
+                            // if Delete is not excluded for this table
+                            if (!dataTable.ExcludeDelete)
+                            {
+                                // Create Delete Proc
+                                CreateDeleteProc(dataTable);
+                            }
                         }
 
-                        // Create FetchAllProc
-                        CreateFindProc(dataTable, true);
+                        // if FetchAll is not excluded for this table
+                        if (!dataTable.ExcludeFetchAll)
+                        {
+                            // Create FetchAllProc
+                            CreateFindProc(dataTable, true);
+                        }
                     }
                 }
             }

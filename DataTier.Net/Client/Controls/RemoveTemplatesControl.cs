@@ -23,18 +23,19 @@ namespace DataTierClient.Controls
     /// </summary>
     public partial class RemoveTemplatesControl : UserControl, ISelectedIndexListener
     {
-        
+
         #region Private Variables
         private TargetFrameworkEnum selectedFramework;
-        public const string UninstallDotNet5ProjectTemplates = "dotnet new -uninstall DataJuggler.DataTier.Net5.ProjectTemplates";        
+        public const string UninstallDotNet5ProjectTemplates = "dotnet new -uninstall DataJuggler.DataTier.Net5.ProjectTemplates";
         public const string UninstallDotNet6ProjectTemplates = "dotnet new uninstall DataJuggler.DataTier.Net6.ProjectTemplates";
         public const string UninstallDotNet7ProjectTemplates = "dotnet new uninstall DataJuggler.DataTier.Net7.ProjectTemplates";
-        public const string UninstallDotNet8ProjectTemplates = "dotnet new uninstall DataJuggler.DataTier.NET8.ProjectTemplates";        
+        public const string UninstallDotNet8ProjectTemplates = "dotnet new uninstall DataJuggler.DataTier.NET8.ProjectTemplates";
         public const string UninstallDotNet8ProjectTemplates2 = "dotnet new uninstall DataJuggler.DataTier.NET8V2.ProjectTemplates";
         public const string UninstallDotNet9ProjectTemplates = "dotnet new uninstall DataJuggler.DataTier.Net9.ProjectTemplatesV2";
         public const string UninstallDotNet10ProjectTemplates = "dotnet new uninstall DataJuggler.DataTier.Net10.ProjectTemplatesV2";
+        public const string UninstallDotNet11ProjectTemplates = "dotnet new uninstall DataJuggler.DataTier.Net11.ProjectTemplatesV2";
         #endregion
-        
+
         #region Constructor
         /// <summary>
         /// Create a new instance of a 'RemoveTemplatesControl' object.
@@ -48,9 +49,9 @@ namespace DataTierClient.Controls
             Init();
         }
         #endregion
-        
+
         #region Events
-            
+
             #region Button_Enter(object sender, EventArgs e)
             /// <summary>
             /// event is fired when Button _ Enter
@@ -61,7 +62,7 @@ namespace DataTierClient.Controls
                 Cursor = Cursors.Hand;
             }
             #endregion
-            
+
             #region Button_Leave(object sender, EventArgs e)
             /// <summary>
             /// event is fired when Button _ Leave
@@ -72,7 +73,7 @@ namespace DataTierClient.Controls
                 Cursor = Cursors.Default;
             }
             #endregion
-            
+
             #region CopyButton_Click(object sender, EventArgs e)
             /// <summary>
             /// event is fired when the 'CopyButton' is clicked.
@@ -93,7 +94,7 @@ namespace DataTierClient.Controls
                 CopyTimer.Start();
             }
             #endregion
-            
+
             #region CopyTimer_Tick(object sender, EventArgs e)
             /// <summary>
             /// event is fired when Copy Timer _ Tick
@@ -104,7 +105,7 @@ namespace DataTierClient.Controls
                 CopyButton.BackgroundImage = Properties.Resources.ClipBoard;
             }
             #endregion
-            
+
             #region DoneButton_Click(object sender, EventArgs e)
             /// <summary>
             /// event is fired when the 'DoneButton' is clicked.
@@ -115,14 +116,14 @@ namespace DataTierClient.Controls
                 ParentForm.Close();
             }
             #endregion
-            
+
             #region OnSelectedIndexChanged(LabelComboBoxControl control, int selectedIndex, object selectedItem)
             /// <summary>
             /// event is fired when a selection is made in the 'On'.
             /// </summary>
             public void OnSelectedIndexChanged(LabelComboBoxControl control, int selectedIndex, object selectedItem)
             {
-                // if the selected index is set                
+                // if the selected index is set
                 if (selectedIndex >= 0)
                 {
                     // Set the selected text
@@ -176,8 +177,16 @@ namespace DataTierClient.Controls
 
                             case "NET10":
 
-                                // Set to .NET9
+                                // Set to .NET10
                                 SelectedFramework = TargetFrameworkEnum.Net10;
+
+                                // required
+                                break;
+
+                            case "NET11":
+
+                                // Set to .NET11
+                                SelectedFramework = TargetFrameworkEnum.Net11;
 
                                 // required
                                 break;
@@ -204,7 +213,7 @@ namespace DataTierClient.Controls
                 UIEnable();
             }
             #endregion
-            
+
             #region RemoveTemplateButton_Click(object sender, EventArgs e)
             /// <summary>
             /// event is fired when the 'RemoveTemplateButton' is clicked.
@@ -229,9 +238,9 @@ namespace DataTierClient.Controls
                             // Show a message
                             StatusLabel.Text = "You must select Version 1 or Version 2";
                             StatusLabel.ForeColor = Color.Coral;
-                        }                        
+                        }
                     }
-                    
+
                     // if the value for abort is false
                     if (!abort)
                     {
@@ -243,13 +252,13 @@ namespace DataTierClient.Controls
                         {
                             // Show a message
                             StatusLabel.Text = "Your template has been removed.";
-                            StatusLabel.ForeColor = Color.LemonChiffon;                            
+                            StatusLabel.ForeColor = Color.LemonChiffon;
                         }
                     }
                 }
             }
             #endregion
-            
+
             #region RemoveTemplateButton_EnabledChanged(object sender, EventArgs e)
             /// <summary>
             /// event is fired when Remove Template Button _ Enabled Changed
@@ -274,7 +283,7 @@ namespace DataTierClient.Controls
                     RemoveTemplateButton.ForeColor = Color.FromArgb(20, 20, 20);
                 }
             }
-        #endregion
+            #endregion
 
             #region RemoveTemplateButton_Paint(object sender, PaintEventArgs e)
             /// <summary>
@@ -301,7 +310,7 @@ namespace DataTierClient.Controls
                 }
             }
             #endregion
-            
+
         #endregion
 
         #region Methods
@@ -313,7 +322,7 @@ namespace DataTierClient.Controls
             public string GetArgumentsBasedUponSelectedFramework()
             {
                 // initial value
-                string argument = "";                
+                string argument = "";
 
                 // Determine the action by the SelectedFramework
                 switch (SelectedFramework)
@@ -374,13 +383,21 @@ namespace DataTierClient.Controls
 
                         // Required
                         break;
+
+                    case TargetFrameworkEnum.Net11:
+
+                        // Set the return value
+                        argument = "/C " + UninstallDotNet11ProjectTemplates;
+
+                        // Required
+                        break;
                 }
-                
+
                 // return value
                 return argument;
             }
             #endregion
-            
+
             #region Init()
             /// <summary>
             ///  This method performs initializations for this object.
@@ -390,8 +407,15 @@ namespace DataTierClient.Controls
                 // Load the items
                 FrameworkComboBox.LoadItems(typeof(TargetFrameworkEnum));
 
-                // Remove .NET Framework
-                FrameworkComboBox.Items.RemoveAt(5);
+                // Find the .NET Framework item by name, so adding new frameworks does not shift the index
+                int netFrameworkIndex = FrameworkComboBox.FindItemIndexByValue("NetFramework");
+
+                // if the .NET Framework item was found
+                if (netFrameworkIndex >= 0)
+                {
+                    // Remove .NET Framework
+                    FrameworkComboBox.Items.RemoveAt(netFrameworkIndex);
+                }
 
                 // Make the text upper case
                 for (int i = 0; i < FrameworkComboBox.Items.Count; i++)
@@ -425,7 +449,7 @@ namespace DataTierClient.Controls
                 // get the string to remove based on the selected framework
                 string arguments = GetArgumentsBasedUponSelectedFramework();
 
-                try               
+                try
                 {
                     if (TextHelper.Exists(arguments))
                     {
@@ -434,10 +458,10 @@ namespace DataTierClient.Controls
                         ProcessStartInfo startInfo = new ProcessStartInfo();
                         startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                         startInfo.FileName = "cmd.exe";
-                        startInfo.Arguments = arguments;                        
+                        startInfo.Arguments = arguments;
                         process.StartInfo = startInfo;
                         process.Start();
-                    
+
                         // set to true
                         removed = true;
                     }
@@ -449,7 +473,7 @@ namespace DataTierClient.Controls
                     }
                  }
                  catch (Exception error)
-                 { 
+                 {
                      // Set the error
                     DebugHelper.WriteDebugError("PerformRemove", this.Name, error);
 
@@ -460,12 +484,12 @@ namespace DataTierClient.Controls
                         MessageBoxHelper.ShowMessage("The DataTier.Net Project Templates could not be uninstalled.", "Uninsteall Templates Failed");
                     }
                  }
-                
+
                 // return value
                 return removed;
             }
             #endregion
-            
+
             #region UIEnable()
             /// <summary>
             /// UI Enable
@@ -483,7 +507,7 @@ namespace DataTierClient.Controls
                 Version2RadioButton.Visible = radioButtonsVisible;
             }
             #endregion
-            
+
         #endregion
 
         #region Properties
@@ -498,13 +522,13 @@ namespace DataTierClient.Controls
                 {
                     // initial value
                     bool hasSelectedFramework = ((int) SelectedFramework > 0);
-                    
+
                     // return value
                     return hasSelectedFramework;
                 }
             }
             #endregion
-            
+
             #region SelectedFramework
             /// <summary>
             /// This property gets or sets the value for 'SelectedFramework'.
@@ -516,7 +540,7 @@ namespace DataTierClient.Controls
                 get { return selectedFramework; }
                 set { selectedFramework = value; }
             }
-        #endregion
+            #endregion
 
         #endregion
 

@@ -1,4 +1,5 @@
 ﻿
+
 #region using statements
 
 using System.ComponentModel;
@@ -33,7 +34,7 @@ namespace DataTierClient.Controls
     /// </summary>
     public partial class CustomMethodEditor : UserControl, ISelectedIndexListener, ICheckChangedListener, ISaveCancelControl, ITabButtonParent
     {
-        
+
         #region Private Variables
         private DTNTable selectedTable;
         private Project selectedProject;
@@ -44,7 +45,7 @@ namespace DataTierClient.Controls
         private bool viewMode;
         private bool userCancelled;
         #endregion
-        
+
         #region Constructor
         /// <summary>
         /// Create a new instance of a 'CustomMethodEditor' object.
@@ -134,13 +135,13 @@ namespace DataTierClient.Controls
                 }
             }
             #endregion
-            
+
             #region OnCustomReaderSelected(int selectedIndex)
             /// <summary>
             /// This event is fired when On Custom Reader Selected
             /// </summary>
             public void OnCustomReaderSelected(int selectedIndex)
-            {   
+            {
                 // if the value for HasSelectedTable is true
                 if ((HasSelectedMethod) && (HasSelectedTable) && (SelectedTable.HasCustomReaders) && (selectedIndex < SelectedTable.CustomReaders.Count))
                 {
@@ -181,151 +182,103 @@ namespace DataTierClient.Controls
 
             #region OnMethodTypeSelected(int selectedIndex)
             /// <summary>
-            /// This method On Method Type Selected
+            /// This method On Method Type Selected.
+            /// Update Build Excludes: The action is now determined by the selected MethodType instead of
+            /// the selectedIndex, because items can be removed for views and for Build Excludes, which
+            /// shifts the indexes. This replaces the separate ViewMode switch.
             /// </summary>
             public void OnMethodTypeSelected(int selectedIndex)
-            {  
-                // if the value for ViewMode is true
-                if (ViewMode)
+            {
+                // locals
+                MethodTypeEnum methodType = MethodTypeEnum.Unknown;
+
+                // if a MethodType is selected
+                if ((selectedIndex >= 0) && (this.MethodTypeControl.HasSelectedObject))
                 {
-                    // Determine the action by the selectedIndex
-                    switch (selectedIndex)
-                    {
-                        case 1:
-
-                            // Load
-
-                            // Enable the single field control
-                            this.ParameterFieldControl.Editable = true;
-
-                            // Disable the multiple fields control
-                            this.ParameterFieldSetControl.Editable = false;
-
-                            // Set the Text
-                            this.MethodNameControl.Text = "Load" + PluralWordHelper.GetPluralName(this.SelectedTable.TableName, false) + "For";
-                        
-                            // Set the ProcedureName Text root
-                            this.ProcedureNameControl.Text = this.SelectedTable.TableName + "_" + "FetchAllFor";
-                        
-                            // required
-                            break;
-
-                        case 0:
-
-                            // Find
-
-                            // Enable the single field control
-                            this.ParameterFieldControl.Editable = true;
-
-                            // Disable the multiple fields control
-                            this.ParameterFieldSetControl.Editable = false;
-                        
-                            // Set the Text for the MethodName (it can be changed by the user if desired)
-                            this.MethodNameControl.Text = "Find" + this.SelectedTable.TableName + "By";
-                        
-                            // Set the ProcedureName Text root
-                            this.ProcedureNameControl.Text = this.SelectedTable.TableName + "_" + "FindBy";
-
-                             // Set to editable in case Delete was previously selected
-                            this.UpdateOnBuildCheckbox.Checked = true;
-                            this.UpdateOnBuildCheckbox.Editable = true;
-                        
-                            // required
-                            break;
-                    }
-
+                    // Parse the MethodType
+                    methodType = Parser.ParseMethodType(this.MethodTypeControl.SelectedObject.ToString());
                 }
-                else
+
+                // Determine the action by the methodType
+                switch (methodType)
                 {
-                    // Determine the action by the selectedIndex
-                    switch (selectedIndex)
-                    {
+                    case MethodTypeEnum.Delete_By:
 
-                        case 0:
+                        // Set the Text for the MethodName (it can be changed by the user if desired)
+                        this.MethodNameControl.Text = "Delete" + this.SelectedTable.TableName + "By";
 
-                            // Delete
+                        // Set the ProcedureName Text root
+                        this.ProcedureNameControl.Text = this.SelectedTable.TableName + "_" + "DeleteBy";
 
-                            // Set the Text for the MethodName (it can be changed by the user if desired)
-                            this.MethodNameControl.Text = "Delete" + this.SelectedTable.TableName + "By";
-                        
-                            // Set the ProcedureName Text root
-                            this.ProcedureNameControl.Text = this.SelectedTable.TableName + "_" + "DeleteBy";
+                        // You cannot update a Delete procedure, no need to is another way to put it.
+                        this.UpdateOnBuildCheckbox.Checked = false;
+                        this.UpdateOnBuildCheckbox.Editable = false;
 
-                            // You cannot update a Delete procedure, no need to is another way to put it.
-                            this.UpdateOnBuildCheckbox.Checked = false;
-                            this.UpdateOnBuildCheckbox.Editable = false;
-                        
-                            // required
-                            break;
-                    
+                        // required
+                        break;
 
-                        case 1:
+                    case MethodTypeEnum.Find_By:
 
-                            // Find
+                        // Enable the single field control
+                        this.ParameterFieldControl.Editable = true;
 
-                            // Enable the single field control
-                            this.ParameterFieldControl.Editable = true;
+                        // Disable the multiple fields control
+                        this.ParameterFieldSetControl.Editable = false;
 
-                            // Disable the multiple fields control
-                            this.ParameterFieldSetControl.Editable = false;
-                        
-                            // Set the Text for the MethodName (it can be changed by the user if desired)
-                            this.MethodNameControl.Text = "Find" + this.SelectedTable.TableName + "By";
-                        
-                            // Set the ProcedureName Text root
-                            this.ProcedureNameControl.Text = this.SelectedTable.TableName + "_" + "FindBy";
+                        // Set the Text for the MethodName (it can be changed by the user if desired)
+                        this.MethodNameControl.Text = "Find" + this.SelectedTable.TableName + "By";
 
-                             // Set to editable in case Delete was previously selected
-                            this.UpdateOnBuildCheckbox.Checked = true;
-                            this.UpdateOnBuildCheckbox.Editable = true;
-                        
-                            // required
-                            break;
+                        // Set the ProcedureName Text root
+                        this.ProcedureNameControl.Text = this.SelectedTable.TableName + "_" + "FindBy";
 
-                        case 2:
+                        // Set to editable in case Delete was previously selected
+                        this.UpdateOnBuildCheckbox.Checked = true;
+                        this.UpdateOnBuildCheckbox.Editable = true;
 
-                            // Load
+                        // required
+                        break;
 
-                            // Enable the single field control
-                            this.ParameterFieldControl.Editable = true;
+                    case MethodTypeEnum.Load_By:
 
-                            // Disable the multiple fields control
-                            this.ParameterFieldSetControl.Editable = false;
+                        // Enable the single field control
+                        this.ParameterFieldControl.Editable = true;
 
-                            // Set the Text
-                            this.MethodNameControl.Text = "Load" + PluralWordHelper.GetPluralName(this.SelectedTable.TableName, false) + "For";
-                        
-                            // Set the ProcedureName Text root
-                            this.ProcedureNameControl.Text = this.SelectedTable.TableName + "_" + "FetchAllFor";
+                        // Disable the multiple fields control
+                        this.ParameterFieldSetControl.Editable = false;
 
-                            // Set to editable in case Delete was previously selected
-                            this.UpdateOnBuildCheckbox.Checked = true;
-                            this.UpdateOnBuildCheckbox.Editable = true;
-                        
-                            // required
-                            break;
+                        // Set the Text
+                        this.MethodNameControl.Text = "Load" + PluralWordHelper.GetPluralName(this.SelectedTable.TableName, false) + "For";
 
-                        case 3:
+                        // Set the ProcedureName Text root
+                        this.ProcedureNameControl.Text = this.SelectedTable.TableName + "_" + "FetchAllFor";
 
-                             // Enable the single field control
-                            this.ParameterFieldControl.Editable = true;
+                        // Set to editable in case Delete was previously selected
+                        this.UpdateOnBuildCheckbox.Checked = true;
+                        this.UpdateOnBuildCheckbox.Editable = true;
 
-                            // Disable the multiple fields control
-                            this.ParameterFieldSetControl.Editable = false;
+                        // required
+                        break;
 
-                            // Set the Text
-                            this.MethodNameControl.Text = "Update" + SelectedTable.TableName;
-                        
-                            // Set the ProcedureName Text root
-                            this.ProcedureNameControl.Text = this.SelectedTable.TableName + "_" + "Update";
+                    case MethodTypeEnum.Update:
 
-                            // Set to editable in case Delete was previously selected
-                            this.UpdateOnBuildCheckbox.Checked = true;
-                            this.UpdateOnBuildCheckbox.Editable = true;
+                        // Enable the single field control
+                        this.ParameterFieldControl.Editable = true;
 
-                            // required
-                            break;
-                    }
+                        // Disable the multiple fields control
+                        this.ParameterFieldSetControl.Editable = false;
+
+                        // Set the Text
+                        this.MethodNameControl.Text = "Update" + SelectedTable.TableName;
+
+                        // Set the ProcedureName Text root
+                        this.ProcedureNameControl.Text = this.SelectedTable.TableName + "_" + "Update";
+
+                        // Set to editable in case Delete was previously selected
+                        this.UpdateOnBuildCheckbox.Checked = true;
+                        this.UpdateOnBuildCheckbox.Editable = true;
+
+                        // required
+                        break;
                 }
 
                 // Set the first part of the PropertyName
@@ -344,7 +297,7 @@ namespace DataTierClient.Controls
             /// This event is fired when an Order By Type is selected.
             /// </summary>
             public void OnOrderByTypeSelected(int selectedIndex)
-            {   
+            {
                 // Capture the current MethodInfo
                 CaptureMethodInfo();
 
@@ -365,7 +318,7 @@ namespace DataTierClient.Controls
                                 this.OrderByFieldControl.LoadItems(MethodInfo.CustomReader.FieldSet.Fields);
                             }
                             else
-                            {  
+                            {
                                 // Load the Fields
                                 this.OrderByFieldSetControl.LoadItems(this.SelectedTable.OrderByFieldSets);
                             }
@@ -407,7 +360,7 @@ namespace DataTierClient.Controls
                 UIEnable();
             }
             #endregion
-            
+
             #region OnParameterFieldSelected(int selectedIndex, object selectedItem)
             /// <summary>
             /// This method On Parameter Field Selected
@@ -432,7 +385,7 @@ namespace DataTierClient.Controls
 
                     // If the field object exists
                     if (NullHelper.Exists(field))
-                    { 
+                    {
                         // if we already have a selected field
                         if (HasSelectedField)
                         {
@@ -465,7 +418,7 @@ namespace DataTierClient.Controls
 
                         // Append the name of this field
                         this.MethodNameControl.Text += field.FieldName;
-                   
+
                         // Append the name of this field
                         this.ProcedureNameControl.Text += field.FieldName;
 
@@ -525,7 +478,7 @@ namespace DataTierClient.Controls
 
                     // Append the name of this field
                     this.MethodNameControl.Text += fieldSet.Name;
-                   
+
                     // Append the name of this field
                     this.ProcedureNameControl.Text += fieldSet.Name;
 
@@ -537,16 +490,16 @@ namespace DataTierClient.Controls
 
                     // get the parametersText
                     parametersText = FieldSetHelper.GetParametersText(ref fieldSet, this.SelectedProject.Enumerations);
-                    
+
                     // display the parametersText
-                    this.ParametersControl.Text = parametersText; 
+                    this.ParametersControl.Text = parametersText;
 
                     // Set the first part of the PropertyName
                     this.PropertyNameControl.Text = this.MethodTypeControl.ComboBoxText.Replace(" ", "") + fieldSet.Name;
                 }
             }
             #endregion
-            
+
             #region OnParameterTypeSelected(int selectedIndex)
             /// <summary>
             /// This method On Parameter Type Selected
@@ -560,7 +513,7 @@ namespace DataTierClient.Controls
                 UIEnable();
             }
             #endregion
-            
+
             #region OnSave()
             /// <summary>
             /// This method implements the OnSave method.
@@ -614,7 +567,7 @@ namespace DataTierClient.Controls
                             break;
 
                         case "ParameterTypeControl":
-    
+
                              // Handle the ParameterType selected event
                             OnParameterTypeSelected(selectedIndex);
 
@@ -622,7 +575,7 @@ namespace DataTierClient.Controls
                             break;
 
                         case "ParameterFieldControl":
-    
+
                             // A field was selected
                             OnParameterFieldSelected(selectedIndex, selectedItem);
 
@@ -630,7 +583,7 @@ namespace DataTierClient.Controls
                             break;
 
                         case "ParameterFieldSetControl":
-    
+
                            // A field was selected
                             OnParameterFieldSetSelected(selectedIndex, selectedItem);
 
@@ -656,10 +609,10 @@ namespace DataTierClient.Controls
                 }
             }
             #endregion
-            
+
             #region OnTabButtonClicked(TabButton tabButton)
             /// <summary>
-            /// A tab button was clicked. 
+            /// A tab button was clicked.
             /// </summary>
             /// <param name="buttonText"></param>
             public void OnTabButtonClicked(TabButton tabButton)
@@ -700,7 +653,7 @@ namespace DataTierClient.Controls
 
                             // Show the form
                             readersForm.ShowDialog();
-                           
+
                             // reload the CustomReaders
                             this.SelectedTable.CustomReaders = gateway.LoadCustomReadersForTableId(this.SelectedTable.TableId);
 
@@ -750,7 +703,7 @@ namespace DataTierClient.Controls
                 }
             }
             #endregion
-            
+
             #region ParametersSetControl_EnabledChanged(object sender, EventArgs e)
             /// <summary>
             /// event is fired when Parameters Set Control _ Enabled Changed
@@ -769,7 +722,7 @@ namespace DataTierClient.Controls
                 }
             }
             #endregion
-            
+
         #endregion
 
         #region Methods
@@ -842,7 +795,7 @@ namespace DataTierClient.Controls
                         // Set to No Order By
                         MethodInfo.OrderByType = OrderByTypeEnum.No_Order_By;
                     }
-                
+
                     // if this is a SingleField parameter
                     if (MethodInfo.ParameterType == ParameterTypeEnum.Single_Field)
                     {
@@ -867,7 +820,7 @@ namespace DataTierClient.Controls
                     }
                     else if (MethodInfo.ParameterType == ParameterTypeEnum.Field_Set)
                     {
-                        // Show the ParameterFieldSetControl                        
+                        // Show the ParameterFieldSetControl
                         this.ParameterFieldSetControl.Visible = true;
                         this.EditParametersSetButton.Visible = true;
 
@@ -935,7 +888,7 @@ namespace DataTierClient.Controls
                 }
             }
             #endregion
-            
+
             #region DisplaySelectedMethod()
             /// <summary>
             /// This method Display Selected Method
@@ -1114,7 +1067,7 @@ namespace DataTierClient.Controls
                 TopRowsControl.Text = topRows.ToString();
                 CustomWhereCheckBox.Checked = customWhere;
                 UpdateOnBuildCheckbox.Checked = updateOnBuild;
-                
+
                 // if the value for useCustomReader is true
                 if (useCustomReader)
                 {
@@ -1123,7 +1076,7 @@ namespace DataTierClient.Controls
                 }
             }
             #endregion
-            
+
             #region DisplaySelectedTable()
             /// <summary>
             /// This method Display Selected Table
@@ -1141,7 +1094,7 @@ namespace DataTierClient.Controls
                 }
             }
             #endregion
-            
+
             #region GetConfirmationToCreatePrimaryKeyProcedure()
             /// <summary>
             /// This method Get Confirmation To Create Primary Key Procedure
@@ -1151,7 +1104,7 @@ namespace DataTierClient.Controls
                 // initial value
                 UserResponseEnum userResponse = UserResponseEnum.NoResponse;
 
-                // Capture the MethodInfo object                        
+                // Capture the MethodInfo object
                 CaptureMethodInfo();
 
                 // if the value for HasMethodInfo is true and this is a FindBy or a DeleteBy
@@ -1181,7 +1134,7 @@ namespace DataTierClient.Controls
                 return userResponse;
             }
             #endregion
-            
+
             #region Init()
             /// <summary>
             /// This method performs initializations for this object.
@@ -1194,7 +1147,7 @@ namespace DataTierClient.Controls
 
                 // Disable the ParameterFieldControl until a selection is made
                 this.ParameterFieldControl.Enabled = false;
-                
+
                 // Setup the Listeners
                 this.MethodTypeControl.SelectedIndexListener = this;
                 this.ParameterTypeControl.SelectedIndexListener = this;
@@ -1217,7 +1170,7 @@ namespace DataTierClient.Controls
                 this.EditReadersButton.SelectedImage = Properties.Resources.DeepBlue;
                 this.EditOrderByFieldSetsButton.SelectedImage = Properties.Resources.DeepBlue;
                 this.EditOrderByFieldSetsButton.NotSelectedImage = Properties.Resources.DeepGray;
-                
+
                 // Disable both buttons, and force the change
                 this.EditReadersButton.Enabled = true;
                 this.EditParametersSetButton.Enabled = true;
@@ -1229,7 +1182,7 @@ namespace DataTierClient.Controls
 
                 // Load the Order By Type Control
                 OrderByTypeControl.LoadItems(typeof(OrderByTypeEnum));
-                
+
                 // Default to No order By
                 OrderByTypeControl.SelectedIndex = 1;
 
@@ -1240,7 +1193,7 @@ namespace DataTierClient.Controls
                 UIEnable();
             }
             #endregion
-            
+
             #region LoadAndDisplayFieldSets()
             /// <summary>
             /// This method Load And Display Field Sets
@@ -1285,7 +1238,91 @@ namespace DataTierClient.Controls
                 }
             }
             #endregion
-            
+
+            #region RemoveExcludedMethodTypes()
+            /// <summary>
+            /// This method removes the Method Types from the MethodTypeControl that are excluded
+            /// by the BuildExcludes for the SelectedTable. If no BuildExcludes exist, nothing is removed.
+            /// A Method Type is not removed if the SelectedMethod already uses it, so an existing
+            /// method can still be edited.
+            /// </summary>
+            public void RemoveExcludedMethodTypes()
+            {
+                // locals
+                BuildExcludes buildExcludes = null;
+                MethodTypeEnum currentMethodType = MethodTypeEnum.Unknown;
+
+                // if the SelectedTable exists and is not new
+                if ((HasSelectedTable) && (!SelectedTable.IsNew))
+                {
+                    // create a new instance of a Gateway object
+                    Gateway gateway = new Gateway(ConnectionConstants.Name);
+
+                    // load the BuildExcludes for this table
+                    buildExcludes = gateway.FindBuildExcludes(SelectedTable.TableId);
+
+                    // If the SelectedMethod exists
+                    if (HasSelectedMethod)
+                    {
+                        // keep the MethodType of the method being edited
+                        currentMethodType = SelectedMethod.MethodType;
+                    }
+
+                    // If the buildExcludes object exists
+                    if (NullHelper.Exists(buildExcludes))
+                    {
+                        // if Delete is excluded
+                        if ((buildExcludes.ExcludeDelete) && (currentMethodType != MethodTypeEnum.Delete_By))
+                        {
+                            // Remove Delete By
+                            RemoveMethodType("Delete By");
+                        }
+
+                        // if Find is excluded
+                        if ((buildExcludes.ExcludeFind) && (currentMethodType != MethodTypeEnum.Find_By))
+                        {
+                            // Remove Find By
+                            RemoveMethodType("Find By");
+                        }
+
+                        // if FetchAll is excluded
+                        if ((buildExcludes.ExcludeFetchAll) && (currentMethodType != MethodTypeEnum.Load_By))
+                        {
+                            // Remove Load By
+                            RemoveMethodType("Load By");
+                        }
+
+                        // if Update is excluded
+                        if ((buildExcludes.ExcludeUpdate) && (currentMethodType != MethodTypeEnum.Update))
+                        {
+                            // Remove Update
+                            RemoveMethodType("Update");
+                        }
+                    }
+                }
+            }
+            #endregion
+
+            #region RemoveMethodType(string itemText)
+            /// <summary>
+            /// This method removes the item from the MethodTypeControl if it exists.
+            /// The item is found by its text, so it does not depend on the item's position.
+            /// </summary>
+            /// <param name="itemText">The display text of the item, e.g. 'Delete By'.</param>
+            public void RemoveMethodType(string itemText)
+            {
+                // find the index of this item
+                int index = this.MethodTypeControl.FindItemIndexByValue(itemText);
+
+                // if the item was found
+                if (index >= 0)
+                {
+                    // Remove this item
+                    this.MethodTypeControl.Items.RemoveAt(index);
+                }
+            }
+            #endregion
+
             #region RemoveSelectedField()
             /// <summary>
             /// This method Remove Selected Field
@@ -1304,7 +1341,7 @@ namespace DataTierClient.Controls
                 this.SelectedField = null;
             }
             #endregion
-            
+
             #region RemoveSelectedFieldSet()
             /// <summary>
             /// This method Remove Selected Field Set
@@ -1320,10 +1357,11 @@ namespace DataTierClient.Controls
                 }
             }
             #endregion
-            
+
             #region Setup(DTNTable table, Project selectedProject, Method selectedMethod = null)
             /// <summary>
             /// This method Setup
+            /// Update Build Excludes: RemoveExcludedMethodTypes is called after the View items are removed.
             /// </summary>
             public void Setup(DTNTable table, Project selectedProject, Method selectedMethod = null)
             {
@@ -1359,6 +1397,9 @@ namespace DataTierClient.Controls
                         ViewMode = true;
                     }
 
+                    // Remove any Method Types excluded by the Build Excludes for this table
+                    RemoveExcludedMethodTypes();
+
                     // Load the CustomReaders
                     this.CustomReaderControl.LoadItems(this.SelectedTable.CustomReaders);
                 }
@@ -1381,7 +1422,7 @@ namespace DataTierClient.Controls
 
             #region UIEnable()
             /// <summary>
-            /// This method handles enabling what is enabled or not 
+            /// This method handles enabling what is enabled or not
             /// </summary>
             public void UIEnable()
             {
@@ -1390,7 +1431,7 @@ namespace DataTierClient.Controls
                 bool orderByVisible = true;
                 bool topRowsVisible = true;
                 bool customReaderVisible = true;
-                
+
                 // If the MethodInfo object exists
                 if (HasMethodInfo)
                 {
@@ -1447,10 +1488,10 @@ namespace DataTierClient.Controls
                         OrderByFieldSetControl.Editable = true;
                         OrderByFieldSetControl.Enabled = true;
                         EditOrderByFieldSetsButton.Visible = true;
-                        EditOrderByFieldSetsButton.Enabled = true;    
+                        EditOrderByFieldSetsButton.Enabled = true;
                     }
                     else
-                    { 
+                    {
                         // if the value for orderByVisible is true
                         if (orderByVisible)
                         {
@@ -1463,7 +1504,7 @@ namespace DataTierClient.Controls
                                 // Hide the FieldSet and Button
                                 OrderByFieldSetControl.Visible = false;
                                 EditOrderByFieldSetsButton.Visible = false;
-                                
+
                                 // Show the Order By Field Control
                                 OrderByFieldControl.Visible = true;
                                 DescendingCheckBox.Visible = true;
@@ -1517,10 +1558,10 @@ namespace DataTierClient.Controls
                 TopRowsControl.Visible = topRowsVisible;
 
                 // refresh everything
-                Refresh();  
+                Refresh();
             }
             #endregion
-            
+
         #endregion
 
         #region Properties
@@ -1535,13 +1576,13 @@ namespace DataTierClient.Controls
                 {
                     // initial value
                     bool hasMethodInfo = (this.MethodInfo != null);
-                    
+
                     // return value
                     return hasMethodInfo;
                 }
             }
             #endregion
-            
+
             #region HasParentCustomMethodEditorForm
             /// <summary>
             /// This property returns true if this object has a 'ParentCustomMethodEditorForm'.
@@ -1552,13 +1593,13 @@ namespace DataTierClient.Controls
                 {
                     // initial value
                     bool hasParentCustomMethodEditorForm = (this.ParentCustomMethodEditorForm != null);
-                    
+
                     // return value
                     return hasParentCustomMethodEditorForm;
                 }
             }
             #endregion
-            
+
             #region HasSelectedField
             /// <summary>
             /// This property returns true if this object has a 'SelectedField'.
@@ -1569,13 +1610,13 @@ namespace DataTierClient.Controls
                 {
                     // initial value
                     bool hasSelectedField = (this.SelectedField != null);
-                    
+
                     // return value
                     return hasSelectedField;
                 }
             }
             #endregion
-            
+
             #region HasSelectedFieldSet
             /// <summary>
             /// This property returns true if this object has a 'SelectedFieldSet'.
@@ -1586,13 +1627,13 @@ namespace DataTierClient.Controls
                 {
                     // initial value
                     bool hasSelectedFieldSet = (this.SelectedFieldSet != null);
-                    
+
                     // return value
                     return hasSelectedFieldSet;
                 }
             }
             #endregion
-            
+
             #region HasSelectedMethod
             /// <summary>
             /// This property returns true if this object has a 'SelectedMethod'.
@@ -1603,13 +1644,13 @@ namespace DataTierClient.Controls
                 {
                     // initial value
                     bool hasSelectedMethod = (this.SelectedMethod != null);
-                    
+
                     // return value
                     return hasSelectedMethod;
                 }
             }
             #endregion
-            
+
             #region HasSelectedProject
             /// <summary>
             /// This property returns true if this object has a 'SelectedProject'.
@@ -1620,13 +1661,13 @@ namespace DataTierClient.Controls
                 {
                     // initial value
                     bool hasSelectedProject = (this.SelectedProject != null);
-                    
+
                     // return value
                     return hasSelectedProject;
                 }
             }
             #endregion
-            
+
             #region HasSelectedTable
             /// <summary>
             /// This property returns true if this object has a 'SelectedTable'.
@@ -1637,13 +1678,13 @@ namespace DataTierClient.Controls
                 {
                     // initial value
                     bool hasSelectedTable = (this.SelectedTable != null);
-                    
+
                     // return value
                     return hasSelectedTable;
                 }
             }
             #endregion
-                        
+
             #region MethodInfo
             /// <summary>
             /// This property gets or sets the value for 'MethodInfo'.
@@ -1654,7 +1695,7 @@ namespace DataTierClient.Controls
                 set { methodInfo = value; }
             }
             #endregion
-            
+
             #region ParentCustomMethodEditorForm
             /// <summary>
             /// This read only property returns the ParentForm of this object, cast as a CustomMethodEditorForm.
@@ -1677,66 +1718,66 @@ namespace DataTierClient.Controls
             /// This property gets or sets the value for 'SelectedField'.
             /// </summary>
             [Browsable(false)]
-            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
             public DTNField SelectedField
             {
                 get { return selectedField; }
                 set { selectedField = value; }
             }
             #endregion
-            
+
             #region SelectedFieldSet
             /// <summary>
             /// This property gets or sets the value for 'SelectedFieldSet'.
             /// </summary>
             [Browsable(false)]
-            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
             public FieldSet SelectedFieldSet
             {
                 get { return selectedFieldSet; }
                 set { selectedFieldSet = value; }
             }
             #endregion
-            
+
             #region SelectedMethod
             /// <summary>
             /// This property gets or sets the value for 'SelectedMethod'.
             /// </summary>
             [Browsable(false)]
-            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
             public Method SelectedMethod
             {
                 get { return selectedMethod; }
                 set
-                { 
-                    selectedMethod = value; 
+                {
+                    selectedMethod = value;
                 }
             }
             #endregion
-            
+
             #region SelectedProject
             /// <summary>
             /// This property gets or sets the value for 'SelectedProject'.
             /// </summary>
             [Browsable(false)]
-            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
             public Project SelectedProject
             {
                 get { return selectedProject; }
                 set { selectedProject = value; }
             }
             #endregion
-            
+
             #region SelectedTable
             /// <summary>
             /// This property gets or sets the value for 'SelectedTable'.
             /// </summary>
             [Browsable(false)]
-            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
             public DTNTable SelectedTable
             {
                 get { return selectedTable; }
-                set 
+                set
                 {
                     selectedTable = value;
 
@@ -1756,7 +1797,7 @@ namespace DataTierClient.Controls
                 set { userCancelled = value; }
             }
             #endregion
-            
+
             #region ViewMode
             /// <summary>
             /// This property gets or sets the value for 'ViewMode'.

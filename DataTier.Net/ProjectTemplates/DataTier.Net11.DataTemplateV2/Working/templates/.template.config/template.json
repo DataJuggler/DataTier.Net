@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Data Juggler",
+  "classifications": [ "ClassLibrary", "DataJuggler.DataTier.Net11.ProjectTemplatesV2", "C#15" ],
+  "identity": "DataJuggler.DataTier.Net11.ProjectTemplatesV2",
+  "name": "DataJuggler.DataTier.Net11.ProjectTemplatesV2",
+  "shortName": "DataTier.Net11.ProjectTemplatesV2",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  }
+}

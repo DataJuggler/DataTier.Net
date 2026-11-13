@@ -31,7 +31,7 @@ namespace ObjectLibrary.BusinessObjects
         private string dataWriterFolder;
         private string dataWriterNamespace;
         private int dataWriterReferencesSetId;
-        private DateTime dateModified;
+        private DateTime? dateModified;
         private string gatewayNamespace;
         private string gatewayPath;
         private string objectFolder;
@@ -265,8 +265,8 @@ namespace ObjectLibrary.BusinessObjects
             }
             #endregion
 
-            #region DateTime DateModified
-            public DateTime DateModified
+            #region DateTime? DateModified
+            public DateTime? DateModified
             {
                 get
                 {

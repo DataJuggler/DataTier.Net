@@ -9,7 +9,6 @@ using DataAccessComponent.DataOperations;
 using DataJuggler.Core.UltimateHelper;
 using DataJuggler.Core.UltimateHelper.Objects;
 using DataJuggler.Net;
-using DataJuggler.Net.Cryptography;
 using DataJuggler.Net.Enumerations;
 using DataJuggler.Win.Controls;
 using DataJuggler.Win.Controls.Interfaces;
@@ -19,7 +18,6 @@ using DataTierClient.ClientUtil;
 using DataTierClient.Controls.Images;
 using DataTierClient.Enumerations;
 using DataTierClient.Objects;
-using DataTierClient.Xml.Parsers;
 using ObjectLibrary.BusinessObjects;
 using ObjectLibrary.Enumerations;
 using System;
@@ -27,11 +25,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Text;
 using System.Windows.Forms;
-using System.Collections.ObjectModel;
-using XmlMirror.Runtime.Objects;
 
 #endregion
 
@@ -989,7 +984,6 @@ namespace DataTierClient.Forms
                         // Create ClassBuilder
                         ClassBuilder classBuilder = new ClassBuilder(false);
 
-
                         // Get namespace and project namesw
                         string nameSpace = OpenProject.GatewayNamespace;
                         string projectName = OpenProject.ProjectName;
@@ -997,6 +991,34 @@ namespace DataTierClient.Forms
 
                         // 12.19.2021
                         TargetFrameworkEnum targetFramework = (TargetFrameworkEnum) OpenProject.TargetFramework;
+
+                        // Create a new instance of a 'Gateway' object.
+                        Gateway gateway = new Gateway(ConnectionConstants.Name);
+
+                        // load the BuildExcludes for this project
+                        List<BuildExcludes> allExcludes = gateway.LoadBuildExcludesForProjectId(this.OpenProject.ProjectId);
+
+                        // If the allExcludes collection exists and has one or more items
+                        if (ListHelper.HasOneOrMoreItems(allExcludes))
+                        {
+                            // Iterate the collection of BuildExcludes objects
+                            foreach (BuildExcludes exclude in allExcludes)
+                            {
+                                // find the DataTable for this exclude
+                                DataTable dataTable = DataTables.FirstOrDefault(x => x.TableId == exclude.TableId);
+
+                                // If the dataTable object exists
+                                if (NullHelper.Exists(dataTable))
+                                {
+                                    // map the excludes
+                                    dataTable.ExcludeDelete = exclude.ExcludeDelete;
+                                    dataTable.ExcludeFetchAll = exclude.ExcludeFetchAll;
+                                    dataTable.ExcludeFind = exclude.ExcludeFind;
+                                    dataTable.ExcludeInsert = exclude.ExcludeInsert;
+                                    dataTable.ExcludeUpdate = exclude.ExcludeUpdate;
+                                }
+                            }
+                        }
 
                         // create the writer
                         GatewayCreator writer = new GatewayCreator(DataTables, gatewayPath, projectName, nameSpace, this.FileManager, targetFramework);

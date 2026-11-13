@@ -75,6 +75,7 @@ namespace DataTierClient.Controls
             this.CreateMethodButton = new System.Windows.Forms.Button();
             this.RemoveTableButton = new System.Windows.Forms.Button();
             this.SaveCancelControl = new DataTierClient.Controls.SaveCancelControl();
+            this.ExcludeOptionsButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // TablesListBox
@@ -82,7 +83,7 @@ namespace DataTierClient.Controls
             this.TablesListBox.FormattingEnabled = true;
             this.TablesListBox.Location = new System.Drawing.Point(24, 36);
             this.TablesListBox.Name = "TablesListBox";
-            this.TablesListBox.Size = new System.Drawing.Size(320, 352);
+            this.TablesListBox.Size = new System.Drawing.Size(320, 439);
             this.TablesListBox.Sorted = true;
             this.TablesListBox.TabIndex = 0;
             this.TablesListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.TablesListBox_ItemCheck);
@@ -91,28 +92,30 @@ namespace DataTierClient.Controls
             // ExcludeTableLabel
             // 
             this.ExcludeTableLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExcludeTableLabel.Location = new System.Drawing.Point(43, 394);
+            this.ExcludeTableLabel.Location = new System.Drawing.Point(24, 482);
             this.ExcludeTableLabel.Name = "ExcludeTableLabel";
-            this.ExcludeTableLabel.Size = new System.Drawing.Size(282, 29);
+            this.ExcludeTableLabel.Size = new System.Drawing.Size(320, 29);
             this.ExcludeTableLabel.TabIndex = 2;
             this.ExcludeTableLabel.Text = "Uncheck to exclude a table.";
+            this.ExcludeTableLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // ExcludeFieldLabel
             // 
             this.ExcludeFieldLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExcludeFieldLabel.Location = new System.Drawing.Point(627, 394);
+            this.ExcludeFieldLabel.Location = new System.Drawing.Point(648, 482);
             this.ExcludeFieldLabel.Name = "ExcludeFieldLabel";
-            this.ExcludeFieldLabel.Size = new System.Drawing.Size(282, 29);
+            this.ExcludeFieldLabel.Size = new System.Drawing.Size(320, 29);
             this.ExcludeFieldLabel.TabIndex = 4;
             this.ExcludeFieldLabel.Text = "Uncheck to exclude a field.";
+            this.ExcludeFieldLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // FieldsListBox
             // 
             this.FieldsListBox.CheckOnClick = true;
             this.FieldsListBox.FormattingEnabled = true;
-            this.FieldsListBox.Location = new System.Drawing.Point(608, 36);
+            this.FieldsListBox.Location = new System.Drawing.Point(648, 36);
             this.FieldsListBox.Name = "FieldsListBox";
-            this.FieldsListBox.Size = new System.Drawing.Size(320, 352);
+            this.FieldsListBox.Size = new System.Drawing.Size(320, 439);
             this.FieldsListBox.Sorted = true;
             this.FieldsListBox.TabIndex = 3;
             this.FieldsListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.FieldsListBox_ItemCheck);
@@ -130,7 +133,7 @@ namespace DataTierClient.Controls
             // FieldsLabel
             // 
             this.FieldsLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FieldsLabel.Location = new System.Drawing.Point(608, 4);
+            this.FieldsLabel.Location = new System.Drawing.Point(648, 4);
             this.FieldsLabel.Name = "FieldsLabel";
             this.FieldsLabel.Size = new System.Drawing.Size(282, 29);
             this.FieldsLabel.TabIndex = 6;
@@ -140,7 +143,7 @@ namespace DataTierClient.Controls
             // SelectedTableLabel
             // 
             this.SelectedTableLabel.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SelectedTableLabel.Location = new System.Drawing.Point(360, 4);
+            this.SelectedTableLabel.Location = new System.Drawing.Point(364, 4);
             this.SelectedTableLabel.Name = "SelectedTableLabel";
             this.SelectedTableLabel.Size = new System.Drawing.Size(156, 29);
             this.SelectedTableLabel.TabIndex = 7;
@@ -149,10 +152,10 @@ namespace DataTierClient.Controls
             // 
             // SelectedTableTextBox
             // 
-            this.SelectedTableTextBox.Location = new System.Drawing.Point(360, 36);
+            this.SelectedTableTextBox.Location = new System.Drawing.Point(368, 36);
             this.SelectedTableTextBox.Name = "SelectedTableTextBox";
             this.SelectedTableTextBox.ReadOnly = true;
-            this.SelectedTableTextBox.Size = new System.Drawing.Size(232, 34);
+            this.SelectedTableTextBox.Size = new System.Drawing.Size(256, 34);
             this.SelectedTableTextBox.TabIndex = 8;
             // 
             // AllButton
@@ -191,9 +194,9 @@ namespace DataTierClient.Controls
             this.CreateGridColumnsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CreateGridColumnsButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CreateGridColumnsButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.CreateGridColumnsButton.Location = new System.Drawing.Point(360, 346);
+            this.CreateGridColumnsButton.Location = new System.Drawing.Point(368, 346);
             this.CreateGridColumnsButton.Name = "CreateGridColumnsButton";
-            this.CreateGridColumnsButton.Size = new System.Drawing.Size(232, 44);
+            this.CreateGridColumnsButton.Size = new System.Drawing.Size(256, 44);
             this.CreateGridColumnsButton.TabIndex = 108;
             this.CreateGridColumnsButton.Text = "Create Grid Columns";
             this.CreateGridColumnsButton.UseVisualStyleBackColor = true;
@@ -212,9 +215,9 @@ namespace DataTierClient.Controls
             this.ManageFieldSetsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ManageFieldSetsButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ManageFieldSetsButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.ManageFieldSetsButton.Location = new System.Drawing.Point(360, 187);
+            this.ManageFieldSetsButton.Location = new System.Drawing.Point(368, 187);
             this.ManageFieldSetsButton.Name = "ManageFieldSetsButton";
-            this.ManageFieldSetsButton.Size = new System.Drawing.Size(232, 44);
+            this.ManageFieldSetsButton.Size = new System.Drawing.Size(256, 44);
             this.ManageFieldSetsButton.TabIndex = 103;
             this.ManageFieldSetsButton.Text = "Manage Field Sets";
             this.ManageFieldSetsButton.UseVisualStyleBackColor = true;
@@ -233,9 +236,9 @@ namespace DataTierClient.Controls
             this.ManageReadersButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ManageReadersButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ManageReadersButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.ManageReadersButton.Location = new System.Drawing.Point(360, 240);
+            this.ManageReadersButton.Location = new System.Drawing.Point(368, 240);
             this.ManageReadersButton.Name = "ManageReadersButton";
-            this.ManageReadersButton.Size = new System.Drawing.Size(232, 44);
+            this.ManageReadersButton.Size = new System.Drawing.Size(256, 44);
             this.ManageReadersButton.TabIndex = 102;
             this.ManageReadersButton.Text = "Manage Readers";
             this.ManageReadersButton.UseVisualStyleBackColor = true;
@@ -254,9 +257,9 @@ namespace DataTierClient.Controls
             this.ManageMethodButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ManageMethodButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ManageMethodButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.ManageMethodButton.Location = new System.Drawing.Point(360, 134);
+            this.ManageMethodButton.Location = new System.Drawing.Point(368, 134);
             this.ManageMethodButton.Name = "ManageMethodButton";
-            this.ManageMethodButton.Size = new System.Drawing.Size(232, 44);
+            this.ManageMethodButton.Size = new System.Drawing.Size(256, 44);
             this.ManageMethodButton.TabIndex = 101;
             this.ManageMethodButton.Text = "Manage Methods";
             this.ManageMethodButton.UseVisualStyleBackColor = true;
@@ -275,9 +278,9 @@ namespace DataTierClient.Controls
             this.CreateMethodButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CreateMethodButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CreateMethodButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.CreateMethodButton.Location = new System.Drawing.Point(360, 81);
+            this.CreateMethodButton.Location = new System.Drawing.Point(368, 81);
             this.CreateMethodButton.Name = "CreateMethodButton";
-            this.CreateMethodButton.Size = new System.Drawing.Size(232, 44);
+            this.CreateMethodButton.Size = new System.Drawing.Size(256, 44);
             this.CreateMethodButton.TabIndex = 100;
             this.CreateMethodButton.Text = "Create New Method";
             this.CreateMethodButton.UseVisualStyleBackColor = true;
@@ -296,9 +299,9 @@ namespace DataTierClient.Controls
             this.RemoveTableButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.RemoveTableButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RemoveTableButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.RemoveTableButton.Location = new System.Drawing.Point(360, 293);
+            this.RemoveTableButton.Location = new System.Drawing.Point(368, 293);
             this.RemoveTableButton.Name = "RemoveTableButton";
-            this.RemoveTableButton.Size = new System.Drawing.Size(232, 44);
+            this.RemoveTableButton.Size = new System.Drawing.Size(256, 44);
             this.RemoveTableButton.TabIndex = 97;
             this.RemoveTableButton.Text = "Remove Table Code";
             this.RemoveTableButton.UseVisualStyleBackColor = true;
@@ -311,15 +314,37 @@ namespace DataTierClient.Controls
             // 
             this.SaveCancelControl.BackColor = System.Drawing.Color.Transparent;
             this.SaveCancelControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.SaveCancelControl.Location = new System.Drawing.Point(0, 448);
+            this.SaveCancelControl.Location = new System.Drawing.Point(0, 528);
             this.SaveCancelControl.Name = "SaveCancelControl";
-            this.SaveCancelControl.Size = new System.Drawing.Size(964, 48);
+            this.SaveCancelControl.Size = new System.Drawing.Size(1000, 48);
             this.SaveCancelControl.TabIndex = 109;
+            // 
+            // ExcludeOptionsButton
+            // 
+            this.ExcludeOptionsButton.BackgroundImage = global::DataTierClient.Properties.Resources.BlackButton;
+            this.ExcludeOptionsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ExcludeOptionsButton.FlatAppearance.BorderSize = 0;
+            this.ExcludeOptionsButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.ExcludeOptionsButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.ExcludeOptionsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ExcludeOptionsButton.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExcludeOptionsButton.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.ExcludeOptionsButton.Location = new System.Drawing.Point(368, 403);
+            this.ExcludeOptionsButton.Name = "ExcludeOptionsButton";
+            this.ExcludeOptionsButton.Size = new System.Drawing.Size(256, 44);
+            this.ExcludeOptionsButton.TabIndex = 110;
+            this.ExcludeOptionsButton.Text = "Exclude Build Options";
+            this.ExcludeOptionsButton.UseVisualStyleBackColor = true;
+            this.ExcludeOptionsButton.Visible = false;
+            this.ExcludeOptionsButton.Click += new System.EventHandler(this.ExcludeOptionsButton_Click);
+            this.ExcludeOptionsButton.MouseEnter += new System.EventHandler(this.Button_Enter);
+            this.ExcludeOptionsButton.MouseLeave += new System.EventHandler(this.Button_Leave);
             // 
             // DataEditorControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Linen;
+            this.Controls.Add(this.ExcludeOptionsButton);
             this.Controls.Add(this.SaveCancelControl);
             this.Controls.Add(this.CreateGridColumnsButton);
             this.Controls.Add(this.NoneButton);
@@ -339,7 +364,7 @@ namespace DataTierClient.Controls
             this.Controls.Add(this.TablesListBox);
             this.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "DataEditorControl";
-            this.Size = new System.Drawing.Size(964, 496);
+            this.Size = new System.Drawing.Size(1000, 576);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -351,6 +376,7 @@ namespace DataTierClient.Controls
 
         private System.Windows.Forms.Button CreateGridColumnsButton;
         private SaveCancelControl SaveCancelControl;
+        private System.Windows.Forms.Button ExcludeOptionsButton;
     }
     #endregion
 

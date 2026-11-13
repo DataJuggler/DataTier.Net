@@ -129,6 +129,30 @@ namespace DataTierClient.Controls
             }
             #endregion
             
+            #region ExcludeOptionsButton_Click(object sender, EventArgs e)
+            /// <summary>
+            /// event is fired when the 'ExcludeOptionsButton' is clicked.
+            /// </summary>
+            private void ExcludeOptionsButton_Click(object sender, EventArgs e)
+            {
+                // Create a new instance of an 'ExcludeBuildOptionsForm' object.
+                ExcludeBuildOptionsForm form = new ExcludeBuildOptionsForm();
+
+                // setup the F0rm which setups the Control
+                form.Setup(this.SelectedTable);
+
+                // Show the form
+                form.ShowDialog();
+
+                // if not cancelled
+                if (!form.UserCancelled)
+                {
+                    // Call the selected table again so the buttons refresh
+                    this.TablesListBox_SelectedIndexChanged(this, null);
+                }
+            }
+            #endregion
+            
             #region FieldsListBox_ItemCheck(object sender, ItemCheckEventArgs e)
             /// <summary>
             /// event is fired when Fields List Box _ Item Check
@@ -578,6 +602,28 @@ namespace DataTierClient.Controls
                     // Append the Count
                     this.ManageReadersButton.Text += " (" + SelectedTableCustomReadersCount.ToString() + ")";
                 }
+
+                // if the value for HasSelectedTable is true
+                if (HasSelectedTable)
+                {
+                    // Create a new instance of a 'Gateway' object.
+                    Gateway gateway = new Gateway(ConnectionConstants.Name);
+
+                    // check if this table has an buildExcludes
+                    BuildExcludes buildExcludes = gateway.FindBuildExcludesByTableId(SelectedTable.TableId);
+
+                    // If the buildExcludes object exists
+                    if ((NullHelper.Exists(buildExcludes)) && (buildExcludes.ExcludesCount > 0))
+                    {
+                        // set the text with count
+                        this.ExcludeOptionsButton.Text = "Exclude Build Options (" + buildExcludes.ExcludesCount + ")";
+                    }
+                    else
+                    {
+                        // set the text with no count
+                        this.ExcludeOptionsButton.Text = "Exclude Build Options";
+                    }
+                }
             }
             #endregion
             
@@ -874,6 +920,7 @@ namespace DataTierClient.Controls
                     ManageFieldSetsButton.Visible = true;
                     ManageMethodButton.Visible = true;
                     CreateGridColumnsButton.Visible = true;
+                    ExcludeOptionsButton.Visible = true;
                 }
                 else if ((HasSelectedTable) && (SelectedTable.Exclude))
                 {
@@ -888,6 +935,7 @@ namespace DataTierClient.Controls
                     ManageFieldSetsButton.Visible = false;
                     ManageMethodButton.Visible = false; 
                     CreateGridColumnsButton.Visible = false;
+                    ExcludeOptionsButton.Visible = false;
                 }
                 else
                 {
@@ -901,6 +949,7 @@ namespace DataTierClient.Controls
                     ManageFieldSetsButton.Visible = false;
                     ManageMethodButton.Visible = false; 
                     CreateGridColumnsButton.Visible = false;
+                    ExcludeOptionsButton.Visible = false;
                 }
                 
                 // Not If Loading

@@ -69,7 +69,7 @@ namespace DataAccessComponent.Controllers
             catch (Exception error)
             {  
                 // store the error
-                result.Error = error;    
+                result.Exception = error;    
 
                 // for debugging only
                 DebugHelper.WriteDebugError("TestDatabaseConnection", "SystemController", error);

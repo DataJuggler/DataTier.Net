@@ -47,6 +47,28 @@ namespace ObjectLibrary.BusinessObjects
 
         #region Methods
 
+            #region AddReferenceIfMissing(ReferencesSet referencesSet, string referenceName)
+            /// <summary>
+            /// This method adds a reference only if the referencesSet does not already contain it
+            /// </summary>
+            public void AddReferenceIfMissing(ReferencesSet referencesSet, string referenceName)
+            {
+                // if the referencesSet and the referenceName exist
+                if ((NullHelper.Exists(referencesSet)) && (TextHelper.Exists(referenceName)))
+                {
+                    // find the index of this reference
+                    int index = FindReferenceIndex(referencesSet.References, referenceName);
+
+                    // if the reference was not found
+                    if (index < 0)
+                    {
+                        // Add this reference
+                        referencesSet.References.Add(new ProjectReference(referenceName));
+                    }
+                }
+            }
+            #endregion
+
             #region AppendToProjectFolder(string folderName)
             /// <summary>
             /// This method appends the string to the ProjectFolder
@@ -168,15 +190,15 @@ namespace ObjectLibrary.BusinessObjects
                 // Update to fix existing projects
                 ObjectReferencesSet.UpdateIdentity(ObjectReferencesSetId);
 
-                // Create Object References
-                ObjectReferencesSet.References.Add(new ProjectReference("System"));
-                ObjectReferencesSet.References.Add(new ProjectReference("ObjectLibrary.Enumerations"));
+                // Create Object References (the ObjectReferencesSet setter may have already added defaults)
+                AddReferenceIfMissing(ObjectReferencesSet, "System");
+                AddReferenceIfMissing(ObjectReferencesSet, "ObjectLibrary.Enumerations");
 
                 // If the value for the property this.AddIGridValueInterface is true
                 if (this.AddIGridValueInterface)
                 {
-                    // Add a reference for DataJuggler.NET.Data.Interfaces. 
-                    ObjectReferencesSet.References.Add(new ProjectReference("DataJuggler.NET.Data.Interfaces"));
+                    // Add a reference for DataJuggler.NET.Data.Interfaces.
+                    AddReferenceIfMissing(ObjectReferencesSet, "DataJuggler.NET.Data.Interfaces");
                 }
     
                 // if the OldVersion
@@ -355,8 +377,8 @@ namespace ObjectLibrary.BusinessObjects
                 // Set Stored Procedure References
                 StoredProcedureReferencesSet.References.Add(new ProjectReference("System"));
     
-                // If .NET10
-                if (TargetFramework == TargetFrameworkEnum.Net10)
+                // If .NET10 or .NET11
+                if ((TargetFramework == TargetFrameworkEnum.Net10) || (TargetFramework == TargetFrameworkEnum.Net11))
                 {
                     // .NET10+
                     StoredProcedureReferencesSet.References.Add(new ProjectReference("DataJuggler.NET.Data"));
@@ -525,8 +547,8 @@ namespace ObjectLibrary.BusinessObjects
                 // Create the Tables collection
                 Tables = new List<DTNTable>();
                 
-                // New projects now default to .NET 10
-                TargetFramework = TargetFrameworkEnum.Net10;
+                // New projects now default to .NET 11
+                TargetFramework = TargetFrameworkEnum.Net11;
             }
             #endregion
 

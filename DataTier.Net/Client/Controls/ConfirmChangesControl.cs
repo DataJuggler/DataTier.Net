@@ -133,11 +133,15 @@ namespace DataTierClient.Controls
                 PolymorphicObject updateGatewayResult = null;
                 PolymorphicObject updateFindForfViewResult = null;
                 PolymorphicObject saveMethodToDatabaseResult = null;
+                bool methodTypeExcluded = false;
 
                 try
                 {
-                    // if the ProjectFolder exists and the MethodInfo exists and the MethodInfo.SelectedTable exists
-                    if ((this.HasProjectFolder) && (this.HasMethodInfo) && (this.MethodInfo.HasSelectedTable))
+                    // Update Build Excludes: a custom method overrides the base method, so it cannot be built if the base method is excluded
+                    methodTypeExcluded = IsMethodTypeExcluded();
+
+                    // if the ProjectFolder exists and the MethodInfo exists and the MethodInfo.SelectedTable exists and the base method is not excluded
+                    if ((this.HasProjectFolder) && (this.HasMethodInfo) && (this.MethodInfo.HasSelectedTable) && (!methodTypeExcluded))
                     {
                         // Clear the ListBox and a column header
                         SetupListBox();
@@ -162,6 +166,11 @@ namespace DataTierClient.Controls
 
                         // Save the method to the database
                         saveMethodToDatabaseResult = HandleSaveMethodToDatabase(updateDataObjectResult, updateDataWriterResult);
+                    }
+                    else if (methodTypeExcluded)
+                    {
+                        // Show the user a message
+                        MessageHelper.DisplayMessage("This custom method cannot be created because the base method it uses is excluded in the Build Excludes for " + MethodInfo.SelectedTable.TableName + ".", "Method Excluded");
                     }
                 }
                 catch (Exception error)
@@ -2734,6 +2743,76 @@ namespace DataTierClient.Controls
             }
             #endregion
             
+            #region IsMethodTypeExcluded()
+            /// <summary>
+            /// This method returns true if the base method used by this custom method is excluded
+            /// in the BuildExcludes for the SelectedTable. A custom method overrides the base Writer
+            /// method and calls the base Gateway method, so the base method must exist.
+            /// Delete By uses Delete, Find By uses Find, Load By uses FetchAll and Update uses Update.
+            /// </summary>
+            public bool IsMethodTypeExcluded()
+            {
+                // initial value
+                bool isMethodTypeExcluded = false;
+
+                // locals
+                BuildExcludes buildExcludes = null;
+
+                // if the MethodInfo and SelectedTable exist and the table is not new
+                if ((HasMethodInfo) && (MethodInfo.HasSelectedTable) && (!MethodInfo.SelectedTable.IsNew))
+                {
+                    // create a new instance of a Gateway object
+                    Gateway gateway = new Gateway(ConnectionConstants.Name);
+
+                    // load the BuildExcludes for this table
+                    buildExcludes = gateway.FindBuildExcludes(MethodInfo.SelectedTable.TableId);
+
+                    // If the buildExcludes object exists
+                    if (NullHelper.Exists(buildExcludes))
+                    {
+                        // determine the base method by the MethodType
+                        switch (MethodInfo.MethodType)
+                        {
+                            case MethodTypeEnum.Delete_By:
+
+                                // Delete By uses Delete
+                                isMethodTypeExcluded = buildExcludes.ExcludeDelete;
+
+                                // required
+                                break;
+
+                            case MethodTypeEnum.Find_By:
+
+                                // Find By uses Find
+                                isMethodTypeExcluded = buildExcludes.ExcludeFind;
+
+                                // required
+                                break;
+
+                            case MethodTypeEnum.Load_By:
+
+                                // Load By uses FetchAll
+                                isMethodTypeExcluded = buildExcludes.ExcludeFetchAll;
+
+                                // required
+                                break;
+
+                            case MethodTypeEnum.Update:
+
+                                // Update uses Update (through Save)
+                                isMethodTypeExcluded = buildExcludes.ExcludeUpdate;
+
+                                // required
+                                break;
+                        }
+                    }
+                }
+
+                // return value
+                return isMethodTypeExcluded;
+            }
+            #endregion
+
             #region IsWriterMethodPresent(List<CodeLine> codeLines, string writerMethodName)
             /// <summary>
             /// This method returns the Writer Method Present

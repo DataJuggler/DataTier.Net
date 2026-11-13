@@ -117,7 +117,7 @@ namespace DataAccessComponent.Data.Writers
             internal static SqlParameter[] CreateInsertParameters(Admin admin)
             {
                 // Initial Values
-                SqlParameter[] parameters = new SqlParameter[5];
+                SqlParameter[] parameters = new SqlParameter[6];
                 SqlParameter param = null;
 
                 // verify adminexists
@@ -145,10 +145,10 @@ namespace DataAccessComponent.Data.Writers
                     param = new SqlParameter("@LastUpdated", SqlDbType.DateTime);
 
                     // If admin.LastUpdated does not exist.
-                    if (admin.LastUpdated.Year < 1900)
+                    if ((admin.LastUpdated == null) || (admin.LastUpdated.Value.Year <= 1900))
                     {
                         // Set the value to null
-                        param.Value = null;
+                        param.Value = DBNull.Value;
                     }
                     else
                     {
@@ -164,6 +164,12 @@ namespace DataAccessComponent.Data.Writers
 
                     // set parameters[4]
                     parameters[4] = param;
+
+                    // Create [UseNullableDates] parameter
+                    param = new SqlParameter("@UseNullableDates", admin.UseNullableDates);
+
+                    // set parameters[5]
+                    parameters[5] = param;
                 }
 
                 // return value
@@ -210,7 +216,7 @@ namespace DataAccessComponent.Data.Writers
             internal static SqlParameter[] CreateUpdateParameters(Admin admin)
             {
                 // Initial Values
-                SqlParameter[] parameters = new SqlParameter[6];
+                SqlParameter[] parameters = new SqlParameter[7];
                 SqlParameter param = null;
 
                 // verify adminexists
@@ -239,10 +245,10 @@ namespace DataAccessComponent.Data.Writers
                     param = new SqlParameter("@LastUpdated", SqlDbType.DateTime);
 
                     // If admin.LastUpdated does not exist.
-                    if (admin.LastUpdated.Year < 1900)
+                    if ((admin.LastUpdated == null) || (admin.LastUpdated.Value.Year <= 1900))
                     {
                         // Set the value to null
-                        param.Value = null;
+                        param.Value = DBNull.Value;
                     }
                     else
                     {
@@ -260,9 +266,15 @@ namespace DataAccessComponent.Data.Writers
                     // set parameters[4]
                     parameters[4] = param;
 
+                    // Create parameter for [UseNullableDates]
+                    param = new SqlParameter("@UseNullableDates", admin.UseNullableDates);
+
+                    // set parameters[5]
+                    parameters[5] = param;
+
                     // Create parameter for [AdminId]
                     param = new SqlParameter("@AdminId", admin.AdminId);
-                    parameters[5] = param;
+                    parameters[6] = param;
                 }
 
                 // return value

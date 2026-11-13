@@ -242,18 +242,30 @@ namespace DataTierClient.Builders
 
             #region CreateObjectReader(DataTable dataTable, dataObjects.CustomReader customReader = null)
             /// <summary>
-            /// Create an object reader for the table passed in.
+            /// Create an object reader for the table passed in. The reader is skipped
+            /// if both Find and FetchAll are excluded for this table, since nothing would
+            /// use it. Custom Readers are always created.
             /// </summary>
             public List<DataField> CreateObjectReader(DataTable dataTable, dataObjects.CustomReader customReader = null)
             {
                 // initial value
                 List<DataField> dataFields = null;
 
+                // locals
+                bool skipReader = false;
+
                 // Set Indent To 0
                 Indent = 0;
-            
-                // verify DataTable exist
-                if (dataTable != null)
+
+                // if this is not a Custom Reader and both Find and FetchAll are excluded
+                if ((NullHelper.Exists(dataTable)) && (NullHelper.IsNull(customReader)) && (dataTable.ExcludeFind) && (dataTable.ExcludeFetchAll))
+                {
+                    // no reader is needed for this table
+                    skipReader = true;
+                }
+
+                // verify DataTable exist and the reader is not skipped
+                if ((dataTable != null) && (!skipReader))
                 {
                     // Get the reader fileName
                     string fileName = CreateFileName(dataTable, customReader);

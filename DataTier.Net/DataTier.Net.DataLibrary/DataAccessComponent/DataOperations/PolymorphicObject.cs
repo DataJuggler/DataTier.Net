@@ -37,7 +37,7 @@ namespace DataAccessComponent.DataOperations
         private object objectValue;
         private bool aborted;
         private string abortedReason;
-        private Exception error;
+        private Exception exception;
         #endregion
 
         #region Constructor
@@ -116,30 +116,47 @@ namespace DataAccessComponent.DataOperations
             }
             #endregion
 
-            #region Error
+            #region Exception
             /// <summary>
             /// This property gets or sets the value for 'Error'.
             /// </summary>
-            public Exception Error
+            public Exception Exception
             {
-                get { return error; }
-                set { error = value; }
+                get { return exception; }
+                set { exception = value; }
             }
             #endregion
             
-            #region HasError
+            #region HasException
             /// <summary>
-            /// This property returns true if this object has an 'Error'.
+            /// This property returns true if this object has an 'Exception'.
             /// </summary>
-            public bool HasError
+            public bool HasException
             {
                 get
                 {
                     // initial value
-                    bool hasError = (Error != null);
+                    bool hasException = (Exception != null);
 
                     // return value
-                    return hasError;
+                    return hasException;
+                }
+            }
+            #endregion
+            
+            #region HasIntegerValue
+            /// <summary>
+            /// This property returns true if the 'IntegerValue' is set.
+            /// </summary>
+            public bool HasIntegerValue
+            {
+                get
+                {
+                    // initial value
+                    bool hasIntegerValue = (IntegerValue > 0);
+
+                    // return value
+                    return hasIntegerValue;
                 }
             }
             #endregion

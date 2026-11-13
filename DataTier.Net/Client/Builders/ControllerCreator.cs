@@ -224,22 +224,43 @@ namespace DataTierClient.Builders
 
             #region FindInsertIndex(DataTable dataTable, List<TextLine> lines)
             /// <summary>
-            /// returns the Insert Index
+            /// returns the Insert Index for the Find method. The Find method goes after the
+            /// FetchAll method. If FetchAll is not in the file (excluded), the Find method goes
+            /// after the Delete method, and if Delete is not in the file either, the Find method
+            /// goes after the Create[ClassName]Parameter method.
             /// </summary>
             public int FindInsertIndex(DataTable dataTable, List<TextLine> lines)
             {
                 // initial value
                 int insertIndex = -1;
 
-                // If the lines collection exists and has one or more items
-                if (ListHelper.HasOneOrMoreItems(lines))
-                {
-                    // find the index of the load
-                    // get the fetch all
-                    string fetchAllProcName = "public static List<" + dataTable + "> FetchAll";
+                // locals
+                int index = -1;
 
-                    // find the Index
-                    int index = lines.FindIndex(x => x.Text.Contains(fetchAllProcName));
+                // If the dataTable exists and the lines collection has one or more items
+                if ((NullHelper.Exists(dataTable)) && (ListHelper.HasOneOrMoreItems(lines)))
+                {
+                    // get the method declarations to look for, in the order they are tried
+                    string fetchAllLine = "public static List<" + dataTable.ClassName + "> FetchAll(";
+                    string deleteLine = "public static PolymorphicObject Delete(" + dataTable.ClassName + " ";
+                    string createParameterLine = "private static List<PolymorphicObject> Create" + dataTable.ClassName + "Parameter(";
+
+                    // find the FetchAll method
+                    index = lines.FindIndex(x => x.Text.Contains(fetchAllLine));
+
+                    // if the FetchAll method was not found (FetchAll is excluded)
+                    if (index < 0)
+                    {
+                        // find the Delete method
+                        index = lines.FindIndex(x => x.Text.Contains(deleteLine));
+                    }
+
+                    // if the Delete method was not found either
+                    if (index < 0)
+                    {
+                        // find the Create[ClassName]Parameter method
+                        index = lines.FindIndex(x => x.Text.Contains(createParameterLine));
+                    }
 
                     // if the index was found
                     if (index >= 0)
@@ -1454,46 +1475,92 @@ namespace DataTierClient.Builders
                     WriteCreateObjectParameter(dataTable);
 
                     // If this table has a primary key and is not a view
-                    if ((dataTable.HasPrimaryKey) && (!dataTable.IsView))
+                    if ((dataTable.HasPrimaryKey) && (!dataTable.IsView) && (!dataTable.ExcludeDelete))
                     {
                         // Write Delete Method
                         WriteDeleteMethod(dataTable);
                     }
-                    
-                    // Write FetchAllMethod
-                    WriteFetchAllMethod(dataTable);
+
+                    // if FetchAll is not excluded for this table
+                    if (!dataTable.ExcludeFetchAll)
+                    {
+                        // Write FetchAllMethod
+                        WriteFetchAllMethod(dataTable);
+                    }
 
                     // If the dataTable has a primary key & this is not a view
                     if ((dataTable.HasPrimaryKey) && (!dataTable.IsView))
                     {
-                        // Write FindMethod
-                        WriteFindMethod(dataTable);
+                        // if FetchAll is not excluded for this table
+                        if (!dataTable.ExcludeFind)
+                        {
+                            // Write FindMethod
+                            WriteFindMethod(dataTable);
+                        }
                     }
 
-                    // If the data table is not a view
-                    if ((!dataTable.IsView) && (dataTable.HasPrimaryKey))
-                    {  
-                        // if this is an Identity column for the primary key
-                        if (dataTable.PrimaryKey.DataType == DataManager.DataTypeEnum.Autonumber)
+                    // If the data table is not a view (Insert does not require a primary key)
+                    if (!dataTable.IsView)
+                    {
+                        // If the dataTable object has ExcludeInsert
+                        if (!dataTable.ExcludeInsert)
                         {
-                            // Write Insert Method
-                            WriteInsertMethodIdentity(dataTable);
+                            // if this table has an Identity column for the primary key
+                            if ((dataTable.HasPrimaryKey) && (dataTable.PrimaryKey.DataType == DataManager.DataTypeEnum.Autonumber))
+                            {
+                                // Write Insert Method
+                                WriteInsertMethodIdentity(dataTable);
+                            }
+                            else
+                            {
+                                // Write Insert Method for non Autonumber fields
+                                WriteInsertMethodLookup(dataTable);
+                            }
+                        }
+                    }
+
+                    // If this is not a view
+                    if (!dataTable.IsView)
+                    {
+                        // locals
+                        bool writeSave = false;
+
+                        // if this table does not have a primary key
+                        if (!dataTable.HasPrimaryKey)
+                        {
+                            // Without a primary key, Save can only Insert
+                            writeSave = (!dataTable.ExcludeInsert);
+                        }
+                        // if this is an Identity column for the primary key
+                        else if (dataTable.PrimaryKey.DataType == DataManager.DataTypeEnum.Autonumber)
+                        {
+                            // Save uses IsNew, so write Save if either Insert or Update is included
+                            writeSave = ((!dataTable.ExcludeInsert) || (!dataTable.ExcludeUpdate));
+                        }
+                        else if (dataTable.ExcludeFind)
+                        {
+                            // Without Find, new objects cannot be detected, so Save can only Update
+                            writeSave = (!dataTable.ExcludeUpdate);
                         }
                         else
                         {
-                            // Write Insert Method for non Autonumber fields
-                            WriteInsertMethodLookup(dataTable);
+                            // Save uses Find, so write Save if either Insert or Update is included
+                            writeSave = ((!dataTable.ExcludeInsert) || (!dataTable.ExcludeUpdate));
                         }
-                    }
 
-                    // If the dataTable has a primary key & this is not a view
-                    if ((dataTable.HasPrimaryKey) && (!dataTable.IsView))
-                    {
-                        // Write Save Method 
-                        WriteSaveMethod(dataTable);
+                        // if the Save method should be written
+                        if (writeSave)
+                        {
+                            // Write Save Method
+                            WriteSaveMethod(dataTable);
+                        }
 
-                        /// Write Update Method
-                        WriteUpdateMethod(dataTable);
+                        // if this table has a primary key and ExcludeUpdate is false
+                        if ((dataTable.HasPrimaryKey) && (!dataTable.ExcludeUpdate))
+                        {
+                            /// Write Update Method
+                            WriteUpdateMethod(dataTable);
+                        }
 
                         // Write Blank Line
                         WriteLine();
@@ -1513,28 +1580,75 @@ namespace DataTierClient.Builders
 
             #region WriteSaveMethod(DataTable dataTable)
             /// <summary>
-            /// This method writes the Save Method
+            /// This method writes the Save Method. The Save method observes the
+            /// ExcludeInsert and ExcludeUpdate properties of the dataTable.
             /// </summary>
             /// <param name="dataTable"></param>
             private void WriteSaveMethod(DataTable dataTable)
             {
                 // locals
                 string dataType = dataTable.ClassName;
-                string returnObjectName = "saved";
                 string parameterName = CapitalizeFirstChar(dataType, true);
+                bool includeInsert = !dataTable.ExcludeInsert;
+                bool includeUpdate = !dataTable.ExcludeUpdate;
+                bool noPrimaryKey = (!dataTable.HasPrimaryKey);
+                bool isIdentity = ((dataTable.HasPrimaryKey) && (dataTable.PrimaryKey.DataType == DataManager.DataTypeEnum.Autonumber));
+                bool findExcluded = ((dataTable.HasPrimaryKey) && (!isIdentity) && (dataTable.ExcludeFind));
+                string methodsCalled = "";
 
-                // BeginRegion  #region Find(
+                // if this table does not have a primary key
+                if (noPrimaryKey)
+                {
+                    // there is no Update method without a primary key, so Save can only Insert
+                    includeUpdate = false;
+                }
+
+                // if this is not an Identity table and Find is excluded
+                if (findExcluded)
+                {
+                    // new objects cannot be detected without Find, so Save can only Update
+                    includeInsert = false;
+                }
+
+                // set the text for which methods this Save method calls
+                if (noPrimaryKey)
+                {
+                    // Insert only, because there is no primary key
+                    methodsCalled = "This method only calls the 'Insert' method, as this table does not have a primary key.";
+                }
+                else if ((includeInsert) && (includeUpdate))
+                {
+                    // both
+                    methodsCalled = "This method calls the 'Insert' or 'Update' method.";
+                }
+                else if (includeInsert)
+                {
+                    // Insert only
+                    methodsCalled = "This method only calls the 'Insert' method, as Updates are excluded.";
+                }
+                else if (findExcluded)
+                {
+                    // Update only, because Find is excluded
+                    methodsCalled = "This method only calls the 'Update' method, as Find is excluded so new objects cannot be detected.";
+                }
+                else
+                {
+                    // Update only
+                    methodsCalled = "This method only calls the 'Update' method, as Inserts are excluded.";
+                }
+
+                // BeginRegion  #region Save(
                 BeginRegion("Save(ref " + dataType + " " + parameterName + ", DataManager dataManager)");
 
                 // Write Summary
                 WriteLine("/// <summary>");
                 WriteLine("/// Saves a '" + dataTable.ClassName + "' object into the database.");
-                WriteLine("/// This method calls the 'Insert' or 'Update' method.");
+                WriteLine("/// " + methodsCalled);
                 WriteLine("/// </summary>");
 
                 WriteLine("/// <param name='" + parameterName + "'>The '" + dataType + "' object to save.</param>");
                 WriteLine("/// <returns>True if successful or false if not.</returns>");
-                
+
                 // Get classDeclaration
                 string classDeclaration = "public static PolymorphicObject Save(ref " + dataType + " " + parameterName + ", DataManager dataManager)";
 
@@ -1556,7 +1670,7 @@ namespace DataTierClient.Builders
                 // Write Blank line
                 WriteLine();
 
-                // Write Comment Get information for calling 'DataBridgeManager.PerformDataOperation' method.
+                // Write Comment If the object exists
                 WriteComment("If the " + parameterName + " exists.");
 
                 // Write Line if exists
@@ -1564,66 +1678,103 @@ namespace DataTierClient.Builders
 
                 // Write Open Bracket
                 WriteOpenBracket(true);
-                
-                // if this is an auto number field
-                if (dataTable.PrimaryKey.DataType == DataManager.DataTypeEnum.Autonumber)
+
+                // if this table does not have a primary key
+                if (noPrimaryKey)
                 {
-                    // Write Comment Is This A New Record
-                    WriteComment("Is this a new " + dataType);
+                    // Write a comment there is no primary key
+                    WriteComment("This table does not have a primary key, so an existing object cannot be detected. Only an Insert can be performed.");
 
-                    // Write Line
-                    WriteLine("if (" + parameterName + ".IsNew)");
-
-                    // Write Open Bracket
-                    WriteOpenBracket(true);
-
-                    // Write Comment Insert
-                    WriteComment("Insert new " + dataType);
-
-                    // Write line to insert new record
+                    // Write line to insert the record
                     WriteLine("result = Insert(" + parameterName + ", dataManager);");
+                }
+                // if this is an auto number field
+                else if (isIdentity)
+                {
+                    // if Inserts are included
+                    if (includeInsert)
+                    {
+                        // Write Comment Is This A New Record
+                        WriteComment("Is this a new " + dataType);
 
-                    // Write Blank Line
-                    WriteLine();
+                        // Write Line
+                        WriteLine("if (" + parameterName + ".IsNew)");
 
-                    // Write Comment if the insert was successful
-                    WriteComment("if the insert was successful");
-                
-                    // Write line if newIdentiy > 0
-                    WriteLine("if (result.HasIntegerValue)");
-                
-                    // Write Open Bracket {
-                    WriteOpenBracket(true);
-                
-                    // Write Comment  Update Identity
-                    WriteComment("Update Identity");
-                
-                    // Write line to update the Identity
-                    WriteLine(parameterName + ".UpdateIdentity(result.IntegerValue);");
+                        // Write Open Bracket
+                        WriteOpenBracket(true);
 
-                    // Write Blank Line
-                    WriteLine();
+                        // Write Comment Insert
+                        WriteComment("Insert new " + dataType);
 
-                    // Write }
-                    WriteCloseBracket(true);
+                        // Write line to insert new record
+                        WriteLine("result = Insert(" + parameterName + ", dataManager);");
 
-                    // Write }
-                    WriteCloseBracket(true);
+                        // Write Blank Line
+                        WriteLine();
 
-                    // Write Else
-                    WriteLine("else");
+                        // Write Comment if the insert was successful
+                        WriteComment("if the insert was successful");
 
-                    // Write {
-                    WriteOpenBracket(true);
+                        // Write line if result has an integer value
+                        WriteLine("if (result.HasIntegerValue)");
 
-                    // Write Comment Update an existing object
-                    WriteComment("Update " + dataType);
+                        // Write Open Bracket {
+                        WriteOpenBracket(true);
 
-                    // Write line to insert new record
-                    WriteLine("result  = Update(" + parameterName + ", dataManager);");
+                        // Write Comment  Update Identity
+                        WriteComment("Update Identity");
 
-                    // Write }
-                    WriteCloseBracket(true);
+                        // Write line to update the Identity
+                        WriteLine(parameterName + ".UpdateIdentity(result.IntegerValue);");
+
+                        // Write Blank Line
+                        WriteLine();
+
+                        // Write }
+                        WriteCloseBracket(true);
+
+                        // Write }
+                        WriteCloseBracket(true);
+                    }
+
+                    // if Updates are included
+                    if (includeUpdate)
+                    {
+                        // if Inserts are also included, this is the else of the IsNew test
+                        if (includeInsert)
+                        {
+                            // Write Else
+                            WriteLine("else");
+                        }
+                        else
+                        {
+                            // Write Comment Is this an existing record
+                            WriteComment("Inserts are excluded, so only update an existing " + dataType);
+
+                            // Write line to test for an existing record
+                            WriteLine("if (!" + parameterName + ".IsNew)");
+                        }
+
+                        // Write {
+                        WriteOpenBracket(true);
+
+                        // Write Comment Update an existing object
+                        WriteComment("Update " + dataType);
+
+                        // Write line to update the existing record
+                        WriteLine("result = Update(" + parameterName + ", dataManager);");
+
+                        // Write }
+                        WriteCloseBracket(true);
+                    }
+                }
+                else if (findExcluded)
+                {
+                    // Write a comment Find is excluded
+                    WriteComment("Find is excluded for this table, so new objects cannot be detected. Only an Update can be performed.");
+
+                    // Write line to update the existing record
+                    WriteLine("result = Update(" + parameterName + ", dataManager);");
                 }
                 else
                 {
@@ -1637,10 +1788,10 @@ namespace DataTierClient.Builders
                     WriteComment("Look up this item to see if it already exists");
 
                     // create the name of the tempObject
-                    string tempObjectName = "temp" + dataTable.Name;
+                    string tempObjectName = "temp" + dataTable.ClassName;
 
                     // Write the line to look up the temp object
-                    WriteLine(dataTable.Name + " " + tempObjectName + " = Find(" + parameterName + ", dataManager);");
+                    WriteLine(dataTable.ClassName + " " + tempObjectName + " = Find(" + parameterName + ", dataManager);");
 
                     // write a blank line
                     WriteLine();
@@ -1654,38 +1805,58 @@ namespace DataTierClient.Builders
                     // Write Blank line
                     WriteLine();
 
-                    // Write a comment If this is a new object
-                    WriteComment("If this is a new object");
+                    // if Inserts are included
+                    if (includeInsert)
+                    {
+                        // Write a comment If this is a new object
+                        WriteComment("If this is a new object");
 
-                    // Write line to test for isNew
-                    WriteLine("if (isNew)");
+                        // Write line to test for isNew
+                        WriteLine("if (isNew)");
 
-                    // Write the open bracket
-                    WriteOpenBracket(true);
+                        // Write the open bracket
+                        WriteOpenBracket(true);
 
-                    // Write Comment Perform the Insert
-                    WriteComment("Perform the insert");
+                        // Write Comment Perform the Insert
+                        WriteComment("Perform the insert");
 
-                    // now perform the insert
-                    WriteLine("result = Insert(" + parameterName + ", dataManager);");
+                        // now perform the insert
+                        WriteLine("result = Insert(" + parameterName + ", dataManager);");
 
-                    // Write a close bracket
-                    WriteCloseBracket(true);
+                        // Write a close bracket
+                        WriteCloseBracket(true);
+                    }
 
-                    // Write a line for else
-                    WriteLine("else");
+                    // if Updates are included
+                    if (includeUpdate)
+                    {
+                        // if Inserts are also included, this is the else of the isNew test
+                        if (includeInsert)
+                        {
+                            // Write a line for else
+                            WriteLine("else");
+                        }
+                        else
+                        {
+                            // Write a comment Inserts are excluded
+                            WriteComment("Inserts are excluded, so only update an existing object");
 
-                    // Write the open bracket
-                    WriteOpenBracket(true);
+                            // Write line to test for an existing object
+                            WriteLine("if (!isNew)");
+                        }
 
-                    // Write Comment Perform the Insert
-                    WriteComment("Perform the update");
+                        // Write the open bracket
+                        WriteOpenBracket(true);
 
-                    // now perform the insert
-                    WriteLine("result = Update(" + parameterName + ", dataManager);");
+                        // Write Comment Perform the Update
+                        WriteComment("Perform the update");
 
-                    // Write a close bracket
-                    WriteCloseBracket(true);
+                        // now perform the update
+                        WriteLine("result = Update(" + parameterName + ", dataManager);");
+
+                        // Write a close bracket
+                        WriteCloseBracket(true);
+                    }
                 }
 
                 // Write }
@@ -1693,22 +1864,22 @@ namespace DataTierClient.Builders
 
                 // Write Blank line
                 WriteLine();
-                
+
                 // Write Comment Return Value
                 WriteComment("return value");
-                
+
                 // Write Return Value (result)
                 WriteLine("return result;");
-                
+
                 // Write }
                 WriteCloseBracket(true);
-                
+
                 // Write EndRegion
                 EndRegion();
 
                 // Write Blank Line
                 WriteLine();
-            } 
+            }
             #endregion
 
             #region WriteUpdateMethod(DataTable dataTable)

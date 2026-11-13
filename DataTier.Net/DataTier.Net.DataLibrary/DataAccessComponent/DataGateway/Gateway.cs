@@ -88,6 +88,43 @@ namespace DataAccessComponent.DataGateway
             }
             #endregion
         
+            #region DeleteBuildExcludes(int id, BuildExcludes tempBuildExcludes = null)
+            /// <summary>
+            /// This method is used to delete BuildExcludes objects.
+            /// </summary>
+            /// <param name="id">Delete the BuildExcludes with this id</param>
+            /// <param name="tempBuildExcludes">Pass in a tempBuildExcludes to perform a custom delete.</param>
+            public bool DeleteBuildExcludes(int id, BuildExcludes tempBuildExcludes = null)
+            {
+                // initial value
+                PolymorphicObject result = new PolymorphicObject();
+        
+                // if the AppController exists
+                if (HasAppController)
+                {
+                    // if the tempBuildExcludes does not exist
+                    if (tempBuildExcludes == null)
+                    {
+                        // create a temp BuildExcludes
+                        tempBuildExcludes = new BuildExcludes();
+                    }
+        
+                    // if the id is set
+                    if (id > 0)
+                    {
+                        // set the primary key
+                        tempBuildExcludes.UpdateIdentity(id);
+                    }
+        
+                    // perform the delete
+                    result = BuildExcludesController.Delete(tempBuildExcludes, DataManager);
+                }
+        
+                // return value
+                return result.Success;
+            }
+            #endregion
+        
             #region DeleteCustomReader(int customReaderId, CustomReader tempCustomReader = null)
             /// <summary>
             /// This method is used to delete CustomReader objects.
@@ -641,6 +678,69 @@ namespace DataAccessComponent.DataGateway
             }
             #endregion
 
+            #region FindBuildExcludes(int id, BuildExcludes tempBuildExcludes = null)
+            /// <summary>
+            /// This method is used to find 'BuildExcludes' objects.
+            /// </summary>
+            /// <param name="id">Find the BuildExcludes with this id</param>
+            /// <param name="tempBuildExcludes">Pass in a tempBuildExcludes to perform a custom find.</param>
+            public BuildExcludes FindBuildExcludes(int id, BuildExcludes tempBuildExcludes = null)
+            {
+                // initial value
+                BuildExcludes buildExcludes = null;
+
+                // if the AppController exists
+                if (HasAppController)
+                {
+                    // if the tempBuildExcludes does not exist
+                    if (tempBuildExcludes == null)
+                    {
+                        // create a temp BuildExcludes
+                        tempBuildExcludes = new BuildExcludes();
+                    }
+
+                    // if the id is set
+                    if (id > 0)
+                    {
+                        // set the primary key
+                        tempBuildExcludes.UpdateIdentity(id);
+                    }
+
+                    // perform the find
+                    buildExcludes = BuildExcludesController.Find(tempBuildExcludes, DataManager);
+                }
+
+                // return value
+                return buildExcludes;
+            }
+            #endregion
+
+            #region FindBuildExcludesByTableId(int tableId)
+            /// <summary>
+            /// This method is used to find 'BuildExcludes' objects for the TableId given.
+            /// </summary>
+            public BuildExcludes FindBuildExcludesByTableId(int tableId)
+            {
+                // initial value
+                BuildExcludes buildExcludes = null;
+                
+                // Create a temp BuildExcludes object
+                BuildExcludes tempBuildExcludes = new BuildExcludes();
+                
+                // Set the value for FindByTableId to true
+                tempBuildExcludes.FindByTableId = true;
+                
+                // Using TableId As tableId
+                tempBuildExcludes.TableId = tableId;
+                
+                // Perform the find
+                buildExcludes = FindBuildExcludes(0, tempBuildExcludes);
+                
+                // return value
+                return buildExcludes;
+            }
+            #endregion
+            
             #region FindCustomReader(int customReaderId, CustomReader tempCustomReader = null)
             /// <summary>
             /// This method is used to find 'CustomReader' objects.
@@ -1324,6 +1424,53 @@ namespace DataAccessComponent.DataGateway
             }
             #endregion
 
+            #region LoadBuildExcludes(BuildExcludes tempBuildExcludes = null)
+            /// <summary>
+            /// This method loads a collection of 'BuildExcludes' objects.
+            /// </summary>
+            public List<BuildExcludes> LoadBuildExcludes(BuildExcludes tempBuildExcludes = null)
+            {
+                // initial value
+                List<BuildExcludes> buildExcludes = null;
+
+                // if the AppController exists
+                if (HasAppController)
+                {
+                    // perform the load
+                    buildExcludes = BuildExcludesController.FetchAll(tempBuildExcludes, DataManager);
+                }
+
+                // return value
+                return buildExcludes;
+            }
+            #endregion
+
+            #region LoadBuildExcludesForProjectId(int projectId)
+            /// <summary>
+            /// This method is used to load 'BuildExcludes' objects for the ProjectId given.
+            /// </summary>
+            public List<BuildExcludes> LoadBuildExcludesForProjectId(int projectId)
+            {
+                // initial value
+                List<BuildExcludes> buildExcludes = null;
+                
+                // Create a temp BuildExcludes object
+                BuildExcludes tempBuildExcludes = new BuildExcludes();
+                
+                // Set the value for LoadByProjectId to true
+                tempBuildExcludes.LoadByProjectId = true;
+                
+                // Using ProjectId As projectId
+                tempBuildExcludes.ProjectId = projectId;
+                
+                // Perform the load
+                buildExcludes = LoadBuildExcludes(tempBuildExcludes);
+                
+                // return value
+                return buildExcludes;
+            }
+            #endregion
+            
             #region LoadChildObjects(Project project)
             /// <summary>
             /// This method loads the Databases and ReferencesSets
@@ -2048,6 +2195,28 @@ namespace DataAccessComponent.DataGateway
 
                 // return value
                 return saved;
+            }
+            #endregion
+
+            #region SaveBuildExcludes(ref BuildExcludes buildExcludes)
+            /// <summary>
+            /// This method is used to save 'BuildExcludes' objects.
+            /// </summary>
+            /// <param name="buildExcludes">The BuildExcludes to save.</param>
+            public bool SaveBuildExcludes(ref BuildExcludes buildExcludes)
+            {
+                // initial value
+                PolymorphicObject result = new PolymorphicObject();
+
+                // if the AppController exists
+                if (HasAppController)
+                {
+                    // perform the save
+                    result = BuildExcludesController.Save(ref buildExcludes, DataManager);
+                }
+
+                // return value
+                return result.Success;
             }
             #endregion
 

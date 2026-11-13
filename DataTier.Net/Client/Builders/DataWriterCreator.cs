@@ -1320,11 +1320,13 @@ namespace DataTierClient.Builders
             }
             #endregion
 
-            #region WriteDateParameter(DataField field)
+            #region WriteDateParameter(string objectName, DataField field)
             /// <summary>
             /// This method writes out the DateParameter.
             /// Update 11.12.2025: Handle dates as NULL if the field is nullable or  as 1/1/1900 if not
+            /// Update 10.15.2026: Nullable fields test for null and pass DBNull.Value
             /// </summary>
+            /// <param name="objectName"></param>
             /// <param name="field"></param>
             private void WriteDateParameter(string objectName, DataField field)
             {
@@ -1333,23 +1335,32 @@ namespace DataTierClient.Builders
                 {
                     // get the object and fieldName
                     string objectAndFieldName = objectName + "." + field.FieldName;
-                    
+        
                     // Write Comment Create DateTime parameter
                     WriteComment("Create [" + field.FieldName + "] Parameter");
-                    
+        
                     // create a sql parameter for this field
                     string paramLine = "param = new SqlParameter(" + (char)34 + "@" + field.FieldName + (char)34 + ", SqlDbType.DateTime);";
                     WriteLine(paramLine);
-                        
+            
                     // Write Blank Line
                     WriteLine();
-                    
+        
                     // Write Comment 
                     WriteComment("If " + objectAndFieldName + " does not exist.");
-                    
-                    // Write line to test 
-                    WriteLine("if (" + objectAndFieldName + ".Year < 1900)");
-                    
+        
+                    // if the field can handle null dates
+                    if (field.IsNullable)
+                    {
+                        // Write line to test for null or an empty date
+                        WriteLine("if ((" + objectAndFieldName + " == null) || (" + objectAndFieldName + ".Value.Year <= 1900))");
+                    }
+                    else
+                    {
+                        // Write line to test 
+                        WriteLine("if (" + objectAndFieldName + ".Year < 1900)");
+                    }
+        
                     // Write Open Bracket and increase Identity
                     WriteOpenBracket(true);
 
@@ -1359,8 +1370,8 @@ namespace DataTierClient.Builders
                         // Write Comment
                         WriteComment("Set the value to null");
 
-                        // Write set the value to null;
-                        WriteLine("param.Value = null;");
+                        // Write set the value to DBNull, so SQL Server receives a NULL
+                        WriteLine("param.Value = DBNull.Value;");
                     }
                     else
                     {
@@ -1370,22 +1381,22 @@ namespace DataTierClient.Builders
                         // Write set the value to Jan 1, 1900 - a fake date
                         WriteLine("param.Value = new DateTime(1900, 1, 1);");
                     }
-                    
+        
                     // Write Close Bracket and decrease Identity
                     WriteCloseBracket(true);
-                    
+        
                     // Write else
                     WriteLine("else");
-                    
+        
                     // Write Open Bracket and increase Identity
                     WriteOpenBracket(true);
-                    
+        
                     // Write Comment Set the value of the object
                     WriteComment("Set the parameter value");
-                    
+        
                     // Set the value
                     WriteLine("param.Value = " + objectAndFieldName + ";");
-                    
+        
                     // Write Close Bracket
                     WriteCloseBracket(true);
 
@@ -1416,32 +1427,53 @@ namespace DataTierClient.Builders
                         // For views do not create the other methods
                         if (dataTable.IsView)
                         {
-                            // Write Create Fetch All Stored Procedure
-                            WriteCreateFetchAllStoredProcedureMethod(dataTable);
+                            // if FetchAll is not excluded for this view
+                            if (!dataTable.ExcludeFetchAll)
+                            {
+                                // Write Create Fetch All Stored Procedure
+                                WriteCreateFetchAllStoredProcedureMethod(dataTable);
+                            }
                         }
                         else
                         {
                             // If the PrimaryKey exists
                             if (dataTable.HasPrimaryKey)
                             {
-                                // Write CreateDeleteParameter
-                                WriteCreatePrimaryKeyParameterMethod(dataTable);
+                                // CreatePrimaryKeyParameter is used by both Delete and Find,
+                                // so it is only skipped if both are excluded
+                                if ((!dataTable.ExcludeDelete) || (!dataTable.ExcludeFind))
+                                {
+                                    // Write CreateDeleteParameter
+                                    WriteCreatePrimaryKeyParameterMethod(dataTable);
+                                }
 
-                                // Write Create Delete Stored Procedure
-                                WriteCreateDeleteStoredProcedureMethod(dataTable);
+                                // if Delete is not excluded for this table
+                                if (!dataTable.ExcludeDelete)
+                                {
+                                    // Write Create Delete Stored Procedure
+                                    WriteCreateDeleteStoredProcedureMethod(dataTable);
+                                }
 
-                                // Write the find method
-                                WriteCreateFindStoredProcedureMethod(dataTable);
+                                // if Find is not excluded for this table
+                                if (!dataTable.ExcludeFind)
+                                {
+                                    // Write the find method
+                                    WriteCreateFindStoredProcedureMethod(dataTable);
+                                }
                             }
 
-                            // Write Create Insert Parameters
-                            WriteCreateInsertParameters(dataTable);
+                            // if Insert is not excluded for this table
+                            if (!dataTable.ExcludeInsert)
+                            {
+                                // Write Create Insert Parameters
+                                WriteCreateInsertParameters(dataTable);
 
-                            // Write Create Insert Stored Procedure Method
-                            WriteCreateInsertStoredProcedureMethod(dataTable);
+                                // Write Create Insert Stored Procedure Method
+                                WriteCreateInsertStoredProcedureMethod(dataTable);
+                            }
 
-                            // If the table has a primary key
-                            if (dataTable.HasPrimaryKey)
+                            // If the table has a primary key and Update is not excluded
+                            if ((dataTable.HasPrimaryKey) && (!dataTable.ExcludeUpdate))
                             {
                                 // Write Create Update Parameters
                                 WriteCreateUpdateParameters(dataTable);
@@ -1450,8 +1482,12 @@ namespace DataTierClient.Builders
                                 WriteCreateUpdateStoredProcedureMethod(dataTable);
                             }
 
-                            // Write Create Fetch All Stored Procedure
-                            WriteCreateFetchAllStoredProcedureMethod(dataTable);
+                            // if FetchAll is not excluded for this table
+                            if (!dataTable.ExcludeFetchAll)
+                            {
+                                // Write Create Fetch All Stored Procedure
+                                WriteCreateFetchAllStoredProcedureMethod(dataTable);
+                            }
                         }
                     }
                     else

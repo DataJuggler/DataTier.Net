@@ -44,6 +44,7 @@ namespace DataTierClient.Controls
         private const string CreateDataTierNet8V2 = "dotnet new DataTier.NET8.ProjectTemplatesV2";        
         private const string CreateDataTierNet9V2 = "dotnet new DataTier.Net9.ProjectTemplatesV2";        
         private const string CreateDataTierNet10V2 = "dotnet new DataTier.Net10.ProjectTemplatesV2";
+        private const string CreateDataTierNet11V2 = "dotnet new DataTier.Net11.ProjectTemplatesV2";
 
         // Installs
         private const string InstallDataTierNet5 = "dotnet new install DataJuggler.DataTier.Net5.ProjectTemplates@2.5.6 --force";
@@ -53,6 +54,7 @@ namespace DataTierClient.Controls
         private const string InstallDataTierNet8V2 = "dotnet new install DataJuggler.DataTier.NET8.ProjectTemplatesV2@8.0.0 --force";
         private const string InstallDataTierNet9V2 = "dotnet new install DataJuggler.DataTier.Net9.ProjectTemplatesV2@9.10.7 --force";
         private const string InstallDataTierNet10V2 = "dotnet new install DataJuggler.DataTier.Net10.ProjectTemplatesV2@10.1.4 --force";
+        private const string InstallDataTierNet11V2 = "dotnet new install DataJuggler.DataTier.Net11.ProjectTemplatesV2@11.0.2 --force";
         
         // Used to install the Project Templates on the ProjectEditorControl.cs
         private const int GraphWidth = 268;
@@ -250,23 +252,34 @@ namespace DataTierClient.Controls
                                 else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net9)
                                 {
                                     // .NET 9 Only Uses V2 Templates
-                                    startInfo.Arguments = "/C " + CreateDataTierNet9V2;                                    
+                                    startInfo.Arguments = "/C " + CreateDataTierNet9V2;
                                 }
-                                else
+                                else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net10)
                                 {
                                     // .NET 10 Only Uses V2 Templates
                                     startInfo.Arguments = "/C " + CreateDataTierNet10V2;
+                                }
+                                else
+                                {
+                                    // .NET 11 Only Uses V2 Templates
+                                    startInfo.Arguments = "/C " + CreateDataTierNet11V2;
                                 }
 
                                 process.StartInfo = startInfo;
                                 process.Start();
 
-                                // get the solution path - default to DotNet10
-                                string solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net10.ClassLibraryV2.sln");
+                                // get the solution path - default to DotNet11
+                                string solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net11.ClassLibraryV2.sln");
 
-                                if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net10)
+                                if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net11)
                                 {
-                                    // switch for Net9
+                                    // switch for Net11
+                                    solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net11.ClassLibraryV2.sln");
+                                }
+                                // if .NET10
+                                else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net10)
+                                {
+                                    // switch for Net10
                                     solutionPath = Path.Combine(SelectedProject.ProjectFolder, "DataTier.Net10.ClassLibraryV2.sln");
                                 }
                                 // if .NET9
@@ -602,7 +615,7 @@ namespace DataTierClient.Controls
                 string projectName = "";
                 string projectFolder = "";
                 bool projectTemplatesVersion2 = false;
-                int projectTypeIndex = TargetFrameworkControl.FindItemIndexByValue("Net10");
+                int projectTypeIndex = TargetFrameworkControl.FindItemIndexByValue("Net11");
                 bool addIGridValueInterface = false;
                 bool autoFillPaths = false;
                 
@@ -707,7 +720,7 @@ namespace DataTierClient.Controls
                 TargetFrameworkControl.SelectedIndexListener = this;
 
                 // Set the SelectedIndex
-                TargetFrameworkControl.SelectedIndex = TargetFrameworkControl.FindItemIndexByValue("Net10");
+                TargetFrameworkControl.SelectedIndex = TargetFrameworkControl.FindItemIndexByValue("Net11");
 
                 // Should call UIEnable
                 OnSelectedIndexChanged(TargetFrameworkControl, TargetFrameworkControl.SelectedIndex, TargetFrameworkControl.SelectedObject);
@@ -794,12 +807,19 @@ namespace DataTierClient.Controls
                         // Template Version 2
                         startInfo.Arguments = "/C " + InstallDataTierNet9V2;
                     }
-                    else
+                    else if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net10)
                     {
                         // .NET 10 can only be TemplateVersion 2
 
                         // Template Version 2
                         startInfo.Arguments = "/C " + InstallDataTierNet10V2;
+                    }
+                    else
+                    {
+                        // .NET 11 can only be TemplateVersion 2
+
+                        // Template Version 2
+                        startInfo.Arguments = "/C " + InstallDataTierNet11V2;
                     }
 
                     // Set the StartInfo
@@ -899,7 +919,7 @@ namespace DataTierClient.Controls
                     // Show the CreateDotNet5Project control if DotNet5
                     CreateDotNetProject.Visible = SelectedProject.IsDotNetCore;
 
-                    if (SelectedProject.TargetFramework == TargetFrameworkEnum.Net10)
+                    if ((SelectedProject.TargetFramework == TargetFrameworkEnum.Net10) || (SelectedProject.TargetFramework == TargetFrameworkEnum.Net11))
                     {
                         // Show
                         AddIGridValueInterfaceCheckBox.Visible = true;
@@ -1148,7 +1168,7 @@ namespace DataTierClient.Controls
                     return selectedProject;
                 }
             }
-        #endregion
+            #endregion
 
             #region ShowAutoFillHelp
             /// <summary>
@@ -1159,7 +1179,7 @@ namespace DataTierClient.Controls
                 get { return showAutoFillHelp; }
                 set { showAutoFillHelp = value; }
             }
-        #endregion
+            #endregion
 
         #endregion
     }
