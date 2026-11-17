@@ -87,10 +87,11 @@
       <Project>{8d92a1eb-2706-41e0-a725-86c1ecbec438}</Project>
       <Name>DataJuggler.Win.Controls</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UltimateHelper\DataJuggler.Core.UltimateHelper.csproj">
-      <Project>{b570d96e-c163-480d-8c89-192ac7cef60a}</Project>
-      <Name>DataJuggler.Core.UltimateHelper</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DataJuggler.Core.UltimateHelper">
+      <Version>1.10.0</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

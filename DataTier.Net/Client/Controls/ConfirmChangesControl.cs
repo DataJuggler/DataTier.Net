@@ -3376,6 +3376,7 @@ namespace DataTierClient.Controls
                 string parameter4 = "";
                 string setParameterFieldValueComment = "";
                 string setParameterFieldValue = "";
+                string primaryKeyValue = "0";
 
                 // if the file exists
                 bool fileExists = File.Exists(gatewayFile);
@@ -3763,11 +3764,27 @@ namespace DataTierClient.Controls
                             // write out a blank line
                         insertIndex = CodeLineHelper.InsertCodeLine(ref codeLines, performActionComment, insertIndex);
 
-                            // if this is a Find or a Delete
+                        // if this is a Find or a Delete
                         if ((MethodInfo.MethodType == MethodTypeEnum.Find_By) || (MethodInfo.MethodType == MethodTypeEnum.Delete_By))
                         {
+                            // if the primary key is a string (AspNetUsers, etc.)
+                            if (NullHelper.Exists(primaryKey))
+                            {
+                                // if a string
+                                if (primaryKey.DataType == DataTypeEnum.String)
+                                {
+                                    // pass in an empty string instead of 0
+                                    primaryKeyValue = "\"\"";
+                                }
+                                else if (primaryKey.DataType == DataTypeEnum.Guid)
+                                {
+                                    // pass in an empty Guid instead of 0
+                                    primaryKeyValue = "Guid.Empty";
+                                }
+                            }
+
                             // set the performAction
-                            performAction = indent2 + methodReturnValue + " = " + MethodInfo.BaseMethodName + "(0, " + tempVariableName + ");";
+                            performAction = indent2 + methodReturnValue + " = " + MethodInfo.BaseMethodName + "(" + primaryKeyValue + ", " + tempVariableName + ");";
                         }
                         else if (MethodInfo.MethodType == MethodTypeEnum.Load_By)
                         {

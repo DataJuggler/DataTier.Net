@@ -47,9 +47,6 @@
     </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DataJuggler.Core.UltimateHelper, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\DataJuggler.Core.UltimateHelper.1.10.0\lib\net48\DataJuggler.Core.UltimateHelper.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -184,15 +181,18 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="Resources\WoodButtonWidth640.png" />
     <None Include="Resources\Deep Black.jpg" />
     <None Include="Resources\WoodButtonWidth640Disabled.png" />
-    <Content Include="Data Juggler.ico" />
     <Content Include="Tools.ico" />
     <None Include="Resources\DarkButton.png" />
     <None Include="Images\DarkBlueButton.png" />
     <Content Include="lib\DataJuggler.Win.Controls Read Me.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DataJuggler.Core.UltimateHelper">
+      <Version>1.10.0</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

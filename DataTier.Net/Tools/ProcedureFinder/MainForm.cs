@@ -74,11 +74,11 @@ namespace ProcedureFinder
             }
             #endregion
             
-            #region OnTextChanged(LabelTextBoxControl control, string text)
+            #region OnTextChanged(Control sender, string text)
             /// <summary>
             /// This event is fired when the Text Changed event is fired
             /// </summary>
-            public void OnTextChanged(LabelTextBoxControl control, string text)
+            public void OnTextChanged(Control sender, string text)
             {
                 // Find the procedures
                 FindProcedures();
@@ -200,9 +200,9 @@ namespace ProcedureFinder
                 return procedureName;
             }
             #endregion
-            
+
         #endregion
-        
+
     }
     #endregion
 

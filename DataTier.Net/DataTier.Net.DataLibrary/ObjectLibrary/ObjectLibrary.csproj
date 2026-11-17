@@ -44,8 +44,8 @@
     <Reference Include="DataJuggler.Core.UltimateHelper, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\DataJuggler.Core.UltimateHelper.1.10.0\lib\net48\DataJuggler.Core.UltimateHelper.dll</HintPath>
     </Reference>
-    <Reference Include="DataJuggler.Net, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\DataJuggler.Net.8.0.0\lib\net48\DataJuggler.Net.dll</HintPath>
+    <Reference Include="DataJuggler.Net, Version=8.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\DataJuggler.Net.8.0.1\lib\net48\DataJuggler.Net.dll</HintPath>
     </Reference>
     <Reference Include="envdte, Version=18.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\envdte.18.12.1603\lib\net472\envdte.dll</HintPath>
